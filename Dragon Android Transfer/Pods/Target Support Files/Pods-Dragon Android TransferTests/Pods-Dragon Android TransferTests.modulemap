@@ -1,0 +1,6 @@
+framework module Pods_Dragon_Android_TransferTests {
+  umbrella header "Pods-Dragon Android TransferTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,15 @@
+//
+//  Bridging-Header.h
+//  Simple Android Transfer
+//
+//  Created by Kishan P Rao on 14/01/17.
+//  Copyright © 2017 Untitled-TBA. All rights reserved.
+//
+
+#ifndef Bridging_Header_h
+#define Bridging_Header_h
+
+#import <Cocoa/Cocoa.h>
+#import <MASShortcut/Shortcut.h>
+
+#endif /* Bridging_Header_h */

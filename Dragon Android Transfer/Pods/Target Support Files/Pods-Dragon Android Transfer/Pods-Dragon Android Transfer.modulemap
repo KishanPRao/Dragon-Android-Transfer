@@ -1,0 +1,6 @@
+framework module Pods_Dragon_Android_Transfer {
+  umbrella header "Pods-Dragon Android Transfer-umbrella.h"
+
+  export *
+  module * { export * }
+}
