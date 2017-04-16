@@ -1,9 +1,9 @@
 //
 //  Simple_Android_TransferUITests.swift
-//  Simple Android TransferUITests
+//  Dragon Android TransferUITests
 //
 //  Created by Kishan P Rao on 25/12/16.
-//  Copyright © 2016 Untitled-TBA. All rights reserved.
+//  Copyright © 2016 Kishan P Rao. All rights reserved.
 //
 
 import XCTest

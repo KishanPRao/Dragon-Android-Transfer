@@ -1,16 +1,16 @@
 //
 //  MacHandler.swift
-//  Simple Android Transfer
+//  Dragon Android Transfer
 //
 //  Created by Kishan P Rao on 14/01/17.
-//  Copyright © 2017 Untitled-TBA. All rights reserved.
+//  Copyright © 2017 Kishan P Rao. All rights reserved.
 //
 
 import Foundation
 
-let VERBOSE = true
 
 class MacHandler {
+	static let VERBOSE = false
 	let ESCAPE_DOUBLE_QUOTES = "\""
 	static let FINDER_ACTIVE_SCRIPT =
 			"on isFinderActive()\n" +
@@ -29,7 +29,7 @@ class MacHandler {
 					"return isFinderActive()\n"
 	
 	func isFinderActive() -> Bool {
-		
+		Swift.print("isFinderActive, ")
 		var result = false
 		if (runScript(MacHandler.RUNNABLE_FINDER_ACTIVE_SCRIPT) == "true") {
 			result = true
@@ -40,6 +40,7 @@ class MacHandler {
 	}
 	
 	func getActivePath() -> String {
+		Swift.print("getActivePath, ")
 		let script =
 				"tell application \"Finder\"\n" +
 						"try\n" +
@@ -95,10 +96,10 @@ class MacHandler {
 		
 		let data = pipe.fileHandleForReading.readDataToEndOfFile()
 		let output = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
-		if (VERBOSE) {
+		if (MacHandler.VERBOSE) {
 			print("Args:", commands, ":")
 		}
-		if (VERBOSE) {
+		if (MacHandler.VERBOSE) {
 			print("Op:", output!)
 		}
 		
@@ -169,7 +170,9 @@ class MacHandler {
 					"return \"" + HandlerConstants.FILE + "\"\n" +
 					"end if\n" +
 					"end tell\n"
-			print("Script:", fileTypeScript)
+			if (MacHandler.VERBOSE) {
+				print("Script:", fileTypeScript)
+			}
 			let output = runScript(fileTypeScript)
 			var type: Int
 //			var size: UInt64
@@ -209,7 +212,7 @@ class MacHandler {
 //            print("Name:", outputNames[i], " Type:", output)
 			i = i + 1
 		}
-		if (VERBOSE) {
+		if (MacHandler.VERBOSE) {
 			Swift.print("MacHandler, Sizes:", files);
 		}
 	}

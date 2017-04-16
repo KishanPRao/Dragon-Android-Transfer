@@ -6,8 +6,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="HelpWindow" customModule="Simple_Android_Transfer" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="HelpWindow" customModule="Dragon_Android_Transfer" customModuleProvider="target">
             <connections>
+                <outlet property="closeButton" destination="35j-bE-Fbz" id="KgW-4d-uZJ"/>
                 <outlet property="helpText" destination="wY5-ec-m6o" id="bQL-5k-yrr"/>
                 <outlet property="textClipView" destination="PAI-0O-Qcb" id="ICh-c4-eqe"/>
                 <outlet property="textScrollView" destination="jDc-ch-pQa" id="EpN-G9-dDL"/>
@@ -17,10 +18,10 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="F0z-JX-Cv5">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="600" height="700"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="600" height="700"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -32,7 +33,7 @@
                             <rect key="frame" x="2" y="2" width="597" height="619"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <textView ambiguous="YES" editable="NO" selectable="NO" drawsBackground="NO" importsGraphics="NO" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="wY5-ec-m6o">
+                                <textView ambiguous="YES" editable="NO" drawsBackground="NO" importsGraphics="NO" allowsNonContiguousLayout="YES" quoteSubstitution="YES" linkDetection="YES" dataDetection="YES" dashSubstitution="YES" textReplacement="YES" smartInsertDelete="YES" id="wY5-ec-m6o">
                                     <rect key="frame" x="0.0" y="0.0" width="595" height="619"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="textColor" red="0.91601882068917573" green="0.94428468660884524" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -66,9 +67,9 @@
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="35j-bE-Fbz">
                         <rect key="frame" x="268" y="10" width="81" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="T5x-RR-A3p">
+                        <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="axesIndependently" inset="2" id="T5x-RR-A3p">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
+                            <font key="font" metaFont="system" size="15"/>
                         </buttonCell>
                         <connections>
                             <action selector="closeHelp:" target="-2" id="yd3-12-NJT"/>

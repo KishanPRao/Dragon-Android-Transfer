@@ -1,9 +1,9 @@
 //
 //  Constants.swift
-//  Simple Android Transfer
+//  Dragon Android Transfer
 //
 //  Created by Kishan P Rao on 01/02/17.
-//  Copyright © 2017 Untitled-TBA. All rights reserved.
+//  Copyright © 2017 Kishan P Rao. All rights reserved.
 //
 
 import Foundation
@@ -20,6 +20,8 @@ public enum StatusTypeNotification {
 	static let PASTE_TO_MAC = "PASTE_TO_MAC"
 	static let STOP = "STOP"
 	static let CHANGE_ACTIVE = "CHANGE_ACTIVE"
+	static let FINISHED_LAUNCH = "FINISHED_LAUNCH"
+	static let SHOW_HELP = "SHOW_HELP"
 	
 //	Menu Item Related
 	static let OPEN_FILE = "OPEN_FILE"
@@ -28,6 +30,8 @@ public enum StatusTypeNotification {
 	static let MENU_PASTE_FILES = "MENU_PASTE_FILES"
 	static let MENU_CLEAR_CLIPBOARD = "MENU_CLEAR_CLIPBOARD"
 	static let MENU_GET_INFO = "MENU_GET_INFO"
+	static let REFRESH_FILES = "REFRESH_FILES"
+	static let RESET_POSITION = "RESET_POSITION"
 }
 
 public enum ViewControllerIdentifier {
@@ -43,4 +47,7 @@ public enum MenuItemIdentifier {
 	static let clearClipboard = 5
 	static let getInfo = 6
 	static let help = 7
+	static let minimize = 8
+	static let refresh = 9
+	static let resetPosition = 10
 }

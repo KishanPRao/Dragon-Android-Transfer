@@ -1,16 +1,16 @@
 //
 //  AndroidHandler.swift
-//  Simple Android Transfer
+//  Dragon Android Transfer
 //
 //  Created by Kishan P Rao on 25/12/16.
-//  Copyright © 2016 Untitled-TBA. All rights reserved.
+//  Copyright © 2016 Kishan P Rao. All rights reserved.
 //
 
 import Foundation
 
 class AndroidHandler {
 	let TAG = "AndroidHandler"
-	let VERBOSE = true
+	let VERBOSE = false
 	let EXTREME_VERBOSE = false
 	static let ESCAPE_DOUBLE_QUOTES = "\""
 	static let SINGLE_QUOTES = "'"
@@ -75,7 +75,6 @@ class AndroidHandler {
 		currentPath = ""
 		adbLaunchPath = "/bin/bash"
 		
-		adbDirectoryPath = self.extractAdbAsset()
 //        test { (result) in
 //            print("Op:", result)
 //        }
@@ -93,6 +92,16 @@ class AndroidHandler {
 //        }
 //        Swift.print(stringRepresentation)
 //    }
+
+	func initialize() {
+		adbDirectoryPath = self.extractAdbAsset()
+	}
+
+	func isFirstLaunch() -> Bool {
+		let resourcePath = Bundle.main.resourcePath!
+		let fileManager = FileManager.default
+		return !(fileManager.fileExists(atPath: resourcePath + "/adb"))
+	}
 	
 	fileprivate func test(_ completion: @escaping (_ result: String) -> Void) {
 		let task = Process()
@@ -135,7 +144,12 @@ class AndroidHandler {
 	
 	func extractAdbAsset() -> String {
 		let resourcePath = Bundle.main.resourcePath!
+		if (!isFirstLaunch()) {
+			return resourcePath
+		} 
 		let fileManager = FileManager.default
+		let fileExists = fileManager.fileExists(atPath: resourcePath + "/adb")
+		Swift.print("AndroidHandler, file Exists:", fileExists)
 		let data = NSDataAsset.init(name: "adb")?.data
 		let filePath = resourcePath + "/adb"
 		
@@ -421,8 +435,8 @@ class AndroidHandler {
 		var localAndroidDevices: Array<AndroidDevice> = []
 		while i < devices.count {
 			var deviceId = devices[i].characters.split {
-						$0 == "\t"
-					}.map(String.init)[0]
+				$0 == "\t"
+			}.map(String.init)[0]
 //            .display gives "nicer" name
 			var deviceName = adb("./adb -s " + deviceId + " shell getprop ro.product.model")
 			deviceId = deviceId.trimmingCharacters(
@@ -634,10 +648,15 @@ class AndroidHandler {
 			var i = 0
 			var pushCommand = "" as String
 			while i < sourceFiles.count {
+				let file = sourceFiles[i]
 				pushCommand = pushCommand + "./adb" + " -s " + (activeDevice?.id)!
-				let sourceFileName = sourceFiles[i].path + HandlerConstants.SEPARATOR + sourceFiles[i].fileName
+				let sourceFileName = file.path + HandlerConstants.SEPARATOR + file.fileName
 				pushCommand = pushCommand + " push " + AndroidHandler.ESCAPE_DOUBLE_QUOTES + sourceFileName + AndroidHandler.ESCAPE_DOUBLE_QUOTES + " " + AndroidHandler.ESCAPE_DOUBLE_QUOTES + destination + AndroidHandler.ESCAPE_DOUBLE_QUOTES + ";\n"
-				size = size + sourceFiles[i].size
+//				TODO: Worst case!
+//				if ((file.size == 0 || file.size == UInt64.max) && file.type == BaseFileType.Directory) {
+////					file.size = getSize(sourceFileName)
+//				}
+				size = size + file.size
 				i = i + 1
 			}
 			
@@ -667,7 +686,7 @@ class AndroidHandler {
 						$0 == "\n" || $0 == "\r\n"
 					}.map(String.init)
 					let output = outputLines[outputLines.count - 1]
-//					print("Op:", output, " Regex:", self.regexPercentage)
+//					print("AndroidHandler, Time:", TimeUtils.getCurrentTime(), ", Op:", output, ", Regex:", self.regexPercentage)
 					
 					let matchesPercentage = self.matchesForRegexInText(self.regexPercentage, text: output)
 					if (matchesPercentage.count > 0) {
@@ -837,7 +856,7 @@ class AndroidHandler {
 //			}
 //			
 //			files[i].size = size
-		
+			
 			updateSize(file: files[i])
 			i = i + 1
 		}
@@ -1156,7 +1175,9 @@ class AndroidHandler {
 			var adbCommand = "./adb -s " + (activeDevice?.id)!
 			adbCommand = adbCommand + " shell " + "'" + commands + "'"
 //			adbCommand = adbCommand + " shell; " + "" + commands + ""
-			print("Adb Command:", adbCommand)
+			if (VERBOSE) {
+				print("Adb Command:", adbCommand)
+			}
 			return adb(adbCommand)
 		} else {
 			print("Warning, trying shell, no active")

@@ -1,6 +1,6 @@
 //
 // Created by Kishan P Rao on 04/03/17.
-// Copyright (c) 2017 Untitled-TBA. All rights reserved.
+// Copyright (c) 2017 Kishan P Rao. All rights reserved.
 //
 
 import Foundation
@@ -13,7 +13,7 @@ class ColoredButton: NSButton {
 	var textSelectedColor: NSColor = NSColor.white
 	var textDeselectedColor: NSColor = NSColor.gray
 	var isSelected: Bool = false
-	var currentFont: NSFont?
+//	var currentFont: NSFont?
 	
 	required init?(coder: NSCoder) {
 		super.init(coder: coder)
@@ -23,21 +23,25 @@ class ColoredButton: NSButton {
 		setSelected(isSelected)
 	}
 	
+	func updateSelected() {
+		setSelected(isSelected)
+	}
+	
 	func setSelected(_ selected: Bool) {
 		isSelected = selected
 		if (VERBOSE) {
 			Swift.print("ColoredButton: Selected:", isSelected, ", Title:", title);
 		}
-		if (currentFont == nil) {
-			currentFont = NSFont(name: font!.fontName, size: 18)
-		}
+//		if (currentFont == nil) {
+//			currentFont = NSFont(name: font!.fontName, size: DimenUtils.getDimension(dimension: Dimens.android_controller_device_selector_storage_text_size))
+//		}
 		let style = NSMutableParagraphStyle()
 		style.alignment = NSCenterTextAlignment
 		var attrsDictionary: [String: AnyObject]
 		if (isSelected) {
-			attrsDictionary = [NSForegroundColorAttributeName: textSelectedColor, NSParagraphStyleAttributeName: style, NSFontAttributeName: currentFont!];
+			attrsDictionary = [NSForegroundColorAttributeName: textSelectedColor, NSParagraphStyleAttributeName: style, NSFontAttributeName: font!];
 		} else {
-			attrsDictionary = [NSForegroundColorAttributeName: textDeselectedColor, NSParagraphStyleAttributeName: style, NSFontAttributeName: currentFont!];
+			attrsDictionary = [NSForegroundColorAttributeName: textDeselectedColor, NSParagraphStyleAttributeName: style, NSFontAttributeName: font!];
 		}
 		let attString = NSAttributedString(string: title, attributes: attrsDictionary)
 		attributedTitle = attString

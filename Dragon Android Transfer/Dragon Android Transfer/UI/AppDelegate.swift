@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  Simple Android Transfer
+//  Dragon Android Transfer
 //
 //  Created by Kishan P Rao on 25/12/16.
-//  Copyright © 2016 Untitled-TBA. All rights reserved.
+//  Copyright © 2016 Kishan P Rao. All rights reserved.
 //
 
 import Cocoa
@@ -30,7 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 	static var canGoBackward = false
 	static var hasClipboardItems = false
 	
-	var helpWindow: HelpWindow? = nil
+//	var helpWindow: HelpWindow? = nil
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
@@ -88,7 +88,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 					}
 					
 				}
-		
+		NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.screenUpdated), name: NSNotification.Name.NSWindowDidChangeScreen, object: nil)
+	}
+	
+	func screenUpdated() {
+//		if (helpWindow != nil) {
+//			helpWindow!.updateSizes()
+//		}
 	}
 	
 	func applicationDidBecomeActive(_ notification: Notification) {
@@ -103,6 +109,22 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 //        viewController = window!.contentViewController as! ViewController;
 //        }
 		NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.CHANGE_ACTIVE), object: nil)
+//		let androidViewController = getAndroidController()
+//		if (androidViewController != nil && androidViewController!.shouldShowGuide()) {
+//			showHelpWindow([])
+//		}
+	}
+	
+	private func getAndroidController() -> AndroidViewController? {
+		if (NSApplication.shared().mainWindow == nil) {
+			Swift.print("AppDelegate, Warning, window not created yet!")
+			return nil
+		}
+		let window = NSApplication.shared().mainWindow!
+		let viewController = window.contentViewController as! ViewController
+		return viewController.androidViewController
+//        Swift.print("Subs:", viewController.view.subviews[0])
+//		return viewController.view.subviews[0] as! AndroidViewController
 	}
 	
 	func applicationDidResignActive(_ notification: Notification) {
@@ -170,6 +192,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 		if (item.tag == MenuItemIdentifier.help) {
 			return true
 		}
+		if (item.tag == MenuItemIdentifier.minimize) {
+			return true
+		}
+		if (item.tag == MenuItemIdentifier.refresh) {
+			return true
+		}
+		if (item.tag == MenuItemIdentifier.resetPosition) {
+			return true
+		}
 		return false
 	}
 	
@@ -202,17 +233,37 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 			Swift.print("AppDelegate, openSelectedFile:", sender);
 		}
 	}
+    
+    @IBAction func refreshFiles(_ sender: Any) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.REFRESH_FILES), object: nil)
+        if (AppDelegate.VERBOSE) {
+            Swift.print("AppDelegate, refreshFiles:", sender);
+        }
+    }
+    
+    @IBAction func resetPosition(_ sender: Any) {
+		NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.RESET_POSITION), object: nil)
+		if (AppDelegate.VERBOSE) {
+			Swift.print("AppDelegate, resetPosition:", sender);
+		}
+    }
+	
 	
 	@IBAction func showHelpWindow(_ sender: Any) {
-		if (helpWindow == nil) {
-			helpWindow = HelpWindow(windowNibName: "HelpWindow")
-		}
-//		helpWindow!.beginSheet(mainWindow: NSApplication.shared().mainWindow!)
-		NSApplication.shared().mainWindow!.beginSheet(helpWindow!.window!) { response in
-			if (AppDelegate.VERBOSE) {
-				Swift.print("AppDelegate, Resp!");
-			}
-		}
+		NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.SHOW_HELP), object: nil)
+//		if (helpWindow == nil) {
+//			helpWindow = HelpWindow(windowNibName: "HelpWindow")
+//		}
+//		let window = NSApplication.shared().mainWindow!
+//		let androidViewController = getAndroidController()
+//		if (androidViewController != nil) {
+//			helpWindow!.setIsIntro(intro: androidViewController!.shouldShowGuide())
+//			window.beginSheet(helpWindow!.window!) { response in
+//				if (AppDelegate.VERBOSE) {
+//					Swift.print("AppDelegate, Resp!");
+//				}
+//			}
+//		}
 	}
 	
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -223,11 +274,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 
 
 //        self.window.appearance = NSAppearance.init(named: NSAppearanceNameVibrantDark)
+//		NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.FINISHED_LAUNCH), object: nil)
 	}
 	
 	func applicationWillTerminate(_ aNotification: Notification) {
 // 		Insert code here to tear down your application
 		NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.STOP), object: nil)
+		NotificationCenter.default.removeObserver(self)
 	}
 }
 

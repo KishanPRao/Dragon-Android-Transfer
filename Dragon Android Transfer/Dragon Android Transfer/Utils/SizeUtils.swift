@@ -1,9 +1,9 @@
 //
 //  SizeUtils.swift
-//  Simple Android Transfer
+//  Dragon Android Transfer
 //
 //  Created by Kishan P Rao on 01/02/17.
-//  Copyright © 2017 Untitled-TBA. All rights reserved.
+//  Copyright © 2017 Kishan P Rao. All rights reserved.
 //
 
 import Foundation

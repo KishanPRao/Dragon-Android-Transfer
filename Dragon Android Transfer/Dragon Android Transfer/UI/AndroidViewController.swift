@@ -1,9 +1,9 @@
 //
 //  AndroidViewController.swift
-//  Simple Android Transfer
+//  Dragon Android Transfer
 //
 //  Created by Kishan P Rao on 25/12/16.
-//  Copyright © 2016 Untitled-TBA. All rights reserved.
+//  Copyright © 2016 Kishan P Rao. All rights reserved.
 //
 
 import Cocoa
@@ -46,6 +46,8 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 	@IBOutlet weak var currentDirectoryText: NSTextField!
 	@IBOutlet weak var spaceStatusText: NSTextField!
 	@IBOutlet weak var refreshButton: NSButton!
+	@IBOutlet weak var currentDirectoryLabel: NSTextField!
+	@IBOutlet weak var spaceStatusLabel: NSTextField!
 	
 	@IBOutlet weak var internalStorageButton: ColoredButton!
 	@IBOutlet weak var externalStorageButton: ColoredButton!
@@ -68,6 +70,10 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 	fileprivate var currentCopiedSize = 0 as UInt64
 	
 	fileprivate let transferHandler = TransferHandler.sharedInstance
+	fileprivate var dirtyWindow: Bool = true
+	fileprivate var showGuide: Bool = false
+	
+	var helpWindow: HelpWindow? = nil
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -75,10 +81,13 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 		print("View Loaded")
 		transferHandler.setDeviceNotificationDelegate(self)
 		
+		showGuide = transferHandler.isFirstLaunch()
+		transferHandler.initializeAndroid()
+		
 		fileTable.target = self
 		fileTable.reloadData()
 		let doubleClickSelector: Selector = #selector(AndroidViewController.doubleClickList(_:))
-		fileTable.doubleAction = doubleClickSelector;
+		fileTable.doubleAction = doubleClickSelector
 		fileTable.allowsMultipleSelection = true
 		
 		self.devicesPopUp.removeAllItems()
@@ -125,13 +134,16 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 //		backButton.imageScaling = NSImageScaling.ScaleProportionallyDown
 //		clipboardButton.scale = NSImageScaling.ScaleProportionallyUpOrDown
 		messageText.alignment = NSCenterTextAlignment
-		messageText.font = NSFont(name: messageText.font!.fontName, size: DimenUtils.ERROR_MESSAGE_TEXT_SIZE)
+		messageText.font = NSFont(name: messageText.font!.fontName, size: DimenUtils.getDimension(dimension: Dimens.error_message_text_size))
 		updateDeviceStatus()
 		updateActiveStorageButton()
 
 //		Testing:
 //		showCopyDialog()
+//		getScreenResolution()
+		transferHandler.start()
 	}
+	
 	
 	fileprivate func updateButton(_ button: NSButton, withImage image: NSImage?) {
 		if let cell = button.cell as? NSButtonCell {
@@ -192,7 +204,8 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 	}
 	
 	func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-		return 25
+//		return 25
+		return DimenUtils.getDimension(dimension: Dimens.android_controller_file_table_file_cell_height) - DimenUtils.getDimension(dimension: Dimens.android_controller_file_table_file_cell_margin)
 	}
 	
 	func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
@@ -208,11 +221,12 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 //		}
 		return true
 	}
-    @IBAction func tableSelectionChanged(_ sender: Any) {
-        if (AndroidViewController.VERBOSE) {
-            Swift.print("AndroidViewController: tableSelectionChanged:", fileTable.selectedRow);
-        }
-    }
+	
+	@IBAction func tableSelectionChanged(_ sender: Any) {
+		if (AndroidViewController.VERBOSE) {
+			Swift.print("AndroidViewController: tableSelectionChanged:", fileTable.selectedRow);
+		}
+	}
 	
 	func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
 		if (row >= self.androidDirectoryItems.count) {
@@ -220,18 +234,30 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 			return nil
 		}
 		let cellView = tableView.make(withIdentifier: "fileCell", owner: self) as! FileCellView
+		cellView.frame = DimenUtils.getUpdatedRect2(frame: cellView.frame, dimensions: [Dimens.android_controller_file_table_file_cell_width, Dimens.android_controller_file_table_file_cell_height])
+		
 		//        print("Items:", self.androidDirectoryItems)
 		//      Possibility “This NSLayoutConstraint is being configured with a constant that exceeds internal limits” error to occur. Old version SDK?
 		let file = self.androidDirectoryItems[row];
 		//            print("File:", file)
-		cellView.nameField!.stringValue = file.fileName
-		cellView.nameField!.textColor = ColorUtils.colorWithHexString(ColorUtils.listTextColor)
-		cellView.sizeField!.stringValue = SizeUtils.getBytesInFormat(file.size)
-		cellView.sizeField!.textColor = ColorUtils.colorWithHexString(ColorUtils.listTextColor)
+		let fileName = cellView.nameField!
+		fileName.stringValue = file.fileName
+		fileName.textColor = ColorUtils.colorWithHexString(ColorUtils.listTextColor)
+		fileName.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_file_table_file_cell_file_name_text_size))
+		fileName.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table_file_cell_file_name)
+		
+		let fileSize = cellView.sizeField!
+		fileSize.stringValue = SizeUtils.getBytesInFormat(file.size)
+		fileSize.textColor = ColorUtils.colorWithHexString(ColorUtils.listTextColor)
+		fileSize.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_file_table_file_cell_file_size_text_size))
+		fileSize.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table_file_cell_file_size)
+		
+		let fileImage = cellView.fileImage!
+		fileImage.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table_file_cell_file_image)
 		if (file.type == BaseFileType.Directory) {
-			cellView.fileImage!.image = NSImage(named: "folder")
+			fileImage.image = NSImage(named: "folder")
 		} else {
-			cellView.fileImage!.image = NSImage(named: "file")
+			fileImage.image = NSImage(named: "file")
 		}
 		let indexSet = fileTable.selectedRowIndexes
 		if (indexSet.contains(row)) {
@@ -320,6 +346,55 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 //				Swift.print("AndroidViewController, First Responder!");
 //			}
 		}
+		if (dirtyWindow) {
+			updateWindowSize()
+		}
+		checkGuide()
+	}
+	
+	override func viewWillLayout() {
+		super.viewWillLayout()
+		Swift.print("AndroidViewController, viewWillLayout")
+		if (dirtyWindow) {
+			updateWindowSize()
+		}
+		checkGuide()
+	}
+	
+	override func viewDidLayout() {
+		super.viewDidLayout()
+		if (dirtyWindow) {
+			updateWindowSize()
+		}
+		checkGuide()
+	}
+	
+	func shouldShowGuide() -> Bool {
+		return showGuide
+	}
+	
+	func checkGuide() {
+		if (showGuide) {
+//			TODO: Guide.
+			if (AndroidViewController.VERBOSE) {
+				Swift.print("AndroidViewController, Opening Intro Guide")
+			}
+//			if (NSApplication.shared().mainWindow == nil) {
+//				if (AndroidViewController.VERBOSE) {
+//					Swift.print("AndroidViewController, Warning, window not created yet!")
+//				}
+//				return
+//			}
+//			let delegate = NSApplication.shared().delegate as! AppDelegate
+//			delegate.showHelpWindow([])
+			showHelpWindow()
+			showGuide = false
+		}
+	}
+	
+	override func updateViewConstraints() {
+		super.updateViewConstraints()
+		Swift.print("AndroidViewController, 2")
 	}
 	
 	override func viewWillDisappear() {
@@ -350,6 +425,7 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 		self.devicesPopUp.addItems(withTitles: devicesNames)
 		let selectedIndex = self.devicesPopUp.indexOfSelectedItem
 		print("Update Selected:", selectedIndex)
+		externalStorageButton.isHidden = true
 		var activeDevice = nil as AndroidDevice?
 		if (selectedIndex > -1) {
 			activeDevice = devices[selectedIndex]
@@ -398,11 +474,11 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 	}
 	
 	func start() {
-		transferHandler.start()
+//		transferHandler.start()
 	}
 	
 	func stop() {
-		transferHandler.stop()
+//		transferHandler.stop()
 	}
 	
 	func doubleClickList(_ sender: AnyObject) {
@@ -618,13 +694,159 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 	}
 	
 	fileprivate func showCopyDialog() {
-		let width = DimenUtils.COPY_DIALOG_WIDTH
-		let height = DimenUtils.COPY_DIALOG_HEIGHT
-		let x = Int(self.view.bounds.width / 2) - width / 2
-		let y = Int(self.view.bounds.height / 2) - height / 2
+		let width = DimenUtils.getDimensionInInt(dimension: Dimens.copy_dialog_width)
+		let height = DimenUtils.getDimensionInInt(dimension: Dimens.copy_dialog_height)
+		let x = Int(getWindowWidth() / 2) - width / 2
+		let y = Int(getWindowHeight() / 2) - height / 2
 		copyDialog = CopyDialog(frame: CGRect(x: x, y: y, width: width, height: height))
 		copyDialog!.setCopyDialogDelegate(delegate: self)
+		copyDialog!.updateSize(x: x, y: y, width: width, height: height)
 		self.view.addSubview(copyDialog!)
+	}
+	
+	private func getWindowHeight() -> CGFloat {
+		return self.view.bounds.height
+	}
+	
+	private func getWindowWidth() -> CGFloat {
+		return self.view.bounds.width
+	}
+	
+	private func getScreenResolution() {
+		let screenArray = NSScreen.screens()
+		var index = 0
+		while (index < screenArray!.count) {
+			let screen = screenArray![index]
+			index = index + 1
+			Swift.print("AndroidViewController, screen:", screen)
+//			screen.
+		}
+		Swift.print("AndroidViewController, screens:", screenArray)
+//		let screenRect = 
+	}
+	
+	func screenUpdated() {
+		updateWindowSize()
+		checkGuide()
+	}
+	
+	func updateWindowSize() {
+		if (self.view.window == nil) {
+			Swift.print("AndroidViewController, Warning! Null Window")
+			return
+		}
+		let screen = self.view.window!.screen!
+//		Swift.print("AndroidViewController, current screen:", screen.visibleFrame.width)
+		DimenUtils.updateRatio(currentWidth: screen.visibleFrame.width)
+		
+		let windowFrame = self.view.window!.frame
+		let newSize = DimenUtils.getUpdatedRect2(frame: windowFrame, dimensions: Dimens.android_controller_size)
+		let extraHeight = (screen.frame.height - screen.visibleFrame.height) + (screen.frame.origin.y - screen.visibleFrame.origin.y)
+		
+		let finalRect = CGRect(x: newSize.origin.x, y: newSize.origin.y + (windowFrame.height - newSize.height) - extraHeight, width: newSize.width, height: newSize.height + extraHeight)
+
+//		Swift.print("AndroidViewController, previous:", windowFrame)
+//		Swift.print("AndroidViewController, new:", finalRect)
+		
+		if (finalRect.width == windowFrame.width) {
+			Swift.print("AndroidViewController, Warning! No Changes to Window")
+			return
+		}
+//		TODO: Fix flickering screen update, if occurs again..
+//		Swift.print("AndroidViewController, extra H:", extraHeight)
+//		Swift.print("AndroidViewController, frame:", screen.frame)
+//		Swift.print("AndroidViewController, v frame:", screen.visibleFrame)
+//		Swift.print("AndroidViewController, origin:", self.view.window!.frame.origin.y)
+//		self.view.window!.setContentSize(NSSize(width: newSize.width, height: newSize.height))
+		self.view.window!.setFrame(finalRect, display: true)
+		view.frame = DimenUtils.getUpdatedRect2(frame: view.frame, dimensions: Dimens.android_controller_size)
+		
+		toolbarView.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_toolbar)
+		clipboardButton.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_toolbar_clipboard_button)
+		clipboardItemsCount.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_toolbar_clipboard_items_count)
+		clipboardItemsCount.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_toolbar_clipboard_items_count_text_size))
+		devicesPopUp.controlView!.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_toolbar_device_popup)
+		devicesPopUp.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_toolbar_device_popup_text_size))
+		backButton.controlView!.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_toolbar_back)
+		
+		deviceSelectorView.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_device_selector)
+		internalStorageButton.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_device_selector_storage_text_size))
+		internalStorageButton.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_device_selector_internal)
+		internalStorageButton.updateSelected()
+		externalStorageButton.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_device_selector_storage_text_size))
+		externalStorageButton.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_device_selector_external)
+		externalStorageButton.updateSelected()
+//		Swift.print("AndroidViewController, ext frame:", externalStorageButton.frame)
+		
+		statusView.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_status_view)
+		currentDirectoryLabel.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_status_view_current_directory_label_text_size))
+		currentDirectoryLabel.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_status_view_current_directory_label)
+		currentDirectoryText.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_status_view_current_directory_text_size))
+		currentDirectoryText.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_status_view_current_directory_text)
+		spaceStatusLabel.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_status_view_space_status_label_size))
+		spaceStatusLabel.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_status_view_space_status_label)
+		spaceStatusText.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_status_view_space_status_text_size))
+		spaceStatusText.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_status_view_space_status_text)
+		refreshButton.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_status_view_refresh)
+		
+		fileTable.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table)
+//		let scrollViewFrame = fileTable.enclosingScrollView!.frame
+		fileTable.enclosingScrollView!.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table)
+		updateList()
+		
+		overlayView.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_overlay)
+		
+		messageText.font = NSFont(name: messageText.font!.fontName, size: DimenUtils.getDimension(dimension: Dimens.error_message_text_size))
+		messageText.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.error_message_text)
+		
+		if (copyDialog != nil) {
+			let width = DimenUtils.getDimensionInInt(dimension: Dimens.copy_dialog_width)
+			let height = DimenUtils.getDimensionInInt(dimension: Dimens.copy_dialog_height)
+			let x = Int(getWindowWidth() / 2) - width / 2
+			let y = Int(getWindowHeight() / 2) - height / 2
+			copyDialog!.updateSize(x: x, y: y, width: width, height: height)
+		}
+//		if (helpWindow != nil && helpWindow!.isShowing) {
+		if (helpWindow != nil && helpWindow!.isShowing && helpWindow!.needsUpdating()) {
+//			helpWindow!.updateSizes()
+			Swift.print("AndroidViewController, updating Help")
+			helpWindow!.endSheet()
+			helpWindow!.setIsIntro(intro: shouldShowGuide())
+			helpWindow!.updateSizes()
+			helpWindow!.isShowing = true
+			self.view.window!.beginSheet(helpWindow!.window!) { response in
+				if (AndroidViewController.VERBOSE) {
+					Swift.print("AndroidViewController, Resp!");
+				}
+			}
+		}
+		dirtyWindow = false
+	}
+	
+	func showHelpWindow() {
+		if (helpWindow == nil) {
+			helpWindow = HelpWindow(windowNibName: "HelpWindow")
+		}
+		if (self.view.window == nil) {
+			if (AndroidViewController.VERBOSE) {
+				Swift.print("AndroidViewController, Warning, window not created yet!")
+			}
+			return
+		}
+//		let window = NSApplication.shared().mainWindow!
+		let window = self.view.window!
+//		let androidViewController = getAndroidController()
+//		if (androidViewController != nil) {
+//		helpWindow!.setIsIntro(intro: androidViewController!.shouldShowGuide())
+		helpWindow!.setIsIntro(intro: shouldShowGuide())
+		helpWindow!.updateSizes()
+		helpWindow!.isShowing = true
+		window.beginSheet(helpWindow!.window!) { response in
+			if (AndroidViewController.VERBOSE) {
+				Swift.print("AndroidViewController, Resp!");
+			}
+		}
+//		}
 	}
 	
 	func pasteToAndroid(_ notification: Notification) {
@@ -636,7 +858,15 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 			}
 			return
 		} else {
-			if (files[0].size == 0) {
+			var i = 0
+			var updateSizes = false
+			while (i < files.count) {
+				if (files[i].size == 0 || files[i].size == UInt64.max) {
+					updateSizes = true
+				}
+				i = i + 1
+			}
+			if (updateSizes) {
 				transferHandler.updateSizes()
 			}
 		}
@@ -729,19 +959,33 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 //        timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector:#selector(AndroidViewController.testMethod), userInfo: nil, repeats: true)
 	}
 	
-	fileprivate func refresh() {
+	func refresh() {
 		reloadFileList(transferHandler.openDirectoryData(transferHandler.getCurrentPath()))
 		transferHandler.updateStorage()
 		if (transferHandler.hasActiveDevice()) {
 			spaceStatusText.stringValue = transferHandler.getAvailableSpace() + " of " + transferHandler.getTotalSpaceInString()
 		}
 	}
+	
+	func resetPosition() {
+		let previousFrame = self.view.window!.frame
+//		let rect = CGRect(x: previousFrame.origin.x, y: 0, width: previousFrame.width, height: previousFrame.height)
+		let screenFrame = self.view.window!.screen!.frame
+		let screenVisibleFrame = self.view.window!.screen!.visibleFrame
+//		Swift.print("AndroidViewController, before, visible:", screenVisibleFrame, ", frame:", screenFrame, ", prev:", previousFrame)
+		let extraHeight = (screenFrame.height - screenVisibleFrame.height) + (screenFrame.origin.y - screenVisibleFrame.origin.y)
+		let y = (screenVisibleFrame.height / 2) - (previousFrame.height / 2) + screenVisibleFrame.origin.y + extraHeight
+		let x = (screenVisibleFrame.width / 2) - (previousFrame.width / 2) + screenVisibleFrame.origin.x
+		let rect = CGRect(x: x, y: y, width: previousFrame.width, height: previousFrame.height)
+//		Swift.print("AndroidViewController, visible:", screenVisibleFrame, ", frame:", screenFrame, ", rect:", rect)
+		self.view.window!.setFrame(rect, display: true)
+	}
 
 //    var timer: NSTimer? = nil
 	
 	@IBAction func clipboardButtonTapped(_ sender: AnyObject) {
-		if (!open) {
-			open = true
+		if (!clipboardOpened) {
+			clipboardOpened = true
 			self.performSegue(withIdentifier: ViewControllerIdentifier.ClipboardId, sender: self)
 		} else {
 			if (AndroidViewController.VERBOSE) {
@@ -757,14 +1001,14 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 		return AppDelegate.validateInterfaceMenuItem(item: item)
 	}
 	
-	var open = false
+	var clipboardOpened = false
 	
 	func onOpened() {
-		open = true
+		clipboardOpened = true
 	}
 	
 	func onClosed() {
-		open = false
+		clipboardOpened = false
 	}
 	
 	override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
@@ -790,6 +1034,8 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.pasteToMac), name: NSNotification.Name(rawValue: StatusTypeNotification.PASTE_TO_MAC), object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.stop), name: NSNotification.Name(rawValue: StatusTypeNotification.STOP), object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.activeChange), name: NSNotification.Name(rawValue: StatusTypeNotification.CHANGE_ACTIVE), object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.checkGuide), name: NSNotification.Name(rawValue: StatusTypeNotification.FINISHED_LAUNCH), object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.screenUpdated), name: NSNotification.Name.NSWindowDidChangeScreen, object: nil)
 
 //		Menu Item Related
 		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.openSelectedDirectory), name: NSNotification.Name(rawValue: StatusTypeNotification.OPEN_FILE), object: nil)
@@ -798,6 +1044,9 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.pasteToAndroid), name: NSNotification.Name(rawValue: StatusTypeNotification.MENU_PASTE_FILES), object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.clearClipboard), name: NSNotification.Name(rawValue: StatusTypeNotification.MENU_CLEAR_CLIPBOARD), object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.getSelectedItemInfo), name: NSNotification.Name(rawValue: StatusTypeNotification.MENU_GET_INFO), object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.refresh), name: NSNotification.Name(rawValue: StatusTypeNotification.REFRESH_FILES), object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.resetPosition), name: NSNotification.Name(rawValue: StatusTypeNotification.RESET_POSITION), object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.showHelpWindow), name: NSNotification.Name(rawValue: StatusTypeNotification.SHOW_HELP), object: nil)
 	}
 	
 	deinit {

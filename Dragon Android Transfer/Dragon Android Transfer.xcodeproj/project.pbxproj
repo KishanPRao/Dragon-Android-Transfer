@@ -26,6 +26,7 @@
 		BE3BD3CF4A98FDDACABFF93A /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD7F1239BA6A5E7685902 /* ColorUtils.swift */; };
 		BE3BD3EE760EA36708CC2F52 /* StyleUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD6E9AD363F2C93D7DD6E /* StyleUtils.swift */; };
 		BE3BD4342179DB442FD36053 /* close_button.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD14EBAA39AE998183C61 /* close_button.png */; };
+		BE3BD43FFDA218F217C09DBA /* help.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD067D7FB225535465C16 /* help.rtf */; };
 		BE3BD454352A5DEFBCF3B534 /* ClipboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDFB9152E270F55A7DA93 /* ClipboardViewController.swift */; };
 		BE3BD48392D9F2FFFB13E879 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDEBCBDFAEEA61467AE50 /* OverlayView.swift */; };
 		BE3BD52D3C817210FBDCEDC3 /* ColoredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD45ECA11EB2D3C3BDAC4 /* ColoredButton.swift */; };
@@ -50,7 +51,9 @@
 		BE3BDA5F8B8040DCA2509A1D /* file.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3BDDFFAFC3F3A5DAC239F2 /* file.png */; };
 		BE3BDAF11B0C0A34B5455FA2 /* clipboard_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD7F3E98C3A92436C5F2C /* clipboard_icon.png */; };
 		BE3BDB56DB5BC3795A1E82B6 /* CopyDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDA85138797DCF1CBFF6E /* CopyDialog.swift */; };
+		BE3BDB74D4CB19E9B4D74631 /* Dimens.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDD867147BBE13995A8D3 /* Dimens.swift */; };
 		BE3BDBB79A71733D77D57280 /* TransferHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD1A9384B93DB8EB9F728 /* TransferHandler.swift */; };
+		BE3BDBF0A3F946760F91F720 /* intro_guide.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD5A174AC494406F68801 /* intro_guide.rtf */; };
 		BE3BDC57F874BAFD8C7076B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD9E9DDF981F8F795B66F /* AppDelegate.swift */; };
 		BE3BDC8FE02DB6B1BDDFD082 /* clipboard_icon_plain.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3BDF4C3E50FACB10B4D3EF /* clipboard_icon_plain.png */; };
 		BE3BDD5398929F0485C6B7A0 /* SynchronizedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDB74F3C4682B914DD044 /* SynchronizedProtocol.swift */; };
@@ -71,14 +74,14 @@
 			containerPortal = 503C5A1F1E0FB92F0090EB68 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 503C5A261E0FB92F0090EB68;
-			remoteInfo = "Simple Android Transfer";
+			remoteInfo = "Dragon Android Transfer";
 		};
 		503C5A441E0FB9300090EB68 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 503C5A1F1E0FB92F0090EB68 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 503C5A261E0FB92F0090EB68;
-			remoteInfo = "Simple Android Transfer";
+			remoteInfo = "Dragon Android Transfer";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -98,6 +101,7 @@
 		6B57E05A04A8CF6A133E8C85 /* Pods-Dragon Android TransferUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dragon Android TransferUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dragon Android TransferUITests/Pods-Dragon Android TransferUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B7D8F895498525A7BB7E0CB4 /* Pods-Dragon Android TransferTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dragon Android TransferTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dragon Android TransferTests/Pods-Dragon Android TransferTests.release.xcconfig"; sourceTree = "<group>"; };
 		BE3BD03E4814A9F79E387252 /* StringUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringUtils.swift; sourceTree = "<group>"; };
+		BE3BD067D7FB225535465C16 /* help.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = help.rtf; sourceTree = "<group>"; };
 		BE3BD14EBAA39AE998183C61 /* close_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close_button.png; sourceTree = "<group>"; };
 		BE3BD17E6BE5C28C562E802B /* AndroidHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AndroidHandler.swift; sourceTree = "<group>"; };
 		BE3BD18F320379C8AC947788 /* ClipboardDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipboardDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +116,7 @@
 		BE3BD555FCE5B0B46E51D6BA /* DraggableTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableTableView.swift; sourceTree = "<group>"; };
 		BE3BD5632911A41E6A29378F /* AbstractHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractHandler.swift; sourceTree = "<group>"; };
 		BE3BD59077312767846474BE /* CopyDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CopyDialog.xib; sourceTree = "<group>"; };
+		BE3BD5A174AC494406F68801 /* intro_guide.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = intro_guide.rtf; sourceTree = "<group>"; };
 		BE3BD6111F36BDACDC8C22C5 /* AndroidViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AndroidViewController.swift; sourceTree = "<group>"; };
 		BE3BD64C1FBA89CEE74C8E21 /* CustomSwiftAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSwiftAnimator.swift; sourceTree = "<group>"; };
 		BE3BD65DA3E8130849D039FD /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
@@ -135,6 +140,7 @@
 		BE3BDCB8F35ADE3367E52D68 /* BaseObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseObject.swift; sourceTree = "<group>"; };
 		BE3BDCC4280329DAC474762E /* TimeUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeUtils.swift; sourceTree = "<group>"; };
 		BE3BDCC51664AA62C5D2E16F /* DeviceNotificationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceNotificationDelegate.swift; sourceTree = "<group>"; };
+		BE3BDD867147BBE13995A8D3 /* Dimens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dimens.swift; sourceTree = "<group>"; };
 		BE3BDDFFAFC3F3A5DAC239F2 /* file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file.png; sourceTree = "<group>"; };
 		BE3BDEB5D8B17C228D0A18FC /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		BE3BDEBCBDFAEEA61467AE50 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
@@ -199,6 +205,8 @@
 				BE3BDB16DB0C701832D6D2BC /* endCopy.mp3 */,
 				6E93CDD63DA7EE8968DB391B /* Pods */,
 				D4C33354EAA7E8CA24921F0F /* Frameworks */,
+				BE3BD067D7FB225535465C16 /* help.rtf */,
+				BE3BD5A174AC494406F68801 /* intro_guide.rtf */,
 			);
 			sourceTree = "<group>";
 		};
@@ -266,6 +274,7 @@
 				BE3BD75F91DBA3B298B91E2D /* SizeUtils.swift */,
 				BE3BD03E4814A9F79E387252 /* StringUtils.swift */,
 				BE3BDCC4280329DAC474762E /* TimeUtils.swift */,
+				BE3BDD867147BBE13995A8D3 /* Dimens.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -330,7 +339,7 @@
 			dependencies = (
 			);
 			name = "Dragon Android Transfer";
-			productName = "Simple Android Transfer";
+			productName = "Dragon Android Transfer";
 			productReference = 503C5A271E0FB92F0090EB68 /* Dragon Android Transfer.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -351,7 +360,7 @@
 				503C5A3A1E0FB9300090EB68 /* PBXTargetDependency */,
 			);
 			name = "Dragon Android TransferTests";
-			productName = "Simple Android TransferTests";
+			productName = "Dragon Android TransferTests";
 			productReference = 503C5A381E0FB9300090EB68 /* Dragon Android TransferTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -372,7 +381,7 @@
 				503C5A451E0FB9300090EB68 /* PBXTargetDependency */,
 			);
 			name = "Dragon Android TransferUITests";
-			productName = "Simple Android TransferUITests";
+			productName = "Dragon Android TransferUITests";
 			productReference = 503C5A431E0FB9300090EB68 /* Dragon Android TransferUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
@@ -387,7 +396,7 @@
 				);
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
-				ORGANIZATIONNAME = "Untitled-TBA";
+				ORGANIZATIONNAME = "Kishan P Rao";
 				TargetAttributes = {
 					503C5A261E0FB92F0090EB68 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -445,6 +454,8 @@
 				BE3BD869D6B5C24C762444B0 /* endCopy.mp3 in Resources */,
 				BE3BDA056B2DC42E5964E83F /* CopyDialog.xib in Resources */,
 				BE3BD24FD8B96C7770A8B230 /* HelpWindow.xib in Resources */,
+				BE3BD43FFDA218F217C09DBA /* help.rtf in Resources */,
+				BE3BDBF0A3F946760F91F720 /* intro_guide.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -645,6 +656,7 @@
 				BE3BDA227C3660B22686716F /* SizeUtils.swift in Sources */,
 				BE3BDD546D40C11CBAA28CB1 /* StringUtils.swift in Sources */,
 				BE3BD37C280AAD9C969F3243 /* TimeUtils.swift in Sources */,
+				BE3BDB74D4CB19E9B4D74631 /* Dimens.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

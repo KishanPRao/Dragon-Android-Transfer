@@ -1,15 +1,15 @@
 //
 //  ProgressView.swift
-//  Simple Android Transfer
+//  Dragon Android Transfer
 //
 //  Created by Kishan P Rao on 29/01/17.
-//  Copyright © 2017 Untitled-TBA. All rights reserved.
+//  Copyright © 2017 Kishan P Rao. All rights reserved.
 //
 
 import Foundation
 
 class ProgressView: NSView {
-	private static let VERBOSE = true;
+	private static let VERBOSE = false;
 //    let PROGRESS_BACKGROUND_COLOR = ColorUtils.colorWithHexString("#5abbb2")
 //    let PROGRESS_FOREGROUND_COLOR = ColorUtils.colorWithHexString("#009688")
     let PROGRESS_BACKGROUND_COLOR = ColorUtils.colorWithHexString(ColorUtils.progressBackgroundColor)
@@ -33,6 +33,7 @@ class ProgressView: NSView {
     }
     
     func setProgress(_ progress: CGFloat) {
+//		Swift.print("ProgressView, Time:", TimeUtils.getCurrentTime(), ", Progress:", progress)
         mProgress = progress
 	
 //		if (ProgressView.VERBOSE) {
