@@ -559,6 +559,7 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 	}
 	
 	func onStart(_ totalSize: UInt64, transferType: Int) {
+		AppDelegate.isPastingOperation = true
 		overlayView.isHidden = false;
 		currentCopyFile = ""
 		showCopyDialog()
@@ -618,6 +619,7 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 	}
 	
 	func onCompletion() {
+		AppDelegate.isPastingOperation = false
 		print("Done!")
 		
 		print("End Time:", TimeUtils.getCurrentTime())
@@ -849,6 +851,10 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 //		}
 	}
 	
+	func selectAllFiles() {
+		fileTable.selectAll(nil)
+	}
+	
 	func pasteToAndroid(_ notification: Notification) {
 		print("Paste to Android")
 		let files = transferHandler.getClipboardMacItems()
@@ -871,6 +877,7 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 			}
 		}
 		copyDestination = transferHandler.getCurrentPath()
+		AppDelegate.isPastingOperation = true
 		transferHandler.push(files, destination: transferHandler.getCurrentPath(), delegate: self)
 	}
 	
@@ -884,6 +891,7 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 			return
 		}
 		copyDestination = transferHandler.getActivePath()
+		AppDelegate.isPastingOperation = true
 		transferHandler.pull(files!, destination: transferHandler.getActivePath(), delegate: self)
 	}
 	
@@ -1042,6 +1050,7 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.backButtonPressed), name: NSNotification.Name(rawValue: StatusTypeNotification.GO_BACKWARD), object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.copyFromAndroid), name: NSNotification.Name(rawValue: StatusTypeNotification.MENU_COPY_FILES), object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.pasteToAndroid), name: NSNotification.Name(rawValue: StatusTypeNotification.MENU_PASTE_FILES), object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.selectAllFiles), name: NSNotification.Name(rawValue: StatusTypeNotification.SELECT_ALL), object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.clearClipboard), name: NSNotification.Name(rawValue: StatusTypeNotification.MENU_CLEAR_CLIPBOARD), object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.getSelectedItemInfo), name: NSNotification.Name(rawValue: StatusTypeNotification.MENU_GET_INFO), object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.refresh), name: NSNotification.Name(rawValue: StatusTypeNotification.REFRESH_FILES), object: nil)

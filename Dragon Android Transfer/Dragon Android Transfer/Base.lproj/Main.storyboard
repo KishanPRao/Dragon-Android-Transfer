@@ -99,7 +99,7 @@ DQ
                                         </menuItem>
                                         <menuItem title="Select All" tag="3" keyEquivalent="a" id="Ruw-6m-B2m">
                                             <connections>
-                                                <action selector="selectAll:" target="Ady-hI-5gd" id="VNm-Mi-diN"/>
+                                                <action selector="selectAll:" target="Voe-Tx-rLC" id="ELa-Hr-nxE"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="uyl-h8-XO2"/>

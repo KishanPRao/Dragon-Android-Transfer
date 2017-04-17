@@ -28,6 +28,7 @@ public enum StatusTypeNotification {
 	static let GO_BACKWARD = "GO_BACKWARD"
 	static let MENU_COPY_FILES = "MENU_COPY_FILES"
 	static let MENU_PASTE_FILES = "MENU_PASTE_FILES"
+	static let SELECT_ALL = "SELECT_ALL"
 	static let MENU_CLEAR_CLIPBOARD = "MENU_CLEAR_CLIPBOARD"
 	static let MENU_GET_INFO = "MENU_GET_INFO"
 	static let REFRESH_FILES = "REFRESH_FILES"

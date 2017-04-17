@@ -29,7 +29,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 	static var hasMacClipboardItems = false
 	static var canGoBackward = false
 	static var hasClipboardItems = false
-	
+	static var isPastingOperation = false
+
 //	var helpWindow: HelpWindow? = nil
 	
 	override func awakeFromNib() {
@@ -43,52 +44,49 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 		
 		let defaultPasteShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_V), modifierFlags: NSEventModifierFlags.command.rawValue + NSEventModifierFlags.shift.rawValue)
 		let defaultPasteShortcutData = NSKeyedArchiver.archivedData(withRootObject: defaultPasteShortcut)
-
-//        objc_geta
 		
 		defaults.register(defaults: [
-//                        MASHardcodedShortcutEnabledKey : true,
-//                        MASCustomShortcutEnabledKey : true,
 				AppDelegate.MASShortcutCopy: defaultCopyShortcutData,
 				AppDelegate.MASShortcutPaste: defaultPasteShortcutData
 		])
-//        print("Shortcut View:", shortcutView)
-
-//        shortcutView!.setAssociatedUserDefaultsKey(AppDelegate.MASCustomShortcutKey, withTransformerName: NSKeyedUnarchiveFromDataTransformerName)
 		
 		MASShortcutBinder.shared().bindShortcut(withDefaultsKey: AppDelegate.MASShortcutCopy) {
-					print("Copy, Foreground:", AppDelegate.isAppInForeground())
-//            let window = NSApplication.sharedApplication().mainWindow
-//            print("Window:", window)
-//            print("Window:", window!.contentViewController)
-//
-//            let viewController = window!.contentViewController as! ViewController;
-					
-					
-					if (AppDelegate.isAppInForeground()) {
-//                self.viewController.copyFromAndroid()
-						NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.COPY_FROM_ANDROID), object: nil)
-					} else {
-//                self.viewController.copyFromMac()
-						NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.COPY_FROM_MAC), object: nil)
-					}
-				}
+			print("Copy, Foreground:", AppDelegate.isAppInForeground())
+			
+			if (self.isInvalidOperation()) {
+				return
+			}
+			
+			if (AppDelegate.isAppInForeground()) {
+				NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.COPY_FROM_ANDROID), object: nil)
+			} else {
+				NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.COPY_FROM_MAC), object: nil)
+			}
+		}
 		
 		MASShortcutBinder.shared().bindShortcut(withDefaultsKey: AppDelegate.MASShortcutPaste) {
-					print("Paste, Foreground:", AppDelegate.isAppInForeground())
-
-//            let window = NSApplication.sharedApplication().mainWindow
-//            let viewController = window!.contentViewController as! ViewController;
-					if (AppDelegate.isAppInForeground()) {
-//                self.viewController.pasteToAndroid()
-						NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.PASTE_TO_ANDROID), object: nil)
-					} else {
-//                self.viewController.pasteToMac()
-						NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.PASTE_TO_MAC), object: nil)
-					}
-					
-				}
+			print("Paste, Foreground:", AppDelegate.isAppInForeground())
+			
+			if (self.isInvalidOperation()) {
+				return
+			}
+			if (AppDelegate.isAppInForeground()) {
+				NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.PASTE_TO_ANDROID), object: nil)
+			} else {
+				NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.PASTE_TO_MAC), object: nil)
+			}
+			
+		}
 		NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.screenUpdated), name: NSNotification.Name.NSWindowDidChangeScreen, object: nil)
+	}
+	
+	func isInvalidOperation() -> Bool {
+		let invalid = AppDelegate.isPastingOperation
+		if (invalid) {
+			NSSound.init(named: "Funk")!.play()
+			NSApp.requestUserAttention(NSRequestUserAttentionType.informationalRequest)
+		}
+		return invalid
 	}
 	
 	func screenUpdated() {
@@ -167,27 +165,28 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 	public static func validateInterfaceMenuItem(item: NSValidatedUserInterfaceItem!) -> Bool {
 		if (AppDelegate.VERBOSE) {
 			Swift.print("AppDelegate, validateInterfaceMenuItem:", item.tag);
+			Swift.print("AppDelegate, validateInterfaceMenuItem, isPasting:", AppDelegate.isPastingOperation);
 		}
 		if (item.tag == MenuItemIdentifier.fileOpenFile && AppDelegate.directoryItemSelected && !AppDelegate.multipleItemsSelected) {
-			return true
+			return !AppDelegate.isPastingOperation
 		}
 		if (item.tag == MenuItemIdentifier.getInfo && AppDelegate.itemSelected && !AppDelegate.multipleItemsSelected) {
-			return true
+			return !AppDelegate.isPastingOperation
 		}
 		if (item.tag == MenuItemIdentifier.editCopy && AppDelegate.itemSelected) {
-			return true
+			return !AppDelegate.isPastingOperation
 		}
 		if (item.tag == MenuItemIdentifier.editPaste && AppDelegate.hasMacClipboardItems) {
-			return true
+			return !AppDelegate.isPastingOperation
 		}
 		if (item.tag == MenuItemIdentifier.editSelectAll && AppDelegate.hasItems) {
-			return true
+			return !AppDelegate.isPastingOperation
 		}
 		if (item.tag == MenuItemIdentifier.goBackward && AppDelegate.canGoBackward) {
-			return true
+			return !AppDelegate.isPastingOperation
 		}
 		if (item.tag == MenuItemIdentifier.clearClipboard && AppDelegate.hasClipboardItems) {
-			return true
+			return !AppDelegate.isPastingOperation
 		}
 		if (item.tag == MenuItemIdentifier.help) {
 			return true
@@ -220,6 +219,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 		NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.MENU_COPY_FILES), object: nil)
 	}
 	
+    @IBAction func selectAll(_ sender: Any) {
+		NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.SELECT_ALL), object: nil)
+    }
+	
 	@IBAction func navigateBackward(_ sender: Any) {
 		NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.GO_BACKWARD), object: nil)
 		if (AppDelegate.VERBOSE) {
@@ -233,20 +236,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 			Swift.print("AppDelegate, openSelectedFile:", sender);
 		}
 	}
-    
-    @IBAction func refreshFiles(_ sender: Any) {
-        NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.REFRESH_FILES), object: nil)
-        if (AppDelegate.VERBOSE) {
-            Swift.print("AppDelegate, refreshFiles:", sender);
-        }
-    }
-    
-    @IBAction func resetPosition(_ sender: Any) {
+	
+	@IBAction func refreshFiles(_ sender: Any) {
+		NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.REFRESH_FILES), object: nil)
+		if (AppDelegate.VERBOSE) {
+			Swift.print("AppDelegate, refreshFiles:", sender);
+		}
+	}
+	
+	@IBAction func resetPosition(_ sender: Any) {
 		NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.RESET_POSITION), object: nil)
 		if (AppDelegate.VERBOSE) {
 			Swift.print("AppDelegate, resetPosition:", sender);
 		}
-    }
+	}
 	
 	
 	@IBAction func showHelpWindow(_ sender: Any) {
@@ -276,6 +279,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 //        self.window.appearance = NSAppearance.init(named: NSAppearanceNameVibrantDark)
 //		NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.FINISHED_LAUNCH), object: nil)
 	}
+	
+	public func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+		return true
+	}
+	
 	
 	func applicationWillTerminate(_ aNotification: Notification) {
 // 		Insert code here to tear down your application
