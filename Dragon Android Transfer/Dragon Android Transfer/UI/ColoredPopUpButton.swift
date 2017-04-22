@@ -6,7 +6,15 @@
 import Foundation
 
 class ColoredPopUpButton : NSPopUpButtonCell {
-	let VERBOSE = true;
+	static let VERBOSE = true;
+	
+	public required init(coder: NSCoder) {
+		super.init(coder: coder)
+		if (ColoredPopUpButton.VERBOSE) {
+			Swift.print("ColoredPopUpButton, init")
+		}
+	}
+	
 	
 //	required init?(coder aDecoder: NSCoder) {
 //		super.init(coder: aDecoder)
@@ -103,12 +111,20 @@ class ColoredPopUpButton : NSPopUpButtonCell {
 //		return frame
 //	}
 	
-//	override func drawSeparatorItemWithFrame(cellFrame: Foundation.NSRect, inView controlView: NSView) {
-////		super.drawSeparatorItemWithFrame(cellFrame, inView: controlView)
-//		NSColor.redColor().set()
+	override func draw(withFrame cellFrame: NSRect, in controlView: NSView) {
+		super.draw(withFrame: cellFrame, in: controlView)
+		NSColor.red.set()
+		NSRectFill(cellFrame)
+	}
+	
+	
+//	override func drawSeparatorItem(withFrame cellFrame: NSRect, in controlView: NSView) {
+//		super.drawSeparatorItem(withFrame: cellFrame, in: controlView)
+//		NSColor.red.set()
 //		NSRectFill(cellFrame)
 //	}
-//	
+	
+	
 //	override func drawStateImageWithFrame(cellFrame: Foundation.NSRect, inView controlView: NSView) {
 ////		super.drawStateImageWithFrame(cellFrame, inView: controlView)
 //		NSColor.redColor().set()
@@ -120,20 +136,23 @@ class ColoredPopUpButton : NSPopUpButtonCell {
 //		NSColor.redColor().set()
 //		NSRectFill(cellFrame)
 //	}
-//	
-//	override func drawBorderAndBackgroundWithFrame(cellFrame: Foundation.NSRect, inView controlView: NSView) {
-////		super.drawBorderAndBackgroundWithFrame(cellFrame, inView: controlView)
-//		NSColor.redColor().set()
+	
+//	override func drawBorderAndBackground(withFrame cellFrame: NSRect, in controlView: NSView) {
+//		super.drawBorderAndBackground(withFrame: cellFrame, in: controlView)
+//		if (ColoredPopUpButton.VERBOSE) {
+//			Swift.print("ColoredPopUpButton, drawBorderAndBackgroundWithFrame")
+//		}
+//		NSColor.red.set()
 //		NSRectFill(cellFrame)
 //	}
-
-	override func drawBezel(withFrame frame: Foundation.NSRect, in controlView: NSView) {
-		super.drawBezel(withFrame: frame, in: controlView)
-		if (VERBOSE) {
+//
+//	override func drawBezel(withFrame frame: Foundation.NSRect, in controlView: NSView) {
+//		super.drawBezel(withFrame: frame, in: controlView)
+//		if (ColoredPopUpButton.VERBOSE) {
 //			Swift.print("ColoredPopUpButton: drawBezelWithFrame");
-		}
-//		NSColor.yellowColor().set()
+//		}
+//		NSColor.yellow.set()
 //		NSRectFill(frame)
-	}
+//	}
 	
 }

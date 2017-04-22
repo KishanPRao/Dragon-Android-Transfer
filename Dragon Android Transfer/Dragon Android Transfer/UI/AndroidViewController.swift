@@ -25,7 +25,7 @@ fileprivate func <<T:Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSComboBoxDataSource, NSComboBoxDelegate, NSControlTextEditingDelegate,
 		FileProgressDelegate, DeviceNotficationDelegate, ClipboardDelegate, CopyDialogDelegate, NSUserInterfaceValidations {
-	private static let VERBOSE = true;
+	private static let VERBOSE = false;
 	
 	var androidDirectoryItems: Array<BaseFile> = []
 	@IBOutlet weak var fileTable: DraggableTableView!
@@ -54,6 +54,7 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 	
 	@IBOutlet weak var messageText: NSTextField!
 	
+	@IBOutlet weak var devicesPopupButton: NSPopUpButton!
 	@IBOutlet weak var clipboardItemsCount: DisabledTextField!
 	@IBOutlet weak var clipboardButton: NSButton!
 	
@@ -75,6 +76,8 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 	
 	var helpWindow: HelpWindow? = nil
 	
+	private var needsUpdatePopupDimens = false
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -93,6 +96,7 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 		self.devicesPopUp.removeAllItems()
 		self.devicesPopUp.action = #selector(AndroidViewController.onPopupSelected(_:))
 		self.devicesPopUp.target = self
+		updatePopupDimens()
 		
 		overlayView.isHidden = true
 		
@@ -121,6 +125,7 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 		var image = NSImage(named: "back_button.png")
 		image!.size = backButton.cellSize
 		backButton.image = image!
+		
 //		backButton.imageScaling = NSImageScaling.ScaleProportionallyDown
 //		backButton.imageScaling = NSImageScaling.ScaleProportionallyUpOrDown
 		backButton.imageScaling = NSImageScaling.scaleAxesIndependently
@@ -144,6 +149,18 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 		transferHandler.start()
 	}
 	
+	private func updatePopupDimens() {
+		devicesPopUp.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_toolbar_device_popup_text_size))
+		let popupRect = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_toolbar_device_popup)
+		var width: CGFloat
+		if (androidDevices.count > 0) {
+			devicesPopupButton.sizeToFit()
+			width = devicesPopupButton.frame.width
+		} else {
+			width = popupRect.width
+		}
+		devicesPopupButton.frame = CGRect(x: popupRect.origin.x, y: popupRect.origin.y, width: width, height: popupRect.height)
+	}
 	
 	fileprivate func updateButton(_ button: NSButton, withImage image: NSImage?) {
 		if let cell = button.cell as? NSButtonCell {
@@ -426,6 +443,7 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 		let selectedIndex = self.devicesPopUp.indexOfSelectedItem
 		print("Update Selected:", selectedIndex)
 		externalStorageButton.isHidden = true
+		updatePopupDimens()
 		var activeDevice = nil as AndroidDevice?
 		if (selectedIndex > -1) {
 			activeDevice = devices[selectedIndex]
@@ -751,7 +769,9 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 //		Swift.print("AndroidViewController, new:", finalRect)
 		
 		if (finalRect.width == windowFrame.width) {
-			Swift.print("AndroidViewController, Warning! No Changes to Window")
+            if (AndroidViewController.VERBOSE) {
+                Swift.print("AndroidViewController, Warning! No Changes to Window")
+            }
 			return
 		}
 //		TODO: Fix flickering screen update, if occurs again..
@@ -767,8 +787,8 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 		clipboardButton.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_toolbar_clipboard_button)
 		clipboardItemsCount.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_toolbar_clipboard_items_count)
 		clipboardItemsCount.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_toolbar_clipboard_items_count_text_size))
-		devicesPopUp.controlView!.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_toolbar_device_popup)
-		devicesPopUp.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_toolbar_device_popup_text_size))
+		updatePopupDimens()
+		
 		backButton.controlView!.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_toolbar_back)
 		
 		deviceSelectorView.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_device_selector)
@@ -1002,7 +1022,7 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 		}
 	}
 	
-	func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem!) -> Bool {
+	func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
 		if (AndroidViewController.VERBOSE) {
 			Swift.print("AndroidViewController, item:", item);
 		}

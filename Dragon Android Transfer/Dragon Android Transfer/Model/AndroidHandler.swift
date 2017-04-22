@@ -83,14 +83,14 @@ class AndroidHandler {
 //    func print(items: Any...) {
 //        var printableItems = items
 //        printableItems.insert(TAG+":", atIndex: 0)
-////        Swift.print("Items:", printableItems)
+////        print("Items:", printableItems)
 ////        var stringRepresentation = printableItems.joinWithSeparator(" ")
 //        var i = 0
 //        while i < printableItems.count {
 ////            stringRepresentation = stringRepresentation+printableItems[i]
 //            i = i + 1
 //        }
-//        Swift.print(stringRepresentation)
+//        print(stringRepresentation)
 //    }
 
 	func initialize() {
@@ -149,7 +149,7 @@ class AndroidHandler {
 		} 
 		let fileManager = FileManager.default
 		let fileExists = fileManager.fileExists(atPath: resourcePath + "/adb")
-		Swift.print("AndroidHandler, file Exists:", fileExists)
+		print("AndroidHandler, file Exists:", fileExists)
 		let data = NSDataAsset.init(name: "adb")?.data
 		let filePath = resourcePath + "/adb"
 		
@@ -247,11 +247,11 @@ class AndroidHandler {
 		}
 		var i = skipLines
 //        print("Output:", output)
-//        print("Output:", outputLines)
+        print("Output:", outputLines)
 		while (i < outputLines.count) {
 //            print("i:", i)
 			let line = outputLines[i]
-			if (!line.contains("self") && !line.contains("emulated")) {
+			if (!line.contains("self") && !line.contains("emulated") && !line.contains("system")) {
 //                print("Appending:", fileNamesLines[i - skipLines]," Line:", line)
 				directories.append("/storage/" + fileNamesLines[i - skipLines])
 			}
@@ -283,12 +283,12 @@ class AndroidHandler {
 			}
 			var output = adbShell(AndroidHandler.JAVA_TYPE_COMMAND)
 			output = output.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-			Swift.print("AndroidHandler, Type:", output);
+			print("AndroidHandler, Type:", output);
 			AndroidHandler.sJavaType = output
 			if (VERBOSE) {
-//				Swift.print("AndroidHandler, Type:", AndroidHandler.JAVA_TYPE);
-//				Swift.print("AndroidHandler, Type GNU:", AndroidHandler.GNU_TYPE);
-//				Swift.print("AndroidHandler, equal to GNU?", AndroidHandler.JAVA_TYPE == AndroidHandler.GNU_TYPE);
+//				print("AndroidHandler, Type:", AndroidHandler.JAVA_TYPE);
+//				print("AndroidHandler, Type GNU:", AndroidHandler.GNU_TYPE);
+//				print("AndroidHandler, equal to GNU?", AndroidHandler.JAVA_TYPE == AndroidHandler.GNU_TYPE);
 			}
 
 //			if (VERBOSE) {
@@ -303,7 +303,7 @@ class AndroidHandler {
 //				lsSizeCommand = lsSizeCommand.replacingOccurrences(of: "ls |", with: "cd /sdcard; ls |")
 ////				lsSizeCommand = lsSizeCommand.stringByReplacingOccurrencesOfString("ls |", withString: "cd " + currentPath + " ls |")
 //				let output1 = adbShell(lsSizeCommand)
-//				Swift.print("AndroidHandler, Size:", output1);
+//				print("AndroidHandler, Size:", output1);
 //			}
 		} else {
 			externalStorage = ""
@@ -805,7 +805,7 @@ class AndroidHandler {
 				if let sizeInInt = UInt64(sizeStringArray[0]) {
 					sizeInKiloBytes = sizeInInt
 					if (VERBOSE) {
-						Swift.print("AndroidHandler: Size in KBytes:", sizeInKiloBytes);
+						print("AndroidHandler: Size in KBytes:", sizeInKiloBytes);
 					}
 					if (sizeInKiloBytes > maxSizeInMBytes) {
 						sizeInKiloBytes = UInt64.max
@@ -820,7 +820,7 @@ class AndroidHandler {
 //			if let sizeInInt = UInt64(outputInLines[i]) {
 //				sizeInKiloBytes = sizeInInt
 ////				if (VERBOSE) {
-////					Swift.print("AndroidHandler: Size in KBytes:", sizeInKiloBytes);
+////					print("AndroidHandler: Size in KBytes:", sizeInKiloBytes);
 ////				}
 //				if (sizeInKiloBytes > maxSizeInMBytes) {
 //					sizeInKiloBytes = UInt64.max
@@ -861,7 +861,7 @@ class AndroidHandler {
 			i = i + 1
 		}
 		if (VERBOSE) {
-			Swift.print("AndroidHandler, Sizes:", files);
+			print("AndroidHandler, Sizes:", files);
 		}
 	}
 	
@@ -876,7 +876,7 @@ class AndroidHandler {
 		
 		file.size = size
 		if (VERBOSE) {
-			Swift.print("AndroidHandler, Sizes:", file);
+			print("AndroidHandler, Sizes:", file);
 		}
 	}
 
@@ -960,8 +960,8 @@ class AndroidHandler {
 			}
 		}
 		if (VERBOSE) {
-			Swift.print("AndroidHandler, isRootDirectory path:", currentPath);
-			Swift.print("AndroidHandler, isRootDirectory:", isRoot);
+			print("AndroidHandler, isRootDirectory path:", currentPath);
+			print("AndroidHandler, isRootDirectory:", isRoot);
 		}
 		return isRoot
 	}
@@ -1042,7 +1042,8 @@ class AndroidHandler {
 //		return output
 //	}
 	
-	fileprivate func bashShell(_ commands: String) -> Int32 {
+//	fileprivate func bashShell(_ commands: String) -> Int32 {
+	fileprivate func bashShell(_ commands: String) {
 		let task = Process()
 		task.launchPath = "/bin/bash"
 		task.arguments = ["-l", "-c", commands]
@@ -1062,7 +1063,7 @@ class AndroidHandler {
 		}
 		
 		task.waitUntilExit()
-		return task.terminationStatus
+//		return task.terminationStatus
 	}
 	
 	fileprivate func adb(_ commands: String) -> String {
@@ -1101,7 +1102,7 @@ class AndroidHandler {
 			}
 		} else {
 			if (VERBOSE) {
-				Swift.print("AndroidHandler, Warning, Task not Started!");
+				print("AndroidHandler, Warning, Task not Started!");
 			}
 			cancelTask = true
 		}
@@ -1114,14 +1115,14 @@ class AndroidHandler {
 	fileprivate func adbAsync(_ commands: String, with: @escaping (_ output: String?) -> Void) {
 		startedTask = true
 		if (VERBOSE) {
-			Swift.print("AndroidHandler, Started Adb Async");
+			print("AndroidHandler, Started Adb Async");
 		}
 		self.startAdbIfNotStarted()
 		
 		let task = Process()
 		activeTask = task
 		if (VERBOSE) {
-			Swift.print("AndroidHandler, Started Task");
+			print("AndroidHandler, Started Task");
 		}
 		task.launchPath = adbLaunchPath
 		task.arguments = ["-l", "-c", commands]
@@ -1166,7 +1167,7 @@ class AndroidHandler {
 		}
 		
 		if (VERBOSE) {
-			Swift.print("AndroidHandler, Launched Task");
+			print("AndroidHandler, Launched Task");
 		}
 	}
 	

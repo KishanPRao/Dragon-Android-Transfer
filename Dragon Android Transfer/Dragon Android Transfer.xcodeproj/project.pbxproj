@@ -795,7 +795,7 @@
 				);
 				INFOPLIST_FILE = "Dragon Android Transfer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.untitled-tba.Dragon-Android-Transfer";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.draconiantechnologies.Dragon-Android-Transfer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Bridging-Header.h";
@@ -816,7 +816,7 @@
 				);
 				INFOPLIST_FILE = "Dragon Android Transfer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.untitled-tba.Dragon-Android-Transfer";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.draconiantechnologies.Dragon-Android-Transfer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Bridging-Header.h";
@@ -833,7 +833,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "Dragon Android TransferTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.untitled-tba.Dragon-Android-TransferTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.draconiantechnologies.Dragon-Android-TransferTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dragon Android Transfer.app/Contents/MacOS/Dragon Android Transfer";
@@ -848,7 +848,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "Dragon Android TransferTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.untitled-tba.Dragon-Android-TransferTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.draconiantechnologies.Dragon-Android-TransferTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dragon Android Transfer.app/Contents/MacOS/Dragon Android Transfer";
@@ -862,7 +862,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "Dragon Android TransferUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.untitled-tba.Dragon-Android-TransferUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.draconiantechnologies.Dragon-Android-TransferUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "Dragon Android Transfer";
@@ -876,7 +876,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "Dragon Android TransferUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.untitled-tba.Dragon-Android-TransferUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.draconiantechnologies.Dragon-Android-TransferUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "Dragon Android Transfer";

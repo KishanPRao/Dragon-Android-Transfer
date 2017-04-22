@@ -29,13 +29,13 @@ class MacHandler {
 					"return isFinderActive()\n"
 	
 	func isFinderActive() -> Bool {
-		Swift.print("isFinderActive, ")
+		Swift.print("isFinderActive, ", TimeUtils.getCurrentTime())
 		var result = false
 		if (runScript(MacHandler.RUNNABLE_FINDER_ACTIVE_SCRIPT) == "true") {
 			result = true
 		}
 		
-		print("Result:" + String(result))
+		print("Result:" + String(result), TimeUtils.getCurrentTime())
 		return result
 	}
 	

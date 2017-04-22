@@ -9,7 +9,7 @@
 import Foundation
 
 class ClipboardViewController: NSViewController, NSTableViewDataSource {
-	fileprivate let VERBOSE = true;
+	fileprivate static let VERBOSE = false;
 	@IBOutlet weak var clipboardTable: NSTableView!
 	@IBOutlet weak var clipboardMainBG: NSView!
 	@IBOutlet weak var clipboardCloseButton: NSButton!
@@ -155,9 +155,13 @@ class ClipboardViewController: NSViewController, NSTableViewDataSource {
 	}
 	
 	func updateWindowSize() {
-		Swift.print("ClipboardViewController, updateWindowSize")
+		if (ClipboardViewController.VERBOSE) {
+            Swift.print("ClipboardViewController, updateWindowSize")
+        }
 		if (self.view.window == nil) {
-			Swift.print("AndroidViewController, Warning! Null Window")
+            if (ClipboardViewController.VERBOSE) {
+				Swift.print("ClipboardViewController, Warning! Null Window")
+            }
 			return
 		}
 		let screen = self.view.window!.screen!
@@ -166,8 +170,10 @@ class ClipboardViewController: NSViewController, NSTableViewDataSource {
 		
 		let windowFrame = self.view.window!.frame
 		let newSize = DimenUtils.getUpdatedRect2(frame: windowFrame, dimensions: Dimens.clipboard_controller_size)
-		Swift.print("ClipboardViewController, current:", windowFrame.width)
-		Swift.print("ClipboardViewController, new:", newSize.width)
+		if (ClipboardViewController.VERBOSE) {
+            Swift.print("ClipboardViewController, current:", windowFrame.width)
+            Swift.print("ClipboardViewController, new:", newSize.width)
+        }
 		if (newSize.width != windowFrame.width) {
 			self.view.window!.setContentSize(NSSize(width: newSize.width, height: newSize.height))
 		}

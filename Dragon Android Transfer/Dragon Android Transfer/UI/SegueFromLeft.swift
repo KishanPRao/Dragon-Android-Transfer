@@ -41,8 +41,8 @@ class SegueFromLeft: NSStoryboardSegue {
 //		}
 		
 		if let src = self.sourceController as? NSViewController,
-		   let dest = self.destinationController as? NSViewController,
-		   let window = src.view.window {
+            let dest = self.destinationController as? NSViewController {
+//		   let window = src.view.window {
 			let animator = MyCustomSwiftAnimator()
 			src.presentViewController(dest, animator: animator)
 //			let animator = NSViewControllerPresentationAnimator().animatePresentationOfViewController(dest, fromViewController: src)

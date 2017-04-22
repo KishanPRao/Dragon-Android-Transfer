@@ -12,7 +12,8 @@ class Dimens {
 	static let android_controller_toolbar_clipboard_button: Array<Int> = [610, 3, 34, 45]
 	static let android_controller_toolbar_clipboard_items_count: Array<Int> = [610, 16, 34, 17]
 	static let android_controller_toolbar_clipboard_items_count_text_size: Int = 15
-	static let android_controller_toolbar_device_popup: Array<Int> = [204, 1, 250, 45]
+//	static let android_controller_toolbar_device_popup: Array<Int> = [70, 1, 250, 45]
+	static let android_controller_toolbar_device_popup: Array<Int> = [90, 7, 160, 35]
 	static let android_controller_toolbar_device_popup_text_size: Int = 16
 	static let android_controller_toolbar_back: Array<Int> = [15, 5, 40, 40]
 	static let android_controller_device_selector: Array<Int> = [0, 701, 658, 50]

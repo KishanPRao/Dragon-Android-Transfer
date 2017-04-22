@@ -155,7 +155,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 //        }
 //    }
 	
-	func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem!) -> Bool {
+	func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
 		if (AppDelegate.VERBOSE) {
 			Swift.print("AppDelegate, item:", item);
 		}
