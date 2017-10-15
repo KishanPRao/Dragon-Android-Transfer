@@ -9,7 +9,7 @@
 import Foundation
 
 class ClipboardViewController: NSViewController, NSTableViewDataSource {
-	fileprivate static let VERBOSE = false;
+//	fileprivate static let VERBOSE = false;
 	@IBOutlet weak var clipboardTable: NSTableView!
 	@IBOutlet weak var clipboardMainBG: NSView!
 	@IBOutlet weak var clipboardCloseButton: NSButton!
@@ -155,11 +155,11 @@ class ClipboardViewController: NSViewController, NSTableViewDataSource {
 	}
 	
 	func updateWindowSize() {
-		if (ClipboardViewController.VERBOSE) {
+		if (NSObject.VERBOSE) {
             Swift.print("ClipboardViewController, updateWindowSize")
         }
 		if (self.view.window == nil) {
-            if (ClipboardViewController.VERBOSE) {
+            if (NSObject.VERBOSE) {
 				Swift.print("ClipboardViewController, Warning! Null Window")
             }
 			return
@@ -170,7 +170,7 @@ class ClipboardViewController: NSViewController, NSTableViewDataSource {
 		
 		let windowFrame = self.view.window!.frame
 		let newSize = DimenUtils.getUpdatedRect2(frame: windowFrame, dimensions: Dimens.clipboard_controller_size)
-		if (ClipboardViewController.VERBOSE) {
+		if (NSObject.VERBOSE) {
             Swift.print("ClipboardViewController, current:", windowFrame.width)
             Swift.print("ClipboardViewController, new:", newSize.width)
         }

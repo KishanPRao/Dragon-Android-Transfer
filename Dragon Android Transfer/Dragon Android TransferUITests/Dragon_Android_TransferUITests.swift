@@ -1,14 +1,14 @@
 //
-//  Simple_Android_TransferUITests.swift
+//  Dragon_Android_TransferUITests.swift
 //  Dragon Android TransferUITests
 //
-//  Created by Kishan P Rao on 25/12/16.
-//  Copyright © 2016 Kishan P Rao. All rights reserved.
+//  Created by Kishan P Rao on 10/10/17.
+//  Copyright © 2017 Kishan P Rao. All rights reserved.
 //
 
 import XCTest
 
-class Simple_Android_TransferUITests: XCTestCase {
+class Dragon_Android_TransferUITests: XCTestCase {
         
     override func setUp() {
         super.setUp()

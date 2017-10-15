@@ -14,6 +14,8 @@ protocol AbstractHandler {
 
 struct HandlerConstants {
 	static let SEPARATOR = "/"
-	static let DIRECTORY = "DIRECTORY"
-	static let FILE = "FILE"
+	static let DIRECTORY = "DT_DAT_DIRECTORY"
+	static let FILE = "DT_DAT_FILE"
+	static let EXIST = "DT_EXIST"
+	static let NOT_EXIST = "DT_NOT_EXIST"
 }

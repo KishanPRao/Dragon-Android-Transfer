@@ -23,9 +23,12 @@ fileprivate func <<T:Comparable>(lhs: T?, rhs: T?) -> Bool {
 }
 
 
-class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSComboBoxDataSource, NSComboBoxDelegate, NSControlTextEditingDelegate,
-		FileProgressDelegate, DeviceNotficationDelegate, ClipboardDelegate, CopyDialogDelegate, NSUserInterfaceValidations {
-	private static let VERBOSE = false;
+class AndroidViewController: NSViewController, NSTableViewDelegate,
+    NSComboBoxDataSource, NSComboBoxDelegate, NSControlTextEditingDelegate,
+	FileProgressDelegate, DeviceNotficationDelegate,
+	ClipboardDelegate, CopyDialogDelegate,
+    DragNotificationDelegate,
+	NSUserInterfaceValidations {
 	
 	var androidDirectoryItems: Array<BaseFile> = []
 	@IBOutlet weak var fileTable: DraggableTableView!
@@ -61,7 +64,6 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 	var clipboardIcon: NSImage?
 	var clipboardIconPlain: NSImage?
 	
-	var progress: CGFloat = 0
 	var copyDialog = nil as CopyDialog?
 	
 	fileprivate var copyDestination = ""
@@ -78,6 +80,9 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 	
 	private var needsUpdatePopupDimens = false
 	
+	private let mDockTile: NSDockTile = NSApplication.shared().dockTile
+	private var mDockProgress: NSProgressIndicator? = nil
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -87,11 +92,10 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 		showGuide = transferHandler.isFirstLaunch()
 		transferHandler.initializeAndroid()
 		
-		fileTable.target = self
-		fileTable.reloadData()
+        fileTable.delegate = self
+        fileTable.dragDelegate = self
 		let doubleClickSelector: Selector = #selector(AndroidViewController.doubleClickList(_:))
 		fileTable.doubleAction = doubleClickSelector
-		fileTable.allowsMultipleSelection = true
 		
 		self.devicesPopUp.removeAllItems()
 		self.devicesPopUp.action = #selector(AndroidViewController.onPopupSelected(_:))
@@ -118,7 +122,8 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 		externalStorageButton.textDeselectedColor = ColorUtils.colorWithHexString(ColorUtils.storageDeselectedTextColor)
 		
 		fileTable.backgroundColor = ColorUtils.colorWithHexString(ColorUtils.mainViewColor)
-		fileTable.selectionHighlightStyle = NSTableViewSelectionHighlightStyle.none
+        fileTable.selectionHighlightStyle = NSTableViewSelectionHighlightStyle.none
+//        fileTable.draggingDestinationFeedbackStyle = NSTableViewDraggingDestinationFeedbackStyle.sourceList
 		
 		externalStorageButton.isHidden = true
 		
@@ -142,6 +147,23 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 		messageText.font = NSFont(name: messageText.font!.fontName, size: DimenUtils.getDimension(dimension: Dimens.error_message_text_size))
 		updateDeviceStatus()
 		updateActiveStorageButton()
+		
+//		fileTable.register(forDraggedTypes: [NSGeneralPboard])
+		
+		
+		let imageView = NSImageView()
+		imageView.image = NSApplication.shared().applicationIconImage
+		mDockTile.contentView = imageView
+		
+		mDockProgress = NSProgressIndicator(frame: NSMakeRect(0.0, 0.0, mDockTile.size.width, 10))
+		mDockProgress?.style = NSProgressIndicatorStyle.barStyle
+		mDockProgress?.isIndeterminate = false
+		mDockProgress?.minValue = 0
+		mDockProgress?.maxValue = 100
+		imageView.addSubview(mDockProgress!)
+		
+		mDockProgress?.isBezeled = true
+		mDockProgress?.isHidden = true
 
 //		Testing:
 //		showCopyDialog()
@@ -169,10 +191,56 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 			cell.imageScaling = NSImageScaling.scaleAxesIndependently
 		}
 	}
-	
-	func numberOfRows(in tableView: NSTableView) -> Int {
-		return self.androidDirectoryItems.count
-	}
+    
+//    Multiple Files!
+    func dragItem(item: DraggableItem, fromAppToFinderLocation location: String) {
+        LogI("Drag (to Finder) ", item, "->", location)
+        
+        transferHandler.clearClipboardMacItems()
+        transferHandler.clearClipboardAndroidItems()
+        var copyItemsAndroid: Array<BaseFile> = []
+        copyItemsAndroid.append(item as! BaseFile)
+        print("Copy:", copyItemsAndroid)
+        transferHandler.updateClipboardAndroidItems(copyItemsAndroid)
+        updateClipboard()
+        
+        pasteToMacInternal(path: location)
+    }
+    
+    func dragItem(item: String, fromFinderIntoAppItem appItem: DraggableItem) {
+        LogI("Drag (to App)", item, "->" , appItem)
+        
+        var copyItemsMac: Array<BaseFile> = []
+        transferHandler.clearClipboardMacItems()
+        transferHandler.clearClipboardAndroidItems()
+//        copyItemsMac = transferHandler.getActiveFiles()
+        copyItemsMac.removeAll()
+        
+        let fileManager = FileManager.default
+//        do {
+            let path = item.stringByDeletingLastPathComponent + HandlerConstants.SEPARATOR
+            var isDirectory : ObjCBool = false
+            fileManager.fileExists(atPath: item, isDirectory: &isDirectory)
+            var type: Int
+            if (isDirectory).boolValue {
+                type = BaseFileType.Directory
+            } else {
+                type = BaseFileType.File
+            }
+            let name = item.lastPathComponent
+//            var attr = try fileManager.attributesOfItem(atPath: item)
+//            let fileSize = attr[FileAttributeKey.size] as! UInt64
+            let file = BaseFile.init(fileName: name, path: path, type: type, size: 0)
+            LogI("File", file)
+            copyItemsMac.append(file)
+            transferHandler.updateClipboardMacItems(copyItemsMac)
+            updateClipboard()
+    
+            pasteToAndroidInternal(path: (appItem as! BaseFile).getFullPath())
+//        } catch _ {
+//        	LogE("Cannot copy into app!")
+//        }
+    }
 	
 	func updateDeviceStatus() {
 		if (!transferHandler.hasActiveDevice()) {
@@ -215,7 +283,7 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 		} else {
 			AppDelegate.canGoBackward = true
 		}
-//		if (AndroidViewController.VERBOSE) {
+//		if (NSObject.VERBOSE) {
 //			Swift.print("AndroidViewController, Can go backward:", AppDelegate.canGoBackward);
 //		}
 	}
@@ -226,9 +294,9 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 	}
 	
 	func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
-		if (AndroidViewController.VERBOSE) {
+		if (NSObject.VERBOSE) {
 //			TODO: Check later..
-			Swift.print("AndroidViewController: select:", row, ", Table:", tableView, ", FileTable:", fileTable, ", Item:", androidDirectoryItems[row]);
+//			Swift.print("AndroidViewController: select:", row, ", Table:", tableView, ", FileTable:", fileTable, ", Item:", androidDirectoryItems[row]);
 		}
 //		if (tableView == fileTable) {
 //			let rowItem = tableView.rowView(atRow: row, makeIfNecessary: true)
@@ -240,8 +308,8 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 	}
 	
 	@IBAction func tableSelectionChanged(_ sender: Any) {
-		if (AndroidViewController.VERBOSE) {
-			Swift.print("AndroidViewController: tableSelectionChanged:", fileTable.selectedRow);
+		if (NSObject.VERBOSE) {
+//			Swift.print("AndroidViewController: tableSelectionChanged:", fileTable.selectedRow);
 		}
 	}
 	
@@ -288,7 +356,7 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 	func tableViewSelectionDidChange(_ notification: Notification) {
 		if (self.fileTable.numberOfSelectedRows > 0) {
 			let selectedItem = self.androidDirectoryItems[self.fileTable.selectedRow].fileName
-			print("Selected:", selectedItem)
+//			print("Selected:", selectedItem)
 			
 			let indexSet = fileTable.selectedRowIndexes
 			var i = 0
@@ -329,37 +397,13 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 		}
 		updateActiveDevice(activeDevice)
 	}
-
-//    func numberOfItemsInComboBox(aComboBox: NSComboBox) -> Int {
-//        return self.androidDevices!.count
-//    }
-//
-//    func comboBox(aComboBox: NSComboBox, objectValueForItemAtIndex index: Int) -> AnyObject {
-//        return (self.androidDevices![index] as! AndroidDevice).name
-//    }
-//
-//    func comboBox(aComboBox: NSComboBox, indexOfItemWithStringValue string: String) -> Int {
-//        return self.androidDevices!.indexOfObject(string)
-//    }
-//
-//    func comboBoxSelectionDidChange(notification: NSNotification) {
-//        print("Selection Changed:", devicesBox.indexOfSelectedItem)
-//        if (devicesBox.indexOfSelectedItem > -1) {
-//            let selectedDevice = androidDevices?.objectAtIndex(devicesBox.indexOfSelectedItem)
-//            print("Selection Changed:", selectedDevice)
-//        } else {
-////            devicesBox.sele
-//        }
-//    }
-	
-	
 	
 	override func viewWillAppear() {
 		super.viewWillAppear()
 //        start()
 		if (fileTable.acceptsFirstResponder) {
 			self.view.window?.makeFirstResponder(fileTable)
-//			if (AndroidViewController.VERBOSE) {
+//			if (NSObject.VERBOSE) {
 //				Swift.print("AndroidViewController, First Responder!");
 //			}
 		}
@@ -393,11 +437,11 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 	func checkGuide() {
 		if (showGuide) {
 //			TODO: Guide.
-			if (AndroidViewController.VERBOSE) {
+			if (NSObject.VERBOSE) {
 				Swift.print("AndroidViewController, Opening Intro Guide")
 			}
 //			if (NSApplication.shared().mainWindow == nil) {
-//				if (AndroidViewController.VERBOSE) {
+//				if (NSObject.VERBOSE) {
 //					Swift.print("AndroidViewController, Warning, window not created yet!")
 //				}
 //				return
@@ -452,7 +496,7 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 	}
 	
 	fileprivate func updateActiveDevice(_ activeDevice: AndroidDevice?) {
-		if (AndroidViewController.VERBOSE) {
+		if (NSObject.VERBOSE) {
 			Swift.print("AndroidViewController, update:" + TimeUtils.getCurrentTime());
 		}
 		transferHandler.setActiveDevice(activeDevice)
@@ -471,7 +515,7 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 		updateClipboard()
 		updateActiveStorageButton()
 		updateDeviceStatus()
-		if (AndroidViewController.VERBOSE) {
+		if (NSObject.VERBOSE) {
 			Swift.print("AndroidViewController, update fin:" + TimeUtils.getCurrentTime());
 		}
 	}
@@ -515,7 +559,7 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 	}
 	
 	func openSelectedDirectory() {
-		if (AndroidViewController.VERBOSE) {
+		if (NSObject.VERBOSE) {
 			Swift.print("AndroidViewController, openSelectedDirectory");
 		}
 		let selectedItem = self.androidDirectoryItems[fileTable.selectedRow].fileName
@@ -530,41 +574,42 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 	}
 	
 	func getSelectedItemInfo() {
-		if (AndroidViewController.VERBOSE) {
+		if (NSObject.VERBOSE) {
 			Swift.print("AndroidViewController, getSelectedItemInfo");
 		}
 		let selectedFile = self.androidDirectoryItems[fileTable.selectedRow]
 		print("Selected", fileTable.selectedRow)
 		print("Selected", self.androidDirectoryItems[fileTable.selectedRow])
 		
-		transferHandler.updateAndroidFileSize(file: selectedFile)
-		let alert = NSAlert()
-		alert.messageText = "Name: " + selectedFile.fileName
-		var infoText: String = ""
-		var image: NSImage
-		if (selectedFile.type == BaseFileType.Directory) {
-			image = NSImage(named: "folder")!
-		} else {
-			image = NSImage(named: "file")!
-		}
-		if (AndroidViewController.VERBOSE) {
-			Swift.print("AndroidViewController, image size:", image.size);
-		}
-		alert.icon = image
-		infoText = "Path: " + selectedFile.path + "\n"
-		var type = "File"
-		if (selectedFile.type == BaseFileType.Directory) {
-			type = "Directory"
-		}
-		infoText = infoText + "Type: " + type + "\n"
-		infoText = infoText + "Size: " + SizeUtils.getBytesInFormat(selectedFile.size) + "\n"
-		alert.informativeText = infoText
-		alert.runModal()
+		transferHandler.updateAndroidFileSize(file: selectedFile, closure: {
+			let alert = NSAlert()
+			alert.messageText = "Name: " + selectedFile.fileName
+			var infoText: String = ""
+			var image: NSImage
+			if (selectedFile.type == BaseFileType.Directory) {
+				image = NSImage(named: "folder")!
+			} else {
+				image = NSImage(named: "file")!
+			}
+			if (NSObject.VERBOSE) {
+				Swift.print("AndroidViewController, image size:", image.size);
+			}
+			alert.icon = image
+			infoText = "Path: " + selectedFile.path + "\n"
+			var type = "File"
+			if (selectedFile.type == BaseFileType.Directory) {
+				type = "Directory"
+			}
+			infoText = infoText + "Type: " + type + "\n"
+			infoText = infoText + "Size: " + SizeUtils.getBytesInFormat(selectedFile.size) + "\n"
+			alert.informativeText = infoText
+			alert.runModal()
 //		alert.addButton(withTitle: "Ok")
 //		let response = alert.runModal()
-//		if (AndroidViewController.VERBOSE) {
+//		if (NSObject.VERBOSE) {
 //			Swift.print("AndroidViewController, alert resp:", response);
 //		}
+		})
 	}
 	
 	func activeChange() {
@@ -593,6 +638,7 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 			copyDialog?.setTotalCopySize(totalSize)
 			copyDialog?.setTransferType(transferTypeString)
 		}
+		mDockProgress?.isHidden = false
 	}
 	
 	func currentFile(_ fileName: String) {
@@ -627,22 +673,30 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 //			print("Current Copy Size:", currentCopiedSize)
 //            copyDialog?.setProgress(CGFloat(progress))
 			if (currentFile != nil) {
-//				if (AndroidViewController.VERBOSE) {
+//				if (NSObject.VERBOSE) {
 //					Swift.print("AndroidViewController, progress:", progress);
 //				}
 				let currentFileCopiedSize = UInt64(CGFloat(currentFile!.size) * (CGFloat(progress) / 100.0)) as UInt64
-				copyDialog?.setCopiedSize(currentCopiedSize + currentFileCopiedSize)
+				copyDialog?.updateCopyStatus(currentCopiedSize + currentFileCopiedSize, withProgress: CGFloat(progress))
 			}
 		}
+		mDockProgress?.doubleValue = Double(progress)
+		mDockTile.display()
 	}
 	
-	func onCompletion() {
+	func onCompletion(status: FileProgressStatus) {
 		AppDelegate.isPastingOperation = false
 		print("Done!")
 		
 		print("End Time:", TimeUtils.getCurrentTime())
-		NSSound(named: "endCopy")?.play()
-		NSApp.requestUserAttention(NSRequestUserAttentionType.informationalRequest)
+		
+		if (status == FileProgressStatus.kStatusOk) {
+			print("Successful copy")
+			NSSound(named: "endCopy")?.play()
+			NSApp.requestUserAttention(NSRequestUserAttentionType.informationalRequest)
+		} else {
+			print("Canceled")
+		}
 		overlayView.isHidden = true;
 		if (copyDialog != nil) {
 //            copyDialog!.rootView.removeFromSuperview()
@@ -650,6 +704,8 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 			copyDialog = nil
 			currentFile = nil
 		}
+		mDockProgress?.isHidden = true
+		mDockTile.display()
 		refresh()
 	}
 	
@@ -752,7 +808,7 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 	
 	func updateWindowSize() {
 		if (self.view.window == nil) {
-			Swift.print("AndroidViewController, Warning! Null Window")
+//			Swift.print("AndroidViewController, Warning! Null Window")
 			return
 		}
 		let screen = self.view.window!.screen!
@@ -769,8 +825,8 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 //		Swift.print("AndroidViewController, new:", finalRect)
 		
 		if (finalRect.width == windowFrame.width) {
-            if (AndroidViewController.VERBOSE) {
-                Swift.print("AndroidViewController, Warning! No Changes to Window")
+            if (NSObject.VERBOSE) {
+//                Swift.print("AndroidViewController, Warning! No Changes to Window")
             }
 			return
 		}
@@ -837,7 +893,7 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 			helpWindow!.updateSizes()
 			helpWindow!.isShowing = true
 			self.view.window!.beginSheet(helpWindow!.window!) { response in
-				if (AndroidViewController.VERBOSE) {
+				if (NSObject.VERBOSE) {
 					Swift.print("AndroidViewController, Resp!");
 				}
 			}
@@ -850,7 +906,7 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 			helpWindow = HelpWindow(windowNibName: "HelpWindow")
 		}
 		if (self.view.window == nil) {
-			if (AndroidViewController.VERBOSE) {
+			if (NSObject.VERBOSE) {
 				Swift.print("AndroidViewController, Warning, window not created yet!")
 			}
 			return
@@ -864,7 +920,7 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 		helpWindow!.updateSizes()
 		helpWindow!.isShowing = true
 		window.beginSheet(helpWindow!.window!) { response in
-			if (AndroidViewController.VERBOSE) {
+			if (NSObject.VERBOSE) {
 				Swift.print("AndroidViewController, Resp!");
 			}
 		}
@@ -876,47 +932,55 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 	}
 	
 	func pasteToAndroid(_ notification: Notification) {
-		print("Paste to Android")
-		let files = transferHandler.getClipboardMacItems()
-		if (files.count == 0) {
-			if (AndroidViewController.VERBOSE) {
-				Swift.print("AndroidViewController, paste to android, Warning, NO ITEMS");
-			}
-			return
-		} else {
-			var i = 0
-			var updateSizes = false
-			while (i < files.count) {
-				if (files[i].size == 0 || files[i].size == UInt64.max) {
-					updateSizes = true
-				}
-				i = i + 1
-			}
-			if (updateSizes) {
-				transferHandler.updateSizes()
-			}
-		}
-		copyDestination = transferHandler.getCurrentPath()
-		AppDelegate.isPastingOperation = true
-		transferHandler.push(files, destination: transferHandler.getCurrentPath(), delegate: self)
+        pasteToAndroidInternal(path: transferHandler.getCurrentPath())
 	}
+    
+    func pasteToAndroidInternal(path: String) {
+        print("Paste to Android")
+        let files = transferHandler.getClipboardMacItems()
+        if (files.count == 0) {
+            if (NSObject.VERBOSE) {
+                Swift.print("AndroidViewController, paste to android, Warning, NO ITEMS");
+            }
+            return
+        } else {
+            var i = 0
+            var updateSizes = false
+            while (i < files.count) {
+                if (files[i].size == 0 || files[i].size == UInt64.max) {
+                    updateSizes = true
+                }
+                i = i + 1
+            }
+            if (updateSizes) {
+                transferHandler.updateSizes()
+            }
+        }
+        copyDestination = path
+        AppDelegate.isPastingOperation = true
+        transferHandler.push(files, destination: path, delegate: self)
+    }
 	
-	func pasteToMac(_ notification: Notification) {
-		print("Paste to Mac")
-		let files = transferHandler.getClipboardAndroidItems()
-		if (files!.count == 0) {
-			if (AndroidViewController.VERBOSE) {
-				Swift.print("AndroidViewController, paste to mac, Warning, NO ITEMS");
-			}
-			return
-		}
-		copyDestination = transferHandler.getActivePath()
-		AppDelegate.isPastingOperation = true
-		transferHandler.pull(files!, destination: transferHandler.getActivePath(), delegate: self)
-	}
+    func pasteToMac(_ notification: Notification) {
+        pasteToMacInternal(path: transferHandler.getActivePath())
+    }
+    
+    func pasteToMacInternal(path: String) {
+        print("Paste to Mac")
+        let files = transferHandler.getClipboardAndroidItems()
+        if (files!.count == 0) {
+            if (NSObject.VERBOSE) {
+                Swift.print("AndroidViewController, paste to mac, Warning, NO ITEMS");
+            }
+            return
+        }
+        copyDestination = path
+        AppDelegate.isPastingOperation = true
+        transferHandler.pull(files!, destination: path, delegate: self)
+    }
 	
 	func clearClipboard() {
-		if (AndroidViewController.VERBOSE) {
+		if (NSObject.VERBOSE) {
 			Swift.print("AndroidViewController, clearClipboard");
 		}
 		transferHandler.clearClipboardAndroidItems()
@@ -925,7 +989,7 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 	}
 	
 	func cancelTask() {
-		if (AndroidViewController.VERBOSE) {
+		if (NSObject.VERBOSE) {
 			Swift.print("AndroidViewController, Cancel Active Task");
 		}
 		transferHandler.cancelActiveTask()
@@ -933,7 +997,8 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 	
 	func updateList() {
 		currentDirectoryText.stringValue = transferHandler.getCurrentPathForDisplay()
-		fileTable.reloadData()
+        LogV("Update List")
+		fileTable.updateList(data: androidDirectoryItems)
 		updateDeviceStatus()
 	}
 	
@@ -976,9 +1041,22 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 	}
 	
 	@IBAction func backButtonPressed(_ button: NSButton) {
-		let directoryData = transferHandler.upDirectoryData()
-		if ((directoryData?.count)! > 0) {
-			reloadFileList(directoryData!)
+        let previousDirectory = transferHandler.getCurrentPath()
+        if let directoryData = transferHandler.upDirectoryData(), (directoryData.count) > 0 {
+			reloadFileList(directoryData)
+            for (i, item) in directoryData.enumerated() {
+//                LogV("Item", item, "Prev", previousDirectory)
+                if (item.getFullPath() == previousDirectory) {
+                    let rowSet = NSIndexSet(index: i) as IndexSet
+                    fileTable.selectRowIndexes(rowSet, byExtendingSelection: false)
+                    
+                    let columnSet = NSIndexSet(index: 0) as IndexSet
+                    self.fileTable.reloadData(forRowIndexes: rowSet, columnIndexes: columnSet)
+                    self.fileTable.scrollRowToVisible(i)
+                    AppDelegate.itemSelected = true
+                    AppDelegate.directoryItemSelected = true
+                }
+            }
 		}
 	}
 	
@@ -1016,14 +1094,14 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 			clipboardOpened = true
 			self.performSegue(withIdentifier: ViewControllerIdentifier.ClipboardId, sender: self)
 		} else {
-			if (AndroidViewController.VERBOSE) {
+			if (NSObject.VERBOSE) {
 				Swift.print("AndroidViewController, Warning, trying to open multiple times!");
 			}
 		}
 	}
 	
 	func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
-		if (AndroidViewController.VERBOSE) {
+		if (NSObject.VERBOSE) {
 			Swift.print("AndroidViewController, item:", item);
 		}
 		return AppDelegate.validateInterfaceMenuItem(item: item)
@@ -1042,7 +1120,7 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 	override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
 		let clipboardVC = segue.destinationController as! ClipboardViewController
 		clipboardVC.setClipboardDelegate(self)
-//		if (AndroidViewController.VERBOSE) {
+//		if (NSObject.VERBOSE) {
 //			Swift.print("AndroidViewController, Prepare Segue!");
 //		}
 	}
@@ -1051,6 +1129,37 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 	func setBackgroundColorTo(_ view: NSView, color: String) {
 		view.wantsLayer = true
 		view.layer?.backgroundColor = ColorUtils.colorWithHexString(color).cgColor
+	}
+	
+	func showNewFolderDialog() {
+		if (NSObject.VERBOSE) {
+			Swift.print("AndroidViewController, showNewFolderDialog")
+		}
+        if let folderName = AlertUtils.input("Create New Folder", info:"Enter the name of the new folder:", defaultValue: "Untitled Folder") {
+			Swift.print("AndroidViewController, folder:", folderName)
+			if (transferHandler.folderExists(folderName)) {
+                AlertUtils.showAlert("Folder '\(folderName)' already exists!", info: "", confirm: false)
+			} else {
+				transferHandler.createAndroidFolder(folderName)
+				refresh()
+			}
+		} else {
+			Swift.print("AndroidViewController, no folder")
+		}
+	}
+	
+	func deleteFileDialog() {
+		if (Verbose) {
+			Swift.print("AndroidViewController, deleteFileDialog")
+		}
+        let selectedItem = self.androidDirectoryItems[fileTable.selectedRow]
+        let selectedFileName = selectedItem.fileName
+        if AlertUtils.showAlert("Do you really want to delete '\(selectedFileName)'?", info: "", confirm: true) {
+            transferHandler.deleteAndroid(selectedItem)
+            refresh()
+        } else {
+            LogV("Do not Delete!")
+        }
 	}
 	
 	required init?(coder: NSCoder) {
@@ -1076,11 +1185,13 @@ class AndroidViewController: NSViewController, NSTableViewDataSource, NSTableVie
 		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.refresh), name: NSNotification.Name(rawValue: StatusTypeNotification.REFRESH_FILES), object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.resetPosition), name: NSNotification.Name(rawValue: StatusTypeNotification.RESET_POSITION), object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.showHelpWindow), name: NSNotification.Name(rawValue: StatusTypeNotification.SHOW_HELP), object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.showNewFolderDialog), name: NSNotification.Name(rawValue: StatusTypeNotification.MENU_NEW_FOLDER), object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.deleteFileDialog), name: NSNotification.Name(rawValue: StatusTypeNotification.MENU_DELETE), object: nil)
 	}
 	
 	deinit {
 		print("Removing Observer")
 		NotificationCenter.default.removeObserver(self)
-		transferHandler.release()
+		transferHandler.terminate()
 	}
 }

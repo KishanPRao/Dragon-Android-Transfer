@@ -6,5 +6,6 @@ build
 *~
 *~.nib
 *~.xib
+.idea
 .DS_Store
 xcuserdata/

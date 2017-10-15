@@ -9,7 +9,6 @@
 import Foundation
 
 class AndroidDevice: BaseObject {
-	let TAG = "AndroidDevice"
 	var id : String = ""
 	var name : String = ""
 	
@@ -18,5 +17,5 @@ class AndroidDevice: BaseObject {
 		self.name = name
 	}
 	
-	var description: String { return TAG+": \(id, name)" }
+	var description: String { return "AndroidDevice" + ": \(id, name)" }
 }

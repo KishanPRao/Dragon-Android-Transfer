@@ -12,4 +12,6 @@
 #import <Cocoa/Cocoa.h>
 #import <MASShortcut/Shortcut.h>
 
+#import "AlertUtils.h"
+
 #endif /* Bridging_Header_h */

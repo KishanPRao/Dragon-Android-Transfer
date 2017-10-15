@@ -13,8 +13,8 @@ public enum BaseFileType {
 	static let Directory = 1
 }
 
-class BaseFile: BaseObject {
-	fileprivate let TAG = "BaseFile"
+class BaseFile: DraggableItem, BaseObject {
+//	fileprivate let TAG = "BaseFile"
 	var fileName: String = ""
 	var path: String = ""
 	var type: Int
@@ -26,6 +26,10 @@ class BaseFile: BaseObject {
 		self.type = type
         self.size = size
 	}
+    
+    func getFullPath() -> String {
+        return path + HandlerConstants.SEPARATOR + fileName
+    }
 	
-	var description: String { return TAG+": \(fileName, path, type, size)" }
+	override var description: String { return TAG+": \(fileName, path, type, size)" }
 }

@@ -11,8 +11,8 @@ class TransferHandler {
 	fileprivate var copyItemsMac: Array<BaseFile> = []
 //	private var clipboardItems: Array<BaseFile>? = []
 	
-	fileprivate let androidHandler = AndroidHandler()
-	fileprivate let macHandler = MacHandler()
+	private let androidHandler = AndroidHandler()
+	private let macHandler = MacHandler()
 	
 	func setDeviceNotificationDelegate(_ delegate: DeviceNotficationDelegate) {
 		androidHandler.setDeviceNotificationDelegate(delegate)
@@ -27,9 +27,11 @@ class TransferHandler {
 	}
 	
 	func setActiveDevice(_ device: AndroidDevice?) {
-		androidHandler.setActiveDevice(device)
-		copyItemsMac.removeAll()
-		copyItemsAndroid?.removeAll()
+//		ThreadUtils.runInBackgroundThread {
+		self.androidHandler.setActiveDevice(device)
+		self.copyItemsMac.removeAll()
+		self.copyItemsAndroid?.removeAll()
+//		}
 	}
 	
 	func openDirectoryData(_ path: String) -> Array<BaseFile>! {
@@ -45,7 +47,9 @@ class TransferHandler {
 	}
 	
 	func updateStorage() {
-		androidHandler.updateStorage()
+//		ThreadUtils.runInBackgroundThread {
+		self.androidHandler.updateStorage()
+//		}
 	}
 	
 	func getExternalStorage() -> String {
@@ -76,8 +80,8 @@ class TransferHandler {
 		androidHandler.stop()
 	}
 	
-	func release() {
-		androidHandler.release()
+	func terminate() {
+		androidHandler.terminate()
 	}
 	
 	func isDirectory(_ fileName: String) -> Bool {
@@ -86,7 +90,11 @@ class TransferHandler {
 	
 	func getCurrentPath() -> String {
 		return androidHandler.getCurrentPath()
-	}
+    }
+    
+    func getCurrentPathFile() -> BaseFile {
+        return androidHandler.getCurrentPathFile()
+    }
 	
 	func pull(_ sourceFiles: Array<BaseFile>, destination: String, delegate: FileProgressDelegate) {
 		androidHandler.pull(sourceFiles, destination: destination, delegate: delegate)
@@ -94,11 +102,11 @@ class TransferHandler {
 	
 	func push(_ sourceFiles: Array<BaseFile>, destination: String, delegate: FileProgressDelegate) {
 		androidHandler.push(sourceFiles, destination: destination, delegate: delegate)
-	}
-	
-	func getCurrentPathForDisplay() -> String {
-		return androidHandler.getCurrentPathForDisplay()
-	}
+    }
+    
+    func getCurrentPathForDisplay() -> String {
+        return androidHandler.getCurrentPathForDisplay()
+    }
 	
 	func isRootDirectory() -> Bool {
 		return androidHandler.isRootDirectory()
@@ -128,9 +136,26 @@ class TransferHandler {
 		androidHandler.cancelActiveTask()
 	}
 	
-	func updateAndroidFileSize(file: BaseFile) {
-		androidHandler.updateSize(file: file)
+	func updateAndroidFileSize(file: BaseFile, closure: @escaping () -> ()) {
+//		ThreadUtils.runInBackgroundThread {
+		self.androidHandler.updateSize(file: file)
+//			ThreadUtils.runInMainThread {
+		closure()
+//			}
+//		}
 	}
+	
+	func createAndroidFolder(_ folderName: String) {
+		androidHandler.createNewFolder(folderName);
+	}
+	
+	func folderExists(_ folderName: String) -> Bool {
+		return androidHandler.folderExists(folderName);
+	}
+    
+    func deleteAndroid(_ file: BaseFile) {
+        androidHandler.delete(file)
+    }
 
 //	Mac Related
 	func isFinderActive() -> Bool {
@@ -180,6 +205,7 @@ class TransferHandler {
 	}
 	
 	func initializeAndroid() {
+//		TODO: Loading indeterminate progress?
 		androidHandler.initialize()
 	}
 }

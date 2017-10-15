@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16G29" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
@@ -80,6 +80,11 @@ DQ
                                                 <action selector="refreshFiles:" target="Voe-Tx-rLC" id="EPe-Gn-eGv"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="New Folder" tag="11" keyEquivalent="N" id="Udy-IB-cnd">
+                                            <connections>
+                                                <action selector="showNewFolderDialog:" target="Voe-Tx-rLC" id="Fwf-IP-zdQ"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -100,6 +105,14 @@ DQ
                                         <menuItem title="Select All" tag="3" keyEquivalent="a" id="Ruw-6m-B2m">
                                             <connections>
                                                 <action selector="selectAll:" target="Voe-Tx-rLC" id="ELa-Hr-nxE"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Delete" tag="12" id="j2H-uU-XxD" userLabel="Delete">
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
+                                            <connections>
+                                                <action selector="delete:" target="Voe-Tx-rLC" id="hAe-H4-szT"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="uyl-h8-XO2"/>
@@ -234,10 +247,10 @@ CA
                                     <popUpButton fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oOz-8a-cBD">
                                         <rect key="frame" x="90" y="7" width="160" height="35"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="bevel" bezelStyle="regularSquare" image="F93DB849-4DF1-460A-B127-4A9636FC67D8" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" selectedItem="31T-xV-Z1W" id="aAP-7i-zWa">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <popUpButtonCell key="cell" type="bevel" bezelStyle="regularSquare" image="89F4BA33-B6E3-43CE-AD2C-E1A984B9EF61" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" autoenablesItems="NO" selectedItem="31T-xV-Z1W" id="aAP-7i-zWa">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system" size="16"/>
-                                            <menu key="menu" id="tRc-af-CiA">
+                                            <menu key="menu" autoenablesItems="NO" id="tRc-af-CiA">
                                                 <items>
                                                     <menuItem state="on" id="31T-xV-Z1W"/>
                                                     <menuItem title="Item 2" id="h9D-4y-qHE"/>
@@ -405,7 +418,6 @@ CA
                                             </tableColumns>
                                             <connections>
                                                 <action selector="tableSelectionChanged:" target="XfG-lQ-9wD" id="PKi-Ne-gM8"/>
-                                                <outlet property="dataSource" destination="XfG-lQ-9wD" id="Aid-tP-6gE"/>
                                                 <outlet property="delegate" destination="XfG-lQ-9wD" id="Rdt-Ii-M3L"/>
                                             </connections>
                                         </tableView>
@@ -621,7 +633,7 @@ CA
         </scene>
     </scenes>
     <resources>
-        <image name="F93DB849-4DF1-460A-B127-4A9636FC67D8" width="1" height="1">
+        <image name="89F4BA33-B6E3-43CE-AD2C-E1A984B9EF61" width="1" height="1">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

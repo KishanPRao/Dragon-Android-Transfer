@@ -16,5 +16,14 @@ protocol FileProgressDelegate: class {
 	
     func onProgress(_ progress: Int)
 	
-	func onCompletion()
+	func onCompletion(status: FileProgressStatus)
+}
+
+enum FileProgressStatus: Int {
+//	static let kStatusOk = 0
+//	static let kStatusCanceled = 1
+//	static let kStatusError = 2
+case kStatusOk
+case kStatusCanceled
+case kStatusError
 }

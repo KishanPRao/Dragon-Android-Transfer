@@ -6,11 +6,9 @@
 import Foundation
 
 class ColoredPopUpButton : NSPopUpButtonCell {
-	static let VERBOSE = true;
-	
 	public required init(coder: NSCoder) {
 		super.init(coder: coder)
-		if (ColoredPopUpButton.VERBOSE) {
+		if (NSObject.VERBOSE) {
 			Swift.print("ColoredPopUpButton, init")
 		}
 	}
@@ -139,7 +137,7 @@ class ColoredPopUpButton : NSPopUpButtonCell {
 	
 //	override func drawBorderAndBackground(withFrame cellFrame: NSRect, in controlView: NSView) {
 //		super.drawBorderAndBackground(withFrame: cellFrame, in: controlView)
-//		if (ColoredPopUpButton.VERBOSE) {
+//		if (NSObject.VERBOSE) {
 //			Swift.print("ColoredPopUpButton, drawBorderAndBackgroundWithFrame")
 //		}
 //		NSColor.red.set()
@@ -148,7 +146,7 @@ class ColoredPopUpButton : NSPopUpButtonCell {
 //
 //	override func drawBezel(withFrame frame: Foundation.NSRect, in controlView: NSView) {
 //		super.drawBezel(withFrame: frame, in: controlView)
-//		if (ColoredPopUpButton.VERBOSE) {
+//		if (NSObject.VERBOSE) {
 //			Swift.print("ColoredPopUpButton: drawBezelWithFrame");
 //		}
 //		NSColor.yellow.set()

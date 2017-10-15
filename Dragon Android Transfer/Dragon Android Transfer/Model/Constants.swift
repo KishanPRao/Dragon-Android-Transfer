@@ -33,6 +33,8 @@ public enum StatusTypeNotification {
 	static let MENU_GET_INFO = "MENU_GET_INFO"
 	static let REFRESH_FILES = "REFRESH_FILES"
 	static let RESET_POSITION = "RESET_POSITION"
+	static let MENU_NEW_FOLDER = "MENU_NEW_FOLDER"
+	static let MENU_DELETE = "MENU_DELETE"
 }
 
 public enum ViewControllerIdentifier {
@@ -50,5 +52,7 @@ public enum MenuItemIdentifier {
 	static let help = 7
 	static let minimize = 8
 	static let refresh = 9
-	static let resetPosition = 10
+    static let resetPosition = 10
+    static let newFolder = 11
+    static let editDelete = 12
 }

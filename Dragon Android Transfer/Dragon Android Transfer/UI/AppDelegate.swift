@@ -12,7 +12,9 @@ import AppKit
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
-	private static let VERBOSE = true;
+    override class var VERBOSE: Bool {
+        return false
+    }
 	static let MASShortcutCopy = "copyShortcut"
 	static let MASShortcutPaste = "pasteShortcut"
 	@IBOutlet weak var shortcutView: MASShortcutView?
@@ -96,21 +98,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 	}
 	
 	func applicationDidBecomeActive(_ notification: Notification) {
-//        print("Active")
 		AppDelegate.active = true
-//        viewController = self.window.rootViewController
-//        let window = NSApplication.sharedApplication().mainWindow
-//        print("Window:", window)
-//        if (window != nil) {
-//        print("Window:", window!.contentViewController)
-//
-//        viewController = window!.contentViewController as! ViewController;
-//        }
 		NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.CHANGE_ACTIVE), object: nil)
-//		let androidViewController = getAndroidController()
-//		if (androidViewController != nil && androidViewController!.shouldShowGuide()) {
-//			showHelpWindow([])
-//		}
 	}
 	
 	private func getAndroidController() -> AndroidViewController? {
@@ -121,8 +110,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 		let window = NSApplication.shared().mainWindow!
 		let viewController = window.contentViewController as! ViewController
 		return viewController.androidViewController
-//        Swift.print("Subs:", viewController.view.subviews[0])
-//		return viewController.view.subviews[0] as! AndroidViewController
 	}
 	
 	func applicationDidResignActive(_ notification: Notification) {
@@ -133,37 +120,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 	
 	static func isAppInForeground() -> Bool {
 		return active
-//        let state = NSApplication.sharedApplication().occlusionState
-//        if (state == NSApplicationOcclusionState.Visible) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-
-//        if state == .Background {
-//            return false;
-//        }
-//        else if state == .Active {
-//            return true;
-//        }
 	}
-
-//    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-//        if (context != MASObservingContext) {
-//            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
-//            return;
-//        }
-//    }
 	
 	func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
-		if (AppDelegate.VERBOSE) {
+		if (Verbose) {
 			Swift.print("AppDelegate, item:", item);
 		}
 		return AppDelegate.validateInterfaceMenuItem(item: item)
 	}
 	
 	public static func validateInterfaceMenuItem(item: NSValidatedUserInterfaceItem!) -> Bool {
-		if (AppDelegate.VERBOSE) {
+//        LogV("Vbose", Verbose, "")
+		if (VERBOSE) {
 			Swift.print("AppDelegate, validateInterfaceMenuItem:", item.tag);
 			Swift.print("AppDelegate, validateInterfaceMenuItem, isPasting:", AppDelegate.isPastingOperation);
 		}
@@ -200,6 +168,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 		if (item.tag == MenuItemIdentifier.resetPosition) {
 			return true
 		}
+		if (item.tag == MenuItemIdentifier.newFolder) {
+			return true
+		}
+		if (item.tag == MenuItemIdentifier.editDelete && AppDelegate.itemSelected && !AppDelegate.multipleItemsSelected) {
+			return !AppDelegate.isPastingOperation
+		}
 		return false
 	}
 	
@@ -225,28 +199,28 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 	
 	@IBAction func navigateBackward(_ sender: Any) {
 		NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.GO_BACKWARD), object: nil)
-		if (AppDelegate.VERBOSE) {
+		if (Verbose) {
 			Swift.print("AppDelegate, navigateBackward:", sender);
 		}
 	}
 	
 	@IBAction func openSelectedFile(_ sender: Any) {
 		NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.OPEN_FILE), object: nil)
-		if (AppDelegate.VERBOSE) {
+		if (Verbose) {
 			Swift.print("AppDelegate, openSelectedFile:", sender);
 		}
 	}
 	
 	@IBAction func refreshFiles(_ sender: Any) {
 		NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.REFRESH_FILES), object: nil)
-		if (AppDelegate.VERBOSE) {
+		if (Verbose) {
 			Swift.print("AppDelegate, refreshFiles:", sender);
 		}
 	}
 	
 	@IBAction func resetPosition(_ sender: Any) {
 		NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.RESET_POSITION), object: nil)
-		if (AppDelegate.VERBOSE) {
+		if (Verbose) {
 			Swift.print("AppDelegate, resetPosition:", sender);
 		}
 	}
@@ -254,20 +228,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 	
 	@IBAction func showHelpWindow(_ sender: Any) {
 		NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.SHOW_HELP), object: nil)
-//		if (helpWindow == nil) {
-//			helpWindow = HelpWindow(windowNibName: "HelpWindow")
-//		}
-//		let window = NSApplication.shared().mainWindow!
-//		let androidViewController = getAndroidController()
-//		if (androidViewController != nil) {
-//			helpWindow!.setIsIntro(intro: androidViewController!.shouldShowGuide())
-//			window.beginSheet(helpWindow!.window!) { response in
-//				if (AppDelegate.VERBOSE) {
-//					Swift.print("AppDelegate, Resp!");
-//				}
-//			}
-//		}
 	}
+    
+    @IBAction func showNewFolderDialog(_ sender: Any) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.MENU_NEW_FOLDER), object: nil)
+    }
+    
+    @IBAction func delete(_ sender: Any) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.MENU_DELETE), object: nil)
+    }
 	
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 //		Insert code here to initialize your application

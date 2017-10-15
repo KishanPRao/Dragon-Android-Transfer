@@ -9,8 +9,6 @@
 import Cocoa
 
 class HelpWindow: NSWindowController {
-	private static let VERBOSE = true;
-
     @IBOutlet weak var textClipView: NSClipView!
     @IBOutlet var helpText: NSTextView!
 	var mainW: NSWindow = NSWindow()
@@ -53,7 +51,7 @@ class HelpWindow: NSWindowController {
 	}
 	
 	func updateText() {
-		if (HelpWindow.VERBOSE) {
+		if (NSObject.VERBOSE) {
 			Swift.print("HelpWindow, update Text, init:", initialized)
 		}
 		if (!initialized) {
@@ -110,7 +108,7 @@ class HelpWindow: NSWindowController {
 	}
 	
 	func cancel(_ sender: Any) {
-		if (HelpWindow.VERBOSE) {
+		if (NSObject.VERBOSE) {
 			Swift.print("HelpWindow, cancel!")
 		}
 		endSheet()

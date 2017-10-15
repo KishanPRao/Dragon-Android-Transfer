@@ -13,7 +13,6 @@ protocol CopyDialogDelegate {
 }
 
 class CopyDialog: NSView {
-	private static let VERBOSE = true;
 	@IBOutlet var rootView: NSView!
 	
 	var progressView: ProgressView? = nil
@@ -112,8 +111,8 @@ class CopyDialog: NSView {
 		totalSizeView?.stringValue = SizeUtils.getBytesInFormat(size)
 	}
 	
-	func setCopiedSize(_ copiedSize: UInt64) {
-		let progress = (CGFloat(copiedSize) / CGFloat(mTotalCopySize) * 100.0)
+	func updateCopyStatus(_ copiedSize: UInt64, withProgress progress: CGFloat) {
+//		let progress = (CGFloat(copiedSize) / CGFloat(mTotalCopySize) * 100.0)
 		progressView?.setProgress(progress)
 //        if (CopyDialog.VERBOSE) {
 //            Swift.print("CopyDialog, Progress:", progress);

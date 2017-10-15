@@ -6,7 +6,6 @@
 import Foundation
 
 class ColoredButton: NSButton {
-	let VERBOSE = false;
 	var normalColor: NSColor = NSColor.black
 	var pressedColor: NSColor = NSColor.blue
 	var pressedSelectedColor: NSColor = NSColor.cyan
@@ -17,8 +16,8 @@ class ColoredButton: NSButton {
 	
 	required init?(coder: NSCoder) {
 		super.init(coder: coder)
-		if (VERBOSE) {
-			Swift.print("ColoredButton: init");
+		if (NSObject.VERBOSE) {
+//			Swift.print("ColoredButton: init");
 		}
 		setSelected(isSelected)
 	}
@@ -29,8 +28,8 @@ class ColoredButton: NSButton {
 	
 	func setSelected(_ selected: Bool) {
 		isSelected = selected
-		if (VERBOSE) {
-			Swift.print("ColoredButton: Selected:", isSelected, ", Title:", title);
+		if (NSObject.VERBOSE) {
+//			Swift.print("ColoredButton: Selected:", isSelected, ", Title:", title);
 		}
 //		if (currentFont == nil) {
 //			currentFont = NSFont(name: font!.fontName, size: DimenUtils.getDimension(dimension: Dimens.android_controller_device_selector_storage_text_size))
@@ -49,8 +48,8 @@ class ColoredButton: NSButton {
 	}
 	
 	override func draw(_ dirtyRect: Foundation.NSRect) {
-		if (VERBOSE) {
-			Swift.print("ColoredButton: draw, Highlighted:", isHighlighted, ", Selected:", isSelected, ", Title:", title);
+		if (NSObject.VERBOSE) {
+//			Swift.print("ColoredButton: draw, Highlighted:", isHighlighted, ", Selected:", isSelected, ", Title:", title);
 		}
 		if (isHighlighted) {
 //			if (isSelected && highlighted) {

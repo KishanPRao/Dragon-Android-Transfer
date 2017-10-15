@@ -7,14 +7,13 @@ import Foundation
 
 //TODO: Screen size specific, etc
 class DimenUtils {
-    static let VERBOSE = false
 	static let ORIGINAL_SCREEN_SIZE_WIDTH = 1920.0 as CGFloat
 	static var ratio = 1.0 as CGFloat
 	
 	static func updateRatio(currentWidth : CGFloat) {
 		ratio = currentWidth / DimenUtils.ORIGINAL_SCREEN_SIZE_WIDTH
-		if (DimenUtils.VERBOSE) {
-            Swift.print("DimenUtils, updateRatio:", ratio)
+		if (NSObject.VERBOSE) {
+//            Swift.print("DimenUtils, updateRatio:", ratio)
         }
 	}
 	

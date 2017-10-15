@@ -9,8 +9,7 @@
 import Foundation
 
 
-class MacHandler {
-	static let VERBOSE = false
+class MacHandler: NSObject {
 	let ESCAPE_DOUBLE_QUOTES = "\""
 	static let FINDER_ACTIVE_SCRIPT =
 			"on isFinderActive()\n" +
@@ -96,10 +95,10 @@ class MacHandler {
 		
 		let data = pipe.fileHandleForReading.readDataToEndOfFile()
 		let output = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
-		if (MacHandler.VERBOSE) {
+		if (NSObject.VERBOSE) {
 			print("Args:", commands, ":")
 		}
-		if (MacHandler.VERBOSE) {
+		if (NSObject.VERBOSE) {
 			print("Op:", output!)
 		}
 		
@@ -170,7 +169,7 @@ class MacHandler {
 					"return \"" + HandlerConstants.FILE + "\"\n" +
 					"end if\n" +
 					"end tell\n"
-			if (MacHandler.VERBOSE) {
+			if (NSObject.VERBOSE) {
 				print("Script:", fileTypeScript)
 			}
 			let output = runScript(fileTypeScript)
@@ -212,7 +211,7 @@ class MacHandler {
 //            print("Name:", outputNames[i], " Type:", output)
 			i = i + 1
 		}
-		if (MacHandler.VERBOSE) {
+		if (NSObject.VERBOSE) {
 			Swift.print("MacHandler, Sizes:", files);
 		}
 	}

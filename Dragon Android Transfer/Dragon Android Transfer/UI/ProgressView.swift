@@ -9,7 +9,6 @@
 import Foundation
 
 class ProgressView: NSView {
-	private static let VERBOSE = false;
 //    let PROGRESS_BACKGROUND_COLOR = ColorUtils.colorWithHexString("#5abbb2")
 //    let PROGRESS_FOREGROUND_COLOR = ColorUtils.colorWithHexString("#009688")
     let PROGRESS_BACKGROUND_COLOR = ColorUtils.colorWithHexString(ColorUtils.progressBackgroundColor)
@@ -36,7 +35,7 @@ class ProgressView: NSView {
 //		Swift.print("ProgressView, Time:", TimeUtils.getCurrentTime(), ", Progress:", progress)
         mProgress = progress
 	
-//		if (ProgressView.VERBOSE) {
+//		if (NSObject.VERBOSE) {
 //			Swift.print("ProgressView, main?", Thread.isMainThread);
 //		}
 		
@@ -44,8 +43,8 @@ class ProgressView: NSView {
     }
     
     override func draw(_ dirtyRect: NSRect) {
-		if (ProgressView.VERBOSE) {
-			Swift.print("ProgressView, Drawing");
+		if (NSObject.VERBOSE) {
+//			Swift.print("ProgressView, Drawing");
 		}
         PROGRESS_BACKGROUND_COLOR.set()
         NSBezierPath.fill(dirtyRect)

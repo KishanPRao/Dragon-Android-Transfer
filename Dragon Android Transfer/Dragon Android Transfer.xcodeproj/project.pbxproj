@@ -7,10 +7,56 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		500381471F8D44A0000728E9 /* Dragon_Android_TransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500381461F8D44A0000728E9 /* Dragon_Android_TransferTests.swift */; };
+		5003814F1F8D44F2000728E9 /* testAndroidAdb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5003814E1F8D44F2000728E9 /* testAndroidAdb.swift */; };
+		500381571F8D4510000728E9 /* Dragon_Android_TransferUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500381561F8D4510000728E9 /* Dragon_Android_TransferUITests.swift */; };
+		5003815E1F8D48DD000728E9 /* AndroidHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD17E6BE5C28C562E802B /* AndroidHandler.swift */; };
+		5003815F1F8D48DD000728E9 /* AndroidHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD17E6BE5C28C562E802B /* AndroidHandler.swift */; };
+		500381601F8D4984000728E9 /* AndroidFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDFC036C89DA942D822CB /* AndroidFile.swift */; };
+		500381611F8D4984000728E9 /* DeviceNotificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDCC51664AA62C5D2E16F /* DeviceNotificationDelegate.swift */; };
+		500381621F8D4984000728E9 /* SynchronizedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDB74F3C4682B914DD044 /* SynchronizedProtocol.swift */; };
+		500381631F8D4984000728E9 /* AbstractHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD5632911A41E6A29378F /* AbstractHandler.swift */; };
+		500381641F8D4984000728E9 /* TransferHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD1A9384B93DB8EB9F728 /* TransferHandler.swift */; };
+		500381651F8D4984000728E9 /* SynchronizedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD87B91572052F74F6A71 /* SynchronizedObject.swift */; };
+		500381661F8D4984000728E9 /* MacHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD9B142C72330CAD33F08 /* MacHandler.swift */; };
+		500381671F8D4984000728E9 /* BaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDCB8F35ADE3367E52D68 /* BaseObject.swift */; };
+		500381681F8D4984000728E9 /* AndroidDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD86C2E85315AA443F20A /* AndroidDevice.swift */; };
+		500381691F8D4984000728E9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD502F04DCCC712179F3E /* Constants.swift */; };
+		5003816A1F8D4984000728E9 /* FileProgressDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDF984C6EAC900758D77B /* FileProgressDelegate.swift */; };
+		5003816B1F8D498F000728E9 /* DraggableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD555FCE5B0B46E51D6BA /* DraggableTableView.swift */; };
+		5003816C1F8D498F000728E9 /* FileCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD7E75EBAEADF2AE05A69 /* FileCellView.swift */; };
+		5003816D1F8D498F000728E9 /* SegueFromLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDFFC3BE9E56DDE2D3C19 /* SegueFromLeft.swift */; };
+		5003816E1F8D498F000728E9 /* ClipboardTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD19E339D4C85CA94DB63 /* ClipboardTableCellView.swift */; };
+		5003816F1F8D498F000728E9 /* ClipboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDFB9152E270F55A7DA93 /* ClipboardViewController.swift */; };
+		500381701F8D498F000728E9 /* DisabledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDFCB4C0C8B5BFD2ED505 /* DisabledTextField.swift */; };
+		500381711F8D498F000728E9 /* CustomSwiftAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD64C1FBA89CEE74C8E21 /* CustomSwiftAnimator.swift */; };
+		500381721F8D498F000728E9 /* SelectableTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDF8F15DBA53742637FAF /* SelectableTableRowView.swift */; };
+		500381731F8D498F000728E9 /* DarkWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDF6F86ADACE75BF298B8 /* DarkWindow.swift */; };
+		500381741F8D498F000728E9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDACB9C2CE0860247FA3F /* ViewController.swift */; };
+		500381751F8D498F000728E9 /* StyleUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD6E9AD363F2C93D7DD6E /* StyleUtils.swift */; };
+		500381761F8D498F000728E9 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDEBCBDFAEEA61467AE50 /* OverlayView.swift */; };
+		500381771F8D498F000728E9 /* CopyDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD59077312767846474BE /* CopyDialog.xib */; };
+		500381781F8D498F000728E9 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDEB5D8B17C228D0A18FC /* ProgressView.swift */; };
+		500381791F8D498F000728E9 /* AndroidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD6111F36BDACDC8C22C5 /* AndroidViewController.swift */; };
+		5003817A1F8D498F000728E9 /* ColoredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD45ECA11EB2D3C3BDAC4 /* ColoredButton.swift */; };
+		5003817B1F8D498F000728E9 /* CopyDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDA85138797DCF1CBFF6E /* CopyDialog.swift */; };
+		5003817C1F8D498F000728E9 /* HelpWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD2DEBB68B7BBACBC6C7E /* HelpWindow.swift */; };
+		5003817D1F8D498F000728E9 /* ClipboardDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD18F320379C8AC947788 /* ClipboardDelegate.swift */; };
+		5003817E1F8D498F000728E9 /* ColoredPopUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD346E931B09B5337066D /* ColoredPopUpButton.swift */; };
+		5003817F1F8D498F000728E9 /* HelpWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD490BC7F7A5251A45E2E /* HelpWindow.xib */; };
+		500381801F8D498F000728E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD9E9DDF981F8F795B66F /* AppDelegate.swift */; };
+		500381811F8D498F000728E9 /* CrossfadeSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDA6EBA1CA6FCA5275D1F /* CrossfadeSegue.swift */; };
+		500381821F8D49C7000728E9 /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDCC4280329DAC474762E /* TimeUtils.swift */; };
+		500381831F8D49C7000728E9 /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDCC4280329DAC474762E /* TimeUtils.swift */; };
+		500381841F8D49EF000728E9 /* SizeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD75F91DBA3B298B91E2D /* SizeUtils.swift */; };
+		500381851F8D49F1000728E9 /* SizeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD75F91DBA3B298B91E2D /* SizeUtils.swift */; };
+		503B88541F928944004E6417 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503B88531F928944004E6417 /* StringExtension.swift */; };
 		503C5A2F1E0FB9300090EB68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 503C5A2E1E0FB9300090EB68 /* Assets.xcassets */; };
 		503C5A321E0FB9300090EB68 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 503C5A301E0FB9300090EB68 /* Main.storyboard */; };
+		506B74341F868C02008DD7EB /* AlertUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 506B74331F868C02008DD7EB /* AlertUtils.m */; };
 		50F716F41E82F492005CA833 /* MASShortcut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F716F31E82F492005CA833 /* MASShortcut.framework */; };
 		BE3BD0680117384D1A25829B /* update_sizes.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD263FE3F94CE594A7D20 /* update_sizes.png */; };
+		BE3BD093BA7DD75B6ED54230 /* PrintUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD508FF8655BB4E0D9395 /* PrintUtils.swift */; };
 		BE3BD1056F2C2C328B1A6857 /* AbstractHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD5632911A41E6A29378F /* AbstractHandler.swift */; };
 		BE3BD112BC91E0AC5A18FB99 /* back_button.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD6E19034EA1ACA510769 /* back_button.png */; };
 		BE3BD1209E6D395B5F80C07C /* ColoredPopUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD346E931B09B5337066D /* ColoredPopUpButton.swift */; };
@@ -33,7 +79,10 @@
 		BE3BD547E0DAAED05A7553FC /* AndroidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD6111F36BDACDC8C22C5 /* AndroidViewController.swift */; };
 		BE3BD56935F2B716809E01FA /* MacHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD9B142C72330CAD33F08 /* MacHandler.swift */; };
 		BE3BD591EDD6C82C2A25DF07 /* SynchronizedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD87B91572052F74F6A71 /* SynchronizedObject.swift */; };
+		BE3BD5A8294D96E907609C29 /* DragUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD50C33F9E4D0C57DE393 /* DragUtils.swift */; };
 		BE3BD5C0BCEC0534C6DC7A7F /* DeviceNotificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDCC51664AA62C5D2E16F /* DeviceNotificationDelegate.swift */; };
+		BE3BD5CF6E8601A12F2F1E50 /* BaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD5EBB9465D75C993382B /* BaseExtension.swift */; };
+		BE3BD5FBBA2CE3BBA2153F92 /* DragNotificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDE405DB44C2AE18362B1 /* DragNotificationDelegate.swift */; };
 		BE3BD6520BEDB861B128917D /* HelpWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD2DEBB68B7BBACBC6C7E /* HelpWindow.swift */; };
 		BE3BD6B26F04D72DF11DF6F7 /* DraggableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD555FCE5B0B46E51D6BA /* DraggableTableView.swift */; };
 		BE3BD6BFACF8AC26AA9AC486 /* DisabledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDFCB4C0C8B5BFD2ED505 /* DisabledTextField.swift */; };
@@ -45,6 +94,7 @@
 		BE3BD869D6B5C24C762444B0 /* endCopy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BE3BDB16DB0C701832D6D2BC /* endCopy.mp3 */; };
 		BE3BD88E545B798618704F9B /* SelectableTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDF8F15DBA53742637FAF /* SelectableTableRowView.swift */; };
 		BE3BD9B2F5EA8B8D9E4D2027 /* AndroidHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD17E6BE5C28C562E802B /* AndroidHandler.swift */; };
+		BE3BD9C6949E9F5050D4D401 /* ThreadUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDC1EC5EA8A5A0A17A378 /* ThreadUtils.swift */; };
 		BE3BDA056B2DC42E5964E83F /* CopyDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD59077312767846474BE /* CopyDialog.xib */; };
 		BE3BDA1FB1387C3949B25E52 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD65DA3E8130849D039FD /* index.html */; };
 		BE3BDA227C3660B22686716F /* SizeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD75F91DBA3B298B91E2D /* SizeUtils.swift */; };
@@ -63,20 +113,19 @@
 		BE3BDDEC72C1DF348203586E /* BaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDCB8F35ADE3367E52D68 /* BaseObject.swift */; };
 		BE3BDE084524366D5F702AFC /* AndroidDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD86C2E85315AA443F20A /* AndroidDevice.swift */; };
 		BE3BDEC38389E50C40F7F174 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDACB9C2CE0860247FA3F /* ViewController.swift */; };
+		BE3BDED7B28D3B1EFDB98FF1 /* DraggableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD8BB87128534B56D7AC1 /* DraggableItem.swift */; };
 		BE3BDF0B0B551911A6A2C60C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD502F04DCCC712179F3E /* Constants.swift */; };
-		CE60875A61DC948EE7FF7D7C /* Pods_Dragon_Android_TransferUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5D5E694217E022F0D4FD5E /* Pods_Dragon_Android_TransferUITests.framework */; };
-		E93DB06808A5F72487A3A890 /* Pods_Dragon_Android_TransferTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6E29BC824473C340CAB23B /* Pods_Dragon_Android_TransferTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		503C5A391E0FB9300090EB68 /* PBXContainerItemProxy */ = {
+		500381491F8D44A0000728E9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 503C5A1F1E0FB92F0090EB68 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 503C5A261E0FB92F0090EB68;
 			remoteInfo = "Dragon Android Transfer";
 		};
-		503C5A441E0FB9300090EB68 /* PBXContainerItemProxy */ = {
+		500381591F8D4510000728E9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 503C5A1F1E0FB92F0090EB68 /* Project object */;
 			proxyType = 1;
@@ -90,12 +139,20 @@
 		2E44D6DC05886C969870F7B5 /* Pods-Dragon Android Transfer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dragon Android Transfer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dragon Android Transfer/Pods-Dragon Android Transfer.release.xcconfig"; sourceTree = "<group>"; };
 		3AD3E519BDF1377E2354E60B /* Pods-Dragon Android TransferUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dragon Android TransferUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dragon Android TransferUITests/Pods-Dragon Android TransferUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4A5D5E694217E022F0D4FD5E /* Pods_Dragon_Android_TransferUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dragon_Android_TransferUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		500381441F8D44A0000728E9 /* Dragon Android TransferTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Dragon Android TransferTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		500381461F8D44A0000728E9 /* Dragon_Android_TransferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dragon_Android_TransferTests.swift; sourceTree = "<group>"; };
+		500381481F8D44A0000728E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5003814E1F8D44F2000728E9 /* testAndroidAdb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testAndroidAdb.swift; sourceTree = "<group>"; };
+		500381541F8D4510000728E9 /* Dragon Android TransferUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Dragon Android TransferUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		500381561F8D4510000728E9 /* Dragon_Android_TransferUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dragon_Android_TransferUITests.swift; sourceTree = "<group>"; };
+		500381581F8D4510000728E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		503B88531F928944004E6417 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		503C5A271E0FB92F0090EB68 /* Dragon Android Transfer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dragon Android Transfer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		503C5A2E1E0FB9300090EB68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		503C5A311E0FB9300090EB68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		503C5A331E0FB9300090EB68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		503C5A381E0FB9300090EB68 /* Dragon Android TransferTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Dragon Android TransferTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		503C5A431E0FB9300090EB68 /* Dragon Android TransferUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Dragon Android TransferUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		506B74321F868C02008DD7EB /* AlertUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertUtils.h; sourceTree = "<group>"; };
+		506B74331F868C02008DD7EB /* AlertUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertUtils.m; sourceTree = "<group>"; };
 		507AB7F71E2A374C00C749D1 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		50F716F31E82F492005CA833 /* MASShortcut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MASShortcut.framework; path = Pods/../build/Debug/MASShortcut/MASShortcut.framework; sourceTree = "<group>"; };
 		6B57E05A04A8CF6A133E8C85 /* Pods-Dragon Android TransferUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dragon Android TransferUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dragon Android TransferUITests/Pods-Dragon Android TransferUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -113,10 +170,13 @@
 		BE3BD45ECA11EB2D3C3BDAC4 /* ColoredButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColoredButton.swift; sourceTree = "<group>"; };
 		BE3BD490BC7F7A5251A45E2E /* HelpWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HelpWindow.xib; sourceTree = "<group>"; };
 		BE3BD502F04DCCC712179F3E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BE3BD508FF8655BB4E0D9395 /* PrintUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintUtils.swift; sourceTree = "<group>"; };
+		BE3BD50C33F9E4D0C57DE393 /* DragUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragUtils.swift; sourceTree = "<group>"; };
 		BE3BD555FCE5B0B46E51D6BA /* DraggableTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableTableView.swift; sourceTree = "<group>"; };
 		BE3BD5632911A41E6A29378F /* AbstractHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractHandler.swift; sourceTree = "<group>"; };
 		BE3BD59077312767846474BE /* CopyDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CopyDialog.xib; sourceTree = "<group>"; };
 		BE3BD5A174AC494406F68801 /* intro_guide.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = intro_guide.rtf; sourceTree = "<group>"; };
+		BE3BD5EBB9465D75C993382B /* BaseExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseExtension.swift; sourceTree = "<group>"; };
 		BE3BD6111F36BDACDC8C22C5 /* AndroidViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AndroidViewController.swift; sourceTree = "<group>"; };
 		BE3BD64C1FBA89CEE74C8E21 /* CustomSwiftAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSwiftAnimator.swift; sourceTree = "<group>"; };
 		BE3BD65DA3E8130849D039FD /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
@@ -129,6 +189,7 @@
 		BE3BD86C2E85315AA443F20A /* AndroidDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AndroidDevice.swift; sourceTree = "<group>"; };
 		BE3BD87B91572052F74F6A71 /* SynchronizedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronizedObject.swift; sourceTree = "<group>"; };
 		BE3BD8B0BBFD2BD4175F63BB /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
+		BE3BD8BB87128534B56D7AC1 /* DraggableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableItem.swift; sourceTree = "<group>"; };
 		BE3BD9B142C72330CAD33F08 /* MacHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacHandler.swift; sourceTree = "<group>"; };
 		BE3BD9E9DDF981F8F795B66F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE3BDA6EBA1CA6FCA5275D1F /* CrossfadeSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrossfadeSegue.swift; sourceTree = "<group>"; };
@@ -137,11 +198,13 @@
 		BE3BDB16DB0C701832D6D2BC /* endCopy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = endCopy.mp3; sourceTree = "<group>"; };
 		BE3BDB3E2A1E4A083D7DA873 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		BE3BDB74F3C4682B914DD044 /* SynchronizedProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronizedProtocol.swift; sourceTree = "<group>"; };
+		BE3BDC1EC5EA8A5A0A17A378 /* ThreadUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadUtils.swift; sourceTree = "<group>"; };
 		BE3BDCB8F35ADE3367E52D68 /* BaseObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseObject.swift; sourceTree = "<group>"; };
 		BE3BDCC4280329DAC474762E /* TimeUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeUtils.swift; sourceTree = "<group>"; };
 		BE3BDCC51664AA62C5D2E16F /* DeviceNotificationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceNotificationDelegate.swift; sourceTree = "<group>"; };
 		BE3BDD867147BBE13995A8D3 /* Dimens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dimens.swift; sourceTree = "<group>"; };
 		BE3BDDFFAFC3F3A5DAC239F2 /* file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file.png; sourceTree = "<group>"; };
+		BE3BDE405DB44C2AE18362B1 /* DragNotificationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragNotificationDelegate.swift; sourceTree = "<group>"; };
 		BE3BDEB5D8B17C228D0A18FC /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		BE3BDEBCBDFAEEA61467AE50 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		BE3BDED8D1C80713401499D7 /* DimenUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DimenUtils.swift; sourceTree = "<group>"; };
@@ -160,6 +223,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		500381411F8D44A0000728E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		500381511F8D4510000728E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		503C5A241E0FB92F0090EB68 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -168,29 +245,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		503C5A351E0FB9300090EB68 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E93DB06808A5F72487A3A890 /* Pods_Dragon_Android_TransferTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		503C5A401E0FB9300090EB68 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CE60875A61DC948EE7FF7D7C /* Pods_Dragon_Android_TransferUITests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		500381451F8D44A0000728E9 /* Dragon Android TransferTests */ = {
+			isa = PBXGroup;
+			children = (
+				5003814E1F8D44F2000728E9 /* testAndroidAdb.swift */,
+				500381461F8D44A0000728E9 /* Dragon_Android_TransferTests.swift */,
+				500381481F8D44A0000728E9 /* Info.plist */,
+			);
+			path = "Dragon Android TransferTests";
+			sourceTree = "<group>";
+		};
+		500381551F8D4510000728E9 /* Dragon Android TransferUITests */ = {
+			isa = PBXGroup;
+			children = (
+				500381561F8D4510000728E9 /* Dragon_Android_TransferUITests.swift */,
+				500381581F8D4510000728E9 /* Info.plist */,
+			);
+			path = "Dragon Android TransferUITests";
+			sourceTree = "<group>";
+		};
 		503C5A1E1E0FB92F0090EB68 = {
 			isa = PBXGroup;
 			children = (
 				503C5A291E0FB92F0090EB68 /* Dragon Android Transfer */,
+				500381451F8D44A0000728E9 /* Dragon Android TransferTests */,
+				500381551F8D4510000728E9 /* Dragon Android TransferUITests */,
 				503C5A281E0FB92F0090EB68 /* Products */,
 				BE3BDDFFAFC3F3A5DAC239F2 /* file.png */,
 				BE3BD8B0BBFD2BD4175F63BB /* folder.png */,
@@ -214,8 +296,8 @@
 			isa = PBXGroup;
 			children = (
 				503C5A271E0FB92F0090EB68 /* Dragon Android Transfer.app */,
-				503C5A381E0FB9300090EB68 /* Dragon Android TransferTests.xctest */,
-				503C5A431E0FB9300090EB68 /* Dragon Android TransferUITests.xctest */,
+				500381441F8D44A0000728E9 /* Dragon Android TransferTests.xctest */,
+				500381541F8D4510000728E9 /* Dragon Android TransferUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -262,6 +344,8 @@
 				BE3BD86C2E85315AA443F20A /* AndroidDevice.swift */,
 				BE3BD502F04DCCC712179F3E /* Constants.swift */,
 				BE3BDF984C6EAC900758D77B /* FileProgressDelegate.swift */,
+				BE3BD508FF8655BB4E0D9395 /* PrintUtils.swift */,
+				BE3BD5EBB9465D75C993382B /* BaseExtension.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -275,6 +359,10 @@
 				BE3BD03E4814A9F79E387252 /* StringUtils.swift */,
 				BE3BDCC4280329DAC474762E /* TimeUtils.swift */,
 				BE3BDD867147BBE13995A8D3 /* Dimens.swift */,
+				BE3BDC1EC5EA8A5A0A17A378 /* ThreadUtils.swift */,
+				506B74321F868C02008DD7EB /* AlertUtils.h */,
+				506B74331F868C02008DD7EB /* AlertUtils.m */,
+				503B88531F928944004E6417 /* StringExtension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -305,6 +393,9 @@
 				BE3BD490BC7F7A5251A45E2E /* HelpWindow.xib */,
 				BE3BD9E9DDF981F8F795B66F /* AppDelegate.swift */,
 				BE3BDA6EBA1CA6FCA5275D1F /* CrossfadeSegue.swift */,
+				BE3BD8BB87128534B56D7AC1 /* DraggableItem.swift */,
+				BE3BDE405DB44C2AE18362B1 /* DragNotificationDelegate.swift */,
+				BE3BD50C33F9E4D0C57DE393 /* DragUtils.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -323,6 +414,42 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		500381431F8D44A0000728E9 /* Dragon Android TransferTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5003814B1F8D44A0000728E9 /* Build configuration list for PBXNativeTarget "Dragon Android TransferTests" */;
+			buildPhases = (
+				500381401F8D44A0000728E9 /* Sources */,
+				500381411F8D44A0000728E9 /* Frameworks */,
+				500381421F8D44A0000728E9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5003814A1F8D44A0000728E9 /* PBXTargetDependency */,
+			);
+			name = "Dragon Android TransferTests";
+			productName = "Dragon Android TransferTests";
+			productReference = 500381441F8D44A0000728E9 /* Dragon Android TransferTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		500381531F8D4510000728E9 /* Dragon Android TransferUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5003815B1F8D4510000728E9 /* Build configuration list for PBXNativeTarget "Dragon Android TransferUITests" */;
+			buildPhases = (
+				500381501F8D4510000728E9 /* Sources */,
+				500381511F8D4510000728E9 /* Frameworks */,
+				500381521F8D4510000728E9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5003815A1F8D4510000728E9 /* PBXTargetDependency */,
+			);
+			name = "Dragon Android TransferUITests";
+			productName = "Dragon Android TransferUITests";
+			productReference = 500381541F8D4510000728E9 /* Dragon Android TransferUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		503C5A261E0FB92F0090EB68 /* Dragon Android Transfer */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 503C5A4C1E0FB9300090EB68 /* Build configuration list for PBXNativeTarget "Dragon Android Transfer" */;
@@ -343,48 +470,6 @@
 			productReference = 503C5A271E0FB92F0090EB68 /* Dragon Android Transfer.app */;
 			productType = "com.apple.product-type.application";
 		};
-		503C5A371E0FB9300090EB68 /* Dragon Android TransferTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 503C5A4F1E0FB9300090EB68 /* Build configuration list for PBXNativeTarget "Dragon Android TransferTests" */;
-			buildPhases = (
-				17C165378032C9DC839ADD8B /* [CP] Check Pods Manifest.lock */,
-				503C5A341E0FB9300090EB68 /* Sources */,
-				503C5A351E0FB9300090EB68 /* Frameworks */,
-				503C5A361E0FB9300090EB68 /* Resources */,
-				EE16F085EB94F1ED95E28FA2 /* [CP] Embed Pods Frameworks */,
-				9E4D951DE7E9387FA9CA6C81 /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				503C5A3A1E0FB9300090EB68 /* PBXTargetDependency */,
-			);
-			name = "Dragon Android TransferTests";
-			productName = "Dragon Android TransferTests";
-			productReference = 503C5A381E0FB9300090EB68 /* Dragon Android TransferTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		503C5A421E0FB9300090EB68 /* Dragon Android TransferUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 503C5A521E0FB9300090EB68 /* Build configuration list for PBXNativeTarget "Dragon Android TransferUITests" */;
-			buildPhases = (
-				3F8902353C37D0CA730F5A54 /* [CP] Check Pods Manifest.lock */,
-				503C5A3F1E0FB9300090EB68 /* Sources */,
-				503C5A401E0FB9300090EB68 /* Frameworks */,
-				503C5A411E0FB9300090EB68 /* Resources */,
-				90788FE72F2840703EEA8FFF /* [CP] Embed Pods Frameworks */,
-				43E13AD47F8B53C366BC45B6 /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				503C5A451E0FB9300090EB68 /* PBXTargetDependency */,
-			);
-			name = "Dragon Android TransferUITests";
-			productName = "Dragon Android TransferUITests";
-			productReference = 503C5A431E0FB9300090EB68 /* Dragon Android TransferUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -394,23 +479,23 @@
 				KnownAssetTags = (
 					Adb,
 				);
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Kishan P Rao";
 				TargetAttributes = {
+					500381431F8D44A0000728E9 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 503C5A261E0FB92F0090EB68;
+					};
+					500381531F8D4510000728E9 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 503C5A261E0FB92F0090EB68;
+					};
 					503C5A261E0FB92F0090EB68 = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 0820;
-					};
-					503C5A371E0FB9300090EB68 = {
-						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0820;
-						TestTargetID = 503C5A261E0FB92F0090EB68;
-					};
-					503C5A421E0FB9300090EB68 = {
-						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0820;
-						TestTargetID = 503C5A261E0FB92F0090EB68;
 					};
 				};
 			};
@@ -428,13 +513,29 @@
 			projectRoot = "";
 			targets = (
 				503C5A261E0FB92F0090EB68 /* Dragon Android Transfer */,
-				503C5A371E0FB9300090EB68 /* Dragon Android TransferTests */,
-				503C5A421E0FB9300090EB68 /* Dragon Android TransferUITests */,
+				500381431F8D44A0000728E9 /* Dragon Android TransferTests */,
+				500381531F8D4510000728E9 /* Dragon Android TransferUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		500381421F8D44A0000728E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		500381521F8D4510000728E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5003817F1F8D498F000728E9 /* HelpWindow.xib in Resources */,
+				500381771F8D498F000728E9 /* CopyDialog.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		503C5A251E0FB92F0090EB68 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -459,20 +560,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		503C5A361E0FB9300090EB68 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		503C5A411E0FB9300090EB68 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -489,81 +576,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		17C165378032C9DC839ADD8B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		3F8902353C37D0CA730F5A54 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		43E13AD47F8B53C366BC45B6 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dragon Android TransferUITests/Pods-Dragon Android TransferUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		90788FE72F2840703EEA8FFF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dragon Android TransferUITests/Pods-Dragon Android TransferUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9E4D951DE7E9387FA9CA6C81 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dragon Android TransferTests/Pods-Dragon Android TransferTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DD9F2B5D3F847726169FCAA9 /* [CP] Embed Pods Frameworks */ = {
@@ -596,24 +608,64 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dragon Android Transfer/Pods-Dragon Android Transfer-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EE16F085EB94F1ED95E28FA2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dragon Android TransferTests/Pods-Dragon Android TransferTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		500381401F8D44A0000728E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				500381651F8D4984000728E9 /* SynchronizedObject.swift in Sources */,
+				5003815E1F8D48DD000728E9 /* AndroidHandler.swift in Sources */,
+				500381611F8D4984000728E9 /* DeviceNotificationDelegate.swift in Sources */,
+				500381601F8D4984000728E9 /* AndroidFile.swift in Sources */,
+				500381641F8D4984000728E9 /* TransferHandler.swift in Sources */,
+				500381471F8D44A0000728E9 /* Dragon_Android_TransferTests.swift in Sources */,
+				500381841F8D49EF000728E9 /* SizeUtils.swift in Sources */,
+				500381821F8D49C7000728E9 /* TimeUtils.swift in Sources */,
+				5003814F1F8D44F2000728E9 /* testAndroidAdb.swift in Sources */,
+				500381691F8D4984000728E9 /* Constants.swift in Sources */,
+				500381681F8D4984000728E9 /* AndroidDevice.swift in Sources */,
+				5003816A1F8D4984000728E9 /* FileProgressDelegate.swift in Sources */,
+				500381671F8D4984000728E9 /* BaseObject.swift in Sources */,
+				500381621F8D4984000728E9 /* SynchronizedProtocol.swift in Sources */,
+				500381661F8D4984000728E9 /* MacHandler.swift in Sources */,
+				500381631F8D4984000728E9 /* AbstractHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		500381501F8D4510000728E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				500381801F8D498F000728E9 /* AppDelegate.swift in Sources */,
+				500381751F8D498F000728E9 /* StyleUtils.swift in Sources */,
+				5003816E1F8D498F000728E9 /* ClipboardTableCellView.swift in Sources */,
+				500381781F8D498F000728E9 /* ProgressView.swift in Sources */,
+				5003817A1F8D498F000728E9 /* ColoredButton.swift in Sources */,
+				5003816C1F8D498F000728E9 /* FileCellView.swift in Sources */,
+				5003817D1F8D498F000728E9 /* ClipboardDelegate.swift in Sources */,
+				500381711F8D498F000728E9 /* CustomSwiftAnimator.swift in Sources */,
+				5003817B1F8D498F000728E9 /* CopyDialog.swift in Sources */,
+				5003816B1F8D498F000728E9 /* DraggableTableView.swift in Sources */,
+				500381791F8D498F000728E9 /* AndroidViewController.swift in Sources */,
+				500381851F8D49F1000728E9 /* SizeUtils.swift in Sources */,
+				500381701F8D498F000728E9 /* DisabledTextField.swift in Sources */,
+				5003815F1F8D48DD000728E9 /* AndroidHandler.swift in Sources */,
+				5003817E1F8D498F000728E9 /* ColoredPopUpButton.swift in Sources */,
+				500381741F8D498F000728E9 /* ViewController.swift in Sources */,
+				5003816D1F8D498F000728E9 /* SegueFromLeft.swift in Sources */,
+				5003817C1F8D498F000728E9 /* HelpWindow.swift in Sources */,
+				500381761F8D498F000728E9 /* OverlayView.swift in Sources */,
+				500381831F8D49C7000728E9 /* TimeUtils.swift in Sources */,
+				500381571F8D4510000728E9 /* Dragon_Android_TransferUITests.swift in Sources */,
+				500381731F8D498F000728E9 /* DarkWindow.swift in Sources */,
+				500381721F8D498F000728E9 /* SelectableTableRowView.swift in Sources */,
+				5003816F1F8D498F000728E9 /* ClipboardViewController.swift in Sources */,
+				500381811F8D498F000728E9 /* CrossfadeSegue.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		503C5A231E0FB92F0090EB68 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -623,6 +675,7 @@
 				BE3BDD5398929F0485C6B7A0 /* SynchronizedProtocol.swift in Sources */,
 				BE3BD1056F2C2C328B1A6857 /* AbstractHandler.swift in Sources */,
 				BE3BDBB79A71733D77D57280 /* TransferHandler.swift in Sources */,
+				503B88541F928944004E6417 /* StringExtension.swift in Sources */,
 				BE3BD591EDD6C82C2A25DF07 /* SynchronizedObject.swift in Sources */,
 				BE3BD56935F2B716809E01FA /* MacHandler.swift in Sources */,
 				BE3BDDEC72C1DF348203586E /* BaseObject.swift in Sources */,
@@ -644,6 +697,7 @@
 				BE3BD48392D9F2FFFB13E879 /* OverlayView.swift in Sources */,
 				BE3BDDCCFB274C6527826E4A /* ProgressView.swift in Sources */,
 				BE3BD547E0DAAED05A7553FC /* AndroidViewController.swift in Sources */,
+				506B74341F868C02008DD7EB /* AlertUtils.m in Sources */,
 				BE3BD52D3C817210FBDCEDC3 /* ColoredButton.swift in Sources */,
 				BE3BDB56DB5BC3795A1E82B6 /* CopyDialog.swift in Sources */,
 				BE3BD6520BEDB861B128917D /* HelpWindow.swift in Sources */,
@@ -657,35 +711,27 @@
 				BE3BDD546D40C11CBAA28CB1 /* StringUtils.swift in Sources */,
 				BE3BD37C280AAD9C969F3243 /* TimeUtils.swift in Sources */,
 				BE3BDB74D4CB19E9B4D74631 /* Dimens.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		503C5A341E0FB9300090EB68 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		503C5A3F1E0FB9300090EB68 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				BE3BD9C6949E9F5050D4D401 /* ThreadUtils.swift in Sources */,
+				BE3BDED7B28D3B1EFDB98FF1 /* DraggableItem.swift in Sources */,
+				BE3BD5FBBA2CE3BBA2153F92 /* DragNotificationDelegate.swift in Sources */,
+				BE3BD5A8294D96E907609C29 /* DragUtils.swift in Sources */,
+				BE3BD093BA7DD75B6ED54230 /* PrintUtils.swift in Sources */,
+				BE3BD5CF6E8601A12F2F1E50 /* BaseExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		503C5A3A1E0FB9300090EB68 /* PBXTargetDependency */ = {
+		5003814A1F8D44A0000728E9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 503C5A261E0FB92F0090EB68 /* Dragon Android Transfer */;
-			targetProxy = 503C5A391E0FB9300090EB68 /* PBXContainerItemProxy */;
+			targetProxy = 500381491F8D44A0000728E9 /* PBXContainerItemProxy */;
 		};
-		503C5A451E0FB9300090EB68 /* PBXTargetDependency */ = {
+		5003815A1F8D4510000728E9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 503C5A261E0FB92F0090EB68 /* Dragon Android Transfer */;
-			targetProxy = 503C5A441E0FB9300090EB68 /* PBXContainerItemProxy */;
+			targetProxy = 500381591F8D4510000728E9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -701,6 +747,80 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5003814C1F8D44A0000728E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Dragon Android TransferTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kishanprao.Dragon-Android-TransferTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dragon Android Transfer.app/Contents/MacOS/Dragon Android Transfer";
+			};
+			name = Debug;
+		};
+		5003814D1F8D44A0000728E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Dragon Android TransferTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kishanprao.Dragon-Android-TransferTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dragon Android Transfer.app/Contents/MacOS/Dragon Android Transfer";
+			};
+			name = Release;
+		};
+		5003815C1F8D4510000728E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Dragon Android TransferUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kishanprao.Dragon-Android-TransferUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = "Dragon Android Transfer";
+			};
+			name = Debug;
+		};
+		5003815D1F8D4510000728E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Dragon Android TransferUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kishanprao.Dragon-Android-TransferUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = "Dragon Android Transfer";
+			};
+			name = Release;
+		};
 		503C5A4A1E0FB9300090EB68 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -825,67 +945,27 @@
 			};
 			name = Release;
 		};
-		503C5A501E0FB9300090EB68 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 118C817A6AC0828362F645DC /* Pods-Dragon Android TransferTests.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = "Dragon Android TransferTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.draconiantechnologies.Dragon-Android-TransferTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dragon Android Transfer.app/Contents/MacOS/Dragon Android Transfer";
-			};
-			name = Debug;
-		};
-		503C5A511E0FB9300090EB68 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B7D8F895498525A7BB7E0CB4 /* Pods-Dragon Android TransferTests.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = "Dragon Android TransferTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.draconiantechnologies.Dragon-Android-TransferTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dragon Android Transfer.app/Contents/MacOS/Dragon Android Transfer";
-			};
-			name = Release;
-		};
-		503C5A531E0FB9300090EB68 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3AD3E519BDF1377E2354E60B /* Pods-Dragon Android TransferUITests.debug.xcconfig */;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = "Dragon Android TransferUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.draconiantechnologies.Dragon-Android-TransferUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = "Dragon Android Transfer";
-			};
-			name = Debug;
-		};
-		503C5A541E0FB9300090EB68 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6B57E05A04A8CF6A133E8C85 /* Pods-Dragon Android TransferUITests.release.xcconfig */;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = "Dragon Android TransferUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.draconiantechnologies.Dragon-Android-TransferUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = "Dragon Android Transfer";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5003814B1F8D44A0000728E9 /* Build configuration list for PBXNativeTarget "Dragon Android TransferTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5003814C1F8D44A0000728E9 /* Debug */,
+				5003814D1F8D44A0000728E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5003815B1F8D4510000728E9 /* Build configuration list for PBXNativeTarget "Dragon Android TransferUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5003815C1F8D4510000728E9 /* Debug */,
+				5003815D1F8D4510000728E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		503C5A221E0FB92F0090EB68 /* Build configuration list for PBXProject "Dragon Android Transfer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -900,24 +980,6 @@
 			buildConfigurations = (
 				503C5A4D1E0FB9300090EB68 /* Debug */,
 				503C5A4E1E0FB9300090EB68 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		503C5A4F1E0FB9300090EB68 /* Build configuration list for PBXNativeTarget "Dragon Android TransferTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				503C5A501E0FB9300090EB68 /* Debug */,
-				503C5A511E0FB9300090EB68 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		503C5A521E0FB9300090EB68 /* Build configuration list for PBXNativeTarget "Dragon Android TransferUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				503C5A531E0FB9300090EB68 /* Debug */,
-				503C5A541E0FB9300090EB68 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
