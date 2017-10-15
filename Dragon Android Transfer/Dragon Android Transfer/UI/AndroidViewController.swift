@@ -215,6 +215,13 @@ class AndroidViewController: NSViewController, NSTableViewDelegate,
         transferHandler.clearClipboardAndroidItems()
 //        copyItemsMac = transferHandler.getActiveFiles()
         copyItemsMac.removeAll()
+        let dropDestination = (appItem as! BaseFile)
+        var dropDestinationPath: String
+        if (dropDestination.type == BaseFileType.File) {
+            dropDestinationPath = dropDestination.path
+        } else {
+            dropDestinationPath = dropDestination.getFullPath()
+        }
         
         let fileManager = FileManager.default
 //        do {
@@ -236,7 +243,7 @@ class AndroidViewController: NSViewController, NSTableViewDelegate,
             transferHandler.updateClipboardMacItems(copyItemsMac)
             updateClipboard()
     
-            pasteToAndroidInternal(path: (appItem as! BaseFile).getFullPath())
+            pasteToAndroidInternal(path: dropDestinationPath)
 //        } catch _ {
 //        	LogE("Cannot copy into app!")
 //        }
@@ -683,6 +690,11 @@ class AndroidViewController: NSViewController, NSTableViewDelegate,
 		mDockProgress?.doubleValue = Double(progress)
 		mDockTile.display()
 	}
+    
+    func successfulOperation() {
+        NSSound(named: "endCopy")?.play()
+        NSApp.requestUserAttention(NSRequestUserAttentionType.informationalRequest)
+    }
 	
 	func onCompletion(status: FileProgressStatus) {
 		AppDelegate.isPastingOperation = false
@@ -692,8 +704,7 @@ class AndroidViewController: NSViewController, NSTableViewDelegate,
 		
 		if (status == FileProgressStatus.kStatusOk) {
 			print("Successful copy")
-			NSSound(named: "endCopy")?.play()
-			NSApp.requestUserAttention(NSRequestUserAttentionType.informationalRequest)
+            successfulOperation()
 		} else {
 			print("Canceled")
 		}
@@ -1157,6 +1168,7 @@ class AndroidViewController: NSViewController, NSTableViewDelegate,
         if AlertUtils.showAlert("Do you really want to delete '\(selectedFileName)'?", info: "", confirm: true) {
             transferHandler.deleteAndroid(selectedItem)
             refresh()
+            successfulOperation()
         } else {
             LogV("Do not Delete!")
         }

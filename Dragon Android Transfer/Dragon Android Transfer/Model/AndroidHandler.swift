@@ -10,9 +10,9 @@ import Foundation
 
 public class AndroidHandler: NSObject {
     override class var VERBOSE: Bool {
-        return true
+        return false
     }
-    let EXTREME_VERBOSE = true
+    let EXTREME_VERBOSE = false
     let TIMER_VERBOSE = false
 	static let ESCAPE_DOUBLE_QUOTES = "\""
 	static let SINGLE_QUOTES = "'"
@@ -735,7 +735,7 @@ public class AndroidHandler: NSObject {
 		var directories: Array<BaseFile> = [];
 		let outputInLines = splitLines(listString)
 		var noOutput = false
-		print("Output:", outputInLines)
+//		print("Output:", outputInLines)
 		noOutput = outputInLines.count <= 0 || outputInLines.count <= 2 || (outputInLines.count == 3 && outputInLines[2].contains("No such file"))
 //		noOutput = outputInLines.count <= 0 || outputInLines.count <= 2
 		if (noOutput) {
