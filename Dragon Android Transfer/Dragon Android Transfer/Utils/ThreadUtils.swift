@@ -11,11 +11,17 @@ class ThreadUtils {
 		DispatchQueue.global(qos: .background).async {
 			closure()
 		}
-	}
-	
-	static func runInMainThread(_ closure: @escaping () -> ()) {
-		DispatchQueue.main.async {
-			closure()
-		}
-	}
+    }
+    
+    static func runInMainThread(_ closure: @escaping () -> ()) {
+        DispatchQueue.main.async {
+            closure()
+        }
+    }
+    
+    static func runInMainThreadAfter(delayMs delayInMs: Int, _ closure: @escaping () -> ()) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(delayInMs), execute: {
+            closure()
+        })
+    }
 }

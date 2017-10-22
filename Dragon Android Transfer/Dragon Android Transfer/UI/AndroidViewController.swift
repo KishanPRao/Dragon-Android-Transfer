@@ -82,6 +82,8 @@ NSUserInterfaceValidations {
 	
 	private let mDockTile: NSDockTile = NSApplication.shared().dockTile
 	private var mDockProgress: NSProgressIndicator? = nil
+    
+    private var mCircularProgress: IndeterminateProgressView? = nil
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -165,6 +167,16 @@ NSUserInterfaceValidations {
 		
 		mDockProgress?.isBezeled = true
 		mDockProgress?.isHidden = true
+        
+        let progressSize = 120.0 as CGFloat
+        mCircularProgress = IndeterminateProgressView(
+            frame: NSRect(x: (self.view.frame.width - progressSize) / 2.0,
+                          y: (self.view.frame.height - progressSize) / 2.0,
+                          width: progressSize,
+                          height: progressSize))
+        self.view.addSubview(mCircularProgress!)
+        mCircularProgress?.isHidden = true
+//        parent.center fromView:parent.superview];
 
 //		Testing:
 //		showCopyDialog()
@@ -356,44 +368,46 @@ NSUserInterfaceValidations {
 			print("Warning: Row out of range!")
 			return nil
 		}
-		let cellView = tableView.make(withIdentifier: "fileCell", owner: self) as! FileCellView
-		cellView.frame = DimenUtils.getUpdatedRect2(frame: cellView.frame, dimensions: [Dimens.android_controller_file_table_file_cell_width, Dimens.android_controller_file_table_file_cell_height])
-		
-		//        print("Items:", self.androidDirectoryItems)
-		//      Possibility “This NSLayoutConstraint is being configured with a constant that exceeds internal limits” error to occur. Old version SDK?
-		let file = self.androidDirectoryItems[row]
-		//            print("File:", file)
-		let fileName = cellView.nameField!
-		fileName.stringValue = file.fileName
-		fileName.textColor = ColorUtils.colorWithHexString(ColorUtils.listTextColor)
-		fileName.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_file_table_file_cell_file_name_text_size))
-		fileName.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table_file_cell_file_name)
-		
-		let fileSize = cellView.sizeField!
-		fileSize.stringValue = SizeUtils.getBytesInFormat(file.size)
-		fileSize.textColor = ColorUtils.colorWithHexString(ColorUtils.listTextColor)
-		fileSize.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_file_table_file_cell_file_size_text_size))
-		fileSize.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table_file_cell_file_size)
-		
-		let fileImage = cellView.fileImage!
-		fileImage.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table_file_cell_file_image)
-        let isDirectory = file.type == BaseFileType.Directory
-		if (isDirectory) {
-			fileImage.image = NSImage(named: "folder")
-		} else {
-			fileImage.image = NSImage(named: "file")
-		}
-		let indexSet = fileTable.selectedRowIndexes
-        if (indexSet.contains(row)) {
-            setBackgroundColorTo(cellView, color: ColorUtils.listSelectedBackgroundColor)
-        } else {
-            setBackgroundColorTo(cellView, color: ColorUtils.listBackgroundColor)
-        }
-        
-        if (!isDirectory && fileTable.dragDropRow == row) {
-            setBackgroundColorTo(cellView, color: ColorUtils.mainViewColor)
-        } else {
-//            setBackgroundColorTo(cellView, color: ColorUtils.listBackgroundColor)
+        if let cellView = tableView.make(withIdentifier: "fileCell", owner: self) as? FileCellView {
+            cellView.frame = DimenUtils.getUpdatedRect2(frame: cellView.frame, dimensions: [Dimens.android_controller_file_table_file_cell_width, Dimens.android_controller_file_table_file_cell_height])
+            
+            //        print("Items:", self.androidDirectoryItems)
+            //      Possibility “This NSLayoutConstraint is being configured with a constant that exceeds internal limits” error to occur. Old version SDK?
+            let file = self.androidDirectoryItems[row]
+            //            print("File:", file)
+            let fileName = cellView.nameField!
+            fileName.stringValue = file.fileName
+            fileName.textColor = ColorUtils.colorWithHexString(ColorUtils.listTextColor)
+            fileName.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_file_table_file_cell_file_name_text_size))
+            fileName.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table_file_cell_file_name)
+            
+            let fileSize = cellView.sizeField!
+            fileSize.stringValue = SizeUtils.getBytesInFormat(file.size)
+            fileSize.textColor = ColorUtils.colorWithHexString(ColorUtils.listTextColor)
+            fileSize.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_file_table_file_cell_file_size_text_size))
+            fileSize.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table_file_cell_file_size)
+            
+            let fileImage = cellView.fileImage!
+            fileImage.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table_file_cell_file_image)
+            let isDirectory = file.type == BaseFileType.Directory
+            if (isDirectory) {
+                fileImage.image = NSImage(named: "folder")
+            } else {
+                fileImage.image = NSImage(named: "file")
+            }
+            let indexSet = fileTable.selectedRowIndexes
+            if (indexSet.contains(row)) {
+                setBackgroundColorTo(cellView, color: ColorUtils.listSelectedBackgroundColor)
+            } else {
+                setBackgroundColorTo(cellView, color: ColorUtils.listBackgroundColor)
+            }
+            
+            if (!isDirectory && fileTable.dragDropRow == row) {
+                setBackgroundColorTo(cellView, color: ColorUtils.mainViewColor)
+            } else {
+    //            setBackgroundColorTo(cellView, color: ColorUtils.listBackgroundColor)
+            }
+            return cellView
         }
 //        let dragIndexSet = fileTable.draggedRows
 //        if (dragIndexSet.contains(row)) {
@@ -402,7 +416,7 @@ NSUserInterfaceValidations {
 //        } else {
 //            setBackgroundColorTo(cellView, color: ColorUtils.listBackgroundColor)
 //        }
-		return cellView
+        return nil
 	}
 	
 	func tableViewSelectionDidChange(_ notification: Notification) {
@@ -525,26 +539,32 @@ NSUserInterfaceValidations {
 	
 	func onUpdate() {
 		print("onUpdate")
-		let devices = transferHandler.getAndroidDevices()
-		var devicesNames = [] as Array<String>
-		var i = 0
-		androidDevices.removeAllObjects()
-		androidDevices.addObjects(from: devices)
-		while i < devices.count {
-			devicesNames.append(devices[i].name)
-			i = i + 1
-		}
-		self.devicesPopUp.removeAllItems()
-		self.devicesPopUp.addItems(withTitles: devicesNames)
-		let selectedIndex = self.devicesPopUp.indexOfSelectedItem
-		print("Update Selected:", selectedIndex)
-		externalStorageButton.isHidden = true
-		updatePopupDimens()
-		var activeDevice = nil as AndroidDevice?
-		if (selectedIndex > -1) {
-			activeDevice = devices[selectedIndex]
-		}
-		updateActiveDevice(activeDevice)
+        self.showProgress()
+        ThreadUtils.runInBackgroundThread({
+            let devices = self.transferHandler.getAndroidDevices()
+            var devicesNames = [] as Array<String>
+            var i = 0
+            self.androidDevices.removeAllObjects()
+            self.androidDevices.addObjects(from: devices)
+            while i < devices.count {
+                devicesNames.append(devices[i].name)
+                i = i + 1
+            }
+            self.devicesPopUp.removeAllItems()
+            self.devicesPopUp.addItems(withTitles: devicesNames)
+            let selectedIndex = self.devicesPopUp.indexOfSelectedItem
+            print("Update Selected:", selectedIndex)
+            self.externalStorageButton.isHidden = true
+            ThreadUtils.runInMainThread({
+                self.updatePopupDimens()
+                var activeDevice = nil as AndroidDevice?
+                if (selectedIndex > -1) {
+                    activeDevice = devices[selectedIndex]
+                }
+                self.updateActiveDevice(activeDevice)
+                self.hideProgress()
+            })
+        })
 	}
 	
 	fileprivate func updateActiveDevice(_ activeDevice: AndroidDevice?) {
@@ -593,24 +613,42 @@ NSUserInterfaceValidations {
 	
 	func stop() {
 //		transferHandler.stop()
-	}
+    }
+    
+    private func showProgress() {
+        self.mCircularProgress?.isHidden = false
+    }
+    
+    private func hideProgress() {
+        self.mCircularProgress?.isHidden = true
+    }
 	
 	func doubleClickList(_ sender: AnyObject) {
 		print("Double Clicked:", fileTable.clickedRow)
 		if (fileTable.clickedRow < 0) {
 			return
 		}
-		let selectedItem = self.androidDirectoryItems[fileTable.clickedRow].fileName
-//		print("Selected", fileTable.selectedRowIndexes)
+        let selectedItem = self.androidDirectoryItems[fileTable.clickedRow].fileName
+        openDirectory(selectedItem)
 		
-		if (transferHandler.isDirectory(selectedItem)) {
-			reloadFileList(transferHandler.openDirectoryData(transferHandler.getCurrentPath() + HandlerConstants.SEPARATOR + selectedItem))
-		} else {
-			self.fileTable.deselectRow(self.fileTable.selectedRow)
-		}
 	}
+    
+    private func openDirectory(_ selectedItem: String) {
+        if (transferHandler.isDirectory(selectedItem)) {
+            self.showProgress()
+            ThreadUtils.runInBackgroundThread({
+                let items = self.transferHandler.openDirectoryData(self.transferHandler.getCurrentPath() + HandlerConstants.SEPARATOR + selectedItem)
+                ThreadUtils.runInMainThread({
+                    self.reloadFileList(items!)
+                    self.hideProgress()
+                })
+            })
+        } else {
+            self.fileTable.deselectRow(self.fileTable.selectedRow)
+        }
+    }
 	
-	func openSelectedDirectory() {
+    func openSelectedDirectory() {
 		if (NSObject.VERBOSE) {
 			Swift.print("AndroidViewController, openSelectedDirectory");
 		}
@@ -618,11 +656,7 @@ NSUserInterfaceValidations {
 //		print("Selected", fileTable.selectedRow)
 //		print("Selected", self.androidDirectoryItems[fileTable.selectedRow])
 		
-		if (transferHandler.isDirectory(selectedItem)) {
-			reloadFileList(transferHandler.openDirectoryData(transferHandler.getCurrentPath() + HandlerConstants.SEPARATOR + selectedItem))
-		} else {
-			self.fileTable.deselectRow(self.fileTable.selectedRow)
-		}
+        openDirectory(selectedItem)
 	}
 	
 	func getSelectedItemInfo() {
@@ -1064,13 +1098,17 @@ NSUserInterfaceValidations {
 	}
 	
 	@IBAction func useInternalStorage(_ sender: AnyObject) {
+        self.showProgress()
 		transferHandler.setUsingExternalStorage(false)
 		updateToStorage(transferHandler.getInternalStorage())
+        self.hideProgress()
 	}
 	
 	@IBAction func useExternalStorage(_ sender: AnyObject) {
+        self.showProgress()
 		transferHandler.setUsingExternalStorage(true)
 		updateToStorage(transferHandler.getExternalStorage())
+        self.hideProgress()
 	}
 	
 	fileprivate func updateToStorage(_ storage: String) {
@@ -1097,6 +1135,7 @@ NSUserInterfaceValidations {
 	}
 	
 	@IBAction func backButtonPressed(_ button: NSButton) {
+        self.showProgress()
         let previousDirectory = transferHandler.getCurrentPath()
         if let directoryData = transferHandler.upDirectoryData(), (directoryData.count) > 0 {
 			reloadFileList(directoryData)
@@ -1109,6 +1148,7 @@ NSUserInterfaceValidations {
                     AppDelegate.directoryItemSelected = true
                 }
             }
+            self.hideProgress()
 		}
 	}
 	
@@ -1118,11 +1158,13 @@ NSUserInterfaceValidations {
 	}
 	
 	func refresh() {
+        self.showProgress()
 		reloadFileList(transferHandler.openDirectoryData(transferHandler.getCurrentPath()))
 		transferHandler.updateStorage()
 		if (transferHandler.hasActiveDevice()) {
 			spaceStatusText.stringValue = transferHandler.getAvailableSpace() + " of " + transferHandler.getTotalSpaceInString()
 		}
+        self.hideProgress()
 	}
 	
 	func resetPosition() {

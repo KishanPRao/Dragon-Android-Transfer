@@ -147,11 +147,11 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
     }
 
     func updateItemChanged(index i: Int) {
-        LogI("Update", i)
-        if (i < 0) {
-//            i = 0
+        var row = i
+        if (row < 0) {
+            row = 0
         }
-        let rowSet = NSIndexSet(index: i) as IndexSet
+        let rowSet = NSIndexSet(index: row) as IndexSet
         selectRowIndexes(rowSet, byExtendingSelection: false)
         
         let columnSet = NSIndexSet(index: 0) as IndexSet

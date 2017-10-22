@@ -54,6 +54,7 @@
 		503C5A2F1E0FB9300090EB68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 503C5A2E1E0FB9300090EB68 /* Assets.xcassets */; };
 		503C5A321E0FB9300090EB68 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 503C5A301E0FB9300090EB68 /* Main.storyboard */; };
 		5040051F1F9C77C2000AA823 /* DragUiDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5040051E1F9C77C2000AA823 /* DragUiDelegate.swift */; };
+		504005211F9C8A9A000AA823 /* IndeterminateProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504005201F9C8A9A000AA823 /* IndeterminateProgressView.swift */; };
 		506B74341F868C02008DD7EB /* AlertUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 506B74331F868C02008DD7EB /* AlertUtils.m */; };
 		50CF83371F9688BE00A36F71 /* BridgingUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CF83361F9688BE00A36F71 /* BridgingUtils.m */; };
 		50F716F41E82F492005CA833 /* MASShortcut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F716F31E82F492005CA833 /* MASShortcut.framework */; };
@@ -154,6 +155,7 @@
 		503C5A311E0FB9300090EB68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		503C5A331E0FB9300090EB68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5040051E1F9C77C2000AA823 /* DragUiDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragUiDelegate.swift; sourceTree = "<group>"; };
+		504005201F9C8A9A000AA823 /* IndeterminateProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndeterminateProgressView.swift; sourceTree = "<group>"; };
 		506B74321F868C02008DD7EB /* AlertUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertUtils.h; sourceTree = "<group>"; };
 		506B74331F868C02008DD7EB /* AlertUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertUtils.m; sourceTree = "<group>"; };
 		507AB7F71E2A374C00C749D1 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
@@ -395,6 +397,7 @@
 				BE3BDEBCBDFAEEA61467AE50 /* OverlayView.swift */,
 				BE3BD59077312767846474BE /* CopyDialog.xib */,
 				BE3BDEB5D8B17C228D0A18FC /* ProgressView.swift */,
+				504005201F9C8A9A000AA823 /* IndeterminateProgressView.swift */,
 				BE3BD6111F36BDACDC8C22C5 /* AndroidViewController.swift */,
 				BE3BD45ECA11EB2D3C3BDAC4 /* ColoredButton.swift */,
 				BE3BDA85138797DCF1CBFF6E /* CopyDialog.swift */,
@@ -693,6 +696,7 @@
 				BE3BD7CA895C9AB1479CEE1F /* FileProgressDelegate.swift in Sources */,
 				BE3BD6B26F04D72DF11DF6F7 /* DraggableTableView.swift in Sources */,
 				BE3BD295E517E82426DE3CD1 /* FileCellView.swift in Sources */,
+				504005211F9C8A9A000AA823 /* IndeterminateProgressView.swift in Sources */,
 				BE3BD6D91512D04C1722DC32 /* SegueFromLeft.swift in Sources */,
 				BE3BD6F2807916D53B38D15C /* ClipboardTableCellView.swift in Sources */,
 				BE3BD454352A5DEFBCF3B534 /* ClipboardViewController.swift in Sources */,
