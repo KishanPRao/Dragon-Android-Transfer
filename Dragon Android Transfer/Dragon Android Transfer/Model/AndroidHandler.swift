@@ -319,10 +319,12 @@ public class AndroidHandler: NSObject {
 //		TODO: Need check? Success?
 	}
     
-    func delete(_ file: BaseFile) {
-        let command = "rm -rf " + AndroidHandler.ESCAPE_DOUBLE_QUOTES + file.getFullPath() + AndroidHandler.ESCAPE_DOUBLE_QUOTES
-        LogV("Delete", file, command)
-        adbShell(command)
+    func delete(_ files: Array<BaseFile>) {
+        for file in files {
+            let command = "rm -rf " + AndroidHandler.ESCAPE_DOUBLE_QUOTES + file.getFullPath() + AndroidHandler.ESCAPE_DOUBLE_QUOTES
+            LogV("Delete", file, command)
+            adbShell(command)
+        }
     }
 	
 	func updateStorage() {

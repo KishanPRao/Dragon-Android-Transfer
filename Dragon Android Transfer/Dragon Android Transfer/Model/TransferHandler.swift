@@ -153,8 +153,8 @@ class TransferHandler {
 		return androidHandler.folderExists(folderName);
 	}
     
-    func deleteAndroid(_ file: BaseFile) {
-        androidHandler.delete(file)
+    func deleteAndroid(_ files: Array<BaseFile>) {
+        androidHandler.delete(files)
     }
 
 //	Mac Related

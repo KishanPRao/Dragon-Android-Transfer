@@ -53,7 +53,9 @@
 		503B88541F928944004E6417 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503B88531F928944004E6417 /* StringExtension.swift */; };
 		503C5A2F1E0FB9300090EB68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 503C5A2E1E0FB9300090EB68 /* Assets.xcassets */; };
 		503C5A321E0FB9300090EB68 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 503C5A301E0FB9300090EB68 /* Main.storyboard */; };
+		5040051F1F9C77C2000AA823 /* DragUiDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5040051E1F9C77C2000AA823 /* DragUiDelegate.swift */; };
 		506B74341F868C02008DD7EB /* AlertUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 506B74331F868C02008DD7EB /* AlertUtils.m */; };
+		50CF83371F9688BE00A36F71 /* BridgingUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CF83361F9688BE00A36F71 /* BridgingUtils.m */; };
 		50F716F41E82F492005CA833 /* MASShortcut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F716F31E82F492005CA833 /* MASShortcut.framework */; };
 		BE3BD0680117384D1A25829B /* update_sizes.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD263FE3F94CE594A7D20 /* update_sizes.png */; };
 		BE3BD093BA7DD75B6ED54230 /* PrintUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD508FF8655BB4E0D9395 /* PrintUtils.swift */; };
@@ -151,9 +153,12 @@
 		503C5A2E1E0FB9300090EB68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		503C5A311E0FB9300090EB68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		503C5A331E0FB9300090EB68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5040051E1F9C77C2000AA823 /* DragUiDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragUiDelegate.swift; sourceTree = "<group>"; };
 		506B74321F868C02008DD7EB /* AlertUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertUtils.h; sourceTree = "<group>"; };
 		506B74331F868C02008DD7EB /* AlertUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertUtils.m; sourceTree = "<group>"; };
 		507AB7F71E2A374C00C749D1 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		50CF83351F9688BE00A36F71 /* BridgingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingUtils.h; sourceTree = "<group>"; };
+		50CF83361F9688BE00A36F71 /* BridgingUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BridgingUtils.m; sourceTree = "<group>"; };
 		50F716F31E82F492005CA833 /* MASShortcut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MASShortcut.framework; path = Pods/../build/Debug/MASShortcut/MASShortcut.framework; sourceTree = "<group>"; };
 		6B57E05A04A8CF6A133E8C85 /* Pods-Dragon Android TransferUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dragon Android TransferUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dragon Android TransferUITests/Pods-Dragon Android TransferUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B7D8F895498525A7BB7E0CB4 /* Pods-Dragon Android TransferTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dragon Android TransferTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dragon Android TransferTests/Pods-Dragon Android TransferTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -363,6 +368,8 @@
 				506B74321F868C02008DD7EB /* AlertUtils.h */,
 				506B74331F868C02008DD7EB /* AlertUtils.m */,
 				503B88531F928944004E6417 /* StringExtension.swift */,
+				50CF83351F9688BE00A36F71 /* BridgingUtils.h */,
+				50CF83361F9688BE00A36F71 /* BridgingUtils.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -371,6 +378,10 @@
 			isa = PBXGroup;
 			children = (
 				BE3BD555FCE5B0B46E51D6BA /* DraggableTableView.swift */,
+				BE3BD8BB87128534B56D7AC1 /* DraggableItem.swift */,
+				BE3BDE405DB44C2AE18362B1 /* DragNotificationDelegate.swift */,
+				5040051E1F9C77C2000AA823 /* DragUiDelegate.swift */,
+				BE3BD50C33F9E4D0C57DE393 /* DragUtils.swift */,
 				BE3BD7E75EBAEADF2AE05A69 /* FileCellView.swift */,
 				BE3BDFFC3BE9E56DDE2D3C19 /* SegueFromLeft.swift */,
 				BE3BD19E339D4C85CA94DB63 /* ClipboardTableCellView.swift */,
@@ -393,9 +404,6 @@
 				BE3BD490BC7F7A5251A45E2E /* HelpWindow.xib */,
 				BE3BD9E9DDF981F8F795B66F /* AppDelegate.swift */,
 				BE3BDA6EBA1CA6FCA5275D1F /* CrossfadeSegue.swift */,
-				BE3BD8BB87128534B56D7AC1 /* DraggableItem.swift */,
-				BE3BDE405DB44C2AE18362B1 /* DragNotificationDelegate.swift */,
-				BE3BD50C33F9E4D0C57DE393 /* DragUtils.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -696,6 +704,7 @@
 				BE3BD3EE760EA36708CC2F52 /* StyleUtils.swift in Sources */,
 				BE3BD48392D9F2FFFB13E879 /* OverlayView.swift in Sources */,
 				BE3BDDCCFB274C6527826E4A /* ProgressView.swift in Sources */,
+				5040051F1F9C77C2000AA823 /* DragUiDelegate.swift in Sources */,
 				BE3BD547E0DAAED05A7553FC /* AndroidViewController.swift in Sources */,
 				506B74341F868C02008DD7EB /* AlertUtils.m in Sources */,
 				BE3BD52D3C817210FBDCEDC3 /* ColoredButton.swift in Sources */,
@@ -703,6 +712,7 @@
 				BE3BD6520BEDB861B128917D /* HelpWindow.swift in Sources */,
 				BE3BD166EF0EDCC3CF91AA7E /* ClipboardDelegate.swift in Sources */,
 				BE3BD1209E6D395B5F80C07C /* ColoredPopUpButton.swift in Sources */,
+				50CF83371F9688BE00A36F71 /* BridgingUtils.m in Sources */,
 				BE3BDC57F874BAFD8C7076B1 /* AppDelegate.swift in Sources */,
 				BE3BD348EBF76332FF518DD1 /* CrossfadeSegue.swift in Sources */,
 				BE3BD7DAF4A0DEDEBB668109 /* DimenUtils.swift in Sources */,

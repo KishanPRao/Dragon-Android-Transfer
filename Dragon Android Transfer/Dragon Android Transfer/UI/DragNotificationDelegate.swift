@@ -7,7 +7,7 @@ import Foundation
 
 protocol DragNotificationDelegate {
 	
-	func dragItem(item: DraggableItem, fromAppToFinderLocation location: String)
+	func dragItem(items: [DraggableItem], fromAppToFinderLocation location: String)
 	
-	func dragItem(item: String, fromFinderIntoAppItem appItem: DraggableItem)
+	func dragItem(items: [String], fromFinderIntoAppItem appItem: DraggableItem)
 }

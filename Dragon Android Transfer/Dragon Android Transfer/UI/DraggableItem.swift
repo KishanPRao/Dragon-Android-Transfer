@@ -8,6 +8,8 @@ import Foundation
 class DraggableItem: NSObject, NSPasteboardWriting {
 	static let sFakeLocation = "fakeLocation"
 	static let sFakeUrl = NSURL(string: sFakeLocation)!
+    
+    var index: Int = -1
 	
 	//      Copying to Finder
 	func writingOptions(forType type: String, pasteboard: NSPasteboard) -> NSPasteboardWritingOptions {
@@ -18,11 +20,12 @@ class DraggableItem: NSObject, NSPasteboardWriting {
 	
 	func writableTypes(for pasteboard: NSPasteboard) -> [String] {
 //		LogV("writableTypes")
-		return [DraggableTableView.kWritableType]
+		return [kWritableType]
 	}
 	
 	func pasteboardPropertyList(forType type: String) -> Any? {
 //		LogV("pasteboardPropertyList")
-		return DraggableItem.sFakeUrl.pasteboardPropertyList(forType: type)
+//        return DraggableItem.sFakeUrl.pasteboardPropertyList(forType: type)
+        return index
 	}
 }

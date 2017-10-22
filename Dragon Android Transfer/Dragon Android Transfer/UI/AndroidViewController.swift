@@ -27,8 +27,8 @@ class AndroidViewController: NSViewController, NSTableViewDelegate,
     NSComboBoxDataSource, NSComboBoxDelegate, NSControlTextEditingDelegate,
 	FileProgressDelegate, DeviceNotficationDelegate,
 	ClipboardDelegate, CopyDialogDelegate,
-    DragNotificationDelegate,
-	NSUserInterfaceValidations {
+    DragNotificationDelegate, DragUiDelegate,
+NSUserInterfaceValidations {
 	
 	var androidDirectoryItems: Array<BaseFile> = []
 	@IBOutlet weak var fileTable: DraggableTableView!
@@ -94,6 +94,7 @@ class AndroidViewController: NSViewController, NSTableViewDelegate,
 		
         fileTable.delegate = self
         fileTable.dragDelegate = self
+        fileTable.dragUiDelegate = self
 		let doubleClickSelector: Selector = #selector(AndroidViewController.doubleClickList(_:))
 		fileTable.doubleAction = doubleClickSelector
 		
@@ -193,13 +194,15 @@ class AndroidViewController: NSViewController, NSTableViewDelegate,
 	}
     
 //    Multiple Files!
-    func dragItem(item: DraggableItem, fromAppToFinderLocation location: String) {
-        LogI("Drag (to Finder) ", item, "->", location)
+    func dragItem(items: [DraggableItem], fromAppToFinderLocation location: String) {
+        LogI("Drag (to Finder) ", items, "->", location)
         
-        transferHandler.clearClipboardMacItems()
-        transferHandler.clearClipboardAndroidItems()
         var copyItemsAndroid: Array<BaseFile> = []
-        copyItemsAndroid.append(item as! BaseFile)
+        for item in items {
+            transferHandler.clearClipboardMacItems()
+            transferHandler.clearClipboardAndroidItems()
+            copyItemsAndroid.append(item as! BaseFile)
+        }
         print("Copy:", copyItemsAndroid)
         transferHandler.updateClipboardAndroidItems(copyItemsAndroid)
         updateClipboard()
@@ -207,8 +210,8 @@ class AndroidViewController: NSViewController, NSTableViewDelegate,
         pasteToMacInternal(path: location)
     }
     
-    func dragItem(item: String, fromFinderIntoAppItem appItem: DraggableItem) {
-        LogI("Drag (to App)", item, "->" , appItem)
+    func dragItem(items: [String], fromFinderIntoAppItem appItem: DraggableItem) {
+        LogI("Drag (to App)", items, "->" , appItem)
         
         var copyItemsMac: Array<BaseFile> = []
         transferHandler.clearClipboardMacItems()
@@ -225,6 +228,7 @@ class AndroidViewController: NSViewController, NSTableViewDelegate,
         
         let fileManager = FileManager.default
 //        do {
+        for item in items {
             let path = item.stringByDeletingLastPathComponent + HandlerConstants.SEPARATOR
             var isDirectory : ObjCBool = false
             fileManager.fileExists(atPath: item, isDirectory: &isDirectory)
@@ -240,10 +244,11 @@ class AndroidViewController: NSViewController, NSTableViewDelegate,
             let file = BaseFile.init(fileName: name, path: path, type: type, size: 0)
             LogI("File", file)
             copyItemsMac.append(file)
-            transferHandler.updateClipboardMacItems(copyItemsMac)
-            updateClipboard()
-    
-            pasteToAndroidInternal(path: dropDestinationPath)
+        }
+        transferHandler.updateClipboardMacItems(copyItemsMac)
+        updateClipboard()
+        
+        pasteToAndroidInternal(path: dropDestinationPath)
 //        } catch _ {
 //        	LogE("Cannot copy into app!")
 //        }
@@ -312,13 +317,39 @@ class AndroidViewController: NSViewController, NSTableViewDelegate,
 //			setBackgroundColorTo(cellView, color: ColorUtils.listSelectedBackgroundColor)
 //		}
 		return true
-	}
+    }
 	
 	@IBAction func tableSelectionChanged(_ sender: Any) {
 		if (NSObject.VERBOSE) {
 //			Swift.print("AndroidViewController: tableSelectionChanged:", fileTable.selectedRow);
 		}
-	}
+    }
+    
+    let tableSelectedBgColor = ColorUtils.colorWithHexString(ColorUtils.listSelectedBackgroundColor)
+    let tableBgColor = ColorUtils.colorWithHexString(ColorUtils.mainViewColor)
+    
+    func onDropDestination(_ row: Int) {
+        if (row >= self.androidDirectoryItems.count || row < 0) {
+            print("Warning: Row out of range!")
+            return
+        }
+        let isDirectory = androidDirectoryItems[row].type == BaseFileType.Directory
+        if (!isDirectory && fileTable.dragDropRow == row) {
+//            ThreadUtils.runInMainThread({
+//            	self.fileTable.backgroundColor = self.tableSelectedBgColor
+            //            })
+            let color = ColorUtils.colorWithHexString(ColorUtils.listSelectedBackgroundColor) as NSColor
+            fileTable.layer?.borderWidth = 2
+            fileTable.layer?.borderColor = color.cgColor
+            LogI("DD Row")
+        } else {
+            fileTable.layer?.borderWidth = 0
+//            fileTable.layer.borderColor = UIColor.black.cgColor
+//            ThreadUtils.runInMainThread({
+//                self.fileTable.backgroundColor = self.tableBgColor
+//            })
+        }
+    }
 	
 	func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
 		if (row >= self.androidDirectoryItems.count) {
@@ -330,7 +361,7 @@ class AndroidViewController: NSViewController, NSTableViewDelegate,
 		
 		//        print("Items:", self.androidDirectoryItems)
 		//      Possibility “This NSLayoutConstraint is being configured with a constant that exceeds internal limits” error to occur. Old version SDK?
-		let file = self.androidDirectoryItems[row];
+		let file = self.androidDirectoryItems[row]
 		//            print("File:", file)
 		let fileName = cellView.nameField!
 		fileName.stringValue = file.fileName
@@ -346,17 +377,31 @@ class AndroidViewController: NSViewController, NSTableViewDelegate,
 		
 		let fileImage = cellView.fileImage!
 		fileImage.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table_file_cell_file_image)
-		if (file.type == BaseFileType.Directory) {
+        let isDirectory = file.type == BaseFileType.Directory
+		if (isDirectory) {
 			fileImage.image = NSImage(named: "folder")
 		} else {
 			fileImage.image = NSImage(named: "file")
 		}
 		let indexSet = fileTable.selectedRowIndexes
-		if (indexSet.contains(row)) {
-			setBackgroundColorTo(cellView, color: ColorUtils.listSelectedBackgroundColor)
-		} else {
-			setBackgroundColorTo(cellView, color: ColorUtils.listBackgroundColor)
-		}
+        if (indexSet.contains(row)) {
+            setBackgroundColorTo(cellView, color: ColorUtils.listSelectedBackgroundColor)
+        } else {
+            setBackgroundColorTo(cellView, color: ColorUtils.listBackgroundColor)
+        }
+        
+        if (!isDirectory && fileTable.dragDropRow == row) {
+            setBackgroundColorTo(cellView, color: ColorUtils.mainViewColor)
+        } else {
+//            setBackgroundColorTo(cellView, color: ColorUtils.listBackgroundColor)
+        }
+//        let dragIndexSet = fileTable.draggedRows
+//        if (dragIndexSet.contains(row)) {
+//            LogV("Drag Item", row)
+//            setBackgroundColorTo(cellView, color: ColorUtils.listDragBackgroundColor)
+//        } else {
+//            setBackgroundColorTo(cellView, color: ColorUtils.listBackgroundColor)
+//        }
 		return cellView
 	}
 	
@@ -1058,11 +1103,7 @@ class AndroidViewController: NSViewController, NSTableViewDelegate,
             for (i, item) in directoryData.enumerated() {
 //                LogV("Item", item, "Prev", previousDirectory)
                 if (item.getFullPath() == previousDirectory) {
-                    let rowSet = NSIndexSet(index: i) as IndexSet
-                    fileTable.selectRowIndexes(rowSet, byExtendingSelection: false)
-                    
-                    let columnSet = NSIndexSet(index: 0) as IndexSet
-                    self.fileTable.reloadData(forRowIndexes: rowSet, columnIndexes: columnSet)
+                    self.fileTable.updateItemChanged(index: i)
                     self.fileTable.scrollRowToVisible(i)
                     AppDelegate.itemSelected = true
                     AppDelegate.directoryItemSelected = true
@@ -1162,11 +1203,24 @@ class AndroidViewController: NSViewController, NSTableViewDelegate,
 	func deleteFileDialog() {
 		if (Verbose) {
 			Swift.print("AndroidViewController, deleteFileDialog")
-		}
-        let selectedItem = self.androidDirectoryItems[fileTable.selectedRow]
-        let selectedFileName = selectedItem.fileName
-        if AlertUtils.showAlert("Do you really want to delete '\(selectedFileName)'?", info: "", confirm: true) {
-            transferHandler.deleteAndroid(selectedItem)
+        }
+        let indexSet = fileTable.selectedRowIndexes
+        var currentIndex = indexSet.first
+        transferHandler.clearClipboardMacItems()
+        transferHandler.clearClipboardAndroidItems()
+        var deleteItems: Array<BaseFile> = []
+        
+        while (currentIndex != nil && currentIndex != NSNotFound) {
+            let currentItem = androidDirectoryItems[currentIndex!];
+            deleteItems.append(currentItem)
+            currentIndex = indexSet.integerGreaterThan(currentIndex!)
+        }
+        let deleteStringInDialog = (deleteItems.count > 1) ? "selected items" : deleteItems[0].fileName
+//        let selectedItem = self.androidDirectoryItems[fileTable.selectedRow]
+//        let selectedFileName = selectedItem.fileName
+        if AlertUtils.showAlert("Do you really want to delete '\(deleteStringInDialog)'?", info: "", confirm: true) {
+            LogI("Delete", deleteItems)
+            transferHandler.deleteAndroid(deleteItems)
             refresh()
             successfulOperation()
         } else {

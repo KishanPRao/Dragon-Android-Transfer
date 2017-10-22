@@ -9,5 +9,8 @@ import Foundation
 //private let sFakeLocation = "fakeLocation"
 //public let sFakeUrl = NSURL(string: sFakeLocation)!
 //public let kPasteBoardType = NSFilenamesPboardType
-//public let kWritableType = kPasteboardTypeFileURLPromise
+public let kWritableType = kPasteboardTypeFileURLPromise
 //let kFakeDraggableItem = DraggableItem()
+
+public let DRAG_DROP_NONE = -1
+public let DRAG_DROP_WHOLE = -2

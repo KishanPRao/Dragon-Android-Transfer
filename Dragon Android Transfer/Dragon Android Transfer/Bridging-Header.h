@@ -13,5 +13,6 @@
 #import <MASShortcut/Shortcut.h>
 
 #import "AlertUtils.h"
+#import "BridgingUtils.h"
 
 #endif /* Bridging_Header_h */

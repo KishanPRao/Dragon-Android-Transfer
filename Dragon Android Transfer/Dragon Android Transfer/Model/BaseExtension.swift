@@ -7,7 +7,7 @@ import Foundation
 
 extension NSObject {
 	class var VERBOSE: Bool {
-		return false
+		return true
 	}
 	
 	var TAG: String {

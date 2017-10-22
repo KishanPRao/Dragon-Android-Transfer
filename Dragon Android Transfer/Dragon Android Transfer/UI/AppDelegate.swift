@@ -171,7 +171,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 		if (item.tag == MenuItemIdentifier.newFolder) {
 			return true
 		}
-		if (item.tag == MenuItemIdentifier.editDelete && AppDelegate.itemSelected && !AppDelegate.multipleItemsSelected) {
+//        if (item.tag == MenuItemIdentifier.editDelete && AppDelegate.itemSelected && !AppDelegate.multipleItemsSelected) {
+        if (item.tag == MenuItemIdentifier.editDelete && AppDelegate.itemSelected) {
 			return !AppDelegate.isPastingOperation
 		}
 		return false

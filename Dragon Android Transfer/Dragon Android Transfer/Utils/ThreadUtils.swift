@@ -7,13 +7,13 @@ import Foundation
 
 class ThreadUtils {
 	
-	static func runInBackgroundThread(closure: @escaping () -> ()) {
+	static func runInBackgroundThread(_ closure: @escaping () -> ()) {
 		DispatchQueue.global(qos: .background).async {
 			closure()
 		}
 	}
 	
-	static func runInMainThread(closure: @escaping () -> ()) {
+	static func runInMainThread(_ closure: @escaping () -> ()) {
 		DispatchQueue.main.async {
 			closure()
 		}
