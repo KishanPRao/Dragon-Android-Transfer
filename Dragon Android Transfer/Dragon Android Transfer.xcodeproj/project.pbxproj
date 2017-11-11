@@ -57,6 +57,13 @@
 		504005211F9C8A9A000AA823 /* IndeterminateProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504005201F9C8A9A000AA823 /* IndeterminateProgressView.swift */; };
 		506B74341F868C02008DD7EB /* AlertUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 506B74331F868C02008DD7EB /* AlertUtils.m */; };
 		50CF83371F9688BE00A36F71 /* BridgingUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 50CF83361F9688BE00A36F71 /* BridgingUtils.m */; };
+		50F314DD1FAE1B86006BF985 /* BaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD5EBB9465D75C993382B /* BaseExtension.swift */; };
+		50F314DE1FAE1B88006BF985 /* BaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD5EBB9465D75C993382B /* BaseExtension.swift */; };
+		50F314E01FAE1C45006BF985 /* ExtensionBaseFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F314DF1FAE1C45006BF985 /* ExtensionBaseFile.swift */; };
+		50F314E11FAE1E8A006BF985 /* DraggableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD8BB87128534B56D7AC1 /* DraggableItem.swift */; };
+		50F314E21FAE2256006BF985 /* PrintUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD508FF8655BB4E0D9395 /* PrintUtils.swift */; };
+		50F314E31FAE2257006BF985 /* PrintUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD508FF8655BB4E0D9395 /* PrintUtils.swift */; };
+		50F314E41FAE28D7006BF985 /* ThreadUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDC1EC5EA8A5A0A17A378 /* ThreadUtils.swift */; };
 		50F716F41E82F492005CA833 /* MASShortcut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F716F31E82F492005CA833 /* MASShortcut.framework */; };
 		BE3BD0680117384D1A25829B /* update_sizes.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD263FE3F94CE594A7D20 /* update_sizes.png */; };
 		BE3BD093BA7DD75B6ED54230 /* PrintUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD508FF8655BB4E0D9395 /* PrintUtils.swift */; };
@@ -161,6 +168,7 @@
 		507AB7F71E2A374C00C749D1 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		50CF83351F9688BE00A36F71 /* BridgingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingUtils.h; sourceTree = "<group>"; };
 		50CF83361F9688BE00A36F71 /* BridgingUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BridgingUtils.m; sourceTree = "<group>"; };
+		50F314DF1FAE1C45006BF985 /* ExtensionBaseFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionBaseFile.swift; sourceTree = "<group>"; };
 		50F716F31E82F492005CA833 /* MASShortcut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MASShortcut.framework; path = Pods/../build/Debug/MASShortcut/MASShortcut.framework; sourceTree = "<group>"; };
 		6B57E05A04A8CF6A133E8C85 /* Pods-Dragon Android TransferUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dragon Android TransferUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dragon Android TransferUITests/Pods-Dragon Android TransferUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B7D8F895498525A7BB7E0CB4 /* Pods-Dragon Android TransferTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dragon Android TransferTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dragon Android TransferTests/Pods-Dragon Android TransferTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -353,6 +361,7 @@
 				BE3BDF984C6EAC900758D77B /* FileProgressDelegate.swift */,
 				BE3BD508FF8655BB4E0D9395 /* PrintUtils.swift */,
 				BE3BD5EBB9465D75C993382B /* BaseExtension.swift */,
+				50F314DF1FAE1C45006BF985 /* ExtensionBaseFile.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -636,10 +645,13 @@
 				500381821F8D49C7000728E9 /* TimeUtils.swift in Sources */,
 				5003814F1F8D44F2000728E9 /* testAndroidAdb.swift in Sources */,
 				500381691F8D4984000728E9 /* Constants.swift in Sources */,
+				50F314DD1FAE1B86006BF985 /* BaseExtension.swift in Sources */,
 				500381681F8D4984000728E9 /* AndroidDevice.swift in Sources */,
 				5003816A1F8D4984000728E9 /* FileProgressDelegate.swift in Sources */,
+				50F314E41FAE28D7006BF985 /* ThreadUtils.swift in Sources */,
 				500381671F8D4984000728E9 /* BaseObject.swift in Sources */,
 				500381621F8D4984000728E9 /* SynchronizedProtocol.swift in Sources */,
+				50F314E21FAE2256006BF985 /* PrintUtils.swift in Sources */,
 				500381661F8D4984000728E9 /* MacHandler.swift in Sources */,
 				500381631F8D4984000728E9 /* AbstractHandler.swift in Sources */,
 			);
@@ -658,7 +670,9 @@
 				5003817D1F8D498F000728E9 /* ClipboardDelegate.swift in Sources */,
 				500381711F8D498F000728E9 /* CustomSwiftAnimator.swift in Sources */,
 				5003817B1F8D498F000728E9 /* CopyDialog.swift in Sources */,
+				50F314E31FAE2257006BF985 /* PrintUtils.swift in Sources */,
 				5003816B1F8D498F000728E9 /* DraggableTableView.swift in Sources */,
+				50F314DE1FAE1B88006BF985 /* BaseExtension.swift in Sources */,
 				500381791F8D498F000728E9 /* AndroidViewController.swift in Sources */,
 				500381851F8D49F1000728E9 /* SizeUtils.swift in Sources */,
 				500381701F8D498F000728E9 /* DisabledTextField.swift in Sources */,
@@ -669,6 +683,7 @@
 				5003817C1F8D498F000728E9 /* HelpWindow.swift in Sources */,
 				500381761F8D498F000728E9 /* OverlayView.swift in Sources */,
 				500381831F8D49C7000728E9 /* TimeUtils.swift in Sources */,
+				50F314E11FAE1E8A006BF985 /* DraggableItem.swift in Sources */,
 				500381571F8D4510000728E9 /* Dragon_Android_TransferUITests.swift in Sources */,
 				500381731F8D498F000728E9 /* DarkWindow.swift in Sources */,
 				500381721F8D498F000728E9 /* SelectableTableRowView.swift in Sources */,
@@ -727,6 +742,7 @@
 				BE3BDB74D4CB19E9B4D74631 /* Dimens.swift in Sources */,
 				BE3BD9C6949E9F5050D4D401 /* ThreadUtils.swift in Sources */,
 				BE3BDED7B28D3B1EFDB98FF1 /* DraggableItem.swift in Sources */,
+				50F314E01FAE1C45006BF985 /* ExtensionBaseFile.swift in Sources */,
 				BE3BD5FBBA2CE3BBA2153F92 /* DragNotificationDelegate.swift in Sources */,
 				BE3BD5A8294D96E907609C29 /* DragUtils.swift in Sources */,
 				BE3BD093BA7DD75B6ED54230 /* PrintUtils.swift in Sources */,
@@ -903,6 +919,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -923,6 +940,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug/MASShortcut",
@@ -944,6 +962,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug/MASShortcut",

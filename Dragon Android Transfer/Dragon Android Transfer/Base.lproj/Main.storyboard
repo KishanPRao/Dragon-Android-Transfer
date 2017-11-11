@@ -156,6 +156,11 @@ CA
                                                 <action selector="resetPosition:" target="Voe-Tx-rLC" id="P8V-3S-zbZ"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Stay on top" tag="13" keyEquivalent="F" id="8OR-U1-XNh">
+                                            <connections>
+                                                <action selector="stayOnTop:" target="Voe-Tx-rLC" id="FQv-if-c9d"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>

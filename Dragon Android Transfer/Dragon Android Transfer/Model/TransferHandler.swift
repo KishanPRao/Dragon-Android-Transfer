@@ -204,8 +204,8 @@ class TransferHandler {
 		return androidHandler.isFirstLaunch()
 	}
 	
-	func initializeAndroid() {
+    func initializeAndroid(_ data: Data) {
 //		TODO: Loading indeterminate progress?
-		androidHandler.initialize()
+		androidHandler.initialize(data)
 	}
 }

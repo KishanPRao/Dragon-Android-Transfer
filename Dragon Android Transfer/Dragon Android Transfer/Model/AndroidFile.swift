@@ -13,12 +13,15 @@ public enum BaseFileType {
 	static let Directory = 1
 }
 
-class BaseFile: DraggableItem, BaseObject {
-//	fileprivate let TAG = "BaseFile"
+class BaseFile {
+//	internal let TAG = "BaseFile"
 	var fileName: String = ""
 	var path: String = ""
 	var type: Int
     var size: UInt64
+    
+//    UI Specific:
+    var index: Int = -1
 	
     init(fileName: String, path: String, type: Int, size: UInt64) {
 		self.fileName = fileName
@@ -31,5 +34,5 @@ class BaseFile: DraggableItem, BaseObject {
         return path + HandlerConstants.SEPARATOR + fileName
     }
 	
-	override var description: String { return TAG+": \(fileName, path, type, size)" }
+//	override var description: String { return "BaseFile: \(fileName, path, type, size)" }
 }

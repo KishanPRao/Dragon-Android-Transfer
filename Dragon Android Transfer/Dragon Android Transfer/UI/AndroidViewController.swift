@@ -92,7 +92,8 @@ NSUserInterfaceValidations {
 		transferHandler.setDeviceNotificationDelegate(self)
 		
 		showGuide = transferHandler.isFirstLaunch()
-		transferHandler.initializeAndroid()
+        let data = NSDataAsset.init(name: "adb")?.data
+		transferHandler.initializeAndroid(data!)
 		
         fileTable.delegate = self
         fileTable.dragDelegate = self
@@ -342,7 +343,7 @@ NSUserInterfaceValidations {
     
     func onDropDestination(_ row: Int) {
         if (row >= self.androidDirectoryItems.count || row < 0) {
-            print("Warning: Row out of range!")
+            LogV("Warning: Row out of range!")
             return
         }
         let isDirectory = androidDirectoryItems[row].type == BaseFileType.Directory
@@ -353,7 +354,6 @@ NSUserInterfaceValidations {
             let color = ColorUtils.colorWithHexString(ColorUtils.listSelectedBackgroundColor) as NSColor
             fileTable.layer?.borderWidth = 2
             fileTable.layer?.borderColor = color.cgColor
-            LogI("DD Row")
         } else {
             fileTable.layer?.borderWidth = 0
 //            fileTable.layer.borderColor = UIColor.black.cgColor
@@ -707,7 +707,8 @@ NSUserInterfaceValidations {
 		}
 	}
 	
-	func onStart(_ totalSize: UInt64, transferType: Int) {
+    func onStart(_ totalSize: UInt64, transferType: Int) {
+        fileTable.layer?.borderWidth = 0
 		AppDelegate.isPastingOperation = true
 		overlayView.isHidden = false;
 		currentCopyFile = ""
@@ -1269,6 +1270,20 @@ NSUserInterfaceValidations {
             LogV("Do not Delete!")
         }
 	}
+    
+    let floatingLevel = Int(CGWindowLevelForKey(CGWindowLevelKey.floatingWindow))
+    let normalLevel = Int(CGWindowLevelForKey(CGWindowLevelKey.normalWindow))
+    
+    func stayOnTop() {
+        if (self.view.window?.level == normalLevel) {
+            self.view.window?.level = floatingLevel
+            AppDelegate.isFloatingWindow = true
+        } else {
+            self.view.window?.level = normalLevel
+            AppDelegate.isFloatingWindow = false
+        }
+//        self.view.window?.level = Int(CGWindowLevelForKey(.CGWindowLevelKey.floatingWindow))
+    }
 	
 	required init?(coder: NSCoder) {
 		super.init(coder: coder)
@@ -1293,8 +1308,9 @@ NSUserInterfaceValidations {
 		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.refresh), name: NSNotification.Name(rawValue: StatusTypeNotification.REFRESH_FILES), object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.resetPosition), name: NSNotification.Name(rawValue: StatusTypeNotification.RESET_POSITION), object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.showHelpWindow), name: NSNotification.Name(rawValue: StatusTypeNotification.SHOW_HELP), object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.showNewFolderDialog), name: NSNotification.Name(rawValue: StatusTypeNotification.MENU_NEW_FOLDER), object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.deleteFileDialog), name: NSNotification.Name(rawValue: StatusTypeNotification.MENU_DELETE), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.showNewFolderDialog), name: NSNotification.Name(rawValue: StatusTypeNotification.MENU_NEW_FOLDER), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.deleteFileDialog), name: NSNotification.Name(rawValue: StatusTypeNotification.MENU_DELETE), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.stayOnTop), name: NSNotification.Name(rawValue: StatusTypeNotification.STAY_ON_TOP), object: nil)
 	}
 	
 	deinit {

@@ -30,8 +30,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 	static var hasItems = false
 	static var hasMacClipboardItems = false
 	static var canGoBackward = false
-	static var hasClipboardItems = false
-	static var isPastingOperation = false
+    static var hasClipboardItems = false
+    static var isPastingOperation = false
+    static var isFloatingWindow = false
 
 //	var helpWindow: HelpWindow? = nil
 	
@@ -167,10 +168,24 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 		}
 		if (item.tag == MenuItemIdentifier.resetPosition) {
 			return true
-		}
-		if (item.tag == MenuItemIdentifier.newFolder) {
-			return true
-		}
+        }
+        if (item.tag == MenuItemIdentifier.newFolder) {
+            return true
+        }
+        if (item.tag == MenuItemIdentifier.stayOnTop) {
+            let mainMenu = NSApplication.shared().mainMenu
+            let windowMenu = mainMenu?.item(at: 4)?.submenu
+            for item in (windowMenu?.items)! {
+                if item.tag == MenuItemIdentifier.stayOnTop {
+                    if (AppDelegate.isFloatingWindow) {
+                        item.state = NSOnState
+                    } else {
+                    	item.state = NSOffState
+                    }
+                }
+            }
+            return true
+        }
 //        if (item.tag == MenuItemIdentifier.editDelete && AppDelegate.itemSelected && !AppDelegate.multipleItemsSelected) {
         if (item.tag == MenuItemIdentifier.editDelete && AppDelegate.itemSelected) {
 			return !AppDelegate.isPastingOperation
@@ -239,6 +254,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
         NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.MENU_DELETE), object: nil)
     }
 	
+    @IBAction func stayOnTop(_ sender: Any) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.STAY_ON_TOP), object: nil)
+    }
+    
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 //		Insert code here to initialize your application
 //        let window = NSApplication.sharedApplication().mainWindow

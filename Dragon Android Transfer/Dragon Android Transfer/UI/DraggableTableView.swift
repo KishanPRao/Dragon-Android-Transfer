@@ -10,16 +10,16 @@ import Foundation
 import Cocoa
 
 class DraggableTableView: NSTableView, NSTableViewDataSource {
-	public static let kPasteBoardType = NSFilenamesPboardType
-	private static let kFakeDraggableItem = DraggableItem()
-	private var mData = [DraggableItem]()
+//	public static let kPasteBoardType = NSFilenamesPboardType
+	private static let kFakeDraggableItem = BaseFile(fileName: "", path: "", type: 0, size: 0)
+	private var mData = [BaseFile]()
 	public var dragDelegate: DragNotificationDelegate? = nil
     public var dragUiDelegate: DragUiDelegate? = nil
     public let kPasteboardTypePasteLocation = "com.apple.pastelocation"
     public var draggedRows: IndexSet = []
     public var dragDropRow: Int = DRAG_DROP_NONE
 	
-	func updateList(data: [DraggableItem]) {
+	func updateList(data: [BaseFile]) {
 		self.mData = data
 //		LogI("Update List", mData)
         for (i, element) in data.enumerated() {
@@ -28,12 +28,12 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
 		reloadData()
 	}
 	
-	func addItem(item: DraggableItem) {
+	func addItem(item: BaseFile) {
 		mData.append(item)
 		reloadData()
 	}
 	
-	func getData() -> [DraggableItem] {
+	func getData() -> [BaseFile] {
 		return mData
 	}
 	
@@ -49,10 +49,17 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
         let emptyList = mData.count == 0
 		if (dropOperation == .above) {
             if (emptyList) {
+                let oldIndex = dragDropRow
                 dragDropRow = DRAG_DROP_WHOLE
+                deselectAllRows(oldIndex)
+                return [.copy]
+            } else if (row >= mData.count) {
+                let oldIndex = dragDropRow
+                dragDropRow = DRAG_DROP_WHOLE
+                deselectAllRows(oldIndex)
                 return [.copy]
             } else {
-				return []
+                return []
             }
 		} else {
             if info.draggingSource() == nil {
@@ -93,16 +100,16 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
                 }
                 returnValue = true
             }
-            var data: DraggableItem
+            var data: BaseFile
             let emptyList = mData.count == 0
-            if (emptyList) {
+            if (row >= mData.count || emptyList) {
                 data = TransferHandler.sharedInstance.getCurrentPathFile()
             } else {
                 data = mData[row]
             }
             LogV("Copy from Finder, file:[", finderItems, "] into app item:", data)
             if let nonNilDelegate = dragDelegate {
-                nonNilDelegate.dragItem(items: finderItems, fromFinderIntoAppItem: data)
+                nonNilDelegate.dragItem(items: finderItems, fromFinderIntoAppItem: data as! DraggableItem)
             }
             return true
         }
@@ -112,12 +119,12 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
 	
 	func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
 //        return DraggableTableView.kFakeDraggableItem
-        return mData[row]
+        return mData[row] as! NSPasteboardWriting
 	}
 	
 	required init?(coder: NSCoder) {
 		super.init(coder: coder)
-		register(forDraggedTypes: [DraggableTableView.kPasteBoardType])
+		register(forDraggedTypes: [kPasteBoardType])
 		setDraggingSourceOperationMask(NSDragOperation.copy, forLocal: false)
 		headerView = nil
 		allowsMultipleSelection = true
@@ -145,15 +152,28 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
         }
         return 0
     }
-
+    
     func updateItemChanged(index i: Int) {
         var row = i
         if (row < 0) {
             row = 0
+        } else if (row >= numberOfRows) {
+            row = numberOfRows - 1;
         }
         let rowSet = NSIndexSet(index: row) as IndexSet
         selectRowIndexes(rowSet, byExtendingSelection: false)
         
+        let columnSet = NSIndexSet(index: 0) as IndexSet
+        reloadData(forRowIndexes: rowSet, columnIndexes: columnSet)
+    }
+    
+    func deselectAllRows(_ oldIndex: Int) {
+        deselectAll(nil)
+        if (oldIndex >= numberOfRows || oldIndex < 0) {
+//            LogW("Bad Deselect Index")
+            return
+        }
+        let rowSet = NSIndexSet(index: oldIndex) as IndexSet
         let columnSet = NSIndexSet(index: 0) as IndexSet
         reloadData(forRowIndexes: rowSet, columnIndexes: columnSet)
     }
@@ -168,7 +188,7 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
             dragUiDelegate?.onDropDestination(oldDrag)
         }
         if let senderUnwrap = sender {
-            var appItems = [DraggableItem]()
+            var appItems = [BaseFile]()
             let pb = senderUnwrap.draggingPasteboard()
 //            LogI("Items", senderUnwrap.draggingPasteboard().pasteboardItems)
             var draggedIndex = -1
@@ -189,7 +209,7 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
             var currentIndex = indexSet.first
             while (currentIndex != nil && currentIndex != NSNotFound) {
                 if (currentIndex != draggedIndex) {
-                    let currentItem = mData[currentIndex!];
+                    let currentItem = mData[currentIndex!]
                     appItems.append(currentItem)
                 }
                 currentIndex = indexSet.integerGreaterThan(currentIndex!)
@@ -200,7 +220,7 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
                 if let copyPath = url?.absoluteURL?.path {
                     LogV("Copy from app item:", appItems, "to", copyPath)
                     if let nonNilDelegate = dragDelegate {
-                        nonNilDelegate.dragItem(items: appItems, fromAppToFinderLocation: copyPath)
+                        nonNilDelegate.dragItem(items: appItems as! [DraggableItem], fromAppToFinderLocation: copyPath)
                     }
                 } else {
 //                    LogE("Cannot Copy!")

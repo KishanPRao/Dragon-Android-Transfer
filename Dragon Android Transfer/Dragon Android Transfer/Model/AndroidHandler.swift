@@ -10,7 +10,7 @@ import Foundation
 
 public class AndroidHandler: NSObject {
     override class var VERBOSE: Bool {
-        return false
+        return true
     }
     let EXTREME_VERBOSE = false
     let TIMER_VERBOSE = false
@@ -73,6 +73,7 @@ public class AndroidHandler: NSObject {
 //	private static let BSD_LS_SIZE_COMMAND = GNU_LS_SIZE
 	fileprivate static let BSD_LS_SIZE = GNU_LS_SIZE
 	fileprivate static let SOLARIS_LS_SIZE = GNU_LS_FILE_SIZE + SOLARIS_LS_SIZE_COMMAND + "ls | for name in *; do echo \"$name\"; if [ -d \"$name\" ]; then echo \"DIRECTORY\"; SOLARIS_LS \"$name\"; else echo \"FILE\"; LS_FILE \"$name\"; fi; done;"
+    private var data: Data? = nil
 	
 	override init() {
 		currentPath = ""
@@ -83,8 +84,10 @@ public class AndroidHandler: NSObject {
 //        }
 	}
 	
-	func initialize() {
+    func initialize(_ data: Data) {
+        self.data = data
 		adbDirectoryPath = self.extractAdbAsset()
+        LogV("Initialize")
 	}
 	
 	func isFirstLaunch() -> Bool {
@@ -140,7 +143,7 @@ public class AndroidHandler: NSObject {
 		let fileManager = FileManager.default
 		let fileExists = fileManager.fileExists(atPath: resourcePath + "/adb")
 		print("AndroidHandler, file Exists:", fileExists)
-		let data = NSDataAsset.init(name: "adb")?.data
+//		let data = NSDataAsset.init(name: "adb")?.data
 		let filePath = resourcePath + "/adb"
 		
 		fileManager.createFile(atPath: filePath, contents: data, attributes: nil)
