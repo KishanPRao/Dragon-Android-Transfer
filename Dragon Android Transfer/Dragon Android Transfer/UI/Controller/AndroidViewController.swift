@@ -421,7 +421,7 @@ NSUserInterfaceValidations {
 	
 	func tableViewSelectionDidChange(_ notification: Notification) {
 		if (self.fileTable.numberOfSelectedRows > 0) {
-			let selectedItem = self.androidDirectoryItems[self.fileTable.selectedRow].fileName
+//			let selectedItem = self.androidDirectoryItems[self.fileTable.selectedRow].fileName
 //			print("Selected:", selectedItem)
 			
 			let indexSet = fileTable.selectedRowIndexes
@@ -738,7 +738,7 @@ NSUserInterfaceValidations {
 				files = transferHandler.getClipboardMacItems()
 			}
 			var i = 0
-			print("Files:", files)
+			print("Files:", files as Any!)
 			print("File Name:", fileName)
 			currentCopiedSize = 0
 			while (i < files!.count) {
@@ -815,7 +815,7 @@ NSUserInterfaceValidations {
 		while (currentIndex != nil && currentIndex != NSNotFound) {
 			let currentItem = androidDirectoryItems[currentIndex!];
 			copyItemsAndroid.append(currentItem)
-			print("Current Index:", currentIndex, " Item:", currentItem.fileName)
+			print("Current Index:", currentIndex!, " Item:", currentItem.fileName)
 			currentIndex = indexSet.integerGreaterThan(currentIndex!)
 		}
 		print("Copy:", copyItemsAndroid)
@@ -888,7 +888,7 @@ NSUserInterfaceValidations {
 			Swift.print("AndroidViewController, screen:", screen)
 //			screen.
 		}
-		Swift.print("AndroidViewController, screens:", screenArray)
+		Swift.print("AndroidViewController, screens:", screenArray!)
 //		let screenRect = 
 	}
 	
