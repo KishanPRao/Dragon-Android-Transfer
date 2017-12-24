@@ -279,5 +279,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 		NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.STOP), object: nil)
 		NotificationCenter.default.removeObserver(self)
 	}
+
+	static func reset() {
+		AppDelegate.hasItems = false
+		AppDelegate.canGoBackward = false
+		AppDelegate.hasMacClipboardItems = false
+		AppDelegate.itemSelected = false
+		AppDelegate.directoryItemSelected = false
+		AppDelegate.multipleItemsSelected = false
+		AppDelegate.hasClipboardItems = false
+	}
 }
 

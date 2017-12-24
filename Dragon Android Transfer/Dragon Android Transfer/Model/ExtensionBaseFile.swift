@@ -8,6 +8,7 @@
 
 import Foundation
 
+/*
 extension DraggableItem where Self :BaseFile {
     
     //      Copying to Finder
@@ -29,3 +30,4 @@ extension DraggableItem where Self :BaseFile {
         return self.index
     }
 }
+*/

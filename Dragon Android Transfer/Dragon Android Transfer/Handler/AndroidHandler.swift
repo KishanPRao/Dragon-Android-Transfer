@@ -7,7 +7,12 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
+/*
+ Stores State of Android Devices. Sends approp info to UI.
+ */
 public class AndroidHandler: NSObject {
 	override class var VERBOSE: Bool {
 		return true
@@ -16,6 +21,7 @@ public class AndroidHandler: NSObject {
 	let TIMER_VERBOSE = false
 //    let DEVICE_UPDATE_DELAY = 0.01
 	let DEVICE_UPDATE_DELAY = 1
+	// let DEVICE_UPDATE_DELAY = 0.1
 	
 	let BLOCK_SIZE_IN_FLOAT = Float(1024)
 	
@@ -42,12 +48,18 @@ public class AndroidHandler: NSObject {
 	fileprivate static var sJavaType = ""
 	fileprivate let espaceDoubleQuotes = StringResource.ESCAPE_DOUBLE_QUOTES
 	fileprivate static let JAVA_TYPE_COMMAND = AndroidShellScripts.JAVA_TYPE_COMMAND
+    
+    fileprivate let adbHandler: AndroidAdbHandler
 	
 	private var data: Data? = nil
 	
 	override init() {
 		currentPath = ""
 		adbLaunchPath = "/bin/bash"
+        
+        adbHandler = AndroidAdbHandler()
+		
+//		AndroidAdbHandler.test()
 
 //        test { (result) in
 //            print("Op:", result)
@@ -64,45 +76,6 @@ public class AndroidHandler: NSObject {
 		let resourcePath = Bundle.main.resourcePath!
 		let fileManager = FileManager.default
 		return !(fileManager.fileExists(atPath: resourcePath + "/adb"))
-	}
-	
-	fileprivate func test(_ completion: @escaping (_ result: String) -> Void) {
-		let task = Process()
-		task.launchPath = "/bin/sh"
-		task.arguments = ["-c", "echo 1 ; sleep 3 ; echo 2 ; sleep 5 ; echo 3 ; sleep 5 ; echo 4"]
-		
-		let pipe = Pipe()
-		task.standardOutput = pipe
-		let outHandle = pipe.fileHandleForReading
-		outHandle.waitForDataInBackgroundAndNotify()
-		
-		var obs1: NSObjectProtocol!
-		obs1 = NotificationCenter.default.addObserver(
-				forName: NSNotification.Name.NSFileHandleDataAvailable,
-				object: outHandle, queue: nil) { notification -> Void in
-			let data = outHandle.availableData
-			if data.count > 0 {
-				if let str = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
-//                        print("got output: \(str)")
-					completion(str as String)
-				}
-				outHandle.waitForDataInBackgroundAndNotify()
-			} else {
-				print("EOF on stdout from process")
-				NotificationCenter.default.removeObserver(obs1)
-			}
-		}
-		
-		var obs2: NSObjectProtocol!
-		obs2 = NotificationCenter.default.addObserver(
-				forName: Process.didTerminateNotification,
-				object: task, queue: nil) { notification -> Void in
-			print("terminated")
-			NotificationCenter.default.removeObserver(obs2)
-		}
-		
-		task.launch()
-		
 	}
 	
 	func extractAdbAsset() -> String {
@@ -136,14 +109,11 @@ public class AndroidHandler: NSObject {
 	func getAndroidDevices() -> Array<AndroidDevice> {
 		return androidDevices
 	}
-	
-	func synced(_ lock: AnyObject, closure: ()) {
-		print("Try Enter:", TimeUtils.getCurrentTime())
-		objc_sync_enter(lock)
-		closure
-		objc_sync_exit(lock)
-		print("Release Lock:", TimeUtils.getCurrentTime())
-	}
+    
+    fileprivate var observableAndroidDevices: Variable<[AndroidDevice]> = Variable([])
+    func observeAndroidDevices() -> Observable<[AndroidDevice]> {
+        return observableAndroidDevices.asObservable()
+    }
 	
 	func start() {
 		self.adbDevicesTimer()
@@ -218,7 +188,7 @@ public class AndroidHandler: NSObject {
 	
 	func setActiveDevice(_ device: AndroidDevice?) {
 		activeDevice = device;
-		LogV("Active Device:", activeDevice!)
+		LogV("Active Device:", activeDevice)
 		if (activeDevice != nil) {
 			let externalDirectories = getExternalStorageDirectories()
 			print("External Directories:", externalDirectories)
@@ -386,7 +356,7 @@ public class AndroidHandler: NSObject {
 		let sizeStringArray = output.characters.split {
 			$0 == " " || $0 == "\t"
 		}.map(String.init)
-		if let sizeInInt = UInt64(sizeStringArray[0]) {
+		if sizeStringArray.count > 0, let sizeInInt = UInt64(sizeStringArray[0]) {
 			sizeInBytes = sizeInInt
 			if (sizeInBytes > maxSizeInMBytes) {
 				sizeInBytes = UInt64.max
@@ -441,11 +411,14 @@ public class AndroidHandler: NSObject {
 		if (!same) {
 			androidDevices.removeAll()
 			androidDevices.append(contentsOf: localAndroidDevices)
-			DispatchQueue.main.async {
-				if (self.deviceNotificationDelegate != nil) {
-					self.deviceNotificationDelegate?.onUpdate()
-				}
-			}
+            Swift.print("Androidhandler, Main:", ThreadUtils.isMainThread())
+            self.observableAndroidDevices.value = self.androidDevices
+			// DispatchQueue.main.async {
+                
+			// 	if (self.deviceNotificationDelegate != nil) {
+			// 		self.deviceNotificationDelegate?.onUpdate()
+			// 	}
+			// }
 		}
 //        androidDevices.set { protected in
 //            protected.removeAll()
@@ -1101,3 +1074,45 @@ public class AndroidHandler: NSObject {
 		task.waitUntilExit()
 	}
 }
+
+
+//	fileprivate func test(_ completion: @escaping (_ result: String) -> Void) {
+//		let task = Process()
+//		task.launchPath = "/bin/sh"
+//		task.arguments = ["-c", "echo 1 ; sleep 3 ; echo 2 ; sleep 5 ; echo 3 ; sleep 5 ; echo 4"]
+//		
+//		let pipe = Pipe()
+//		task.standardOutput = pipe
+//		let outHandle = pipe.fileHandleForReading
+//		outHandle.waitForDataInBackgroundAndNotify()
+//		
+//		var obs1: NSObjectProtocol!
+//		obs1 = NotificationCenter.default.addObserver(
+//				forName: NSNotification.Name.NSFileHandleDataAvailable,
+//				object: outHandle, 
+//				queue: nil) {
+//			notification -> Void in
+//			let data = outHandle.availableData
+//			if data.count > 0 {
+//				if let str = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
+////                        print("got output: \(str)")
+//					completion(str as String)
+//				}
+//				outHandle.waitForDataInBackgroundAndNotify()
+//			} else {
+//				print("EOF on stdout from process")
+//				NotificationCenter.default.removeObserver(obs1)
+//			}
+//		}
+//		
+//		var obs2: NSObjectProtocol!
+//		obs2 = NotificationCenter.default.addObserver(
+//				forName: Process.didTerminateNotification,
+//				object: task, queue: nil) { notification -> Void in
+//			print("terminated")
+//			NotificationCenter.default.removeObserver(obs2)
+//		}
+//		
+//		task.launch()
+//		
+//	}

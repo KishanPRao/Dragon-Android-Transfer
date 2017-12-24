@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0820"
+   LastUpgradeVersion = "0830"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -43,6 +43,15 @@
             </LocationScenarioReference>
          </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "500381431F8D44A0000728E9"
+            BuildableName = "Dragon Android TransferTests.xctest"
+            BlueprintName = "Dragon Android TransferTests"
+            ReferencedContainer = "container:Dragon Android Transfer.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -74,6 +83,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "500381431F8D44A0000728E9"
+            BuildableName = "Dragon Android TransferTests.xctest"
+            BlueprintName = "Dragon Android TransferTests"
+            ReferencedContainer = "container:Dragon Android Transfer.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

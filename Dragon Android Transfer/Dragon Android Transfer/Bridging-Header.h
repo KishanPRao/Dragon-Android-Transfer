@@ -12,6 +12,7 @@
 #import <Cocoa/Cocoa.h>
 #import <MASShortcut/Shortcut.h>
 
+#import "AndroidAdbHandler.h"
 #import "AlertUtils.h"
 #import "BridgingUtils.h"
 

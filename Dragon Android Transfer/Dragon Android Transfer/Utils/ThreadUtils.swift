@@ -24,4 +24,8 @@ class ThreadUtils {
             closure()
         })
     }
+    
+    static func isMainThread() -> Bool {
+        return Thread.isMainThread
+    }
 }

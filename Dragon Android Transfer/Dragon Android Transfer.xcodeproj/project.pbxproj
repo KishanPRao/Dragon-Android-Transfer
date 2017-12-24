@@ -10,19 +10,26 @@
 		500381471F8D44A0000728E9 /* Dragon_Android_TransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500381461F8D44A0000728E9 /* Dragon_Android_TransferTests.swift */; };
 		5003814F1F8D44F2000728E9 /* testAndroidAdb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5003814E1F8D44F2000728E9 /* testAndroidAdb.swift */; };
 		500381571F8D4510000728E9 /* Dragon_Android_TransferUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500381561F8D4510000728E9 /* Dragon_Android_TransferUITests.swift */; };
-		500381601F8D4984000728E9 /* AndroidFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDFC036C89DA942D822CB /* AndroidFile.swift */; };
 		500381681F8D4984000728E9 /* AndroidDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD86C2E85315AA443F20A /* AndroidDevice.swift */; };
 		500381801F8D498F000728E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD9E9DDF981F8F795B66F /* AppDelegate.swift */; };
 		500381821F8D49C7000728E9 /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDCC4280329DAC474762E /* TimeUtils.swift */; };
 		500381831F8D49C7000728E9 /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDCC4280329DAC474762E /* TimeUtils.swift */; };
 		500381841F8D49EF000728E9 /* SizeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD75F91DBA3B298B91E2D /* SizeUtils.swift */; };
 		500381851F8D49F1000728E9 /* SizeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD75F91DBA3B298B91E2D /* SizeUtils.swift */; };
+		500698E11FEF88B400F904AC /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 500698E01FEF88B400F904AC /* RxSwift.framework */; };
+		50293DF41FEFB8DB00B06B14 /* DeviceTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50293DF31FEFB8DB00B06B14 /* DeviceTableDelegate.swift */; };
+		50293DF61FEFBF0B00B06B14 /* BaseFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50293DF51FEFBF0B00B06B14 /* BaseFile.swift */; };
+		50293DF81FEFBF2A00B06B14 /* BaseFileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50293DF71FEFBF2A00B06B14 /* BaseFileType.swift */; };
 		503B88541F928944004E6417 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503B88531F928944004E6417 /* StringExtension.swift */; };
 		503C5A2F1E0FB9300090EB68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 503C5A2E1E0FB9300090EB68 /* Assets.xcassets */; };
 		503C5A321E0FB9300090EB68 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 503C5A301E0FB9300090EB68 /* Main.storyboard */; };
+		50B020341FE986C500989BA4 /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B020331FE986C500989BA4 /* CollectionExtension.swift */; };
 		50F314E01FAE1C45006BF985 /* ExtensionBaseFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F314DF1FAE1C45006BF985 /* ExtensionBaseFile.swift */; };
 		50F314E41FAE28D7006BF985 /* ThreadUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDC1EC5EA8A5A0A17A378 /* ThreadUtils.swift */; };
-		50F716F41E82F492005CA833 /* MASShortcut.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F716F31E82F492005CA833 /* MASShortcut.framework */; };
+		51228DE463F84080BF00A549 /* Pods_Dragon_Android_Transfer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D76E99487AF2B4AB76B28F08 /* Pods_Dragon_Android_Transfer.framework */; };
+		58404B644B2960F748912234 /* Pods_Dragon_Android_TransferTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6E29BC824473C340CAB23B /* Pods_Dragon_Android_TransferTests.framework */; };
+		5C205735CD6A01DEEE2E163F /* Pods_Dragon_Android_TransferUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5D5E694217E022F0D4FD5E /* Pods_Dragon_Android_TransferUITests.framework */; };
+		BE3BD03E6C73AAB2E0A49C2F /* AndroidAdbHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD326D7BB6EA85FB5313E /* AndroidAdbHandler.mm */; };
 		BE3BD05FF9E81C9D7CCF4F30 /* CrossfadeSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD20F5F9E13F0255E1522 /* CrossfadeSegue.swift */; };
 		BE3BD0680117384D1A25829B /* update_sizes.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD263FE3F94CE594A7D20 /* update_sizes.png */; };
 		BE3BD06FDDB930947C1B074A /* CopyDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD797A84E2FCF1D77271B /* CopyDialog.swift */; };
@@ -37,9 +44,7 @@
 		BE3BD17F8436D360FDCB20EC /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BE3BDB3E2A1E4A083D7DA873 /* Credits.rtf */; };
 		BE3BD19C86941C01B60D0921 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDE794C92E054421418BB /* ViewController.swift */; };
 		BE3BD1B87F638080742BF2CD /* DragUiDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDF7F498E044C83FB0280 /* DragUiDelegate.swift */; };
-		BE3BD1D72CE53B61F3945821 /* AndroidFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDFC036C89DA942D822CB /* AndroidFile.swift */; };
 		BE3BD20E4CB561A51395CF39 /* ClipboardTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD5400EDCE113E397EA1F /* ClipboardTableCellView.swift */; };
-		BE3BD23B9E05BD5F2802A6D1 /* AlertUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD12E698FBE9134927C21 /* AlertUtils.m */; };
 		BE3BD247789B6C3497AF10EA /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD40AE738BD024E549A5E /* OverlayView.swift */; };
 		BE3BD2819E411070C96A55E1 /* StyleUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDEF13CA38DBEC207CD7E /* StyleUtils.swift */; };
 		BE3BD284856999A467420E8C /* DisabledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDBB5E059C6147F64EDCE /* DisabledTextField.swift */; };
@@ -48,6 +53,7 @@
 		BE3BD3527936F50D34E47D2D /* PrintUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD4CF42CD0C36BF15D950 /* PrintUtils.swift */; };
 		BE3BD37C280AAD9C969F3243 /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDCC4280329DAC474762E /* TimeUtils.swift */; };
 		BE3BD38C8918A54949EAC5AC /* SegueFromLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDE8034FD05FF612778EF /* SegueFromLeft.swift */; };
+		BE3BD3995526C5E8E6AD8930 /* ListCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDCC3EEA7D872BB478BB8 /* ListCommand.cpp */; };
 		BE3BD3A9EC324B60D172E185 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3BDEFB8D195743373D18DF /* refresh.png */; };
 		BE3BD3CA5BE659E67FC602F6 /* HelpWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD2D5E6A92AAE4A73DF66 /* HelpWindow.xib */; };
 		BE3BD3CF4A98FDDACABFF93A /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD7F1239BA6A5E7685902 /* ColorUtils.swift */; };
@@ -59,6 +65,7 @@
 		BE3BD469737964877BBAD5D4 /* DeviceNotificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD1B5FD0102D7F7DC4512 /* DeviceNotificationDelegate.swift */; };
 		BE3BD4784A27F72D2B9CC3F1 /* BaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD9CFDA815A58EE4B948C /* BaseObject.swift */; };
 		BE3BD4859D0A4C8B57D3336A /* StyleUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDEF13CA38DBEC207CD7E /* StyleUtils.swift */; };
+		BE3BD4A6E7500A522D7CCAA1 /* ListCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDCC3EEA7D872BB478BB8 /* ListCommand.cpp */; };
 		BE3BD4B7CC752F2DB32B185C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDF2646B4FF28CCC5B703 /* Constants.swift */; };
 		BE3BD4C30BCC171DF3CC445F /* ColoredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD7E881A82B0C8CCA96A5 /* ColoredButton.swift */; };
 		BE3BD5136CF7F3655A8E3265 /* ClipboardTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD5400EDCE113E397EA1F /* ClipboardTableCellView.swift */; };
@@ -80,14 +87,13 @@
 		BE3BD804DFD209096F71EC0D /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD40AE738BD024E549A5E /* OverlayView.swift */; };
 		BE3BD8168BA539FF4397E553 /* DarkWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD97D6F1F3832414869CE /* DarkWindow.swift */; };
 		BE3BD844D6836981F9289AEF /* BaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD9CFDA815A58EE4B948C /* BaseObject.swift */; };
-		BE3BD848C668CC0772EDFDF1 /* AndroidAdbHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDE8E1177BBA3EB41B545 /* AndroidAdbHandler.swift */; };
 		BE3BD869D6B5C24C762444B0 /* endCopy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BE3BDB16DB0C701832D6D2BC /* endCopy.mp3 */; };
 		BE3BD8931EC9CE6A9A2BCD97 /* AndroidHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDEC3A70E61017CF5C4D5 /* AndroidHandler.swift */; };
 		BE3BD8AAD276BD6AB9313246 /* CustomSwiftAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD55127085F27DE775E28 /* CustomSwiftAnimator.swift */; };
 		BE3BD8EE0F08AADB11B72710 /* HelpWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD1150BDBC59E1E4EE59E /* HelpWindow.swift */; };
 		BE3BD9080982F66CADE02C28 /* HelpWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD2D5E6A92AAE4A73DF66 /* HelpWindow.xib */; };
+		BE3BD9899E224C1509824C6F /* AlertUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD29598E1B2A9F0B3D966 /* AlertUtils.m */; };
 		BE3BD99A586FADDBD3B7DDCF /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD84AE45EE7CCE8AA60E2 /* ProgressView.swift */; };
-		BE3BD9A509068C2C4DE61223 /* AndroidAdbHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDE8E1177BBA3EB41B545 /* AndroidAdbHandler.swift */; };
 		BE3BD9C6949E9F5050D4D401 /* ThreadUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDC1EC5EA8A5A0A17A378 /* ThreadUtils.swift */; };
 		BE3BD9D55D5C9670B8ACFA0F /* PrintUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD4CF42CD0C36BF15D950 /* PrintUtils.swift */; };
 		BE3BDA06EB0630E43703247B /* DeviceNotificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD1B5FD0102D7F7DC4512 /* DeviceNotificationDelegate.swift */; };
@@ -100,6 +106,7 @@
 		BE3BDAC6FACE3A64C5A41FCD /* FileProgressDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD5B0D93EC150367B8A8C /* FileProgressDelegate.swift */; };
 		BE3BDAE8242721166CAFDEC9 /* AndroidHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDEC3A70E61017CF5C4D5 /* AndroidHandler.swift */; };
 		BE3BDAF11B0C0A34B5455FA2 /* clipboard_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD7F3E98C3A92436C5F2C /* clipboard_icon.png */; };
+		BE3BDB93125B4F8F31159F09 /* AndroidAdbHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD326D7BB6EA85FB5313E /* AndroidAdbHandler.mm */; };
 		BE3BDBE94D2598210F140C32 /* SelectableTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD86117C6A1984B137A27 /* SelectableTableRowView.swift */; };
 		BE3BDBF0A3F946760F91F720 /* intro_guide.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD5A174AC494406F68801 /* intro_guide.rtf */; };
 		BE3BDC18BB4358AF85250981 /* BaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDE295CD9D91FD872081A /* BaseExtension.swift */; };
@@ -117,10 +124,10 @@
 		BE3BDE084524366D5F702AFC /* AndroidDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD86C2E85315AA443F20A /* AndroidDevice.swift */; };
 		BE3BDE253D33B4305FAEE9B7 /* ColoredPopUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD79CDF38FD2B656A1939 /* ColoredPopUpButton.swift */; };
 		BE3BDE7135AD38A94E9209FA /* AndroidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD024937FCBD0DC3BF232 /* AndroidViewController.swift */; };
-		BE3BDEC5FC773B8B0267C963 /* BridgingUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDF848CCE75D65B3BB0FA /* BridgingUtils.m */; };
 		BE3BDEE6CC7666AF909D26CC /* AndroidShellResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDEF99F9695AD6D7B4402 /* AndroidShellResource.swift */; };
 		BE3BDEEB194C92E6EEB01070 /* TransferHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDD843B295FEB7CB9CE4F /* TransferHandler.swift */; };
 		BE3BDF047032EC260FC573A1 /* CopyDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD08ACB1E71CAFEDC0EA1 /* CopyDialog.xib */; };
+		BE3BDF591FD15632655D6C53 /* BridgingUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD8C00FE5EABB3CA29B9A /* BridgingUtils.m */; };
 		BE3BDFA6B9ED9545B157F47D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDF2646B4FF28CCC5B703 /* Constants.swift */; };
 		BE3BDFCBE0994AEA0312BA2D /* DragNotificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD2D92E07142A60E60248 /* DragNotificationDelegate.swift */; };
 		BE3BDFCE24CB423E5C753535 /* BaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDE295CD9D91FD872081A /* BaseExtension.swift */; };
@@ -156,12 +163,17 @@
 		500381541F8D4510000728E9 /* Dragon Android TransferUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Dragon Android TransferUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		500381561F8D4510000728E9 /* Dragon_Android_TransferUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dragon_Android_TransferUITests.swift; sourceTree = "<group>"; };
 		500381581F8D4510000728E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		500698E01FEF88B400F904AC /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Pods/../build/Debug/RxSwift/RxSwift.framework; sourceTree = "<group>"; };
+		50293DF31FEFB8DB00B06B14 /* DeviceTableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceTableDelegate.swift; sourceTree = "<group>"; };
+		50293DF51FEFBF0B00B06B14 /* BaseFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseFile.swift; sourceTree = "<group>"; };
+		50293DF71FEFBF2A00B06B14 /* BaseFileType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseFileType.swift; sourceTree = "<group>"; };
 		503B88531F928944004E6417 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		503C5A271E0FB92F0090EB68 /* Dragon Android Transfer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dragon Android Transfer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		503C5A2E1E0FB9300090EB68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		503C5A311E0FB9300090EB68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		503C5A331E0FB9300090EB68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		507AB7F71E2A374C00C749D1 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		50B020331FE986C500989BA4 /* CollectionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
 		50F314DF1FAE1C45006BF985 /* ExtensionBaseFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionBaseFile.swift; sourceTree = "<group>"; };
 		50F716F31E82F492005CA833 /* MASShortcut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MASShortcut.framework; path = Pods/../build/Debug/MASShortcut/MASShortcut.framework; sourceTree = "<group>"; };
 		6B57E05A04A8CF6A133E8C85 /* Pods-Dragon Android TransferUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dragon Android TransferUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dragon Android TransferUITests/Pods-Dragon Android TransferUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -171,18 +183,19 @@
 		BE3BD067D7FB225535465C16 /* help.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = help.rtf; sourceTree = "<group>"; };
 		BE3BD08ACB1E71CAFEDC0EA1 /* CopyDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CopyDialog.xib; sourceTree = "<group>"; };
 		BE3BD1150BDBC59E1E4EE59E /* HelpWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpWindow.swift; sourceTree = "<group>"; };
-		BE3BD12E698FBE9134927C21 /* AlertUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertUtils.m; sourceTree = "<group>"; };
 		BE3BD14EBAA39AE998183C61 /* close_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close_button.png; sourceTree = "<group>"; };
-		BE3BD16C028FAFA17206BE3E /* AlertUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertUtils.h; sourceTree = "<group>"; };
 		BE3BD1B5FD0102D7F7DC4512 /* DeviceNotificationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceNotificationDelegate.swift; sourceTree = "<group>"; };
 		BE3BD20F5F9E13F0255E1522 /* CrossfadeSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrossfadeSegue.swift; sourceTree = "<group>"; };
 		BE3BD248438DF21B6AFDCF6F /* DraggableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableItem.swift; sourceTree = "<group>"; };
 		BE3BD263FE3F94CE594A7D20 /* update_sizes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = update_sizes.png; sourceTree = "<group>"; };
+		BE3BD29598E1B2A9F0B3D966 /* AlertUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertUtils.m; sourceTree = "<group>"; };
 		BE3BD2D5E6A92AAE4A73DF66 /* HelpWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HelpWindow.xib; sourceTree = "<group>"; };
 		BE3BD2D92E07142A60E60248 /* DragNotificationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragNotificationDelegate.swift; sourceTree = "<group>"; };
+		BE3BD326D7BB6EA85FB5313E /* AndroidAdbHandler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AndroidAdbHandler.mm; sourceTree = "<group>"; };
 		BE3BD40AE738BD024E549A5E /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		BE3BD461BEC6F7B580117F1B /* DragUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragUtils.swift; sourceTree = "<group>"; };
 		BE3BD4BE8B8D95E327B543B9 /* IndeterminateProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndeterminateProgressView.swift; sourceTree = "<group>"; };
+		BE3BD4CECE141596651ED9B3 /* Command.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Command.h; sourceTree = "<group>"; };
 		BE3BD4CF42CD0C36BF15D950 /* PrintUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintUtils.swift; sourceTree = "<group>"; };
 		BE3BD50CC71E1C324A8471F4 /* FileCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileCellView.swift; sourceTree = "<group>"; };
 		BE3BD5400EDCE113E397EA1F /* ClipboardTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipboardTableCellView.swift; sourceTree = "<group>"; };
@@ -192,7 +205,6 @@
 		BE3BD60613DBA5FB8A059C0F /* MacHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacHandler.swift; sourceTree = "<group>"; };
 		BE3BD65DA3E8130849D039FD /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		BE3BD693C2D36032D1109390 /* AbstractHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractHandler.swift; sourceTree = "<group>"; };
-		BE3BD6B7DC25CE5D4B9C2E8C /* BridgingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingUtils.h; sourceTree = "<group>"; };
 		BE3BD6E19034EA1ACA510769 /* back_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_button.png; sourceTree = "<group>"; };
 		BE3BD75F91DBA3B298B91E2D /* SizeUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeUtils.swift; sourceTree = "<group>"; };
 		BE3BD797A84E2FCF1D77271B /* CopyDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CopyDialog.swift; sourceTree = "<group>"; };
@@ -200,10 +212,13 @@
 		BE3BD7E881A82B0C8CCA96A5 /* ColoredButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColoredButton.swift; sourceTree = "<group>"; };
 		BE3BD7F1239BA6A5E7685902 /* ColorUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorUtils.swift; sourceTree = "<group>"; };
 		BE3BD7F3E98C3A92436C5F2C /* clipboard_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clipboard_icon.png; sourceTree = "<group>"; };
+		BE3BD812AC1B522A7B16961F /* AlertUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertUtils.h; sourceTree = "<group>"; };
+		BE3BD842071A151360917781 /* AndroidAdbHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AndroidAdbHandler.h; sourceTree = "<group>"; };
 		BE3BD84AE45EE7CCE8AA60E2 /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		BE3BD86117C6A1984B137A27 /* SelectableTableRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectableTableRowView.swift; sourceTree = "<group>"; };
 		BE3BD86C2E85315AA443F20A /* AndroidDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AndroidDevice.swift; sourceTree = "<group>"; };
 		BE3BD8B0BBFD2BD4175F63BB /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
+		BE3BD8C00FE5EABB3CA29B9A /* BridgingUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BridgingUtils.m; sourceTree = "<group>"; };
 		BE3BD97D6F1F3832414869CE /* DarkWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkWindow.swift; sourceTree = "<group>"; };
 		BE3BD9CFDA815A58EE4B948C /* BaseObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseObject.swift; sourceTree = "<group>"; };
 		BE3BD9E9DDF981F8F795B66F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -215,23 +230,23 @@
 		BE3BDBB5E059C6147F64EDCE /* DisabledTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisabledTextField.swift; sourceTree = "<group>"; };
 		BE3BDC1EC5EA8A5A0A17A378 /* ThreadUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadUtils.swift; sourceTree = "<group>"; };
 		BE3BDC7CF24C3F020FF8484B /* DraggableTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableTableView.swift; sourceTree = "<group>"; };
+		BE3BDCC3EEA7D872BB478BB8 /* ListCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ListCommand.cpp; sourceTree = "<group>"; };
 		BE3BDCC4280329DAC474762E /* TimeUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeUtils.swift; sourceTree = "<group>"; };
 		BE3BDD843B295FEB7CB9CE4F /* TransferHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferHandler.swift; sourceTree = "<group>"; };
 		BE3BDDFFAFC3F3A5DAC239F2 /* file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file.png; sourceTree = "<group>"; };
 		BE3BDE295CD9D91FD872081A /* BaseExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseExtension.swift; sourceTree = "<group>"; };
 		BE3BDE794C92E054421418BB /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BE3BDE8034FD05FF612778EF /* SegueFromLeft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueFromLeft.swift; sourceTree = "<group>"; };
-		BE3BDE8E1177BBA3EB41B545 /* AndroidAdbHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AndroidAdbHandler.swift; sourceTree = "<group>"; };
 		BE3BDEC3A70E61017CF5C4D5 /* AndroidHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AndroidHandler.swift; sourceTree = "<group>"; };
 		BE3BDED8D1C80713401499D7 /* DimenUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DimenUtils.swift; sourceTree = "<group>"; };
 		BE3BDEF13CA38DBEC207CD7E /* StyleUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleUtils.swift; sourceTree = "<group>"; };
 		BE3BDEF99F9695AD6D7B4402 /* AndroidShellResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AndroidShellResource.swift; sourceTree = "<group>"; };
 		BE3BDEFB8D195743373D18DF /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		BE3BDF2646B4FF28CCC5B703 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BE3BDF293F20C142C74E540D /* BridgingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingUtils.h; sourceTree = "<group>"; };
 		BE3BDF4C3E50FACB10B4D3EF /* clipboard_icon_plain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clipboard_icon_plain.png; sourceTree = "<group>"; };
 		BE3BDF7F498E044C83FB0280 /* DragUiDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragUiDelegate.swift; sourceTree = "<group>"; };
-		BE3BDF848CCE75D65B3BB0FA /* BridgingUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BridgingUtils.m; sourceTree = "<group>"; };
-		BE3BDFC036C89DA942D822CB /* AndroidFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AndroidFile.swift; sourceTree = "<group>"; };
+		BE3BDF9C3751FA0DC9D40707 /* ListCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCommand.h; sourceTree = "<group>"; };
 		D4F2E244205540B32D87D1CF /* Pods-Dragon Android Transfer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dragon Android Transfer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dragon Android Transfer/Pods-Dragon Android Transfer.debug.xcconfig"; sourceTree = "<group>"; };
 		D76E99487AF2B4AB76B28F08 /* Pods_Dragon_Android_Transfer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dragon_Android_Transfer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD6E29BC824473C340CAB23B /* Pods_Dragon_Android_TransferTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dragon_Android_TransferTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -242,6 +257,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58404B644B2960F748912234 /* Pods_Dragon_Android_TransferTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +265,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C205735CD6A01DEEE2E163F /* Pods_Dragon_Android_TransferUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,7 +273,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50F716F41E82F492005CA833 /* MASShortcut.framework in Frameworks */,
+				500698E11FEF88B400F904AC /* RxSwift.framework in Frameworks */,
+				51228DE463F84080BF00A549 /* Pods_Dragon_Android_Transfer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +350,11 @@
 				BE3BD1DDD71B2CB4E44E0792 /* Extension */,
 				BE3BDE8B496FC9F868312673 /* Data */,
 				BE3BDBB7A2C092DD9B019869 /* Bridge */,
+				BE3BD812AC1B522A7B16961F /* AlertUtils.h */,
+				BE3BDF293F20C142C74E540D /* BridgingUtils.h */,
+				BE3BD8C00FE5EABB3CA29B9A /* BridgingUtils.m */,
+				BE3BD29598E1B2A9F0B3D966 /* AlertUtils.m */,
+				BE3BDF72A34217C42F17FA5E /* Command */,
 			);
 			path = "Dragon Android Transfer";
 			sourceTree = "<group>";
@@ -373,6 +396,7 @@
 			children = (
 				BE3BDE295CD9D91FD872081A /* BaseExtension.swift */,
 				BE3BD9CFDA815A58EE4B948C /* BaseObject.swift */,
+				50B020331FE986C500989BA4 /* CollectionExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -400,9 +424,10 @@
 		BE3BD3F18BD4C34B13D207DC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BE3BDFC036C89DA942D822CB /* AndroidFile.swift */,
 				BE3BD86C2E85315AA443F20A /* AndroidDevice.swift */,
 				50F314DF1FAE1C45006BF985 /* ExtensionBaseFile.swift */,
+				50293DF51FEFBF0B00B06B14 /* BaseFile.swift */,
+				50293DF71FEFBF2A00B06B14 /* BaseFileType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -448,6 +473,7 @@
 				BE3BD8A8851B1169677F31C6 /* Animation */,
 				BE3BD3A6E9C4FD08E990E51A /* Drag */,
 				BE3BDF155B25DCF63C1A0538 /* Xib */,
+				50293DF31FEFB8DB00B06B14 /* DeviceTableDelegate.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -465,10 +491,6 @@
 		BE3BDBB7A2C092DD9B019869 /* Bridge */ = {
 			isa = PBXGroup;
 			children = (
-				BE3BD16C028FAFA17206BE3E /* AlertUtils.h */,
-				BE3BDF848CCE75D65B3BB0FA /* BridgingUtils.m */,
-				BE3BD12E698FBE9134927C21 /* AlertUtils.m */,
-				BE3BD6B7DC25CE5D4B9C2E8C /* BridgingUtils.h */,
 			);
 			path = Bridge;
 			sourceTree = "<group>";
@@ -500,7 +522,8 @@
 				BE3BDEC3A70E61017CF5C4D5 /* AndroidHandler.swift */,
 				BE3BD60613DBA5FB8A059C0F /* MacHandler.swift */,
 				BE3BDD843B295FEB7CB9CE4F /* TransferHandler.swift */,
-				BE3BDE8E1177BBA3EB41B545 /* AndroidAdbHandler.swift */,
+				BE3BD326D7BB6EA85FB5313E /* AndroidAdbHandler.mm */,
+				BE3BD842071A151360917781 /* AndroidAdbHandler.h */,
 			);
 			path = Handler;
 			sourceTree = "<group>";
@@ -516,9 +539,20 @@
 			path = Xib;
 			sourceTree = "<group>";
 		};
+		BE3BDF72A34217C42F17FA5E /* Command */ = {
+			isa = PBXGroup;
+			children = (
+				BE3BD4CECE141596651ED9B3 /* Command.h */,
+				BE3BDCC3EEA7D872BB478BB8 /* ListCommand.cpp */,
+				BE3BDF9C3751FA0DC9D40707 /* ListCommand.h */,
+			);
+			path = Command;
+			sourceTree = "<group>";
+		};
 		D4C33354EAA7E8CA24921F0F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				500698E01FEF88B400F904AC /* RxSwift.framework */,
 				50F716F31E82F492005CA833 /* MASShortcut.framework */,
 				D76E99487AF2B4AB76B28F08 /* Pods_Dragon_Android_Transfer.framework */,
 				FD6E29BC824473C340CAB23B /* Pods_Dragon_Android_TransferTests.framework */,
@@ -534,9 +568,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5003814B1F8D44A0000728E9 /* Build configuration list for PBXNativeTarget "Dragon Android TransferTests" */;
 			buildPhases = (
+				336940DD63C592032754162B /* [CP] Check Pods Manifest.lock */,
 				500381401F8D44A0000728E9 /* Sources */,
 				500381411F8D44A0000728E9 /* Frameworks */,
 				500381421F8D44A0000728E9 /* Resources */,
+				79A342B057A4B792F0CBE49A /* [CP] Embed Pods Frameworks */,
+				E618945E911D4D1EF8153E06 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -552,9 +589,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5003815B1F8D4510000728E9 /* Build configuration list for PBXNativeTarget "Dragon Android TransferUITests" */;
 			buildPhases = (
+				B518355D0E54215792A6E568 /* [CP] Check Pods Manifest.lock */,
 				500381501F8D4510000728E9 /* Sources */,
 				500381511F8D4510000728E9 /* Frameworks */,
 				500381521F8D4510000728E9 /* Resources */,
+				87F57096DADFCA5ADED677D3 /* [CP] Embed Pods Frameworks */,
+				8027E3E00FB8A17D2481F007 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -596,7 +636,7 @@
 					Adb,
 				);
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Kishan P Rao";
 				TargetAttributes = {
 					500381431F8D44A0000728E9 = {
@@ -685,16 +725,74 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Dragon Android Transfer-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		336940DD63C592032754162B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Dragon Android TransferTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		79A342B057A4B792F0CBE49A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Dragon Android TransferTests/Pods-Dragon Android TransferTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxBlocking/RxBlocking.framework",
+				"${BUILT_PRODUCTS_DIR}/RxTest/RxTest.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxBlocking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxTest.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dragon Android TransferTests/Pods-Dragon Android TransferTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8027E3E00FB8A17D2481F007 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dragon Android TransferUITests/Pods-Dragon Android TransferUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DD9F2B5D3F847726169FCAA9 /* [CP] Embed Pods Frameworks */ = {
+		87F57096DADFCA5ADED677D3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -703,6 +801,46 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dragon Android TransferUITests/Pods-Dragon Android TransferUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B518355D0E54215792A6E568 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Dragon Android TransferUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DD9F2B5D3F847726169FCAA9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Dragon Android Transfer/Pods-Dragon Android Transfer-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/MASShortcut/MASShortcut.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MASShortcut.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -724,6 +862,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dragon Android Transfer/Pods-Dragon Android Transfer-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E618945E911D4D1EF8153E06 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dragon Android TransferTests/Pods-Dragon Android TransferTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -731,7 +884,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				500381601F8D4984000728E9 /* AndroidFile.swift in Sources */,
 				500381471F8D44A0000728E9 /* Dragon_Android_TransferTests.swift in Sources */,
 				500381841F8D49EF000728E9 /* SizeUtils.swift in Sources */,
 				500381821F8D49C7000728E9 /* TimeUtils.swift in Sources */,
@@ -749,7 +901,8 @@
 				BE3BD844D6836981F9289AEF /* BaseObject.swift in Sources */,
 				BE3BDFA6B9ED9545B157F47D /* Constants.swift in Sources */,
 				BE3BDEE6CC7666AF909D26CC /* AndroidShellResource.swift in Sources */,
-				BE3BD848C668CC0772EDFDF1 /* AndroidAdbHandler.swift in Sources */,
+				BE3BD3995526C5E8E6AD8930 /* ListCommand.cpp in Sources */,
+				BE3BD03E6C73AAB2E0A49C2F /* AndroidAdbHandler.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -792,14 +945,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE3BD1D72CE53B61F3945821 /* AndroidFile.swift in Sources */,
 				503B88541F928944004E6417 /* StringExtension.swift in Sources */,
 				BE3BDE084524366D5F702AFC /* AndroidDevice.swift in Sources */,
 				BE3BDC57F874BAFD8C7076B1 /* AppDelegate.swift in Sources */,
 				BE3BD7DAF4A0DEDEBB668109 /* DimenUtils.swift in Sources */,
+				50B020341FE986C500989BA4 /* CollectionExtension.swift in Sources */,
 				BE3BD3CF4A98FDDACABFF93A /* ColorUtils.swift in Sources */,
 				BE3BDA227C3660B22686716F /* SizeUtils.swift in Sources */,
 				BE3BD37C280AAD9C969F3243 /* TimeUtils.swift in Sources */,
+				50293DF61FEFBF0B00B06B14 /* BaseFile.swift in Sources */,
 				BE3BD9C6949E9F5050D4D401 /* ThreadUtils.swift in Sources */,
 				50F314E01FAE1C45006BF985 /* ExtensionBaseFile.swift in Sources */,
 				BE3BD4859D0A4C8B57D3336A /* StyleUtils.swift in Sources */,
@@ -808,12 +962,14 @@
 				BE3BD247789B6C3497AF10EA /* OverlayView.swift in Sources */,
 				BE3BD094F0C2183A46CDD6E3 /* ProgressView.swift in Sources */,
 				BE3BDA30B26F35C7C23F9B56 /* IndeterminateProgressView.swift in Sources */,
+				50293DF81FEFBF2A00B06B14 /* BaseFileType.swift in Sources */,
 				BE3BD8168BA539FF4397E553 /* DarkWindow.swift in Sources */,
 				BE3BD32896E1B80E34684643 /* ColoredButton.swift in Sources */,
 				BE3BDC41D77A6265E5E8283C /* ClipboardViewController.swift in Sources */,
 				BE3BD20E4CB561A51395CF39 /* ClipboardTableCellView.swift in Sources */,
 				BE3BD7F160769EC8049FA1AC /* ClipboardDelegate.swift in Sources */,
 				BE3BD64DA0CEAFD027656D0A /* ColoredPopUpButton.swift in Sources */,
+				50293DF41FEFB8DB00B06B14 /* DeviceTableDelegate.swift in Sources */,
 				BE3BD7A0031EADC65E19DA1D /* CrossfadeSegue.swift in Sources */,
 				BE3BD5D597FE4AA22E298EFB /* CustomSwiftAnimator.swift in Sources */,
 				BE3BD284856999A467420E8C /* DisabledTextField.swift in Sources */,
@@ -839,10 +995,11 @@
 				BE3BD06FDDB930947C1B074A /* CopyDialog.swift in Sources */,
 				BE3BDD26BD56D714B0769BEB /* Dimens.swift in Sources */,
 				BE3BD5406227870BE38ACD2D /* StringResource.swift in Sources */,
-				BE3BDEC5FC773B8B0267C963 /* BridgingUtils.m in Sources */,
-				BE3BD23B9E05BD5F2802A6D1 /* AlertUtils.m in Sources */,
 				BE3BDC1DDDC0D54EED0E1B61 /* AndroidShellResource.swift in Sources */,
-				BE3BD9A509068C2C4DE61223 /* AndroidAdbHandler.swift in Sources */,
+				BE3BDF591FD15632655D6C53 /* BridgingUtils.m in Sources */,
+				BE3BD9899E224C1509824C6F /* AlertUtils.m in Sources */,
+				BE3BD4A6E7500A522D7CCAA1 /* ListCommand.cpp in Sources */,
+				BE3BDB93125B4F8F31159F09 /* AndroidAdbHandler.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -875,6 +1032,7 @@
 /* Begin XCBuildConfiguration section */
 		5003814C1F8D44A0000728E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 118C817A6AC0828362F645DC /* Pods-Dragon Android TransferTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -894,6 +1052,7 @@
 		};
 		5003814D1F8D44A0000728E9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7D8F895498525A7BB7E0CB4 /* Pods-Dragon Android TransferTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -913,6 +1072,7 @@
 		};
 		5003815C1F8D4510000728E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3AD3E519BDF1377E2354E60B /* Pods-Dragon Android TransferUITests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -931,6 +1091,7 @@
 		};
 		5003815D1F8D4510000728E9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B57E05A04A8CF6A133E8C85 /* Pods-Dragon Android TransferUITests.release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -961,8 +1122,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -988,7 +1151,9 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1006,8 +1171,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -1027,6 +1194,9 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1040,6 +1210,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug/MASShortcut",
+					"$(PROJECT_DIR)/build/Debug/RxSwift",
 				);
 				INFOPLIST_FILE = "Dragon Android Transfer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -1062,6 +1233,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug/MASShortcut",
+					"$(PROJECT_DIR)/build/Debug/RxSwift",
 				);
 				INFOPLIST_FILE = "Dragon Android Transfer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

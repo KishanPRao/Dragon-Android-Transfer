@@ -4,6 +4,8 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 class TransferHandler {
 	static let sharedInstance = TransferHandler();
@@ -20,11 +22,15 @@ class TransferHandler {
 	
 	func hasActiveDevice() -> Bool {
 		return androidHandler.hasActiveDevice()
-	}
-	
-	func getAndroidDevices() -> Array<AndroidDevice> {
-		return androidHandler.getAndroidDevices()
-	}
+    }
+    
+    func getAndroidDevices() -> Array<AndroidDevice> {
+        return androidHandler.getAndroidDevices()
+    }
+    
+    func observeAndroidDevices() -> Observable<[AndroidDevice]> {
+        return androidHandler.observeAndroidDevices()
+    }
 	
 	func setActiveDevice(_ device: AndroidDevice?) {
 //		ThreadUtils.runInBackgroundThread {
@@ -34,7 +40,7 @@ class TransferHandler {
 //		}
 	}
 	
-	func openDirectoryData(_ path: String) -> Array<BaseFile>! {
+	func openDirectoryData(_ path: String) -> [BaseFile] {
 		return androidHandler.openDirectoryData(path)
 	}
 	
@@ -112,7 +118,7 @@ class TransferHandler {
 		return androidHandler.isRootDirectory()
 	}
 	
-	func upDirectoryData() -> Array<BaseFile>! {
+	func upDirectoryData() -> [BaseFile] {
 		return androidHandler.upDirectoryData()
 	}
 	

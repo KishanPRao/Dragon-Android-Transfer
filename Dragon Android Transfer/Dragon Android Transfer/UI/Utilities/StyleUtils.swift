@@ -16,4 +16,12 @@ class StyleUtils {
 		button.image = image!
 		button.imageScaling = NSImageScaling.scaleAxesIndependently
 	}
+	
+	static func updateButtonWithCell(_ button: NSButton, withImage image: NSImage?) {
+		if let cell = button.cell as? NSButtonCell {
+			image!.size = cell.cellSize
+			cell.image = image!
+			cell.imageScaling = NSImageScaling.scaleAxesIndependently
+		}
+	}
 }

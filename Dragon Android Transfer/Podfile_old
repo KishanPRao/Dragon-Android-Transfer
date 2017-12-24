@@ -1,0 +1,21 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'Dragon Android Transfer' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Dragon Android Transfer
+  pod 'MASShortcut'
+
+  target 'Dragon Android TransferTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'Dragon Android TransferUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end

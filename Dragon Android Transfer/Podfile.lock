@@ -1,12 +1,27 @@
 PODS:
   - MASShortcut (2.3.6)
+  - RxBlocking (3.6.1):
+    - RxSwift (~> 3.6)
+  - RxCocoa (3.6.1):
+    - RxSwift (~> 3.6)
+  - RxSwift (3.6.1)
+  - RxTest (3.6.1):
+    - RxSwift (~> 3.6)
 
 DEPENDENCIES:
   - MASShortcut
+  - RxBlocking (~> 3.6.1)
+  - RxCocoa (~> 3.6.1)
+  - RxSwift (~> 3.6.1)
+  - RxTest (~> 3.6.1)
 
 SPEC CHECKSUMS:
   MASShortcut: 9c215e8a8a78f3d01ce56da48e2730ab66b538fa
+  RxBlocking: 4f4bd5732e8b952e54ae8a57739bcfb645de12bc
+  RxCocoa: 84a08739ab186248c7f31ce4ee92d6f8a947d690
+  RxSwift: f9de85ea20cd2f7716ee5409fc13523dc638e4e4
+  RxTest: 1d00348a7848c91ab5bf5d197d2378aa6b2bb356
 
-PODFILE CHECKSUM: 459e61acd94fa6e4bdb8a2f7c22f87459ec9bc94
+PODFILE CHECKSUM: 4d6d16ce6474cbe4760c6e06d47542ff82ab50ca
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.3.1
