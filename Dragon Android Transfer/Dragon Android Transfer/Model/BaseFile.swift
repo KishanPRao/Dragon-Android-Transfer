@@ -9,7 +9,7 @@
 import Cocoa
 
 
-class BaseFile : DraggableItem {
+public class BaseFile : DraggableItem {
     //	internal let TAG = "BaseFile"
     var fileName: String = ""
     var path: String = ""

@@ -7,15 +7,19 @@
 #define DRAGON_ANDROID_TRANSFER_LISTCOMMAND_H
 
 
-#include "Command.h"
+#include "AdbCommand.h"
+#include <string>
 
-class ListCommand : public Command {
+class ListCommand : public AdbCommand {
+	std::string directoryName;
+
 public:
+	ListCommand(std::string, AdbExecutor *executor);
 //	Command* newCommand();
 	
-	void execute() override;
+	std::string execute() override;
 	
-	~ListCommand();
+	//~ListCommand();
 };
 
 

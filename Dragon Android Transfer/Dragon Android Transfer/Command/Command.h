@@ -7,9 +7,11 @@
 #define DRAGON_ANDROID_TRANSFER_COMMAND_H
 
 
+#import <string>
+
 class Command {
 public:
-	virtual void execute() = 0;
+	virtual std::string execute() = 0;
 	
 	virtual ~Command() {}
 };

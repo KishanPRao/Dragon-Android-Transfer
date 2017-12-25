@@ -5,7 +5,7 @@
 
 import Foundation
 
-class DraggableItem: NSObject, NSPasteboardWriting {
+public class DraggableItem: NSObject, NSPasteboardWriting {
 //: NSObject, NSPasteboardWriting {
 	static let sFakeLocation = "fakeLocation"
 	static let sFakeUrl = NSURL(string: sFakeLocation)!
@@ -13,19 +13,19 @@ class DraggableItem: NSObject, NSPasteboardWriting {
     var index: Int = -1
 
 	//      Copying to Finder
-	func writingOptions(forType type: String, pasteboard: NSPasteboard) -> NSPasteboardWritingOptions {
+	public func writingOptions(forType type: String, pasteboard: NSPasteboard) -> NSPasteboardWritingOptions {
 //        kPasteBoardType
 		pasteboard.declareTypes([NSFilenamesPboardType], owner: self)
 //		LogV("writingOptions", type, pasteboard, type)
 		return DraggableItem.sFakeUrl.writingOptions(forType: type, pasteboard: pasteboard)
 	}
 
-	func writableTypes(for pasteboard: NSPasteboard) -> [String] {
+	public func writableTypes(for pasteboard: NSPasteboard) -> [String] {
 //		LogV("writableTypes")
 		return [kWritableType]
 	}
 
-	func pasteboardPropertyList(forType type: String) -> Any? {
+	public func pasteboardPropertyList(forType type: String) -> Any? {
 //		LogV("pasteboardPropertyList")
 //        return DraggableItem.sFakeUrl.pasteboardPropertyList(forType: type)
         return index

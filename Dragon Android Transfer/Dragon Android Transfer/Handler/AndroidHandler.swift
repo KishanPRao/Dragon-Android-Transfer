@@ -49,17 +49,15 @@ public class AndroidHandler: NSObject {
 	fileprivate let espaceDoubleQuotes = StringResource.ESCAPE_DOUBLE_QUOTES
 	fileprivate static let JAVA_TYPE_COMMAND = AndroidShellScripts.JAVA_TYPE_COMMAND
     
-    fileprivate let adbHandler: AndroidAdbHandler
+    fileprivate lazy var adbHandler: AndroidAdbHandler = {
+        return AndroidAdbHandler(directory: self.adbDirectoryPath)
+	}()
 	
 	private var data: Data? = nil
 	
 	override init() {
 		currentPath = ""
 		adbLaunchPath = "/bin/bash"
-        
-        adbHandler = AndroidAdbHandler()
-		
-//		AndroidAdbHandler.test()
 
 //        test { (result) in
 //            print("Op:", result)
@@ -69,7 +67,14 @@ public class AndroidHandler: NSObject {
 	func initialize(_ data: Data) {
 		self.data = data
 		adbDirectoryPath = self.extractAdbAsset()
-		LogV("Initialize")
+        LogV("Initialize")
+        
+        // adbHandler = AndroidAdbHandler(adbDirectoryPath)
+        // if let adbHandler = adbHandler {
+        	// adbHandler.deviceId = "ZY223DGND4"
+        	// adbHandler.adbDirectoryPath = adbDirectoryPath
+            // adbHandler.getDirectoryListing("/sdcard/")
+        // }
 	}
 	
 	func isFirstLaunch() -> Bool {
@@ -190,6 +195,7 @@ public class AndroidHandler: NSObject {
 		activeDevice = device;
 		LogV("Active Device:", activeDevice)
 		if (activeDevice != nil) {
+			adbHandler.deviceId = (activeDevice?.id)!
 			let externalDirectories = getExternalStorageDirectories()
 			print("External Directories:", externalDirectories)
 			if (externalDirectories.count > 0) {
@@ -372,62 +378,15 @@ public class AndroidHandler: NSObject {
 			print("Try Enter:", TimeUtils.getCurrentTime())
 		}
 		objc_sync_enter(self)
-		
-		let devicesString = adb("./adb devices;")
-		
-		let devices = devicesString.characters.split {
-			$0 == "\n" || $0 == "\r\n"
-		}.map(String.init)
-		var i = 1
-//        androidDevices.removeAll()
-		var localAndroidDevices: Array<AndroidDevice> = []
-		while i < devices.count {
-			var deviceId = devices[i].characters.split {
-				$0 == "\t"
-			}.map(String.init)[0]
-//            .display gives "nicer" name
-			var deviceName = adb("./adb -s " + deviceId + " shell getprop ro.product.model")
-			deviceId = deviceId.trimmingCharacters(
-					in: CharacterSet.whitespacesAndNewlines
-			)
-			deviceName = deviceName.trimmingCharacters(
-					in: CharacterSet.whitespacesAndNewlines
-			)
-//            print("Device Id:", deviceId)
-//            print("Device Name:", deviceName)
-			let device = AndroidDevice.init(id: deviceId, name: deviceName)
-//            androidDevices.append(device)
-			localAndroidDevices.append(device)
-//            androidDevices.set { protected in
-//                protected.append(device)
-//            }
-			i = i + 1
-		}
-		let same = containSameElements(localAndroidDevices, array2: androidDevices)
-//        localAndroidDevices.sortInPlace({$0.name < $1.name})
-		if (TIMER_VERBOSE) {
-			print("Same Elements", same)
-		}
+		let newDevices = adbHandler.getDevices()
+		let same = containSameElements(newDevices, array2: androidDevices)
+		LogV("Same: \(same)")
 		if (!same) {
 			androidDevices.removeAll()
-			androidDevices.append(contentsOf: localAndroidDevices)
+			androidDevices.append(contentsOf: newDevices)
             Swift.print("Androidhandler, Main:", ThreadUtils.isMainThread())
             self.observableAndroidDevices.value = self.androidDevices
-			// DispatchQueue.main.async {
-                
-			// 	if (self.deviceNotificationDelegate != nil) {
-			// 		self.deviceNotificationDelegate?.onUpdate()
-			// 	}
-			// }
 		}
-//        androidDevices.set { protected in
-//            protected.removeAll()
-//            protected.appendContentsOf(localAndroidDevices)
-//        }
-		if (TIMER_VERBOSE) {
-			print("Devices:", androidDevices)
-		}
-//        devicesUpdating = false
 		
 		objc_sync_exit(self)
 		if (TIMER_VERBOSE) {
@@ -679,89 +638,8 @@ public class AndroidHandler: NSObject {
 	
 	func openDirectoryData(_ path: String) -> Array<BaseFile>! {
 		currentPath = path
-		let listString = adbListData(currentPath);
-		var directories: Array<BaseFile> = [];
-		let outputInLines = splitLines(listString)
-		var noOutput = false
-//		print("Output:", outputInLines)
-		noOutput = outputInLines.count <= 0 || outputInLines.count <= 2 || (outputInLines.count == 3 && outputInLines[2].contains("No such file"))
-//		noOutput = outputInLines.count <= 0 || outputInLines.count <= 2
-		if (noOutput) {
-			print("No Output!!!!")
-//			print("Output:", outputInLines)
-			return directories
-		}
-		var i = 0
-		let maxSizeInMBytes = UInt64.max / 1024
-		while (i < outputInLines.count) {
-			var fileType = BaseFileType.File;
-			var sizeInKiloBytes = UInt64.max as UInt64
-			var name = ""
-			var extraNewLine = ""
-			while (!isFileTypeString(str: outputInLines[i])) {
-				name = name + extraNewLine + outputInLines[i]
-				i = i + 1
-				extraNewLine = "\n";
-			}
-			if (outputInLines[i].contains(HandlerConstants.DIRECTORY)) {
-				fileType = BaseFileType.Directory
-			}
-//			name = outputInLines[i]
-//			i = i + 1
-//            if (isFileTypeString(str: outputInLines[i])) {
-//				if (outputInLines[i].contains(HandlerConstants.DIRECTORY)) {
-//					fileType = BaseFileType.Directory
-//				}
-//            } else {
-//                //TODO: Recurse? Bad idea, update internal.
-//                name = name + outputInLines[i]
-//                i = i + 1
-//            }
-			i = i + 1
-			if (fileType == BaseFileType.File) {
-				let sizeStringArray = outputInLines[i].characters.split {
-					$0 == " " || $0 == "\t"
-				}.map(String.init)
-				if let sizeInInt = UInt64(sizeStringArray[0]) {
-					sizeInKiloBytes = sizeInInt
-					if (Verbose) {
-//						print("AndroidHandler: Size in KBytes:", sizeInKiloBytes);
-					}
-					if (sizeInKiloBytes > maxSizeInMBytes) {
-						sizeInKiloBytes = UInt64.max
-					} else {
-						sizeInKiloBytes = sizeInKiloBytes * 1024
-					}
-//				sizeInBytes = sizeInInt
-				}
-			} else {
-				sizeInKiloBytes = 0
-			}
-//			if let sizeInInt = UInt64(outputInLines[i]) {
-//				sizeInKiloBytes = sizeInInt
-////				if (Verbose) {
-////					print("AndroidHandler: Size in KBytes:", sizeInKiloBytes);
-////				}
-//				if (sizeInKiloBytes > maxSizeInMBytes) {
-//					sizeInKiloBytes = UInt64.max
-//				} else {
-//					sizeInKiloBytes = sizeInKiloBytes * 1024
-//				}
-////				directories.append(BaseFile.init(fileName: name, path: currentPath, type: fileType, size: sizeInKiloBytes))
-//			}
-			directories.append(BaseFile.init(fileName: name, path: currentPath, type: fileType, size: sizeInKiloBytes))
-			i = i + 1
-		}
-		if (EXTREME_VERBOSE) {
-			print("Dirs:", directories)
-		}
-		directories.sort { file, file1 in
-			return file.fileName.lowercased() < file1.fileName.lowercased()
-		}
-		if (EXTREME_VERBOSE) {
-			print("Sorted Dirs:", directories)
-		}
-		return directories;
+		adbHandler.deviceId = (activeDevice?.id)!
+		return adbHandler.getDirectoryListing(path)
 	}
 	
 	func updateSizes(_ files: Array<BaseFile>) {
@@ -798,44 +676,6 @@ public class AndroidHandler: NSObject {
 		if (Verbose) {
 			print("AndroidHandler, Sizes:", file);
 		}
-	}
-	
-	fileprivate func adbListData(_ directory: String) -> String {
-		let name = espaceDoubleQuotes + "$name" + espaceDoubleQuotes
-//		For every type of file, size calc:
-//		let commands = "cd "+espaceDoubleQuotes+directory+espaceDoubleQuotes+"; ls | for name in *; do echo "+name+"; if [ -d "+name+" ]; then echo "+espaceDoubleQuotes+HandlerConstants.DIRECTORY+espaceDoubleQuotes+"; else echo "+espaceDoubleQuotes+HandlerConstants.FILE+espaceDoubleQuotes+"; fi; du -sk "+name+"; done;"
-//		let commands = "cd " + espaceDoubleQuotes + directory + espaceDoubleQuotes + "; ls | for name in *; do echo " + name + "; if [ -d " + name + " ]; then echo " + espaceDoubleQuotes + HandlerConstants.DIRECTORY + espaceDoubleQuotes + "; echo \"0\"; else echo " + espaceDoubleQuotes + HandlerConstants.FILE + espaceDoubleQuotes + "; du -sk " + name + "; fi; done;"
-
-//		var lsSizeCommand: String
-//		var lsSizeCommandName: String
-//		if (AndroidHandler.JAVA_TYPE == StringResource.GNU_TYPE) {
-//			lsSizeCommand = AndroidHandler.GNU_LS_SIZE_COMMAND
-//			lsSizeCommandName = AndroidHandler.GNU_LS_SIZE_COMMAND_NAME
-//		} else if (AndroidHandler.JAVA_TYPE == StringResource.BSD_TYPE) {
-//			lsSizeCommand = AndroidHandler.GNU_LS_SIZE_COMMAND
-//			lsSizeCommandName = AndroidHandler.GNU_LS_SIZE_COMMAND_NAME
-//		} else {
-//			lsSizeCommand = AndroidHandler.SOLARIS_LS_SIZE_COMMAND
-//			lsSizeCommandName = AndroidHandler.SOLARIS_LS_SIZE_COMMAND_NAME
-//		}
-		var commands: String
-		if (AndroidHandler.sJavaType == StringResource.GNU_TYPE) {
-			commands = AndroidShellScripts.GNU_LS_FILE_SIZE
-		} else if (AndroidHandler.sJavaType == StringResource.BSD_TYPE) {
-			commands = AndroidShellScripts.GNU_LS_FILE_SIZE
-		} else {
-			commands = AndroidShellScripts.SOLARIS_LS_FILE_SIZE
-		}
-		//TODO: While retrieving ls output and appending FILE etc, remove illegal characters (like "\n")
-		commands = commands + "cd " + espaceDoubleQuotes + directory + espaceDoubleQuotes + "; ls | for name in *; do echo " + name +
-				"; if [ -d " + name + " ]; then echo " + espaceDoubleQuotes + HandlerConstants.DIRECTORY + espaceDoubleQuotes + "; echo \"0\"; else echo " + espaceDoubleQuotes + HandlerConstants.FILE + espaceDoubleQuotes + "; " + AndroidShellScripts.LS_FILE_SIZE_COMMAND + " " + name + "; fi; done;"
-		
-		LogV("Adb List Data", directory, ", Command:", commands)
-		let output = adbShell(commands)
-		if (EXTREME_VERBOSE) {
-//			print("Output:", output)
-		}
-		return output
 	}
 	
 	func isRootDirectory() -> Bool {
@@ -1050,7 +890,7 @@ public class AndroidHandler: NSObject {
 			adbCommand = adbCommand + " shell " + "'" + commands + "'"
 //			adbCommand = adbCommand + " shell; " + "" + commands + ""
 			if (Verbose) {
-//				print("Adb Command:", adbCommand)
+				print("Adb Command:", adbCommand)
 			}
 			return adb(adbCommand)
 		} else {
@@ -1074,45 +914,3 @@ public class AndroidHandler: NSObject {
 		task.waitUntilExit()
 	}
 }
-
-
-//	fileprivate func test(_ completion: @escaping (_ result: String) -> Void) {
-//		let task = Process()
-//		task.launchPath = "/bin/sh"
-//		task.arguments = ["-c", "echo 1 ; sleep 3 ; echo 2 ; sleep 5 ; echo 3 ; sleep 5 ; echo 4"]
-//		
-//		let pipe = Pipe()
-//		task.standardOutput = pipe
-//		let outHandle = pipe.fileHandleForReading
-//		outHandle.waitForDataInBackgroundAndNotify()
-//		
-//		var obs1: NSObjectProtocol!
-//		obs1 = NotificationCenter.default.addObserver(
-//				forName: NSNotification.Name.NSFileHandleDataAvailable,
-//				object: outHandle, 
-//				queue: nil) {
-//			notification -> Void in
-//			let data = outHandle.availableData
-//			if data.count > 0 {
-//				if let str = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
-////                        print("got output: \(str)")
-//					completion(str as String)
-//				}
-//				outHandle.waitForDataInBackgroundAndNotify()
-//			} else {
-//				print("EOF on stdout from process")
-//				NotificationCenter.default.removeObserver(obs1)
-//			}
-//		}
-//		
-//		var obs2: NSObjectProtocol!
-//		obs2 = NotificationCenter.default.addObserver(
-//				forName: Process.didTerminateNotification,
-//				object: task, queue: nil) { notification -> Void in
-//			print("terminated")
-//			NotificationCenter.default.removeObserver(obs2)
-//		}
-//		
-//		task.launch()
-//		
-//	}

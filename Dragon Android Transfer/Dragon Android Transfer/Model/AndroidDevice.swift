@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import Cocoa
 
-class AndroidDevice: BaseObject {
+public class AndroidDevice: NSObject {
 	var id : String = ""
 	var name : String = ""
 	
@@ -17,5 +18,5 @@ class AndroidDevice: BaseObject {
 		self.name = name
 	}
 	
-	var description: String { return "AndroidDevice" + ": \(id, name)" }
+    override public var description: String { return "AndroidDevice" + ": \(id, name)" }
 }
