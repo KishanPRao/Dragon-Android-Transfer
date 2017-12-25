@@ -12,13 +12,12 @@
 
 std::string DeviceListCommand::execute() {
     std::string commands = "devices";
-    std::cout<<"Adb List Devices, Command:"<<commands;
+    // std::cout<<"Adb List Devices, Command:"<<commands<<std::endl;
     if (executor) {
-		AdbExecutorProperties *properties = new AdbExecutorProperties();
+        auto properties = make_shared<AdbExecutorProperties>();
 		properties->attributes = commands;
 		properties->executionType = AdbExecutionType::Full;
 		auto data = executor->execute(properties);
-		delete properties;
 		return data;
 	}
     std::cout<<"Warning, no executor"<<std::endl;

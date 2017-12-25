@@ -4,10 +4,8 @@
 //
 
 #import "AndroidAdbHandler.h"
-#import "MacHelper.h"
 #import "AdbExecutor.h"
 
-#import "IncludeSwift.h"
 
 // #import <AppKit/AppKit.h>
 // //#import <Foundation/Foundation.h>
@@ -19,15 +17,28 @@
 //  //#import <Dragon Android Transfer/Dragon Android Transfer-Swift.h>
 // // #import <Dragon_Android_Transfer-Swift.h>
 
-#import "ListCommand.h"
-#import "DeviceListCommand.hpp"
-#import "DeviceInfoCommand.hpp"
+/* Helpers */
+#import "IncludeSwift.h"
 #import "ShellScripts.h"
 #import "CommandConfig.h"
+#import "BridgeHelper.h"
+#import "MacHelper.h"
+
+/* Commands */
+#import "ListCommand.h"
+#import "DeviceListCommand.hpp"
+#import "FileExistsCommand.hpp"
+#import "DeviceInfoCommand.hpp"
+#import "SimpleAdbCommand.hpp"
+#import "NewFolderCommand.hpp"
+#import "DeleteCommand.hpp"
+#import "TotalSpaceCommand.hpp"
+#import "AvailableSpaceCommand.hpp"
+#import "FileSizeCommand.hpp"
 
 @class ShellParser;
 
-AdbExecutor *executor;
+shared_ptr<AdbExecutor> executor;
 // @interface AndroidAdbHandler()
 
 // -(std::string) execute: (AdbCommand *) command;
@@ -38,19 +49,22 @@ AdbExecutor *executor;
 // @synthesize deviceId;
 // @synthesize adbDirectoryPath;
 
-@synthesize deviceId = _deviceId;
+@synthesize device = _device;
 @synthesize adbDirectoryPath = _adbDirectoryPath;
 
-- (void)setDeviceId:(NSString *)deviceId;
+- (void)setDevice:(AndroidDevice *)device;
 {
-    if (deviceId != _deviceId && ![deviceId isEqualToString:_deviceId])
+	// TODO: Check device name too! Scenario: first time grant USB access (USB Debugging), no name.
+    if (device != _device && ![device.id isEqualToString:_device.id])
     {
-        _deviceId = deviceId;
-        executor->setDeviceId(_deviceId.UTF8String);
-        AdbExecutorProperties *properties = new AdbExecutorProperties();
-        properties->attributes = ShellScripts::SHELL_TYPE_COMMAND;
-        properties->executionType = AdbExecutionType::Shell;
-        auto data = [ShellParser cleanString: [MacHelper convert:executor->execute(properties)]].UTF8String;
+        _device = device;
+        if (device == nil) {
+            NSLog(@"Empty Device");
+            return;
+        }
+        executor->setDeviceId(_device.id.UTF8String);
+        auto simpleCommand = make_shared<SimpleAdbCommand>(ShellScripts::SHELL_TYPE_COMMAND, executor);
+        auto data = [ShellParser cleanString: convert(simpleCommand->execute())].UTF8String;
         if (data == StringResource::GNU_TYPE) {
             CommandConfig::shellType = ShellType::Gnu;
         } else if (data == StringResource::BSD_TYPE) {
@@ -58,7 +72,13 @@ AdbExecutor *executor;
         } else {
             CommandConfig::shellType = ShellType::Solaris;
         }
-        NSLog(@"New Shell Type: %@, %d", [MacHelper convert:data], CommandConfig::shellType);
+        auto storageListInfo =  make_shared<SimpleAdbCommand>(ShellScripts::STORAGE_LIST_INFO, executor)->execute();
+        auto storageList = make_shared<SimpleAdbCommand>(ShellScripts::STORAGE_LIST, executor)->execute();
+        
+        device.externalStorages = [ShellParser parseStorageOutput: convert(storageList) info: convert(storageListInfo)];
+        
+        NSLog(@"New Shell Type: %@, %d", convert(data), CommandConfig::shellType);
+        NSLog(@"Storage: %@", device.externalStorages);
     }
 }
 
@@ -75,46 +95,75 @@ AdbExecutor *executor;
 - (id)initWithDirectory:(NSString *)adbDirectoryPath {
     self = [super init];
     if (self) {
-        executor = new AdbExecutor();
+        executor = make_shared<AdbExecutor>();
         self.adbDirectoryPath = adbDirectoryPath;
     }
     return self;
 }
 
 - (NSArray<BaseFile *> *) getDirectoryListing: (NSString *) path {
-	ListCommand *command = new ListCommand(path.UTF8String, executor);
-	// TODO: Move Executor to init.
-	auto listString = command->execute();
-    auto list = [ShellParser parseListOutput: [MacHelper convert:listString]];
+    auto command = make_shared<ListCommand>(path.UTF8String, executor);
+    auto listString = convert(command->execute());
+    auto list = [ShellParser parseListOutput: listString currentPath: path];
     // NSLog(@"List Output, %@", list);
-	delete command;
 	return list;
 }
 
 - (NSArray<AndroidDevice *> *) getDevices {
-    DeviceListCommand *command = new DeviceListCommand(executor);
-    auto devicesString = command->execute();
-    auto deviceIds = [ShellParser parseDeviceListOutput: [MacHelper convert:devicesString]];
-    NSLog(@"List Output, %@", deviceIds);
+    auto command = make_shared<DeviceListCommand>(executor);
+    auto devicesString = convert(command->execute());
+    auto deviceIds = [ShellParser parseDeviceListOutput: devicesString];
+    // NSLog(@"List Output, %@", deviceIds);
     NSMutableArray<AndroidDevice *> *devices = [NSMutableArray new];
 
     for (NSString *deviceId in deviceIds) {
-        DeviceInfoCommand *command = new DeviceInfoCommand(deviceId.UTF8String, executor);
-        auto infoString = command->execute();
-		NSLog(@"Info Output, %@", [MacHelper convert:infoString]);
-        auto device = [ShellParser parseDeviceInfoOutput: deviceId infoString:
-                           [MacHelper convert:infoString]];
+        auto command = make_shared<DeviceInfoCommand>(deviceId.UTF8String, executor);
+        auto infoString = convert(command->execute());
+		// NSLog(@"Info Output, %@", infoString);
+        auto device = [ShellParser parseDeviceInfoOutput: deviceId infoString: infoString];
 
         [devices addObject:device];
-        delete command;
     }
-    delete command;
     return devices;
 }
 
-- (void)dealloc
-{
-    delete executor;
+- (bool) fileExists: (NSString *) path withFileType: (bool) isFile {
+    auto command = make_shared<FileExistsCommand>(convert(path), isFile, executor);
+    auto output = command->execute();
+    return [ShellParser parseFileExists: convert(output)];
 }
+
+-(bool) createNewFolder: (NSString *) path {
+    auto command = make_shared<NewFolderCommand>(convert(path), executor);
+    command->execute();
+	return true;
+}
+
+-(void) deleteFile: (NSString *) path {
+    auto command = make_shared<DeleteCommand>(convert(path), executor);
+	command->execute();
+}
+
+
+-(NSString *) getTotalSpace: (NSString *) path {
+    auto command = make_shared<TotalSpaceCommand>(convert(path), executor);
+    return [ShellParser parseTotalSpace: convert(command->execute())];
+}
+
+-(NSString *) getAvailableSpace: (NSString *) path {
+    auto command = make_shared<AvailableSpaceCommand>(convert(path), executor);
+    return [ShellParser parseAvailableSpace: convert(command->execute())];
+    
+}
+
+-(UInt64) getFileSize: (NSString *) path {
+    auto command = make_shared<FileSizeCommand>(convert(path), executor);
+    return [ShellParser parseFileSize: convert(command->execute())];
+}
+
+// - (void)dealloc
+// {
+//     delete executor;
+// }
 
 @end

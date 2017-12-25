@@ -423,6 +423,7 @@ NSUserInterfaceValidations {
 	func doubleClickList(_ sender: AnyObject) {
 		print("Double Clicked:", fileTable.clickedRow)
 		if (fileTable.clickedRow < 0) {
+			LogW("Bad Row")
 			return
 		}
         let selectedItem = self.androidDirectoryItems[fileTable.clickedRow]
@@ -450,7 +451,9 @@ NSUserInterfaceValidations {
 				/*let isDirectory = true
 				if (isDirectory) {*/
 					let path = self.transferHandler.getCurrentPath() + HandlerConstants.SEPARATOR + selectedItem.fileName
+					self.LogV("Opening Dir")
 					let items = self.transferHandler.openDirectoryData(path)
+					self.LogV("Opened Dir")
 					return items
 				/*} else {
 					return nil
@@ -461,6 +464,7 @@ NSUserInterfaceValidations {
 				onNext: {
 					items in
 					guard let items = items else {
+						self.LogW("Nil Items")
             			self.fileTable.deselectRow(self.fileTable.selectedRow)
                     	self.hideProgress()
                         return

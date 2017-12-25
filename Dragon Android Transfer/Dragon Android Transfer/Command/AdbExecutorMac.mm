@@ -6,37 +6,37 @@
 #import "AdbExecutor.h"
 #import <Foundation/Foundation.h>
 #import "StringResource.h"
-#import "MacHelper.h"
 #import "ShellScripts.h"
 #import "CommandConfig.h"
+#import "BridgeHelper.h"
 // #import "Macros.h"
 
 // #import "IncludeSwift.h"
 
 // @class ShellParser;
 
-auto EXTREME_VERBOSE = true;
+auto EXTREME_VERBOSE = false;
 
-string AdbExecutor::execute(AdbExecutorProperties *properties) {
-	NSLog(@"DD");
+string AdbExecutor::execute(shared_ptr<AdbExecutorProperties> properties) {
 	auto resourcePath = NSBundle.mainBundle.resourcePath;
 	auto fileManager = NSFileManager.defaultManager;
 	id adbPath = [[NSMutableString alloc] init];
 	[adbPath appendString:resourcePath];
 	[adbPath appendString:@"/adb"];
+	// TODO: Move this out...
 	auto fileExists = [fileManager fileExistsAtPath:adbPath];
-	NSLog(@"File Exists, %d", fileExists);
-    auto escape = [MacHelper convert:StringResource::SINGLE_QUOTES];
+	// NSLog(@"File Exists, %d", fileExists);
+    auto escape = convert(StringResource::SINGLE_QUOTES);
 
     NSArray<NSString *> *adbArgsArray;
 
 	switch(properties->executionType) {
 		case AdbExecutionType::Full: {
-			adbArgsArray = @[@"./adb ", [MacHelper convert: properties->attributes]];
+			adbArgsArray = @[@"./adb ", convert(properties->attributes)];
 			break;
 		}
 		case AdbExecutionType::Shell: {
-			adbArgsArray = @[@"./adb -s ", [MacHelper convert:deviceId], @" shell ", escape, [MacHelper convert: properties->attributes], escape];
+			adbArgsArray = @[@"./adb -s ", convert(deviceId), @" shell ", escape, convert(properties->attributes), escape];
 			break;
 		}
 	}
@@ -47,7 +47,7 @@ string AdbExecutor::execute(AdbExecutorProperties *properties) {
 void AdbExecutor::killAdbIfRunning() {
     auto commands = @"killall -9 adb";
     auto task = [[NSTask alloc] init];
-    auto adbLaunchPath = [MacHelper convert:"/bin/bash"];
+    auto adbLaunchPath = convert("/bin/bash");
     task.launchPath = adbLaunchPath;
     task.arguments = @[@"-l", @"-c", commands];
     [task launch];
@@ -57,10 +57,10 @@ void AdbExecutor::killAdbIfRunning() {
 void AdbExecutor::startAdbIfNotStarted() {
     auto commands = @"./adb start-server";
     auto task = [[NSTask alloc] init];
-    auto adbLaunchPath = [MacHelper convert:"/bin/bash"];
+    auto adbLaunchPath = convert("/bin/bash");
     task.launchPath = adbLaunchPath;
     task.arguments = @[@"-l", @"-c", commands];
-    task.currentDirectoryPath = [MacHelper convert: adbDirectoryPath];
+    task.currentDirectoryPath = convert( adbDirectoryPath);
     [task launch];
     [task waitUntilExit];
 }
@@ -69,10 +69,10 @@ string AdbExecutor::executeAdb(string commands) {
     //killAdbIfRunning();
     startAdbIfNotStarted();
     auto task = [[NSTask alloc] init];
-    auto adbLaunchPath = [MacHelper convert:"/bin/bash"];
+    auto adbLaunchPath = convert("/bin/bash");
     task.launchPath = adbLaunchPath;
-    task.arguments = @[@"-l", @"-c", [MacHelper convert: commands]];
-    task.currentDirectoryPath = [MacHelper convert: adbDirectoryPath];
+    task.arguments = @[@"-l", @"-c", convert( commands)];
+    task.currentDirectoryPath = convert(adbDirectoryPath);
     
     auto pipe = [[NSPipe alloc] init];
     task.standardOutput = pipe;
@@ -81,7 +81,7 @@ string AdbExecutor::executeAdb(string commands) {
     auto data = [[pipe fileHandleForReading] readDataToEndOfFile];
     auto output = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     if (EXTREME_VERBOSE) {
-        NSLog(@"AdbExecutor, Commands: %@", [MacHelper convert: commands]);
+        NSLog(@"AdbExecutor, Commands: %@", convert(commands));
     }
     // if (EXTREME_VERBOSE) {
     //     NSLog(@"AdbExecutor, %@", output);
@@ -99,18 +99,6 @@ void AdbExecutor::setDeviceId(const string &deviceId) {
 		NSLog(@"Warning, Same device!");
 		return;
 	}
-	NSLog(@"New Device: %@, old: %@", [MacHelper convert:deviceId], [MacHelper convert:AdbExecutor::deviceId]);
+	NSLog(@"New Device: %@, old: %@", convert(deviceId), convert(AdbExecutor::deviceId));
 	AdbExecutor::deviceId = deviceId;
-	// AdbExecutorProperties *properties = new AdbExecutorProperties();
-	// properties->attributes = ShellScripts::SHELL_TYPE_COMMAND;
-	// properties->executionType = AdbExecutionType::Shell; 
-    // auto data = [ShellParser cleanString: [MacHelper convert:execute(properties)]].UTF8String;
-	// if (data == StringResource::GNU_TYPE) {
-	// 	CommandConfig::shellType = ShellType::Gnu;
-	// } else if (data == StringResource::BSD_TYPE) {
-	// 	CommandConfig::shellType = ShellType::Bsd;
-	// } else {
-	// 	CommandConfig::shellType = ShellType::Solaris;
-	// }
-	// NSLog(@"New Shell Type: %@, %d", [MacHelper convert:data], CommandConfig::shellType);
 }

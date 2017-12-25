@@ -1,18 +1,21 @@
 //
-//  StorageListCommand.cpp
+//  FileExistsCommand.cpp
 //  Dragon Android Transfer
 //
 //  Created by Kishan P Rao on 25/12/17.
 //  Copyright © 2017 Kishan P Rao. All rights reserved.
 //
 
-#include "StorageListCommand.hpp"
+#include "FileExistsCommand.hpp"
+#include "StringResource.h"
 #include <iostream>
-#include "AdbExecutorProperties.h"
 
-std::string StorageListCommand::execute() {
-    std::string commands = "devices";
-    std::cout<<"Adb List Storage, Command:"<<commands<<std::endl;
+std::string FileExistsCommand::execute() {
+    std::string quotes = StringResource::ESCAPE_DOUBLE_QUOTES;
+    std::string commands = "";
+    commands = commands + "[ -" + (isFile ? "f" : "d") + " " + quotes + filePath + quotes + " ]" +
+				" && echo " + quotes + StringResource::EXIST + quotes +
+				" || echo " + quotes + StringResource::NOT_EXIST + quotes;
     if (executor) {
         auto properties = make_shared<AdbExecutorProperties>();
         properties->attributes = commands;

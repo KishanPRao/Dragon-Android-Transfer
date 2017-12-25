@@ -15,7 +15,7 @@
 
 class DeviceListCommand : public AdbCommand {
 public:
-	DeviceListCommand(AdbExecutor *executor) : AdbCommand(executor) {}
+	DeviceListCommand(shared_ptr<AdbExecutor> executor) : AdbCommand(executor) {}
 
     std::string execute() override;
 };

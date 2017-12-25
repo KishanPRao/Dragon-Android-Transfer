@@ -22,15 +22,27 @@
  */
 // TODO: Check if possible to convert as C++ class.
 @interface AndroidAdbHandler : NSObject
-@property (nonatomic, retain) NSString *deviceId;
-@property (nonatomic, retain) NSString *adbDirectoryPath;
- //@property (nonatomic, retain) AdbExecutor *executor;
+@property(nonatomic, retain) AndroidDevice *device;
+@property(nonatomic, retain) NSString *adbDirectoryPath;
+//@property (nonatomic, retain) AdbExecutor *executor;
 
 //AdbExecutor *executor;
 
 - (id)initWithDirectory:(NSString *)adbDirectoryPath;
 
-- (NSArray<BaseFile *> *) getDirectoryListing: (NSString *) path;
+- (NSArray<BaseFile *> *)getDirectoryListing:(NSString *)path;
 
-- (NSArray<AndroidDevice *> * _Nonnull) getDevices;
+- (NSArray<AndroidDevice *> *_Nonnull)getDevices;
+
+- (bool)fileExists:(NSString *)path withFileType:(bool)isFile;
+
+- (bool)createNewFolder:(NSString *)path;
+
+- (void)deleteFile:(NSString *)path;
+
+- (NSString *)getTotalSpace:(NSString *)path;
+
+- (NSString *)getAvailableSpace:(NSString *)path;
+
+- (UInt64)getFileSize:(NSString *)path;
 @end

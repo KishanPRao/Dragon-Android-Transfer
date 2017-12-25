@@ -1,18 +1,20 @@
 //
-//  StorageListCommand.cpp
+//  FileSizeCommand.cpp
 //  Dragon Android Transfer
 //
 //  Created by Kishan P Rao on 25/12/17.
 //  Copyright © 2017 Kishan P Rao. All rights reserved.
 //
 
-#include "StorageListCommand.hpp"
+#include "FileSizeCommand.hpp"
+#include "StringResource.h"
+#include "ShellScripts.h"
 #include <iostream>
-#include "AdbExecutorProperties.h"
 
-std::string StorageListCommand::execute() {
-    std::string commands = "devices";
-    std::cout<<"Adb List Storage, Command:"<<commands<<std::endl;
+std::string FileSizeCommand::execute() {
+    std::string espaceDoubleQuotes = StringResource::ESCAPE_DOUBLE_QUOTES;
+    std::string commands = "";
+    commands = commands + ShellScripts::File_Size + espaceDoubleQuotes + path + espaceDoubleQuotes;
     if (executor) {
         auto properties = make_shared<AdbExecutorProperties>();
         properties->attributes = commands;

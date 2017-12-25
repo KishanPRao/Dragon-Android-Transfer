@@ -26,6 +26,13 @@
 		50815BB91FF0B86C006731A4 /* DeviceListCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50815BB71FF0B86C006731A4 /* DeviceListCommand.cpp */; };
 		50815BBC1FF0D298006731A4 /* DeviceInfoCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50815BBA1FF0D298006731A4 /* DeviceInfoCommand.cpp */; };
 		50815BC41FF103D3006731A4 /* StorageListCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50815BC21FF103D3006731A4 /* StorageListCommand.cpp */; };
+		50815BC71FF10D8A006731A4 /* SimpleAdbCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50815BC51FF10D8A006731A4 /* SimpleAdbCommand.cpp */; };
+		50815BCB1FF11307006731A4 /* FileExistsCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50815BC91FF11307006731A4 /* FileExistsCommand.cpp */; };
+		50815BCE1FF11DC4006731A4 /* NewFolderCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50815BCC1FF11DC4006731A4 /* NewFolderCommand.cpp */; };
+		50815BD11FF11FD6006731A4 /* DeleteCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50815BCF1FF11FD6006731A4 /* DeleteCommand.cpp */; };
+		50815BD71FF1263E006731A4 /* TotalSpaceCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50815BD51FF1263E006731A4 /* TotalSpaceCommand.cpp */; };
+		50815BDA1FF1264C006731A4 /* AvailableSpaceCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50815BD81FF1264C006731A4 /* AvailableSpaceCommand.cpp */; };
+		50815BDD1FF12F97006731A4 /* FileSizeCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50815BDB1FF12F97006731A4 /* FileSizeCommand.cpp */; };
 		50916CBF1FF006AB00A83976 /* MacHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 50916CBE1FF006AB00A83976 /* MacHelper.mm */; };
 		50916CC11FF027D800A83976 /* ShellParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50916CC01FF027D800A83976 /* ShellParser.swift */; };
 		50B020341FE986C500989BA4 /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B020331FE986C500989BA4 /* CollectionExtension.swift */; };
@@ -195,6 +202,21 @@
 		50815BC11FF102A8006731A4 /* IncludeSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IncludeSwift.h; sourceTree = "<group>"; };
 		50815BC21FF103D3006731A4 /* StorageListCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StorageListCommand.cpp; sourceTree = "<group>"; };
 		50815BC31FF103D3006731A4 /* StorageListCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StorageListCommand.hpp; sourceTree = "<group>"; };
+		50815BC51FF10D8A006731A4 /* SimpleAdbCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleAdbCommand.cpp; sourceTree = "<group>"; };
+		50815BC61FF10D8A006731A4 /* SimpleAdbCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SimpleAdbCommand.hpp; sourceTree = "<group>"; };
+		50815BC81FF11144006731A4 /* BridgeHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgeHelper.h; sourceTree = "<group>"; };
+		50815BC91FF11307006731A4 /* FileExistsCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileExistsCommand.cpp; sourceTree = "<group>"; };
+		50815BCA1FF11307006731A4 /* FileExistsCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FileExistsCommand.hpp; sourceTree = "<group>"; };
+		50815BCC1FF11DC4006731A4 /* NewFolderCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NewFolderCommand.cpp; sourceTree = "<group>"; };
+		50815BCD1FF11DC4006731A4 /* NewFolderCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NewFolderCommand.hpp; sourceTree = "<group>"; };
+		50815BCF1FF11FD6006731A4 /* DeleteCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DeleteCommand.cpp; sourceTree = "<group>"; };
+		50815BD01FF11FD6006731A4 /* DeleteCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DeleteCommand.hpp; sourceTree = "<group>"; };
+		50815BD51FF1263E006731A4 /* TotalSpaceCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TotalSpaceCommand.cpp; sourceTree = "<group>"; };
+		50815BD61FF1263E006731A4 /* TotalSpaceCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TotalSpaceCommand.hpp; sourceTree = "<group>"; };
+		50815BD81FF1264C006731A4 /* AvailableSpaceCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AvailableSpaceCommand.cpp; sourceTree = "<group>"; };
+		50815BD91FF1264C006731A4 /* AvailableSpaceCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AvailableSpaceCommand.hpp; sourceTree = "<group>"; };
+		50815BDB1FF12F97006731A4 /* FileSizeCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileSizeCommand.cpp; sourceTree = "<group>"; };
+		50815BDC1FF12F97006731A4 /* FileSizeCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FileSizeCommand.hpp; sourceTree = "<group>"; };
 		50916CBD1FF006AB00A83976 /* MacHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacHelper.h; sourceTree = "<group>"; };
 		50916CBE1FF006AB00A83976 /* MacHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MacHelper.mm; sourceTree = "<group>"; };
 		50916CC01FF027D800A83976 /* ShellParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShellParser.swift; sourceTree = "<group>"; };
@@ -612,6 +634,21 @@
 				50815BC11FF102A8006731A4 /* IncludeSwift.h */,
 				50815BC21FF103D3006731A4 /* StorageListCommand.cpp */,
 				50815BC31FF103D3006731A4 /* StorageListCommand.hpp */,
+				50815BC51FF10D8A006731A4 /* SimpleAdbCommand.cpp */,
+				50815BC61FF10D8A006731A4 /* SimpleAdbCommand.hpp */,
+				50815BC81FF11144006731A4 /* BridgeHelper.h */,
+				50815BC91FF11307006731A4 /* FileExistsCommand.cpp */,
+				50815BCA1FF11307006731A4 /* FileExistsCommand.hpp */,
+				50815BCC1FF11DC4006731A4 /* NewFolderCommand.cpp */,
+				50815BCD1FF11DC4006731A4 /* NewFolderCommand.hpp */,
+				50815BCF1FF11FD6006731A4 /* DeleteCommand.cpp */,
+				50815BD01FF11FD6006731A4 /* DeleteCommand.hpp */,
+				50815BD51FF1263E006731A4 /* TotalSpaceCommand.cpp */,
+				50815BD61FF1263E006731A4 /* TotalSpaceCommand.hpp */,
+				50815BD81FF1264C006731A4 /* AvailableSpaceCommand.cpp */,
+				50815BD91FF1264C006731A4 /* AvailableSpaceCommand.hpp */,
+				50815BDB1FF12F97006731A4 /* FileSizeCommand.cpp */,
+				50815BDC1FF12F97006731A4 /* FileSizeCommand.hpp */,
 			);
 			path = Command;
 			sourceTree = "<group>";
@@ -1017,12 +1054,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				503B88541F928944004E6417 /* StringExtension.swift in Sources */,
+				50815BDD1FF12F97006731A4 /* FileSizeCommand.cpp in Sources */,
+				50815BD71FF1263E006731A4 /* TotalSpaceCommand.cpp in Sources */,
 				BE3BDE084524366D5F702AFC /* AndroidDevice.swift in Sources */,
 				50916CC11FF027D800A83976 /* ShellParser.swift in Sources */,
 				BE3BDC57F874BAFD8C7076B1 /* AppDelegate.swift in Sources */,
 				BE3BD7DAF4A0DEDEBB668109 /* DimenUtils.swift in Sources */,
 				50B020341FE986C500989BA4 /* CollectionExtension.swift in Sources */,
 				BE3BD3CF4A98FDDACABFF93A /* ColorUtils.swift in Sources */,
+				50815BDA1FF1264C006731A4 /* AvailableSpaceCommand.cpp in Sources */,
 				BE3BDA227C3660B22686716F /* SizeUtils.swift in Sources */,
 				BE3BD37C280AAD9C969F3243 /* TimeUtils.swift in Sources */,
 				50293DF61FEFBF0B00B06B14 /* BaseFile.swift in Sources */,
@@ -1033,6 +1073,7 @@
 				BE3BDCC039E34A76B2BA261E /* DragUtils.swift in Sources */,
 				BE3BD5AB49B16745D9602A4A /* AndroidViewController.swift in Sources */,
 				BE3BD247789B6C3497AF10EA /* OverlayView.swift in Sources */,
+				50815BCE1FF11DC4006731A4 /* NewFolderCommand.cpp in Sources */,
 				BE3BD094F0C2183A46CDD6E3 /* ProgressView.swift in Sources */,
 				BE3BDA30B26F35C7C23F9B56 /* IndeterminateProgressView.swift in Sources */,
 				50293DF81FEFBF2A00B06B14 /* BaseFileType.swift in Sources */,
@@ -1047,9 +1088,11 @@
 				BE3BD5D597FE4AA22E298EFB /* CustomSwiftAnimator.swift in Sources */,
 				BE3BD284856999A467420E8C /* DisabledTextField.swift in Sources */,
 				BE3BDFCBE0994AEA0312BA2D /* DragNotificationDelegate.swift in Sources */,
+				50815BC71FF10D8A006731A4 /* SimpleAdbCommand.cpp in Sources */,
 				BE3BD1B87F638080742BF2CD /* DragUiDelegate.swift in Sources */,
 				BE3BD1160DCBB842CAF018B2 /* DraggableTableView.swift in Sources */,
 				50916CBF1FF006AB00A83976 /* MacHelper.mm in Sources */,
+				50815BD11FF11FD6006731A4 /* DeleteCommand.cpp in Sources */,
 				BE3BDA1B26C25B694341E27B /* DraggableItem.swift in Sources */,
 				BE3BD756779B9E066ABD34FA /* SegueFromLeft.swift in Sources */,
 				BE3BDD40E7D724B613AFB166 /* SelectableTableRowView.swift in Sources */,
@@ -1074,6 +1117,7 @@
 				50815BC41FF103D3006731A4 /* StorageListCommand.cpp in Sources */,
 				BE3BDF591FD15632655D6C53 /* BridgingUtils.m in Sources */,
 				BE3BD9899E224C1509824C6F /* AlertUtils.m in Sources */,
+				50815BCB1FF11307006731A4 /* FileExistsCommand.cpp in Sources */,
 				BE3BD4A6E7500A522D7CCAA1 /* ListCommand.cpp in Sources */,
 				BE3BDB93125B4F8F31159F09 /* AndroidAdbHandler.mm in Sources */,
 				BE3BD79FFCADF3ADE0702CF5 /* CommandFactory.cpp in Sources */,

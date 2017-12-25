@@ -11,7 +11,7 @@
 #include "ShellScripts.h"
 #include "AdbExecutorProperties.h"
 
-ListCommand::ListCommand(std::string directoryName, AdbExecutor *executor) : AdbCommand(executor) {
+ListCommand::ListCommand(std::string directoryName, shared_ptr<AdbExecutor> executor) : AdbCommand(executor) {
 	ListCommand::directoryName = directoryName;
 }
 
@@ -36,14 +36,13 @@ std::string ListCommand::execute() {
 	commands = commands + "cd " + espaceDoubleQuotes + directoryName + espaceDoubleQuotes + "; ls | for name in *; do echo " + name +
 			"; if [ -d " + name + " ]; then echo " + espaceDoubleQuotes + StringResource::DIRECTORY_TYPE + espaceDoubleQuotes + "; echo \"0\"; else echo " + espaceDoubleQuotes + StringResource::FILE_TYPE + espaceDoubleQuotes + "; " + ShellScripts::LS_FILE_SIZE_COMMAND + " " + name + "; fi; done;";
 	
-	std::cout<<"Adb List Data"<<directoryName<<", Command:"<<commands;
+	std::cout<<"Adb List Data"<<directoryName<<", Command:"<<commands<<std::endl;
 //	let output = adbShell(commands)
 	if (executor) {
-		AdbExecutorProperties *properties = new AdbExecutorProperties();
+        auto properties = make_shared<AdbExecutorProperties>();
 		properties->attributes = commands;
 		properties->executionType = AdbExecutionType::Shell;
 		auto data = executor->execute(properties);
-		delete properties;
 		return data;
 	}
 	std::cout<<"Warning, no executor"<<std::endl;

@@ -12,10 +12,12 @@ import Cocoa
 public class AndroidDevice: NSObject {
 	var id : String = ""
 	var name : String = ""
+	var externalStorages = [String]()
 	
-	init(id: String, name: String) {
+	init(id: String, name: String, externalStorages: [String] = []) {
 		self.id = id
 		self.name = name
+		self.externalStorages = externalStorages
 	}
 	
     override public var description: String { return "AndroidDevice" + ": \(id, name)" }

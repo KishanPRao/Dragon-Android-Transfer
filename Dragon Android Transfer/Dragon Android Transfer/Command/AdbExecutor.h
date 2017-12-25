@@ -30,7 +30,7 @@ public:
     
     void killAdbIfRunning();
 	
-	string execute(AdbExecutorProperties *properties);
+	string execute(shared_ptr<AdbExecutorProperties> properties);
 };
 
 

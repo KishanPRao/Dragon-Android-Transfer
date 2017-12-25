@@ -15,15 +15,15 @@
 class CommandFactory {
 	std::string directoryName;
 	
-    AdbExecutor *executor;
+    shared_ptr<AdbExecutor> executor;
     
 public:
 	
 	void setDirectoryName(const std::string &directoryName);
     
-    void setExecutor(AdbExecutor *executor);
+    void setExecutor(shared_ptr<AdbExecutor> executor);
 	
-	Command *getCommand(CommandType type);
+	shared_ptr<Command> getCommand(CommandType type);
 };
 
 

@@ -6,10 +6,10 @@
 #include "CommandFactory.h"
 #include "ListCommand.h"
 
-Command *CommandFactory::getCommand(CommandType type) {
+shared_ptr<Command> CommandFactory::getCommand(CommandType type) {
 	switch (type) {
 		case List: {
-			return new ListCommand(directoryName, executor);
+			return make_shared<ListCommand>(directoryName, executor);
 		}
 	}
 	return nullptr;
@@ -19,6 +19,6 @@ void CommandFactory::setDirectoryName(const std::string &directoryName) {
     CommandFactory::directoryName = directoryName;
 }
 
-void CommandFactory::setExecutor(AdbExecutor *executor) {
+void CommandFactory::setExecutor(shared_ptr<AdbExecutor> executor) {
     CommandFactory::executor = executor;
 }

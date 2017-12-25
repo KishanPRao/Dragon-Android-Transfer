@@ -38,6 +38,20 @@ namespace ShellScripts {
 
 	static std::string BSD_LS_SIZE = GNU_LS_SIZE;
 	static std::string SOLARIS_LS_SIZE = GNU_LS_FILE_SIZE + SOLARIS_LS_SIZE_COMMAND + "ls | for name in *; do echo \"$name\"; if [ -d \"$name\" ]; then echo \"DIRECTORY\"; SOLARIS_LS \"$name\"; else echo \"FILE\"; LS_FILE \"$name\"; fi; done;";
+    
+    static std::string STORAGE_LIST_INFO = "cd /storage; ls -l;";
+    static std::string STORAGE_LIST = "cd /storage; ls;";
+    
+    static std::string Gnu_Disk = "df -k ";
+    static std::string Bsd_Disk = Gnu_Disk;
+    static std::string Solaris_Disk = "df ";
+    
+    static std::string File_Size = "du -sk ";
+    /*
+    static std::string Gnu_File_Size = "du -sk ";
+    static std::string Bsd_File_Size = Gnu_Disk;
+    static std::string Solaris_File_Size = "df ";
+     */
 };
 
 

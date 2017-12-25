@@ -15,7 +15,7 @@
 class DeviceInfoCommand : public AdbCommand {
     std::string deviceId;
 public:
-    DeviceInfoCommand(std::string deviceId, AdbExecutor *executor);
+    DeviceInfoCommand(std::string deviceId, shared_ptr<AdbExecutor> executor);
     
     std::string execute() override;
 };

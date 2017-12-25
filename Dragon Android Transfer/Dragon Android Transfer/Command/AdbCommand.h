@@ -14,9 +14,9 @@
 
 class AdbCommand : public Command {
 protected:
-	AdbExecutor *executor;
+	shared_ptr<AdbExecutor> executor;
 
-	AdbCommand(AdbExecutor *executor) {
+	AdbCommand(shared_ptr<AdbExecutor> executor) {
 		AdbCommand::executor = executor;
 	}
 };

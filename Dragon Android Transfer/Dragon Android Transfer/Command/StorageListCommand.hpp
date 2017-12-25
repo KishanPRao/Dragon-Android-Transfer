@@ -14,7 +14,7 @@
 
 class StorageListCommand : public AdbCommand {
 public:
-    StorageListCommand(AdbExecutor *executor) : AdbCommand(executor) {}
+    StorageListCommand(shared_ptr<AdbExecutor> executor) : AdbCommand(executor) {}
     
     std::string execute() override;
 };

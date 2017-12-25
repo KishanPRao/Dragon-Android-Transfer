@@ -14,7 +14,7 @@ class ListCommand : public AdbCommand {
 	std::string directoryName;
 
 public:
-	ListCommand(std::string, AdbExecutor *executor);
+	ListCommand(std::string, shared_ptr<AdbExecutor> executor);
 //	Command* newCommand();
 	
 	std::string execute() override;

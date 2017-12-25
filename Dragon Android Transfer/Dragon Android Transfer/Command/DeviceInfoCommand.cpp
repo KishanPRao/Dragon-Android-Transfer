@@ -10,19 +10,18 @@
 #include <iostream>
 #include "AdbExecutorProperties.h"
 
-DeviceInfoCommand::DeviceInfoCommand(std::string deviceId, AdbExecutor *executor) : AdbCommand(executor) {
+DeviceInfoCommand::DeviceInfoCommand(std::string deviceId, shared_ptr<AdbExecutor> executor) : AdbCommand(executor) {
     DeviceInfoCommand::deviceId = deviceId;
 }
 
 std::string DeviceInfoCommand::execute() {
     std::string commands = "-s " + deviceId + " shell getprop ro.product.model";
-    std::cout<<"Adb List Devices, Command:"<<commands;
+    // std::cout<<"Adb Device Info, Command:"<<commands<<std::endl;
     if (executor) {
-		AdbExecutorProperties *properties = new AdbExecutorProperties();
+		auto properties = make_shared<AdbExecutorProperties>();
 		properties->attributes = commands;
 		properties->executionType = AdbExecutionType::Full;
 		auto data = executor->execute(properties);
-		delete properties;
 		return data;
 	}
     std::cout<<"Warning, no executor"<<std::endl;

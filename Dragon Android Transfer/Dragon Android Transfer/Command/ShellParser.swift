@@ -11,6 +11,8 @@ import Foundation
 
 @objc
 public class ShellParser : NSObject {
+    static let EXTREME_VERBOSE = false
+    static let BLOCK_SIZE_IN_FLOAT = Float(1024)
     
     static fileprivate func splitLines(_ string: String) -> [String] {
         return string.characters.split {
@@ -22,8 +24,7 @@ public class ShellParser : NSObject {
         return str.contains(HandlerConstants.DIRECTORY) || str.contains(HandlerConstants.FILE);
     }
     
-    public static func parseListOutput(_ data: String) -> [BaseFile] {
-        let EXTREME_VERBOSE = false
+    public static func parseListOutput(_ data: String, currentPath: String) -> [BaseFile] {
         let listString = data;
         var directories: [BaseFile] = [];
         let outputInLines = splitLines(listString)
@@ -68,8 +69,7 @@ public class ShellParser : NSObject {
             } else {
                 sizeInKiloBytes = 0
             }
-            //directories.append(BaseFile.init(fileName: name, path: currentPath, type: fileType, size: sizeInKiloBytes))
-            directories.append(BaseFile.init(fileName: name, path: "", type: fileType, size: sizeInKiloBytes))
+            directories.append(BaseFile.init(fileName: name, path: currentPath, type: fileType, size: sizeInKiloBytes))
             i = i + 1
         }
         if (EXTREME_VERBOSE) {
@@ -97,6 +97,106 @@ public class ShellParser : NSObject {
             i = i + 1
         }
         return androidDevices
+    }
+    
+    @objc
+	public static func parseStorageOutput(_ fileNames: String, info output: String) -> Array<String> {
+		var directories = [] as Array<String>
+		let outputLines = splitLines(output)
+		let fileNamesLines = splitLines(fileNames)
+		var skipLines = 0
+		if (outputLines.count > 0 && outputLines[0].hasPrefix("total")) {
+			skipLines = 1
+		}
+		var i = skipLines
+		while (i < outputLines.count) {
+			let line = outputLines[i]
+			if (!line.contains("self") && !line.contains("emulated") && !line.contains("system")) {
+				directories.append("/storage/" + fileNamesLines[i - skipLines])
+			}
+			i = i + 1
+		}
+		return directories
+    }
+
+	private static func parseSpaceOutput(_ output: String) -> [String] {
+		let outputInLines = splitLines(output)
+		if (outputInLines.count < 2) {
+			print("Cannot update!")
+			return []
+		}
+		let outputInTabs = outputInLines[1].characters.split {
+			$0 == " "
+		}.map(String.init)
+		return outputInTabs
+	} 
+    
+    @objc
+    public static func parseTotalSpace(_ output: String) -> String {
+		var spaceInString = "0B"
+		let outputInTabs = parseSpaceOutput(output)
+		if (outputInTabs.count == 0) {
+			return spaceInString
+		}
+		if let totalSpaceInInt = UInt64(outputInTabs[1]) {
+//			totalSpace = totalSpaceInInt * UInt64(BLOCK_SIZE_IN_FLOAT)
+			spaceInString = SizeUtils.getBytesInFormat(totalSpaceInInt * UInt64(BLOCK_SIZE_IN_FLOAT))
+		} else {
+//			Solaris
+			spaceInString = outputInTabs[1] + "B"
+		}
+		if (EXTREME_VERBOSE) {
+//			print("Output:", outputInTabs)
+		}
+		if (EXTREME_VERBOSE) {
+//			print("Total:", totalSpace)
+		}
+		return spaceInString
+    }
+    
+    @objc
+    public static func parseAvailableSpace(_ output: String) -> String {
+		var spaceInString = "0B"
+		let outputInTabs = parseSpaceOutput(output)
+		if (outputInTabs.count == 0) {
+			return spaceInString
+		}
+		if let totalSpaceInInt = UInt64(outputInTabs[1]) {
+			if let usedSpaceInInt = UInt64(outputInTabs[2]) {
+				let availableSpaceInInt = (totalSpaceInInt - usedSpaceInInt) * UInt64(BLOCK_SIZE_IN_FLOAT) as UInt64
+				spaceInString = SizeUtils.getBytesInFormat(availableSpaceInInt)
+			}
+		} else {
+//			Solaris
+			spaceInString = outputInTabs[3] + "B"
+		}
+		return spaceInString
+    }
+    
+    @objc
+    public static func parseFileExists(_ rawOutput: String) -> Bool {
+		let output = rawOutput.replacingOccurrences(of: "\r\n", with: "").replacingOccurrences(of: "\n", with: "")
+		let exists = (output == HandlerConstants.EXIST)
+		Swift.print("AndroidHandler, exists:", exists)
+		return exists
+    }
+    
+    @objc
+    public static func parseFileSize(_ rawOutput: String) -> UInt64 {
+		let maxSizeInMBytes = UInt64.max / 1024
+		var sizeInBytes = UInt64.max as UInt64
+		let sizeStringArray = rawOutput.characters.split {
+			$0 == " " || $0 == "\t"
+		}.map(String.init)
+		if sizeStringArray.count > 0, let sizeInInt = UInt64(sizeStringArray[0]) {
+			sizeInBytes = sizeInInt
+			if (sizeInBytes > maxSizeInMBytes) {
+				sizeInBytes = UInt64.max
+			} else {
+				sizeInBytes = sizeInBytes * 1024
+			}
+		}
+		return sizeInBytes
     }
     
     @objc

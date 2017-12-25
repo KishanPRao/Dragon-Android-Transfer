@@ -19,6 +19,10 @@ namespace StringResource {
 //	TODO: Make it more specific.
 	static std::string DIRECTORY_TYPE = "DT_DAT_DIRECTORY";
 	static std::string FILE_TYPE = "DT_DAT_FILE";
+
+	static std::string SEPARATOR = "/";
+	static std::string EXIST = "DT_EXIST";
+	static std::string NOT_EXIST = "DT_NOT_EXIST";
 };
 
 

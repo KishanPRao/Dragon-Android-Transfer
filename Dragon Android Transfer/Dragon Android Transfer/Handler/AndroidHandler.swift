@@ -45,7 +45,7 @@ public class AndroidHandler: NSObject {
 	
 	fileprivate var usingExternalStorage = false
 	
-	fileprivate static var sJavaType = ""
+	// fileprivate static var sJavaType = ""
 	fileprivate let espaceDoubleQuotes = StringResource.ESCAPE_DOUBLE_QUOTES
 	fileprivate static let JAVA_TYPE_COMMAND = AndroidShellScripts.JAVA_TYPE_COMMAND
     
@@ -157,28 +157,7 @@ public class AndroidHandler: NSObject {
 	}
 	
 	fileprivate func getExternalStorageDirectories() -> Array<String> {
-		var directories = [] as Array<String>
-		let output = adbShell("cd /storage; ls -l;");
-		let fileNames = adbShell("cd /storage; ls;");
-//        print("File Names:", fileNames)
-		let outputLines = splitLines(output)
-		let fileNamesLines = splitLines(fileNames)
-		var skipLines = 0
-		if (outputLines.count > 0 && outputLines[0].hasPrefix("total")) {
-			skipLines = 1
-		}
-		var i = skipLines
-//		print("Output:", outputLines)
-		while (i < outputLines.count) {
-//            print("i:", i)
-			let line = outputLines[i]
-			if (!line.contains("self") && !line.contains("emulated") && !line.contains("system")) {
-//                print("Appending:", fileNamesLines[i - skipLines]," Line:", line)
-				directories.append("/storage/" + fileNamesLines[i - skipLines])
-			}
-			i = i + 1
-		}
-		return directories
+		return activeDevice!.externalStorages
 	}
 	
 	fileprivate func splitLines(_ string: String) -> [String] {
@@ -195,7 +174,7 @@ public class AndroidHandler: NSObject {
 		activeDevice = device;
 		LogV("Active Device:", activeDevice)
 		if (activeDevice != nil) {
-			adbHandler.deviceId = (activeDevice?.id)!
+			adbHandler.device = activeDevice
 			let externalDirectories = getExternalStorageDirectories()
 			print("External Directories:", externalDirectories)
 			if (externalDirectories.count > 0) {
@@ -203,30 +182,6 @@ public class AndroidHandler: NSObject {
 			} else {
 				externalStorage = ""
 			}
-			var output = adbShell(AndroidHandler.JAVA_TYPE_COMMAND)
-			output = output.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-			LogV("AndroidHandler, Type:", output);
-			AndroidHandler.sJavaType = output
-			if (Verbose) {
-//				print("AndroidHandler, Type:", AndroidHandler.JAVA_TYPE);
-//				print("AndroidHandler, Type GNU:", StringResource.GNU_TYPE);
-//				print("AndroidHandler, equal to GNU?", AndroidHandler.JAVA_TYPE == StringResource.GNU_TYPE);
-			}
-
-//			if (Verbose) {
-//				var lsSizeCommand: String
-//				if (AndroidHandler.sJavaType == StringResource.GNU_TYPE) {
-//					lsSizeCommand = AndroidHandler.GNU_LS_SIZE
-//				} else if (AndroidHandler.sJavaType == StringResource.BSD_TYPE) {
-//					lsSizeCommand = AndroidHandler.BSD_LS_SIZE
-//				} else {
-//					lsSizeCommand = AndroidHandler.SOLARIS_LS_SIZE
-//				}
-//				lsSizeCommand = lsSizeCommand.replacingOccurrences(of: "ls |", with: "cd /sdcard; ls |")
-////				lsSizeCommand = lsSizeCommand.stringByReplacingOccurrencesOfString("ls |", withString: "cd " + currentPath + " ls |")
-//				let output1 = adbShell(lsSizeCommand)
-//				print("AndroidHandler, Size:", output1);
-//			}
 		} else {
 			externalStorage = ""
 		}
@@ -245,13 +200,7 @@ public class AndroidHandler: NSObject {
 	}
 	
 	private func exists(_ filePath: String, isFile: Bool) -> Bool {
-		let command = "[ -" + (isFile ? "f" : "d") + " " + espaceDoubleQuotes + filePath + espaceDoubleQuotes + " ]" +
-				" && echo " + espaceDoubleQuotes + HandlerConstants.EXIST + espaceDoubleQuotes +
-				" || echo " + espaceDoubleQuotes + HandlerConstants.NOT_EXIST + espaceDoubleQuotes
-		let output = adbShell(command).replacingOccurrences(of: "\r\n", with: "").replacingOccurrences(of: "\n", with: "")
-		let exists = (output == HandlerConstants.EXIST)
-		Swift.print("AndroidHandler, exists:", exists)
-		return exists
+		return adbHandler.fileExists(filePath, withFileType: isFile)
 	}
 	
 	func fileExists(_ name: String) -> Bool {
@@ -263,79 +212,27 @@ public class AndroidHandler: NSObject {
 	}
 	
 	func createNewFolder(_ folderName: String) {
-		let command = "mkdir " + espaceDoubleQuotes + currentPath + HandlerConstants.SEPARATOR + folderName + espaceDoubleQuotes
-		let _ = adbShell(command)
+		adbHandler.createNewFolder(currentPath + HandlerConstants.SEPARATOR + folderName)
 //		TODO: Need check? Success?
 	}
 	
 	func delete(_ files: Array<BaseFile>) {
 		for file in files {
-			let command = "rm -rf " + espaceDoubleQuotes + file.getFullPath() + espaceDoubleQuotes
-			LogV("Delete", file, command)
-			let _ = adbShell(command)
+			// let command = "rm -rf " + espaceDoubleQuotes + file.getFullPath() + espaceDoubleQuotes
+			// LogV("Delete", file, command)
+			// let _ = adbShell(command)
+			print("Delete, \(file.getFullPath())")
+			// TODO: TEST!!!
+			adbHandler.deleteFile(file.getFullPath())
 		}
 	}
 	
 	func updateStorage() {
-		var command: String
-		if (AndroidHandler.sJavaType == StringResource.GNU_TYPE || AndroidHandler.sJavaType == StringResource.BSD_TYPE) {
-			command = "df -k "
-		} else {
-			command = "df "
-		}
-		let output = adbShell(command + espaceDoubleQuotes + currentPath + espaceDoubleQuotes)
-		let outputInLines = splitLines(output)
-		if (outputInLines.count < 2) {
-			print("Cannot update!")
-//			totalSpace = 0
-			totalSpaceInString = "0B"
-			return
-		}
-		let outputInTabs = outputInLines[1].characters.split {
-			$0 == " "
-		}.map(String.init)
-		if let totalSpaceInInt = UInt64(outputInTabs[1]) {
-//			totalSpace = totalSpaceInInt * UInt64(BLOCK_SIZE_IN_FLOAT)
-			totalSpaceInString = SizeUtils.getBytesInFormat(totalSpaceInInt * UInt64(BLOCK_SIZE_IN_FLOAT))
-		} else {
-//			Solaris
-			totalSpaceInString = outputInTabs[1] + "B"
-		}
-		if (EXTREME_VERBOSE) {
-//			print("Output:", outputInTabs)
-		}
-		if (EXTREME_VERBOSE) {
-//			print("Total:", totalSpace)
-		}
+		totalSpaceInString = adbHandler.getTotalSpace(currentPath)
 	}
 	
 	func getAvailableSpace() -> String {
-		var command: String
-		if (AndroidHandler.sJavaType == StringResource.GNU_TYPE || AndroidHandler.sJavaType == StringResource.BSD_TYPE) {
-			command = "df -k "
-		} else {
-			command = "df "
-		}
-		var availableSpace = "0B";
-		let output = adbShell(command + espaceDoubleQuotes + currentPath + espaceDoubleQuotes)
-		let outputInLines = splitLines(output)
-		if (outputInLines.count < 2) {
-			print("Cannot update!")
-			return availableSpace
-		}
-		let outputInTabs = outputInLines[1].characters.split {
-			$0 == " "
-		}.map(String.init)
-		if let totalSpaceInInt = UInt64(outputInTabs[1]) {
-			if let usedSpaceInInt = UInt64(outputInTabs[2]) {
-				let availableSpaceInInt = (totalSpaceInInt - usedSpaceInInt) * UInt64(BLOCK_SIZE_IN_FLOAT) as UInt64
-				availableSpace = SizeUtils.getBytesInFormat(availableSpaceInInt)
-			}
-		} else {
-//			Solaris
-			availableSpace = outputInTabs[3] + "B"
-		}
-		return availableSpace
+		return adbHandler.getAvailableSpace(currentPath)
 	}
 	
 	func getTotalSpace() -> UInt64 {
@@ -354,23 +251,8 @@ public class AndroidHandler: NSObject {
 		return internalStorage
 	}
 	
-	fileprivate func getSize(_ fileName: String) -> UInt64 {
-		let maxSizeInMBytes = UInt64.max / 1024
-		let command = "du -sk " + espaceDoubleQuotes + fileName + espaceDoubleQuotes + ";"
-		let output = adbShell(command)
-		var sizeInBytes = UInt64.max as UInt64
-		let sizeStringArray = output.characters.split {
-			$0 == " " || $0 == "\t"
-		}.map(String.init)
-		if sizeStringArray.count > 0, let sizeInInt = UInt64(sizeStringArray[0]) {
-			sizeInBytes = sizeInInt
-			if (sizeInBytes > maxSizeInMBytes) {
-				sizeInBytes = UInt64.max
-			} else {
-				sizeInBytes = sizeInBytes * 1024
-			}
-		}
-		return sizeInBytes
+	fileprivate func getSize(_ filePath: String) -> UInt64 {
+		return adbHandler.getFileSize(filePath)
 	}
 	
 	func adbDevices() {
@@ -380,7 +262,9 @@ public class AndroidHandler: NSObject {
 		objc_sync_enter(self)
 		let newDevices = adbHandler.getDevices()
 		let same = containSameElements(newDevices, array2: androidDevices)
-		LogV("Same: \(same)")
+		if (TIMER_VERBOSE) {
+			LogV("Same: \(same)")
+		}
 		if (!same) {
 			androidDevices.removeAll()
 			androidDevices.append(contentsOf: newDevices)
@@ -537,17 +421,6 @@ public class AndroidHandler: NSObject {
 		}
 	}
 
-
-//    var timer: NSTimer?
-
-
-//    @objc func testComplete() {
-//        delegate?.onCompletion()
-//    }
-//
-//    var delegate: FileProgressDelegate?
-
-
 //    To Android
 	func push(_ sourceFiles: Array<BaseFile>, destination: String, delegate: FileProgressDelegate) {
 		cancelTask = false
@@ -638,7 +511,7 @@ public class AndroidHandler: NSObject {
 	
 	func openDirectoryData(_ path: String) -> Array<BaseFile>! {
 		currentPath = path
-		adbHandler.deviceId = (activeDevice?.id)!
+		adbHandler.device = activeDevice
 		return adbHandler.getDirectoryListing(path)
 	}
 	
@@ -664,12 +537,12 @@ public class AndroidHandler: NSObject {
 	}
 	
 	func updateSize(file: BaseFile) {
-		let fileName = file.path + HandlerConstants.SEPARATOR + file.fileName
+		let filePath = file.path + HandlerConstants.SEPARATOR + file.fileName
 		var size: UInt64
 		if (file.type == BaseFileType.Directory) {
-			size = getSize(fileName)
+			size = getSize(filePath)
 		} else {
-			size = getSize(fileName)
+			size = getSize(filePath)
 		}
 		
 		file.size = size
@@ -727,16 +600,17 @@ public class AndroidHandler: NSObject {
 		return []
 	}
 	
-	func isDirectory(_ fileName: String) -> Bool {
-		let directory = currentPath;
-		let commands = "cd " + espaceDoubleQuotes + directory + espaceDoubleQuotes + "; [ -d " + espaceDoubleQuotes + directory + HandlerConstants.SEPARATOR + fileName + espaceDoubleQuotes + " ] && echo \"" + HandlerConstants.DIRECTORY + "\";";
-		let output = adbShell(commands);
-		let isDir = output.contains(HandlerConstants.DIRECTORY)
-		if (Verbose) {
-			print("Dir?", directory + HandlerConstants.SEPARATOR + fileName, isDir, output, commands)
-		}
-		return isDir;
-	}
+	// TODO: Keep if used later!
+	// func isDirectory(_ fileName: String) -> Bool {
+	// 	let directory = currentPath;
+	// 	let commands = "cd " + espaceDoubleQuotes + directory + espaceDoubleQuotes + "; [ -d " + espaceDoubleQuotes + directory + HandlerConstants.SEPARATOR + fileName + espaceDoubleQuotes + " ] && echo \"" + HandlerConstants.DIRECTORY + "\";";
+	// 	let output = adbShell(commands);
+	// 	let isDir = output.contains(HandlerConstants.DIRECTORY)
+	// 	if (Verbose) {
+	// 		print("Dir?", directory + HandlerConstants.SEPARATOR + fileName, isDir, output, commands)
+	// 	}
+	// 	return isDir;
+	// }
 	
 	func getCurrentPath() -> String {
 		return currentPath
@@ -780,32 +654,6 @@ public class AndroidHandler: NSObject {
 		task.waitUntilExit()
 	}
 	
-	fileprivate func adb(_ commands: String) -> String {
-		self.startAdbIfNotStarted()
-		
-		let task = Process()
-		task.launchPath = adbLaunchPath
-		task.arguments = ["-l", "-c", commands]
-		task.currentDirectoryPath = adbDirectoryPath
-		
-		let pipe = Pipe()
-		task.standardOutput = pipe
-		
-		task.launch()
-		
-		let data = pipe.fileHandleForReading.readDataToEndOfFile()
-		let output = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
-		if (EXTREME_VERBOSE) {
-			print("Commands:", commands)
-		}
-		if (EXTREME_VERBOSE) {
-			print(output!)
-		}
-		
-		task.waitUntilExit()
-		return output! as String
-	}
-	
 	func cancelActiveTask() {
 		if (startedTask) {
 			if (activeTask != nil) {
@@ -819,6 +667,7 @@ public class AndroidHandler: NSObject {
 		cancelTask = true
 	}
 	
+	//TODO: Handle active task cancelation!!
 	fileprivate var activeTask: Process? = nil
 	fileprivate var startedTask: Bool = false
 	fileprivate var cancelTask: Bool = false
@@ -881,21 +730,6 @@ public class AndroidHandler: NSObject {
 		
 		if (Verbose) {
 			print("AndroidHandler, Launched Task");
-		}
-	}
-	
-	fileprivate func adbShell(_ commands: String) -> String {
-		if (activeDevice != nil) {
-			var adbCommand = "./adb -s " + (activeDevice?.id)!
-			adbCommand = adbCommand + " shell " + "'" + commands + "'"
-//			adbCommand = adbCommand + " shell; " + "" + commands + ""
-			if (Verbose) {
-				print("Adb Command:", adbCommand)
-			}
-			return adb(adbCommand)
-		} else {
-			print("Warning, trying shell, no active")
-			return ""
 		}
 	}
 	

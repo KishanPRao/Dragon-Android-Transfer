@@ -90,9 +90,9 @@ class TransferHandler {
 		androidHandler.terminate()
 	}
 	
-	func isDirectory(_ fileName: String) -> Bool {
+	/*func isDirectory(_ fileName: String) -> Bool {
 		return androidHandler.isDirectory(fileName)
-	}
+	}*/
 	
 	func getCurrentPath() -> String {
 		return androidHandler.getCurrentPath()
