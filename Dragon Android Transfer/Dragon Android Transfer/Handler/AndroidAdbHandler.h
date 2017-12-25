@@ -28,21 +28,21 @@
 
 //AdbExecutor *executor;
 
-- (id)initWithDirectory:(NSString *)adbDirectoryPath;
+- (id)initWithDirectory:(NSString *_Nonnull)adbDirectoryPath;
 
-- (NSArray<BaseFile *> *)getDirectoryListing:(NSString *)path;
+- (NSArray<BaseFile *> *_Nonnull)getDirectoryListing:(NSString *_Nonnull)path;
 
 - (NSArray<AndroidDevice *> *_Nonnull)getDevices;
 
-- (bool)fileExists:(NSString *)path withFileType:(bool)isFile;
+- (bool)fileExists:(NSString *_Nonnull)path withFileType:(bool)isFile;
 
-- (bool)createNewFolder:(NSString *)path;
+- (bool)createNewFolder:(NSString *_Nonnull)path;
 
-- (void)deleteFile:(NSString *)path;
+- (void)deleteFile:(NSString *_Nonnull)path;
 
-- (NSString *)getTotalSpace:(NSString *)path;
+- (NSString *_Nonnull)getTotalSpace:(NSString *_Nonnull)path;
 
-- (NSString *)getAvailableSpace:(NSString *)path;
+- (NSString *_Nonnull)getAvailableSpace:(NSString *_Nonnull)path;
 
-- (UInt64)getFileSize:(NSString *)path;
+- (UInt64)getFileSize:(NSString *_Nonnull)path;
 @end
