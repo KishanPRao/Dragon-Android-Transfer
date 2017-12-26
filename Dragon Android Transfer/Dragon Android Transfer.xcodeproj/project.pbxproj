@@ -38,6 +38,7 @@
 		BE3BD094F0C2183A46CDD6E3 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD84AE45EE7CCE8AA60E2 /* ProgressView.swift */; };
 		BE3BD09CD2A5C32377D33B33 /* ClipboardDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDB4BDA4AF8C469F2136D /* ClipboardDelegate.swift */; };
 		BE3BD0A89E6BA26358100EEE /* FileCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD50CC71E1C324A8471F4 /* FileCellView.swift */; };
+		BE3BD0BD51163ECA8A5D5591 /* AlertUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD4C7EAE158473C89B0E1 /* AlertUtils.m */; };
 		BE3BD0BFD49829866DA0F303 /* ClipboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDB097E5E3776E3C533A9 /* ClipboardViewController.swift */; };
 		BE3BD0DAFD01DF437ADDF7C9 /* DraggableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDC7CF24C3F020FF8484B /* DraggableTableView.swift */; };
 		BE3BD0E5A9B8848A8C017AD3 /* CopyDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD08ACB1E71CAFEDC0EA1 /* CopyDialog.xib */; };
@@ -104,7 +105,6 @@
 		BE3BD8AAD276BD6AB9313246 /* CustomSwiftAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD55127085F27DE775E28 /* CustomSwiftAnimator.swift */; };
 		BE3BD8EE0F08AADB11B72710 /* HelpWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD1150BDBC59E1E4EE59E /* HelpWindow.swift */; };
 		BE3BD9080982F66CADE02C28 /* HelpWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD2D5E6A92AAE4A73DF66 /* HelpWindow.xib */; };
-		BE3BD9899E224C1509824C6F /* AlertUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD29598E1B2A9F0B3D966 /* AlertUtils.m */; };
 		BE3BD997583170883563D454 /* DeleteCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD60EAFC03007A46FE2F4 /* DeleteCommand.cpp */; };
 		BE3BD99A586FADDBD3B7DDCF /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD84AE45EE7CCE8AA60E2 /* ProgressView.swift */; };
 		BE3BD9C6949E9F5050D4D401 /* ThreadUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDC1EC5EA8A5A0A17A378 /* ThreadUtils.swift */; };
@@ -142,12 +142,12 @@
 		BE3BDDEBA7F8D5119F29144D /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD8B0BBFD2BD4175F63BB /* folder.png */; };
 		BE3BDE084524366D5F702AFC /* AndroidDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD86C2E85315AA443F20A /* AndroidDevice.swift */; };
 		BE3BDE253D33B4305FAEE9B7 /* ColoredPopUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD79CDF38FD2B656A1939 /* ColoredPopUpButton.swift */; };
+		BE3BDE555397795773311960 /* BridgingUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDC0D7F0FFFD893AB4949 /* BridgingUtils.m */; };
 		BE3BDE7135AD38A94E9209FA /* AndroidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD024937FCBD0DC3BF232 /* AndroidViewController.swift */; };
 		BE3BDEE6CC7666AF909D26CC /* AndroidShellResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDEF99F9695AD6D7B4402 /* AndroidShellResource.swift */; };
 		BE3BDEEB194C92E6EEB01070 /* TransferHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDD843B295FEB7CB9CE4F /* TransferHandler.swift */; };
 		BE3BDF047032EC260FC573A1 /* CopyDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD08ACB1E71CAFEDC0EA1 /* CopyDialog.xib */; };
 		BE3BDF0DB532B65C04E311BD /* SimpleAdbCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDD930E20C1CA43BD528C /* SimpleAdbCommand.cpp */; };
-		BE3BDF591FD15632655D6C53 /* BridgingUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD8C00FE5EABB3CA29B9A /* BridgingUtils.m */; };
 		BE3BDFA6B9ED9545B157F47D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDF2646B4FF28CCC5B703 /* Constants.swift */; };
 		BE3BDFCBE0994AEA0312BA2D /* DragNotificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD2D92E07142A60E60248 /* DragNotificationDelegate.swift */; };
 		BE3BDFCE24CB423E5C753535 /* BaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDE295CD9D91FD872081A /* BaseExtension.swift */; };
@@ -218,7 +218,6 @@
 		BE3BD263FE3F94CE594A7D20 /* update_sizes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = update_sizes.png; sourceTree = "<group>"; };
 		BE3BD2875903A42BC4C0796F /* Command.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Command.h; sourceTree = "<group>"; };
 		BE3BD29026A99094C920C8AB /* FileExistsCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileExistsCommand.cpp; sourceTree = "<group>"; };
-		BE3BD29598E1B2A9F0B3D966 /* AlertUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertUtils.m; sourceTree = "<group>"; };
 		BE3BD2AD7E6A6347242F4DE3 /* ShellParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShellParser.swift; sourceTree = "<group>"; };
 		BE3BD2D5E6A92AAE4A73DF66 /* HelpWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HelpWindow.xib; sourceTree = "<group>"; };
 		BE3BD2D92E07142A60E60248 /* DragNotificationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragNotificationDelegate.swift; sourceTree = "<group>"; };
@@ -228,8 +227,10 @@
 		BE3BD40F65CD987713945D5D /* MacHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MacHelper.mm; sourceTree = "<group>"; };
 		BE3BD431720CB9D13DE2112A /* DeviceListCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DeviceListCommand.hpp; sourceTree = "<group>"; };
 		BE3BD461BEC6F7B580117F1B /* DragUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragUtils.swift; sourceTree = "<group>"; };
+		BE3BD46BD96C21CADA642E50 /* BridgingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingUtils.h; sourceTree = SOURCE_ROOT; };
 		BE3BD49D37DA7B7C884576E7 /* TotalSpaceCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TotalSpaceCommand.cpp; sourceTree = "<group>"; };
 		BE3BD4BE8B8D95E327B543B9 /* IndeterminateProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndeterminateProgressView.swift; sourceTree = "<group>"; };
+		BE3BD4C7EAE158473C89B0E1 /* AlertUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertUtils.m; sourceTree = SOURCE_ROOT; };
 		BE3BD4CF42CD0C36BF15D950 /* PrintUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintUtils.swift; sourceTree = "<group>"; };
 		BE3BD50CC71E1C324A8471F4 /* FileCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileCellView.swift; sourceTree = "<group>"; };
 		BE3BD5400EDCE113E397EA1F /* ClipboardTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipboardTableCellView.swift; sourceTree = "<group>"; };
@@ -252,13 +253,11 @@
 		BE3BD7E881A82B0C8CCA96A5 /* ColoredButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColoredButton.swift; sourceTree = "<group>"; };
 		BE3BD7F1239BA6A5E7685902 /* ColorUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorUtils.swift; sourceTree = "<group>"; };
 		BE3BD7F3E98C3A92436C5F2C /* clipboard_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clipboard_icon.png; sourceTree = "<group>"; };
-		BE3BD812AC1B522A7B16961F /* AlertUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertUtils.h; sourceTree = "<group>"; };
 		BE3BD842071A151360917781 /* AndroidAdbHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AndroidAdbHandler.h; sourceTree = "<group>"; };
 		BE3BD84AE45EE7CCE8AA60E2 /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		BE3BD86117C6A1984B137A27 /* SelectableTableRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectableTableRowView.swift; sourceTree = "<group>"; };
 		BE3BD86C2E85315AA443F20A /* AndroidDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AndroidDevice.swift; sourceTree = "<group>"; };
 		BE3BD8B0BBFD2BD4175F63BB /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
-		BE3BD8C00FE5EABB3CA29B9A /* BridgingUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BridgingUtils.m; sourceTree = "<group>"; };
 		BE3BD8E83B33335EFFAE02FB /* TotalSpaceCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TotalSpaceCommand.hpp; sourceTree = "<group>"; };
 		BE3BD903231A6A691CF8F97F /* PullCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PullCommand.cpp; sourceTree = "<group>"; };
 		BE3BD93E3B1DF30EB2DB7D15 /* IncludeSwift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncludeSwift.h; sourceTree = "<group>"; };
@@ -277,6 +276,7 @@
 		BE3BDBB5E059C6147F64EDCE /* DisabledTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisabledTextField.swift; sourceTree = "<group>"; };
 		BE3BDBC1DF68ADDF6B3C551C /* ListCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCommand.h; sourceTree = "<group>"; };
 		BE3BDBDE327B0A1968AB193B /* ListCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ListCommand.cpp; sourceTree = "<group>"; };
+		BE3BDC0D7F0FFFD893AB4949 /* BridgingUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BridgingUtils.m; sourceTree = SOURCE_ROOT; };
 		BE3BDC1EC5EA8A5A0A17A378 /* ThreadUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadUtils.swift; sourceTree = "<group>"; };
 		BE3BDC7CF24C3F020FF8484B /* DraggableTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableTableView.swift; sourceTree = "<group>"; };
 		BE3BDCC4280329DAC474762E /* TimeUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeUtils.swift; sourceTree = "<group>"; };
@@ -304,10 +304,10 @@
 		BE3BDEF99F9695AD6D7B4402 /* AndroidShellResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AndroidShellResource.swift; sourceTree = "<group>"; };
 		BE3BDEFB8D195743373D18DF /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		BE3BDF2646B4FF28CCC5B703 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		BE3BDF293F20C142C74E540D /* BridgingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingUtils.h; sourceTree = "<group>"; };
 		BE3BDF2E49F9802CC53731B1 /* AdbCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdbCommand.h; sourceTree = "<group>"; };
 		BE3BDF4C3E50FACB10B4D3EF /* clipboard_icon_plain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clipboard_icon_plain.png; sourceTree = "<group>"; };
 		BE3BDF54A6C09CD7EF560DA7 /* DeviceListCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DeviceListCommand.cpp; sourceTree = "<group>"; };
+		BE3BDF6499B5281F4601029A /* AlertUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertUtils.h; sourceTree = SOURCE_ROOT; };
 		BE3BDF7F498E044C83FB0280 /* DragUiDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragUiDelegate.swift; sourceTree = "<group>"; };
 		BE3BDF9DF12733C10195D46C /* BridgeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgeHelper.h; sourceTree = "<group>"; };
 		BE3BDFC8C944CE167BADEEAC /* NewFolderCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NewFolderCommand.cpp; sourceTree = "<group>"; };
@@ -415,10 +415,6 @@
 				BE3BD1DDD71B2CB4E44E0792 /* Extension */,
 				BE3BDE8B496FC9F868312673 /* Data */,
 				BE3BDBB7A2C092DD9B019869 /* Bridge */,
-				BE3BD812AC1B522A7B16961F /* AlertUtils.h */,
-				BE3BDF293F20C142C74E540D /* BridgingUtils.h */,
-				BE3BD8C00FE5EABB3CA29B9A /* BridgingUtils.m */,
-				BE3BD29598E1B2A9F0B3D966 /* AlertUtils.m */,
 				BE3BD224063D4EC147025AC2 /* Base */,
 			);
 			path = "Dragon Android Transfer";
@@ -631,6 +627,10 @@
 		BE3BDBB7A2C092DD9B019869 /* Bridge */ = {
 			isa = PBXGroup;
 			children = (
+				BE3BD4C7EAE158473C89B0E1 /* AlertUtils.m */,
+				BE3BD46BD96C21CADA642E50 /* BridgingUtils.h */,
+				BE3BDC0D7F0FFFD893AB4949 /* BridgingUtils.m */,
+				BE3BDF6499B5281F4601029A /* AlertUtils.h */,
 			);
 			path = Bridge;
 			sourceTree = "<group>";
@@ -1141,8 +1141,6 @@
 				BE3BDD26BD56D714B0769BEB /* Dimens.swift in Sources */,
 				BE3BD5406227870BE38ACD2D /* StringResource.swift in Sources */,
 				BE3BDC1DDDC0D54EED0E1B61 /* AndroidShellResource.swift in Sources */,
-				BE3BDF591FD15632655D6C53 /* BridgingUtils.m in Sources */,
-				BE3BD9899E224C1509824C6F /* AlertUtils.m in Sources */,
 				BE3BDB93125B4F8F31159F09 /* AndroidAdbHandler.mm in Sources */,
 				BE3BDFE9AE56EA9F863D7065 /* ListCommand.cpp in Sources */,
 				BE3BD4C277570BF38157A99A /* DeviceListCommand.cpp in Sources */,
@@ -1162,6 +1160,8 @@
 				BE3BD0F4C5A7EF122AD8ADE6 /* AdbExecutorMac.mm in Sources */,
 				BE3BD18B21658A76373A84E1 /* ShellResolver.cpp in Sources */,
 				BE3BDC7A6DF3C18127CFFF78 /* ShellParser.swift in Sources */,
+				BE3BD0BD51163ECA8A5D5591 /* AlertUtils.m in Sources */,
+				BE3BDE555397795773311960 /* BridgingUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
