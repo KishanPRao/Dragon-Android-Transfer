@@ -13,15 +13,20 @@
 #include <string>
 
 class PullCommand : public AdbCommand {
-    std::string sourcePath;
-    std::string destinationPath;
+	std::string sourcePath;
+	std::string destinationPath;
+	AdbCallback callback;
+
 public:
-    PullCommand(std::string sourcePath,std::string destinationPath, shared_ptr<AdbExecutor> executor) : AdbCommand(executor) {
-        PullCommand::sourcePath = sourcePath;
-        PullCommand::destinationPath = destinationPath;
-    }
-    
-    std::string execute() override;
+	PullCommand(std::string sourcePath, std::string destinationPath, 
+			AdbCallback callback, shared_ptr<AdbExecutor> executor)
+			: AdbCommand(executor) {
+		PullCommand::sourcePath = sourcePath;
+		PullCommand::callback = callback;
+		PullCommand::destinationPath = destinationPath;
+	}
+	
+	std::string execute() override;
 };
 
 #endif /* PullCommand_hpp */

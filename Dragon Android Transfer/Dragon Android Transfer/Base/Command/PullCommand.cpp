@@ -12,19 +12,33 @@
 #include <iostream>
 
 std::string PullCommand::execute() {
-    //TODO: Block?
-    /*
     std::string espaceDoubleQuotes = StringResource::ESCAPE_DOUBLE_QUOTES;
     std::string commands = "";
-    commands = commands + ShellScripts::File_Size + espaceDoubleQuotes + path + espaceDoubleQuotes;
+    commands = commands + "cd /sdcard; ls;";
+    commands = commands + "cd /sdcard; ls;";
+    commands = commands + "cd /sdcard; ls;";
+    commands = commands + "cd /sdcard; ls;";
+    commands = commands + "cd /sdcard; ls;";
+    commands = commands + "cd /sdcard; ls;";
+    commands = commands + "cd /sdcard; ls;";
+    commands = commands + "cd /sdcard; ls;";
+    commands = commands + "cd /sdcard; ls;";
+//    commands = commands + "cd /sdcard; ls;";
+//    commands = commands + "cd /sdcard; ls;";
+//    commands = commands + "cd /sdcard; ls;";
+//    commands = commands + "cd /sdcard; ls;";
+//    commands = commands + "cd /sdcard; ls;";
+//    commands = commands + "cd /sdcard; ls;";
+//    commands = commands + "cd /sdcard; ls;";
+//    commands = commands + "cd /sdcard; ls;";
+//    commands = commands + "cd /sdcard; ls;";
     if (executor) {
         auto properties = make_shared<AdbExecutorProperties>();
         properties->attributes = commands;
-        properties->executionType = AdbExecutionType::Shell;
-        auto data = executor->execute(properties);
+        properties->executionType = AdbExecutionType::ShellAsync;
+        auto data = executor->execute(properties, callback);
         return data;
     }
     std::cout<<"Warning, no executor"<<std::endl;
-     */
     return "";
 }

@@ -9,8 +9,12 @@
 #import <string>
 #include "Macros.h"
 #include "AdbExecutorProperties.h"
+#include "AdbExecutionResult.h"
 
 using namespace std;
+
+#import <functional>
+#define AdbCallback std::function<void(std::string output, AdbExecutionResult result)>
 
 class AdbExecutor {
 private:
@@ -19,6 +23,8 @@ private:
     string adbDirectoryPath;
     
     string executeAdb(string );
+	
+    string executeAdb(string, AdbCallback);
     
     void startAdbIfNotStarted();
 	
@@ -30,7 +36,7 @@ public:
     
     void killAdbIfRunning();
 	
-	string execute(shared_ptr<AdbExecutorProperties> properties);
+	string execute(shared_ptr<AdbExecutorProperties> properties, AdbCallback callback = {});
 };
 
 

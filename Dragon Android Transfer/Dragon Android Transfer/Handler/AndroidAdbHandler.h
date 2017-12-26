@@ -4,6 +4,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AdbExecutionResult.h"
 //#import "AdbExecutor.h"
 
 //#import "Dragon_Android_Transfer-Swift.h"
@@ -45,4 +46,7 @@
 - (NSString *_Nonnull)getAvailableSpace:(NSString *_Nonnull)path;
 
 - (UInt64)getFileSize:(NSString *_Nonnull)path;
+
+//- (void) pull: (void (^)(NSString * output, enum AdbExecutionResult result))completionBlock;
+- (void)pull:(void (^)(NSInteger progress, enum AdbExecutionResult result))pullBlock;
 @end

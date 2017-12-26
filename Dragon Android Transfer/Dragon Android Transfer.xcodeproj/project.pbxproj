@@ -207,6 +207,7 @@
 		BE3BD067D7FB225535465C16 /* help.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = help.rtf; sourceTree = "<group>"; };
 		BE3BD06D3E3A4BF2B7C67C06 /* ShellScripts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShellScripts.h; sourceTree = "<group>"; };
 		BE3BD07AE75AC50256BB9815 /* CommandType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandType.h; sourceTree = "<group>"; };
+		BE3BD086D4EEF08028BB5DEE /* AdbExecutionResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdbExecutionResult.h; sourceTree = "<group>"; };
 		BE3BD08ACB1E71CAFEDC0EA1 /* CopyDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CopyDialog.xib; sourceTree = "<group>"; };
 		BE3BD0B264627D3B14AE82D0 /* AdbExecutorProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdbExecutorProperties.h; sourceTree = "<group>"; };
 		BE3BD1150BDBC59E1E4EE59E /* HelpWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpWindow.swift; sourceTree = "<group>"; };
@@ -662,6 +663,7 @@
 				BE3BD9793A76066F013F8293 /* AdbExecutorMac.mm */,
 				BE3BDE8AAFA4E6B773A0DAB6 /* AdbExecutionType.h */,
 				BE3BD0B264627D3B14AE82D0 /* AdbExecutorProperties.h */,
+				BE3BD086D4EEF08028BB5DEE /* AdbExecutionResult.h */,
 			);
 			path = Executors;
 			sourceTree = "<group>";

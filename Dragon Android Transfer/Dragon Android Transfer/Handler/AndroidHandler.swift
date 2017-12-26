@@ -182,6 +182,9 @@ public class AndroidHandler: NSObject {
 			} else {
 				externalStorage = ""
 			}
+			adbHandler.pull { progress, result in 
+				print("Pull: \(progress), \(result)")
+			 }
 		} else {
 			externalStorage = ""
 		}
