@@ -6,12 +6,14 @@
 #import <Foundation/Foundation.h>
 #import "AdbExecutionResult.h"
 //#import "AdbExecutor.h"
+#import "AdbExecutionResultWrapper.h"
 
 //#import "Dragon_Android_Transfer-Swift.h"
 
+#define TransferBlock (void (^)(NSInteger progress, enum AdbExecutionResultWrapper result))
+
 @class BaseFile;
 @class AndroidDevice;
-// @class AdbExecutor;
 
 //extern NSString * const MYSomethingHappenedNotification;
 
@@ -48,5 +50,7 @@
 - (UInt64)getFileSize:(NSString *_Nonnull)path;
 
 //- (void) pull: (void (^)(NSString * output, enum AdbExecutionResult result))completionBlock;
-- (void)pull:(void (^)(NSInteger progress, enum AdbExecutionResult result))pullBlock;
+- (void)pull:(NSString *)sourceFile toDestination:(NSString *)destination :TransferBlock transferBlock;
+
+- (void)push:(NSString *)sourceFile toDestination:(NSString *)destination :TransferBlock transferBlock;
 @end

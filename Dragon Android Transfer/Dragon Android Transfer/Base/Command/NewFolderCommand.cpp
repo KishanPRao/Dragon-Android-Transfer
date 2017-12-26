@@ -11,9 +11,9 @@
 #include <iostream>
 
 std::string NewFolderCommand::execute() {
-    std::string espaceDoubleQuotes = StringResource::ESCAPE_DOUBLE_QUOTES;
+    std::string escapeDoubleQuotes = StringResource::ESCAPE_DOUBLE_QUOTES;
     std::string commands = "";
-    commands = commands + "mkdir " + espaceDoubleQuotes + folderPath + espaceDoubleQuotes;
+    commands = commands + "mkdir " + escapeDoubleQuotes + folderPath + escapeDoubleQuotes;
     if (executor) {
         auto properties = make_shared<AdbExecutorProperties>();
         properties->attributes = commands;

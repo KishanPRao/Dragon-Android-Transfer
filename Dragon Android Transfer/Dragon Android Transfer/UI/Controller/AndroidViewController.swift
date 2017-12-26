@@ -7,30 +7,32 @@
 //
 
 import Cocoa
+
 //import AppKit
+
 import MASShortcut
 import RxSwift
 import RxCocoa
 
 class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
-    NSComboBoxDataSource, NSComboBoxDelegate, NSControlTextEditingDelegate,
-	FileProgressDelegate,
-	ClipboardDelegate, CopyDialogDelegate,
-    DragNotificationDelegate, DragUiDelegate,
-NSUserInterfaceValidations {
+		NSComboBoxDataSource, NSComboBoxDelegate, NSControlTextEditingDelegate,
+		FileProgressDelegate,
+		ClipboardDelegate, CopyDialogDelegate,
+		DragNotificationDelegate, DragUiDelegate,
+		NSUserInterfaceValidations {
 	
-    let bgScheduler = ConcurrentDispatchQueueScheduler(qos: .background)
-    let tableDelegate = DeviceTableDelegate()
-    private var _androidDirectoryItems : Array<BaseFile> = []
-    var androidDirectoryItems: Array<BaseFile> {
-        get {
-            return self._androidDirectoryItems
-        }
-        set {
-            self._androidDirectoryItems = newValue
-        	tableDelegate.setAndroidDirectoryItems(items: self._androidDirectoryItems)
-        }
-    }
+	let bgScheduler = ConcurrentDispatchQueueScheduler(qos: .background)
+	let tableDelegate = DeviceTableDelegate()
+	private var _androidDirectoryItems: Array<BaseFile> = []
+	var androidDirectoryItems: Array<BaseFile> {
+		get {
+			return self._androidDirectoryItems
+		}
+		set {
+			self._androidDirectoryItems = newValue
+			tableDelegate.setAndroidDirectoryItems(items: self._androidDirectoryItems)
+		}
+	}
 	@IBOutlet weak var fileTable: DraggableTableView!
 	@IBOutlet weak var backButton: NSButtonCell!
 	@IBOutlet weak var overlayView: OverlayView!
@@ -82,8 +84,8 @@ NSUserInterfaceValidations {
 	
 	private let mDockTile: NSDockTile = NSApplication.shared().dockTile
 	private var mDockProgress: NSProgressIndicator? = nil
-    
-    private var mCircularProgress: IndeterminateProgressView? = nil
+	
+	private var mCircularProgress: IndeterminateProgressView? = nil
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -92,131 +94,246 @@ NSUserInterfaceValidations {
 		// transferHandler.setDeviceNotificationDelegate(self)
 		
 		showGuide = transferHandler.isFirstLaunch()
-        let data = NSDataAsset.init(name: "adb")?.data
+		let data = NSDataAsset.init(name: "adb")?.data
 		transferHandler.initializeAndroid(data!)
-
+		
 		self.initUi()
 
 //		Testing:
 //		showCopyDialog()
 //		getScreenResolution()
 		transferHandler.start()
-
+		
 		observeDevices()
+		observeTransfer()
 	}
-
+	
+	private func observeTransfer() {
+		transferHandler.hasActiveTask().skip(1)
+				.observeOn(MainScheduler.instance)
+				.subscribe(onNext: { value in
+					if (value) {
+						self.fileTable.layer?.borderWidth = 0
+						AppDelegate.isPastingOperation = true
+						self.overlayView.isHidden = false;
+						self.currentCopyFile = ""
+						self.showCopyDialog()
+						self.mDockProgress?.isHidden = false
+					} else {
+//						TODO:
+						self.finished(FileProgressStatus.kStatusOk)
+					}
+				})
+//		TODO: Initially, do not call!
+		transferHandler.sizeActiveTask().skip(1)
+				.observeOn(MainScheduler.instance)
+				.subscribe(onNext: { totalSize in
+					if (self.copyDialog != nil) {
+						self.copyDialog?.setTotalCopySize(totalSize)
+					}
+				})
+		transferHandler.transferTypeActive().skip(1)
+				.observeOn(MainScheduler.instance)
+				.subscribe(onNext: { value in
+					if (self.copyDialog != nil) {
+						var transferTypeString = ""
+						if (value == TransferType.AndroidToMac) {
+							transferTypeString = "Copy From Android To Mac"
+						} else if (value == TransferType.MacToAndroid) {
+							transferTypeString = "Copy From Mac To Android"
+						}
+						self.transferType = value
+						print("Transfer Type:", transferTypeString)
+						self.copyDialog?.setTransferType(transferTypeString)
+					}
+				})
+		transferHandler.fileActiveTask().skip(1)
+				.observeOn(MainScheduler.instance)
+				.subscribe(onNext: { value in
+					let fileName = value.fileName
+					if (self.copyDialog != nil && self.currentCopyFile != fileName) {
+//            currentCopyFile = fileName
+						var files: Array<BaseFile>?
+						if (self.transferType == TransferType.AndroidToMac) {
+							files = self.transferHandler.getClipboardAndroidItems()
+						} else if (self.transferType == TransferType.MacToAndroid) {
+							files = self.transferHandler.getClipboardMacItems()
+						}
+						var i = 0
+						print("Files:", files as Any!)
+						print("File Name:", fileName)
+						self.currentCopiedSize = 0
+						while (i < files!.count) {
+							if (fileName.contains(files![i].fileName)) {
+								self.currentFile = files![i]
+								self.currentCopyFile = self.currentFile!.fileName
+								break
+							}
+							self.currentCopiedSize = self.currentCopiedSize + files![i].size
+							i = i + 1
+						}
+						print("Update Current File:", self.currentCopyFile)
+						self.copyDialog?.setCurrentTransfer(self.currentCopyFile, to: self.copyDestination)
+					}
+				})
+		transferHandler.progressActiveTask().skip(1)
+				.observeOn(MainScheduler.instance)
+				.subscribe(onNext: { progress in
+					self.progressActive(progress)
+				})
+	}
+	
+	private func progressActive(_ progress: Int) {
+		if (copyDialog != nil) {
+			print("Current File: \(currentFile)")
+			if (currentFile != nil) {
+				print("Update Prog")
+				let currentFileCopiedSize = UInt64(CGFloat(currentFile!.size) * (CGFloat(progress) / 100.0)) as UInt64
+				copyDialog?.updateCopyStatus(currentCopiedSize + currentFileCopiedSize, withProgress: CGFloat(progress))
+			}
+		}
+		mDockProgress?.doubleValue = Double(progress)
+		mDockTile.display()
+	}
+	
+	private func finished(_ status: FileProgressStatus) {
+		AppDelegate.isPastingOperation = false
+		print("Done!")
+		
+		print("End Time:", TimeUtils.getCurrentTime())
+		
+		if (status == FileProgressStatus.kStatusOk) {
+			print("Successful copy")
+			successfulOperation()
+		} else {
+			print("Canceled")
+			//TODO: Sound if canceled.
+		}
+		//TODO: Copy of Marvel's Agents of Shield problem, not disappearing. & bad progress!
+		overlayView.isHidden = true;
+		if (copyDialog != nil) {
+//            copyDialog!.rootView.removeFromSuperview()
+			copyDialog!.removeFromSuperview()
+			copyDialog = nil
+			currentFile = nil
+		}
+		mDockProgress?.isHidden = true
+		mDockTile.display()
+		refresh()
+	}
+	
 	private func observeDevices() {
-        transferHandler.observeAndroidDevices()
-			.subscribeOn(bgScheduler)
-			.observeOn(MainScheduler.instance)
-			.map {
-				devices -> ([AndroidDevice]) in
-				Swift.print("Main 1 :", ThreadUtils.isMainThread())
-				Swift.print("Observable Devices", devices)
-				self.showProgress()
-				if (!self.externalStorageButton.isHidden) {
-					self.externalStorageButton.isHidden = true
-				}
-				return devices
-			}
-			.observeOn(bgScheduler)
-				.map{
+		transferHandler.observeAndroidDevices()
+				.subscribeOn(bgScheduler)
+				.observeOn(MainScheduler.instance)
+				.map {
 					devices -> ([AndroidDevice]) in
-				Swift.print("Main 2:", ThreadUtils.isMainThread())
-				Swift.print("Observable Devices", devices)
-				var devicesNames = [] as Array<String>
-				var i = 0
-				self.androidDevices.removeAllObjects()
-				self.androidDevices.addObjects(from: devices)
-				while i < devices.count {
-					devicesNames.append(devices[i].name)
-					i = i + 1
+					Swift.print("Main 1 :", ThreadUtils.isMainThread())
+					Swift.print("Observable Devices", devices)
+					self.showProgress()
+					if (!self.externalStorageButton.isHidden) {
+						self.externalStorageButton.isHidden = true
+					}
+					return devices
 				}
-				self.devicesPopUp.removeAllItems()
-				self.devicesPopUp.addItems(withTitles: devicesNames)
-				return devices
-				
-			}
-			.observeOn(MainScheduler.instance)
-			.map {
+				.observeOn(bgScheduler)
+				.map {
 					devices -> ([AndroidDevice]) in
-				Swift.print("Main 3:", ThreadUtils.isMainThread())
-				Swift.print("Observable Devices", devices)
-				let selectedIndex = self.devicesPopUp.indexOfSelectedItem
-				print("Update Selected:", selectedIndex)
-				self.updatePopupDimens()
-				var activeDevice = nil as AndroidDevice?
-				if (selectedIndex > -1 && selectedIndex < devices.count) {
-					//TODO: Crash if rapid dc & conn.
-					activeDevice = devices[selectedIndex]
+					Swift.print("Main 2:", ThreadUtils.isMainThread())
+					Swift.print("Observable Devices", devices)
+					var devicesNames = [] as Array<String>
+					var i = 0
+					self.androidDevices.removeAllObjects()
+					self.androidDevices.addObjects(from: devices)
+					while i < devices.count {
+						devicesNames.append(devices[i].name)
+						i = i + 1
+					}
+					self.devicesPopUp.removeAllItems()
+					self.devicesPopUp.addItems(withTitles: devicesNames)
+					return devices
+					
 				}
-				self.updateActiveDevice(activeDevice)
-				return devices
-			}.subscribe(onNext: {
+				.observeOn(MainScheduler.instance)
+				.map {
+					devices -> ([AndroidDevice]) in
+					Swift.print("Main 3:", ThreadUtils.isMainThread())
+					Swift.print("Observable Devices", devices)
+					let selectedIndex = self.devicesPopUp.indexOfSelectedItem
+					print("Update Selected:", selectedIndex)
+					self.updatePopupDimens()
+					var activeDevice = nil as AndroidDevice?
+					if (selectedIndex > -1 && selectedIndex < devices.count) {
+						//TODO: Crash if rapid dc & conn.
+						activeDevice = devices[selectedIndex]
+					}
+					self.updateActiveDevice(activeDevice)
+					return devices
+				}.subscribe(onNext: {
 					devices in
-				print("Result : ", devices)
-			})
+					print("Result : ", devices)
+				})
 	}
-    
-    func dragItem(items: [DraggableItem], fromAppToFinderLocation location: String) {
-        LogI("Drag (to Finder) ", items, "->", location)
-        
-        var copyItemsAndroid: Array<BaseFile> = []
-        for item in items {
-            transferHandler.clearClipboardMacItems()
-            transferHandler.clearClipboardAndroidItems()
-            copyItemsAndroid.append(item as! BaseFile)
-        }
-        print("Copy:", copyItemsAndroid)
-        transferHandler.updateClipboardAndroidItems(copyItemsAndroid)
-        updateClipboard()
-        
-        pasteToMacInternal(path: location)
-    }
-    
-    func dragItem(items: [String], fromFinderIntoAppItem appItem: DraggableItem) {
-        LogI("Drag (to App)", items, "->" , appItem)
-        
-        var copyItemsMac: Array<BaseFile> = []
-        transferHandler.clearClipboardMacItems()
-        transferHandler.clearClipboardAndroidItems()
+	
+	func dragItem(items: [DraggableItem], fromAppToFinderLocation location: String) {
+		LogI("Drag (to Finder) ", items, "->", location)
+		
+		var copyItemsAndroid: Array<BaseFile> = []
+		for item in items {
+			transferHandler.clearClipboardMacItems()
+			transferHandler.clearClipboardAndroidItems()
+			copyItemsAndroid.append(item as! BaseFile)
+		}
+		print("Copy:", copyItemsAndroid)
+		transferHandler.updateClipboardAndroidItems(copyItemsAndroid)
+		updateClipboard()
+		
+		pasteToMacInternal(path: location)
+	}
+	
+	func dragItem(items: [String], fromFinderIntoAppItem appItem: DraggableItem) {
+		LogI("Drag (to App)", items, "->", appItem)
+		
+		var copyItemsMac: Array<BaseFile> = []
+		transferHandler.clearClipboardMacItems()
+		transferHandler.clearClipboardAndroidItems()
 //        copyItemsMac = transferHandler.getActiveFiles()
-        copyItemsMac.removeAll()
-        let dropDestination = (appItem as! BaseFile)
-        var dropDestinationPath: String
-        if (dropDestination.type == BaseFileType.File) {
-            dropDestinationPath = dropDestination.path
-        } else {
-            dropDestinationPath = dropDestination.getFullPath()
-        }
-        
-        let fileManager = FileManager.default
+		copyItemsMac.removeAll()
+		let dropDestination = (appItem as! BaseFile)
+		var dropDestinationPath: String
+		if (dropDestination.type == BaseFileType.File) {
+			dropDestinationPath = dropDestination.path
+		} else {
+			dropDestinationPath = dropDestination.getFullPath()
+		}
+		
+		let fileManager = FileManager.default
 //        do {
-        for item in items {
-            let path = item.stringByDeletingLastPathComponent + HandlerConstants.SEPARATOR
-            var isDirectory : ObjCBool = false
-            fileManager.fileExists(atPath: item, isDirectory: &isDirectory)
-            var type: Int
-            if (isDirectory).boolValue {
-                type = BaseFileType.Directory
-            } else {
-                type = BaseFileType.File
-            }
-            let name = item.lastPathComponent
+		for item in items {
+			let path = item.stringByDeletingLastPathComponent + HandlerConstants.SEPARATOR
+			var isDirectory: ObjCBool = false
+			fileManager.fileExists(atPath: item, isDirectory: &isDirectory)
+			var type: Int
+			if (isDirectory).boolValue {
+				type = BaseFileType.Directory
+			} else {
+				type = BaseFileType.File
+			}
+			let name = item.lastPathComponent
 //            var attr = try fileManager.attributesOfItem(atPath: item)
 //            let fileSize = attr[FileAttributeKey.size] as! UInt64
-            let file = BaseFile.init(fileName: name, path: path, type: type, size: 0)
-            LogI("File", file)
-            copyItemsMac.append(file)
-        }
-        transferHandler.updateClipboardMacItems(copyItemsMac)
-        updateClipboard()
-        
-        pasteToAndroidInternal(path: dropDestinationPath)
+			let file = BaseFile.init(fileName: name, path: path, type: type, size: 0)
+			LogI("File", file)
+			copyItemsMac.append(file)
+		}
+		transferHandler.updateClipboardMacItems(copyItemsMac)
+		updateClipboard()
+		
+		pasteToAndroidInternal(path: dropDestinationPath)
 //        } catch _ {
 //        	LogE("Cannot copy into app!")
 //        }
-    }
+	}
 	
 	func updateDeviceStatus() {
 		if (!transferHandler.hasActiveDevice()) {
@@ -245,39 +362,40 @@ NSUserInterfaceValidations {
 //		}
 	}
 	
-    func onDropDestination(_ row: Int) {
-        if (row >= self.androidDirectoryItems.count || row < 0) {
-            LogV("Warning: Row out of range!")
-            return
-        }
-        let isDirectory = androidDirectoryItems[row].type == BaseFileType.Directory
-        if (!isDirectory && fileTable.dragDropRow == row) {
+	func onDropDestination(_ row: Int) {
+		if (row >= self.androidDirectoryItems.count || row < 0) {
+			LogV("Warning: Row out of range!")
+			return
+		}
+		let isDirectory = androidDirectoryItems[row].type == BaseFileType.Directory
+		if (!isDirectory && fileTable.dragDropRow == row) {
 //            ThreadUtils.runInMainThread({
 //            	self.fileTable.backgroundColor = self.tableSelectedBgColor
-            //            })
-            let color = ColorUtils.colorWithHexString(ColorUtils.listSelectedBackgroundColor) as NSColor
-            fileTable.layer?.borderWidth = 2
-            fileTable.layer?.borderColor = color.cgColor
-        } else {
-            fileTable.layer?.borderWidth = 0
+			//            })
+			let color = ColorUtils.colorWithHexString(ColorUtils.listSelectedBackgroundColor) as NSColor
+			fileTable.layer?.borderWidth = 2
+			fileTable.layer?.borderColor = color.cgColor
+		} else {
+			fileTable.layer?.borderWidth = 0
 //            fileTable.layer.borderColor = UIColor.black.cgColor
 //            ThreadUtils.runInMainThread({
 //                self.fileTable.backgroundColor = self.tableBgColor
 //            })
-        }
-    }
+		}
+	}
 	
-    private var previousIndex = -1
+	private var previousIndex = -1
+	
 	func onPopupSelected(_ sender: AnyObject) {
 		let index = self.devicesPopUp.indexOfSelectedItem
 		print("Popup Selected:", index)
-        if (previousIndex != index) {
+		if (previousIndex != index) {
 			var activeDevice = nil as AndroidDevice?
 			if (index > -1) {
 				activeDevice = androidDevices[index] as? AndroidDevice
-            }
-            updateActiveDevice(activeDevice)
-        }
+			}
+			updateActiveDevice(activeDevice)
+		}
 	}
 	
 	override func viewWillAppear() {
@@ -337,52 +455,54 @@ NSUserInterfaceValidations {
 //        self.stop()
 	}
 	
-	func onConnected(_ device: AndroidDevice) {}
+	func onConnected(_ device: AndroidDevice) {
+	}
 	
-	func onDisconnected(_ device: AndroidDevice) {}
+	func onDisconnected(_ device: AndroidDevice) {
+	}
 	
 	fileprivate func updateActiveDevice(_ activeDevice: AndroidDevice?) {
 		if (NSObject.VERBOSE) {
 			Swift.print("AndroidViewController, update:" + TimeUtils.getCurrentTime());
 		}
-
+		
 		Observable.just(transferHandler)
-			.observeOn(bgScheduler)
-			.map {
-				transferHandler -> TransferHandler in
-				print("Bg", transferHandler)
-				transferHandler.setActiveDevice(activeDevice)
-				if (activeDevice != nil) {
-					self.androidDirectoryItems = transferHandler.openDirectoryData(transferHandler.getInternalStorage())
-					transferHandler.setUsingExternalStorage(false)
-					transferHandler.updateStorage()
-				} else {
-					self.reset()
-				}
-				return transferHandler
-			}
-			.observeOn(MainScheduler.instance)
-			.map {
-				transferHandler in
-				if (transferHandler.hasActiveDevice()) {
-					self.spaceStatusText.stringValue = transferHandler.getAvailableSpace() + " of " + transferHandler.getTotalSpaceInString()
-					if (transferHandler.getExternalStorage() != "") {
-						self.externalStorageButton.isHidden = false
+				.observeOn(bgScheduler)
+				.map {
+					transferHandler -> TransferHandler in
+					print("Bg", transferHandler)
+					transferHandler.setActiveDevice(activeDevice)
+					if (activeDevice != nil) {
+						self.androidDirectoryItems = transferHandler.openDirectoryData(transferHandler.getInternalStorage())
+						transferHandler.setUsingExternalStorage(false)
+						transferHandler.updateStorage()
+					} else {
+						self.reset()
 					}
+					return transferHandler
 				}
-				print("UI Stuff")
-				self.hideProgress()
-				self.updateList()
-				self.updateClipboard()
-				self.updateActiveStorageButton()
-				self.updateDeviceStatus()
-			}.subscribe(onNext: {
-				// print("Result : ", devices)
-				print("Complete!")
-				if (NSObject.VERBOSE) {
-					Swift.print("AndroidViewController, update fin:" + TimeUtils.getCurrentTime());
-				}
-			})
+				.observeOn(MainScheduler.instance)
+				.map {
+					transferHandler in
+					if (transferHandler.hasActiveDevice()) {
+						self.spaceStatusText.stringValue = transferHandler.getAvailableSpace() + " of " + transferHandler.getTotalSpaceInString()
+						if (transferHandler.getExternalStorage() != "") {
+							self.externalStorageButton.isHidden = false
+						}
+					}
+					print("UI Stuff")
+					self.hideProgress()
+					self.updateList()
+					self.updateClipboard()
+					self.updateActiveStorageButton()
+					self.updateDeviceStatus()
+				}.subscribe(onNext: {
+					// print("Result : ", devices)
+					print("Complete!")
+					if (NSObject.VERBOSE) {
+						Swift.print("AndroidViewController, update fin:" + TimeUtils.getCurrentTime());
+					}
+				})
 	}
 	
 	fileprivate func updateActiveStorageButton() {
@@ -402,23 +522,23 @@ NSUserInterfaceValidations {
 	
 	func stop() {
 //		transferHandler.stop()
-    }
-    
-    private func showProgress() {
-        self.mCircularProgress?.alphaValue = 1.0
-        self.mCircularProgress?.isHidden = false
-    }
-    
-    private func hideProgress() {
-		NSAnimationContext.runAnimationGroup({_ in
-            NSAnimationContext.current().duration = 0.5
-            self.mCircularProgress?.animator().alphaValue = 0.0 
-        }, completionHandler:{ 
-            //print("Animation completed")
-        	//self.mCircularProgress?.isHidden = true
-        })
-        // self.mCircularProgress?.isHidden = true
-    }
+	}
+	
+	private func showProgress() {
+		self.mCircularProgress?.alphaValue = 1.0
+		self.mCircularProgress?.isHidden = false
+	}
+	
+	private func hideProgress() {
+		NSAnimationContext.runAnimationGroup({ _ in
+			NSAnimationContext.current().duration = 0.5
+			self.mCircularProgress?.animator().alphaValue = 0.0
+		}, completionHandler: {
+			//print("Animation completed")
+			//self.mCircularProgress?.isHidden = true
+		})
+		// self.mCircularProgress?.isHidden = true
+	}
 	
 	func doubleClickList(_ sender: AnyObject) {
 		print("Double Clicked:", fileTable.clickedRow)
@@ -426,56 +546,56 @@ NSUserInterfaceValidations {
 			LogW("Bad Row")
 			return
 		}
-        let selectedItem = self.androidDirectoryItems[fileTable.clickedRow]
-        openFile(selectedItem)
+		let selectedItem = self.androidDirectoryItems[fileTable.clickedRow]
+		openFile(selectedItem)
 		
 	}
-    
-    private func openFile(_ selectedItem: BaseFile) {
+	
+	private func openFile(_ selectedItem: BaseFile) {
 		if (selectedItem.type != BaseFileType.Directory) {
 			// LogW("Trying to open a file")
 			return
 		}
 		Observable.just(transferHandler)
-			.observeOn(MainScheduler.instance)
-			.map {
-				transferHandler -> TransferHandler in
-            	self.showProgress()
-				return transferHandler
-			}
-			.observeOn(bgScheduler)
-			.map {
-				transferHandler -> [BaseFile]? in
-				// TODO: Confirm this works properly!
-				// let isDirectory = transferHandler.isDirectory(selectedItem.fileName)
-				/*let isDirectory = true
-				if (isDirectory) {*/
+				.observeOn(MainScheduler.instance)
+				.map {
+					transferHandler -> TransferHandler in
+					self.showProgress()
+					return transferHandler
+				}
+				.observeOn(bgScheduler)
+				.map {
+					transferHandler -> [BaseFile]? in
+					// TODO: Confirm this works properly!
+					// let isDirectory = transferHandler.isDirectory(selectedItem.fileName)
+					/*let isDirectory = true
+					if (isDirectory) {*/
 					let path = self.transferHandler.getCurrentPath() + HandlerConstants.SEPARATOR + selectedItem.fileName
 					self.LogV("Opening Dir")
 					let items = self.transferHandler.openDirectoryData(path)
 					self.LogV("Opened Dir")
 					return items
-				/*} else {
-					return nil
-				}*/
-			}
-			.observeOn(MainScheduler.instance)
-			.subscribe(
-				onNext: {
-					items in
-					guard let items = items else {
-						self.LogW("Nil Items")
-            			self.fileTable.deselectRow(self.fileTable.selectedRow)
-                    	self.hideProgress()
-                        return
-                    }
-                    self.reloadFileList(items)
-                    self.hideProgress()
+					/*} else {
+						return nil
+					}*/
 				}
-			)
-    }
+				.observeOn(MainScheduler.instance)
+				.subscribe(
+						onNext: {
+							items in
+							guard let items = items else {
+								self.LogW("Nil Items")
+								self.fileTable.deselectRow(self.fileTable.selectedRow)
+								self.hideProgress()
+								return
+							}
+							self.reloadFileList(items)
+							self.hideProgress()
+						}
+				)
+	}
 	
-    func openSelectedDirectory() {
+	func openSelectedDirectory() {
 		if (NSObject.VERBOSE) {
 			Swift.print("AndroidViewController, openSelectedDirectory");
 		}
@@ -483,7 +603,7 @@ NSUserInterfaceValidations {
 //		print("Selected", fileTable.selectedRow)
 //		print("Selected", self.androidDirectoryItems[fileTable.selectedRow])
 		
-        openFile(selectedItem)
+		openFile(selectedItem)
 	}
 	
 	func getSelectedItemInfo() {
@@ -534,8 +654,8 @@ NSUserInterfaceValidations {
 		}
 	}
 	
-    func onStart(_ totalSize: UInt64, transferType: Int) {
-        fileTable.layer?.borderWidth = 0
+	func onStart(_ totalSize: UInt64, transferType: Int) {
+		fileTable.layer?.borderWidth = 0
 		AppDelegate.isPastingOperation = true
 		overlayView.isHidden = false;
 		currentCopyFile = ""
@@ -597,11 +717,11 @@ NSUserInterfaceValidations {
 		mDockProgress?.doubleValue = Double(progress)
 		mDockTile.display()
 	}
-    
-    func successfulOperation() {
-        NSSound(named: "endCopy")?.play()
-        NSApp.requestUserAttention(NSRequestUserAttentionType.informationalRequest)
-    }
+	
+	func successfulOperation() {
+		NSSound(named: "endCopy")?.play()
+		NSApp.requestUserAttention(NSRequestUserAttentionType.informationalRequest)
+	}
 	
 	func onCompletion(status: FileProgressStatus) {
 		AppDelegate.isPastingOperation = false
@@ -611,12 +731,12 @@ NSUserInterfaceValidations {
 		
 		if (status == FileProgressStatus.kStatusOk) {
 			print("Successful copy")
-            successfulOperation()
+			successfulOperation()
 		} else {
 			print("Canceled")
-            //TODO: Sound if canceled.
+			//TODO: Sound if canceled.
 		}
-        //TODO: Copy of Marvel's Agents of Shield problem, not disappearing. & bad progress!
+		//TODO: Copy of Marvel's Agents of Shield problem, not disappearing. & bad progress!
 		overlayView.isHidden = true;
 		if (copyDialog != nil) {
 //            copyDialog!.rootView.removeFromSuperview()
@@ -721,52 +841,56 @@ NSUserInterfaceValidations {
 	}
 	
 	func pasteToAndroid(_ notification: Notification) {
-        pasteToAndroidInternal(path: transferHandler.getCurrentPath())
+		pasteToAndroidInternal(path: transferHandler.getCurrentPath())
 	}
-    
-    func pasteToAndroidInternal(path: String) {
-        print("Paste to Android")
-        let files = transferHandler.getClipboardMacItems()
-        if (files.count == 0) {
-            if (NSObject.VERBOSE) {
-                Swift.print("AndroidViewController, paste to android, Warning, NO ITEMS");
-            }
-            return
-        } else {
-            var i = 0
-            var updateSizes = false
-            while (i < files.count) {
-                if (files[i].size == 0 || files[i].size == UInt64.max) {
-                    updateSizes = true
-                }
-                i = i + 1
-            }
-            if (updateSizes) {
-                transferHandler.updateSizes()
-            }
-        }
-        copyDestination = path
-        AppDelegate.isPastingOperation = true
-        transferHandler.push(files, destination: path, delegate: self)
-    }
 	
-    func pasteToMac(_ notification: Notification) {
-        pasteToMacInternal(path: transferHandler.getActivePath())
-    }
-    
-    func pasteToMacInternal(path: String) {
-        print("Paste to Mac")
-        let files = transferHandler.getClipboardAndroidItems()
-        if (files!.count == 0) {
-            if (NSObject.VERBOSE) {
-                Swift.print("AndroidViewController, paste to mac, Warning, NO ITEMS");
-            }
-            return
-        }
-        copyDestination = path
-        AppDelegate.isPastingOperation = true
-        transferHandler.pull(files!, destination: path, delegate: self)
-    }
+	func pasteToAndroidInternal(path: String) {
+		print("Paste to Android")
+		let files = transferHandler.getClipboardMacItems()
+		if (files.count == 0) {
+			if (NSObject.VERBOSE) {
+				Swift.print("AndroidViewController, paste to android, Warning, NO ITEMS");
+			}
+			return
+		} else {
+			var i = 0
+			var updateSizes = false
+			while (i < files.count) {
+				if (files[i].size == 0 || files[i].size == UInt64.max) {
+					updateSizes = true
+				}
+				i = i + 1
+			}
+			if (updateSizes) {
+				transferHandler.updateSizes()
+			}
+		}
+		copyDestination = path
+		AppDelegate.isPastingOperation = true
+		transferHandler.push(files, destination: path, delegate: self)
+	}
+	
+	func pasteToMac(_ notification: Notification) {
+		pasteToMacInternal(path: transferHandler.getActivePath())
+	}
+	
+	func pasteToMacInternal(path: String) {
+		print("Paste to Mac")
+		let files = transferHandler.getClipboardAndroidItems()
+		if (files!.count == 0) {
+			if (NSObject.VERBOSE) {
+				Swift.print("AndroidViewController, paste to mac, Warning, NO ITEMS");
+			}
+			return
+		}
+		copyDestination = path
+		AppDelegate.isPastingOperation = true
+		Observable.just(transferHandler)
+				.observeOn(bgScheduler)
+				.subscribe(onNext: { transferHandler in
+					transferHandler.pull(files!, destination: path, delegate: self)
+				})
+	}
 	
 	func clearClipboard() {
 		if (NSObject.VERBOSE) {
@@ -786,7 +910,7 @@ NSUserInterfaceValidations {
 	
 	func updateList() {
 		currentDirectoryText.stringValue = transferHandler.getCurrentPathForDisplay()
-        LogV("Update List")
+		LogV("Update List")
 		fileTable.updateList(data: androidDirectoryItems)
 		updateDeviceStatus()
 	}
@@ -797,52 +921,52 @@ NSUserInterfaceValidations {
 	}
 	
 	@IBAction func useInternalStorage(_ sender: AnyObject) {
-        // self.showProgress()
+		// self.showProgress()
 		transferHandler.setUsingExternalStorage(false)
 		updateToStorage(transferHandler.getInternalStorage())
-        // self.hideProgress()
+		// self.hideProgress()
 	}
 	
 	@IBAction func useExternalStorage(_ sender: AnyObject) {
-        // self.showProgress()
+		// self.showProgress()
 		transferHandler.setUsingExternalStorage(true)
 		updateToStorage(transferHandler.getExternalStorage())
-        // self.hideProgress()
+		// self.hideProgress()
 	}
 	
 	fileprivate func updateToStorage(_ storage: String) {
 		Observable.just(transferHandler)
-			.observeOn(MainScheduler.instance)
-			.map {
-				transferHandler -> TransferHandler in
-				self.showProgress()
-				return transferHandler
-			}
-			.observeOn(bgScheduler)
-			.map {
-				transferHandler -> TransferHandler? in
-				if (transferHandler.hasActiveDevice()) {
-					self.androidDirectoryItems = transferHandler.openDirectoryData(storage)
-					transferHandler.updateStorage()
-					transferHandler.clearClipboardAndroidItems()
+				.observeOn(MainScheduler.instance)
+				.map {
+					transferHandler -> TransferHandler in
+					self.showProgress()
 					return transferHandler
-				} else {
-					return nil
 				}
-			}
-			.observeOn(MainScheduler.instance)
-			.subscribe(onNext: {
-				transferHandler in
-				if let transferHandler = transferHandler {
-					self.spaceStatusText.stringValue = transferHandler.getAvailableSpace() + " of " + transferHandler.getTotalSpaceInString()
-				} else {
-					self.reset()
+				.observeOn(bgScheduler)
+				.map {
+					transferHandler -> TransferHandler? in
+					if (transferHandler.hasActiveDevice()) {
+						self.androidDirectoryItems = transferHandler.openDirectoryData(storage)
+						transferHandler.updateStorage()
+						transferHandler.clearClipboardAndroidItems()
+						return transferHandler
+					} else {
+						return nil
+					}
 				}
-				self.updateList()
-				self.updateClipboard()
-				self.updateActiveStorageButton()
-				self.hideProgress()
-			})
+				.observeOn(MainScheduler.instance)
+				.subscribe(onNext: {
+					transferHandler in
+					if let transferHandler = transferHandler {
+						self.spaceStatusText.stringValue = transferHandler.getAvailableSpace() + " of " + transferHandler.getTotalSpaceInString()
+					} else {
+						self.reset()
+					}
+					self.updateList()
+					self.updateClipboard()
+					self.updateActiveStorageButton()
+					self.hideProgress()
+				})
 	}
 	
 	fileprivate func reset() {
@@ -856,40 +980,40 @@ NSUserInterfaceValidations {
 	@IBAction func backButtonPressed(_ button: NSButton) {
 		let previousDirectory = transferHandler.getCurrentPath()
 		Observable.just(transferHandler)
-			.observeOn(MainScheduler.instance)
-			.map {
-				transferHandler -> TransferHandler in
-        		self.showProgress()
-				return transferHandler
-			}
-			.observeOn(bgScheduler)
-			.map {
-				transferHandler -> [BaseFile]? in
-                let directoryData = transferHandler.upDirectoryData()
-				if directoryData.count > 0 {
-					return directoryData
+				.observeOn(MainScheduler.instance)
+				.map {
+					transferHandler -> TransferHandler in
+					self.showProgress()
+					return transferHandler
 				}
-				return nil
-			}
-			.observeOn(MainScheduler.instance)
-			.subscribe(
-				onNext: {
-					directoryData in
-					guard let directoryData = directoryData else {
-						return
+				.observeOn(bgScheduler)
+				.map {
+					transferHandler -> [BaseFile]? in
+					let directoryData = transferHandler.upDirectoryData()
+					if directoryData.count > 0 {
+						return directoryData
 					}
-					self.reloadFileList(directoryData)
-					for (i, item) in directoryData.enumerated() {
-		//                LogV("Item", item, "Prev", previousDirectory)
-						if (item.getFullPath() == previousDirectory) {
-							self.fileTable.updateItemChanged(index: i)
-							self.fileTable.scrollRowToVisible(i)
-							AppDelegate.itemSelected = true
-							AppDelegate.directoryItemSelected = true
-						}
-					}
-					self.hideProgress()
-				})
+					return nil
+				}
+				.observeOn(MainScheduler.instance)
+				.subscribe(
+						onNext: {
+							directoryData in
+							guard let directoryData = directoryData else {
+								return
+							}
+							self.reloadFileList(directoryData)
+							for (i, item) in directoryData.enumerated() {
+								//                LogV("Item", item, "Prev", previousDirectory)
+								if (item.getFullPath() == previousDirectory) {
+									self.fileTable.updateItemChanged(index: i)
+									self.fileTable.scrollRowToVisible(i)
+									AppDelegate.itemSelected = true
+									AppDelegate.directoryItemSelected = true
+								}
+							}
+							self.hideProgress()
+						})
 	}
 	
 	@IBAction func refreshButtonTapped(_ sender: AnyObject) {
@@ -898,29 +1022,29 @@ NSUserInterfaceValidations {
 	
 	func refresh() {
 		Observable.just(transferHandler)
-			.observeOn(MainScheduler.instance)
-			.map {
-				transferHandler -> TransferHandler in
-        		self.showProgress()
-				return transferHandler
-			}
-			.observeOn(bgScheduler)
-			.map {
-				transferHandler -> [BaseFile] in
-				let items = transferHandler.openDirectoryData(transferHandler.getCurrentPath())
-				transferHandler.updateStorage()
-				return items
-			}
-			.observeOn(MainScheduler.instance)
-			.subscribe(onNext: {
-				items in
-				let transferHandler = self.transferHandler
-        		self.hideProgress()
-				self.reloadFileList(items)
-				if (transferHandler.hasActiveDevice()) {
-					self.spaceStatusText.stringValue = transferHandler.getAvailableSpace() + " of " + transferHandler.getTotalSpaceInString()
+				.observeOn(MainScheduler.instance)
+				.map {
+					transferHandler -> TransferHandler in
+					self.showProgress()
+					return transferHandler
 				}
-			})
+				.observeOn(bgScheduler)
+				.map {
+					transferHandler -> [BaseFile] in
+					let items = transferHandler.openDirectoryData(transferHandler.getCurrentPath())
+					transferHandler.updateStorage()
+					return items
+				}
+				.observeOn(MainScheduler.instance)
+				.subscribe(onNext: {
+					items in
+					let transferHandler = self.transferHandler
+					self.hideProgress()
+					self.reloadFileList(items)
+					if (transferHandler.hasActiveDevice()) {
+						self.spaceStatusText.stringValue = transferHandler.getAvailableSpace() + " of " + transferHandler.getTotalSpaceInString()
+					}
+				})
 	}
 
 //    var timer: NSTimer? = nil
@@ -957,10 +1081,10 @@ NSUserInterfaceValidations {
 		if (NSObject.VERBOSE) {
 			Swift.print("AndroidViewController, showNewFolderDialog")
 		}
-        if let folderName = AlertUtils.input("Create New Folder", info:"Enter the name of the new folder:", defaultValue: "Untitled Folder") {
+		if let folderName = AlertUtils.input("Create New Folder", info: "Enter the name of the new folder:", defaultValue: "Untitled Folder") {
 			Swift.print("AndroidViewController, folder:", folderName)
 			if (transferHandler.folderExists(folderName)) {
-                AlertUtils.showAlert("Folder '\(folderName)' already exists!", info: "", confirm: false)
+				AlertUtils.showAlert("Folder '\(folderName)' already exists!", info: "", confirm: false)
 			} else {
 				transferHandler.createAndroidFolder(folderName)
 				refresh()
@@ -973,44 +1097,44 @@ NSUserInterfaceValidations {
 	func deleteFileDialog() {
 		if (Verbose) {
 			Swift.print("AndroidViewController, deleteFileDialog")
-        }
-        let indexSet = fileTable.selectedRowIndexes
-        var currentIndex = indexSet.first
-        transferHandler.clearClipboardMacItems()
-        transferHandler.clearClipboardAndroidItems()
-        var deleteItems: Array<BaseFile> = []
-        
-        while (currentIndex != nil && currentIndex != NSNotFound) {
-            let currentItem = androidDirectoryItems[currentIndex!];
-            deleteItems.append(currentItem)
-            currentIndex = indexSet.integerGreaterThan(currentIndex!)
-        }
-        let deleteStringInDialog = (deleteItems.count > 1) ? "selected items" : deleteItems[0].fileName
+		}
+		let indexSet = fileTable.selectedRowIndexes
+		var currentIndex = indexSet.first
+		transferHandler.clearClipboardMacItems()
+		transferHandler.clearClipboardAndroidItems()
+		var deleteItems: Array<BaseFile> = []
+		
+		while (currentIndex != nil && currentIndex != NSNotFound) {
+			let currentItem = androidDirectoryItems[currentIndex!];
+			deleteItems.append(currentItem)
+			currentIndex = indexSet.integerGreaterThan(currentIndex!)
+		}
+		let deleteStringInDialog = (deleteItems.count > 1) ? "selected items" : deleteItems[0].fileName
 //        let selectedItem = self.androidDirectoryItems[fileTable.selectedRow]
 //        let selectedFileName = selectedItem.fileName
-        if AlertUtils.showAlert("Do you really want to delete '\(deleteStringInDialog)'?", info: "", confirm: true) {
-            LogI("Delete", deleteItems)
-            transferHandler.deleteAndroid(deleteItems)
-            refresh()
-            successfulOperation()
-        } else {
-            LogV("Do not Delete!")
-        }
+		if AlertUtils.showAlert("Do you really want to delete '\(deleteStringInDialog)'?", info: "", confirm: true) {
+			LogI("Delete", deleteItems)
+			transferHandler.deleteAndroid(deleteItems)
+			refresh()
+			successfulOperation()
+		} else {
+			LogV("Do not Delete!")
+		}
 	}
-    
-    let floatingLevel = Int(CGWindowLevelForKey(CGWindowLevelKey.floatingWindow))
-    let normalLevel = Int(CGWindowLevelForKey(CGWindowLevelKey.normalWindow))
-    
-    func stayOnTop() {
-        if (self.view.window?.level == normalLevel) {
-            self.view.window?.level = floatingLevel
-            AppDelegate.isFloatingWindow = true
-        } else {
-            self.view.window?.level = normalLevel
-            AppDelegate.isFloatingWindow = false
-        }
+	
+	let floatingLevel = Int(CGWindowLevelForKey(CGWindowLevelKey.floatingWindow))
+	let normalLevel = Int(CGWindowLevelForKey(CGWindowLevelKey.normalWindow))
+	
+	func stayOnTop() {
+		if (self.view.window?.level == normalLevel) {
+			self.view.window?.level = floatingLevel
+			AppDelegate.isFloatingWindow = true
+		} else {
+			self.view.window?.level = normalLevel
+			AppDelegate.isFloatingWindow = false
+		}
 //        self.view.window?.level = Int(CGWindowLevelForKey(.CGWindowLevelKey.floatingWindow))
-    }
+	}
 	
 	func resetPosition() {
 		let previousFrame = self.view.window!.frame
@@ -1033,14 +1157,14 @@ NSUserInterfaceValidations {
 //			Swift.print("AndroidViewController, Prepare Segue!");
 //		}
 	}
-
+	
 	private func initUi() {
-        // fileTable.delegate = self
-        fileTable.delegate = tableDelegate
-        tableDelegate.setAndroidDirectoryItems(items: androidDirectoryItems)
-        tableDelegate.fileTable = fileTable
-        fileTable.dragDelegate = self
-        fileTable.dragUiDelegate = self
+		// fileTable.delegate = self
+		fileTable.delegate = tableDelegate
+		tableDelegate.setAndroidDirectoryItems(items: androidDirectoryItems)
+		tableDelegate.fileTable = fileTable
+		fileTable.dragDelegate = self
+		fileTable.dragUiDelegate = self
 		let doubleClickSelector: Selector = #selector(AndroidViewController.doubleClickList(_:))
 		fileTable.doubleAction = doubleClickSelector
 		
@@ -1069,7 +1193,7 @@ NSUserInterfaceValidations {
 		externalStorageButton.textDeselectedColor = ColorUtils.colorWithHexString(ColorUtils.storageDeselectedTextColor)
 		
 		fileTable.backgroundColor = ColorUtils.colorWithHexString(ColorUtils.mainViewColor)
-        fileTable.selectionHighlightStyle = NSTableViewSelectionHighlightStyle.none
+		fileTable.selectionHighlightStyle = NSTableViewSelectionHighlightStyle.none
 //        fileTable.draggingDestinationFeedbackStyle = NSTableViewDraggingDestinationFeedbackStyle.sourceList
 		
 		externalStorageButton.isHidden = true
@@ -1077,7 +1201,7 @@ NSUserInterfaceValidations {
 		var image = NSImage(named: "back_button.png")
 		image!.size = backButton.cellSize
 		backButton.image = image!
-		
+
 //		backButton.imageScaling = NSImageScaling.ScaleProportionallyDown
 //		backButton.imageScaling = NSImageScaling.ScaleProportionallyUpOrDown
 		backButton.imageScaling = NSImageScaling.scaleAxesIndependently
@@ -1094,7 +1218,7 @@ NSUserInterfaceValidations {
 		messageText.font = NSFont(name: messageText.font!.fontName, size: DimenUtils.getDimension(dimension: Dimens.error_message_text_size))
 		updateDeviceStatus()
 		updateActiveStorageButton()
-		
+
 //		fileTable.register(forDraggedTypes: [NSGeneralPboard])
 		
 		
@@ -1111,15 +1235,15 @@ NSUserInterfaceValidations {
 		
 		mDockProgress?.isBezeled = true
 		mDockProgress?.isHidden = true
-        
-        let progressSize = 120.0 as CGFloat
-        mCircularProgress = IndeterminateProgressView(
-            frame: NSRect(x: (self.view.frame.width - progressSize) / 2.0,
-                          y: (self.view.frame.height - progressSize) / 2.0,
-                          width: progressSize,
-                          height: progressSize))
-        self.view.addSubview(mCircularProgress!)
-        mCircularProgress?.isHidden = true
+		
+		let progressSize = 120.0 as CGFloat
+		mCircularProgress = IndeterminateProgressView(
+				frame: NSRect(x: (self.view.frame.width - progressSize) / 2.0,
+						y: (self.view.frame.height - progressSize) / 2.0,
+						width: progressSize,
+						height: progressSize))
+		self.view.addSubview(mCircularProgress!)
+		mCircularProgress?.isHidden = true
 //        parent.center fromView:parent.superview];
 	}
 	
@@ -1146,9 +1270,9 @@ NSUserInterfaceValidations {
 		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.refresh), name: NSNotification.Name(rawValue: StatusTypeNotification.REFRESH_FILES), object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.resetPosition), name: NSNotification.Name(rawValue: StatusTypeNotification.RESET_POSITION), object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.showHelpWindow), name: NSNotification.Name(rawValue: StatusTypeNotification.SHOW_HELP), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.showNewFolderDialog), name: NSNotification.Name(rawValue: StatusTypeNotification.MENU_NEW_FOLDER), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.deleteFileDialog), name: NSNotification.Name(rawValue: StatusTypeNotification.MENU_DELETE), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.stayOnTop), name: NSNotification.Name(rawValue: StatusTypeNotification.STAY_ON_TOP), object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.showNewFolderDialog), name: NSNotification.Name(rawValue: StatusTypeNotification.MENU_NEW_FOLDER), object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.deleteFileDialog), name: NSNotification.Name(rawValue: StatusTypeNotification.MENU_DELETE), object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.stayOnTop), name: NSNotification.Name(rawValue: StatusTypeNotification.STAY_ON_TOP), object: nil)
 	}
 	
 	func updateWindowSize() {
@@ -1170,9 +1294,9 @@ NSUserInterfaceValidations {
 //		Swift.print("AndroidViewController, new:", finalRect)
 		
 		if (finalRect.width == windowFrame.width) {
-            if (NSObject.VERBOSE) {
+			if (NSObject.VERBOSE) {
 //                Swift.print("AndroidViewController, Warning! No Changes to Window")
-            }
+			}
 			return
 		}
 //		TODO: Fix flickering screen update, if occurs again..

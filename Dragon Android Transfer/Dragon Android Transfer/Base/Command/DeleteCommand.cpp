@@ -11,9 +11,9 @@
 #include <iostream>
 
 std::string DeleteCommand::execute() {
-    std::string espaceDoubleQuotes = StringResource::ESCAPE_DOUBLE_QUOTES;
+    std::string escapeDoubleQuotes = StringResource::ESCAPE_DOUBLE_QUOTES;
     std::string commands = "";
-    commands = commands + "rm -rf " + espaceDoubleQuotes + path + espaceDoubleQuotes;
+    commands = commands + "rm -rf " + escapeDoubleQuotes + path + escapeDoubleQuotes;
     if (executor) {
         auto properties = make_shared<AdbExecutorProperties>();
         properties->attributes = commands;

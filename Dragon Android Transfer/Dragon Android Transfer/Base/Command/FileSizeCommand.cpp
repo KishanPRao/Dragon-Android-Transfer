@@ -12,9 +12,9 @@
 #include <iostream>
 
 std::string FileSizeCommand::execute() {
-    std::string espaceDoubleQuotes = StringResource::ESCAPE_DOUBLE_QUOTES;
+    std::string escapeDoubleQuotes = StringResource::ESCAPE_DOUBLE_QUOTES;
     std::string commands = "";
-    commands = commands + ShellScripts::File_Size + espaceDoubleQuotes + path + espaceDoubleQuotes;
+    commands = commands + ShellScripts::File_Size + escapeDoubleQuotes + path + escapeDoubleQuotes;
     if (executor) {
         auto properties = make_shared<AdbExecutorProperties>();
         properties->attributes = commands;

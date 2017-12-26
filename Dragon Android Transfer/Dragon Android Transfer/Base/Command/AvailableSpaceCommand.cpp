@@ -14,7 +14,7 @@
 #include <iostream>
 
 std::string AvailableSpaceCommand::execute() {
-    std::string espaceDoubleQuotes = StringResource::ESCAPE_DOUBLE_QUOTES;
+    std::string escapeDoubleQuotes = StringResource::ESCAPE_DOUBLE_QUOTES;
     std::string diskCommand;
     switch (CommandConfig::shellType) {
         case ShellType::Gnu:
@@ -30,7 +30,7 @@ std::string AvailableSpaceCommand::execute() {
             break;
     }
     std::string commands = "";
-    commands = commands + diskCommand + espaceDoubleQuotes + path + espaceDoubleQuotes;
+    commands = commands + diskCommand + escapeDoubleQuotes + path + escapeDoubleQuotes;
     if (executor) {
         auto properties = make_shared<AdbExecutorProperties>();
         properties->attributes = commands;

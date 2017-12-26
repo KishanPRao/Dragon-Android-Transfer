@@ -105,6 +105,25 @@ class TransferHandler {
 	func pull(_ sourceFiles: Array<BaseFile>, destination: String, delegate: FileProgressDelegate) {
 		androidHandler.pull(sourceFiles, destination: destination, delegate: delegate)
 	}
+	func hasActiveTask() -> Observable<Bool> {
+		return androidHandler.hasActiveTask.asObservable()
+	}
+	
+	func sizeActiveTask() -> Observable<UInt64> {
+		return androidHandler.sizeActiveTask.asObservable()
+	}
+	
+	func transferTypeActive() -> Observable<Int> {
+		return androidHandler.transferTypeActive.asObservable()
+	}
+	
+	func fileActiveTask() -> Observable<BaseFile> {
+		return androidHandler.fileActiveTask.asObservable()
+	}
+	
+	func progressActiveTask() -> Observable<Int> {
+		return androidHandler.progressActiveTask.asObservable()
+	}
 	
 	func push(_ sourceFiles: Array<BaseFile>, destination: String, delegate: FileProgressDelegate) {
 		androidHandler.push(sourceFiles, destination: destination, delegate: delegate)

@@ -65,6 +65,7 @@
 		BE3BD37C280AAD9C969F3243 /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDCC4280329DAC474762E /* TimeUtils.swift */; };
 		BE3BD38C8918A54949EAC5AC /* SegueFromLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDE8034FD05FF612778EF /* SegueFromLeft.swift */; };
 		BE3BD3A9EC324B60D172E185 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3BDEFB8D195743373D18DF /* refresh.png */; };
+		BE3BD3B0A01FF62638822C38 /* PushCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD4B4838E58D71435680F /* PushCommand.cpp */; };
 		BE3BD3CA5BE659E67FC602F6 /* HelpWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD2D5E6A92AAE4A73DF66 /* HelpWindow.xib */; };
 		BE3BD3CF4A98FDDACABFF93A /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD7F1239BA6A5E7685902 /* ColorUtils.swift */; };
 		BE3BD3F63BF3B11A5D618039 /* StorageListCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDEC73569A31F57BA2A31 /* StorageListCommand.cpp */; };
@@ -107,6 +108,7 @@
 		BE3BD9080982F66CADE02C28 /* HelpWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD2D5E6A92AAE4A73DF66 /* HelpWindow.xib */; };
 		BE3BD997583170883563D454 /* DeleteCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD60EAFC03007A46FE2F4 /* DeleteCommand.cpp */; };
 		BE3BD99A586FADDBD3B7DDCF /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD84AE45EE7CCE8AA60E2 /* ProgressView.swift */; };
+		BE3BD9BD2020E50C8DE0DD28 /* PushCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD4B4838E58D71435680F /* PushCommand.cpp */; };
 		BE3BD9C6949E9F5050D4D401 /* ThreadUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDC1EC5EA8A5A0A17A378 /* ThreadUtils.swift */; };
 		BE3BD9D55D5C9670B8ACFA0F /* PrintUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD4CF42CD0C36BF15D950 /* PrintUtils.swift */; };
 		BE3BDA06EB0630E43703247B /* DeviceNotificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD1B5FD0102D7F7DC4512 /* DeviceNotificationDelegate.swift */; };
@@ -220,6 +222,7 @@
 		BE3BD2875903A42BC4C0796F /* Command.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Command.h; sourceTree = "<group>"; };
 		BE3BD29026A99094C920C8AB /* FileExistsCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileExistsCommand.cpp; sourceTree = "<group>"; };
 		BE3BD2AD7E6A6347242F4DE3 /* ShellParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShellParser.swift; sourceTree = "<group>"; };
+		BE3BD2AFDACD42D8F744D38C /* AdbExecutionResultWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdbExecutionResultWrapper.h; sourceTree = "<group>"; };
 		BE3BD2D5E6A92AAE4A73DF66 /* HelpWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HelpWindow.xib; sourceTree = "<group>"; };
 		BE3BD2D92E07142A60E60248 /* DragNotificationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragNotificationDelegate.swift; sourceTree = "<group>"; };
 		BE3BD307979BA4DA1F578C27 /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
@@ -230,6 +233,7 @@
 		BE3BD461BEC6F7B580117F1B /* DragUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragUtils.swift; sourceTree = "<group>"; };
 		BE3BD46BD96C21CADA642E50 /* BridgingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingUtils.h; sourceTree = SOURCE_ROOT; };
 		BE3BD49D37DA7B7C884576E7 /* TotalSpaceCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TotalSpaceCommand.cpp; sourceTree = "<group>"; };
+		BE3BD4B4838E58D71435680F /* PushCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PushCommand.cpp; sourceTree = "<group>"; };
 		BE3BD4BE8B8D95E327B543B9 /* IndeterminateProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndeterminateProgressView.swift; sourceTree = "<group>"; };
 		BE3BD4C7EAE158473C89B0E1 /* AlertUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertUtils.m; sourceTree = SOURCE_ROOT; };
 		BE3BD4CF42CD0C36BF15D950 /* PrintUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintUtils.swift; sourceTree = "<group>"; };
@@ -280,6 +284,7 @@
 		BE3BDC0D7F0FFFD893AB4949 /* BridgingUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BridgingUtils.m; sourceTree = SOURCE_ROOT; };
 		BE3BDC1EC5EA8A5A0A17A378 /* ThreadUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadUtils.swift; sourceTree = "<group>"; };
 		BE3BDC7CF24C3F020FF8484B /* DraggableTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableTableView.swift; sourceTree = "<group>"; };
+		BE3BDC7FE804A1EA176C2E18 /* PushCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushCommand.h; sourceTree = "<group>"; };
 		BE3BDCC4280329DAC474762E /* TimeUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeUtils.swift; sourceTree = "<group>"; };
 		BE3BDD1D3C284AF7BBE4C256 /* AdbExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdbExecutor.h; sourceTree = "<group>"; };
 		BE3BDD6B3989C1B44C8F75BC /* StringResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringResource.h; sourceTree = "<group>"; };
@@ -595,6 +600,8 @@
 				BE3BD7A738DDD55BEF14B56F /* FileSizeCommand.hpp */,
 				BE3BD903231A6A691CF8F97F /* PullCommand.cpp */,
 				BE3BD988F2E0E93AA1F8A9C9 /* PullCommand.hpp */,
+				BE3BD4B4838E58D71435680F /* PushCommand.cpp */,
+				BE3BDC7FE804A1EA176C2E18 /* PushCommand.h */,
 			);
 			path = Command;
 			sourceTree = "<group>";
@@ -664,6 +671,7 @@
 				BE3BDE8AAFA4E6B773A0DAB6 /* AdbExecutionType.h */,
 				BE3BD0B264627D3B14AE82D0 /* AdbExecutorProperties.h */,
 				BE3BD086D4EEF08028BB5DEE /* AdbExecutionResult.h */,
+				BE3BD2AFDACD42D8F744D38C /* AdbExecutionResultWrapper.h */,
 			);
 			path = Executors;
 			sourceTree = "<group>";
@@ -1050,6 +1058,7 @@
 				BE3BD5A603BB8E266FB09888 /* CommandFactory.cpp in Sources */,
 				BE3BD1AD00B53F07D2C6BAD5 /* AdbExecutorMac.mm in Sources */,
 				BE3BDC633BCC81F6927E1305 /* ShellResolver.cpp in Sources */,
+				BE3BD3B0A01FF62638822C38 /* PushCommand.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1164,6 +1173,7 @@
 				BE3BDC7A6DF3C18127CFFF78 /* ShellParser.swift in Sources */,
 				BE3BD0BD51163ECA8A5D5591 /* AlertUtils.m in Sources */,
 				BE3BDE555397795773311960 /* BridgingUtils.m in Sources */,
+				BE3BD9BD2020E50C8DE0DD28 /* PushCommand.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

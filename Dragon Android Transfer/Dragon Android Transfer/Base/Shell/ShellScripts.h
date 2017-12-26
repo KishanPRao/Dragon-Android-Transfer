@@ -11,12 +11,12 @@
 #include "StringResource.h"
 
 namespace ShellScripts {
-	static std::string espaceDoubleQuotes = StringResource::ESCAPE_DOUBLE_QUOTES;
+	static std::string escapeDoubleQuotes = StringResource::ESCAPE_DOUBLE_QUOTES;
 	static std::string SHELL_TYPE_COMMAND =
-			"TYPE=" + espaceDoubleQuotes + espaceDoubleQuotes + ";" +
-					"GNU=" + espaceDoubleQuotes + StringResource::GNU_TYPE + espaceDoubleQuotes + ";" +
-					"BSD=" + espaceDoubleQuotes + StringResource::BSD_TYPE + espaceDoubleQuotes + ";" +
-					"SOLARIS=" + espaceDoubleQuotes + StringResource::SOLARIS_TYPE + espaceDoubleQuotes + ";" +
+			"TYPE=" + escapeDoubleQuotes + escapeDoubleQuotes + ";" +
+					"GNU=" + escapeDoubleQuotes + StringResource::GNU_TYPE + escapeDoubleQuotes + ";" +
+					"BSD=" + escapeDoubleQuotes + StringResource::BSD_TYPE + escapeDoubleQuotes + ";" +
+					"SOLARIS=" + escapeDoubleQuotes + StringResource::SOLARIS_TYPE + escapeDoubleQuotes + ";" +
 					"if ls --color -d . >/dev/null 2>&1; then " +
 					"TYPE=$GNU;" +
 					"elif ls -G -d . >/dev/null 2>&1; then " +

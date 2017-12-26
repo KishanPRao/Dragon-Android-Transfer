@@ -10,96 +10,96 @@ import Cocoa
 import Foundation
 
 @objc
-public class ShellParser : NSObject {
-    static let EXTREME_VERBOSE = false
-    static let BLOCK_SIZE_IN_FLOAT = Float(1024)
-    
-    static fileprivate func splitLines(_ string: String) -> [String] {
-        return string.characters.split {
-            $0 == "\n" || $0 == "\r\n"
-            }.map(String.init)
-    }
-    
-    static func isFileTypeString(str: String) -> Bool {
-        return str.contains(HandlerConstants.DIRECTORY) || str.contains(HandlerConstants.FILE);
-    }
-    
-    public static func parseListOutput(_ data: String, currentPath: String) -> [BaseFile] {
-        let listString = data;
-        var directories: [BaseFile] = [];
-        let outputInLines = splitLines(listString)
-        var noOutput = false
-        //		print("Output:", outputInLines)
-        noOutput = outputInLines.count <= 0 || outputInLines.count <= 2 || (outputInLines.count == 3 && outputInLines[2].contains("No such file"))
-        //		noOutput = outputInLines.count <= 0 || outputInLines.count <= 2
-        if (noOutput) {
-            print("No Output!!!!")
-            //			print("Output:", outputInLines)
-            return directories
-        }
-        var i = 0
-        let maxSizeInMBytes = UInt64.max / 1024
-        while (i < outputInLines.count) {
-            var fileType = BaseFileType.File;
-            var sizeInKiloBytes = UInt64.max as UInt64
-            var name = ""
-            var extraNewLine = ""
-            while (!isFileTypeString(str: outputInLines[i])) {
-                name = name + extraNewLine + outputInLines[i]
-                i = i + 1
-                extraNewLine = "\n";
-            }
-            if (outputInLines[i].contains(HandlerConstants.DIRECTORY)) {
-                fileType = BaseFileType.Directory
-            }
-            i = i + 1
-            if (fileType == BaseFileType.File) {
-                let sizeStringArray = outputInLines[i].characters.split {
-                    $0 == " " || $0 == "\t"
-                    }.map(String.init)
-                if let sizeInInt = UInt64(sizeStringArray[0]) {
-                    sizeInKiloBytes = sizeInInt
-                    if (sizeInKiloBytes > maxSizeInMBytes) {
-                        sizeInKiloBytes = UInt64.max
-                    } else {
-                        sizeInKiloBytes = sizeInKiloBytes * 1024
-                    }
-                    //				sizeInBytes = sizeInInt
-                }
-            } else {
-                sizeInKiloBytes = 0
-            }
-            directories.append(BaseFile.init(fileName: name, path: currentPath, type: fileType, size: sizeInKiloBytes))
-            i = i + 1
-        }
-        if (EXTREME_VERBOSE) {
-            print("Dirs:", directories)
-        }
-        directories.sort { file, file1 in
-            return file.fileName.lowercased() < file1.fileName.lowercased()
-        }
-        if (EXTREME_VERBOSE) {
-            print("Sorted Dirs:", directories)
-        }
-        return directories;
-    }
-    
-    public static func parseDeviceListOutput(_ devicesString: String) -> [String] {
-        var androidDevices = [String]()
-        
-        let devices = splitLines(devicesString)
-        var i = 1
-        while i < devices.count {
-            let deviceId = devices[i].characters.split {
-                $0 == "\t"
-                }.map(String.init)[0]
-            androidDevices.append(deviceId)
-            i = i + 1
-        }
-        return androidDevices
-    }
-    
-    @objc
+public class ShellParser: NSObject {
+	static let EXTREME_VERBOSE = false
+	static let BLOCK_SIZE_IN_FLOAT = Float(1024)
+	
+	static fileprivate func splitLines(_ string: String) -> [String] {
+		return string.characters.split {
+			$0 == "\n" || $0 == "\r\n"
+		}.map(String.init)
+	}
+	
+	static func isFileTypeString(str: String) -> Bool {
+		return str.contains(HandlerConstants.DIRECTORY) || str.contains(HandlerConstants.FILE);
+	}
+	
+	public static func parseListOutput(_ data: String, currentPath: String) -> [BaseFile] {
+		let listString = data;
+		var directories: [BaseFile] = [];
+		let outputInLines = splitLines(listString)
+		var noOutput = false
+		//		print("Output:", outputInLines)
+		noOutput = outputInLines.count <= 0 || outputInLines.count <= 2 || (outputInLines.count == 3 && outputInLines[2].contains("No such file"))
+		//		noOutput = outputInLines.count <= 0 || outputInLines.count <= 2
+		if (noOutput) {
+			print("No Output!!!!")
+			//			print("Output:", outputInLines)
+			return directories
+		}
+		var i = 0
+		let maxSizeInMBytes = UInt64.max / 1024
+		while (i < outputInLines.count) {
+			var fileType = BaseFileType.File;
+			var sizeInKiloBytes = UInt64.max as UInt64
+			var name = ""
+			var extraNewLine = ""
+			while (!isFileTypeString(str: outputInLines[i])) {
+				name = name + extraNewLine + outputInLines[i]
+				i = i + 1
+				extraNewLine = "\n";
+			}
+			if (outputInLines[i].contains(HandlerConstants.DIRECTORY)) {
+				fileType = BaseFileType.Directory
+			}
+			i = i + 1
+			if (fileType == BaseFileType.File) {
+				let sizeStringArray = outputInLines[i].characters.split {
+					$0 == " " || $0 == "\t"
+				}.map(String.init)
+				if let sizeInInt = UInt64(sizeStringArray[0]) {
+					sizeInKiloBytes = sizeInInt
+					if (sizeInKiloBytes > maxSizeInMBytes) {
+						sizeInKiloBytes = UInt64.max
+					} else {
+						sizeInKiloBytes = sizeInKiloBytes * 1024
+					}
+					//				sizeInBytes = sizeInInt
+				}
+			} else {
+				sizeInKiloBytes = 0
+			}
+			directories.append(BaseFile.init(fileName: name, path: currentPath, type: fileType, size: sizeInKiloBytes))
+			i = i + 1
+		}
+		if (EXTREME_VERBOSE) {
+			print("Dirs:", directories)
+		}
+		directories.sort { file, file1 in
+			return file.fileName.lowercased() < file1.fileName.lowercased()
+		}
+		if (EXTREME_VERBOSE) {
+			print("Sorted Dirs:", directories)
+		}
+		return directories;
+	}
+	
+	public static func parseDeviceListOutput(_ devicesString: String) -> [String] {
+		var androidDevices = [String]()
+		
+		let devices = splitLines(devicesString)
+		var i = 1
+		while i < devices.count {
+			let deviceId = devices[i].characters.split {
+				$0 == "\t"
+			}.map(String.init)[0]
+			androidDevices.append(deviceId)
+			i = i + 1
+		}
+		return androidDevices
+	}
+	
+	@objc
 	public static func parseStorageOutput(_ fileNames: String, info output: String) -> Array<String> {
 		var directories = [] as Array<String>
 		let outputLines = splitLines(output)
@@ -117,8 +117,8 @@ public class ShellParser : NSObject {
 			i = i + 1
 		}
 		return directories
-    }
-
+	}
+	
 	private static func parseSpaceOutput(_ output: String) -> [String] {
 		let outputInLines = splitLines(output)
 		if (outputInLines.count < 2) {
@@ -129,10 +129,10 @@ public class ShellParser : NSObject {
 			$0 == " "
 		}.map(String.init)
 		return outputInTabs
-	} 
-    
-    @objc
-    public static func parseTotalSpace(_ output: String) -> String {
+	}
+	
+	@objc
+	public static func parseTotalSpace(_ output: String) -> String {
 		var spaceInString = "0B"
 		let outputInTabs = parseSpaceOutput(output)
 		if (outputInTabs.count == 0) {
@@ -152,10 +152,10 @@ public class ShellParser : NSObject {
 //			print("Total:", totalSpace)
 		}
 		return spaceInString
-    }
-    
-    @objc
-    public static func parseAvailableSpace(_ output: String) -> String {
+	}
+	
+	@objc
+	public static func parseAvailableSpace(_ output: String) -> String {
 		var spaceInString = "0B"
 		let outputInTabs = parseSpaceOutput(output)
 		if (outputInTabs.count == 0) {
@@ -171,18 +171,18 @@ public class ShellParser : NSObject {
 			spaceInString = outputInTabs[3] + "B"
 		}
 		return spaceInString
-    }
-    
-    @objc
-    public static func parseFileExists(_ rawOutput: String) -> Bool {
+	}
+	
+	@objc
+	public static func parseFileExists(_ rawOutput: String) -> Bool {
 		let output = rawOutput.replacingOccurrences(of: "\r\n", with: "").replacingOccurrences(of: "\n", with: "")
 		let exists = (output == HandlerConstants.EXIST)
 		Swift.print("AndroidHandler, exists:", exists)
 		return exists
-    }
-    
-    @objc
-    public static func parseFileSize(_ rawOutput: String) -> UInt64 {
+	}
+	
+	@objc
+	public static func parseFileSize(_ rawOutput: String) -> UInt64 {
 		let maxSizeInMBytes = UInt64.max / 1024
 		var sizeInBytes = UInt64.max as UInt64
 		let sizeStringArray = rawOutput.characters.split {
@@ -197,21 +197,59 @@ public class ShellParser : NSObject {
 			}
 		}
 		return sizeInBytes
-    }
-    
-    @objc
-    public static func cleanString(_ rawString: String) -> String {
-    	let cleanString = rawString.trimmingCharacters(
-    		in: CharacterSet.whitespacesAndNewlines
-    	)
-    	return cleanString
-    }
-    
-	@objc 
-    public static func parseDeviceInfoOutput(_ devId: String, infoString: String) -> AndroidDevice {
+	}
+	
+	@objc
+	public static func cleanString(_ rawString: String) -> String {
+		let cleanString = rawString.trimmingCharacters(
+				in: CharacterSet.whitespacesAndNewlines
+		)
+		return cleanString
+	}
+	
+	@objc
+	public static func parseDeviceInfoOutput(_ devId: String, infoString: String) -> AndroidDevice {
 		let deviceName = ShellParser.cleanString(infoString)
-        let deviceId = ShellParser.cleanString(devId)
+		let deviceId = ShellParser.cleanString(devId)
 		let device = AndroidDevice.init(id: deviceId, name: deviceName)
-        return device
-    }
+		return device
+	}
+	
+	
+	static let regexPercentage = "\\[.*%\\]"
+	static let regexFileName = "[^/]*$"
+	
+	private static func matchesForRegexInText(_ regex: String, text: String) -> [String] {
+		do {
+			let regex = try NSRegularExpression(pattern: regex, options: [])
+			let nsString = text as NSString
+			let results = regex.matches(in: text,
+					options: [], range: NSMakeRange(0, nsString.length))
+			return results.map {
+				nsString.substring(with: $0.range)
+			}
+		} catch let error as NSError {
+			print("invalid regex: \(error.localizedDescription)")
+			return []
+		}
+	}
+	
+	@objc
+	public static func parseTransferOutput(_ output: String) -> Int {
+		let outputLines = splitLines(output)
+		let output = outputLines[outputLines.count - 1]
+		let matchesPercentage = self.matchesForRegexInText(self.regexPercentage, text: output)
+		if (matchesPercentage.count > 0) {
+			var progressString = matchesPercentage[0]
+			progressString.remove(at: progressString.startIndex)
+			progressString.remove(at: progressString.characters.index(before: progressString.endIndex))
+			progressString.remove(at: progressString.characters.index(before: progressString.endIndex))
+			progressString = progressString.trimmingCharacters(
+					in: CharacterSet.whitespacesAndNewlines
+			)
+			let progress = Int(progressString)
+			return progress!
+		}
+		return 0
+	}
 }

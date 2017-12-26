@@ -159,14 +159,36 @@ shared_ptr<AdbExecutor> executor;
 }
 
 //- (void) pull: (void (^)(NSString * output, enum AdbExecutionResult result))completionBlock {
-- (void)pull:(void (^)(NSInteger progress, enum AdbExecutionResult result))pullBlock {
-	auto command = make_shared<PullCommand>("", "", [pullBlock](std::string output, AdbExecutionResult result) {
-		NSLog(@"Output Pull: %@, finished: %d", convert(output), result);
+- (void)pull:(NSString *)sourceFile toDestination:(NSString *)destination :TransferBlock transferBlock {
+	auto command = make_shared<PullCommand>(convert(sourceFile), convert(destination), [transferBlock](std::string output, AdbExecutionResult result) {
+//		NSLog(@"Output Pull: %@, finished: %d", convert(output), result);
 //		[pullBlock: 0, result: result];
-		pullBlock(0, result);
+		long progress;
+		if (result == AdbExecutionResult::InProgress) {
+			progress = [ShellParser parseTransferOutput:convert(output)];
+		} else {
+			progress = 100;
+		}
+		AdbExecutionResultWrapper wrapperResult = AdbExecutionResultWrapper(result); 
+		transferBlock(progress, wrapperResult);
 	}, executor);
 	auto outputPull = convert(command->execute());
-	NSLog(@"Outer Output Pull: %@", outputPull);
+//	NSLog(@"Outer Output Pull: %@", outputPull);
+}
+
+- (void)push:(NSString *)sourceFile toDestination:(NSString *)destination :TransferBlock transferBlock {
+	auto command = make_shared<PushCommand>(convert(sourceFile), convert(destination), [transferBlock](std::string output, AdbExecutionResult result) {
+		long progress;
+		if (result == AdbExecutionResult::InProgress) {
+			progress = [ShellParser parseTransferOutput:convert(output)];
+		} else {
+			progress = 100;
+		}
+		AdbExecutionResultWrapper wrapperResult = AdbExecutionResultWrapper(result); 
+		transferBlock(progress, wrapperResult);
+	}, executor);
+	auto outputPull = convert(command->execute());
+//	NSLog(@"Outer Output Pull: %@", outputPull);
 }
 
 

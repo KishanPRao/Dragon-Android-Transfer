@@ -32,21 +32,21 @@ string AdbExecutor::execute(shared_ptr<AdbExecutorProperties> properties, AdbCal
 	NSArray<NSString *> *adbArgsArray;
 	
 	switch (properties->executionType) {
-		case AdbExecutionType::Full: {
+		case AdbExecutionType::Full: 
+		case AdbExecutionType::FullAsync: {
 			adbArgsArray = @[@"./adb ", convert(properties->attributes)];
 			break;
 		}
-		case AdbExecutionType::Shell:
-		case AdbExecutionType::ShellAsync: {
+		case AdbExecutionType::Shell: {
 			adbArgsArray = @[@"./adb -s ", convert(deviceId), @" shell ", escape, convert(properties->attributes), escape];
 			break;
 		}
 	}
 	auto adbArgs = [adbArgsArray componentsJoinedByString:@""];
-	if (properties->executionType == AdbExecutionType::ShellAsync) {
+	if (properties->executionType == AdbExecutionType::FullAsync) {
 //		std::cout<<"Calling Adb Args:"<<adbArgs.UTF8String<<std::endl;
 		auto output = executeAdb(adbArgs.UTF8String, callback);
-		std::cout<<"Calling Callback:"<<output<<std::endl;
+//		std::cout<<"Calling Callback:"<<output<<std::endl;
 //		callback(output);
 		return "";
 	} else {
@@ -126,11 +126,11 @@ string AdbExecutor::executeAdb(string commands, AdbCallback callback) {
 //						NSLog(@"Task Data, %@", data);
 						if (data.length > 0) {
 							auto str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-							NSLog(@"Task Data, %@", str);
+//							NSLog(@"Task Data, %@", str);
 							callback(convert(str), AdbExecutionResult::InProgress);
 							[outFile waitForDataInBackgroundAndNotify];
 						} else {
-							NSLog(@"Task Length 0");
+//							NSLog(@"Task Length 0");
 //							TODO: Done Content, somehow:
 							callback("", AdbExecutionResult::Ok);
 							[[NSNotificationCenter defaultCenter] removeObserver: dataAvailable];
@@ -138,9 +138,9 @@ string AdbExecutor::executeAdb(string commands, AdbCallback callback) {
 					}];
 	
 	[task launch];
-	NSLog(@"Task Launched");
+//	NSLog(@"Task Launched");
 	[task waitUntilExit];
-	NSLog(@"Task After Exit");
+//	NSLog(@"Task After Exit");
 //	[[NSNotificationCenter defaultCenter] addObserver:self
 //											 selector:@selector(commandNotification:)
 //												 name:NSFileHandleDataAvailableNotification

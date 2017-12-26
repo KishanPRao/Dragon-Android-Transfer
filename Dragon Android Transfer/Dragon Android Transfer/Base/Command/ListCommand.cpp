@@ -16,8 +16,8 @@ ListCommand::ListCommand(std::string directoryName, shared_ptr<AdbExecutor> exec
 }
 
 std::string ListCommand::execute() {
-	std::string espaceDoubleQuotes = StringResource::ESCAPE_DOUBLE_QUOTES;
-	std::string name = espaceDoubleQuotes + "$name" + espaceDoubleQuotes;
+	std::string escapeDoubleQuotes = StringResource::ESCAPE_DOUBLE_QUOTES;
+	std::string name = escapeDoubleQuotes + "$name" + escapeDoubleQuotes;
 //	StringResource::ESCAPE_DOUBLE_QUOTES = "ABC";
 	std::string commands;
 	switch (CommandConfig::shellType) {
@@ -33,8 +33,8 @@ std::string ListCommand::execute() {
 	}
 	// std::cout<<"Using Shell Type:"<<CommandConfig::shellType<<std::endl;
 	//TODO: While retrieving ls output and appending FILE etc, remove illegal characters (like "\n")
-	commands = commands + "cd " + espaceDoubleQuotes + directoryName + espaceDoubleQuotes + "; ls | for name in *; do echo " + name +
-			"; if [ -d " + name + " ]; then echo " + espaceDoubleQuotes + StringResource::DIRECTORY_TYPE + espaceDoubleQuotes + "; echo \"0\"; else echo " + espaceDoubleQuotes + StringResource::FILE_TYPE + espaceDoubleQuotes + "; " + ShellScripts::LS_FILE_SIZE_COMMAND + " " + name + "; fi; done;";
+	commands = commands + "cd " + escapeDoubleQuotes + directoryName + escapeDoubleQuotes + "; ls | for name in *; do echo " + name +
+			"; if [ -d " + name + " ]; then echo " + escapeDoubleQuotes + StringResource::DIRECTORY_TYPE + escapeDoubleQuotes + "; echo \"0\"; else echo " + escapeDoubleQuotes + StringResource::FILE_TYPE + escapeDoubleQuotes + "; " + ShellScripts::LS_FILE_SIZE_COMMAND + " " + name + "; fi; done;";
 	
 	std::cout<<"Adb List Data"<<directoryName<<", Command:"<<commands<<std::endl;
 //	let output = adbShell(commands)

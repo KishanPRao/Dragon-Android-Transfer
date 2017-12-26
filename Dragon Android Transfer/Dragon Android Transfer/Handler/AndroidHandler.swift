@@ -46,7 +46,7 @@ public class AndroidHandler: NSObject {
 	fileprivate var usingExternalStorage = false
 	
 	// fileprivate static var sJavaType = ""
-	fileprivate let espaceDoubleQuotes = StringResource.ESCAPE_DOUBLE_QUOTES
+	fileprivate let escapeDoubleQuotes = StringResource.ESCAPE_DOUBLE_QUOTES
 	fileprivate static let JAVA_TYPE_COMMAND = AndroidShellScripts.JAVA_TYPE_COMMAND
     
     fileprivate lazy var adbHandler: AndroidAdbHandler = {
@@ -182,9 +182,9 @@ public class AndroidHandler: NSObject {
 			} else {
 				externalStorage = ""
 			}
-			adbHandler.pull { progress, result in 
-				print("Pull: \(progress), \(result)")
-			 }
+//			adbHandler.pull("/sdcard/Android/app.apk", toDestination: "/Users/kishanprao/Test/") {  progress, result in
+//				print("Pull: \(progress), \(result)")
+//			}
 		} else {
 			externalStorage = ""
 		}
@@ -221,7 +221,7 @@ public class AndroidHandler: NSObject {
 	
 	func delete(_ files: Array<BaseFile>) {
 		for file in files {
-			// let command = "rm -rf " + espaceDoubleQuotes + file.getFullPath() + espaceDoubleQuotes
+			// let command = "rm -rf " + escapeDoubleQuotes + file.getFullPath() + escapeDoubleQuotes
 			// LogV("Delete", file, command)
 			// let _ = adbShell(command)
 			print("Delete, \(file.getFullPath())")
@@ -303,100 +303,59 @@ public class AndroidHandler: NSObject {
 		}
 		return true
 	}
+	
+	static let EmptyFile = BaseFile(fileName: "", path: "", type: 0, size: 0)
+	
+	var hasActiveTask = Variable<Bool>(false)
+	var sizeActiveTask = Variable<UInt64>(0)
+	var transferTypeActive = Variable<Int>(TransferType.AndroidToMac)
+	var fileActiveTask = Variable<BaseFile>(EmptyFile)
+	var progressActiveTask = Variable<Int>(0)
 
 //    From Android
 	func pull(_ sourceFiles: Array<BaseFile>, destination: String, delegate: FileProgressDelegate) {
 		cancelTask = false
+		hasActiveTask.value = true
 		if (activeDevice != nil) {
 			startedTask = false
 			var i = 0
 			var pullCommand = "" as String
 			var size = 0 as UInt64
+			var sourceFileName = ""
 			while i < sourceFiles.count {
 				pullCommand = pullCommand + "./adb" + " -s " + (activeDevice?.id)!
 				let file = sourceFiles[i]
-				let sourceFileName = file.path + HandlerConstants.SEPARATOR + file.fileName
-				pullCommand = pullCommand + " pull " + espaceDoubleQuotes + sourceFileName + espaceDoubleQuotes + " " + espaceDoubleQuotes + destination + espaceDoubleQuotes + ";\n"
+				sourceFileName = file.path + HandlerConstants.SEPARATOR + file.fileName
+				pullCommand = pullCommand + " pull " + escapeDoubleQuotes + sourceFileName + escapeDoubleQuotes + " " + escapeDoubleQuotes + destination + escapeDoubleQuotes + ";\n"
 				if ((file.size == 0 || file.size == UInt64.max) && file.type == BaseFileType.Directory) {
 					file.size = getSize(sourceFileName)
 				}
 				size = size + file.size
 				i = i + 1
 			}
-			delegate.onStart(size, transferType: TransferType.AndroidToMac)
+			sizeActiveTask.value = size
+			transferTypeActive.value = TransferType.AndroidToMac
 			i = 0
-			delegate.currentFile(sourceFiles[i].fileName)
+			self.fileActiveTask.value = sourceFiles[i]
 			
 			print("------Start Time:", TimeUtils.getCurrentTime())
 			
 			print(pullCommand)
-			self.adbAsync(pullCommand, with: { (output) in
-//                    print("Pull Output:", output)
-				if (output == nil) {
-					DispatchQueue.main.async(execute: { () -> Void in
-						print("This is run on the main queue, after the previous code in outer block")
-						i = 0
-						while i < sourceFiles.count {
-							if (sourceFiles[i].type == BaseFileType.Directory) {
-								sourceFiles[i].size = UInt64.max
-							}
-							i = i + 1
+//			adbHandler.pull("/sdcard/Android/app.apk", toDestination: "/Users/kishanprao/Test/") {  progress, result in
+			adbHandler.pull(sourceFileName, toDestination: destination) {  progress, result in
+				print("Pull: \(progress), \(result)")
+				if (result == AdbExecutionResultWrapper.Result_Ok) {
+					if (progress == 100) {
+						i = i + 1
+						if (i < sourceFiles.count) {
+							self.fileActiveTask.value = sourceFiles[i]
 						}
-						print("Complete, cancel:", self.cancelTask)
-						if (self.cancelTask) {
-							delegate.onCompletion(status: FileProgressStatus.kStatusCanceled)
-						} else {
-							delegate.onCompletion(status: FileProgressStatus.kStatusOk)
-						}
-					})
-				} else {
-					let outputLines = output!.characters.split {
-						$0 == "\n" || $0 == "\r\n"
-					}.map(String.init)
-					let output = outputLines[outputLines.count - 1]
-//                        print("Op:", output, " Regex:", self.regexPercentage)
-
-//				TODO: Include in future, show current file being transferred.
-//					let matchesFileName = self.matchesForRegexInText(self.regexFileName, text: output)
-//					if (matchesFileName.count > 0) {
-//						//                        let newStartIndex = advance(matches[0].startIndex, 1)
-//						//                        let newEndIndex = advance(matches[0].endIndex, -2)
-//						let fileName = matchesFileName[0]
-////                            print("File:", fileName)
-//						dispatch_async(dispatch_get_main_queue(), { () -> Void in
-//							delegate.currentFile(fileName)
-//						})
-//					}
-					let matchesPercentage = self.matchesForRegexInText(self.regexPercentage, text: output)
-					if (matchesPercentage.count > 0) {
-						//                        let newStartIndex = advance(matches[0].startIndex, 1)
-						//                        let newEndIndex = advance(matches[0].endIndex, -2)
-						var progressString = matchesPercentage[0]
-						progressString.remove(at: progressString.startIndex)
-						progressString.remove(at: progressString.characters.index(before: progressString.endIndex))
-						progressString.remove(at: progressString.characters.index(before: progressString.endIndex))
-						progressString = progressString.trimmingCharacters(
-								in: CharacterSet.whitespacesAndNewlines
-						)
-//                            print("Matches:", progressString)
-						if let progress = Int(progressString) {
-//                                print("Percentage:", progress)
-							DispatchQueue.main.async(execute: { () -> Void in
-								if (progress == 100) {
-									i = i + 1
-									if (i < sourceFiles.count) {
-										delegate.currentFile(sourceFiles[i].fileName)
-									}
-								}
-								delegate.onProgress(progress)
-							})
-						}
-
-//                            let progress = Int(progressString)
-//                            print("Percentage:", progress)
 					}
+					self.hasActiveTask.value = false
+				} else if (result == AdbExecutionResultWrapper.Result_InProgress) {
+					self.progressActiveTask.value = progress
 				}
-			})
+			}
 		} else {
 			print("Warning, No active device")
 		}
@@ -436,7 +395,7 @@ public class AndroidHandler: NSObject {
 				let file = sourceFiles[i]
 				pushCommand = pushCommand + "./adb" + " -s " + (activeDevice?.id)!
 				let sourceFileName = file.path + HandlerConstants.SEPARATOR + file.fileName
-				pushCommand = pushCommand + " push " + espaceDoubleQuotes + sourceFileName + espaceDoubleQuotes + " " + espaceDoubleQuotes + destination + HandlerConstants.SEPARATOR + espaceDoubleQuotes + ";\n"
+				pushCommand = pushCommand + " push " + escapeDoubleQuotes + sourceFileName + escapeDoubleQuotes + " " + escapeDoubleQuotes + destination + HandlerConstants.SEPARATOR + escapeDoubleQuotes + ";\n"
 //				TODO: Worst case!
 //				if ((file.size == 0 || file.size == UInt64.max) && file.type == BaseFileType.Directory) {
 ////					file.size = getSize(sourceFileName)
@@ -508,9 +467,9 @@ public class AndroidHandler: NSObject {
 		}
 	}
 	
-	func isFileTypeString(str: String) -> Bool {
-		return str.contains(HandlerConstants.DIRECTORY) || str.contains(HandlerConstants.FILE);
-	}
+//	func isFileTypeString(str: String) -> Bool {
+//		return str.contains(HandlerConstants.DIRECTORY) || str.contains(HandlerConstants.FILE);
+//	}
 	
 	func openDirectoryData(_ path: String) -> Array<BaseFile>! {
 		currentPath = path
@@ -606,7 +565,7 @@ public class AndroidHandler: NSObject {
 	// TODO: Keep if used later!
 	// func isDirectory(_ fileName: String) -> Bool {
 	// 	let directory = currentPath;
-	// 	let commands = "cd " + espaceDoubleQuotes + directory + espaceDoubleQuotes + "; [ -d " + espaceDoubleQuotes + directory + HandlerConstants.SEPARATOR + fileName + espaceDoubleQuotes + " ] && echo \"" + HandlerConstants.DIRECTORY + "\";";
+	// 	let commands = "cd " + escapeDoubleQuotes + directory + escapeDoubleQuotes + "; [ -d " + escapeDoubleQuotes + directory + HandlerConstants.SEPARATOR + fileName + escapeDoubleQuotes + " ] && echo \"" + HandlerConstants.DIRECTORY + "\";";
 	// 	let output = adbShell(commands);
 	// 	let isDir = output.contains(HandlerConstants.DIRECTORY)
 	// 	if (Verbose) {

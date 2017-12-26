@@ -8,8 +8,8 @@
 
 
 enum AdbExecutionResult {
-	Ok,
 	InProgress,
+	Ok,
 	Canceled,
 };
 
