@@ -11,7 +11,8 @@
 
 enum AdbExecutionType {
     Full,
-    Shell
+    Shell,
+    ShellAsync,
 };
 
 #endif /* AdbExecutionType_h */
