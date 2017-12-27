@@ -16,7 +16,7 @@ import RxCocoa
 
 class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		NSComboBoxDataSource, NSComboBoxDelegate, NSControlTextEditingDelegate,
-		FileProgressDelegate,
+//		FileProgressDelegate,
 		ClipboardDelegate, CopyDialogDelegate,
 		DragNotificationDelegate, DragUiDelegate,
 		NSUserInterfaceValidations {
@@ -105,7 +105,17 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		transferHandler.start()
 		
 		observeDevices()
+		observeListing()
 		observeTransfer()
+	}
+	
+	private func observeListing() {
+		transferHandler.observeFileList()
+		.observeOn(MainScheduler.instance)
+		.subscribe(onNext: {
+			list in
+			self.reloadFileList(list)
+		})
 	}
 	
 	private func observeTransfer() {
@@ -181,6 +191,15 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: { progress in
 					self.progressActive(progress)
+				})
+		
+		transferHandler.getSpaceStatus().skip(1)
+				.observeOn(MainScheduler.instance)
+				.subscribe(onNext: { spaceStatus in
+                    if (spaceStatus.count < 2) {
+                        return
+                    }
+					self.spaceStatusText.stringValue = spaceStatus[0] + " of " + spaceStatus[1]
 				})
 	}
 	
@@ -479,7 +498,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 					print("Bg", transferHandler)
 					transferHandler.setActiveDevice(activeDevice)
 					if (activeDevice != nil) {
-						self.androidDirectoryItems = transferHandler.openDirectoryData(transferHandler.getInternalStorage())
+						transferHandler.updateList(transferHandler.getInternalStorage())
 						transferHandler.setUsingExternalStorage(false)
 						transferHandler.updateStorage()
 					} else {
@@ -491,17 +510,15 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 				.map {
 					transferHandler in
 					if (transferHandler.hasActiveDevice()) {
-						self.spaceStatusText.stringValue = transferHandler.getAvailableSpace() + " of " + transferHandler.getTotalSpaceInString()
 						if (transferHandler.getExternalStorage() != "") {
 							self.externalStorageButton.isHidden = false
 						}
 					}
 					print("UI Stuff")
-					self.hideProgress()
-					self.updateList()
 					self.updateClipboard()
 					self.updateActiveStorageButton()
 					self.updateDeviceStatus()
+					self.hideProgress()
 				}.subscribe(onNext: {
 					// print("Result : ", devices)
 					print("Complete!")
@@ -571,34 +588,18 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 				}
 				.observeOn(bgScheduler)
 				.map {
-					transferHandler -> [BaseFile]? in
+					transferHandler /*-> [BaseFile]?*/ in
 					// TODO: Confirm this works properly!
 					// let isDirectory = transferHandler.isDirectory(selectedItem.fileName)
 					/*let isDirectory = true
 					if (isDirectory) {*/
 					let path = self.transferHandler.getCurrentPath() + HandlerConstants.SEPARATOR + selectedItem.fileName
 					self.LogV("Opening Dir")
-					let items = self.transferHandler.openDirectoryData(path)
+					self.transferHandler.updateList(path)
 					self.LogV("Opened Dir")
-					return items
-					/*} else {
-						return nil
-					}*/
 				}
 				.observeOn(MainScheduler.instance)
-				.subscribe(
-						onNext: {
-							items in
-							guard let items = items else {
-								self.LogW("Nil Items")
-								self.fileTable.deselectRow(self.fileTable.selectedRow)
-								self.hideProgress()
-								return
-							}
-							self.reloadFileList(items)
-							self.hideProgress()
-						}
-				)
+				.subscribe(onNext: {})
 	}
 	
 	func openSelectedDirectory() {
@@ -660,99 +661,9 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		}
 	}
 	
-	func onStart(_ totalSize: UInt64, transferType: Int) {
-		fileTable.layer?.borderWidth = 0
-		AppDelegate.isPastingOperation = true
-		overlayView.isHidden = false;
-		currentCopyFile = ""
-		showCopyDialog()
-		if (copyDialog != nil) {
-			var transferTypeString = ""
-			if (transferType == TransferType.AndroidToMac) {
-				transferTypeString = "Copy From Android To Mac"
-			} else if (transferType == TransferType.MacToAndroid) {
-				transferTypeString = "Copy From Mac To Android"
-			}
-			self.transferType = transferType
-			print("Transfer Type:", transferTypeString)
-			copyDialog?.setTotalCopySize(totalSize)
-			copyDialog?.setTransferType(transferTypeString)
-		}
-		mDockProgress?.isHidden = false
-	}
-	
-	func currentFile(_ fileName: String) {
-		if (copyDialog != nil && currentCopyFile != fileName) {
-//            currentCopyFile = fileName
-			var files: Array<BaseFile>?
-			if (transferType == TransferType.AndroidToMac) {
-				files = transferHandler.getClipboardAndroidItems()
-			} else if (transferType == TransferType.MacToAndroid) {
-				files = transferHandler.getClipboardMacItems()
-			}
-			var i = 0
-			print("Files:", files as Any!)
-			print("File Name:", fileName)
-			currentCopiedSize = 0
-			while (i < files!.count) {
-				if (fileName.contains(files![i].fileName)) {
-					currentFile = files![i]
-					currentCopyFile = currentFile!.fileName
-					break
-				}
-				currentCopiedSize = currentCopiedSize + files![i].size
-				i = i + 1
-			}
-			print("Update Current File:", currentCopyFile)
-			copyDialog?.setCurrentTransfer(currentCopyFile, to: copyDestination)
-		}
-	}
-	
-	func onProgress(_ progress: Int) {
-		if (copyDialog != nil) {
-//			print("Current Copy Size:", currentCopiedSize)
-//            copyDialog?.setProgress(CGFloat(progress))
-			if (currentFile != nil) {
-//				if (NSObject.VERBOSE) {
-//					Swift.print("AndroidViewController, progress:", progress);
-//				}
-				let currentFileCopiedSize = UInt64(CGFloat(currentFile!.size) * (CGFloat(progress) / 100.0)) as UInt64
-				copyDialog?.updateCopyStatus(currentCopiedSize + currentFileCopiedSize, withProgress: CGFloat(progress))
-			}
-		}
-		mDockProgress?.doubleValue = Double(progress)
-		mDockTile.display()
-	}
-	
 	func successfulOperation() {
 		NSSound(named: "endCopy")?.play()
 		NSApp.requestUserAttention(NSRequestUserAttentionType.informationalRequest)
-	}
-	
-	func onCompletion(status: FileProgressStatus) {
-		AppDelegate.isPastingOperation = false
-		print("Done!")
-		
-		print("End Time:", TimeUtils.getCurrentTime())
-		
-		if (status == FileProgressStatus.kStatusOk) {
-			print("Successful copy")
-			successfulOperation()
-		} else {
-			print("Canceled")
-			//TODO: Sound if canceled.
-		}
-		//TODO: Copy of Marvel's Agents of Shield problem, not disappearing. & bad progress!
-		overlayView.isHidden = true;
-		if (copyDialog != nil) {
-//            copyDialog!.rootView.removeFromSuperview()
-			copyDialog!.removeFromSuperview()
-			copyDialog = nil
-			currentFile = nil
-		}
-		mDockProgress?.isHidden = true
-		mDockTile.display()
-		refresh()
 	}
 	
 	func copyFromAndroid(_ notification: Notification) {
@@ -878,7 +789,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		Observable.just(transferHandler)
 				.observeOn(bgScheduler)
 				.subscribe(onNext: { transferHandler in
-					transferHandler.push(files, destination: path, delegate: self)
+					transferHandler.push(files, destination: path)
 				})
 	}
 	
@@ -900,7 +811,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		Observable.just(transferHandler)
 				.observeOn(bgScheduler)
 				.subscribe(onNext: { transferHandler in
-					transferHandler.pull(files!, destination: path, delegate: self)
+					transferHandler.pull(files!, destination: path)
 				})
 	}
 	
@@ -930,6 +841,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 	func reloadFileList(_ items: Array<BaseFile>) {
 		androidDirectoryItems = items
 		updateList()
+		hideProgress()
 	}
 	
 	@IBAction func useInternalStorage(_ sender: AnyObject) {
@@ -958,7 +870,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 				.map {
 					transferHandler -> TransferHandler? in
 					if (transferHandler.hasActiveDevice()) {
-						self.androidDirectoryItems = transferHandler.openDirectoryData(storage)
+						transferHandler.updateList(storage)
 						transferHandler.updateStorage()
 						transferHandler.clearClipboardAndroidItems()
 						return transferHandler
@@ -969,12 +881,9 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: {
 					transferHandler in
-					if let transferHandler = transferHandler {
-						self.spaceStatusText.stringValue = transferHandler.getAvailableSpace() + " of " + transferHandler.getTotalSpaceInString()
-					} else {
+					if transferHandler == nil {
 						self.reset()
 					}
-					self.updateList()
 					self.updateClipboard()
 					self.updateActiveStorageButton()
 					self.hideProgress()
@@ -1000,22 +909,13 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 				}
 				.observeOn(bgScheduler)
 				.map {
-					transferHandler -> [BaseFile]? in
-					let directoryData = transferHandler.upDirectoryData()
-					if directoryData.count > 0 {
-						return directoryData
-					}
-					return nil
+					transferHandler in
+					transferHandler.navigateUpList()
 				}
 				.observeOn(MainScheduler.instance)
 				.subscribe(
 						onNext: {
-							directoryData in
-							guard let directoryData = directoryData else {
-								return
-							}
-							self.reloadFileList(directoryData)
-							for (i, item) in directoryData.enumerated() {
+							for (i, item) in self.androidDirectoryItems.enumerated() {
 								//                LogV("Item", item, "Prev", previousDirectory)
 								if (item.getFullPath() == previousDirectory) {
 									self.fileTable.updateItemChanged(index: i)
@@ -1042,21 +942,12 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 				}
 				.observeOn(bgScheduler)
 				.map {
-					transferHandler -> [BaseFile] in
-					let items = transferHandler.openDirectoryData(transferHandler.getCurrentPath())
+					transferHandler in
+					transferHandler.updateList(transferHandler.getCurrentPath())
 					transferHandler.updateStorage()
-					return items
 				}
 				.observeOn(MainScheduler.instance)
-				.subscribe(onNext: {
-					items in
-					let transferHandler = self.transferHandler
-					self.hideProgress()
-					self.reloadFileList(items)
-					if (transferHandler.hasActiveDevice()) {
-						self.spaceStatusText.stringValue = transferHandler.getAvailableSpace() + " of " + transferHandler.getTotalSpaceInString()
-					}
-				})
+				.subscribe(onNext: {})
 	}
 
 //    var timer: NSTimer? = nil

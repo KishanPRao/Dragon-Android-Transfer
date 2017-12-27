@@ -88,6 +88,7 @@ string AdbExecutor::executeAdb(string commands) {
 	task.standardOutput = pipe;
 	[task launch];
 	
+//	TODO: On shell error, redirect, send empty or something similar. No effect to UI!
 	auto data = [[pipe fileHandleForReading] readDataToEndOfFile];
 	auto output = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 	if (EXTREME_VERBOSE) {
@@ -145,34 +146,6 @@ string AdbExecutor::executeAdb(string commands, AdbCallback callback) {
 //	NSLog(@"Task Launched");
 	[task waitUntilExit];
 //	NSLog(@"Task After Exit");
-//	[[NSNotificationCenter defaultCenter] addObserver:self
-//											 selector:@selector(commandNotification:)
-//												 name:NSFileHandleDataAvailableNotification
-//											   object:nil];
-
-//	auto handle = [[pipe fileHandleForReading] retain];
-//	[handle readInBackgroundAndNotify];
-//	notification_block_t handlerBlock =
-//			^(NSNotification *notification) {
-//				NSData *data = [[notification userInfo]
-//						objectForKey: NSFileHandleNotificationDataItem];
-//				/*... do stuff ...*/
-//				[self addNotification: handle block: handlerBlock];
-//			};
-//	[self addNotification: handler block: handlerBlock];
-
-//	auto pipe = [[NSPipe alloc] init];
-//	task.standardOutput = pipe;
-
-
-//	[[task.standardOutput fileHandleForReading] setReadabilityHandler:^(NSFileHandle *file) {
-//		NSData *data = [file availableData]; // this will read to EOF, so call only once
-//		auto utfData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//		NSLog(@"Task output! %@", utfData);
-//		callback(convert(utfData));
-//	}];
-//	[task launch];
-//	[task waitUntilExit];
 	return "";
 }
 

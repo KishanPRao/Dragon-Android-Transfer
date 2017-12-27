@@ -36,7 +36,7 @@ std::string ListCommand::execute() {
 	commands = commands + "cd " + escapeDoubleQuotes + directoryName + escapeDoubleQuotes + "; ls | for name in *; do echo " + name +
 			"; if [ -d " + name + " ]; then echo " + escapeDoubleQuotes + StringResource::DIRECTORY_TYPE + escapeDoubleQuotes + "; echo \"0\"; else echo " + escapeDoubleQuotes + StringResource::FILE_TYPE + escapeDoubleQuotes + "; " + ShellScripts::LS_FILE_SIZE_COMMAND + " " + name + "; fi; done;";
 	
-	std::cout<<"Adb List Data"<<directoryName<<", Command:"<<commands<<std::endl;
+//	std::cout<<"Adb List Data"<<directoryName<<", Command:"<<commands<<std::endl;
 //	let output = adbShell(commands)
 	if (executor) {
         auto properties = make_shared<AdbExecutorProperties>();

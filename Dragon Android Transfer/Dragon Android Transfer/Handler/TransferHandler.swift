@@ -23,25 +23,27 @@ class TransferHandler {
 	func hasActiveDevice() -> Bool {
 		return androidHandler.hasActiveDevice()
     }
-    
-    func getAndroidDevices() -> Array<AndroidDevice> {
-        return androidHandler.getAndroidDevices()
-    }
-    
+	
     func observeAndroidDevices() -> Observable<[AndroidDevice]> {
         return androidHandler.observeAndroidDevices()
     }
 	
 	func setActiveDevice(_ device: AndroidDevice?) {
-//		ThreadUtils.runInBackgroundThread {
 		self.androidHandler.setActiveDevice(device)
 		self.copyItemsMac.removeAll()
 		self.copyItemsAndroid?.removeAll()
-//		}
 	}
 	
-	func openDirectoryData(_ path: String) -> [BaseFile] {
-		return androidHandler.openDirectoryData(path)
+	func observeFileList() -> Observable<[BaseFile]> {
+		return androidHandler.observableFileList.asObservable()
+	}
+	
+	func updateList(_ path: String) {
+		androidHandler.updateList(path)
+	}
+	
+	func navigateUpList() {
+		androidHandler.navigateUpList()
 	}
 	
 	func getInternalStorage() -> String {
@@ -53,25 +55,15 @@ class TransferHandler {
 	}
 	
 	func updateStorage() {
-//		ThreadUtils.runInBackgroundThread {
 		self.androidHandler.updateStorage()
-//		}
+	}
+	
+	func getSpaceStatus() -> Observable<[String]> {
+		return androidHandler.getSpaceStatus()
 	}
 	
 	func getExternalStorage() -> String {
 		return androidHandler.getExternalStorage()
-	}
-	
-	func getAvailableSpace() -> String {
-		return androidHandler.getAvailableSpace()
-	}
-	
-	func getTotalSpace() -> UInt64 {
-		return androidHandler.getTotalSpace()
-	}
-	
-	func getTotalSpaceInString() -> String {
-		return androidHandler.getTotalSpaceInString()
 	}
 	
 	func isUsingExternalStorage() -> Bool {
@@ -102,8 +94,8 @@ class TransferHandler {
         return androidHandler.getCurrentPathFile()
     }
 	
-	func pull(_ sourceFiles: Array<BaseFile>, destination: String, delegate: FileProgressDelegate) {
-		androidHandler.pull(sourceFiles, destination: destination, delegate: delegate)
+	func pull(_ sourceFiles: Array<BaseFile>, destination: String) {
+		androidHandler.pull(sourceFiles, destination: destination)
 	}
 	func hasActiveTask() -> Observable<FileProgressStatus> {
 		return androidHandler.hasActiveTask.asObservable()
@@ -125,8 +117,8 @@ class TransferHandler {
 		return androidHandler.progressActiveTask.asObservable()
 	}
 	
-	func push(_ sourceFiles: Array<BaseFile>, destination: String, delegate: FileProgressDelegate) {
-		androidHandler.push(sourceFiles, destination: destination, delegate: delegate)
+	func push(_ sourceFiles: Array<BaseFile>, destination: String) {
+		androidHandler.push(sourceFiles, destination: destination)
     }
     
     func getCurrentPathForDisplay() -> String {
@@ -135,10 +127,6 @@ class TransferHandler {
 	
 	func isRootDirectory() -> Bool {
 		return androidHandler.isRootDirectory()
-	}
-	
-	func upDirectoryData() -> [BaseFile] {
-		return androidHandler.upDirectoryData()
 	}
 	
 	func reset() {
@@ -162,12 +150,8 @@ class TransferHandler {
 	}
 	
 	func updateAndroidFileSize(file: BaseFile, closure: @escaping () -> ()) {
-//		ThreadUtils.runInBackgroundThread {
 		self.androidHandler.updateSize(file: file)
-//			ThreadUtils.runInMainThread {
 		closure()
-//			}
-//		}
 	}
 	
 	func createAndroidFolder(_ folderName: String) {

@@ -10,16 +10,19 @@
 #include <iostream>
 #include "AdbExecutorProperties.h"
 
+/**
+ * Use when the storage detection logic is smarter.
+ */
 std::string StorageListCommand::execute() {
-    std::string commands = "devices";
-    std::cout<<"Adb List Storage, Command:"<<commands<<std::endl;
-    if (executor) {
-        auto properties = make_shared<AdbExecutorProperties>();
-        properties->attributes = commands;
-        properties->executionType = AdbExecutionType::Shell;
-        auto data = executor->execute(properties);
-        return data;
-    }
-    std::cout<<"Warning, no executor"<<std::endl;
-    return "";
+	std::string commands = "devices";
+//    std::cout<<"Adb List Storage, Command:"<<commands<<std::endl;
+	if (executor) {
+		auto properties = make_shared<AdbExecutorProperties>();
+		properties->attributes = commands;
+		properties->executionType = AdbExecutionType::Shell;
+		auto data = executor->execute(properties);
+		return data;
+	}
+	std::cout << "Warning, no executor" << std::endl;
+	return "";
 }
