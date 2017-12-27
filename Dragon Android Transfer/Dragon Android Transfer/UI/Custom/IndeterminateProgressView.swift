@@ -9,7 +9,7 @@
 import Foundation
 
 class IndeterminateProgressView : NSView {
-    let PROGRESS_FOREGROUND_COLOR = ColorUtils.colorWithHexString(ColorUtils.progressForegroundColor)
+    let PROGRESS_FOREGROUND_COLOR = ColorUtils.colorWithHexString(ColorUtils.indeterminateProgressForegroundColor)
     let circularPath = NSBezierPath()
     let lineWidth = 5.0 as CGFloat
     let totalTimeMs = 1 * 1000 as CGFloat

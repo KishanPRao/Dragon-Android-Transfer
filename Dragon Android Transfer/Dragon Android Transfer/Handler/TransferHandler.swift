@@ -9,8 +9,8 @@ import RxCocoa
 
 class TransferHandler {
 	static let sharedInstance = TransferHandler();
-	fileprivate var copyItemsAndroid: Array<BaseFile>? = []
-	fileprivate var copyItemsMac: Array<BaseFile> = []
+	fileprivate var copyItemsAndroid: Variable<[BaseFile]> = Variable([])
+	fileprivate var copyItemsMac: Variable<[BaseFile]> = Variable([])
 //	private var clipboardItems: Array<BaseFile>? = []
 	
 	private let androidHandler = AndroidHandler()
@@ -30,8 +30,8 @@ class TransferHandler {
 	
 	func setActiveDevice(_ device: AndroidDevice?) {
 		self.androidHandler.setActiveDevice(device)
-		self.copyItemsMac.removeAll()
-		self.copyItemsAndroid?.removeAll()
+		self.clearClipboardAndroidItems()
+		self.clearClipboardMacItems()
 	}
 	
 	func observeFileList() -> Observable<[BaseFile]> {
@@ -113,7 +113,7 @@ class TransferHandler {
 		return androidHandler.fileActiveTask.asObservable()
 	}
 	
-	func progressActiveTask() -> Observable<Int> {
+	func progressActiveTask() -> Observable<Double> {
 		return androidHandler.progressActiveTask.asObservable()
 	}
 	
@@ -133,16 +133,22 @@ class TransferHandler {
 		androidHandler.reset()
 	}
 	
-	func getClipboardAndroidItems() -> Array<BaseFile>? {
-		return copyItemsAndroid
+	func observeClipboardAndroidItems() -> Observable<[BaseFile]> {
+		return copyItemsAndroid.asObservable()
 	}
+	
+	func getClipboardAndroidItems() -> [BaseFile] {
+		return copyItemsAndroid.value
+	}
+	
+	let EmptyList = [BaseFile]()
 	
 	func clearClipboardAndroidItems() {
-		copyItemsAndroid?.removeAll()
+		copyItemsAndroid.value = EmptyList
 	}
 	
-	func updateClipboardAndroidItems(_ items: Array<BaseFile>?) {
-		copyItemsAndroid = items
+	func updateClipboardAndroidItems(_ items: Array<BaseFile>) {
+		copyItemsAndroid.value = items
 	}
 	
 	func cancelActiveTask() {
@@ -179,33 +185,37 @@ class TransferHandler {
 		return macHandler.getActivePath()
 	}
 	
-	func getClipboardMacItems() -> Array<BaseFile> {
-		return copyItemsMac
+	func observeClipboardMacItems() -> Observable<[BaseFile]> {
+		return copyItemsMac.asObservable()
+	}
+	
+	func getClipboardMacItems() -> [BaseFile] {
+		return copyItemsMac.value
 	}
 	
 	func clearClipboardMacItems() {
-		copyItemsMac.removeAll()
+		copyItemsMac.value = EmptyList
 	}
 	
 	func updateClipboardMacItems(_ items: Array<BaseFile>) {
-		copyItemsMac = items
+		copyItemsMac.value = items
 	}
 
 //	Cross
 	func updateSizes() {
-		if (copyItemsAndroid!.count > 0) {
-			androidHandler.updateSizes(copyItemsAndroid!)
+		if (getClipboardAndroidItems().count > 0) {
+			androidHandler.updateSizes(getClipboardAndroidItems())
 		} else {
-			macHandler.updateSizes(copyItemsMac)
+			macHandler.updateSizes(getClipboardMacItems())
 		}
 	}
 
 //	TODO: Use this every time in UI
-	func getClipboardItems() -> Array<BaseFile>? {
-		if (copyItemsAndroid!.count > 0) {
-			return copyItemsAndroid
+	func getClipboardItems() -> Array<BaseFile> {
+		if (getClipboardAndroidItems().count > 0) {
+			return getClipboardAndroidItems()
 		} else {
-			return copyItemsMac
+			return getClipboardMacItems()
 		}
 	}
 	

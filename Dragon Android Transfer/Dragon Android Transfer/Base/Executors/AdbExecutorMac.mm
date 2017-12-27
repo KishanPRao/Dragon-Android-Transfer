@@ -134,18 +134,23 @@ string AdbExecutor::executeAdb(string commands, AdbCallback callback) {
 //							NSLog(@"Task Data, %@", str);
 							callback(convert(str), AdbExecutionResult::InProgress);
 							[outFile waitForDataInBackgroundAndNotify];
-						} else {
+						} /*else {
 //							NSLog(@"Task Length 0");
 //							TODO: Done Content, somehow:
 							callback("", AdbExecutionResult::Ok);
 							[[NSNotificationCenter defaultCenter] removeObserver: dataAvailable];
-						}
+						}*/
 					}];
 	
 	[task launch];
 //	NSLog(@"Task Launched");
 	[task waitUntilExit];
 //	NSLog(@"Task After Exit");
+	if (activeTask != nil) {
+		callback("", AdbExecutionResult::Ok);
+		[[NSNotificationCenter defaultCenter] removeObserver: dataAvailable];
+	}
+	activeTask = nil;
 	return "";
 }
 

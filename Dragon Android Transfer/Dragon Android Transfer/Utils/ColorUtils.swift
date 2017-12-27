@@ -22,11 +22,10 @@ class ColorUtils {
 	static let listTextColor = "#ffffff"
 	static let statusViewColor = "#212121"
 	static let blackColor = "#000000"
-
-//	static let progressBackgroundColor = "#0091ea"
-
+	
 	static let progressBackgroundColor = "#0091ea"
 	static let progressForegroundColor = "#01579b"
+	static let indeterminateProgressForegroundColor = "#17d85e"
 	
 	static func colorWithHexString(_ hex: String) -> NSColor {
 		var cString: String = hex.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines).uppercased()

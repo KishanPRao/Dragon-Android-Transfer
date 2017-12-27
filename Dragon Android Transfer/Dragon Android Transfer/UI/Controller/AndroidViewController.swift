@@ -111,11 +111,25 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 	
 	private func observeListing() {
 		transferHandler.observeFileList()
-		.observeOn(MainScheduler.instance)
-		.subscribe(onNext: {
-			list in
-			self.reloadFileList(list)
-		})
+				.observeOn(MainScheduler.instance)
+				.subscribe(onNext: {
+					list in
+					self.reloadFileList(list)
+				})
+		
+		transferHandler.observeClipboardAndroidItems()
+				.observeOn(MainScheduler.instance)
+				.subscribe(onNext: {
+					list in
+					self.updateClipboard()
+				})
+		transferHandler.observeClipboardMacItems()
+				.observeOn(MainScheduler.instance)
+				.subscribe(onNext: {
+					list in
+					self.updateClipboard()
+					AppDelegate.hasMacClipboardItems = list.count > 0
+				})
 	}
 	
 	private func observeTransfer() {
@@ -196,27 +210,27 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		transferHandler.getSpaceStatus().skip(1)
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: { spaceStatus in
-                    if (spaceStatus.count < 2) {
-                        return
-                    }
+					if (spaceStatus.count < 2) {
+						return
+					}
 					self.spaceStatusText.stringValue = spaceStatus[0] + " of " + spaceStatus[1]
 				})
 	}
 	
-	var mCurrentProgress = -1
+	var mCurrentProgress = -1.0
 	
-	private func progressActive(_ progress: Int) {
+	private func progressActive(_ progress: Double) {
 //		print("Progress Active: \(progress)")
 		if (mCurrentProgress == progress) {
 			return
 		}
 		mCurrentProgress = progress
 		if (copyDialog != nil) {
-			print("Current File: \(currentFile)")
+//			print("Current File: \(currentFile)")
 			if (currentFile != nil) {
-				print("Update Prog")
-				let currentFileCopiedSize = UInt64(CGFloat(currentFile!.size) * (CGFloat(progress) / 100.0)) as UInt64
-				copyDialog?.updateCopyStatus(currentCopiedSize + currentFileCopiedSize, withProgress: CGFloat(progress))
+//				print("Update Prog")
+				let currentFileCopiedSize = UInt64(CGFloat(copyDialog!.mTotalCopySize) * (CGFloat(progress) / 100.0)) as UInt64
+				copyDialog?.updateCopyStatus(currentFileCopiedSize, withProgress: CGFloat(progress))
 			}
 		}
 		mDockProgress?.doubleValue = Double(progress)
@@ -307,13 +321,10 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		
 		var copyItemsAndroid: Array<BaseFile> = []
 		for item in items {
-			transferHandler.clearClipboardMacItems()
-			transferHandler.clearClipboardAndroidItems()
 			copyItemsAndroid.append(item as! BaseFile)
 		}
 		print("Copy:", copyItemsAndroid)
 		transferHandler.updateClipboardAndroidItems(copyItemsAndroid)
-		updateClipboard()
 		
 		pasteToMacInternal(path: location)
 	}
@@ -354,7 +365,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 			copyItemsMac.append(file)
 		}
 		transferHandler.updateClipboardMacItems(copyItemsMac)
-		updateClipboard()
+//		updateClipboard()
 		
 		pasteToAndroidInternal(path: dropDestinationPath)
 //        } catch _ {
@@ -382,7 +393,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		AppDelegate.itemSelected = false
 		AppDelegate.directoryItemSelected = false
 		AppDelegate.multipleItemsSelected = false
-		AppDelegate.hasMacClipboardItems = transferHandler.getClipboardMacItems().count > 0
+//		AppDelegate.hasMacClipboardItems = transferHandler.getClipboardMacItems().count > 0
 		AppDelegate.canGoBackward = !transferHandler.isRootDirectory()
 //		if (NSObject.VERBOSE) {
 //			Swift.print("AndroidViewController, Can go backward:", AppDelegate.canGoBackward);
@@ -482,9 +493,11 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 //        self.stop()
 	}
 	
-	func onConnected(_ device: AndroidDevice) {}
+	func onConnected(_ device: AndroidDevice) {
+	}
 	
-	func onDisconnected(_ device: AndroidDevice) {}
+	func onDisconnected(_ device: AndroidDevice) {
+	}
 	
 	fileprivate func updateActiveDevice(_ activeDevice: AndroidDevice?) {
 		if (NSObject.VERBOSE) {
@@ -515,7 +528,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 						}
 					}
 					print("UI Stuff")
-					self.updateClipboard()
+//					self.updateClipboard()
 					self.updateActiveStorageButton()
 					self.updateDeviceStatus()
 					self.hideProgress()
@@ -686,7 +699,6 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		}
 		print("Copy:", copyItemsAndroid)
 		transferHandler.updateClipboardAndroidItems(copyItemsAndroid)
-		updateClipboard()
 	}
 	
 	func copyFromMac(_ notification: Notification) {
@@ -701,19 +713,19 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		} else {
 			print("Warning, inactive Finder")
 		}
-		updateClipboard()
 	}
 	
 	fileprivate func updateClipboard() {
-		if (transferHandler.getClipboardItems()!.count > 0) {
+		let clipboardItems = transferHandler.getClipboardItems() 
+		if (clipboardItems.count > 0) {
 			StyleUtils.updateButtonWithCell(clipboardButton, withImage: clipboardIconPlain)
-			clipboardItemsCount.stringValue = String(transferHandler.getClipboardItems()!.count)
+			clipboardItemsCount.stringValue = String(clipboardItems.count)
 		} else {
 			StyleUtils.updateButtonWithCell(clipboardButton, withImage: clipboardIcon)
 			clipboardItemsCount.stringValue = ""
 		}
-		AppDelegate.hasMacClipboardItems = transferHandler.getClipboardMacItems().count > 0
-		AppDelegate.hasClipboardItems = transferHandler.getClipboardItems()!.count > 0
+//		AppDelegate.hasMacClipboardItems = transferHandler.getClipboardMacItems().count > 0
+		AppDelegate.hasClipboardItems = clipboardItems.count > 0
 	}
 	
 	fileprivate func showCopyDialog() {
@@ -800,7 +812,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 	func pasteToMacInternal(path: String) {
 		print("Paste to Mac")
 		let files = transferHandler.getClipboardAndroidItems()
-		if (files!.count == 0) {
+		if (files.count == 0) {
 			if (NSObject.VERBOSE) {
 				Swift.print("AndroidViewController, paste to mac, Warning, NO ITEMS");
 			}
@@ -811,7 +823,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		Observable.just(transferHandler)
 				.observeOn(bgScheduler)
 				.subscribe(onNext: { transferHandler in
-					transferHandler.pull(files!, destination: path)
+					transferHandler.pull(files, destination: path)
 				})
 	}
 	
@@ -821,7 +833,6 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		}
 		transferHandler.clearClipboardAndroidItems()
 		transferHandler.clearClipboardMacItems()
-		updateClipboard()
 	}
 	
 	func cancelTask() {
@@ -884,7 +895,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 					if transferHandler == nil {
 						self.reset()
 					}
-					self.updateClipboard()
+//					self.updateClipboard()
 					self.updateActiveStorageButton()
 					self.hideProgress()
 				})

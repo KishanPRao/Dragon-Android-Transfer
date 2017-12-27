@@ -416,64 +416,50 @@ public class AndroidHandler: NSObject {
 	var sizeActiveTask = Variable<UInt64>(0)
 	var transferTypeActive = Variable<Int>(TransferType.AndroidToMac)
 	var fileActiveTask = Variable<BaseFile>(EmptyFile)
-	var progressActiveTask = Variable<Int>(0)
-	var filesIterator: IndexingIterator<[BaseFile]>?
+	var progressActiveTask = Variable<Double>(0.0)
 	
 	fileprivate var startedTask: Bool = false
+	
+	private var filesIterator: IndexingIterator<[BaseFile]>?
+	private var previousSizeTask = 0 as UInt64
+	private var totalItems = 0 as Int
+	private var currentFile: BaseFile?
 	
 	typealias TransferBlockType = (Int, AdbExecutionResultWrapper) -> Void
 	lazy var transferBlock: TransferBlockType = { progress, result in
 //				print("Pull: \(progress), \(result)")
 		if (result == AdbExecutionResultWrapper.Result_Ok) {
-			if (progress == 100) {
-				self.fileActiveTask.value = self.filesIterator!.next()!
+			print("Completed!")
+			let previousFile = self.currentFile
+			let currentFile = self.filesIterator!.next()
+			if (currentFile == nil) {
+				print("Done Exec!")
+				self.hasActiveTask.value = FileProgressStatus.kStatusOk
+			} else {
+				self.previousSizeTask += previousFile!.size
+//				print("Prev Size: \(self.previousSizeTask), total: \(self.sizeActiveTask.value)")
 			}
-			self.hasActiveTask.value = FileProgressStatus.kStatusOk
+			self.currentFile = currentFile
 		} else if (result == AdbExecutionResultWrapper.Result_InProgress) {
-			self.progressActiveTask.value = progress
+			let totalSize = Double(self.sizeActiveTask.value)
+			let previousProgress = (Double(self.previousSizeTask) / totalSize) * 100.0
+			let currentProgress = (Double(progress) / Double(self.totalItems))
+//			print("Prev: \(previousProgress), curr: \(currentProgress)")
+			self.progressActiveTask.value = previousProgress + currentProgress 
 		} else if (result == AdbExecutionResultWrapper.Result_Canceled) {
 			print("Canceled")
 			self.hasActiveTask.value = FileProgressStatus.kStatusCanceled
 		}
 	};
 
-//    From Android
-	func pull(_ sourceFiles: Array<BaseFile>, destination: String) {
-//		cancelTask = false
-		hasActiveTask.value = FileProgressStatus.kStatusInProgress
-		if (activeDevice != nil) {
-			startedTask = false
-			filesIterator = sourceFiles.makeIterator()
-			var size = 0 as UInt64
-			var sourceFileName = ""
-			while let file = filesIterator!.next() {
-				sourceFileName = file.path + HandlerConstants.SEPARATOR + file.fileName
-				if ((file.size == 0 || file.size == UInt64.max) && file.type == BaseFileType.Directory) {
-					file.size = getSize(sourceFileName)
-				}
-				size = size + file.size
-			}
-			sizeActiveTask.value = size
-			transferTypeActive.value = TransferType.AndroidToMac
-			filesIterator = sourceFiles.makeIterator()
-			self.fileActiveTask.value = filesIterator!.next()!
-			
-			print("------Start Time:", TimeUtils.getCurrentTime())
-			
-			startedTask = true
-//			adbHandler.pull("/sdcard/Android/app.apk", toDestination: "/Users/kishanprao/Test/") {  progress, result in
-			adbHandler.pull(sourceFileName, toDestination: destination, transferBlock)
-		} else {
-			print("Warning, No active device")
-		}
-	}
-
-//    To Android
 	func push(_ sourceFiles: Array<BaseFile>, destination: String) {
-//		cancelTask = false
+		print("Pushing: \(sourceFiles) to \(destination)")
+		cancelTask = false
+		previousSizeTask = 0
 		hasActiveTask.value = FileProgressStatus.kStatusInProgress
 		if (activeDevice != nil) {
 			startedTask = false
+			totalItems = sourceFiles.count
 			var size = 0 as UInt64
 			filesIterator = sourceFiles.makeIterator()
 			var sourceFileName = ""
@@ -488,18 +474,78 @@ public class AndroidHandler: NSObject {
 			sizeActiveTask.value = size
 			transferTypeActive.value = TransferType.MacToAndroid
 			filesIterator = sourceFiles.makeIterator()
-			self.fileActiveTask.value = filesIterator!.next()!
+			currentFile = self.filesIterator!.next()
+			self.fileActiveTask.value = currentFile!
 			
 			print("------Start Time:", TimeUtils.getCurrentTime())
 			startedTask = true
-			adbHandler.push(sourceFileName, toDestination: destination, transferBlock)
+			
+			while let file = currentFile {
+				if (cancelTask) {
+					print("Task Canceled")
+					break
+				}
+				self.fileActiveTask.value = file
+				sourceFileName = file.path + HandlerConstants.SEPARATOR + file.fileName
+				adbHandler.push(sourceFileName, toDestination: destination, transferBlock)
+				print("After Single Push!")
+			}
+			print("After Push!")
 		} else {
 			print("Warning, no active")
 		}
 	}
+
+	func pull(_ sourceFiles: Array<BaseFile>, destination: String) {
+		print("Pulling: \(sourceFiles) to \(destination)")
+		cancelTask = false
+		previousSizeTask = 0
+		hasActiveTask.value = FileProgressStatus.kStatusInProgress
+		if (activeDevice != nil) {
+			startedTask = false
+			totalItems = sourceFiles.count
+			filesIterator = sourceFiles.makeIterator()
+			var size = 0 as UInt64
+			var sourceFileName = ""
+			while let file = filesIterator!.next() {
+				sourceFileName = file.path + HandlerConstants.SEPARATOR + file.fileName
+				if ((file.size == 0 || file.size == UInt64.max) && file.type == BaseFileType.Directory) {
+					file.size = getSize(sourceFileName)
+				}
+				size = size + file.size
+			}
+			sizeActiveTask.value = size
+			transferTypeActive.value = TransferType.AndroidToMac
+			filesIterator = sourceFiles.makeIterator()
+			currentFile = self.filesIterator!.next()
+			self.fileActiveTask.value = currentFile!
+			
+			print("------Start Time:", TimeUtils.getCurrentTime())
+			
+			startedTask = true
+//			adbHandler.pull("/sdcard/Android/app.apk", toDestination: "/Users/kishanprao/Test/") {  progress, result in
+			while let file = currentFile {
+				if (cancelTask) {
+					print("Task Canceled")
+					break
+				}
+				self.fileActiveTask.value = file
+				sourceFileName = file.path + HandlerConstants.SEPARATOR + file.fileName
+				adbHandler.pull(sourceFileName, toDestination: destination, transferBlock)
+				print("After Single Pull!")
+			}
+			print("After Pull!")
+		} else {
+			print("Warning, No active device")
+		}
+	}
+	
+//	TODO: Probably can use status
+	var cancelTask = false
 	
 	func cancelActiveTask() {
 		if (startedTask) {
+			cancelTask = true
 			print("Cancel Active Task")
 			adbHandler.cancelActiveTask()
 		} else {
@@ -507,6 +553,6 @@ public class AndroidHandler: NSObject {
 				print("AndroidHandler, Warning, Task not Started!");
 			}
 		}
-//		cancelTask = true
+		cancelTask = true
 	}
 }
