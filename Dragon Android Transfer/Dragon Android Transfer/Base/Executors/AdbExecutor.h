@@ -37,6 +37,8 @@ public:
     void killAdbIfRunning();
 	
 	string execute(shared_ptr<AdbExecutorProperties> properties, AdbCallback callback = {});
+	
+	void cancel();
 };
 
 

@@ -170,7 +170,7 @@ shared_ptr<AdbExecutor> executor;
 		} else {
 			progress = 100;
 		}
-		AdbExecutionResultWrapper wrapperResult = AdbExecutionResultWrapper(result); 
+		AdbExecutionResultWrapper wrapperResult = AdbExecutionResultWrapper(result);
 		transferBlock(progress, wrapperResult);
 	}, executor);
 	auto outputPull = convert(command->execute());
@@ -185,12 +185,19 @@ shared_ptr<AdbExecutor> executor;
 		} else {
 			progress = 100;
 		}
-		AdbExecutionResultWrapper wrapperResult = AdbExecutionResultWrapper(result); 
+		AdbExecutionResultWrapper wrapperResult = AdbExecutionResultWrapper(result);
 		transferBlock(progress, wrapperResult);
 	}, executor);
 	auto outputPull = convert(command->execute());
 //	NSLog(@"Outer Output Pull: %@", outputPull);
 }
+
+- (void)cancelActiveTask {
+	if (executor) {
+		executor->cancel();
+	}
+}
+
 
 
 // - (void)dealloc

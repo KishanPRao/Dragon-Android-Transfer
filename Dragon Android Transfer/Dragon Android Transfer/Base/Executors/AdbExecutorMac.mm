@@ -122,6 +122,10 @@ string AdbExecutor::executeAdb(string commands, AdbCallback callback) {
 						 queue:nil
 					usingBlock:^(NSNotification *notification) {
 //						NSLog(@"Task Block");
+						if (activeTask == nil) {
+							callback("", AdbExecutionResult::Canceled);
+							return;
+						}
 						auto data = [pipe fileHandleForReading].availableData;
 //						NSLog(@"Task Data, %@", data);
 						if (data.length > 0) {
@@ -184,4 +188,12 @@ void AdbExecutor::setDeviceId(const string &deviceId) {
 	}
 	NSLog(@"New Device: %@, old: %@", convert(deviceId), convert(AdbExecutor::deviceId));
 	AdbExecutor::deviceId = deviceId;
+}
+
+void AdbExecutor::cancel() {
+	if (activeTask != nil) {
+		NSLog(@"Cancelling active task");
+		[activeTask terminate];
+		activeTask = nil;
+	}
 }

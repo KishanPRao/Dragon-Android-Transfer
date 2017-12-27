@@ -24,6 +24,7 @@ enum FileProgressStatus: Int {
 //	static let kStatusCanceled = 1
 //	static let kStatusError = 2
 case kStatusOk
+case kStatusInProgress
 case kStatusCanceled
 case kStatusError
 }

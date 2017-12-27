@@ -105,7 +105,7 @@ class TransferHandler {
 	func pull(_ sourceFiles: Array<BaseFile>, destination: String, delegate: FileProgressDelegate) {
 		androidHandler.pull(sourceFiles, destination: destination, delegate: delegate)
 	}
-	func hasActiveTask() -> Observable<Bool> {
+	func hasActiveTask() -> Observable<FileProgressStatus> {
 		return androidHandler.hasActiveTask.asObservable()
 	}
 	

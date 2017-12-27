@@ -111,8 +111,8 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 	private func observeTransfer() {
 		transferHandler.hasActiveTask().skip(1)
 				.observeOn(MainScheduler.instance)
-				.subscribe(onNext: { value in
-					if (value) {
+				.subscribe(onNext: { status in
+					if (status == FileProgressStatus.kStatusInProgress) {
 						self.fileTable.layer?.borderWidth = 0
 						AppDelegate.isPastingOperation = true
 						self.overlayView.isHidden = false;
@@ -121,7 +121,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 						self.mDockProgress?.isHidden = false
 					} else {
 //						TODO:
-						self.finished(FileProgressStatus.kStatusOk)
+						self.finished(status)
 					}
 					self.mCurrentProgress = -1
 				})
@@ -463,11 +463,9 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 //        self.stop()
 	}
 	
-	func onConnected(_ device: AndroidDevice) {
-	}
+	func onConnected(_ device: AndroidDevice) {}
 	
-	func onDisconnected(_ device: AndroidDevice) {
-	}
+	func onDisconnected(_ device: AndroidDevice) {}
 	
 	fileprivate func updateActiveDevice(_ activeDevice: AndroidDevice?) {
 		if (NSObject.VERBOSE) {

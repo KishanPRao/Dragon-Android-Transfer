@@ -48,9 +48,9 @@ public class AndroidHandler: NSObject {
 	// fileprivate static var sJavaType = ""
 	fileprivate let escapeDoubleQuotes = StringResource.ESCAPE_DOUBLE_QUOTES
 	fileprivate static let JAVA_TYPE_COMMAND = AndroidShellScripts.JAVA_TYPE_COMMAND
-    
-    fileprivate lazy var adbHandler: AndroidAdbHandler = {
-        return AndroidAdbHandler(directory: self.adbDirectoryPath)
+	
+	fileprivate lazy var adbHandler: AndroidAdbHandler = {
+		return AndroidAdbHandler(directory: self.adbDirectoryPath)
 	}()
 	
 	private var data: Data? = nil
@@ -58,23 +58,12 @@ public class AndroidHandler: NSObject {
 	override init() {
 		currentPath = ""
 		adbLaunchPath = "/bin/bash"
-
-//        test { (result) in
-//            print("Op:", result)
-//        }
 	}
 	
 	func initialize(_ data: Data) {
 		self.data = data
 		adbDirectoryPath = self.extractAdbAsset()
-        LogV("Initialize")
-        
-        // adbHandler = AndroidAdbHandler(adbDirectoryPath)
-        // if let adbHandler = adbHandler {
-        	// adbHandler.deviceId = "ZY223DGND4"
-        	// adbHandler.adbDirectoryPath = adbDirectoryPath
-            // adbHandler.getDirectoryListing("/sdcard/")
-        // }
+		LogV("Initialize")
 	}
 	
 	func isFirstLaunch() -> Bool {
@@ -114,11 +103,12 @@ public class AndroidHandler: NSObject {
 	func getAndroidDevices() -> Array<AndroidDevice> {
 		return androidDevices
 	}
-    
-    fileprivate var observableAndroidDevices: Variable<[AndroidDevice]> = Variable([])
-    func observeAndroidDevices() -> Observable<[AndroidDevice]> {
-        return observableAndroidDevices.asObservable()
-    }
+	
+	fileprivate var observableAndroidDevices: Variable<[AndroidDevice]> = Variable([])
+	
+	func observeAndroidDevices() -> Observable<[AndroidDevice]> {
+		return observableAndroidDevices.asObservable()
+	}
 	
 	func start() {
 		self.adbDevicesTimer()
@@ -182,9 +172,6 @@ public class AndroidHandler: NSObject {
 			} else {
 				externalStorage = ""
 			}
-//			adbHandler.pull("/sdcard/Android/app.apk", toDestination: "/Users/kishanprao/Test/") {  progress, result in
-//				print("Pull: \(progress), \(result)")
-//			}
 		} else {
 			externalStorage = ""
 		}
@@ -271,8 +258,8 @@ public class AndroidHandler: NSObject {
 		if (!same) {
 			androidDevices.removeAll()
 			androidDevices.append(contentsOf: newDevices)
-            Swift.print("Androidhandler, Main:", ThreadUtils.isMainThread())
-            self.observableAndroidDevices.value = self.androidDevices
+			Swift.print("Androidhandler, Main:", ThreadUtils.isMainThread())
+			self.observableAndroidDevices.value = self.androidDevices
 		}
 		
 		objc_sync_exit(self)
@@ -306,130 +293,96 @@ public class AndroidHandler: NSObject {
 	
 	static let EmptyFile = BaseFile(fileName: "", path: "", type: 0, size: 0)
 	
-	var hasActiveTask = Variable<Bool>(false)
+	var hasActiveTask = Variable<FileProgressStatus>(FileProgressStatus.kStatusInProgress)
 	var sizeActiveTask = Variable<UInt64>(0)
 	var transferTypeActive = Variable<Int>(TransferType.AndroidToMac)
 	var fileActiveTask = Variable<BaseFile>(EmptyFile)
 	var progressActiveTask = Variable<Int>(0)
+	
+	typealias TransferBlockType = (Int, AdbExecutionResultWrapper) -> Void
+	lazy var transferBlock: TransferBlockType = { progress, result in
+//				print("Pull: \(progress), \(result)")
+		if (result == AdbExecutionResultWrapper.Result_Ok) {
+			if (progress == 100) {
+				self.fileActiveTask.value = self.filesIterator!.next()!
+			}
+			self.hasActiveTask.value = FileProgressStatus.kStatusOk
+		} else if (result == AdbExecutionResultWrapper.Result_InProgress) {
+			self.progressActiveTask.value = progress
+		} else if (result == AdbExecutionResultWrapper.Result_Canceled) {
+			print("Canceled")
+			self.hasActiveTask.value = FileProgressStatus.kStatusCanceled
+		}
+	};
+
+	var sourceFiles = Array<BaseFile>()
+	var filesIterator: IndexingIterator<[BaseFile]>?
 
 //    From Android
 	func pull(_ sourceFiles: Array<BaseFile>, destination: String, delegate: FileProgressDelegate) {
-		cancelTask = false
-		hasActiveTask.value = true
+//		cancelTask = false
+		hasActiveTask.value = FileProgressStatus.kStatusInProgress
+		self.sourceFiles = sourceFiles
 		if (activeDevice != nil) {
 			startedTask = false
-			var i = 0
-			var pullCommand = "" as String
+			filesIterator = sourceFiles.makeIterator()
+//			var i = 0
 			var size = 0 as UInt64
 			var sourceFileName = ""
-			while i < sourceFiles.count {
-				pullCommand = pullCommand + "./adb" + " -s " + (activeDevice?.id)!
-				let file = sourceFiles[i]
+			while let file = filesIterator!.next() {
 				sourceFileName = file.path + HandlerConstants.SEPARATOR + file.fileName
-				pullCommand = pullCommand + " pull " + escapeDoubleQuotes + sourceFileName + escapeDoubleQuotes + " " + escapeDoubleQuotes + destination + escapeDoubleQuotes + ";\n"
 				if ((file.size == 0 || file.size == UInt64.max) && file.type == BaseFileType.Directory) {
 					file.size = getSize(sourceFileName)
 				}
 				size = size + file.size
-				i = i + 1
 			}
 			sizeActiveTask.value = size
 			transferTypeActive.value = TransferType.AndroidToMac
-			i = 0
-			self.fileActiveTask.value = sourceFiles[i]
+			filesIterator = sourceFiles.makeIterator()
+			self.fileActiveTask.value = filesIterator!.next()!
 			
 			print("------Start Time:", TimeUtils.getCurrentTime())
 			
-			print(pullCommand)
+			startedTask = true
 //			adbHandler.pull("/sdcard/Android/app.apk", toDestination: "/Users/kishanprao/Test/") {  progress, result in
-			adbHandler.pull(sourceFileName, toDestination: destination) {  progress, result in
-//				print("Pull: \(progress), \(result)")
-				if (result == AdbExecutionResultWrapper.Result_Ok) {
-					if (progress == 100) {
-						i = i + 1
-						if (i < sourceFiles.count) {
-							self.fileActiveTask.value = sourceFiles[i]
-						}
-					}
-					self.hasActiveTask.value = false
-				} else if (result == AdbExecutionResultWrapper.Result_InProgress) {
-					self.progressActiveTask.value = progress
-				}
-			}
+			adbHandler.pull(sourceFileName, toDestination: destination, transferBlock)
 		} else {
 			print("Warning, No active device")
 		}
-
-//        timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: #selector(AndroidHandler.testComplete), userInfo: nil, repeats: true)
-		
 	}
 
 //    To Android
 	func push(_ sourceFiles: Array<BaseFile>, destination: String, delegate: FileProgressDelegate) {
-		cancelTask = false
-		hasActiveTask.value = true
+//		cancelTask = false
+		hasActiveTask.value = FileProgressStatus.kStatusInProgress
+		self.sourceFiles = sourceFiles
 		if (activeDevice != nil) {
 			startedTask = false
 			var size = 0 as UInt64
-			var i = 0
+//			var i = 0
+			filesIterator = sourceFiles.makeIterator()
 			var sourceFileName = ""
-			while i < sourceFiles.count {
-				let file = sourceFiles[i]
+			while let file = filesIterator!.next() {
 				sourceFileName = file.path + HandlerConstants.SEPARATOR + file.fileName
 //				TODO: Worst case!
 //				if ((file.size == 0 || file.size == UInt64.max) && file.type == BaseFileType.Directory) {
-////					file.size = getSize(sourceFileName)
+//					file.size = getSize(sourceFileName)
 //				}
 				size = size + file.size
-				i = i + 1
 			}
 			sizeActiveTask.value = size
 			transferTypeActive.value = TransferType.MacToAndroid
-			i = 0
-			self.fileActiveTask.value = sourceFiles[i]
+			filesIterator = sourceFiles.makeIterator()
+			self.fileActiveTask.value = filesIterator!.next()!
 			
 			print("------Start Time:", TimeUtils.getCurrentTime())
-//        let output = adb(adbLaunchPath, arguments: arguments, directoryPath: adbDirectoryPath)
-
-			adbHandler.push(sourceFileName, toDestination: destination) {  progress, result in
-//				print("Push: \(progress), \(result)")
-				if (result == AdbExecutionResultWrapper.Result_Ok) {
-					if (progress == 100) {
-						i = i + 1
-						if (i < sourceFiles.count) {
-							self.fileActiveTask.value = sourceFiles[i]
-						}
-					}
-					self.hasActiveTask.value = false
-				} else if (result == AdbExecutionResultWrapper.Result_InProgress) {
-//					print("In Progress")
-					self.progressActiveTask.value = progress
-				}
-			}
+			startedTask = true
+			adbHandler.push(sourceFileName, toDestination: destination, transferBlock)
 		} else {
 			print("Warning, no active")
 		}
 	}
-	
-	let regexPercentage = "\\[.*%\\]"
-	let regexFileName = "[^/]*$"
-	
-	func matchesForRegexInText(_ regex: String, text: String) -> [String] {
-		
-		do {
-			let regex = try NSRegularExpression(pattern: regex, options: [])
-			let nsString = text as NSString
-			let results = regex.matches(in: text,
-					options: [], range: NSMakeRange(0, nsString.length))
-			return results.map {
-				nsString.substring(with: $0.range)
-			}
-		} catch let error as NSError {
-			print("invalid regex: \(error.localizedDescription)")
-			return []
-		}
-	}
-	
+
 //	func isFileTypeString(str: String) -> Bool {
 //		return str.contains(HandlerConstants.DIRECTORY) || str.contains(HandlerConstants.FILE);
 //	}
@@ -443,16 +396,6 @@ public class AndroidHandler: NSObject {
 	func updateSizes(_ files: Array<BaseFile>) {
 		var i = 0;
 		while i < files.count {
-//			let fileName = files[i].path + HandlerConstants.SEPARATOR + files[i].fileName
-//			var size: UInt64
-//			if (files[i].type == BaseFileType.Directory) {
-//				size = getSize(fileName)
-//			} else {
-//				size = getSize(fileName)
-//			}
-//			
-//			files[i].size = size
-			
 			updateSize(file: files[i])
 			i = i + 1
 		}
@@ -582,95 +525,16 @@ public class AndroidHandler: NSObject {
 	
 	func cancelActiveTask() {
 		if (startedTask) {
-			if (activeTask != nil) {
-				activeTask!.terminate()
-			}
+			print("Cancel Active Task")
+			adbHandler.cancelActiveTask()
 		} else {
 			if (Verbose) {
 				print("AndroidHandler, Warning, Task not Started!");
 			}
 		}
-		cancelTask = true
+//		cancelTask = true
 	}
 	
-	//TODO: Handle active task cancelation!!
-	fileprivate var activeTask: Process? = nil
+	//TODO: Handle active task cancellation!!
 	fileprivate var startedTask: Bool = false
-	fileprivate var cancelTask: Bool = false
-	
-	fileprivate func adbAsync(_ commands: String, with: @escaping (_ output: String?) -> Void) {
-		startedTask = true
-		if (Verbose) {
-			print("AndroidHandler, Started Adb Async");
-		}
-		self.startAdbIfNotStarted()
-		
-		let task = Process()
-		activeTask = task
-		if (Verbose) {
-			print("AndroidHandler, Started Task");
-		}
-		task.launchPath = adbLaunchPath
-		task.arguments = ["-l", "-c", commands]
-		task.currentDirectoryPath = adbDirectoryPath
-		
-		let pipe = Pipe()
-		task.standardOutput = pipe
-		let outHandle = pipe.fileHandleForReading
-		
-		var obs1: NSObjectProtocol!
-		obs1 = NotificationCenter.default.addObserver(
-				forName: NSNotification.Name.NSFileHandleDataAvailable,
-				object: outHandle, queue: nil) { notification -> Void in
-			let data = outHandle.availableData
-//			print("Data: ", data);
-			if data.count > 0 {
-				if let str = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
-//                        print("Output:", str)
-					with(str as String)
-				}
-				outHandle.waitForDataInBackgroundAndNotify()
-			} else {
-				print("EOF on stdout from process")
-				NotificationCenter.default.removeObserver(obs1)
-			}
-		}
-		
-		var obs2: NSObjectProtocol!
-		obs2 = NotificationCenter.default.addObserver(
-				forName: Process.didTerminateNotification,
-				object: task, queue: nil) { notification -> Void in
-			print("Terminated")
-			with(nil)
-			NotificationCenter.default.removeObserver(obs2)
-		}
-		
-		outHandle.waitForDataInBackgroundAndNotify()
-		task.launch()
-		if (cancelTask) {
-			task.terminate()
-			activeTask = nil
-			cancelTask = false
-			print("Terminating!")
-		}
-		
-		if (Verbose) {
-			print("AndroidHandler, Launched Task");
-		}
-	}
-	
-	fileprivate func startAdbIfNotStarted() {
-		let command = "./adb start-server"
-		let task = Process()
-		task.launchPath = adbLaunchPath
-		task.arguments = ["-l", "-c", command]
-		task.currentDirectoryPath = adbDirectoryPath
-		
-		let pipe = Pipe()
-		task.standardOutput = pipe
-		
-		task.launch()
-		
-		task.waitUntilExit()
-	}
 }

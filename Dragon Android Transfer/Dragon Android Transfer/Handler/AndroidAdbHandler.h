@@ -53,4 +53,6 @@
 - (void)pull:(NSString *_Nonnull)sourceFile toDestination:(NSString *_Nonnull)destination :TransferBlock transferBlock;
 
 - (void)push:(NSString *_Nonnull)sourceFile toDestination:(NSString *_Nonnull)destination :TransferBlock transferBlock;
+
+- (void)cancelActiveTask;
 @end
