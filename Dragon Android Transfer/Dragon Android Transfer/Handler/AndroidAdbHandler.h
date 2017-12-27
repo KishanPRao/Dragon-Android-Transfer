@@ -50,7 +50,7 @@
 - (UInt64)getFileSize:(NSString *_Nonnull)path;
 
 //- (void) pull: (void (^)(NSString * output, enum AdbExecutionResult result))completionBlock;
-- (void)pull:(NSString *)sourceFile toDestination:(NSString *)destination :TransferBlock transferBlock;
+- (void)pull:(NSString *_Nonnull)sourceFile toDestination:(NSString *_Nonnull)destination :TransferBlock transferBlock;
 
-- (void)push:(NSString *)sourceFile toDestination:(NSString *)destination :TransferBlock transferBlock;
+- (void)push:(NSString *_Nonnull)sourceFile toDestination:(NSString *_Nonnull)destination :TransferBlock transferBlock;
 @end

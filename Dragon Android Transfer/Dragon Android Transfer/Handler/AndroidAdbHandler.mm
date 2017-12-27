@@ -36,6 +36,7 @@
 #import "AvailableSpaceCommand.hpp"
 #import "FileSizeCommand.hpp"
 #import "PullCommand.hpp"
+#import "PushCommand.h"
 
 @class ShellParser;
 

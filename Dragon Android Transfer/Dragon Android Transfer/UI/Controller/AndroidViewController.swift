@@ -123,6 +123,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 //						TODO:
 						self.finished(FileProgressStatus.kStatusOk)
 					}
+					self.mCurrentProgress = -1
 				})
 //		TODO: Initially, do not call!
 		transferHandler.sizeActiveTask().skip(1)
@@ -183,7 +184,14 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 				})
 	}
 	
+	var mCurrentProgress = -1
+	
 	private func progressActive(_ progress: Int) {
+//		print("Progress Active: \(progress)")
+		if (mCurrentProgress == progress) {
+			return
+		}
+		mCurrentProgress = progress
 		if (copyDialog != nil) {
 			print("Current File: \(currentFile)")
 			if (currentFile != nil) {
@@ -867,7 +875,13 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		}
 		copyDestination = path
 		AppDelegate.isPastingOperation = true
-		transferHandler.push(files, destination: path, delegate: self)
+//		transferHandler.push(files, destination: path, delegate: self)
+		
+		Observable.just(transferHandler)
+				.observeOn(bgScheduler)
+				.subscribe(onNext: { transferHandler in
+					transferHandler.push(files, destination: path, delegate: self)
+				})
 	}
 	
 	func pasteToMac(_ notification: Notification) {
