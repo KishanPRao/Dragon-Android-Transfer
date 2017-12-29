@@ -40,7 +40,7 @@ class ClipboardViewController: NSViewController, NSTableViewDataSource {
 		
 		clipboardTable.target = self
 		
-		clipboardTable.backgroundColor = ColorUtils.colorWithHexString(ColorUtils.mainViewColor)
+		clipboardTable.backgroundColor = ColorUtils.colorWithHexString(ColorUtils.listBackgroundColor)
 		clipboardTable.selectionHighlightStyle = NSTableViewSelectionHighlightStyle.none
 		
 		clipboardCloseIcon = NSImage(named: "close_button.png")
@@ -137,7 +137,7 @@ class ClipboardViewController: NSViewController, NSTableViewDataSource {
 		}
 		cellView.showFullPath = false
 		cellView.objectValue = file
-		ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listBackgroundColor)
+		ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listItemBackgroundColor)
 		return cellView
 	}
 	

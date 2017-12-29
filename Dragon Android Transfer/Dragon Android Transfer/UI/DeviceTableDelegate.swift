@@ -82,7 +82,7 @@ class DeviceTableDelegate: NSObject, NSTableViewDelegate {
             if (indexSet.contains(row)) {
                 ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listSelectedBackgroundColor)
             } else {
-                ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listBackgroundColor)
+                ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listItemBackgroundColor)
             }
             
             if (!isDirectory && fileTable.dragDropRow == row) {
@@ -133,7 +133,7 @@ class DeviceTableDelegate: NSObject, NSTableViewDelegate {
 						}
 						AppDelegate.itemSelected = true
 					} else {
-						ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listBackgroundColor)
+						ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listItemBackgroundColor)
 					}
 				}
 				i = i + 1

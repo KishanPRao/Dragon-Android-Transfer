@@ -24,6 +24,14 @@
 		503C5A2F1E0FB9300090EB68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 503C5A2E1E0FB9300090EB68 /* Assets.xcassets */; };
 		503C5A321E0FB9300090EB68 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 503C5A301E0FB9300090EB68 /* Main.storyboard */; };
 		50B020341FE986C500989BA4 /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B020331FE986C500989BA4 /* CollectionExtension.swift */; };
+		50E35D691FF65B0400DAAB96 /* AVCNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E35D681FF65B0400DAAB96 /* AVCNotification.swift */; };
+		50E35D6B1FF65E9100DAAB96 /* AVCWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E35D6A1FF65E9100DAAB96 /* AVCWindow.swift */; };
+		50E35D6D1FF6604C00DAAB96 /* AVCTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E35D6C1FF6604C00DAAB96 /* AVCTransfer.swift */; };
+		50E35D6F1FF662A900DAAB96 /* AVCListing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E35D6E1FF662A900DAAB96 /* AVCListing.swift */; };
+		50E35D711FF6637200DAAB96 /* AVCActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E35D701FF6637200DAAB96 /* AVCActions.swift */; };
+		50E35D731FF663FB00DAAB96 /* AVCDrag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E35D721FF663FB00DAAB96 /* AVCDrag.swift */; };
+		50E35D751FF6652300DAAB96 /* AVCUi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E35D741FF6652300DAAB96 /* AVCUi.swift */; };
+		50E35D771FF66A3500DAAB96 /* TestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E35D761FF66A3500DAAB96 /* TestController.swift */; };
 		50F314E01FAE1C45006BF985 /* ExtensionBaseFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F314DF1FAE1C45006BF985 /* ExtensionBaseFile.swift */; };
 		50F314E41FAE28D7006BF985 /* ThreadUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDC1EC5EA8A5A0A17A378 /* ThreadUtils.swift */; };
 		51228DE463F84080BF00A549 /* Pods_Dragon_Android_Transfer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D76E99487AF2B4AB76B28F08 /* Pods_Dragon_Android_Transfer.framework */; };
@@ -197,6 +205,14 @@
 		503C5A331E0FB9300090EB68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		507AB7F71E2A374C00C749D1 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		50B020331FE986C500989BA4 /* CollectionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
+		50E35D681FF65B0400DAAB96 /* AVCNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVCNotification.swift; sourceTree = "<group>"; };
+		50E35D6A1FF65E9100DAAB96 /* AVCWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVCWindow.swift; sourceTree = "<group>"; };
+		50E35D6C1FF6604C00DAAB96 /* AVCTransfer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVCTransfer.swift; sourceTree = "<group>"; };
+		50E35D6E1FF662A900DAAB96 /* AVCListing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVCListing.swift; sourceTree = "<group>"; };
+		50E35D701FF6637200DAAB96 /* AVCActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVCActions.swift; sourceTree = "<group>"; };
+		50E35D721FF663FB00DAAB96 /* AVCDrag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVCDrag.swift; sourceTree = "<group>"; };
+		50E35D741FF6652300DAAB96 /* AVCUi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVCUi.swift; sourceTree = "<group>"; };
+		50E35D761FF66A3500DAAB96 /* TestController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestController.swift; sourceTree = "<group>"; };
 		50F314DF1FAE1C45006BF985 /* ExtensionBaseFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionBaseFile.swift; sourceTree = "<group>"; };
 		50F716F31E82F492005CA833 /* MASShortcut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MASShortcut.framework; path = Pods/../build/Debug/MASShortcut/MASShortcut.framework; sourceTree = "<group>"; };
 		6B57E05A04A8CF6A133E8C85 /* Pods-Dragon Android TransferUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dragon Android TransferUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dragon Android TransferUITests/Pods-Dragon Android TransferUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -505,8 +521,16 @@
 		BE3BD3BB04329C8CC1275F9F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				BE3BD024937FCBD0DC3BF232 /* AndroidViewController.swift */,
 				BE3BDE794C92E054421418BB /* ViewController.swift */,
+				BE3BD024937FCBD0DC3BF232 /* AndroidViewController.swift */,
+				50E35D681FF65B0400DAAB96 /* AVCNotification.swift */,
+				50E35D6A1FF65E9100DAAB96 /* AVCWindow.swift */,
+				50E35D6C1FF6604C00DAAB96 /* AVCTransfer.swift */,
+				50E35D6E1FF662A900DAAB96 /* AVCListing.swift */,
+				50E35D701FF6637200DAAB96 /* AVCActions.swift */,
+				50E35D721FF663FB00DAAB96 /* AVCDrag.swift */,
+				50E35D741FF6652300DAAB96 /* AVCUi.swift */,
+				50E35D761FF66A3500DAAB96 /* TestController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1108,9 +1132,11 @@
 				50B020341FE986C500989BA4 /* CollectionExtension.swift in Sources */,
 				BE3BD3CF4A98FDDACABFF93A /* ColorUtils.swift in Sources */,
 				BE3BDA227C3660B22686716F /* SizeUtils.swift in Sources */,
+				50E35D6D1FF6604C00DAAB96 /* AVCTransfer.swift in Sources */,
 				BE3BD37C280AAD9C969F3243 /* TimeUtils.swift in Sources */,
 				50293DF61FEFBF0B00B06B14 /* BaseFile.swift in Sources */,
 				BE3BD9C6949E9F5050D4D401 /* ThreadUtils.swift in Sources */,
+				50E35D6B1FF65E9100DAAB96 /* AVCWindow.swift in Sources */,
 				50F314E01FAE1C45006BF985 /* ExtensionBaseFile.swift in Sources */,
 				BE3BD4859D0A4C8B57D3336A /* StyleUtils.swift in Sources */,
 				BE3BDCC039E34A76B2BA261E /* DragUtils.swift in Sources */,
@@ -1128,10 +1154,13 @@
 				50293DF41FEFB8DB00B06B14 /* DeviceTableDelegate.swift in Sources */,
 				BE3BD7A0031EADC65E19DA1D /* CrossfadeSegue.swift in Sources */,
 				BE3BD5D597FE4AA22E298EFB /* CustomSwiftAnimator.swift in Sources */,
+				50E35D731FF663FB00DAAB96 /* AVCDrag.swift in Sources */,
+				50E35D751FF6652300DAAB96 /* AVCUi.swift in Sources */,
 				BE3BD284856999A467420E8C /* DisabledTextField.swift in Sources */,
 				BE3BDFCBE0994AEA0312BA2D /* DragNotificationDelegate.swift in Sources */,
 				BE3BD1B87F638080742BF2CD /* DragUiDelegate.swift in Sources */,
 				BE3BD1160DCBB842CAF018B2 /* DraggableTableView.swift in Sources */,
+				50E35D6F1FF662A900DAAB96 /* AVCListing.swift in Sources */,
 				BE3BDA1B26C25B694341E27B /* DraggableItem.swift in Sources */,
 				BE3BD756779B9E066ABD34FA /* SegueFromLeft.swift in Sources */,
 				BE3BDD40E7D724B613AFB166 /* SelectableTableRowView.swift in Sources */,
@@ -1150,6 +1179,7 @@
 				BE3BD43E1D6C3ADCE968188D /* HelpWindow.swift in Sources */,
 				BE3BD06FDDB930947C1B074A /* CopyDialog.swift in Sources */,
 				BE3BDD26BD56D714B0769BEB /* Dimens.swift in Sources */,
+				50E35D711FF6637200DAAB96 /* AVCActions.swift in Sources */,
 				BE3BD5406227870BE38ACD2D /* StringResource.swift in Sources */,
 				BE3BDC1DDDC0D54EED0E1B61 /* AndroidShellResource.swift in Sources */,
 				BE3BDB93125B4F8F31159F09 /* AndroidAdbHandler.mm in Sources */,
@@ -1173,7 +1203,9 @@
 				BE3BDC7A6DF3C18127CFFF78 /* ShellParser.swift in Sources */,
 				BE3BD0BD51163ECA8A5D5591 /* AlertUtils.m in Sources */,
 				BE3BDE555397795773311960 /* BridgingUtils.m in Sources */,
+				50E35D771FF66A3500DAAB96 /* TestController.swift in Sources */,
 				BE3BD9BD2020E50C8DE0DD28 /* PushCommand.cpp in Sources */,
+				50E35D691FF65B0400DAAB96 /* AVCNotification.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

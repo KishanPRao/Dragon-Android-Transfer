@@ -9,19 +9,21 @@
 import Foundation
 
 class ColorUtils {
+    static let blackColor = "#000000"
 	static let mainViewColor = "#424242"
-	static let toolbarColor = "#212121"
-	static let storageToolbarSelectedColor = "#0091ea"
-	static let storageToolbarPressedSelectedColor = "#0277bd"
-	static let storageToolbarDeselectedColor = "#616161"
+	static let toolbarColor = "#102038"
+	static let storageToolbarSelectedColor = "#102038"
+	static let storageToolbarPressedSelectedColor = "#102038"
+	static let storageToolbarDeselectedColor = "#071326"
 	static let storageSelectedTextColor = "#ffffff"
 	static let storageDeselectedTextColor = "#bdbdbd"
-    static let listBackgroundColor = "#616161"
-    static let listSelectedBackgroundColor = "#0091ea"
+    static let listBackgroundColor = blackColor
+//    static let listItemBackgroundColor = "#29303b"
+    static let listItemBackgroundColor = blackColor
+    static let listSelectedBackgroundColor = "#092c61"
     static let listDragBackgroundColor = "#000000"
 	static let listTextColor = "#ffffff"
-	static let statusViewColor = "#212121"
-	static let blackColor = "#000000"
+	static let statusViewColor = "#071326"
 	
 	static let progressBackgroundColor = "#0091ea"
 	static let progressForegroundColor = "#01579b"
