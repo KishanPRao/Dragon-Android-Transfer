@@ -173,7 +173,7 @@ shared_ptr<AdbExecutor> executor;
 		AdbExecutionResultWrapper wrapperResult = AdbExecutionResultWrapper(result);
 		transferBlock(progress, wrapperResult);
 	}, executor);
-	auto outputPull = convert(command->execute());
+	/*auto outputPull =*/ convert(command->execute());
 //	NSLog(@"Outer Output Pull: %@", outputPull);
 }
 
@@ -188,7 +188,7 @@ shared_ptr<AdbExecutor> executor;
 		AdbExecutionResultWrapper wrapperResult = AdbExecutionResultWrapper(result);
 		transferBlock(progress, wrapperResult);
 	}, executor);
-	auto outputPull = convert(command->execute());
+	/*auto outputPull =*/ convert(command->execute());
 //	NSLog(@"Outer Output Pull: %@", outputPull);
 }
 

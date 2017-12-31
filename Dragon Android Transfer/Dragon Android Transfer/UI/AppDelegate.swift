@@ -81,6 +81,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 			
 		}
 		NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.screenUpdated), name: NSNotification.Name.NSWindowDidChangeScreen, object: nil)
+		
+		R.setDarkTheme()
 	}
 	
 	func isInvalidOperation() -> Bool {

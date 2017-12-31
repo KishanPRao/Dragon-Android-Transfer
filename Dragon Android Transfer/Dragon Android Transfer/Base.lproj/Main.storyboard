@@ -197,12 +197,20 @@ CA
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
                     </window>
                     <connections>
-                        <segue destination="r7r-8M-4by" kind="relationship" relationship="window.shadowedContentViewController" id="JXa-SW-zcj"/>
+                        <segue destination="TV6-d3-Rsa" kind="relationship" relationship="window.shadowedContentViewController" id="Yix-Vx-5h2"/>
                     </connections>
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="23" y="262"/>
+        </scene>
+        <!--AndroidViewController-->
+        <scene sceneID="m7b-3m-o1c">
+            <objects>
+                <controllerPlaceholder storyboardName="AndroidViewController" id="TV6-d3-Rsa" sceneMemberID="viewController"/>
+                <customObject id="91X-VP-Z7B" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="24" y="603"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="rnk-XJ-FOW">
@@ -220,6 +228,7 @@ CA
         <!--Android View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
+                <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="androidViewController" id="XfG-lQ-9wD" customClass="AndroidViewController" customModule="Dragon_Android_Transfer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="658" height="800"/>
@@ -474,9 +483,8 @@ CA
                         <segue destination="TR5-Rx-khb" kind="custom" identifier="Clipboard" customClass="SegueFromLeft" customModule="Dragon_Android_Transfer" customModuleProvider="target" id="wzF-aC-p8S"/>
                     </connections>
                 </viewController>
-                <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="122" y="913"/>
+            <point key="canvasLocation" x="-732" y="878"/>
         </scene>
         <!--Clipboard View Controller-->
         <scene sceneID="QUw-ha-Rko">

@@ -10,7 +10,7 @@
 
 //#import "Dragon_Android_Transfer-Swift.h"
 
-#define TransferBlock (void (^)(NSInteger progress, enum AdbExecutionResultWrapper result))
+#define TransferBlock (nonnull void (^)(NSInteger progress, enum AdbExecutionResultWrapper result))
 
 @class BaseFile;
 @class AndroidDevice;
@@ -25,13 +25,13 @@
  */
 // TODO: Check if possible to convert as C++ class.
 @interface AndroidAdbHandler : NSObject
-@property(nonatomic, retain) AndroidDevice *device;
-@property(nonatomic, retain) NSString *adbDirectoryPath;
+@property(nonatomic, retain) AndroidDevice *_Nullable device;
+@property(nonatomic, retain) NSString *_Nullable adbDirectoryPath;
 //@property (nonatomic, retain) AdbExecutor *executor;
 
 //AdbExecutor *executor;
 
-- (id)initWithDirectory:(NSString *_Nonnull)adbDirectoryPath;
+- (id _Nonnull)initWithDirectory:(NSString *_Nonnull)adbDirectoryPath;
 
 - (NSArray<BaseFile *> *_Nonnull)getDirectoryListing:(NSString *_Nonnull)path;
 

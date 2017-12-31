@@ -14,6 +14,7 @@ class ViewController: NSViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+        /*
 		let mainStoryboard: NSStoryboard = NSStoryboard(name: "Main", bundle: nil)
 		let sourceViewController = mainStoryboard.instantiateController(withIdentifier: "androidViewController") as! NSViewController
 		androidViewController = sourceViewController as? AndroidViewController
@@ -21,5 +22,6 @@ class ViewController: NSViewController {
         self.view.wantsLayer = true
 		self.view.addSubview(sourceViewController.view)
 		self.view.frame = sourceViewController.view.frame
+ */
 	}
 }

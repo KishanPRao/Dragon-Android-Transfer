@@ -35,7 +35,8 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 	}
 	@IBOutlet weak var fileTable: DraggableTableView!
 	@IBOutlet weak var backButton: NSButtonCell!
-	@IBOutlet weak var overlayView: OverlayView!
+	//@IBOutlet weak var overlayView: OverlayView!
+    internal var overlayView: OverlayView!
 //    @IBOutlet weak var devicesBox: NSComboBox!
 	@IBOutlet weak var devicesPopUp: NSPopUpButtonCell!
 	
@@ -168,6 +169,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 //				Swift.print("AndroidViewController, First Responder!");
 //			}
 		}
+		NotificationCenter.default.addObserver(self, selector: #selector(windowMoved), name: NSNotification.Name.NSWindowDidMove, object: self.view.window!)
         updateWindowSize()
 		checkGuide()
 	}
@@ -310,8 +312,20 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 
 //    var timer: NSTimer? = nil
 	
+	func windowMoved() {
+		LogV("Win Moved", view.window?.frame)
+		if let window = vc?.view.window {
+			var frame = window.frame
+			frame.origin = view.window!.frame.origin
+//			window.setFrame(frame, display: false)
+//			vc?.update(frame)
+			window.setFrameOrigin(frame.origin)
+		}
+	}
+	
 	@IBAction func clipboardButtonTapped(_ sender: AnyObject) {
-		if (!clipboardOpened) {
+		/*
+         if (!clipboardOpened) {
 			clipboardOpened = true
 			self.performSegue(withIdentifier: ViewControllerIdentifier.ClipboardId, sender: self)
 		} else {
@@ -319,7 +333,75 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 				Swift.print("AndroidViewController, Warning, trying to open multiple times!");
 			}
 		}
+         */
+        
+        let window = self.view.window!
+        var frameSize = window.frame
+//        frameSize.size = NSSize(width: window.frame.width * 0.75, height: frameSize.height - window.titlebarHeight)
+        frameSize.size = NSSize(width: window.frame.width, height: frameSize.height - window.titlebarHeight)
+        //frameSize.size = NSSize(width: 50, height: 50)
+        /*
+        let frameworkBundle = Bundle.main
+        let storyBoard = NSStoryboard(name: "MenuViewController", bundle: frameworkBundle)
+        
+        let vc = storyBoard.instantiateInitialController() as! MenuViewController
+         vc.frameSize.size = NSSize(width: 50, height: 50)
+         presentViewControllerAsModalWindow(vc)
+ */
+		
+//		vc.view.window?.setFrame(NSRect(x: 9, y: 9, width: 1000, height: 1000), display: true)
+        //vc.view.backgroundFilters = .clearColor()
+//        vc.modal = .OverCurrentContext
+        
+//        self.presentViewController(vc, animated: true, completion: nil)
+        
+        
+        //let animator = PushAnimatorTrial()
+//        let animator = MyCustomSwiftAnimator()
+//        presentViewController(vc, animator: animator)
+        
+//        presentViewControllerAsSheet(vc)
+        
+        /*
+        let myViewController = MenuViewController(nibName: "MenuViewController", bundle: nil)!
+ */
+		
+		/*
+		let storyBoard = NSStoryboard(name: "MenuViewController", bundle: Bundle.main)
+		vc = storyBoard.instantiateInitialController() as! MenuViewController
+//		vc.frameSize.size = NSSize(width: 50, height: 50)
+        vc!.frameSize = frameSize
+		displayContent(vc!)
+//		presentViewControllerAsModalWindow(vc!)
+		*/
+		
+		let vc = MenuViewController(nibName: "MenuViewController", bundle: nil)!
+		vc.frameSize = frameSize
+		view.addSubview(vc.view)
+		
+//		LogV("AVC Win", window)
+//		vc = MenuViewController()
+//        vc!.frameSize = frameSize
+//        //presentViewControllerAsModalWindow(vc)
+//        presentViewControllerAsSheet(vc!)
+        //self.presentViewController(vc, animated: true, completion: nil)
+
+//		insertChildViewController(vc, at: 0)
+	
+//	addChildViewController(vc)
+//		presentViewControllerAsModalWindow(vc)
+        /*
+ 		presentViewController(vc, asPopoverRelativeTo: view.frame,
+                              of: self.view, preferredEdge: NSRectEdge.minY,
+                              behavior: NSPopoverBehavior.transient)
+ */
 	}
+	func displayContent(_ vc: NSViewController) {
+		presentViewControllerAsModalWindow(vc)
+//		view.addSubview(vc.view)
+	}
+	
+	var vc : MenuViewController? = nil
 	
 	func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
 		if (NSObject.VERBOSE) {
