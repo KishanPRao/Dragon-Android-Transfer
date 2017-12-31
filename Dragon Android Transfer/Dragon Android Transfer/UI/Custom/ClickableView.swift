@@ -1,5 +1,5 @@
 //
-//  OverlayView.swift
+//  ClickableView.swift
 //  Dragon Android Transfer
 //
 //  Created by Kishan P Rao on 14/01/17.
@@ -22,15 +22,14 @@ class ClickableView: NSView {
  */
 	}
     
-    typealias ClickHandler = () -> ()
-    var clickHandler: ClickHandler? = {}
+    var onClick: () -> () = {}
     
-    func setOnClickListener(clickHandler: (@escaping () -> ())) {
-        self.clickHandler = clickHandler
+    func setOnClickListener(onClick: (@escaping () -> ())) {
+        self.onClick = onClick
     }
 	
 	override func mouseDown(with theEvent: NSEvent) {
 //        Swift.print("Ignore Mouse!")
-        clickHandler?()
+        onClick()
 	}
 }

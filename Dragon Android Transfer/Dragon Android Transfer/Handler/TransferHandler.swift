@@ -27,6 +27,10 @@ class TransferHandler {
     func observeAndroidDevices() -> Observable<[AndroidDevice]> {
         return androidHandler.observeAndroidDevices()
     }
+    
+    func observeActiveDevice() -> Observable<AndroidDevice?> {
+        return androidHandler.observableActiveDevice.asObservable()
+    }
 	
 	func setActiveDevice(_ device: AndroidDevice?) {
 		self.androidHandler.setActiveDevice(device)

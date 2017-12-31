@@ -35,13 +35,12 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 	}
 	@IBOutlet weak var fileTable: DraggableTableView!
 	@IBOutlet weak var backButton: NSButtonCell!
-	//@IBOutlet weak var overlayView: OverlayView!
-    internal var overlayView: OverlayView!
 //    @IBOutlet weak var devicesBox: NSComboBox!
 	@IBOutlet weak var devicesPopUp: NSPopUpButtonCell!
 	
 	@IBOutlet weak var statusView: NSView!
 
+    @IBOutlet weak var overlayView: ClickableView!
 //    TODO: Try other phones! Or keep backup as /sdcard, if check..
 //	let INIT_DIRECTORY = "/sdcard"
 //    let INIT_DIRECTORY = "/storage"
@@ -313,7 +312,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 //    var timer: NSTimer? = nil
 	
 	func windowMoved() {
-		LogV("Win Moved", view.window?.frame)
+		//LogV("Win Moved", view.window?.frame)
 		if let window = vc?.view.window {
 			var frame = window.frame
 			frame.origin = view.window!.frame.origin
@@ -375,8 +374,14 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 //		presentViewControllerAsModalWindow(vc!)
 		*/
 		
-		let vc = MenuViewController(nibName: "MenuViewController", bundle: nil)!
+		/*let vc = MenuViewController(nibName: "MenuViewController", bundle: nil)!
+ */
+        
+		let storyBoard = NSStoryboard(name: "MenuViewController", bundle: Bundle.main)
+		let vc = storyBoard.instantiateInitialController() as! MenuViewController
+ 
 		vc.frameSize = frameSize
+        addChildViewController(vc)
 		view.addSubview(vc.view)
 		
 //		LogV("AVC Win", window)

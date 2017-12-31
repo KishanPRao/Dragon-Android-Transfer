@@ -31,11 +31,16 @@ public class AndroidHandler: NSObject {
 	fileprivate var currentPath: String = ""
 	fileprivate var timer: Timer? = nil
 	fileprivate var activeDevice: AndroidDevice? = nil
+    
+    let observableActiveDevice = Variable<AndroidDevice?>(nil)
+    
 	
 	fileprivate var deviceNotificationDelegate: DeviceNotficationDelegate? = nil
 	
 	fileprivate var devicesUpdating: Bool = false
 	fileprivate var active: Bool = true
+    
+    private var storageItems = [StorageItem]()
 	
 	fileprivate var externalStorage: String = ""
 	fileprivate var internalStorage: String = "/sdcard"
@@ -133,9 +138,10 @@ public class AndroidHandler: NSObject {
 		})
 	}
 	
+    /*
 	fileprivate func getExternalStorageDirectories() -> Array<String> {
 		return activeDevice!.externalStorages
-	}
+	}*/
 	
 	func hasActiveDevice() -> Bool {
 		return (activeDevice != nil)
@@ -146,16 +152,17 @@ public class AndroidHandler: NSObject {
 		LogV("Active Device:", activeDevice)
 		if (activeDevice != nil) {
 			adbHandler.device = activeDevice
-			let externalDirectories = getExternalStorageDirectories()
+			let externalDirectories = activeDevice!.storages
 			print("External Directories:", externalDirectories)
-			if (externalDirectories.count > 0) {
-				externalStorage = externalDirectories[0];
+			if (externalDirectories.count > 1) {
+				externalStorage = externalDirectories[1].location
 			} else {
 				externalStorage = ""
 			}
 		} else {
 			externalStorage = ""
 		}
+        observableActiveDevice.value = activeDevice
 	}
 	
 	func setUsingExternalStorage(_ usingExternalStorage: Bool) {

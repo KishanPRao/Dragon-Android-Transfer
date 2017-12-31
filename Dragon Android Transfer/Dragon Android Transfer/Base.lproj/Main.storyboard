@@ -455,7 +455,7 @@ CA
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mkw-RH-JE6" customClass="OverlayView" customModule="Dragon_Android_Transfer" customModuleProvider="target">
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mkw-RH-JE6" customClass="ClickableView" customModule="Dragon_Android_Transfer" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="658" height="800"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </customView>
@@ -474,7 +474,7 @@ CA
                         <outlet property="fileTable" destination="R7M-fC-j97" id="Uzn-wC-ZOn"/>
                         <outlet property="internalStorageButton" destination="R81-yc-dJg" id="puO-99-NTO"/>
                         <outlet property="messageText" destination="TaS-eB-Ahr" id="yIJ-bB-BCg"/>
-                        <outlet property="overlayView" destination="mkw-RH-JE6" id="Itm-pd-OYa"/>
+                        <outlet property="overlayView" destination="mkw-RH-JE6" id="wcg-91-tck"/>
                         <outlet property="refreshButton" destination="gUk-e3-h2W" id="5KY-ge-6hu"/>
                         <outlet property="spaceStatusLabel" destination="6gO-rF-QL7" id="Im1-uc-vwn"/>
                         <outlet property="spaceStatusText" destination="wtx-SR-WSt" id="D0M-nh-5lp"/>
@@ -490,7 +490,7 @@ CA
         <scene sceneID="QUw-ha-Rko">
             <objects>
                 <viewController id="TR5-Rx-khb" customClass="ClipboardViewController" customModule="Dragon_Android_Transfer" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="Bvv-DS-q5A" customClass="OverlayView" customModule="Dragon_Android_Transfer" customModuleProvider="target">
+                    <view key="view" id="Bvv-DS-q5A" customClass="ClickableView" customModule="Dragon_Android_Transfer" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="658" height="800"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>

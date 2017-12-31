@@ -12,7 +12,7 @@ extension AndroidViewController {
     
     
     internal func initUi() {
-        overlayView = OverlayView(frame: NSRect(x: 0, y: 0, width: 100, height: 100))
+        //overlayView = ClickableView(frame: NSRect(x: 0, y: 0, width: 100, height: 100))
         // fileTable.delegate = self
         fileTable.delegate = tableDelegate
         tableDelegate.setAndroidDirectoryItems(items: androidDirectoryItems)

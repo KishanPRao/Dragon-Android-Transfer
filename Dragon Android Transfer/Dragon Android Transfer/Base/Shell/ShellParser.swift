@@ -99,9 +99,10 @@ public class ShellParser: NSObject {
 		return androidDevices
 	}
 	
-	@objc
-	public static func parseStorageOutput(_ fileNames: String, info output: String) -> Array<String> {
-		var directories = [] as Array<String>
+	//@objc
+	public static func parseStorageOutput(_ fileNames: String, info output: String) -> Array<StorageItem> {
+		var storages = [StorageItem]()
+        storages.append(StorageItem(name: "Internal Storage", location: "/sdcard/"))
 		let outputLines = splitLines(output)
 		let fileNamesLines = splitLines(fileNames)
 		var skipLines = 0
@@ -112,11 +113,11 @@ public class ShellParser: NSObject {
 		while (i < outputLines.count) {
 			let line = outputLines[i]
 			if (!line.contains("self") && !line.contains("emulated") && !line.contains("system")) {
-				directories.append("/storage/" + fileNamesLines[i - skipLines])
+                storages.append(StorageItem(name: "External Storage", location: "/storage/" + fileNamesLines[i - skipLines]))
 			}
 			i = i + 1
 		}
-		return directories
+		return storages
 	}
 	
 	private static func parseSpaceOutput(_ output: String) -> [String] {

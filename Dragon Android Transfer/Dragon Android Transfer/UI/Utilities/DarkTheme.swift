@@ -9,16 +9,15 @@
 import Foundation
 
 class DarkTheme: Theme {
-	
-	var dark: Bool {
-		get {
-			return true
-		}
-	}
+    
+    var menuNavColor: NSColor { get {return color("071326")}}
+    
+    var menuTableColor: NSColor { get {return color("071326")}}
 	
 	var menuBgColor: NSColor {
 		get {
-			return colorWithHexString("071326")
+            return color("000409", withAlpha: 0.4)
 		}
+        
 	}
 }

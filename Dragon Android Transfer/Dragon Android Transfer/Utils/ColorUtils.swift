@@ -27,29 +27,33 @@ class ColorUtils {
 	
 	static let progressBackgroundColor = "#0091ea"
 	static let progressForegroundColor = "#01579b"
-	static let indeterminateProgressForegroundColor = "#17d85e"
-	
-	static func colorWithHexString(_ hex: String) -> NSColor {
-		var cString: String = hex.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines).uppercased()
-		
-		if cString.hasPrefix("#") {
-			cString = (cString as NSString).substring(from: 1)
-		}
-		
-		if cString.characters.count != 6 {
-			return NSColor.gray
-		}
-		
-		var rgbValue: UInt32 = 0
-		Scanner(string: cString).scanHexInt32(&rgbValue)
-		
-		return NSColor(
-				red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-				green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-				blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-				alpha: CGFloat(1.0)
-		)
-	}
+    static let indeterminateProgressForegroundColor = "#17d85e"
+    
+    static func colorWithHexString(_ hex: String) -> NSColor {
+        return ColorUtils.colorWithHexString(hex, withAlpha: 1.0)
+    }
+    
+    static func colorWithHexString(_ hex: String, withAlpha alpha: CGFloat) -> NSColor {
+        var cString: String = hex.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines).uppercased()
+        
+        if cString.hasPrefix("#") {
+            cString = (cString as NSString).substring(from: 1)
+        }
+        
+        if cString.characters.count != 6 {
+            return NSColor.gray
+        }
+        
+        var rgbValue: UInt32 = 0
+        Scanner(string: cString).scanHexInt32(&rgbValue)
+        
+        return NSColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(alpha)
+        )
+    }
 	
 	static func setBackgroundColorTo(_ view: NSView, color: String) {
 		view.wantsLayer = true

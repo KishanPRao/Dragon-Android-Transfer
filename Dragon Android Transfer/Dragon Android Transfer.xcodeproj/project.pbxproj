@@ -23,13 +23,23 @@
 		503B88541F928944004E6417 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503B88531F928944004E6417 /* StringExtension.swift */; };
 		503C5A2F1E0FB9300090EB68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 503C5A2E1E0FB9300090EB68 /* Assets.xcassets */; };
 		503C5A321E0FB9300090EB68 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 503C5A301E0FB9300090EB68 /* Main.storyboard */; };
-		503D93141FF8B402009E7E39 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 503D93131FF8B402009E7E39 /* MenuViewController.xib */; };
+		503D93161FF8EAA0009E7E39 /* menu_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 503D93151FF8EAA0009E7E39 /* menu_back.png */; };
+		503D93181FF8ED1B009E7E39 /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D93171FF8ED1B009E7E39 /* ImageButton.swift */; };
+		503D931A1FF8F0A8009E7E39 /* NSView_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D93191FF8F0A8009E7E39 /* NSView_Extension.swift */; };
+		50961BF41FF904D8001B6D3D /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50961BF31FF904D8001B6D3D /* MenuCell.swift */; };
+		50961BF81FF91414001B6D3D /* MVCTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50961BF71FF91414001B6D3D /* MVCTable.swift */; };
+		50961BFA1FF916A6001B6D3D /* StorageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50961BF91FF916A6001B6D3D /* StorageItem.swift */; };
+		50961BFC1FF91D55001B6D3D /* MVCTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50961BFB1FF91D55001B6D3D /* MVCTransfer.swift */; };
+		50961BFE1FF92DCF001B6D3D /* NSButton_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50961BFD1FF92DCF001B6D3D /* NSButton_Extension.swift */; };
+		50961C011FF94A09001B6D3D /* NibLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 50961C001FF94A09001B6D3D /* NibLoader.m */; };
+		50961C051FF95486001B6D3D /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50961C041FF95486001B6D3D /* MenuCell.xib */; };
+		50961C0A1FF95CAE001B6D3D /* external_storage.png in Resources */ = {isa = PBXBuildFile; fileRef = 50961C081FF95CAE001B6D3D /* external_storage.png */; };
+		50961C0B1FF95CAE001B6D3D /* internal_storage.png in Resources */ = {isa = PBXBuildFile; fileRef = 50961C091FF95CAE001B6D3D /* internal_storage.png */; };
 		509695091FF7623E005BC423 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509695081FF7623E005BC423 /* Theme.swift */; };
 		5096950B1FF76428005BC423 /* DarkTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5096950A1FF76428005BC423 /* DarkTheme.swift */; };
 		5096950D1FF765D8005BC423 /* LightTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5096950C1FF765D8005BC423 /* LightTheme.swift */; };
 		5096950F1FF76865005BC423 /* R_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5096950E1FF76865005BC423 /* R_Extension.swift */; };
 		50B020341FE986C500989BA4 /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B020331FE986C500989BA4 /* CollectionExtension.swift */; };
-		50E35D771FF66A3500DAAB96 /* TestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E35D761FF66A3500DAAB96 /* TestController.swift */; };
 		50F314E01FAE1C45006BF985 /* ExtensionBaseFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F314DF1FAE1C45006BF985 /* ExtensionBaseFile.swift */; };
 		50F314E41FAE28D7006BF985 /* ThreadUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDC1EC5EA8A5A0A17A378 /* ThreadUtils.swift */; };
 		50FE44A51FF6AEBA0099A029 /* MenuViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50FE44A41FF6AEBA0099A029 /* MenuViewController.storyboard */; };
@@ -70,7 +80,7 @@
 		BE3BD1B87F638080742BF2CD /* DragUiDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDF7F498E044C83FB0280 /* DragUiDelegate.swift */; };
 		BE3BD1FAA1F1FB50DF326939 /* AVCTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD3FE56162C512DEC9F41 /* AVCTransfer.swift */; };
 		BE3BD20E4CB561A51395CF39 /* ClipboardTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD5400EDCE113E397EA1F /* ClipboardTableCellView.swift */; };
-		BE3BD247789B6C3497AF10EA /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD40AE738BD024E549A5E /* OverlayView.swift */; };
+		BE3BD247789B6C3497AF10EA /* ClickableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD40AE738BD024E549A5E /* ClickableView.swift */; };
 		BE3BD2819E411070C96A55E1 /* StyleUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDEF13CA38DBEC207CD7E /* StyleUtils.swift */; };
 		BE3BD284856999A467420E8C /* DisabledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDBB5E059C6147F64EDCE /* DisabledTextField.swift */; };
 		BE3BD29F2F154A0AECFAD74B /* AvailableSpaceCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD23635711CE5F7FE51EA /* AvailableSpaceCommand.cpp */; };
@@ -116,7 +126,7 @@
 		BE3BD7DAF4A0DEDEBB668109 /* DimenUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDED8D1C80713401499D7 /* DimenUtils.swift */; };
 		BE3BD7DB41DF423A3A01554C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDE794C92E054421418BB /* ViewController.swift */; };
 		BE3BD7F160769EC8049FA1AC /* ClipboardDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDB4BDA4AF8C469F2136D /* ClipboardDelegate.swift */; };
-		BE3BD804DFD209096F71EC0D /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD40AE738BD024E549A5E /* OverlayView.swift */; };
+		BE3BD804DFD209096F71EC0D /* ClickableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD40AE738BD024E549A5E /* ClickableView.swift */; };
 		BE3BD8168BA539FF4397E553 /* DarkWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD97D6F1F3832414869CE /* DarkWindow.swift */; };
 		BE3BD844D6836981F9289AEF /* BaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD9CFDA815A58EE4B948C /* BaseObject.swift */; };
 		BE3BD85D4ACE9E0C076A3820 /* DeviceInfoCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDD86F1FA2C23D3029C8F /* DeviceInfoCommand.cpp */; };
@@ -222,14 +232,25 @@
 		503C5A2E1E0FB9300090EB68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		503C5A311E0FB9300090EB68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		503C5A331E0FB9300090EB68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		503D93131FF8B402009E7E39 /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
+		503D93151FF8EAA0009E7E39 /* menu_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_back.png; sourceTree = "<group>"; };
+		503D93171FF8ED1B009E7E39 /* ImageButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
+		503D93191FF8F0A8009E7E39 /* NSView_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSView_Extension.swift; sourceTree = "<group>"; };
 		507AB7F71E2A374C00C749D1 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		50961BF31FF904D8001B6D3D /* MenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		50961BF71FF91414001B6D3D /* MVCTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVCTable.swift; sourceTree = "<group>"; };
+		50961BF91FF916A6001B6D3D /* StorageItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageItem.swift; sourceTree = "<group>"; };
+		50961BFB1FF91D55001B6D3D /* MVCTransfer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVCTransfer.swift; sourceTree = "<group>"; };
+		50961BFD1FF92DCF001B6D3D /* NSButton_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSButton_Extension.swift; sourceTree = "<group>"; };
+		50961BFF1FF94A09001B6D3D /* NibLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NibLoader.h; path = "Dragon Android Transfer/Data/NibLoader.h"; sourceTree = SOURCE_ROOT; };
+		50961C001FF94A09001B6D3D /* NibLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NibLoader.m; path = "Dragon Android Transfer/Data/NibLoader.m"; sourceTree = SOURCE_ROOT; };
+		50961C041FF95486001B6D3D /* MenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuCell.xib; sourceTree = "<group>"; };
+		50961C081FF95CAE001B6D3D /* external_storage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = external_storage.png; sourceTree = "<group>"; };
+		50961C091FF95CAE001B6D3D /* internal_storage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = internal_storage.png; sourceTree = "<group>"; };
 		509695081FF7623E005BC423 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		5096950A1FF76428005BC423 /* DarkTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkTheme.swift; sourceTree = "<group>"; };
 		5096950C1FF765D8005BC423 /* LightTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightTheme.swift; sourceTree = "<group>"; };
 		5096950E1FF76865005BC423 /* R_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R_Extension.swift; sourceTree = "<group>"; };
 		50B020331FE986C500989BA4 /* CollectionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
-		50E35D761FF66A3500DAAB96 /* TestController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestController.swift; sourceTree = "<group>"; };
 		50F314DF1FAE1C45006BF985 /* ExtensionBaseFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionBaseFile.swift; sourceTree = "<group>"; };
 		50F716F31E82F492005CA833 /* MASShortcut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MASShortcut.framework; path = Pods/../build/Debug/MASShortcut/MASShortcut.framework; sourceTree = "<group>"; };
 		50FE44A41FF6AEBA0099A029 /* MenuViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MenuViewController.storyboard; sourceTree = "<group>"; };
@@ -268,7 +289,7 @@
 		BE3BD307979BA4DA1F578C27 /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		BE3BD326D7BB6EA85FB5313E /* AndroidAdbHandler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AndroidAdbHandler.mm; sourceTree = "<group>"; };
 		BE3BD3FE56162C512DEC9F41 /* AVCTransfer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVCTransfer.swift; sourceTree = "<group>"; };
-		BE3BD40AE738BD024E549A5E /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
+		BE3BD40AE738BD024E549A5E /* ClickableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickableView.swift; sourceTree = "<group>"; };
 		BE3BD40F65CD987713945D5D /* MacHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MacHelper.mm; sourceTree = "<group>"; };
 		BE3BD431720CB9D13DE2112A /* DeviceListCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DeviceListCommand.hpp; sourceTree = "<group>"; };
 		BE3BD44EFC33B9D3B5A3A28C /* AVCWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVCWindow.swift; sourceTree = "<group>"; };
@@ -426,9 +447,12 @@
 				500381451F8D44A0000728E9 /* Dragon Android TransferTests */,
 				500381551F8D4510000728E9 /* Dragon Android TransferUITests */,
 				503C5A281E0FB92F0090EB68 /* Products */,
+				50961C081FF95CAE001B6D3D /* external_storage.png */,
+				50961C091FF95CAE001B6D3D /* internal_storage.png */,
 				BE3BDDFFAFC3F3A5DAC239F2 /* file.png */,
 				BE3BD8B0BBFD2BD4175F63BB /* folder.png */,
 				BE3BD7F3E98C3A92436C5F2C /* clipboard_icon.png */,
+				503D93151FF8EAA0009E7E39 /* menu_back.png */,
 				BE3BD6E19034EA1ACA510769 /* back_button.png */,
 				BE3BDEFB8D195743373D18DF /* refresh.png */,
 				BE3BDF4C3E50FACB10B4D3EF /* clipboard_icon_plain.png */,
@@ -526,6 +550,8 @@
 				BE3BD9CFDA815A58EE4B948C /* BaseObject.swift */,
 				50B020331FE986C500989BA4 /* CollectionExtension.swift */,
 				BE3BD0740A94F0F08A3821C9 /* NSWindow_Extension.swift */,
+				503D93191FF8F0A8009E7E39 /* NSView_Extension.swift */,
+				50961BFD1FF92DCF001B6D3D /* NSButton_Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -556,11 +582,11 @@
 			isa = PBXGroup;
 			children = (
 				BE3BDE794C92E054421418BB /* ViewController.swift */,
-				50E35D761FF66A3500DAAB96 /* TestController.swift */,
 				50FE44A41FF6AEBA0099A029 /* MenuViewController.storyboard */,
 				50FE44A61FF6AED30099A029 /* MenuViewController.swift */,
-				503D93131FF8B402009E7E39 /* MenuViewController.xib */,
 				BE3BD5A1FB12D32671A07E74 /* Android */,
+				50961BF71FF91414001B6D3D /* MVCTable.swift */,
+				50961BFB1FF91D55001B6D3D /* MVCTransfer.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -572,6 +598,7 @@
 				50F314DF1FAE1C45006BF985 /* ExtensionBaseFile.swift */,
 				50293DF51FEFBF0B00B06B14 /* BaseFile.swift */,
 				50293DF71FEFBF2A00B06B14 /* BaseFileType.swift */,
+				50961BF91FF916A6001B6D3D /* StorageItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -627,7 +654,7 @@
 		BE3BD6C1A5E807A74813769E /* Custom */ = {
 			isa = PBXGroup;
 			children = (
-				BE3BD40AE738BD024E549A5E /* OverlayView.swift */,
+				BE3BD40AE738BD024E549A5E /* ClickableView.swift */,
 				BE3BD84AE45EE7CCE8AA60E2 /* ProgressView.swift */,
 				BE3BD4BE8B8D95E327B543B9 /* IndeterminateProgressView.swift */,
 				BE3BD97D6F1F3832414869CE /* DarkWindow.swift */,
@@ -636,6 +663,9 @@
 				BE3BDBB5E059C6147F64EDCE /* DisabledTextField.swift */,
 				BE3BD86117C6A1984B137A27 /* SelectableTableRowView.swift */,
 				BE3BD50CC71E1C324A8471F4 /* FileCellView.swift */,
+				503D93171FF8ED1B009E7E39 /* ImageButton.swift */,
+				50961BF31FF904D8001B6D3D /* MenuCell.swift */,
+				50961C041FF95486001B6D3D /* MenuCell.xib */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -712,6 +742,8 @@
 				BE3BD46BD96C21CADA642E50 /* BridgingUtils.h */,
 				BE3BDC0D7F0FFFD893AB4949 /* BridgingUtils.m */,
 				BE3BDF6499B5281F4601029A /* AlertUtils.h */,
+				50961BFF1FF94A09001B6D3D /* NibLoader.h */,
+				50961C001FF94A09001B6D3D /* NibLoader.m */,
 			);
 			path = Bridge;
 			sourceTree = "<group>";
@@ -940,18 +972,21 @@
 				50FE44AB1FF6BA760099A029 /* PushSegue.swift in Resources */,
 				BE3BDAF11B0C0A34B5455FA2 /* clipboard_icon.png in Resources */,
 				BE3BD112BC91E0AC5A18FB99 /* back_button.png in Resources */,
+				503D93161FF8EAA0009E7E39 /* menu_back.png in Resources */,
+				50961C0A1FF95CAE001B6D3D /* external_storage.png in Resources */,
 				BE3BD3A9EC324B60D172E185 /* refresh.png in Resources */,
 				BE3BDC8FE02DB6B1BDDFD082 /* clipboard_icon_plain.png in Resources */,
 				BE3BD4342179DB442FD36053 /* close_button.png in Resources */,
 				BE3BD0680117384D1A25829B /* update_sizes.png in Resources */,
 				BE3BD17F8436D360FDCB20EC /* Credits.rtf in Resources */,
 				BE3BDA1FB1387C3949B25E52 /* index.html in Resources */,
+				50961C0B1FF95CAE001B6D3D /* internal_storage.png in Resources */,
 				BE3BD869D6B5C24C762444B0 /* endCopy.mp3 in Resources */,
+				50961C051FF95486001B6D3D /* MenuCell.xib in Resources */,
 				BE3BD43FFDA218F217C09DBA /* help.rtf in Resources */,
 				BE3BDBF0A3F946760F91F720 /* intro_guide.rtf in Resources */,
 				BE3BD0E5A9B8848A8C017AD3 /* CopyDialog.xib in Resources */,
 				BE3BD3CA5BE659E67FC602F6 /* HelpWindow.xib in Resources */,
-				503D93141FF8B402009E7E39 /* MenuViewController.xib in Resources */,
 				BE3BDBB3DBEEB39658AC9DDD /* AndroidViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1164,7 +1199,7 @@
 				500381831F8D49C7000728E9 /* TimeUtils.swift in Sources */,
 				500381571F8D4510000728E9 /* Dragon_Android_TransferUITests.swift in Sources */,
 				BE3BD2819E411070C96A55E1 /* StyleUtils.swift in Sources */,
-				BE3BD804DFD209096F71EC0D /* OverlayView.swift in Sources */,
+				BE3BD804DFD209096F71EC0D /* ClickableView.swift in Sources */,
 				BE3BD99A586FADDBD3B7DDCF /* ProgressView.swift in Sources */,
 				BE3BD515A4417EF29DD625F1 /* DarkWindow.swift in Sources */,
 				BE3BD4C30BCC171DF3CC445F /* ColoredButton.swift in Sources */,
@@ -1199,6 +1234,7 @@
 				503B88541F928944004E6417 /* StringExtension.swift in Sources */,
 				BE3BDE084524366D5F702AFC /* AndroidDevice.swift in Sources */,
 				BE3BDC57F874BAFD8C7076B1 /* AppDelegate.swift in Sources */,
+				503D931A1FF8F0A8009E7E39 /* NSView_Extension.swift in Sources */,
 				BE3BD7DAF4A0DEDEBB668109 /* DimenUtils.swift in Sources */,
 				50B020341FE986C500989BA4 /* CollectionExtension.swift in Sources */,
 				BE3BD3CF4A98FDDACABFF93A /* ColorUtils.swift in Sources */,
@@ -1210,10 +1246,11 @@
 				50FE44A71FF6AED30099A029 /* MenuViewController.swift in Sources */,
 				BE3BD4859D0A4C8B57D3336A /* StyleUtils.swift in Sources */,
 				BE3BDCC039E34A76B2BA261E /* DragUtils.swift in Sources */,
-				BE3BD247789B6C3497AF10EA /* OverlayView.swift in Sources */,
+				BE3BD247789B6C3497AF10EA /* ClickableView.swift in Sources */,
 				BE3BD094F0C2183A46CDD6E3 /* ProgressView.swift in Sources */,
 				BE3BDA30B26F35C7C23F9B56 /* IndeterminateProgressView.swift in Sources */,
 				50293DF81FEFBF2A00B06B14 /* BaseFileType.swift in Sources */,
+				50961C011FF94A09001B6D3D /* NibLoader.m in Sources */,
 				50FE44B21FF6C51B0099A029 /* PushAnimatorTrial.swift in Sources */,
 				BE3BD8168BA539FF4397E553 /* DarkWindow.swift in Sources */,
 				BE3BD32896E1B80E34684643 /* ColoredButton.swift in Sources */,
@@ -1221,10 +1258,12 @@
 				BE3BD20E4CB561A51395CF39 /* ClipboardTableCellView.swift in Sources */,
 				BE3BD7F160769EC8049FA1AC /* ClipboardDelegate.swift in Sources */,
 				BE3BD64DA0CEAFD027656D0A /* ColoredPopUpButton.swift in Sources */,
+				50961BFA1FF916A6001B6D3D /* StorageItem.swift in Sources */,
 				50293DF41FEFB8DB00B06B14 /* DeviceTableDelegate.swift in Sources */,
 				BE3BD7A0031EADC65E19DA1D /* CrossfadeSegue.swift in Sources */,
 				BE3BD5D597FE4AA22E298EFB /* CustomSwiftAnimator.swift in Sources */,
 				BE3BD284856999A467420E8C /* DisabledTextField.swift in Sources */,
+				50961BF41FF904D8001B6D3D /* MenuCell.swift in Sources */,
 				BE3BDFCBE0994AEA0312BA2D /* DragNotificationDelegate.swift in Sources */,
 				BE3BD1B87F638080742BF2CD /* DragUiDelegate.swift in Sources */,
 				BE3BD1160DCBB842CAF018B2 /* DraggableTableView.swift in Sources */,
@@ -1237,6 +1276,7 @@
 				BE3BDAE8242721166CAFDEC9 /* AndroidHandler.swift in Sources */,
 				BE3BD3FACF4DE64BB04FAEE6 /* MacHandler.swift in Sources */,
 				BE3BDEEB194C92E6EEB01070 /* TransferHandler.swift in Sources */,
+				50961BFE1FF92DCF001B6D3D /* NSButton_Extension.swift in Sources */,
 				BE3BDCBA1F920EFDA3ADCCF7 /* PrintUtils.swift in Sources */,
 				BE3BDA06EB0630E43703247B /* DeviceNotificationDelegate.swift in Sources */,
 				BE3BD5D86DD31394390BEBB0 /* FileProgressDelegate.swift in Sources */,
@@ -1262,9 +1302,12 @@
 				BE3BD10A17A4F6FC76A3D731 /* FileSizeCommand.cpp in Sources */,
 				BE3BDDD656E09806D5694906 /* PullCommand.cpp in Sources */,
 				50FE44A91FF6B84D0099A029 /* SegueFromLeftNew.swift in Sources */,
+				50961BF81FF91414001B6D3D /* MVCTable.swift in Sources */,
 				BE3BD192CE9F4157090C7FF1 /* logger.cpp in Sources */,
+				503D93181FF8ED1B009E7E39 /* ImageButton.swift in Sources */,
 				509695091FF7623E005BC423 /* Theme.swift in Sources */,
 				BE3BDB8502B96665F2BD39A9 /* MacHelper.mm in Sources */,
+				50961BFC1FF91D55001B6D3D /* MVCTransfer.swift in Sources */,
 				BE3BD10A9B765DCC5FF46FB7 /* CommandFactory.cpp in Sources */,
 				BE3BD0F4C5A7EF122AD8ADE6 /* AdbExecutorMac.mm in Sources */,
 				BE3BD18B21658A76373A84E1 /* ShellResolver.cpp in Sources */,
@@ -1272,7 +1315,6 @@
 				BE3BD0BD51163ECA8A5D5591 /* AlertUtils.m in Sources */,
 				BE3BDE555397795773311960 /* BridgingUtils.m in Sources */,
 				5096950F1FF76865005BC423 /* R_Extension.swift in Sources */,
-				50E35D771FF66A3500DAAB96 /* TestController.swift in Sources */,
 				BE3BD9BD2020E50C8DE0DD28 /* PushCommand.cpp in Sources */,
 				BE3BD4881F649532E9FDB26C /* AVCNotification.swift in Sources */,
 				BE3BDBE621A826D0CBF7DFA2 /* AVCListing.swift in Sources */,

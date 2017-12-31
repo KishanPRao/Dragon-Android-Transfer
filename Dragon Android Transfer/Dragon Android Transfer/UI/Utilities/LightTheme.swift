@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+/*
 class LightTheme: Theme {
 	var dark: Bool {
 		get {
@@ -21,3 +21,4 @@ class LightTheme: Theme {
 		}
 	}
 }
+*/

@@ -8,213 +8,124 @@
 
 import Foundation
 
-class MenuViewController: NSViewController {
+import RxSwift
+
+class MenuViewController: NSViewController,
+NSTableViewDelegate, NSTableViewDataSource
+{
+    @IBOutlet weak var overlayView: ClickableView!
+    @IBOutlet weak var navigationParent: NSView!
+    @IBOutlet weak var back: ImageButton!
+    @IBOutlet weak var popup: NSPopUpButtonCell!
+    @IBOutlet weak var table: NSTableView!
+    @IBOutlet weak var tableOuter: NSScrollView!
     
-    @IBOutlet weak var label: NSTextField!
+    @IBOutlet weak var testPopup: NSPopUpButton!
+    internal let transferHandler = TransferHandler.sharedInstance
+    let AnimationDuration = 0.25
+    public var frameSize = NSRect()
+    internal var storages = [StorageItem]()
+    
     @IBAction func closeMenu(_ sender: Any) {
         print("Close Menu")
-//        animate(open: true) {
-//            print("Close end")
-//            self.dismissViewController(self)
-//        }
+        animate(open: false) {
+            print("Close end")
+            self.view.removeFromSuperview()
+            self.removeFromParentViewController()
+        }
     }
-	
-//	internal func getWind() -> NSWindow {
-//		LogV("Menu Win", view.window)
-//		return view.window!
-//	}
-	
-	public var frameSize = NSRect()
-    
-//    private func animate(open: Bool, handler: @escaping () -> ()) {
-//        let window = getWind()
-//        //window.setFrame(frameSize, display: true)
-//        //self.view.frame.size = NSSize(width: frameSize.width, height: frameSize.height)
-//        var dx = self.view.frame.size.width
-//        if (!open) {
-//            dx = -dx
-//        }
-//        print("Dx", dx)
-//        self.view.frame = self.view.frame.offsetBy(dx: -dx, dy: 0)
-//        NSAnimationContext.runAnimationGroup({ context in
-//            context.duration = 1
-//            self.view.animator().frame = self.view.frame.offsetBy(dx: dx, dy: 0)
-//        }, completionHandler: handler)
-//    }
-	
-	func closeWindow(_ notification: NSNotification) {
-		//LogI("Close Window!", notification)
-//		if (notification.name == NSNotification.Name.NSWindowDidUpdate) {
-//			LogV("Update")
-//		}
-	}
-	
+	/*
 	override func viewDidLoad() {
 		super.viewDidLoad()
-        /*
-        view.translatesAutoresizingMaskIntoConstraints = true
-        view.autoresizingMask = .viewNotSizable
- */
-
-	}
+        
+	}*/
 	
 	override func viewWillAppear() {
 		super.viewWillAppear()
 		
         print("Menu, view!")
-        let center = NotificationCenter.default
-        //center.addObserver(self, selector: #selector(closeWindow), name: NSNotification.Name.NSWindowDidResignKey, object: getWind())
-		
-//        center.addObserver(self, selector: #selector(closeWindow), name: NSNotification.Name.NSWindowDidResignMain, object: getWind())
-//        center.addObserver(self, selector: #selector(closeWindow), name: NSNotification.Name.NSWindowDidBecomeKey, object: getWind())
-//        center.addObserver(self, selector: #selector(closeWindow), name: NSNotification.Name.NSWindowDidBecomeMain, object: getWind())
-//        center.addObserver(self, selector: #selector(closeWindow), name: NSNotification.Name.NSWindowDidChangeScreen, object: getWind())
-//        center.addObserver(self, selector: #selector(closeWindow), name: NSNotification.Name.NSWindowDidDeminiaturize, object: getWind())
-//        center.addObserver(self, selector: #selector(closeWindow), name: NSNotification.Name.NSWindowDidExpose, object: getWind())
-//        center.addObserver(self, selector: #selector(closeWindow), name: NSNotification.Name.NSWindowDidMiniaturize, object: getWind())
-//        center.addObserver(self, selector: #selector(closeWindow), name: NSNotification.Name.NSWindowDidMove, object: getWind())
-//        center.addObserver(self, selector: #selector(closeWindow), name: NSNotification.Name.NSWindowDidResignKey, object: getWind())
-//        center.addObserver(self, selector: #selector(closeWindow), name: NSNotification.Name.NSWindowDidResize, object: getWind())
-//        center.addObserver(self, selector: #selector(closeWindow), name: NSNotification.Name.NSWindowDidUpdate, object: getWind())
-//        center.addObserver(self, selector: #selector(closeWindow), name: NSNotification.Name.NSWindowWillClose, object: getWind())
-//        center.addObserver(self, selector: #selector(closeWindow), name: NSNotification.Name.NSWindowWillMiniaturize, object: getWind())
-//        center.addObserver(self, selector: #selector(closeWindow), name: NSNotification.Name.NSWindowWillMove, object: getWind())
-//        center.addObserver(self, selector: #selector(closeWindow), name: NSNotification.Name.NSWindowWillBeginSheet, object: getWind())
-//        center.addObserver(self, selector: #selector(closeWindow), name: NSNotification.Name.NSWindowWillBeginSheet, object: getWind())
-//        center.addObserver(self, selector: #selector(closeWindow), name: NSNotification.Name.NSWindowDidChangeOcclusionState, object: getWind())
-
-//		self.view.window?.titleVisibility = NSWindowTitleVisibility.Hidden;
-//		self.view.window?.titlebarAppearsTransparent = YES;
-////        self.view.window?.styleMask |= NSFullSizeContentViewWindowMask;
-//		self.window.styleMask.insert(.fullSizeContentView)
-		
-		/*
-		
-		self.view.window?.titleVisibility = NSWindowTitleVisibility.hidden
-		self.view.window?.titlebarAppearsTransparent = true
-		self.view.window?.isMovableByWindowBackground = true
-		self.view.window?.styleMask = NSWindowStyleMask.fullSizeContentView
-		*/
-		
-		
-//		getWind().standardWindowButton(NSWindowButton.closeButton)?.isHidden = true
-//		getWind().standardWindowButton(NSWindowButton.miniaturizeButton)?.isHidden = true
-//		getWind().standardWindowButton(NSWindowButton.zoomButton)?.isHidden = true
-//		
-//		getWind().titleVisibility = .hidden
-//		getWind().titlebarAppearsTransparent = true
-//		getWind().styleMask.insert(.fullSizeContentView)
-//		getWind().styleMask.remove(NSWindowStyleMask.resizable)
-		
-		print("Dark:", R.color.menuBgColor, R.color.dark)
-		
-		self.view.wantsLayer = true
-		self.view.layer?.backgroundColor = R.color.menuBgColor.cgColor
-		self.view.layerContentsRedrawPolicy = NSViewLayerContentsRedrawPolicy.onSetNeedsDisplay
-
-//		let newSize = NSMakeRect(self.frame.origin.x,
-//				self.frame.origin.y - 100,
-//				self.frame.width, self.frame.height + 100)
-		
-		
-//		let window = getWind()
-//		window.setFrame(frameSize, display: true)
-        self.view.frame.size = NSSize(width: frameSize.width, height: frameSize.height)
-//        self.view.frame.size = NSRect(
-//		window.animator().setFrame(window.frame.offsetBy(dx: -180, dy: 0), display: true)
-//		window.animator().setFrame(window.frame.offsetBy(dx: 180, dy: 0), display: true, animate: true)
-
-
-//		var windowFrame = self.view.window?.frame
-//		let oldX = windowFrame?.origin.x
-//		let oldY = windowFrame?.origin.y
-//		let oldWidth = windowFrame?.size.width
-//		let oldHeight = windowFrame?.size.height
-//		let toAdd = CGFloat(50.0)
-//		let newY = oldY! - toAdd
-//		let newHeight = oldHeight! + toAdd
-//		windowFrame? = NSMakeRect(oldX!, newY, oldWidth!, newHeight)
-//		self.view.window?.animator().setFrame(windowFrame!, display: true, animate: true)
-	/*
-		window.animationBehavior = .none
-		window.backgroundColor = .clear
-		window.isMovableByWindowBackground = true
-		
-		*/
-//		window.isMovable = false
-		/*let dx = self.view.frame.size.width
-		self.view.frame = self.view.frame.offsetBy(dx: -dx, dy: 0)
-		NSAnimationContext.runAnimationGroup({ context in
-			context.duration = 1
-			view.animator().frame = self.view.frame.offsetBy(dx: dx, dy: 0)
-		}, completionHandler: {
-//			self.view.isHidden = true
-		})*/
         
+        initUi()
+        observe()
+	}
+    
+    private func initUi() {
         
+        //self.view.wantsLayer = true
+        //self.view.layer?.backgroundColor = R.color.menuBgColor.cgColor
+        //self.view.layerContentsRedrawPolicy = NSViewLayerContentsRedrawPolicy.onSetNeedsDisplay
+        initUiContent()
+        initSizes()
+        animate(open: true) {
+            print("Opened")
+        }
+        /*overlayView.setOnClickListener() {
+            self.closeMenu(nil)
+        }*/
         
-//        animate(open: true) {
-//            print("Opened")
-//        }
-	}
-	
-	public func update(_ frame: NSRect) {
-		
-	}
-	
-//	override func mouseDown(_ event: NSEvent) {
-//		super.mouseDown(event)
-//		let windowFrame = [[self window] frame];
-//		
-//		initialLocation = [NSEvent mouseLocation];
-//		
-//		initialLocation.x -= windowFrame.origin.x;
-//		initialLocation.y -= windowFrame.origin.y;
-//	}
-	
-//	override func mouseDragged(_ event: NSEvent) {
-//		super.mouseDragged(event)
-//	}
-//	
-//	override func mouseUp(_ event: NSEvent) {
-//		super.mouseUp(event)
-//	}
-	
-	override func viewDidAppear() {
-		super.viewDidAppear()
-		LogV("viewDidAppear", label)
-//		let window = getWind()
-//		window.alphaValue = 0
-//		let anim: [String: Any?] = [
-////			NSViewAnimationTargetKey: nil,
-//			NSViewAnimationTargetKey: window,
-//			NSViewAnimationEndFrameKey: NSViewAnimationFadeInEffect
-//		]
-//		window.setFrame(window.frame.offsetBy(dx: -180, dy: 0), display: true)
-//		let anim: [String: Any?] = [
-////			NSViewAnimationTargetKey: nil,
-//			NSViewAnimationTargetKey: window,
-//			NSViewAnimationEndFrameKey: window.frame.offsetBy(dx: 180, dy: 0)
-//		]
-//		
-//		let array = [anim]
-//		let animation = NSViewAnimation(viewAnimations: array)
-//		animation.animationBlockingMode = .nonblocking
-//		animation.animationCurve = .easeIn
-//		animation.duration = 1
-//		animation.start()
-//		LogV("viewDidAppear done")
-
-//		self.view.frame = self.view.frame.offsetBy(dx: -180, dy: 0)
-//		NSAnimationContext.runAnimationGroup({ context in
-////			view.animator.frame = CGRectOffset(view.frame, 180, 0)
-////			view.animator().frame = CGRect.offsetBy(180, 0)
-//			view.animator().frame = self.view.frame.offsetBy(dx: 180, dy: 0)
-//
-////			self.window.animator().frame = self.window.offsetBy(dx: 180, dy: 0)
-//			context.duration = 20
-//		}, completionHandler: {
-////			self.view.isHidden = true
-//		})
-	}
+        overlayView.setOnClickListener() {
+            print("Done")
+            self.closeMenu(self)
+        }
+    }
+    
+    func onPopupSelected(_ sender: Any) {
+        let index = self.popup.indexOfSelectedItem
+        print("Popup Selected", index)
+    }
+    
+    private func initUiContent() {
+        //print("Dark:", R.color.menuBgColor, R.color.dark)
+        self.popup.removeAllItems()
+        self.popup.action = #selector(onPopupSelected(_:))
+        self.popup.target = self
+        overlayView.setBackground(R.color.menuBgColor)
+        navigationParent.setBackground(R.color.menuNavColor)
+        navigationParent.dropShadow()
+        //testPopup.layer?.backgroundColor = R.color.black.cgColor
+        //popup.backgroundColor = R.color.black
+        table.backgroundColor = R.color.menuTableColor
+        table.delegate = self
+        table.dataSource = self
+        back.setImage(name: "menu_back.png")
+    }
+    
+    private func initSizes() {
+        let newSize = NSSize(width: frameSize.width, height: frameSize.height)
+        self.view.frame.size = newSize
+        self.overlayView.frame.size = newSize
+        
+        let navigationSize = NSSize(width: frameSize.width * 0.5, height: frameSize.height)
+        self.navigationParent.frame.origin = self.view.frame.origin
+        self.navigationParent.frame.size = navigationSize
+        self.tableOuter.frame.origin = CGPoint(x: 0, y: popup.accessibilityFrame().origin.y - popup.cellSize.height)
+        self.tableOuter.frame.size = NSSize(width: frameSize.width * 0.5, height: frameSize.height - popup.cellSize.height)
+    }
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+    }
+    
+    private func animate(open: Bool, handler: @escaping () -> ()) {
+        //window.setFrame(frameSize, display: true)
+        //self.view.frame.size = NSSize(width: frameSize.width, height: frameSize.height)
+        let animView = self.navigationParent!
+        let fadeView = self.overlayView!
+        var dx = animView.frame.size.width
+        var alpha = CGFloat(1.0)
+        if (open) {
+            animView.frame = animView.frame.offsetBy(dx: -dx, dy: 0)
+            fadeView.alphaValue = 0
+        } else {
+            dx = -dx
+            alpha = 1 - alpha
+        }
+        
+        print("Dx", dx)
+        NSAnimationContext.runAnimationGroup({ context in
+            context.duration = AnimationDuration
+            animView.animator().frame = animView.frame.offsetBy(dx: dx, dy: 0)
+            fadeView.animator().alphaValue = alpha
+        }, completionHandler: handler)
+    }
 }

@@ -75,10 +75,10 @@ shared_ptr<AdbExecutor> executor;
 		auto storageListInfo = make_shared<SimpleAdbCommand>(ShellScripts::STORAGE_LIST_INFO, executor)->execute();
 		auto storageList = make_shared<SimpleAdbCommand>(ShellScripts::STORAGE_LIST, executor)->execute();
 		
-		device.externalStorages = [ShellParser parseStorageOutput:convert(storageList) info:convert(storageListInfo)];
+		device.storages = [ShellParser parseStorageOutput:convert(storageList) info:convert(storageListInfo)];
 		
-		NSLog(@"New Shell Type: %@, %d", convert(data), CommandConfig::shellType);
-		NSLog(@"Storage: %@", device.externalStorages);
+		//NSLog(@"New Shell Type: %@, %d", convert(data), CommandConfig::shellType);
+		//NSLog(@"Storages: %@", device.storages);
 	}
 }
 

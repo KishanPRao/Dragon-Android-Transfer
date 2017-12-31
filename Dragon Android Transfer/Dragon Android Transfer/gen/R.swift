@@ -6,7 +6,7 @@
 import Foundation
 
 class R {
-    internal static let _lightTheme = LightTheme()
+    //internal static let _lightTheme = LightTheme()
     internal static let _darkTheme = DarkTheme()
-    public internal(set) static var color: Theme = _lightTheme
+    public internal(set) static var color: Theme = _darkTheme
 }

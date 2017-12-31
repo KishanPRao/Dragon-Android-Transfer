@@ -16,5 +16,6 @@
 #import "AndroidAdbHandler.h"
 #import "AlertUtils.h"
 #import "BridgingUtils.h"
+#import "NibLoader.h"
 
 #endif /* Bridging_Header_h */

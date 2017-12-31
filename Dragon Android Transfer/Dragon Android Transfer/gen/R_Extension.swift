@@ -11,12 +11,12 @@ import Foundation
 extension R {
     
     public static func setDarkTheme() {
-        print("Set Dark:", R.color.dark, R.color.dark)
+        //print("Set Dark:", R.color.dark, R.color.dark)
         R.color = R._darkTheme
-        print("Set Dark:", R.color.dark, R.color.dark)
+        //print("Set Dark:", R.color.dark, R.color.dark)
     }
-    
+    /*
     public static func setLightTheme() {
         R.color = R._lightTheme
-    }
+    }*/
 }
