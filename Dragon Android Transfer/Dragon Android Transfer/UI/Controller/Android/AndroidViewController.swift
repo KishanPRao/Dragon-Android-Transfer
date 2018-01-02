@@ -21,6 +21,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		DragNotificationDelegate, DragUiDelegate,
 		NSUserInterfaceValidations {
 	public static let NotificationStartLoading = "NotificationStartLoading"
+    public static let NotificationSnackbar = "NotificationSnackbar"
     
 	internal let bgScheduler = ConcurrentDispatchQueueScheduler(qos: .background)
 	internal let tableDelegate = DeviceTableDelegate()
@@ -255,6 +256,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
             self.view.addSubview(snackbar!)
             self.view.layoutSubtreeIfNeeded()
         }
+        LogV("showSnackbar: \(message)")
         snackbar?.updateMessage(message)
         snackbar?.showSnackbar()
     }

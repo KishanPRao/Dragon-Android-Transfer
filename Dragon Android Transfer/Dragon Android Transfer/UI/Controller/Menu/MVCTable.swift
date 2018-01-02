@@ -55,7 +55,7 @@ extension MenuViewController {
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        LogV("Menu numOfRows")
+        //LogV("Menu numOfRows")
         return self.storages.count
     }
 }

@@ -51,4 +51,13 @@ extension NSObject {
         PrintUtils.Print(TAG, ["🗒", items])
         }
     }
+    
+    static func sendNotification(_ name: String, _ info: [AnyHashable: Any]? = nil) {
+        //NotificationCenter.default.post(name: Notification.Name(rawValue: name), object: object)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: name), object: nil, userInfo: info)
+    }
+    
+    static func observeNotification(_ handler:Any, _ name: String, selector: Selector) {
+        NotificationCenter.default.addObserver(handler, selector: selector, name: NSNotification.Name(rawValue: name), object: nil)
+    }
 }

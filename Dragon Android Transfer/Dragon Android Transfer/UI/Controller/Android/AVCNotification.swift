@@ -37,5 +37,13 @@ extension AndroidViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.deleteFileDialog), name: NSNotification.Name(rawValue: StatusTypeNotification.MENU_DELETE), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.stayOnTop), name: NSNotification.Name(rawValue: StatusTypeNotification.STAY_ON_TOP), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.showProgress), name: NSNotification.Name(rawValue: AndroidViewController.NotificationStartLoading), object: nil)
+        let selector = #selector(AndroidViewController.snackbarNotification(_:))
+        NSObject.observeNotification(self, AndroidViewController.NotificationSnackbar, selector: selector)
+    }
+    
+    func snackbarNotification(_ notification: Notification) {
+        let message = notification.userInfo?["message"] as! String
+        LogV("snackbarNotification:", message)
+        showSnackbar(message)
     }
 }

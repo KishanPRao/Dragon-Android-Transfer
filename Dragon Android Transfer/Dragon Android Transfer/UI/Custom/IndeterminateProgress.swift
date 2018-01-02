@@ -58,18 +58,24 @@ class IndeterminateProgress: NSView {
     }
     
     func show() {
+        cancelActiveAnimation = true
         self.alphaValue = 1.0
         self.isHidden = false
         self.needsDisplay = true
     }
     
+    var cancelActiveAnimation = false
+    
     func hide() {
-        NSAnimationContext.runAnimationGroup({ _ in
-            NSAnimationContext.current().duration = 0.5
+        NSAnimationContext.runAnimationGroup({ context in
+            context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            context.duration = 0.5
             self.animator().alphaValue = 0.0
         }, completionHandler: {
             //print("Animation completed")
-            self.isHidden = true
+            if (!self.cancelActiveAnimation) {
+            	self.isHidden = true
+            }
         })
     }
     

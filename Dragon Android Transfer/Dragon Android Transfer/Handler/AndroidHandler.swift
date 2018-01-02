@@ -150,6 +150,9 @@ public class AndroidHandler: NSObject {
 	func setActiveDevice(_ device: AndroidDevice?) {
 		activeDevice = device;
 		LogV("Active Device:", activeDevice)
+        ThreadUtils.runInMainThread({
+        	NSObject.sendNotification(AndroidViewController.NotificationStartLoading)
+        })
 		if (device != nil) {
 			adbHandler.device = device
 			let externalDirectories = activeDevice!.storages
@@ -246,6 +249,9 @@ public class AndroidHandler: NSObject {
 			LogV("Same: \(same)")
 		}
 		if (!same) {
+            ThreadUtils.runInMainThread({
+                NSObject.sendNotification(AndroidViewController.NotificationSnackbar, ["message": "Updating Devices"])
+            })
 			Swift.print("Androidhandler, Main:", ThreadUtils.isMainThread())
 			self.observableAndroidDevices.value = newDevices
             for device in newDevices {
@@ -257,7 +263,10 @@ public class AndroidHandler: NSObject {
                     break
                 }
             }
-		}
+            if (newDevices.count == 0) {
+                setActiveDevice(nil)
+            }
+        }
 		
 		objc_sync_exit(self)
 		if (TIMER_VERBOSE) {
