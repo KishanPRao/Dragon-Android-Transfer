@@ -150,8 +150,8 @@ public class AndroidHandler: NSObject {
 	func setActiveDevice(_ device: AndroidDevice?) {
 		activeDevice = device;
 		LogV("Active Device:", activeDevice)
-		if (activeDevice != nil) {
-			adbHandler.device = activeDevice
+		if (device != nil) {
+			adbHandler.device = device
 			let externalDirectories = activeDevice!.storages
 			print("External Directories:", externalDirectories)
 			if (externalDirectories.count > 1) {
@@ -159,8 +159,12 @@ public class AndroidHandler: NSObject {
 			} else {
 				externalStorage = ""
 			}
+            if (device!.storages.count > 0) {
+            	updateList(device!.storages[0].location)
+            }
 		} else {
 			externalStorage = ""
+            updateList("")
 		}
         observableActiveDevice.value = activeDevice
 	}
@@ -244,6 +248,15 @@ public class AndroidHandler: NSObject {
 		if (!same) {
 			Swift.print("Androidhandler, Main:", ThreadUtils.isMainThread())
 			self.observableAndroidDevices.value = newDevices
+            for device in newDevices {
+                if activeDevice != device {
+                    LogV("New Active Device")
+                    activeDevice = device
+                    setActiveDevice(activeDevice)
+                    //TODO: Smarter checks, previous device check.
+                    break
+                }
+            }
 		}
 		
 		objc_sync_exit(self)

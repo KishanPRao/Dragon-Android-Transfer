@@ -15,19 +15,24 @@ NSTableViewDelegate, NSTableViewDataSource
 {
     @IBOutlet weak var overlayView: ClickableView!
     @IBOutlet weak var navigationParent: NSView!
-    @IBOutlet weak var back: ImageButton!
+    @IBOutlet weak var back: NSButton!
     @IBOutlet weak var popup: NSPopUpButtonCell!
     @IBOutlet weak var table: NSTableView!
     @IBOutlet weak var tableOuter: NSScrollView!
     
     @IBOutlet weak var testPopup: NSPopUpButton!
     internal let transferHandler = TransferHandler.sharedInstance
+    internal let bgScheduler = ConcurrentDispatchQueueScheduler(qos: .background)
+    
     let AnimationDuration = 0.25
     public var frameSize = NSRect()
     internal var storages = [StorageItem]()
     
+    var isOpen = true
+    
     @IBAction func closeMenu(_ sender: Any) {
         print("Close Menu")
+        isOpen = false
         animate(open: false) {
             print("Close end")
             self.view.removeFromSuperview()
@@ -42,7 +47,6 @@ NSTableViewDelegate, NSTableViewDataSource
 	
 	override func viewWillAppear() {
 		super.viewWillAppear()
-		
         print("Menu, view!")
         
         initUi()
@@ -74,6 +78,32 @@ NSTableViewDelegate, NSTableViewDataSource
         print("Popup Selected", index)
     }
     
+    func doubleClick(_ sender: AnyObject) {
+        //openInTable()
+    }
+    
+    private func openInTable() {
+        let index = table.clickedRow
+        if (index < 0) {
+            //LogW("Bad index, menu")
+            return
+        }
+        print("Double Clicked Menu:", index, storages[index])
+        NotificationCenter.default.post(name: Notification.Name(rawValue: AndroidViewController.NotificationStartLoading), object: nil)
+        Observable.just(transferHandler)
+            .observeOn(bgScheduler)
+            .subscribe(onNext: {
+                transferHandler in
+                transferHandler.updateList(self.storages[index].location)
+            })
+        closeMenu(self)
+    }
+    
+    func tableAction(_ sender: AnyObject) {
+        print("tableAction Menu:", index)
+        openInTable()
+    }
+    
     private func initUiContent() {
         //print("Dark:", R.color.menuBgColor, R.color.dark)
         self.popup.removeAllItems()
@@ -87,6 +117,8 @@ NSTableViewDelegate, NSTableViewDataSource
         table.backgroundColor = R.color.menuTableColor
         table.delegate = self
         table.dataSource = self
+        //table.doubleAction = #selector(doubleClick(_:))
+        table.action = #selector(tableAction(_:))
         back.setImage(name: "menu_back.png")
     }
     
@@ -94,6 +126,7 @@ NSTableViewDelegate, NSTableViewDataSource
         let newSize = NSSize(width: frameSize.width, height: frameSize.height)
         self.view.frame.size = newSize
         self.overlayView.frame.size = newSize
+        self.overlayView.frame.origin = self.view.frame.origin
         
         let navigationSize = NSSize(width: frameSize.width * 0.5, height: frameSize.height)
         self.navigationParent.frame.origin = self.view.frame.origin

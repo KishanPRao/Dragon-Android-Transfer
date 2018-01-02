@@ -22,20 +22,6 @@
                                 <rect key="frame" x="143" y="26" width="201" height="172"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uDC-IE-WmC" customClass="ImageButton" customModule="Dragon_Android_Transfer" customModuleProvider="target">
-                                        <rect key="frame" x="14" y="124" width="25" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="push" bezelStyle="rounded" image="refresh" imagePosition="only" alignment="center" borderStyle="border" inset="2" id="3YZ-qz-szO">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                            <string key="keyEquivalent" base64-UTF8="YES">
-Gw
-</string>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="closeMenu:" target="DwD-Ft-xE8" id="47j-2a-IrP"/>
-                                        </connections>
-                                    </button>
                                     <popUpButton fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6zL-2Q-SqR">
                                         <rect key="frame" x="51" y="127" width="124" height="29"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -58,7 +44,7 @@ Gw
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="65t-9Y-FVQ">
+                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="65t-9Y-FVQ">
                                                     <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
@@ -103,7 +89,7 @@ Gw
                                             </subviews>
                                         </clipView>
                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="U9D-YA-ReE">
-                                            <rect key="frame" x="1" y="83" width="198" height="16"/>
+                                            <rect key="frame" x="0.0" y="-16" width="0.0" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="e5M-UJ-rfi">
@@ -111,6 +97,20 @@ Gw
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uDC-IE-WmC">
+                                        <rect key="frame" x="-6" y="126" width="57" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="push" bezelStyle="rounded" image="refresh" imagePosition="only" alignment="center" borderStyle="border" inset="2" id="3YZ-qz-szO">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="closeMenu:" target="DwD-Ft-xE8" id="47j-2a-IrP"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </customView>
                         </subviews>

@@ -15,12 +15,13 @@ import RxSwift
 import RxCocoa
 
 class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
-		NSComboBoxDataSource, NSComboBoxDelegate, NSControlTextEditingDelegate,
+		NSControlTextEditingDelegate,
 //		FileProgressDelegate,
 		ClipboardDelegate, CopyDialogDelegate,
 		DragNotificationDelegate, DragUiDelegate,
 		NSUserInterfaceValidations {
-	
+	public static let NotificationStartLoading = "NotificationStartLoading"
+    
 	internal let bgScheduler = ConcurrentDispatchQueueScheduler(qos: .background)
 	internal let tableDelegate = DeviceTableDelegate()
 	internal var _androidDirectoryItems: Array<BaseFile> = []
@@ -34,37 +35,14 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		}
 	}
 	@IBOutlet weak var fileTable: DraggableTableView!
-	@IBOutlet weak var backButton: NSButtonCell!
-//    @IBOutlet weak var devicesBox: NSComboBox!
-	@IBOutlet weak var devicesPopUp: NSPopUpButtonCell!
 	
-	@IBOutlet weak var statusView: NSView!
 
-    @IBOutlet weak var overlayView: ClickableView!
-//    TODO: Try other phones! Or keep backup as /sdcard, if check..
-//	let INIT_DIRECTORY = "/sdcard"
-//    let INIT_DIRECTORY = "/storage"
+    @IBOutlet weak var menuButton: NSButton!
+    @IBOutlet weak var backButton: NSButton!
 	
-	var androidDevices: NSMutableArray = []
 	@IBOutlet weak var toolbarView: NSView!
-	@IBOutlet weak var deviceSelectorView: NSView!
-	@IBOutlet weak var currentDirectoryText: NSTextField!
-	@IBOutlet weak var spaceStatusText: NSTextField!
-	@IBOutlet weak var refreshButton: NSButton!
-	@IBOutlet weak var currentDirectoryLabel: NSTextField!
-	@IBOutlet weak var spaceStatusLabel: NSTextField!
-	
-	@IBOutlet weak var internalStorageButton: ColoredButton!
-	@IBOutlet weak var externalStorageButton: ColoredButton!
 	
 	@IBOutlet weak var messageText: NSTextField!
-	
-	@IBOutlet weak var devicesPopupButton: NSPopUpButton!
-	@IBOutlet weak var clipboardItemsCount: DisabledTextField!
-	@IBOutlet weak var clipboardButton: NSButton!
-	
-	internal var clipboardIcon: NSImage?
-	internal var clipboardIconPlain: NSImage?
 	
 	internal var copyDialog = nil as CopyDialog?
 	
@@ -83,11 +61,11 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 	
 	internal let mDockTile: NSDockTile = NSApplication.shared().dockTile
 	internal var mDockProgress: NSProgressIndicator? = nil
-	
-    internal var mCircularProgress: IndeterminateProgressView? = nil
-    
+    //internal var mCircularProgress: IndeterminateProgressView? = nil
     internal var mCurrentProgress = -1.0
 	
+    @IBOutlet weak var loadingProgress: IndeterminateProgress!
+    
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -105,7 +83,6 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 //		getScreenResolution()
 		transferHandler.start()
 		
-		observeDevices()
 		observeListing()
 		observeTransfer()
     }
@@ -115,6 +92,11 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 			AppDelegate.reset()
 			
 			messageText.isHidden = false
+//            let fontName = "AlegreyaSans"
+//            //let fontName = "AlegreyaSans"
+//            var font = NSFont(name: fontName, size: 5.0)
+//            font = NSFont(name: "AlegreyaSans.ttf", size: 5.0)
+//            messageText.font = font
 			messageText.stringValue = "No Active Device.\nPlease connect a device with USB Debugging enabled."
 			return
 		}
@@ -130,23 +112,18 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		AppDelegate.itemSelected = false
 		AppDelegate.directoryItemSelected = false
 		AppDelegate.multipleItemsSelected = false
-//		AppDelegate.hasMacClipboardItems = transferHandler.getClipboardMacItems().count > 0
 		AppDelegate.canGoBackward = !transferHandler.isRootDirectory()
-//		if (NSObject.VERBOSE) {
-//			Swift.print("AndroidViewController, Can go backward:", AppDelegate.canGoBackward);
-//		}
 	}
     
     internal func reset() {
         print("Reset!")
         transferHandler.reset()
         androidDirectoryItems = []
-        spaceStatusText.stringValue = ""
-        currentDirectoryText.stringValue = ""
     }
 	
 	internal var previousIndex = -1
 	
+    /*
 	func onPopupSelected(_ sender: AnyObject) {
 		let index = self.devicesPopUp.indexOfSelectedItem
 		print("Popup Selected:", index)
@@ -157,35 +134,36 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 			}
 			updateActiveDevice(activeDevice)
 		}
-	}
+	}*/
 	
 	override func viewWillAppear() {
 		super.viewWillAppear()
 //        start()
 		if (fileTable.acceptsFirstResponder) {
 			self.view.window?.makeFirstResponder(fileTable)
-//			if (NSObject.VERBOSE) {
-//				Swift.print("AndroidViewController, First Responder!");
-//			}
 		}
 		NotificationCenter.default.addObserver(self, selector: #selector(windowMoved), name: NSNotification.Name.NSWindowDidMove, object: self.view.window!)
-        updateWindowSize()
+        
+        /*updateWindowSize()
 		checkGuide()
+ 		*/
 	}
 	
 	override func viewWillLayout() {
 		super.viewWillLayout()
-		Swift.print("AndroidViewController, viewWillLayout")
+		//Swift.print("AndroidViewController, viewWillLayout")
 		
-        updateWindowSize()
-		checkGuide()
+        /*updateWindowSize()
+         checkGuide()
+         */
 	}
 	
 	override func viewDidLayout() {
 		super.viewDidLayout()
 		
-        updateWindowSize()
-		checkGuide()
+        /*updateWindowSize()
+         checkGuide()
+         */
 	}
 	
 	func shouldShowGuide() -> Bool {
@@ -217,17 +195,6 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 	}
 	
 	func onDisconnected(_ device: AndroidDevice) {
-	}
-	
-	internal func updateActiveStorageButton() {
-		if (transferHandler.hasActiveDevice()) {
-			let usingExternal = transferHandler.isUsingExternalStorage()
-			externalStorageButton.setSelected(usingExternal)
-			internalStorageButton.setSelected(!usingExternal)
-		} else {
-			externalStorageButton.setSelected(false)
-			internalStorageButton.setSelected(false)
-		}
 	}
 	
 	func doubleClickList(_ sender: AnyObject) {
@@ -263,14 +230,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
     }
 	
 	internal func updateClipboard() {
-		let clipboardItems = transferHandler.getClipboardItems() 
-		if (clipboardItems.count > 0) {
-			StyleUtils.updateButtonWithCell(clipboardButton, withImage: clipboardIconPlain)
-			clipboardItemsCount.stringValue = String(clipboardItems.count)
-		} else {
-			StyleUtils.updateButtonWithCell(clipboardButton, withImage: clipboardIcon)
-			clipboardItemsCount.stringValue = ""
-		}
+		let clipboardItems = transferHandler.getClipboardItems()
 //		AppDelegate.hasMacClipboardItems = transferHandler.getClipboardMacItems().count > 0
 		AppDelegate.hasClipboardItems = clipboardItems.count > 0
 	}
@@ -287,126 +247,57 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		transferHandler.clearClipboardMacItems()
 	}
 	
-	@IBAction func useInternalStorage(_ sender: AnyObject) {
-		// self.showProgress()
-		transferHandler.setUsingExternalStorage(false)
-		updateToStorage(transferHandler.getInternalStorage())
-		// self.hideProgress()
-	}
-	
-	@IBAction func useExternalStorage(_ sender: AnyObject) {
-		// self.showProgress()
-		transferHandler.setUsingExternalStorage(true)
-		updateToStorage(transferHandler.getExternalStorage())
-		// self.hideProgress()
+	var snackbar: Snackbar? = nil
+    
+    internal func showSnackbar(_ message: String) {
+        if (snackbar == nil) {
+            snackbar = Snackbar(frame: NSRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
+            self.view.addSubview(snackbar!)
+            self.view.layoutSubtreeIfNeeded()
+        }
+        snackbar?.updateMessage(message)
+        snackbar?.showSnackbar()
     }
 	
 	@IBAction func backButtonPressed(_ button: NSButton) {
         navigateUpDirectory()
-	}
-	
-	@IBAction func refreshButtonTapped(_ sender: AnyObject) {
-		refresh()
+		
+		//print("Showing Snackbar")
+        //showSnackbar("Going back")
 	}
 
 //    var timer: NSTimer? = nil
 	
 	func windowMoved() {
 		//LogV("Win Moved", view.window?.frame)
-		if let window = vc?.view.window {
+		/*if let window = vc?.view.window {
 			var frame = window.frame
 			frame.origin = view.window!.frame.origin
 //			window.setFrame(frame, display: false)
 //			vc?.update(frame)
 			window.setFrameOrigin(frame.origin)
-		}
+		}*/
 	}
-	
-	@IBAction func clipboardButtonTapped(_ sender: AnyObject) {
-		/*
-         if (!clipboardOpened) {
-			clipboardOpened = true
-			self.performSegue(withIdentifier: ViewControllerIdentifier.ClipboardId, sender: self)
-		} else {
-			if (NSObject.VERBOSE) {
-				Swift.print("AndroidViewController, Warning, trying to open multiple times!");
-			}
-		}
-         */
-        
+    
+    var vc: MenuViewController? = nil
+    
+    @IBAction func menuTapped(_ sender: Any) {
+        if (vc != nil && vc!.isOpen) {
+            vc?.closeMenu(self)
+            return
+        }
         let window = self.view.window!
         var frameSize = window.frame
-//        frameSize.size = NSSize(width: window.frame.width * 0.75, height: frameSize.height - window.titlebarHeight)
         frameSize.size = NSSize(width: window.frame.width, height: frameSize.height - window.titlebarHeight)
-        //frameSize.size = NSSize(width: 50, height: 50)
-        /*
-        let frameworkBundle = Bundle.main
-        let storyBoard = NSStoryboard(name: "MenuViewController", bundle: frameworkBundle)
         
-        let vc = storyBoard.instantiateInitialController() as! MenuViewController
-         vc.frameSize.size = NSSize(width: 50, height: 50)
-         presentViewControllerAsModalWindow(vc)
- */
-		
-//		vc.view.window?.setFrame(NSRect(x: 9, y: 9, width: 1000, height: 1000), display: true)
-        //vc.view.backgroundFilters = .clearColor()
-//        vc.modal = .OverCurrentContext
-        
-//        self.presentViewController(vc, animated: true, completion: nil)
-        
-        
-        //let animator = PushAnimatorTrial()
-//        let animator = MyCustomSwiftAnimator()
-//        presentViewController(vc, animator: animator)
-        
-//        presentViewControllerAsSheet(vc)
-        
-        /*
-        let myViewController = MenuViewController(nibName: "MenuViewController", bundle: nil)!
- */
-		
-		/*
-		let storyBoard = NSStoryboard(name: "MenuViewController", bundle: Bundle.main)
-		vc = storyBoard.instantiateInitialController() as! MenuViewController
-//		vc.frameSize.size = NSSize(width: 50, height: 50)
-        vc!.frameSize = frameSize
-		displayContent(vc!)
-//		presentViewControllerAsModalWindow(vc!)
-		*/
-		
-		/*let vc = MenuViewController(nibName: "MenuViewController", bundle: nil)!
- */
-        
-		let storyBoard = NSStoryboard(name: "MenuViewController", bundle: Bundle.main)
-		let vc = storyBoard.instantiateInitialController() as! MenuViewController
- 
-		vc.frameSize = frameSize
-        addChildViewController(vc)
-		view.addSubview(vc.view)
-		
-//		LogV("AVC Win", window)
-//		vc = MenuViewController()
-//        vc!.frameSize = frameSize
-//        //presentViewControllerAsModalWindow(vc)
-//        presentViewControllerAsSheet(vc!)
-        //self.presentViewController(vc, animated: true, completion: nil)
-
-//		insertChildViewController(vc, at: 0)
-	
-//	addChildViewController(vc)
-//		presentViewControllerAsModalWindow(vc)
-        /*
- 		presentViewController(vc, asPopoverRelativeTo: view.frame,
-                              of: self.view, preferredEdge: NSRectEdge.minY,
-                              behavior: NSPopoverBehavior.transient)
- */
-	}
-	func displayContent(_ vc: NSViewController) {
-		presentViewControllerAsModalWindow(vc)
-//		view.addSubview(vc.view)
-	}
-	
-	var vc : MenuViewController? = nil
+        let storyBoard = NSStoryboard(name: "MenuViewController", bundle: Bundle.main)
+        vc = storyBoard.instantiateInitialController() as! MenuViewController
+        if let vc = vc {
+        	vc.frameSize = frameSize
+        	addChildViewController(vc)
+        	view.addSubview(vc.view)
+        }
+    }
 	
 	func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
 		if (NSObject.VERBOSE) {

@@ -9,6 +9,9 @@
 import Foundation
 
 extension NSView {
+    internal static let FPS = 30.0 as Double
+    //internal static let FPS = 60.0 as Double
+    internal static let FPS_DELAY = Int(FPS / (1000.0 as Double))
     
     public func setBackground(_ color: NSColor) {
         self.wantsLayer = true

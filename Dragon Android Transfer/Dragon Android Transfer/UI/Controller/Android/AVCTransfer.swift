@@ -119,8 +119,6 @@ extension AndroidViewController {
                 if (status == FileProgressStatus.kStatusInProgress) {
                     self.fileTable.layer?.borderWidth = 0
                     AppDelegate.isPastingOperation = true
-                    self.overlayView.isHidden = false;
-                    self.currentCopyFile = ""
                     self.showCopyDialog()
                     self.mDockProgress?.isHidden = false
                 } else {
@@ -129,7 +127,7 @@ extension AndroidViewController {
                 }
                 self.mCurrentProgress = -1
             })
-        //		TODO: Initially, do not call!
+        
         transferHandler.sizeActiveTask().skip(1)
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { totalSize in
@@ -187,6 +185,7 @@ extension AndroidViewController {
                 self.progressActive(progress)
             })
         
+        /*
         transferHandler.getSpaceStatus().skip(1)
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { spaceStatus in
@@ -194,7 +193,7 @@ extension AndroidViewController {
                     return
                 }
                 self.spaceStatusText.stringValue = spaceStatus[0] + " of " + spaceStatus[1]
-            })
+            })*/
     }
     
     internal func progressActive(_ progress: Double) {
@@ -229,7 +228,6 @@ extension AndroidViewController {
             //TODO: Sound if canceled.
         }
         //TODO: Copy of Marvel's Agents of Shield problem, not disappearing. & bad progress!
-        overlayView.isHidden = true;
         if (copyDialog != nil) {
             //            copyDialog!.rootView.removeFromSuperview()
             copyDialog!.removeFromSuperview()

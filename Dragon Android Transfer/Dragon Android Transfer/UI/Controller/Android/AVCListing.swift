@@ -33,7 +33,7 @@ extension AndroidViewController {
                 AppDelegate.hasMacClipboardItems = list.count > 0
             })
     }
-    
+    /*
     internal func observeDevices() {
         transferHandler.observeAndroidDevices()
             .subscribeOn(bgScheduler)
@@ -85,10 +85,9 @@ extension AndroidViewController {
                 devices in
                 print("Result : ", devices)
             })
-    }
+    }*/
     
     func updateList() {
-        currentDirectoryText.stringValue = transferHandler.getCurrentPathForDisplay()
         LogV("Update List")
         fileTable.updateList(data: androidDirectoryItems)
         updateDeviceStatus()
@@ -155,38 +154,6 @@ extension AndroidViewController {
         //		print("Selected", self.androidDirectoryItems[fileTable.selectedRow])
         
         openFile(selectedItem)
-    }
-    
-    internal func updateToStorage(_ storage: String) {
-        Observable.just(transferHandler)
-            .observeOn(MainScheduler.instance)
-            .map {
-                transferHandler -> TransferHandler in
-                self.showProgress()
-                return transferHandler
-            }
-            .observeOn(bgScheduler)
-            .map {
-                transferHandler -> TransferHandler? in
-                if (transferHandler.hasActiveDevice()) {
-                    transferHandler.updateList(storage)
-                    transferHandler.updateStorage()
-                    transferHandler.clearClipboardAndroidItems()
-                    return transferHandler
-                } else {
-                    return nil
-                }
-            }
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: {
-                transferHandler in
-                if transferHandler == nil {
-                    self.reset()
-                }
-                //					self.updateClipboard()
-                self.updateActiveStorageButton()
-                self.hideProgress()
-            })
     }
     
     internal func navigateUpDirectory() {

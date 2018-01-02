@@ -62,39 +62,10 @@ extension AndroidViewController {
         view.frame = DimenUtils.getUpdatedRect2(frame: view.frame, dimensions: Dimens.android_controller_size)
         
         toolbarView.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_toolbar)
-        clipboardButton.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_toolbar_clipboard_button)
-        clipboardItemsCount.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_toolbar_clipboard_items_count)
-        clipboardItemsCount.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_toolbar_clipboard_items_count_text_size))
-        updatePopupDimens()
-        
-        backButton.controlView!.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_toolbar_back)
-        
-        deviceSelectorView.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_device_selector)
-        internalStorageButton.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_device_selector_storage_text_size))
-        internalStorageButton.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_device_selector_internal)
-        internalStorageButton.updateSelected()
-        externalStorageButton.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_device_selector_storage_text_size))
-        externalStorageButton.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_device_selector_external)
-        externalStorageButton.updateSelected()
-        //		Swift.print("AndroidViewController, ext frame:", externalStorageButton.frame)
-        
-        statusView.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_status_view)
-        currentDirectoryLabel.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_status_view_current_directory_label_text_size))
-        currentDirectoryLabel.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_status_view_current_directory_label)
-        currentDirectoryText.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_status_view_current_directory_text_size))
-        currentDirectoryText.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_status_view_current_directory_text)
-        spaceStatusLabel.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_status_view_space_status_label_size))
-        spaceStatusLabel.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_status_view_space_status_label)
-        spaceStatusText.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_status_view_space_status_text_size))
-        spaceStatusText.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_status_view_space_status_text)
-        refreshButton.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_status_view_refresh)
-        
-        fileTable.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table)
+        //fileTable.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table)
         //		let scrollViewFrame = fileTable.enclosingScrollView!.frame
-        fileTable.enclosingScrollView!.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table)
+        //fileTable.enclosingScrollView!.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table)
         updateList()
-        
-        overlayView.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_overlay)
         
         messageText.font = NSFont(name: messageText.font!.fontName, size: DimenUtils.getDimension(dimension: Dimens.error_message_text_size))
         messageText.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.error_message_text)
@@ -145,7 +116,8 @@ extension AndroidViewController {
     }
     
     func screenUpdated() {
-        updateWindowSize()
-        checkGuide()
+        /*updateWindowSize()
+         checkGuide()
+         */
     }
 }

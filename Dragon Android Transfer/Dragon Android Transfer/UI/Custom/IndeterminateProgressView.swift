@@ -13,8 +13,6 @@ class IndeterminateProgressView : NSView {
     let circularPath = NSBezierPath()
     let lineWidth = 5.0 as CGFloat
     let totalTimeMs = 1 * 1000 as CGFloat
-    private static let FPS = 30.0 as Double
-    private static let FPS_DELAY = Int(FPS / (1000.0 as Double))
     
     override init(frame frameRect: Foundation.NSRect) {
         super.init(frame: frameRect)

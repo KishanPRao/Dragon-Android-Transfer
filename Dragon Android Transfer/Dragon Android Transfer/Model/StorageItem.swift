@@ -24,4 +24,8 @@ public class StorageItem: NSObject {
             return location.contains("/sdcard")
         }
     }
+    
+    public override var description: String {
+        return "StorageItem: \(name, location)"
+    }
 }

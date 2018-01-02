@@ -32,6 +32,8 @@
 
 //AdbExecutor *executor;
 
+- (bool)hasActiveDevice;
+
 - (id _Nonnull)initWithDirectory:(NSString *_Nonnull)adbDirectoryPath;
 
 - (NSArray<BaseFile *> *_Nonnull)getDirectoryListing:(NSString *_Nonnull)path;

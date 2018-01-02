@@ -119,14 +119,8 @@ extension AndroidViewController {
             .observeOn(MainScheduler.instance)
             .map {
                 transferHandler in
-                if (transferHandler.hasActiveDevice()) {
-                    if (transferHandler.getExternalStorage() != "") {
-                        self.externalStorageButton.isHidden = false
-                    }
-                }
                 print("UI Stuff")
                 //					self.updateClipboard()
-                self.updateActiveStorageButton()
                 self.updateDeviceStatus()
                 self.hideProgress()
             }.subscribe(onNext: {

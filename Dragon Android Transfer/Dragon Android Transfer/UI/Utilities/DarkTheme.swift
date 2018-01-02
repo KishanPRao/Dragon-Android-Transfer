@@ -18,6 +18,9 @@ class DarkTheme: Theme {
 		get {
             return color("000409", withAlpha: 0.4)
 		}
-        
 	}
+    
+    var toolbarColor: NSColor { get { return color("102038") } }
+    var toolbarProgressFg: NSColor {get{ return color("163666") }}
+    var toolbarProgressBg: NSColor {get{ return color("3369bc") }}
 }
