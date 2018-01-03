@@ -12,7 +12,7 @@ class DarkWindow: NSWindow {
 	
 	override init(contentRect: Foundation.NSRect, styleMask style: AppKit.NSWindowStyleMask, backing bufferingType: AppKit.NSBackingStoreType, `defer` flag: Bool) {
 		super.init(contentRect: contentRect, styleMask: style, backing: bufferingType, defer: flag)
-		backgroundColor = NSColor.black
+		backgroundColor = R.color.tableBg
 		titlebarAppearsTransparent = true
 	}
 }

@@ -26,7 +26,7 @@ extension AndroidViewController {
         //ColorUtils.setBackgroundColorTo(toolbarView, color: ColorUtils.toolbarColor)
         toolbarView.setBackground(R.color.toolbarColor)
         
-        fileTable.backgroundColor = ColorUtils.colorWithHexString(ColorUtils.listBackgroundColor)
+        fileTable.backgroundColor = R.color.tableBg
         fileTable.selectionHighlightStyle = NSTableViewSelectionHighlightStyle.none
         messageText.alignment = NSCenterTextAlignment
         messageText.font = NSFont(name: messageText.font!.fontName, size: DimenUtils.getDimension(dimension: Dimens.error_message_text_size))
@@ -60,6 +60,8 @@ extension AndroidViewController {
         self.view.addSubview(mCircularProgress!)
         mCircularProgress?.isHidden = true
  */
+        
+        pathSelectorRootView.setBackground(R.color.black)
         loadingProgress.isHidden = true
         //        parent.center fromView:parent.superview];
     }

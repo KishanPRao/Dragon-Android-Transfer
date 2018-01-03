@@ -47,6 +47,8 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 	
 	internal var copyDialog = nil as CopyDialog?
 	
+    @IBOutlet weak var pathSelector: PathSelector!
+    @IBOutlet weak var pathSelectorRootView: NSView!
 	internal var copyDestination = ""
 	internal var currentCopyFile = ""
 	internal var transferType = -1

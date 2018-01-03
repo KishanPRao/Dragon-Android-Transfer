@@ -1,20 +1,18 @@
 //
-//  NSButton_Extension.swift
+//  NSImageView_Extension.swift
 //  Dragon Android Transfer
 //
-//  Created by Kishan P Rao on 31/12/17.
-//  Copyright © 2017 Kishan P Rao. All rights reserved.
+//  Created by Kishan P Rao on 03/01/18.
+//  Copyright © 2018 Kishan P Rao. All rights reserved.
 //
 
 import Foundation
 
-extension NSButton {
+extension NSImageView {
     
     public func setImage(image: NSImage) {
         self.image = image
         self.imageScaling = .scaleProportionallyUpOrDown
-        self.imagePosition = .imageOnly
-        self.isBordered = false
     }
     
     public func setImage(name: String) {

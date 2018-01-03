@@ -30,17 +30,27 @@
                                             <action selector="menuTapped:" target="EgA-oj-PE1" id="Cx7-G3-wFP"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="phA-Vu-RnN">
-                                        <rect key="frame" x="437" y="17" width="50" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yhC-Dr-o3P">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="backButtonPressed:" target="EgA-oj-PE1" id="7n2-Lk-osq"/>
-                                        </connections>
-                                    </button>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m7k-us-hyl">
+                                        <rect key="frame" x="65" y="10" width="400" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <subviews>
+                                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="phA-Vu-RnN">
+                                                <rect key="frame" x="10" y="7" width="50" height="32"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yhC-Dr-o3P">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="backButtonPressed:" target="EgA-oj-PE1" id="7n2-Lk-osq"/>
+                                                </connections>
+                                            </button>
+                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m7H-0T-VkQ" customClass="PathSelector" customModule="Dragon_Android_Transfer" customModuleProvider="target">
+                                                <rect key="frame" x="63" y="5" width="320" height="35"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            </customView>
+                                        </subviews>
+                                    </customView>
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iMs-xx-bIt" customClass="IndeterminateProgress" customModule="Dragon_Android_Transfer" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="658" height="8"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -93,7 +103,7 @@
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" placeholderString="File Name" id="fNA-Jh-WXh">
                                                                         <font key="font" metaFont="system" size="16"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7AS-Xc-dKC">
@@ -107,7 +117,7 @@
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="Size" id="0OT-Uy-zSk">
                                                                         <font key="font" metaFont="system" size="16"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
                                                             </subviews>
@@ -143,11 +153,13 @@
                         <outlet property="loadingProgress" destination="iMs-xx-bIt" id="3mj-7T-rF2"/>
                         <outlet property="menuButton" destination="mX9-y9-o6g" id="LyE-TH-d1L"/>
                         <outlet property="messageText" destination="F9N-4t-eEo" id="9Ij-fq-K4H"/>
+                        <outlet property="pathSelector" destination="m7H-0T-VkQ" id="Mrb-w3-C0l"/>
+                        <outlet property="pathSelectorRootView" destination="m7k-us-hyl" id="8Ev-BD-Le7"/>
                         <outlet property="toolbarView" destination="tC3-4U-ZdH" id="D5C-yt-G6c"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-725" y="915"/>
+            <point key="canvasLocation" x="-781" y="871"/>
         </scene>
     </scenes>
     <resources>

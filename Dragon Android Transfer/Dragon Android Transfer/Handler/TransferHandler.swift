@@ -136,10 +136,14 @@ class TransferHandler {
 	func reset() {
 		androidHandler.reset()
 	}
-	
-	func observeClipboardAndroidItems() -> Observable<[BaseFile]> {
-		return copyItemsAndroid.asObservable()
-	}
+    
+    func observeCurrentPath() -> Observable<String> {
+        return androidHandler.observableCurrentPath.asObservable()
+    }
+    
+    func observeClipboardAndroidItems() -> Observable<[BaseFile]> {
+        return copyItemsAndroid.asObservable()
+    }
 	
 	func getClipboardAndroidItems() -> [BaseFile] {
 		return copyItemsAndroid.value

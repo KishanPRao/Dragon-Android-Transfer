@@ -51,6 +51,8 @@ public class AndroidHandler: NSObject {
 	fileprivate lazy var adbHandler: AndroidAdbHandler = {
 		return AndroidAdbHandler(directory: self.adbDirectoryPath)
 	}()
+    
+    let observableCurrentPath = Variable<String>("")
 	
 	override init() {
 		currentPath = ""
@@ -182,6 +184,7 @@ public class AndroidHandler: NSObject {
 	
 	func reset() {
 		currentPath = ""
+        observableCurrentPath.value = currentPath
 	}
 	
 	private func exists(_ filePath: String, isFile: Bool) -> Bool {
@@ -305,6 +308,7 @@ public class AndroidHandler: NSObject {
 	
 	func updateList(_ path: String) {
 		currentPath = path
+        observableCurrentPath.value = currentPath
 		adbHandler.device = activeDevice
 		observableFileList.value =  adbHandler.getDirectoryListing(path)
 	}
@@ -365,14 +369,17 @@ public class AndroidHandler: NSObject {
 		if (containsSep) {
 			let lastSep = (currentPath.range(of: HandlerConstants.SEPARATOR, options: NSString.CompareOptions.backwards)?.lowerBound)!
 			currentPath = currentPath.substring(to: lastSep)
+            observableCurrentPath.value = currentPath
 //			if (Verbose) { print("Upper:", currentPath) }
 			if (usingExternalStorage) {
 				if (currentPath.characters.count < externalStorage.characters.count) {
 					currentPath = externalStorage
+                    observableCurrentPath.value = currentPath
 				}
 			} else {
 				if (currentPath.characters.count < internalStorage.characters.count) {
 					currentPath = internalStorage
+                    observableCurrentPath.value = currentPath
 				}
 			}
 			

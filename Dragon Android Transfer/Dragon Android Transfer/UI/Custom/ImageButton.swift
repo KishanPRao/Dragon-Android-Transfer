@@ -8,6 +8,7 @@
 
 import Foundation
 
+/*
 extension NSButton {
 	/*
 	required init?(coder: NSCoder) {
@@ -32,4 +33,4 @@ extension NSButton {
 	public func setImage(name: String) {
 		self.setImage(image: NSImage(named: name)!)
 	}
-}
+}*/

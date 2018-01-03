@@ -9,18 +9,18 @@
 import Foundation
 
 class DarkTheme: Theme {
+    static let color = DarkTheme.color(_:)
     
-    var menuNavColor: NSColor { get {return color("071326")}}
+    var menuNavColor = color("071326")
     
-    var menuTableColor: NSColor { get {return color("071326")}}
+    var menuTableColor = color("071326")
 	
-	var menuBgColor: NSColor {
-		get {
-            return color("000409", withAlpha: 0.4)
-		}
-	}
+	var menuBgColor = color("000409", withAlpha: 0.4)
     
-    var toolbarColor: NSColor { get { return color("102038") } }
-    var toolbarProgressFg: NSColor {get{ return color("163666") }}
-    var toolbarProgressBg: NSColor {get{ return color("3369bc") }}
+    var toolbarColor =  color("102038")
+    var toolbarProgressFg =  color("163666")
+    var toolbarProgressBg =  color("3369bc")
+    
+    var tableBg = color("050505")
+    var tableItemBg = color("050505")
 }

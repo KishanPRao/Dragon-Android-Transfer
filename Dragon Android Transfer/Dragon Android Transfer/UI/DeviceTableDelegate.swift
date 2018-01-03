@@ -82,6 +82,7 @@ class DeviceTableDelegate: NSObject, NSTableViewDelegate {
             if (indexSet.contains(row)) {
                 ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listSelectedBackgroundColor)
             } else {
+                //cellView.setBackground(R.color.tableItemBg)
                 ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listItemBackgroundColor)
             }
             
@@ -133,6 +134,7 @@ class DeviceTableDelegate: NSObject, NSTableViewDelegate {
 						}
 						AppDelegate.itemSelected = true
 					} else {
+                        //cellView.setBackground(R.color.tableItemBg)
 						ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listItemBackgroundColor)
 					}
 				}

@@ -32,6 +32,12 @@ extension AndroidViewController {
                 self.updateClipboard()
                 AppDelegate.hasMacClipboardItems = list.count > 0
             })
+        transferHandler.observeCurrentPath()
+        	.observeOn(MainScheduler.instance)
+            .subscribe(onNext: {
+                path in
+                self.pathSelector.updateCurrentPath(path)
+            })
     }
     /*
     internal func observeDevices() {
