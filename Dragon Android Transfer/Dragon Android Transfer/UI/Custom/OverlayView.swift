@@ -8,29 +8,36 @@
 
 import Foundation
 
-class ClickableView: NSView {
+class OverlayView: ClickableView {
+    let AnimationDuration = 0.25
     
-    override init(frame frameRect: Foundation.NSRect) {
-        super.init(frame: frameRect)
+    func show() {
+//        cancelActiveAnimation = true
+        self.alphaValue = 0.0
+        self.isHidden = false
+        self.needsDisplay = true
+        NSAnimationContext.runAnimationGroup({ context in
+            context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            context.duration = AnimationDuration
+            self.animator().alphaValue = 1.0
+        }, completionHandler: {
+//            if (!self.cancelActiveAnimation) {
+//                self.isHidden = true
+//            }
+        })
     }
-	
-	required init?(coder: NSCoder) {
-		super.init(coder: coder)
-        /*
-		wantsLayer = true
-		layer?.backgroundColor = NSColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5).cgColor
- */
-	}
     
-    typealias ClickHandler = () -> ()
-    var clickHandler: ClickHandler? = {}
+//    var cancelActiveAnimation = false
     
-    func setOnClickListener(clickHandler: (@escaping () -> ())) {
-        self.clickHandler = clickHandler
+    func hide() {
+        NSAnimationContext.runAnimationGroup({ context in
+            context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            context.duration = AnimationDuration
+            self.animator().alphaValue = 0.0
+        }, completionHandler: {
+//            if (!self.cancelActiveAnimation) {
+                self.isHidden = true
+//            }
+        })
     }
-	
-	override func mouseDown(with theEvent: NSEvent) {
-//        Swift.print("Ignore Mouse!")
-        clickHandler?()
-	}
 }

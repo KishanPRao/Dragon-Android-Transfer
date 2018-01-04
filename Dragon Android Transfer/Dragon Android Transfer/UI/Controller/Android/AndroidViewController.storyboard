@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="17B1003" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="EgA-oj-PE1">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="EgA-oj-PE1">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -35,7 +35,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="phA-Vu-RnN">
-                                                <rect key="frame" x="10" y="7" width="50" height="32"/>
+                                                <rect key="frame" x="2" y="7" width="50" height="32"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yhC-Dr-o3P">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -46,7 +46,7 @@
                                                 </connections>
                                             </button>
                                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m7H-0T-VkQ" customClass="PathSelector" customModule="Dragon_Android_Transfer" customModuleProvider="target">
-                                                <rect key="frame" x="63" y="5" width="320" height="35"/>
+                                                <rect key="frame" x="50" y="5" width="340" height="35"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             </customView>
                                         </subviews>
@@ -145,6 +145,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bzf-eS-QFI" customClass="OverlayView" customModule="Dragon_Android_Transfer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="658" height="746"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </customView>
                         </subviews>
                     </view>
                     <connections>
@@ -153,6 +157,7 @@
                         <outlet property="loadingProgress" destination="iMs-xx-bIt" id="3mj-7T-rF2"/>
                         <outlet property="menuButton" destination="mX9-y9-o6g" id="LyE-TH-d1L"/>
                         <outlet property="messageText" destination="F9N-4t-eEo" id="9Ij-fq-K4H"/>
+                        <outlet property="overlayView" destination="bzf-eS-QFI" id="WAP-HB-LzU"/>
                         <outlet property="pathSelector" destination="m7H-0T-VkQ" id="Mrb-w3-C0l"/>
                         <outlet property="pathSelectorRootView" destination="m7k-us-hyl" id="8Ev-BD-Le7"/>
                         <outlet property="toolbarView" destination="tC3-4U-ZdH" id="D5C-yt-G6c"/>

@@ -17,13 +17,13 @@ class MenuCell: NSTableCellView {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
- 
     
     override init(frame frameRect: Foundation.NSRect) {
         super.init(frame: frameRect)
         Bundle.main.loadNibNamed("MenuCell", owner: self, topLevelObjects: nil)
         Swift.print("Test", contentView.frame, self)
-        text.textColor = NSColor.white
+        text.textColor = R.color.white
+//        contentView.setBackground(R.color.black)
         contentView.frame = frame
         addSubview(self.contentView)
         //contentView.autoresizingMask = [.viewMaxXMargin, .viewMinXMargin]
@@ -38,6 +38,24 @@ class MenuCell: NSTableCellView {
             view.needsLayout = true
             view.needsDisplay = true
         }*/
+//        setBackground(R.color.black)
+    }
+    
+//    override func drawBackgroundInRect(dirtyRect: NSRect) {
+//        let context: CGContext = NSGraphicsContext.currentContext()!.CGContext
+//
+//        if !self.selected {
+//            CGContextSetFillColorWithColor(context, NSColor.clearColor().CGColor)
+//        } else {
+//            CGContextSetFillColorWithColor(context, NSColor.redColor().CGColor)
+//        }
+//
+//        CGContextFillRect(context, dirtyRect)
+//    }
+    
+    override func resize(withOldSuperviewSize oldSize: NSSize) {
+        super.resize(withOldSuperviewSize: oldSize)
+//        contentView.frame = frame
     }
     
     required init?(coder: NSCoder) {

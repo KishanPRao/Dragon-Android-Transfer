@@ -50,7 +50,15 @@
 		50B9F3C11FFD22DC00C5C6E3 /* PathSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50B9F3C01FFD22DC00C5C6E3 /* PathSelector.xib */; };
 		50C567221FFA934C00452792 /* AlegreyaSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 50C567211FFA934C00452792 /* AlegreyaSans.ttf */; };
 		50C567241FFA938200452792 /* AlegreyaSans.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 50C567211FFA934C00452792 /* AlegreyaSans.ttf */; };
+		50D7D9B41FFE948D00E85E70 /* TextUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7D9B31FFE948D00E85E70 /* TextUtils.swift */; };
+		50D7D9B61FFE97AC00E85E70 /* SelectionTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7D9B51FFE97AC00E85E70 /* SelectionTableRowView.swift */; };
+		50D7D9BC1FFEA37A00E85E70 /* ScrollessScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D7D9BB1FFEA37A00E85E70 /* ScrollessScrollView.m */; };
+		50D7D9BE1FFEA45100E85E70 /* TransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7D9BD1FFEA45100E85E70 /* TransferViewController.swift */; };
+		50D7D9C01FFEA45B00E85E70 /* TransferViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50D7D9BF1FFEA45B00E85E70 /* TransferViewController.storyboard */; };
+		50D7D9C21FFEA87900E85E70 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 50D7D9C11FFEA87900E85E70 /* cancel.png */; };
+		50DC06361FFD6F0B00B0CDDB /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DC06351FFD6F0B00B0CDDB /* OverlayView.swift */; };
 		50DD59091FFD2C020089D742 /* NSImage_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DD59081FFD2C020089D742 /* NSImage_Extension.swift */; };
+		50F193481FFD5D4A001B6984 /* BlurOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F193471FFD5D4A001B6984 /* BlurOverlayView.swift */; };
 		50F314E01FAE1C45006BF985 /* ExtensionBaseFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F314DF1FAE1C45006BF985 /* ExtensionBaseFile.swift */; };
 		50F314E41FAE28D7006BF985 /* ThreadUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDC1EC5EA8A5A0A17A378 /* ThreadUtils.swift */; };
 		50FE44A91FF6B84D0099A029 /* SegueFromLeftNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE44A81FF6B84D0099A029 /* SegueFromLeftNew.swift */; };
@@ -288,7 +296,16 @@
 		50B9F3BE1FFD22CD00C5C6E3 /* PathSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathSelector.swift; sourceTree = "<group>"; };
 		50B9F3C01FFD22DC00C5C6E3 /* PathSelector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PathSelector.xib; sourceTree = "<group>"; };
 		50C567211FFA934C00452792 /* AlegreyaSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AlegreyaSans.ttf; sourceTree = "<group>"; };
+		50D7D9B31FFE948D00E85E70 /* TextUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextUtils.swift; sourceTree = "<group>"; };
+		50D7D9B51FFE97AC00E85E70 /* SelectionTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTableRowView.swift; sourceTree = "<group>"; };
+		50D7D9BA1FFEA37A00E85E70 /* ScrollessScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScrollessScrollView.h; sourceTree = "<group>"; };
+		50D7D9BB1FFEA37A00E85E70 /* ScrollessScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScrollessScrollView.m; sourceTree = "<group>"; };
+		50D7D9BD1FFEA45100E85E70 /* TransferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferViewController.swift; sourceTree = "<group>"; };
+		50D7D9BF1FFEA45B00E85E70 /* TransferViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TransferViewController.storyboard; sourceTree = "<group>"; };
+		50D7D9C11FFEA87900E85E70 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cancel.png; path = "../../Designs/Mac/Dragon Android Transfer/References/Icons/cancel.png"; sourceTree = "<group>"; };
+		50DC06351FFD6F0B00B0CDDB /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		50DD59081FFD2C020089D742 /* NSImage_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSImage_Extension.swift; sourceTree = "<group>"; };
+		50F193471FFD5D4A001B6984 /* BlurOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurOverlayView.swift; sourceTree = "<group>"; };
 		50F314DF1FAE1C45006BF985 /* ExtensionBaseFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionBaseFile.swift; sourceTree = "<group>"; };
 		50F716F31E82F492005CA833 /* MASShortcut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MASShortcut.framework; path = Pods/../build/Debug/MASShortcut/MASShortcut.framework; sourceTree = "<group>"; };
 		50FE44A81FF6B84D0099A029 /* SegueFromLeftNew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueFromLeftNew.swift; sourceTree = "<group>"; };
@@ -489,6 +506,7 @@
 				500381551F8D4510000728E9 /* Dragon Android TransferUITests */,
 				503C5A281E0FB92F0090EB68 /* Products */,
 				50961C101FF9676B001B6D3D /* backward.png */,
+				50D7D9C11FFEA87900E85E70 /* cancel.png */,
 				50961C0E1FF966C2001B6D3D /* menu.png */,
 				50961C081FF95CAE001B6D3D /* external_storage.png */,
 				50961C091FF95CAE001B6D3D /* internal_storage.png */,
@@ -640,6 +658,8 @@
 				BE3BDE794C92E054421418BB /* ViewController.swift */,
 				BE3BD5A1FB12D32671A07E74 /* Android */,
 				BE3BDD5EC0008B57B95E352C /* Menu */,
+				50D7D9BD1FFEA45100E85E70 /* TransferViewController.swift */,
+				50D7D9BF1FFEA45B00E85E70 /* TransferViewController.storyboard */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -684,6 +704,7 @@
 				BE3BDC1EC5EA8A5A0A17A378 /* ThreadUtils.swift */,
 				503B88531F928944004E6417 /* StringExtension.swift */,
 				BE3BD4CF42CD0C36BF15D950 /* PrintUtils.swift */,
+				50D7D9B31FFE948D00E85E70 /* TextUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -708,6 +729,7 @@
 			isa = PBXGroup;
 			children = (
 				BE3BD40AE738BD024E549A5E /* ClickableView.swift */,
+				50DC06351FFD6F0B00B0CDDB /* OverlayView.swift */,
 				BE3BD84AE45EE7CCE8AA60E2 /* ProgressView.swift */,
 				BE3BD4BE8B8D95E327B543B9 /* IndeterminateProgressView.swift */,
 				BE3BD97D6F1F3832414869CE /* DarkWindow.swift */,
@@ -724,6 +746,10 @@
 				506D09871FFBE6E900FEA857 /* IndeterminateProgress.swift */,
 				50B9F3BE1FFD22CD00C5C6E3 /* PathSelector.swift */,
 				50B9F3C01FFD22DC00C5C6E3 /* PathSelector.xib */,
+				50F193471FFD5D4A001B6984 /* BlurOverlayView.swift */,
+				50D7D9B51FFE97AC00E85E70 /* SelectionTableRowView.swift */,
+				50D7D9BA1FFEA37A00E85E70 /* ScrollessScrollView.h */,
+				50D7D9BB1FFEA37A00E85E70 /* ScrollessScrollView.m */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -1038,6 +1064,7 @@
 				503C5A2F1E0FB9300090EB68 /* Assets.xcassets in Resources */,
 				50C567221FFA934C00452792 /* AlegreyaSans.ttf in Resources */,
 				503C5A321E0FB9300090EB68 /* Main.storyboard in Resources */,
+				50D7D9C21FFEA87900E85E70 /* cancel.png in Resources */,
 				BE3BDA5F8B8040DCA2509A1D /* file.png in Resources */,
 				50961C111FF9676B001B6D3D /* backward.png in Resources */,
 				BE3BDDEBA7F8D5119F29144D /* folder.png in Resources */,
@@ -1051,6 +1078,7 @@
 				BE3BDC8FE02DB6B1BDDFD082 /* clipboard_icon_plain.png in Resources */,
 				BE3BD4342179DB442FD36053 /* close_button.png in Resources */,
 				BE3BD0680117384D1A25829B /* update_sizes.png in Resources */,
+				50D7D9C01FFEA45B00E85E70 /* TransferViewController.storyboard in Resources */,
 				BE3BD17F8436D360FDCB20EC /* Credits.rtf in Resources */,
 				BE3BDA1FB1387C3949B25E52 /* index.html in Resources */,
 				50961C0F1FF966C2001B6D3D /* menu.png in Resources */,
@@ -1331,10 +1359,12 @@
 				50961C011FF94A09001B6D3D /* NibLoader.m in Sources */,
 				50FE44B21FF6C51B0099A029 /* PushAnimatorTrial.swift in Sources */,
 				BE3BD8168BA539FF4397E553 /* DarkWindow.swift in Sources */,
+				50F193481FFD5D4A001B6984 /* BlurOverlayView.swift in Sources */,
 				BE3BD32896E1B80E34684643 /* ColoredButton.swift in Sources */,
 				BE3BDC41D77A6265E5E8283C /* ClipboardViewController.swift in Sources */,
 				BE3BD20E4CB561A51395CF39 /* ClipboardTableCellView.swift in Sources */,
 				BE3BD7F160769EC8049FA1AC /* ClipboardDelegate.swift in Sources */,
+				50D7D9B61FFE97AC00E85E70 /* SelectionTableRowView.swift in Sources */,
 				BE3BD64DA0CEAFD027656D0A /* ColoredPopUpButton.swift in Sources */,
 				50961BFA1FF916A6001B6D3D /* StorageItem.swift in Sources */,
 				50293DF41FEFB8DB00B06B14 /* DeviceTableDelegate.swift in Sources */,
@@ -1365,8 +1395,10 @@
 				BE3BD4B7CC752F2DB32B185C /* Constants.swift in Sources */,
 				BE3BD43E1D6C3ADCE968188D /* HelpWindow.swift in Sources */,
 				BE3BD06FDDB930947C1B074A /* CopyDialog.swift in Sources */,
+				50D7D9BC1FFEA37A00E85E70 /* ScrollessScrollView.m in Sources */,
 				BE3BDD26BD56D714B0769BEB /* Dimens.swift in Sources */,
 				BE3BD5406227870BE38ACD2D /* StringResource.swift in Sources */,
+				50DC06361FFD6F0B00B0CDDB /* OverlayView.swift in Sources */,
 				BE3BDC1DDDC0D54EED0E1B61 /* AndroidShellResource.swift in Sources */,
 				BE3BDB93125B4F8F31159F09 /* AndroidAdbHandler.mm in Sources */,
 				BE3BDFE9AE56EA9F863D7065 /* ListCommand.cpp in Sources */,
@@ -1396,6 +1428,7 @@
 				5096950F1FF76865005BC423 /* R_Extension.swift in Sources */,
 				BE3BD9BD2020E50C8DE0DD28 /* PushCommand.cpp in Sources */,
 				BE3BD4881F649532E9FDB26C /* AVCNotification.swift in Sources */,
+				50D7D9BE1FFEA45100E85E70 /* TransferViewController.swift in Sources */,
 				BE3BDBE621A826D0CBF7DFA2 /* AVCListing.swift in Sources */,
 				5096950B1FF76428005BC423 /* DarkTheme.swift in Sources */,
 				BE3BD1FAA1F1FB50DF326939 /* AVCTransfer.swift in Sources */,
@@ -1406,6 +1439,7 @@
 				BE3BDF9E75310567DF68036E /* AVCDrag.swift in Sources */,
 				BE3BD42A08E8DFFB9237CD83 /* AndroidViewController.swift in Sources */,
 				BE3BD98A9BBF4B8A5D355489 /* AVCUi.swift in Sources */,
+				50D7D9B41FFE948D00E85E70 /* TextUtils.swift in Sources */,
 				BE3BDE36A34F20C0862470AC /* R.swift in Sources */,
 				BE3BDD0E064CA86D1F6A123C /* NSWindow_Extension.swift in Sources */,
 				BE3BD392818B15BDF9FEEAFA /* MVCTable.swift in Sources */,

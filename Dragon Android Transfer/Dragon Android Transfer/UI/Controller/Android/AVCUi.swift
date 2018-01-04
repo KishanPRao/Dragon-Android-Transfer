@@ -49,6 +49,9 @@ extension AndroidViewController {
         mDockProgress?.isBezeled = true
         mDockProgress?.isHidden = true
         
+        overlayView.isHidden = true
+        overlayView.setBackground(R.color.menuBgColor)
+        
         /*
         let progressSize = 120.0 as CGFloat
         //TODO: Move to storyboard.
@@ -68,10 +71,12 @@ extension AndroidViewController {
     
     internal func showProgress() {
         self.loadingProgress.show()
+        self.overlayView.show()
     }
     
     internal func hideProgress() {
         self.loadingProgress.hide()
+        self.overlayView.hide()
         /*
         NSAnimationContext.runAnimationGroup({ _ in
             NSAnimationContext.current().duration = 0.5

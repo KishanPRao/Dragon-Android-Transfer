@@ -24,6 +24,9 @@ protocol Theme {
     
     var tableBg: NSColor {get}
     var tableItemBg: NSColor {get}
+    var menuItemBg: NSColor {get}
+    var menuItemSelectBg: NSColor {get}
+    var transferBg: NSColor {get}
 }
 
 extension Theme {
@@ -42,7 +45,6 @@ extension Theme {
     static func color(_ hex: String) -> NSColor {
         return Self.color(hex, withAlpha: 1.0)
     }
-    
     var black: NSColor { get{return Self.color("000000")}}
     var white: NSColor { get{return Self.color("ffffff")}}
     var clear: NSColor { get{return Self.color("000000", withAlpha: 0.0)}}

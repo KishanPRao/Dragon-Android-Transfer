@@ -39,11 +39,6 @@ NSTableViewDelegate, NSTableViewDataSource
             self.removeFromParentViewController()
         }
     }
-	/*
-	override func viewDidLoad() {
-		super.viewDidLoad()
-        
-	}*/
 	
 	override func viewWillAppear() {
 		super.viewWillAppear()
@@ -100,7 +95,7 @@ NSTableViewDelegate, NSTableViewDataSource
     }
     
     func tableAction(_ sender: AnyObject) {
-        print("tableAction Menu:", index)
+//        print("tableAction Menu:", index)
         openInTable()
     }
     
@@ -117,6 +112,7 @@ NSTableViewDelegate, NSTableViewDataSource
         table.backgroundColor = R.color.menuTableColor
         table.delegate = self
         table.dataSource = self
+        table.selectionHighlightStyle = .none
         //table.doubleAction = #selector(doubleClick(_:))
         table.action = #selector(tableAction(_:))
         back.setImage(name: "menu_back.png")
@@ -133,6 +129,7 @@ NSTableViewDelegate, NSTableViewDataSource
         self.navigationParent.frame.size = navigationSize
         self.tableOuter.frame.origin = CGPoint(x: 0, y: popup.accessibilityFrame().origin.y - popup.cellSize.height)
         self.tableOuter.frame.size = NSSize(width: frameSize.width * 0.5, height: frameSize.height - popup.cellSize.height)
+        self.table.intercellSpacing = NSSize(width: 0, height: 10)
     }
     
     override func viewDidAppear() {

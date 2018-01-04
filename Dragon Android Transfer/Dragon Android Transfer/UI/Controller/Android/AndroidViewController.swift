@@ -69,7 +69,9 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 	
     @IBOutlet weak var loadingProgress: IndeterminateProgress!
     
-	override func viewDidLoad() {
+    @IBOutlet weak var overlayView: OverlayView!
+    
+    override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		print("View Loaded")
@@ -115,7 +117,9 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		AppDelegate.itemSelected = false
 		AppDelegate.directoryItemSelected = false
 		AppDelegate.multipleItemsSelected = false
-		AppDelegate.canGoBackward = !transferHandler.isRootDirectory()
+		let canGoBackward = !transferHandler.isRootDirectory()
+        AppDelegate.canGoBackward = canGoBackward
+        backButton.isEnabled = canGoBackward
 	}
     
     internal func reset() {
@@ -258,16 +262,14 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
             self.view.addSubview(snackbar!)
             self.view.layoutSubtreeIfNeeded()
         }
-        LogV("showSnackbar: \(message)")
+//        LogV("showSnackbar: \(message)")
         snackbar?.updateMessage(message)
         snackbar?.showSnackbar()
     }
 	
 	@IBAction func backButtonPressed(_ button: NSButton) {
         navigateUpDirectory()
-		
-		//print("Showing Snackbar")
-        //showSnackbar("Going back")
+//        startTransfer()
 	}
 
 //    var timer: NSTimer? = nil
@@ -282,6 +284,22 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 			window.setFrameOrigin(frame.origin)
 		}*/
 	}
+    
+    var transferVc: TransferViewController? = nil
+    
+    func startTransfer() {
+        let window = self.view.window!
+        var frameSize = window.frame
+        frameSize.size = NSSize(width: window.frame.width, height: frameSize.height - window.titlebarHeight)
+        
+        let storyBoard = NSStoryboard(name: "TransferViewController", bundle: Bundle.main)
+        transferVc = storyBoard.instantiateInitialController() as! TransferViewController
+        if let transferVc = transferVc {
+//            transferVc.frameSize = frameSize
+            addChildViewController(transferVc)
+            view.addSubview(transferVc.view)
+        }
+    }
     
     var vc: MenuViewController? = nil
     

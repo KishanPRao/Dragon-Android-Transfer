@@ -9,5 +9,6 @@
 import Foundation
 
 class ImageResource {
-    public let path_selector_div = "path_selector_div" 
+    public let path_selector_div = "path_selector_div"
+    public let cancel_transfer = "cancel"
 }

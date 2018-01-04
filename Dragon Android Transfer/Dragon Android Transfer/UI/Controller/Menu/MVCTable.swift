@@ -9,13 +9,13 @@
 import Foundation
 
 extension MenuViewController {
-    
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        return 50
+        let height = 45.0 as CGFloat
+        return height
     }
     
-    func tableView(_ tableView: NSTableView, didClick tableColumn: NSTableColumn) {
-        print("Clicked", tableColumn)
+    func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
+        return SelectionTableRowView()
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -30,7 +30,8 @@ extension MenuViewController {
             returnView = spareView
             
         } else {
-            let newCell = MenuCell(frame: NSRect(x: 0, y: 0, width: self.navigationParent.frame.width, height: 50))
+            let height = 35.0 as CGFloat
+            let newCell = MenuCell(frame: NSRect(x: 0, y: 0, width: self.navigationParent.frame.width, height: height))
             returnView = newCell
         }
         if let view = returnView {
@@ -43,7 +44,8 @@ extension MenuViewController {
             }
             let image = NSImage(named: imageName)
             view.image.image = image
-            view.image.imageScaling = .scaleProportionallyUpOrDown
+//            view.image.imageScaling = .scaleProportionallyUpOrDown
+            view.image.imageScaling = .scaleAxesIndependently
             view.text.stringValue = storage.name
         }
         
