@@ -102,6 +102,9 @@ extension AndroidViewController {
     func reloadFileList(_ items: Array<BaseFile>) {
         androidDirectoryItems = items
         updateList()
+        if (fileTable.acceptsFirstResponder) {
+            self.view.window?.makeFirstResponder(fileTable)
+        }
         hideProgress()
     }
     

@@ -102,6 +102,7 @@ extension TransferViewController {
                     }
                     self.transferType = value
                     print("Transfer Type:", transferTypeString)
+                	self.updateTransferState()
 //                    self.copyDialog?.setTransferType(transferTypeString)
 //                }
             })
@@ -132,6 +133,12 @@ extension TransferViewController {
                     }
                     print("Update Current File:", self.currentCopyFile)
 //                    self.copyDialog?.setCurrentTransfer(self.currentCopyFile, to: self.copyDestination)
+                    //        pathTransferSize.stringValue = copiedSizeInString + " of " + SizeUtils.getBytesInFormat(totalSize)
+                    let range = NSMakeRange(self.currentCopyFile.count, 4)
+                    self.pathTransferString.attributedStringValue = TextUtils.attributedString(
+                        from: self.currentCopyFile + " to " + self.copyDestination,
+                        color: R.color.transferTextColor,
+                        nonBoldRange: range)
                 }
             })
         transferHandler.progressActiveTask().skip(1)
@@ -151,11 +158,22 @@ extension TransferViewController {
         mCurrentProgress = progress
         //            print("Current File: \(currentFile)")
         //                print("Update Prog")
-        let currentFileCopiedSize = UInt64(CGFloat(totalSize) * (CGFloat(progress) / 100.0)) as UInt64
+        let copiedSize = UInt64(CGFloat(totalSize) * (CGFloat(progress) / 100.0)) as UInt64
 //        copyDialog?.updateCopyStatus(currentFileCopiedSize, withProgress: CGFloat(progress))
+        transferProgressView.setProgress(CGFloat(progress))
+        
+        let copiedSizeInString = SizeUtils.getBytesInFormat(copiedSize)
+//        pathTransferSize.stringValue = copiedSizeInString + " of " + SizeUtils.getBytesInFormat(totalSize)
+        let range = NSMakeRange(copiedSizeInString.count, 4)
+        pathTransferSize.attributedStringValue = TextUtils.attributedString(
+            from: copiedSizeInString + " of " + SizeUtils.getBytesInFormat(totalSize),
+            color: R.color.transferTextColor,
+            nonBoldRange: range)
+        
         mDockProgress?.doubleValue = Double(progress)
         mDockTile.display()
     }
+
     
     internal func finished(_ status: FileProgressStatus) {
         AppDelegate.isPastingOperation = false
@@ -174,6 +192,9 @@ extension TransferViewController {
         
         mDockProgress?.isHidden = true
         mDockTile.display()
-        refresh()
+        if (transferType == TransferType.MacToAndroid) {
+            refresh()
+        }
+        exit()
     }
 }

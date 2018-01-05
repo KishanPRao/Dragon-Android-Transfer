@@ -21,4 +21,24 @@ class TextUtils {
             NSParagraphStyleAttributeName: style
         ])
     }
+    
+    static func attributedString(from string: String, color: NSColor, nonBoldRange: NSRange?) -> NSAttributedString {
+        let fontSize = NSFont.systemFontSize()
+        let style = NSMutableParagraphStyle()
+        style.lineBreakMode = .byTruncatingTail
+        style.alignment = .natural
+        let attrs = [
+            NSFontAttributeName: NSFont.boldSystemFont(ofSize: fontSize),
+            NSForegroundColorAttributeName: color,
+            NSParagraphStyleAttributeName: style
+        ]
+        let nonBoldAttribute = [
+            NSFontAttributeName: NSFont.systemFont(ofSize: fontSize),
+            ]
+        let attrStr = NSMutableAttributedString(string: string, attributes: attrs)
+        if let range = nonBoldRange {
+            attrStr.setAttributes(nonBoldAttribute, range: range)
+        }
+        return attrStr
+    }
 }

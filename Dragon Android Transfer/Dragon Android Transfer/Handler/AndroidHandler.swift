@@ -211,7 +211,7 @@ public class AndroidHandler: NSObject {
 			// let _ = adbShell(command)
 			print("Delete, \(file.getFullPath())")
 			// TODO: TEST!!!
-			adbHandler.deleteFile(file.getFullPath())
+			adbHandler.deleteFile(file.getFullPath().escapeString())
 		}
 	}
 	

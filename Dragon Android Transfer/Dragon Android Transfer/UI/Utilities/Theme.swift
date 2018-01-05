@@ -28,6 +28,8 @@ protocol Theme {
     var menuItemBg: NSColor {get}
     var menuItemSelectBg: NSColor {get}
     var transferBg: NSColor {get}
+    var textColor: NSColor {get}
+    var transferTextColor: NSColor{get}
 }
 
 extension Theme {

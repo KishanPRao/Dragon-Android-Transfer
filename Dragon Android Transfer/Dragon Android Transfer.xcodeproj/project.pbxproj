@@ -57,6 +57,7 @@
 		50CAAF9220000F2A00911D8E /* DarkAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CAAF9120000F2A00911D8E /* DarkAlert.swift */; };
 		50CAAF952000253100911D8E /* android.png in Resources */ = {isa = PBXBuildFile; fileRef = 50CAAF932000253000911D8E /* android.png */; };
 		50CAAF962000253100911D8E /* mac.png in Resources */ = {isa = PBXBuildFile; fileRef = 50CAAF942000253100911D8E /* mac.png */; };
+		50CAAF9820003A0E00911D8E /* String_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CAAF9720003A0E00911D8E /* String_Extension.swift */; };
 		50D7D9B41FFE948D00E85E70 /* TextUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7D9B31FFE948D00E85E70 /* TextUtils.swift */; };
 		50D7D9B61FFE97AC00E85E70 /* SelectionTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7D9B51FFE97AC00E85E70 /* SelectionTableRowView.swift */; };
 		50D7D9BC1FFEA37A00E85E70 /* ScrollessScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D7D9BB1FFEA37A00E85E70 /* ScrollessScrollView.m */; };
@@ -310,6 +311,7 @@
 		50CAAF9120000F2A00911D8E /* DarkAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkAlert.swift; sourceTree = "<group>"; };
 		50CAAF932000253000911D8E /* android.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = android.png; sourceTree = "<group>"; };
 		50CAAF942000253100911D8E /* mac.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mac.png; sourceTree = "<group>"; };
+		50CAAF9720003A0E00911D8E /* String_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String_Extension.swift; sourceTree = "<group>"; };
 		50D7D9B31FFE948D00E85E70 /* TextUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextUtils.swift; sourceTree = "<group>"; };
 		50D7D9B51FFE97AC00E85E70 /* SelectionTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTableRowView.swift; sourceTree = "<group>"; };
 		50D7D9BA1FFEA37A00E85E70 /* ScrollessScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScrollessScrollView.h; sourceTree = "<group>"; };
@@ -642,6 +644,7 @@
 				506D09891FFBECE200FEA857 /* NSRect_Extension.swift */,
 				50DD59081FFD2C020089D742 /* NSImage_Extension.swift */,
 				5098AC6B1FFD3A990084449B /* NSImageView_Extension.swift */,
+				50CAAF9720003A0E00911D8E /* String_Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1380,6 +1383,7 @@
 				BE3BD247789B6C3497AF10EA /* ClickableView.swift in Sources */,
 				BE3BD094F0C2183A46CDD6E3 /* ProgressView.swift in Sources */,
 				50DD59091FFD2C020089D742 /* NSImage_Extension.swift in Sources */,
+				50CAAF9820003A0E00911D8E /* String_Extension.swift in Sources */,
 				BE3BDA30B26F35C7C23F9B56 /* IndeterminateProgressView.swift in Sources */,
 				50293DF81FEFBF2A00B06B14 /* BaseFileType.swift in Sources */,
 				50961C011FF94A09001B6D3D /* NibLoader.m in Sources */,

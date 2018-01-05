@@ -24,4 +24,6 @@ class DarkTheme: Theme {
     lazy var tableBg = { color("050505") }()
     lazy var tableItemBg = { color("050505") }()
     lazy var transferBg = {color("313b4c")}()
+    lazy var textColor = {color("ffffff")}()
+    lazy var transferTextColor = {color("b8c2c9")}()
 }

@@ -42,13 +42,19 @@ class TransferViewController: NSViewController {
     var totalSize: UInt64 = 0
     
     public var frameSize = NSRect()
+    
+    func exit() {
+        self.view.removeFromSuperview()
+        self.removeFromParentViewController()
+    }
+    
     func close() {
         let alert = DarkAlert(message: "Cancel?", info: "Do you want to cancel the current transfer?")
         let button = alert.runModal()
         if (button == NSAlertFirstButtonReturn) {
 //            Ok
-                    self.view.removeFromSuperview()
-                    self.removeFromParentViewController()
+            transferHandler.cancelActiveTask()
+            self.exit()
         }
         
 //        overlayView.hide({
@@ -61,6 +67,7 @@ class TransferViewController: NSViewController {
         super.viewDidLoad()
         
         initNotification()
+        observeTransfer()
     }
     
     private func initUi() {
@@ -72,7 +79,6 @@ class TransferViewController: NSViewController {
         //            self.close()
         //        }
         
-        transferProgressView.setProgress(50.0)
         
         self.transferDialog.setBackground(R.color.transferBg)
         self.transferDialog.cornerRadius(5.0)
@@ -80,18 +86,43 @@ class TransferViewController: NSViewController {
         closeButton.setImage(name: R.drawable.cancel_transfer)
         closeButton.action = #selector(close)
         closeButton.target = self
-        pathTransferString.isHidden = true
-        pathTransferSize.isHidden = true
-        copyingTextField.isHidden = true
         
+        initText(pathTransferString)
+        initText(pathTransferSize)
+        initText(copyingTextField)
         timeRemainingText.stringValue = ""
-        updateSrcDest()
+        timeRemainingText.textColor = R.color.white
+        timeRemainingText.isHidden = false
+        
+        copyingTextField.attributedStringValue = TextUtils.attributedString(from: "Copying",
+                                                                            color: R.color.transferTextColor,
+                                                                            nonBoldRange: nil)
+        
+        updateTransferState()
+//        toggleExpansion(self)
+        pathTransferString.stringValue = "Updating.."
+        pathTransferSize.stringValue = "Updating.."
+//        progressActive(0)
 //        LogI("Init UI")
     }
     
-    private func updateSrcDest() {
-        srcDeviceImageView.setImage(name: R.drawable.android)
-        destDeviceImageView.setImage(name: R.drawable.mac)
+    private func initText(_ textField: NSTextField) {
+        textField.isHidden = true
+        textField.stringValue = ""
+        textField.textColor = R.color.transferTextColor
+    }
+    
+    let androidImage = NSImage(named: R.drawable.android)
+    let macImage = NSImage(named: R.drawable.mac)
+    
+    internal func updateTransferState() {
+        if (transferType == TransferType.AndroidToMac) {
+            srcDeviceImageView.image = androidImage
+            destDeviceImageView.image = macImage
+        } else {
+            srcDeviceImageView.image = macImage
+            destDeviceImageView.image = androidImage
+        }
     }
     
     var expanded = false
