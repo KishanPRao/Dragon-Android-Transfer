@@ -50,6 +50,13 @@
 		50B9F3C11FFD22DC00C5C6E3 /* PathSelector.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50B9F3C01FFD22DC00C5C6E3 /* PathSelector.xib */; };
 		50C567221FFA934C00452792 /* AlegreyaSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 50C567211FFA934C00452792 /* AlegreyaSans.ttf */; };
 		50C567241FFA938200452792 /* AlegreyaSans.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 50C567211FFA934C00452792 /* AlegreyaSans.ttf */; };
+		50CAAF8A1FFFBFCD00911D8E /* SingleClickButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CAAF891FFFBFCD00911D8E /* SingleClickButton.swift */; };
+		50CAAF8C1FFFC3DA00911D8E /* FileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CAAF8B1FFFC3DA00911D8E /* FileCell.swift */; };
+		50CAAF8E1FFFC3E400911D8E /* FileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50CAAF8D1FFFC3E400911D8E /* FileCell.xib */; };
+		50CAAF901FFFD0FC00911D8E /* TVCTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CAAF8F1FFFD0FC00911D8E /* TVCTransfer.swift */; };
+		50CAAF9220000F2A00911D8E /* DarkAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CAAF9120000F2A00911D8E /* DarkAlert.swift */; };
+		50CAAF952000253100911D8E /* android.png in Resources */ = {isa = PBXBuildFile; fileRef = 50CAAF932000253000911D8E /* android.png */; };
+		50CAAF962000253100911D8E /* mac.png in Resources */ = {isa = PBXBuildFile; fileRef = 50CAAF942000253100911D8E /* mac.png */; };
 		50D7D9B41FFE948D00E85E70 /* TextUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7D9B31FFE948D00E85E70 /* TextUtils.swift */; };
 		50D7D9B61FFE97AC00E85E70 /* SelectionTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7D9B51FFE97AC00E85E70 /* SelectionTableRowView.swift */; };
 		50D7D9BC1FFEA37A00E85E70 /* ScrollessScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D7D9BB1FFEA37A00E85E70 /* ScrollessScrollView.m */; };
@@ -296,6 +303,13 @@
 		50B9F3BE1FFD22CD00C5C6E3 /* PathSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathSelector.swift; sourceTree = "<group>"; };
 		50B9F3C01FFD22DC00C5C6E3 /* PathSelector.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PathSelector.xib; sourceTree = "<group>"; };
 		50C567211FFA934C00452792 /* AlegreyaSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AlegreyaSans.ttf; sourceTree = "<group>"; };
+		50CAAF891FFFBFCD00911D8E /* SingleClickButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleClickButton.swift; sourceTree = "<group>"; };
+		50CAAF8B1FFFC3DA00911D8E /* FileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCell.swift; sourceTree = "<group>"; };
+		50CAAF8D1FFFC3E400911D8E /* FileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileCell.xib; sourceTree = "<group>"; };
+		50CAAF8F1FFFD0FC00911D8E /* TVCTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVCTransfer.swift; sourceTree = "<group>"; };
+		50CAAF9120000F2A00911D8E /* DarkAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkAlert.swift; sourceTree = "<group>"; };
+		50CAAF932000253000911D8E /* android.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = android.png; sourceTree = "<group>"; };
+		50CAAF942000253100911D8E /* mac.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mac.png; sourceTree = "<group>"; };
 		50D7D9B31FFE948D00E85E70 /* TextUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextUtils.swift; sourceTree = "<group>"; };
 		50D7D9B51FFE97AC00E85E70 /* SelectionTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTableRowView.swift; sourceTree = "<group>"; };
 		50D7D9BA1FFEA37A00E85E70 /* ScrollessScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScrollessScrollView.h; sourceTree = "<group>"; };
@@ -520,6 +534,8 @@
 				5098AC6D1FFD3C810084449B /* path_selector_div.png */,
 				BE3BD14EBAA39AE998183C61 /* close_button.png */,
 				BE3BD263FE3F94CE594A7D20 /* update_sizes.png */,
+				50CAAF932000253000911D8E /* android.png */,
+				50CAAF942000253100911D8E /* mac.png */,
 				BE3BDB3E2A1E4A083D7DA873 /* Credits.rtf */,
 				BE3BD65DA3E8130849D039FD /* index.html */,
 				BE3BDB16DB0C701832D6D2BC /* endCopy.mp3 */,
@@ -660,6 +676,7 @@
 				BE3BDD5EC0008B57B95E352C /* Menu */,
 				50D7D9BD1FFEA45100E85E70 /* TransferViewController.swift */,
 				50D7D9BF1FFEA45B00E85E70 /* TransferViewController.storyboard */,
+				50CAAF8F1FFFD0FC00911D8E /* TVCTransfer.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -750,6 +767,10 @@
 				50D7D9B51FFE97AC00E85E70 /* SelectionTableRowView.swift */,
 				50D7D9BA1FFEA37A00E85E70 /* ScrollessScrollView.h */,
 				50D7D9BB1FFEA37A00E85E70 /* ScrollessScrollView.m */,
+				50CAAF891FFFBFCD00911D8E /* SingleClickButton.swift */,
+				50CAAF8B1FFFC3DA00911D8E /* FileCell.swift */,
+				50CAAF8D1FFFC3E400911D8E /* FileCell.xib */,
+				50CAAF9120000F2A00911D8E /* DarkAlert.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -1073,10 +1094,13 @@
 				BE3BDAF11B0C0A34B5455FA2 /* clipboard_icon.png in Resources */,
 				BE3BD112BC91E0AC5A18FB99 /* back_button.png in Resources */,
 				503D93161FF8EAA0009E7E39 /* menu_back.png in Resources */,
+				50CAAF8E1FFFC3E400911D8E /* FileCell.xib in Resources */,
 				50961C0A1FF95CAE001B6D3D /* external_storage.png in Resources */,
 				BE3BD3A9EC324B60D172E185 /* refresh.png in Resources */,
 				BE3BDC8FE02DB6B1BDDFD082 /* clipboard_icon_plain.png in Resources */,
 				BE3BD4342179DB442FD36053 /* close_button.png in Resources */,
+				50CAAF962000253100911D8E /* mac.png in Resources */,
+				50CAAF952000253100911D8E /* android.png in Resources */,
 				BE3BD0680117384D1A25829B /* update_sizes.png in Resources */,
 				50D7D9C01FFEA45B00E85E70 /* TransferViewController.storyboard in Resources */,
 				BE3BD17F8436D360FDCB20EC /* Credits.rtf in Resources */,
@@ -1337,6 +1361,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50CAAF9220000F2A00911D8E /* DarkAlert.swift in Sources */,
 				503B88541F928944004E6417 /* StringExtension.swift in Sources */,
 				BE3BDE084524366D5F702AFC /* AndroidDevice.swift in Sources */,
 				BE3BDC57F874BAFD8C7076B1 /* AppDelegate.swift in Sources */,
@@ -1346,6 +1371,7 @@
 				BE3BD3CF4A98FDDACABFF93A /* ColorUtils.swift in Sources */,
 				BE3BDA227C3660B22686716F /* SizeUtils.swift in Sources */,
 				BE3BD37C280AAD9C969F3243 /* TimeUtils.swift in Sources */,
+				50CAAF8C1FFFC3DA00911D8E /* FileCell.swift in Sources */,
 				50293DF61FEFBF0B00B06B14 /* BaseFile.swift in Sources */,
 				BE3BD9C6949E9F5050D4D401 /* ThreadUtils.swift in Sources */,
 				50F314E01FAE1C45006BF985 /* ExtensionBaseFile.swift in Sources */,
@@ -1408,7 +1434,9 @@
 				BE3BDF0DB532B65C04E311BD /* SimpleAdbCommand.cpp in Sources */,
 				BE3BD05D840B7FC4EC6F0DC2 /* FileExistsCommand.cpp in Sources */,
 				BE3BD32DC2C2B35B0E63F253 /* NewFolderCommand.cpp in Sources */,
+				50CAAF8A1FFFBFCD00911D8E /* SingleClickButton.swift in Sources */,
 				BE3BD997583170883563D454 /* DeleteCommand.cpp in Sources */,
+				50CAAF901FFFD0FC00911D8E /* TVCTransfer.swift in Sources */,
 				BE3BDB43AA8BAD090A486622 /* TotalSpaceCommand.cpp in Sources */,
 				BE3BD29F2F154A0AECFAD74B /* AvailableSpaceCommand.cpp in Sources */,
 				BE3BD10A17A4F6FC76A3D731 /* FileSizeCommand.cpp in Sources */,

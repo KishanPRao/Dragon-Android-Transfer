@@ -11,6 +11,7 @@ import Foundation
 protocol Theme {
     //func color(_ hex: String) -> NSColor
     var black: NSColor { get }
+    var gray: NSColor { get }
     var white: NSColor { get }
     var clear: NSColor { get }
 	
@@ -48,4 +49,5 @@ extension Theme {
     var black: NSColor { get{return Self.color("000000")}}
     var white: NSColor { get{return Self.color("ffffff")}}
     var clear: NSColor { get{return Self.color("000000", withAlpha: 0.0)}}
+    var gray: NSColor {get{return Self.color("BEBEBE")}}
 }

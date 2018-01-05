@@ -29,7 +29,7 @@ class OverlayView: ClickableView {
     
 //    var cancelActiveAnimation = false
     
-    func hide() {
+    func hide(_ handler: @escaping () -> () = {}) {
         NSAnimationContext.runAnimationGroup({ context in
             context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
             context.duration = AnimationDuration
@@ -38,6 +38,7 @@ class OverlayView: ClickableView {
 //            if (!self.cancelActiveAnimation) {
                 self.isHidden = true
 //            }
+            handler()
         })
     }
 }

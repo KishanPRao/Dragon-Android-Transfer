@@ -27,8 +27,9 @@ class ProgressView: NSView {
 	
 	required init?(coder: NSCoder) {
         super.init(coder: coder)
-        wantsLayer = true
-        layer?.cornerRadius = 3.0
+//        wantsLayer = true
+//        layer?.cornerRadius = 3.0
+        self.cornerRadius(3.0)
     }
     
     func setProgress(_ progress: CGFloat) {

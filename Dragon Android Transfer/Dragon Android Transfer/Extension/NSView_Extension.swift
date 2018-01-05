@@ -29,6 +29,12 @@ extension NSView {
         self.layer?.shadowRadius = 20
     }
     
+    func cornerRadius(_ radius: CGFloat = 5.0) {
+//        self.layer?.masksToBounds = true
+        self.wantsLayer = true
+        self.layer?.cornerRadius = radius
+    }
+    
     class func fromNib<T: NSView>() -> T? {
         var viewArray = NSArray()
         guard Bundle.main.loadNibNamed(String(describing: T.self), owner: T.self, topLevelObjects: &viewArray) else {

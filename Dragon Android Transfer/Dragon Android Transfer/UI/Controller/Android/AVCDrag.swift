@@ -20,7 +20,8 @@ extension AndroidViewController {
         print("Copy:", copyItemsAndroid)
         transferHandler.updateClipboardAndroidItems(copyItemsAndroid)
         
-        pasteToMacInternal(path: location)
+        startTransfer()
+        transferVc?.pasteToMac(location)
     }
     
     func dragItem(items: [String], fromFinderIntoAppItem appItem: DraggableItem) {
@@ -61,7 +62,9 @@ extension AndroidViewController {
         transferHandler.updateClipboardMacItems(copyItemsMac)
         //		updateClipboard()
         
-        pasteToAndroidInternal(path: dropDestinationPath)
+        
+        startTransfer()
+        transferVc?.pasteToAndroid(dropDestinationPath)
         //        } catch _ {
         //        	LogE("Cannot copy into app!")
         //        }

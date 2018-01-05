@@ -69,14 +69,15 @@ extension AndroidViewController {
         
         messageText.font = NSFont(name: messageText.font!.fontName, size: DimenUtils.getDimension(dimension: Dimens.error_message_text_size))
         messageText.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.error_message_text)
+        messageText.textColor = R.color.white
         
-        if (copyDialog != nil) {
-            let width = DimenUtils.getDimensionInInt(dimension: Dimens.copy_dialog_width)
-            let height = DimenUtils.getDimensionInInt(dimension: Dimens.copy_dialog_height)
-            let x = Int(getWindowWidth() / 2) - width / 2
-            let y = Int(getWindowHeight() / 2) - height / 2
-            copyDialog!.updateSize(x: x, y: y, width: width, height: height)
-        }
+//        if (copyDialog != nil) {
+//            let width = DimenUtils.getDimensionInInt(dimension: Dimens.copy_dialog_width)
+//            let height = DimenUtils.getDimensionInInt(dimension: Dimens.copy_dialog_height)
+//            let x = Int(getWindowWidth() / 2) - width / 2
+//            let y = Int(getWindowHeight() / 2) - height / 2
+//            copyDialog!.updateSize(x: x, y: y, width: width, height: height)
+//        }
         //		if (helpWindow != nil && helpWindow!.isShowing) {
         if (helpWindow != nil && helpWindow!.isShowing && helpWindow!.needsUpdating()) {
             //			helpWindow!.updateSizes()

@@ -17,7 +17,7 @@ import RxCocoa
 class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		NSControlTextEditingDelegate,
 //		FileProgressDelegate,
-		ClipboardDelegate, CopyDialogDelegate,
+		ClipboardDelegate, /*CopyDialogDelegate,*/
 		DragNotificationDelegate, DragUiDelegate,
 		NSUserInterfaceValidations {
 	public static let NotificationStartLoading = "NotificationStartLoading"
@@ -45,15 +45,9 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 	
 	@IBOutlet weak var messageText: NSTextField!
 	
-	internal var copyDialog = nil as CopyDialog?
 	
     @IBOutlet weak var pathSelector: PathSelector!
     @IBOutlet weak var pathSelectorRootView: NSView!
-	internal var copyDestination = ""
-	internal var currentCopyFile = ""
-	internal var transferType = -1
-	internal var currentFile: BaseFile? = nil
-	internal var currentCopiedSize = 0 as UInt64
 	
 	internal let transferHandler = TransferHandler.sharedInstance
 	internal var showGuide: Bool = false
@@ -89,7 +83,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		transferHandler.start()
 		
 		observeListing()
-		observeTransfer()
+//        observeTransfer()
     }
 	
 	func updateDeviceStatus() {
@@ -102,6 +96,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 //            var font = NSFont(name: fontName, size: 5.0)
 //            font = NSFont(name: "AlegreyaSans.ttf", size: 5.0)
 //            messageText.font = font
+            LogV("No ACTIVE Device")
 			messageText.stringValue = "No Active Device.\nPlease connect a device with USB Debugging enabled."
 			return
 		}
@@ -268,8 +263,8 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
     }
 	
 	@IBAction func backButtonPressed(_ button: NSButton) {
-        navigateUpDirectory()
-//        startTransfer()
+//        navigateUpDirectory()
+        startTransfer()
 	}
 
 //    var timer: NSTimer? = nil
@@ -295,7 +290,8 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
         let storyBoard = NSStoryboard(name: "TransferViewController", bundle: Bundle.main)
         transferVc = storyBoard.instantiateInitialController() as! TransferViewController
         if let transferVc = transferVc {
-//            transferVc.frameSize = frameSize
+//            transferVc.view.frame.origin = NSSize()
+            transferVc.frameSize = frameSize
             addChildViewController(transferVc)
             view.addSubview(transferVc.view)
         }
@@ -391,17 +387,6 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 			}
 		}
 //		}
-    }
-    
-    internal func showCopyDialog() {
-        let width = DimenUtils.getDimensionInInt(dimension: Dimens.copy_dialog_width)
-        let height = DimenUtils.getDimensionInInt(dimension: Dimens.copy_dialog_height)
-        let x = Int(getWindowWidth() / 2) - width / 2
-        let y = Int(getWindowHeight() / 2) - height / 2
-        copyDialog = CopyDialog(frame: CGRect(x: x, y: y, width: width, height: height))
-        copyDialog!.setCopyDialogDelegate(delegate: self)
-        copyDialog!.updateSize(x: x, y: y, width: width, height: height)
-        self.view.addSubview(copyDialog!)
     }
 	
 	deinit {
