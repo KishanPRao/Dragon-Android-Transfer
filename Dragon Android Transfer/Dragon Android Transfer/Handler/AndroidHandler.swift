@@ -347,11 +347,11 @@ public class AndroidHandler: NSObject {
 			let lastSep = (path.range(of: HandlerConstants.SEPARATOR, options: NSString.CompareOptions.backwards)?.lowerBound)!
 			path = path.substring(to: lastSep)
 			if (usingExternalStorage) {
-				if (!(path.characters.count < externalStorage.characters.count)) {
+				if (!(path.count < externalStorage.count)) {
 					isRoot = false
 				}
 			} else {
-				if (!(path.characters.count < internalStorage.characters.count)) {
+				if (!(path.count < internalStorage.count)) {
 					isRoot = false
 				}
 			}
@@ -372,12 +372,12 @@ public class AndroidHandler: NSObject {
             observableCurrentPath.value = currentPath
 //			if (Verbose) { print("Upper:", currentPath) }
 			if (usingExternalStorage) {
-				if (currentPath.characters.count < externalStorage.characters.count) {
+				if (currentPath.count < externalStorage.count) {
 					currentPath = externalStorage
                     observableCurrentPath.value = currentPath
 				}
 			} else {
-				if (currentPath.characters.count < internalStorage.characters.count) {
+				if (currentPath.count < internalStorage.count) {
 					currentPath = internalStorage
                     observableCurrentPath.value = currentPath
 				}

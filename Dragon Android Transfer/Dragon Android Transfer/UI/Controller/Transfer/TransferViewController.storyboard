@@ -31,9 +31,9 @@
                                         </buttonCell>
                                     </button>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gdj-Cm-sfK">
-                                        <rect key="frame" x="373" y="3" width="81" height="32"/>
+                                        <rect key="frame" x="395" y="3" width="65" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="push" title="More" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dQD-va-UEM">
+                                        <buttonCell key="cell" type="push" title="More" bezelStyle="rounded" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dQD-va-UEM">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -42,7 +42,7 @@
                                         </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L6l-qC-jxA">
-                                        <rect key="frame" x="18" y="70" width="74" height="21"/>
+                                        <rect key="frame" x="18" y="65" width="74" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Copying" id="jHt-xg-qIk">
                                             <font key="font" metaFont="system" size="18"/>
@@ -99,6 +99,7 @@
                         <outlet property="closeButton" destination="nH9-GQ-Unx" id="xkc-BK-LXP"/>
                         <outlet property="copyingTextField" destination="L6l-qC-jxA" id="go2-pX-owd"/>
                         <outlet property="destDeviceImageView" destination="kTP-HC-yNv" id="VDK-e4-F15"/>
+                        <outlet property="moreButton" destination="Gdj-Cm-sfK" id="Mts-B5-Ae6"/>
                         <outlet property="overlayView" destination="5yN-xZ-AXj" id="sYt-Zx-dZe"/>
                         <outlet property="pathTransferSize" destination="bmu-48-VcV" id="YbI-BT-tsb"/>
                         <outlet property="pathTransferString" destination="IsO-0J-ZkG" id="FsL-et-7qY"/>

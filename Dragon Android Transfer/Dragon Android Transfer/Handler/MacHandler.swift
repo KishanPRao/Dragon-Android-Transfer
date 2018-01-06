@@ -112,7 +112,7 @@ class MacHandler: NSObject {
 		let command = "du -sk " + ESCAPE_DOUBLE_QUOTES + directoryName + ESCAPE_DOUBLE_QUOTES + ";"
 		print("Command to Run:", command)
 		let output = bashShell(command)
-		let outputStringArray = output.characters.split {
+		let outputStringArray = output.split {
 			$0 == " " || $0 == "\t"
 		}.map(String.init)
 		print("Output:", outputStringArray)
@@ -145,7 +145,7 @@ class MacHandler: NSObject {
 				"return names\n" +
 				"end tell\n"
 		let output = runScript(script)
-		let outputNames = output.characters.split {
+		let outputNames = output.split {
 			$0 == "\n" || $0 == "\r\n"
 		}.map(String.init)
 		print("Names:", outputNames)

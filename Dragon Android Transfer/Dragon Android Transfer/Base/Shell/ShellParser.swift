@@ -15,7 +15,7 @@ public class ShellParser: NSObject {
 	static let BLOCK_SIZE_IN_FLOAT = Float(1024)
 	
 	static fileprivate func splitLines(_ string: String) -> [String] {
-		return string.characters.split {
+		return string.split {
 			$0 == "\n" || $0 == "\r\n"
 		}.map(String.init)
 	}
@@ -54,7 +54,7 @@ public class ShellParser: NSObject {
 			}
 			i = i + 1
 			if (fileType == BaseFileType.File) {
-				let sizeStringArray = outputInLines[i].characters.split {
+				let sizeStringArray = outputInLines[i].split {
 					$0 == " " || $0 == "\t"
 				}.map(String.init)
 				if let sizeInInt = UInt64(sizeStringArray[0]) {
@@ -90,7 +90,7 @@ public class ShellParser: NSObject {
 		let devices = splitLines(devicesString)
 		var i = 1
 		while i < devices.count {
-			let deviceId = devices[i].characters.split {
+			let deviceId = devices[i].split {
 				$0 == "\t"
 			}.map(String.init)[0]
 			androidDevices.append(deviceId)
@@ -126,7 +126,7 @@ public class ShellParser: NSObject {
 			print("Cannot update!")
 			return []
 		}
-		let outputInTabs = outputInLines[1].characters.split {
+		let outputInTabs = outputInLines[1].split {
 			$0 == " "
 		}.map(String.init)
 		return outputInTabs
@@ -186,7 +186,7 @@ public class ShellParser: NSObject {
 	public static func parseFileSize(_ rawOutput: String) -> UInt64 {
 		let maxSizeInMBytes = UInt64.max / 1024
 		var sizeInBytes = UInt64.max as UInt64
-		let sizeStringArray = rawOutput.characters.split {
+		let sizeStringArray = rawOutput.split {
 			$0 == " " || $0 == "\t"
 		}.map(String.init)
 		if sizeStringArray.count > 0, let sizeInInt = UInt64(sizeStringArray[0]) {
@@ -243,8 +243,8 @@ public class ShellParser: NSObject {
 		if (matchesPercentage.count > 0) {
 			var progressString = matchesPercentage[0]
 			progressString.remove(at: progressString.startIndex)
-			progressString.remove(at: progressString.characters.index(before: progressString.endIndex))
-			progressString.remove(at: progressString.characters.index(before: progressString.endIndex))
+			progressString.remove(at: progressString.index(before: progressString.endIndex))
+			progressString.remove(at: progressString.index(before: progressString.endIndex))
 			progressString = progressString.trimmingCharacters(
 					in: CharacterSet.whitespacesAndNewlines
 			)

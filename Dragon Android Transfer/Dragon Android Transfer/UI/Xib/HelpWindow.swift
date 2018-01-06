@@ -65,7 +65,7 @@ class HelpWindow: NSWindowController {
 			helpText.readRTFD(fromFile: rtfPath)
 		}
 		
-		let length = helpText.string!.characters.count
+		let length = helpText.string!.count
 		self.helpText.scrollRangeToVisible(NSRange(location: 0, length: length))
 		helpText.needsDisplay = true
 		helpText.needsLayout = true
@@ -99,7 +99,7 @@ class HelpWindow: NSWindowController {
 		closeButton.needsDisplay = true
 		closeButton.needsLayout = true
 		
-		let length = helpText.string!.characters.count
+		let length = helpText.string!.count
 		self.helpText.scrollRangeToVisible(NSRange(location: 0, length: length))
 		helpText.needsDisplay = true
 		helpText.needsLayout = true

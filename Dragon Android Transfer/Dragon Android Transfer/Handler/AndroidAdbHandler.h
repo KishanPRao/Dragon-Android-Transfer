@@ -14,7 +14,7 @@
 
 @class BaseFile;
 @class AndroidDevice;
-@class StorageItem;
+//@class StorageItem;
 
 //extern NSString * const MYSomethingHappenedNotification;
 

@@ -13,4 +13,5 @@ class ImageResource {
     public let cancel_transfer = "cancel"
     public let android = "android"
     public let mac = "mac"
+    public let more = "transfer_more"
 }

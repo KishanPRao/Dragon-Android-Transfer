@@ -21,8 +21,8 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		DragNotificationDelegate, DragUiDelegate,
 		NSUserInterfaceValidations {
 	public static let NotificationStartLoading = "NotificationStartLoading"
-    public static let NotificationSnackbar = "NotificationSnackbar"
-    
+	public static let NotificationSnackbar = "NotificationSnackbar"
+	
 	internal let bgScheduler = ConcurrentDispatchQueueScheduler(qos: .background)
 	internal let tableDelegate = DeviceTableDelegate()
 	internal var _androidDirectoryItems: Array<BaseFile> = []
@@ -37,17 +37,17 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 	}
 	@IBOutlet weak var fileTable: DraggableTableView!
 	
-
-    @IBOutlet weak var menuButton: NSButton!
-    @IBOutlet weak var backButton: NSButton!
+	
+	@IBOutlet weak var menuButton: NSButton!
+	@IBOutlet weak var backButton: NSButton!
 	
 	@IBOutlet weak var toolbarView: NSView!
 	
 	@IBOutlet weak var messageText: NSTextField!
 	
 	
-    @IBOutlet weak var pathSelector: PathSelector!
-    @IBOutlet weak var pathSelectorRootView: NSView!
+	@IBOutlet weak var pathSelector: PathSelector!
+	@IBOutlet weak var pathSelectorRootView: NSView!
 	
 	internal let transferHandler = TransferHandler.sharedInstance
 	internal var showGuide: Bool = false
@@ -58,14 +58,14 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 	
 	internal let mDockTile: NSDockTile = NSApplication.shared().dockTile
 	internal var mDockProgress: NSProgressIndicator? = nil
-    //internal var mCircularProgress: IndeterminateProgressView? = nil
-    internal var mCurrentProgress = -1.0
+	//internal var mCircularProgress: IndeterminateProgressView? = nil
+	internal var mCurrentProgress = -1.0
 	
-    @IBOutlet weak var loadingProgress: IndeterminateProgress!
-    
-    @IBOutlet weak var overlayView: OverlayView!
-    
-    override func viewDidLoad() {
+	@IBOutlet weak var loadingProgress: IndeterminateProgress!
+	
+	@IBOutlet weak var overlayView: OverlayView!
+	
+	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		print("View Loaded")
@@ -84,7 +84,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		
 		observeListing()
 //        observeTransfer()
-    }
+	}
 	
 	func updateDeviceStatus() {
 		if (!transferHandler.hasActiveDevice()) {
@@ -96,7 +96,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 //            var font = NSFont(name: fontName, size: 5.0)
 //            font = NSFont(name: "AlegreyaSans.ttf", size: 5.0)
 //            messageText.font = font
-            LogV("No ACTIVE Device")
+			LogV("No ACTIVE Device")
 			messageText.stringValue = "No Active Device.\nPlease connect a device with USB Debugging enabled."
 			return
 		}
@@ -113,19 +113,19 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		AppDelegate.directoryItemSelected = false
 		AppDelegate.multipleItemsSelected = false
 		let canGoBackward = !transferHandler.isRootDirectory()
-        AppDelegate.canGoBackward = canGoBackward
-        backButton.isEnabled = canGoBackward
+		AppDelegate.canGoBackward = canGoBackward
+		backButton.isEnabled = canGoBackward
 	}
-    
-    internal func reset() {
-        print("Reset!")
-        transferHandler.reset()
-        androidDirectoryItems = []
-    }
+	
+	internal func reset() {
+		print("Reset!")
+		transferHandler.reset()
+		androidDirectoryItems = []
+	}
 	
 	internal var previousIndex = -1
 	
-    /*
+	/*
 	func onPopupSelected(_ sender: AnyObject) {
 		let index = self.devicesPopUp.indexOfSelectedItem
 		print("Popup Selected:", index)
@@ -141,31 +141,29 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 	override func viewWillAppear() {
 		super.viewWillAppear()
 //        start()
-		if (fileTable.acceptsFirstResponder) {
-			self.view.window?.makeFirstResponder(fileTable)
-		}
+		fileTable.makeFirstResponder(self.view.window)
 		NotificationCenter.default.addObserver(self, selector: #selector(windowMoved), name: NSNotification.Name.NSWindowDidMove, object: self.view.window!)
-        
-        /*updateWindowSize()
+		
+		/*updateWindowSize()
 		checkGuide()
- 		*/
+		 */
 	}
 	
 	override func viewWillLayout() {
 		super.viewWillLayout()
 		//Swift.print("AndroidViewController, viewWillLayout")
 		
-        /*updateWindowSize()
-         checkGuide()
-         */
+		/*updateWindowSize()
+		 checkGuide()
+		 */
 	}
 	
 	override func viewDidLayout() {
 		super.viewDidLayout()
 		
-        /*updateWindowSize()
-         checkGuide()
-         */
+		/*updateWindowSize()
+		 checkGuide()
+		 */
 	}
 	
 	func shouldShowGuide() -> Bool {
@@ -208,14 +206,14 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		let selectedItem = self.androidDirectoryItems[fileTable.clickedRow]
 		openFile(selectedItem)
 	}
-    
-    func start() {
-        //		transferHandler.start()
-    }
-    
-    func stop() {
-        //		transferHandler.stop()
-    }
+	
+	func start() {
+		//		transferHandler.start()
+	}
+	
+	func stop() {
+		//		transferHandler.stop()
+	}
 	
 	func activeChange() {
 //        print("Active Changed:", AppDelegate.isAppInForeground())
@@ -229,7 +227,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 	func successfulOperation() {
 		NSSound(named: "endCopy")?.play()
 		NSApp.requestUserAttention(NSRequestUserAttentionType.informationalRequest)
-    }
+	}
 	
 	internal func updateClipboard() {
 		let clipboardItems = transferHandler.getClipboardItems()
@@ -250,21 +248,21 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 	}
 	
 	var snackbar: Snackbar? = nil
-    
-    internal func showSnackbar(_ message: String) {
-        if (snackbar == nil) {
-            snackbar = Snackbar(frame: NSRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
-            self.view.addSubview(snackbar!)
-            self.view.layoutSubtreeIfNeeded()
-        }
+	
+	internal func showSnackbar(_ message: String) {
+		if (snackbar == nil) {
+			snackbar = Snackbar(frame: NSRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
+			self.view.addSubview(snackbar!)
+			self.view.layoutSubtreeIfNeeded()
+		}
 //        LogV("showSnackbar: \(message)")
-        snackbar?.updateMessage(message)
-        snackbar?.showSnackbar()
-    }
+		snackbar?.updateMessage(message)
+		snackbar?.showSnackbar()
+	}
 	
 	@IBAction func backButtonPressed(_ button: NSButton) {
-//        navigateUpDirectory()
-        startTransfer()
+        navigateUpDirectory()
+//		startTransfer()
 	}
 
 //    var timer: NSTimer? = nil
@@ -279,43 +277,43 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 			window.setFrameOrigin(frame.origin)
 		}*/
 	}
-    
-    var transferVc: TransferViewController? = nil
-    
-    func startTransfer() {
-        let window = self.view.window!
-        var frameSize = window.frame
-        frameSize.size = NSSize(width: window.frame.width, height: frameSize.height - window.titlebarHeight)
-        
-        let storyBoard = NSStoryboard(name: "TransferViewController", bundle: Bundle.main)
-        transferVc = storyBoard.instantiateInitialController() as! TransferViewController
-        if let transferVc = transferVc {
+	
+	var transferVc: TransferViewController? = nil
+	
+	func startTransfer() {
+		let window = self.view.window!
+		var frameSize = window.frame
+		frameSize.size = NSSize(width: window.frame.width, height: frameSize.height - window.titlebarHeight)
+		
+		let storyBoard = NSStoryboard(name: "TransferViewController", bundle: Bundle.main)
+		transferVc = storyBoard.instantiateInitialController() as! TransferViewController
+		if let transferVc = transferVc {
 //            transferVc.view.frame.origin = NSSize()
-            transferVc.frameSize = frameSize
-            addChildViewController(transferVc)
-            view.addSubview(transferVc.view)
-        }
-    }
-    
-    var vc: MenuViewController? = nil
-    
-    @IBAction func menuTapped(_ sender: Any) {
-        if (vc != nil && vc!.isOpen) {
-            vc?.closeMenu(self)
-            return
-        }
-        let window = self.view.window!
-        var frameSize = window.frame
-        frameSize.size = NSSize(width: window.frame.width, height: frameSize.height - window.titlebarHeight)
-        
-        let storyBoard = NSStoryboard(name: "MenuViewController", bundle: Bundle.main)
-        vc = storyBoard.instantiateInitialController() as! MenuViewController
-        if let vc = vc {
-        	vc.frameSize = frameSize
-        	addChildViewController(vc)
-        	view.addSubview(vc.view)
-        }
-    }
+			transferVc.frameSize = frameSize
+			addChildViewController(transferVc)
+			view.addSubview(transferVc.view)
+		}
+	}
+	
+	var vc: MenuViewController? = nil
+	
+	@IBAction func menuTapped(_ sender: Any) {
+		if (vc != nil && vc!.isOpen) {
+			vc?.closeMenu(self)
+			return
+		}
+		let window = self.view.window!
+		var frameSize = window.frame
+		frameSize.size = NSSize(width: window.frame.width, height: frameSize.height - window.titlebarHeight)
+		
+		let storyBoard = NSStoryboard(name: "MenuViewController", bundle: Bundle.main)
+		vc = storyBoard.instantiateInitialController() as! MenuViewController
+		if let vc = vc {
+			vc.frameSize = frameSize
+			addChildViewController(vc)
+			view.addSubview(vc.view)
+		}
+	}
 	
 	func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
 		if (NSObject.VERBOSE) {
@@ -332,7 +330,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 	
 	func onClosed() {
 		clipboardOpened = false
-    }
+	}
 	
 	let floatingLevel = Int(CGWindowLevelForKey(CGWindowLevelKey.floatingWindow))
 	let normalLevel = Int(CGWindowLevelForKey(CGWindowLevelKey.normalWindow))
@@ -358,10 +356,10 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 	
 	required init?(coder: NSCoder) {
 		super.init(coder: coder)
-        self.initNotification()
-    }
-    
-    internal var dirtyWindow: Bool = true
+		self.initNotification()
+	}
+	
+	internal var dirtyWindow: Bool = true
 	
 	func showHelpWindow() {
 		if (helpWindow == nil) {
@@ -387,7 +385,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 			}
 		}
 //		}
-    }
+	}
 	
 	deinit {
 		print("Removing Observer")

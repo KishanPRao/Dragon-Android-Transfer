@@ -8,7 +8,7 @@
 
 
 // #import <AppKit/AppKit.h>
-// //#import <Foundation/Foundation.h>
+// #import <Foundation/Foundation.h>
 // // #import <Dragon_Android_Transfer/Dragon_Android_Transfer-Swift.h>
 // // #import "Dragon Android Transfer/Dragon_Android_Transfer-Swift.h"
 // // #import <Dragon Android Transfer/Dragon_Android_Transfer-Swift.h>
@@ -39,6 +39,8 @@
 #import "PushCommand.h"
 
 @class ShellParser;
+@class BaseFile;
+@class AndroidDevice;
 
 shared_ptr<AdbExecutor> executor;
 // @interface AndroidAdbHandler()

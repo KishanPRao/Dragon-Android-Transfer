@@ -90,7 +90,7 @@ class PathSelector: NSView {
     var currentPath = ""
     
     func updateCurrentPath(_ currentPath: String) {
-        let directories = currentPath.characters.split{$0 == "/"}.map(String.init)
+        let directories = currentPath.split{$0 == "/"}.map(String.init)
         let size = directories.count
         let textArray = [firstText, secondText, thirdText]
         let arrowsArray = [firstImage, secondImage]

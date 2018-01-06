@@ -19,6 +19,16 @@ class ThreadUtils {
         }
     }
     
+    static func runInMainThreadIfNeeded(_ closure: @escaping () -> ()) {
+		if (ThreadUtils.isMainThread()) {
+			closure()
+		} else {
+			runInMainThread({
+				closure()
+			})
+		}
+    }
+    
     static func runInMainThreadAfter(delayMs delayInMs: Int, _ closure: @escaping () -> ()) {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(delayInMs), execute: {
             closure()
