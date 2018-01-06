@@ -50,27 +50,33 @@ class DeviceTableDelegate: NSObject, NSTableViewDelegate {
 			print("Warning: Row out of range!")
 			return nil
 		}
-        if let cellView = tableView.make(withIdentifier: "fileCell", owner: self) as? FileCellView {
-            cellView.frame = DimenUtils.getUpdatedRect2(frame: cellView.frame, dimensions: [Dimens.android_controller_file_table_file_cell_width, Dimens.android_controller_file_table_file_cell_height])
+        
+        let returnView: FileCell?
+        if let spareView = tableView.make(withIdentifier: "file_cell",
+                                          owner: self) as? FileCell {
+            returnView = spareView
             
-            //        print("Items:", self.androidDirectoryItems)
+        } else {
+            let height = 40.0 as CGFloat
+            let newCell = FileCell(frame: NSRect(x: 0, y: 0, width: self.fileTable!.frame.size.width, height: height))
+            returnView = newCell
             //      Possibility “This NSLayoutConstraint is being configured with a constant that exceeds internal limits” error to occur. Old version SDK?
+        }
+        
+        if let cellView = returnView {
             let file = self.androidDirectoryItems[row]
             //            print("File:", file)
             let fileName = cellView.nameField!
             fileName.stringValue = file.fileName
-            fileName.textColor = ColorUtils.colorWithHexString(ColorUtils.listTextColor)
-            fileName.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_file_table_file_cell_file_name_text_size))
-            fileName.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table_file_cell_file_name)
             
             let fileSize = cellView.sizeField!
             fileSize.stringValue = SizeUtils.getBytesInFormat(file.size)
             fileSize.textColor = ColorUtils.colorWithHexString(ColorUtils.listTextColor)
             fileSize.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_file_table_file_cell_file_size_text_size))
-            fileSize.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table_file_cell_file_size)
+//            fileSize.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table_file_cell_file_size)
             
             let fileImage = cellView.fileImage!
-            fileImage.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table_file_cell_file_image)
+//            fileImage.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table_file_cell_file_image)
             let isDirectory = file.type == BaseFileType.Directory
             if (isDirectory) {
                 fileImage.image = NSImage(named: "folder")
@@ -78,30 +84,22 @@ class DeviceTableDelegate: NSObject, NSTableViewDelegate {
                 fileImage.image = NSImage(named: "file")
             }
             if let fileTable = fileTable {
-            let indexSet = fileTable.selectedRowIndexes
-            if (indexSet.contains(row)) {
-                ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listSelectedBackgroundColor)
-            } else {
-                //cellView.setBackground(R.color.tableItemBg)
-                ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listItemBackgroundColor)
+                let indexSet = fileTable.selectedRowIndexes
+                if (indexSet.contains(row)) {
+                    ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listSelectedBackgroundColor)
+                } else {
+                    cellView.setBackground(R.color.tableItemBg)
+                    //                ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listItemBackgroundColor)
+                }
+                
+                if (!isDirectory && fileTable.dragDropRow == row) {
+                    ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.mainViewColor)
+                } else {
+                    //            setBackgroundColorTo(cellView, color: ColorUtils.listBackgroundColor)
+                }
             }
-            
-            if (!isDirectory && fileTable.dragDropRow == row) {
-                ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.mainViewColor)
-            } else {
-    //            setBackgroundColorTo(cellView, color: ColorUtils.listBackgroundColor)
-            }
-            }
-            return cellView
         }
-//        let dragIndexSet = fileTable.draggedRows
-//        if (dragIndexSet.contains(row)) {
-//            LogV("Drag Item", row)
-//            setBackgroundColorTo(cellView, color: ColorUtils.listDragBackgroundColor)
-//        } else {
-//            setBackgroundColorTo(cellView, color: ColorUtils.listBackgroundColor)
-//        }
-        return nil
+        return returnView
 	}
 	
 	func tableViewSelectionDidChange(_ notification: Notification) {
@@ -134,8 +132,8 @@ class DeviceTableDelegate: NSObject, NSTableViewDelegate {
 						}
 						AppDelegate.itemSelected = true
 					} else {
-                        //cellView.setBackground(R.color.tableItemBg)
-						ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listItemBackgroundColor)
+                        cellView.setBackground(R.color.tableItemBg)
+//						ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listItemBackgroundColor)
 					}
 				}
 				i = i + 1

@@ -9,21 +9,27 @@
 import Foundation
 
 class DarkTheme: Theme {
-    static let color = DarkTheme.color(_:)
-    
-    var menuNavColor = color("071326")
-    var menuTableColor = color("071326")
-	var menuBgColor = color("000409", withAlpha: 0.4)
-    lazy var menuItemBg = { color("040a14") }()
-    lazy var menuItemSelectBg = { color("091f45") }()
-    
-    lazy var toolbarColor = { color("102038") }()
-    lazy var toolbarProgressFg = { color("163666") }()
-    lazy var toolbarProgressBg = { color("3369bc") }()
-    
-    lazy var tableBg = { color("050505") }()
-    lazy var tableItemBg = { color("050505") }()
-    lazy var transferBg = {color("313b4c")}()
-    lazy var textColor = {color("ffffff")}()
-    lazy var transferTextColor = {color("b8c2c9")}()
+	static let color = DarkTheme.color(_:)
+	
+	let menuNavColor = color("071326")
+	let menuTableColor = color("071326")
+	let menuBgColor = color("000409", withAlpha: 0.4)
+	let menuItemBg = color("040a14")
+	let menuItemSelectBg = color("091f45")
+	
+	let toolbarColor = color("102038")
+	let toolbarProgressFg = color("163666")
+	let toolbarProgressBg = color("3369bc")
+
+//    let tableBg = color("050505") 
+//    let tableBg = color("101010") 
+	let tableBg = color("000000")
+//	let tableItemBg = color("050505")
+	let tableItemBg = color("000000")
+	let transferBg = color("313b4c")
+	let textColor = color("ffffff")
+	let transferTextColor = color("b8c2c9")
+
+//	let windowBg = color("050505")
+	let windowBg = color("101010")
 }

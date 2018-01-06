@@ -19,34 +19,23 @@
                                 <rect key="frame" x="0.0" y="741" width="658" height="60"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mX9-y9-o6g">
-                                        <rect key="frame" x="14" y="18" width="40" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fhS-6d-gs2">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="menuTapped:" target="EgA-oj-PE1" id="Cx7-G3-wFP"/>
-                                        </connections>
-                                    </button>
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m7k-us-hyl">
                                         <rect key="frame" x="65" y="10" width="400" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="phA-Vu-RnN">
-                                                <rect key="frame" x="2" y="7" width="50" height="32"/>
+                                                <rect key="frame" x="2" y="8" width="35" height="28"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yhC-Dr-o3P">
+                                                <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yhC-Dr-o3P">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
+                                                    <font key="font" metaFont="smallSystem"/>
                                                 </buttonCell>
                                                 <connections>
                                                     <action selector="backButtonPressed:" target="EgA-oj-PE1" id="7n2-Lk-osq"/>
                                                 </connections>
                                             </button>
                                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m7H-0T-VkQ" customClass="PathSelector" customModule="Dragon_Android_Transfer" customModuleProvider="target">
-                                                <rect key="frame" x="50" y="5" width="340" height="35"/>
+                                                <rect key="frame" x="42" y="5" width="345" height="35"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             </customView>
                                         </subviews>
@@ -55,6 +44,21 @@
                                         <rect key="frame" x="0.0" y="0.0" width="658" height="8"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                     </customView>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qqk-ZA-ice" customClass="FileOptions" customModule="Dragon_Android_Transfer" customModuleProvider="target">
+                                        <rect key="frame" x="492" y="10" width="166" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
+                                    </customView>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mX9-y9-o6g">
+                                        <rect key="frame" x="13" y="18" width="40" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fhS-6d-gs2">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="smallSystem"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="menuTapped:" target="EgA-oj-PE1" id="Cx7-G3-wFP"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </customView>
                             <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="42" horizontalPageScroll="10" verticalLineScroll="42" verticalPageScroll="10" usesPredominantAxisScrolling="NO" scrollerKnobStyle="light" translatesAutoresizingMaskIntoConstraints="NO" id="8ib-1a-Smz">
@@ -84,38 +88,9 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="fileCell" focusRingType="exterior" id="klu-HO-cM9" customClass="FileCellView" customModule="Dragon_Android_Transfer" customModuleProvider="target">
+                                                        <tableCellView identifier="fileCell" focusRingType="exterior" id="klu-HO-cM9">
                                                             <rect key="frame" x="1" y="1" width="655" height="40"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7LP-iF-G2O">
-                                                                    <rect key="frame" x="35" y="9" width="484" height="22"/>
-                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" placeholderString="File Name" id="fNA-Jh-WXh">
-                                                                        <font key="font" metaFont="system" size="16"/>
-                                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                    </textFieldCell>
-                                                                </textField>
-                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7AS-Xc-dKC">
-                                                                    <rect key="frame" x="3" y="12" width="20" height="20"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="QHv-s2-pSQ"/>
-                                                                </imageView>
-                                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LMB-pH-zcW">
-                                                                    <rect key="frame" x="552" y="9" width="100" height="22"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
-                                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="Size" id="0OT-Uy-zSk">
-                                                                        <font key="font" metaFont="system" size="16"/>
-                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                    </textFieldCell>
-                                                                </textField>
-                                                            </subviews>
-                                                            <connections>
-                                                                <outlet property="imageView" destination="7AS-Xc-dKC" id="lq4-EL-veI"/>
-                                                                <outlet property="textField" destination="7LP-iF-G2O" id="5ia-aU-gQ8"/>
-                                                            </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
@@ -138,21 +113,22 @@
                             </scrollView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F9N-4t-eEo">
                                 <rect key="frame" x="0.0" y="391" width="658" height="50"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="0Yc-G1-O6L">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" red="0.99473684210000002" green="0.98947368420000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bzf-eS-QFI" customClass="OverlayView" customModule="Dragon_Android_Transfer" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="658" height="746"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </customView>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="backButton" destination="phA-Vu-RnN" id="5Ru-gN-5QN"/>
+                        <outlet property="fileOptions" destination="qqk-ZA-ice" id="c9l-Z0-liT"/>
                         <outlet property="fileTable" destination="OiS-zv-eWY" id="4MH-Eo-y57"/>
                         <outlet property="loadingProgress" destination="iMs-xx-bIt" id="3mj-7T-rF2"/>
                         <outlet property="menuButton" destination="mX9-y9-o6g" id="LyE-TH-d1L"/>
@@ -167,7 +143,4 @@
             <point key="canvasLocation" x="-781" y="871"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="NSActionTemplate" width="14" height="14"/>
-    </resources>
 </document>

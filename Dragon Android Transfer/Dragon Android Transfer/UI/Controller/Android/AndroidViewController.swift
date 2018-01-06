@@ -37,7 +37,8 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 	}
 	@IBOutlet weak var fileTable: DraggableTableView!
 	
-	
+    @IBOutlet weak var fileOptions: FileOptions!
+    
 	@IBOutlet weak var menuButton: NSButton!
 	@IBOutlet weak var backButton: NSButton!
 	
@@ -98,6 +99,9 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 //            messageText.font = font
 			LogV("No ACTIVE Device")
 			messageText.stringValue = "No Active Device.\nPlease connect a device with USB Debugging enabled."
+			let canGoBackward = false
+			AppDelegate.canGoBackward = canGoBackward
+			backButton.isEnabled = canGoBackward
 			return
 		}
 		
@@ -232,7 +236,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 	internal func updateClipboard() {
 		let clipboardItems = transferHandler.getClipboardItems()
 //		AppDelegate.hasMacClipboardItems = transferHandler.getClipboardMacItems().count > 0
-		AppDelegate.hasClipboardItems = clipboardItems.count > 0
+		AppDelegate.hasClipboardItems.value = clipboardItems.count > 0
 	}
 	
 	func selectAllFiles() {

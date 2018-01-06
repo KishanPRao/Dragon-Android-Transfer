@@ -60,6 +60,14 @@
 		50F314E01FAE1C45006BF985 /* ExtensionBaseFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F314DF1FAE1C45006BF985 /* ExtensionBaseFile.swift */; };
 		50F314E41FAE28D7006BF985 /* ThreadUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDC1EC5EA8A5A0A17A378 /* ThreadUtils.swift */; };
 		50F51179200108FF00CCB22C /* transfer_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 50F51178200108FE00CCB22C /* transfer_more.png */; };
+		50F5117B200139EE00CCB22C /* FileOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F5117A200139EE00CCB22C /* FileOptions.swift */; };
+		50F5117D200139FB00CCB22C /* FileOptions.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50F5117C200139FB00CCB22C /* FileOptions.xib */; };
+		50F511812001401C00CCB22C /* paste.png in Resources */ = {isa = PBXBuildFile; fileRef = 50F5117E2001401A00CCB22C /* paste.png */; };
+		50F511822001401C00CCB22C /* remove.png in Resources */ = {isa = PBXBuildFile; fileRef = 50F5117F2001401B00CCB22C /* remove.png */; };
+		50F511832001401C00CCB22C /* clipboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 50F511802001401B00CCB22C /* clipboard.png */; };
+		50F511852001405500CCB22C /* options.png in Resources */ = {isa = PBXBuildFile; fileRef = 50F511842001405500CCB22C /* options.png */; };
+		50F51187200151CB00CCB22C /* PasteboardWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F51186200151CB00CCB22C /* PasteboardWatcher.swift */; };
+		50F511892001527600CCB22C /* PasteboardWatcherDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F511882001527600CCB22C /* PasteboardWatcherDelegate.swift */; };
 		50FE44A91FF6B84D0099A029 /* SegueFromLeftNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE44A81FF6B84D0099A029 /* SegueFromLeftNew.swift */; };
 		50FE44AB1FF6BA760099A029 /* PushSegue.swift in Resources */ = {isa = PBXBuildFile; fileRef = 50FE44AA1FF6BA760099A029 /* PushSegue.swift */; };
 		50FE44AE1FF6C5080099A029 /* PushAnimatorTrial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE44AC1FF6C0860099A029 /* PushAnimatorTrial.swift */; };
@@ -321,6 +329,14 @@
 		50F193471FFD5D4A001B6984 /* BlurOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurOverlayView.swift; sourceTree = "<group>"; };
 		50F314DF1FAE1C45006BF985 /* ExtensionBaseFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionBaseFile.swift; sourceTree = "<group>"; };
 		50F51178200108FE00CCB22C /* transfer_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transfer_more.png; sourceTree = "<group>"; };
+		50F5117A200139EE00CCB22C /* FileOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileOptions.swift; sourceTree = "<group>"; };
+		50F5117C200139FB00CCB22C /* FileOptions.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileOptions.xib; sourceTree = "<group>"; };
+		50F5117E2001401A00CCB22C /* paste.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paste.png; sourceTree = "<group>"; };
+		50F5117F2001401B00CCB22C /* remove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = remove.png; sourceTree = "<group>"; };
+		50F511802001401B00CCB22C /* clipboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clipboard.png; sourceTree = "<group>"; };
+		50F511842001405500CCB22C /* options.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = options.png; sourceTree = "<group>"; };
+		50F51186200151CB00CCB22C /* PasteboardWatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardWatcher.swift; sourceTree = "<group>"; };
+		50F511882001527600CCB22C /* PasteboardWatcherDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardWatcherDelegate.swift; sourceTree = "<group>"; };
 		50F716F31E82F492005CA833 /* MASShortcut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MASShortcut.framework; path = Pods/../build/Debug/MASShortcut/MASShortcut.framework; sourceTree = "<group>"; };
 		50FE44A81FF6B84D0099A029 /* SegueFromLeftNew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueFromLeftNew.swift; sourceTree = "<group>"; };
 		50FE44AA1FF6BA760099A029 /* PushSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushSegue.swift; sourceTree = "<group>"; };
@@ -545,9 +561,13 @@
 				50F51178200108FE00CCB22C /* transfer_more.png */,
 				BE3BDEFB8D195743373D18DF /* refresh.png */,
 				BE3BDF4C3E50FACB10B4D3EF /* clipboard_icon_plain.png */,
+				50F511842001405500CCB22C /* options.png */,
 				5098AC6D1FFD3C810084449B /* path_selector_div.png */,
 				BE3BD14EBAA39AE998183C61 /* close_button.png */,
 				BE3BD263FE3F94CE594A7D20 /* update_sizes.png */,
+				50F511802001401B00CCB22C /* clipboard.png */,
+				50F5117E2001401A00CCB22C /* paste.png */,
+				50F5117F2001401B00CCB22C /* remove.png */,
 				50CAAF932000253000911D8E /* android.png */,
 				50CAAF942000253100911D8E /* mac.png */,
 				BE3BDB3E2A1E4A083D7DA873 /* Credits.rtf */,
@@ -729,13 +749,15 @@
 			isa = PBXGroup;
 			children = (
 				BE3BD068E4D34BD5B12C7434 /* FileCell.swift */,
-				BE3BD3FB14FAA8E35E2726B3 /* Snackbar.xib */,
 				BE3BD9DD832AF8F7C03CB8FE /* FileCell.xib */,
 				BE3BD45515B3D44B1DD19E2C /* PathSelector.xib */,
 				BE3BD41B757B51397AC78AA2 /* MenuCell.swift */,
 				BE3BD81AC439AB91EA5499E0 /* Snackbar.swift */,
+				BE3BD3FB14FAA8E35E2726B3 /* Snackbar.xib */,
 				BE3BD3AFAB6C6A1C807BE233 /* PathSelector.swift */,
 				BE3BD664A22E7B7663DBCAC7 /* MenuCell.xib */,
+				50F5117A200139EE00CCB22C /* FileOptions.swift */,
+				50F5117C200139FB00CCB22C /* FileOptions.xib */,
 			);
 			path = Xib;
 			sourceTree = "<group>";
@@ -953,6 +975,8 @@
 				BE3BDD843B295FEB7CB9CE4F /* TransferHandler.swift */,
 				BE3BD326D7BB6EA85FB5313E /* AndroidAdbHandler.mm */,
 				BE3BD842071A151360917781 /* AndroidAdbHandler.h */,
+				50F51186200151CB00CCB22C /* PasteboardWatcher.swift */,
+				50F511882001527600CCB22C /* PasteboardWatcherDelegate.swift */,
 			);
 			path = Handler;
 			sourceTree = "<group>";
@@ -1129,6 +1153,7 @@
 				BE3BDAF11B0C0A34B5455FA2 /* clipboard_icon.png in Resources */,
 				BE3BD112BC91E0AC5A18FB99 /* back_button.png in Resources */,
 				503D93161FF8EAA0009E7E39 /* menu_back.png in Resources */,
+				50F511812001401C00CCB22C /* paste.png in Resources */,
 				50961C0A1FF95CAE001B6D3D /* external_storage.png in Resources */,
 				BE3BD3A9EC324B60D172E185 /* refresh.png in Resources */,
 				BE3BDC8FE02DB6B1BDDFD082 /* clipboard_icon_plain.png in Resources */,
@@ -1141,15 +1166,19 @@
 				50961C0F1FF966C2001B6D3D /* menu.png in Resources */,
 				50961C0B1FF95CAE001B6D3D /* internal_storage.png in Resources */,
 				BE3BD869D6B5C24C762444B0 /* endCopy.mp3 in Resources */,
+				50F5117D200139FB00CCB22C /* FileOptions.xib in Resources */,
 				BE3BD43FFDA218F217C09DBA /* help.rtf in Resources */,
 				BE3BDBF0A3F946760F91F720 /* intro_guide.rtf in Resources */,
 				BE3BD0E5A9B8848A8C017AD3 /* CopyDialog.xib in Resources */,
 				BE3BD3CA5BE659E67FC602F6 /* HelpWindow.xib in Resources */,
 				BE3BDBB3DBEEB39658AC9DDD /* AndroidViewController.storyboard in Resources */,
+				50F511852001405500CCB22C /* options.png in Resources */,
+				50F511832001401C00CCB22C /* clipboard.png in Resources */,
 				BE3BD86D6970BC033D5B3E58 /* MenuViewController.storyboard in Resources */,
 				BE3BD049FD9C4D474A8E308C /* TransferViewController.storyboard in Resources */,
 				BE3BD07C1550A55D08A853F2 /* Snackbar.xib in Resources */,
 				BE3BDF9F00E6DA1CD6D6CE43 /* FileCell.xib in Resources */,
+				50F511822001401C00CCB22C /* remove.png in Resources */,
 				BE3BD04A725201CFC6692744 /* PathSelector.xib in Resources */,
 				BE3BDD6D61EEB37FFAA132F9 /* MenuCell.xib in Resources */,
 			);
@@ -1418,6 +1447,7 @@
 				BE3BD094F0C2183A46CDD6E3 /* ProgressView.swift in Sources */,
 				50DD59091FFD2C020089D742 /* NSImage_Extension.swift in Sources */,
 				50CAAF9820003A0E00911D8E /* String_Extension.swift in Sources */,
+				50F51187200151CB00CCB22C /* PasteboardWatcher.swift in Sources */,
 				BE3BDA30B26F35C7C23F9B56 /* IndeterminateProgressView.swift in Sources */,
 				50293DF81FEFBF2A00B06B14 /* BaseFileType.swift in Sources */,
 				50961C011FF94A09001B6D3D /* NibLoader.m in Sources */,
@@ -1459,6 +1489,7 @@
 				BE3BD43E1D6C3ADCE968188D /* HelpWindow.swift in Sources */,
 				BE3BD06FDDB930947C1B074A /* CopyDialog.swift in Sources */,
 				50D7D9BC1FFEA37A00E85E70 /* ScrollessScrollView.m in Sources */,
+				50F511892001527600CCB22C /* PasteboardWatcherDelegate.swift in Sources */,
 				BE3BDD26BD56D714B0769BEB /* Dimens.swift in Sources */,
 				BE3BD5406227870BE38ACD2D /* StringResource.swift in Sources */,
 				50DC06361FFD6F0B00B0CDDB /* OverlayView.swift in Sources */,
@@ -1501,6 +1532,7 @@
 				BE3BDF9E75310567DF68036E /* AVCDrag.swift in Sources */,
 				BE3BD42A08E8DFFB9237CD83 /* AndroidViewController.swift in Sources */,
 				BE3BD98A9BBF4B8A5D355489 /* AVCUi.swift in Sources */,
+				50F5117B200139EE00CCB22C /* FileOptions.swift in Sources */,
 				50D7D9B41FFE948D00E85E70 /* TextUtils.swift in Sources */,
 				BE3BDE36A34F20C0862470AC /* R.swift in Sources */,
 				BE3BDD0E064CA86D1F6A123C /* NSWindow_Extension.swift in Sources */,

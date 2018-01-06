@@ -19,11 +19,6 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="45"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P11-bZ-Xla">
-                    <rect key="frame" x="10" y="5" width="35" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="qaA-sC-jsV"/>
-                </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MtD-uh-Zf0">
                     <rect key="frame" x="55" y="12" width="415" height="22"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
@@ -33,6 +28,11 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P11-bZ-Xla">
+                    <rect key="frame" x="14" y="10" width="25" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="qaA-sC-jsV"/>
+                </imageView>
             </subviews>
             <point key="canvasLocation" x="140" y="168.5"/>
         </customView>

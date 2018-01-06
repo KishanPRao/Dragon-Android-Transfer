@@ -9,6 +9,7 @@
 import Cocoa
 import MASShortcut
 import AppKit
+import RxSwift
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
@@ -30,8 +31,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 	static var hasItems = false
 	static var hasMacClipboardItems = false
 	static var canGoBackward = false
-    static var hasClipboardItems = false
-    static var isPastingOperation = false
+    static var hasClipboardItems = Variable<Bool>(false)
+    static var isPastingOperation = Variable<Bool>(false)
     static var isFloatingWindow = false
 
 //	var helpWindow: HelpWindow? = nil
@@ -86,7 +87,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 	}
 	
 	func isInvalidOperation() -> Bool {
-		let invalid = AppDelegate.isPastingOperation
+		let invalid = AppDelegate.isPastingOperation.value
 		if (invalid) {
 			NSSound.init(named: "Funk")!.play()
 			NSApp.requestUserAttention(NSRequestUserAttentionType.informationalRequest)
@@ -136,28 +137,28 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 //        LogV("Vbose", Verbose, "")
 		if (VERBOSE) {
 			Swift.print("AppDelegate, validateInterfaceMenuItem:", item.tag);
-			Swift.print("AppDelegate, validateInterfaceMenuItem, isPasting:", AppDelegate.isPastingOperation);
+			Swift.print("AppDelegate, validateInterfaceMenuItem, isPasting:", AppDelegate.isPastingOperation.value)
 		}
 		if (item.tag == MenuItemIdentifier.fileOpenFile && AppDelegate.directoryItemSelected && !AppDelegate.multipleItemsSelected) {
-			return !AppDelegate.isPastingOperation
+			return !AppDelegate.isPastingOperation.value
 		}
 		if (item.tag == MenuItemIdentifier.getInfo && AppDelegate.itemSelected && !AppDelegate.multipleItemsSelected) {
-			return !AppDelegate.isPastingOperation
+			return !AppDelegate.isPastingOperation.value
 		}
 		if (item.tag == MenuItemIdentifier.editCopy && AppDelegate.itemSelected) {
-			return !AppDelegate.isPastingOperation
+			return !AppDelegate.isPastingOperation.value
 		}
 		if (item.tag == MenuItemIdentifier.editPaste && AppDelegate.hasMacClipboardItems) {
-			return !AppDelegate.isPastingOperation
+			return !AppDelegate.isPastingOperation.value
 		}
 		if (item.tag == MenuItemIdentifier.editSelectAll && AppDelegate.hasItems) {
-			return !AppDelegate.isPastingOperation
+			return !AppDelegate.isPastingOperation.value
 		}
 		if (item.tag == MenuItemIdentifier.goBackward && AppDelegate.canGoBackward) {
-			return !AppDelegate.isPastingOperation
+			return !AppDelegate.isPastingOperation.value
 		}
-		if (item.tag == MenuItemIdentifier.clearClipboard && AppDelegate.hasClipboardItems) {
-			return !AppDelegate.isPastingOperation
+		if (item.tag == MenuItemIdentifier.clearClipboard && AppDelegate.hasClipboardItems.value) {
+			return !AppDelegate.isPastingOperation.value
 		}
 		if (item.tag == MenuItemIdentifier.help) {
 			return true
@@ -190,7 +191,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
         }
 //        if (item.tag == MenuItemIdentifier.editDelete && AppDelegate.itemSelected && !AppDelegate.multipleItemsSelected) {
         if (item.tag == MenuItemIdentifier.editDelete && AppDelegate.itemSelected) {
-			return !AppDelegate.isPastingOperation
+			return !AppDelegate.isPastingOperation.value
 		}
 		return false
 	}
@@ -289,7 +290,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 		AppDelegate.itemSelected = false
 		AppDelegate.directoryItemSelected = false
 		AppDelegate.multipleItemsSelected = false
-		AppDelegate.hasClipboardItems = false
+		AppDelegate.hasClipboardItems.value = false
 	}
 }
 

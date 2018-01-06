@@ -32,7 +32,7 @@ extension TransferViewController {
 			}
 		}
 		copyDestination = path
-		AppDelegate.isPastingOperation = true
+		AppDelegate.isPastingOperation.value = true
 		
 		Observable.just(transferHandler)
 				.observeOn(bgScheduler)
@@ -51,7 +51,7 @@ extension TransferViewController {
 			return
 		}
 		copyDestination = path
-		AppDelegate.isPastingOperation = true
+		AppDelegate.isPastingOperation.value = true
 		Observable.just(transferHandler)
 				.observeOn(bgScheduler)
 				.subscribe(onNext: { transferHandler in
@@ -72,7 +72,7 @@ extension TransferViewController {
 				.subscribe(onNext: { status in
 					if (status == FileProgressStatus.kStatusInProgress) {
 //                    self.fileTable.layer?.borderWidth = 0
-						AppDelegate.isPastingOperation = true
+						AppDelegate.isPastingOperation.value = true
 //                    self.showCopyDialog()
 						self.mDockProgress?.isHidden = false
 					} else {
@@ -183,7 +183,7 @@ extension TransferViewController {
 	
 	
 	internal func finished(_ status: FileProgressStatus) {
-		AppDelegate.isPastingOperation = false
+		AppDelegate.isPastingOperation.value = false
 		print("Done!")
 		
 		print("End Time:", TimeUtils.getCurrentTime())

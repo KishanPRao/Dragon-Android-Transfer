@@ -14,4 +14,9 @@ class ImageResource {
     public let android = "android"
     public let mac = "mac"
     public let more = "transfer_more"
+    
+    public let clipboard = "clipboard"
+    public let paste = "paste"
+    public let remove = "remove"
+    public let options = "options"
 }
