@@ -157,6 +157,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		/*updateWindowSize()
 		checkGuide()
 		 */
+        openAd()
 	}
 	
 	override func viewWillLayout() {
@@ -288,6 +289,40 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		}*/
 	}
 	
+//    var adVc: AdViewController? = nil
+	let url = "https://dragon-android-transfer-ad.herokuapp.com"
+    var adWc: AdWindowController? = nil
+    
+	func openAd() {
+        adWc = AdWindowController(windowNibName: "AdWindowController")
+        let window = self.view.window!
+        var frameSize = window.frame
+        frameSize.size = NSSize(width: window.frame.width, height: frameSize.height - window.titlebarHeight)
+        
+        if let adWc = adWc {
+            adWc.url = url
+            adWc.frameSize = frameSize
+        	adWc.showWindow(self)
+        }
+        /*let window = self.view.window!
+        var frameSize = window.frame
+        frameSize.size = NSSize(width: window.frame.width, height: frameSize.height - window.titlebarHeight)
+//        LogI("Ctrl: ", window.windowController)
+		if adVc == nil {
+			adVc = NSViewController.loadFromStoryboard(name: "AdViewController")
+		}
+		if let adVc = adVc {
+            adVc.url = url
+            adVc.frameSize = frameSize
+//            addChildViewController(adVc)
+//            view.addSubview(adVc.view)
+//            adVc.
+//            presentViewControllerAsSheet(adVc)
+            presentViewControllerAsModalWindow(adVc)
+//            presentViewController(adVc, animator: PushAnimatorTrial())
+		}*/
+	}
+	
 	var transferVc: TransferViewController? = nil
 	
 	func startTransfer() {
@@ -297,8 +332,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		frameSize.size = NSSize(width: window.frame.width, height: frameSize.height - window.titlebarHeight)
 		
         if transferVc == nil {
-			let storyBoard = NSStoryboard(name: "TransferViewController", bundle: Bundle.main)
-			transferVc = storyBoard.instantiateInitialController() as! TransferViewController
+			transferVc = NSViewController.loadFromStoryboard(name: "TransferViewController")
         }
 		if let transferVc = transferVc {
 //            transferVc.view.frame.origin = NSSize()
@@ -319,8 +353,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
         var frameSize = window.frame
         frameSize.size = NSSize(width: window.frame.width, height: frameSize.height - window.titlebarHeight)
         if menuVc == nil {
-			let storyBoard = NSStoryboard(name: "MenuViewController", bundle: Bundle.main)
-			menuVc = storyBoard.instantiateInitialController() as! MenuViewController
+			menuVc = NSViewController.loadFromStoryboard(name: "MenuViewController")
         }
 		if let menuVc = menuVc {
 			menuVc.frameSize = frameSize

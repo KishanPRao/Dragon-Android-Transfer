@@ -15,7 +15,7 @@ public class PushAnimatorTrial: NSObject, NSViewControllerPresentationAnimator {
 		// bool indicating whether the view uses a layer as its backing store
 		viewController.view.wantsLayer = true
 		// http://stackoverflow.com/a/30425508/2179970
-		viewController.view.layer?.backgroundColor = CGColor.init(red: 1, green: 0, blue: 0, alpha: 1)
+		viewController.view.layer?.backgroundColor = CGColor.init(red: 1, green: 0, blue: 0, alpha: 0)
 		viewController.view.frame = CGRect(x: fromViewController.view.frame.size.width, y: 0,
 				width: fromViewController.view.frame.size.width, height: fromViewController.view.frame.size.height)
 		fromViewController.addChildViewController(viewController)
