@@ -136,10 +136,12 @@
 		BE3BD481EE7E1ECFB9BAB89D /* NSWindow_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD0740A94F0F08A3821C9 /* NSWindow_Extension.swift */; };
 		BE3BD4859D0A4C8B57D3336A /* StyleUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDEF13CA38DBEC207CD7E /* StyleUtils.swift */; };
 		BE3BD4881F649532E9FDB26C /* AVCNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDC1D80FB6B62F06A135B /* AVCNotification.swift */; };
+		BE3BD49231CF52B8ABEE7670 /* Collection_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD035DD9F5BE7EB5220BE /* Collection_Extension.swift */; };
 		BE3BD4B7CC752F2DB32B185C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDF2646B4FF28CCC5B703 /* Constants.swift */; };
 		BE3BD4C277570BF38157A99A /* DeviceListCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDF54A6C09CD7EF560DA7 /* DeviceListCommand.cpp */; };
 		BE3BD4C30BCC171DF3CC445F /* ColoredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD7E881A82B0C8CCA96A5 /* ColoredButton.swift */; };
 		BE3BD4EB06E9E32A7344866B /* NSTableView_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDE81BDA18AA71E0DDAC3 /* NSTableView_Extension.swift */; };
+		BE3BD512886BC25A550F8BDF /* CommandConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDF237C5E63BBBEB20EE5 /* CommandConfig.cpp */; };
 		BE3BD5136CF7F3655A8E3265 /* ClipboardTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD5400EDCE113E397EA1F /* ClipboardTableCellView.swift */; };
 		BE3BD515A4417EF29DD625F1 /* DarkWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD97D6F1F3832414869CE /* DarkWindow.swift */; };
 		BE3BD51D05677230C1D522CC /* R.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDD1D612B9E5A72510B12 /* R.swift */; };
@@ -215,6 +217,7 @@
 		BE3BDD443C546ADE3C554293 /* ListCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDBDE327B0A1968AB193B /* ListCommand.cpp */; };
 		BE3BDD6D61EEB37FFAA132F9 /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD664A22E7B7663DBCAC7 /* MenuCell.xib */; };
 		BE3BDDAC202EC594F7145B67 /* AVCWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD44EFC33B9D3B5A3A28C /* AVCWindow.swift */; };
+		BE3BDDC697F4DA2741C2CE97 /* Collection_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD035DD9F5BE7EB5220BE /* Collection_Extension.swift */; };
 		BE3BDDD656E09806D5694906 /* PullCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD903231A6A691CF8F97F /* PullCommand.cpp */; };
 		BE3BDDE9D513271A0265C642 /* Snackbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD81AC439AB91EA5499E0 /* Snackbar.swift */; };
 		BE3BDDEBA7F8D5119F29144D /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD8B0BBFD2BD4175F63BB /* folder.png */; };
@@ -229,6 +232,7 @@
 		BE3BDF047032EC260FC573A1 /* CopyDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD08ACB1E71CAFEDC0EA1 /* CopyDialog.xib */; };
 		BE3BDF0DB532B65C04E311BD /* SimpleAdbCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDD930E20C1CA43BD528C /* SimpleAdbCommand.cpp */; };
 		BE3BDF368388FB6EFDF95098 /* TransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDDA6A14679C99D3339E3 /* TransferViewController.swift */; };
+		BE3BDF43E55E23C9AA555683 /* CommandConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDF237C5E63BBBEB20EE5 /* CommandConfig.cpp */; };
 		BE3BDF47D133535B2723303C /* IntegerResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD58F84E6678D4CC5BA02 /* IntegerResource.swift */; };
 		BE3BDF9E75310567DF68036E /* AVCDrag.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD29697E49FE6B53E5E90 /* AVCDrag.swift */; };
 		BE3BDF9F00E6DA1CD6D6CE43 /* FileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD9DD832AF8F7C03CB8FE /* FileCell.xib */; };
@@ -345,6 +349,7 @@
 		B7D8F895498525A7BB7E0CB4 /* Pods-Dragon Android TransferTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dragon Android TransferTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dragon Android TransferTests/Pods-Dragon Android TransferTests.release.xcconfig"; sourceTree = "<group>"; };
 		BE3BD00ADD3CA125AC470393 /* ShellType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShellType.h; sourceTree = "<group>"; };
 		BE3BD02227352672454F79DB /* logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = logger.cpp; sourceTree = "<group>"; };
+		BE3BD035DD9F5BE7EB5220BE /* Collection_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection_Extension.swift; sourceTree = "<group>"; };
 		BE3BD043FF08D7CCBDA83E46 /* Dimens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dimens.swift; sourceTree = "<group>"; };
 		BE3BD05C5D6135A32D42D46A /* FileSizeCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileSizeCommand.cpp; sourceTree = "<group>"; };
 		BE3BD067D7FB225535465C16 /* help.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = help.rtf; sourceTree = "<group>"; };
@@ -478,6 +483,7 @@
 		BE3BDEF13CA38DBEC207CD7E /* StyleUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleUtils.swift; sourceTree = "<group>"; };
 		BE3BDEF99F9695AD6D7B4402 /* AndroidShellResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AndroidShellResource.swift; sourceTree = "<group>"; };
 		BE3BDEFB8D195743373D18DF /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
+		BE3BDF237C5E63BBBEB20EE5 /* CommandConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CommandConfig.cpp; sourceTree = "<group>"; };
 		BE3BDF2646B4FF28CCC5B703 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BE3BDF2E49F9802CC53731B1 /* AdbCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdbCommand.h; sourceTree = "<group>"; };
 		BE3BDF4C3E50FACB10B4D3EF /* clipboard_icon_plain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clipboard_icon_plain.png; sourceTree = "<group>"; };
@@ -678,6 +684,7 @@
 				5098AC6B1FFD3A990084449B /* NSImageView_Extension.swift */,
 				50CAAF9720003A0E00911D8E /* String_Extension.swift */,
 				BE3BDE81BDA18AA71E0DDAC3 /* NSTableView_Extension.swift */,
+				BE3BD035DD9F5BE7EB5220BE /* Collection_Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -852,6 +859,7 @@
 				BE3BD988F2E0E93AA1F8A9C9 /* PullCommand.hpp */,
 				BE3BD4B4838E58D71435680F /* PushCommand.cpp */,
 				BE3BDC7FE804A1EA176C2E18 /* PushCommand.h */,
+				BE3BDF237C5E63BBBEB20EE5 /* CommandConfig.cpp */,
 			);
 			path = Command;
 			sourceTree = "<group>";
@@ -1384,6 +1392,8 @@
 				BE3BDCE538836C8F5FD3DE0C /* NSTableView_Extension.swift in Sources */,
 				BE3BD0CC16F11CA8AD3B2D4E /* TableViewKeys.swift in Sources */,
 				BE3BD3909031FF01D5520F49 /* Snackbar.swift in Sources */,
+				BE3BD49231CF52B8ABEE7670 /* Collection_Extension.swift in Sources */,
+				BE3BD512886BC25A550F8BDF /* CommandConfig.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1549,6 +1559,8 @@
 				BE3BD975E231F361C9E82C66 /* MenuCell.swift in Sources */,
 				BE3BDDE9D513271A0265C642 /* Snackbar.swift in Sources */,
 				BE3BDFA64BC7A54BC65A4795 /* PathSelector.swift in Sources */,
+				BE3BDDC697F4DA2741C2CE97 /* Collection_Extension.swift in Sources */,
+				BE3BDF43E55E23C9AA555683 /* CommandConfig.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

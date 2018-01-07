@@ -9,7 +9,8 @@
 
 #include "ShellType.h"
 
-namespace CommandConfig {
+class CommandConfig {
+public:
 	static ShellType shellType;
 };
 

@@ -32,9 +32,12 @@ string AdbExecutor::execute(shared_ptr<AdbExecutorProperties> properties, AdbCal
 	NSArray<NSString *> *adbArgsArray;
 	
 	switch (properties->executionType) {
-		case AdbExecutionType::Full: 
-		case AdbExecutionType::FullAsync: {
+		case AdbExecutionType::Full: {
 			adbArgsArray = @[@"./adb ", convert(properties->attributes)];
+			break;
+		}
+		case AdbExecutionType::DeviceAsync: {
+			adbArgsArray = @[@"./adb -s ", convert(deviceId), @" ", convert(properties->attributes)];
 			break;
 		}
 		case AdbExecutionType::Shell: {
@@ -43,7 +46,7 @@ string AdbExecutor::execute(shared_ptr<AdbExecutorProperties> properties, AdbCal
 		}
 	}
 	auto adbArgs = [adbArgsArray componentsJoinedByString:@""];
-	if (properties->executionType == AdbExecutionType::FullAsync) {
+	if (properties->executionType == AdbExecutionType::DeviceAsync) {
 //		std::cout<<"Calling Adb Args:"<<adbArgs.UTF8String<<std::endl;
 		auto output = executeAdb(adbArgs.UTF8String, callback);
 //		std::cout<<"Calling Callback:"<<output<<std::endl;

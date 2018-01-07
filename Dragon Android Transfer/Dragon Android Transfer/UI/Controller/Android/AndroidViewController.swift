@@ -49,7 +49,10 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 	
 	@IBOutlet weak var pathSelector: PathSelector!
 	@IBOutlet weak var pathSelectorRootView: NSView!
-	
+    
+    
+    @IBOutlet weak var snackbar: Snackbar!
+    
 	internal let transferHandler = TransferHandler.sharedInstance
 	internal var showGuide: Bool = false
 	
@@ -251,17 +254,17 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		transferHandler.clearClipboardMacItems()
 	}
 	
-	var snackbar: Snackbar? = nil
+//	var snackbar: Snackbar? = nil
 	
 	internal func showSnackbar(_ message: String) {
-		if (snackbar == nil) {
-			snackbar = Snackbar(frame: NSRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
-			self.view.addSubview(snackbar!)
-			self.view.layoutSubtreeIfNeeded()
-		}
+//		if (snackbar == nil) {
+//			snackbar = Snackbar(frame: NSRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
+//			self.view.addSubview(snackbar!)
+//			self.view.layoutSubtreeIfNeeded()
+//		}
 //        LogV("showSnackbar: \(message)")
-		snackbar?.updateMessage(message)
-		snackbar?.showSnackbar()
+		snackbar.updateMessage(message)
+		snackbar.showSnackbar()
 	}
 	
 	@IBAction func backButtonPressed(_ button: NSButton) {

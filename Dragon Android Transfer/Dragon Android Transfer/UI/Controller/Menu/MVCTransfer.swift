@@ -16,18 +16,31 @@ extension MenuViewController {
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: {
 					devices in
-					print("Devices", devices)
+					self.androidDevices = devices
+					self.LogV("Devices", devices)
 					self.popup.removeAllItems()
 					if (devices.count == 0) {
 						return
 					}
 					var devicesNames = [] as Array<String>
 					var i = 0
+					let activeDevice = self.transferHandler.getActiveDevice()
 					while i < devices.count {
-						devicesNames.append(devices[i].name)
+						let device = devices[i]
+						devicesNames.append(device.name)
 						i = i + 1
 					}
 					self.popup.addItems(withTitles: devicesNames)
+					for i in 0..<devices.count {
+						let device = devices[i]
+						if let activeDevice = activeDevice {
+							if (device.id == activeDevice.id) {
+								self.LogI("Active: \(i)")
+								self.popup.selectItem(at: i)
+								break
+							}
+						}
+					}
 				})
 		
 		transferHandler.observeActiveDevice()
@@ -37,8 +50,7 @@ extension MenuViewController {
 					//print("Device", device)
 					if let device = device {
 						//print("Device Storage", device.storages)
-						self.storages = device.storages
-						self.table.reloadData()
+						self.updateStorageItems(device.storages)
 					}
 				})
 		transferHandler.observeCurrentPath()

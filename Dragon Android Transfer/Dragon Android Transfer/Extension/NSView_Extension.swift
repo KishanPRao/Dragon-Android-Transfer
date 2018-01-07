@@ -42,14 +42,36 @@ extension NSView {
 		Bundle.main.loadNibNamed(nibName, owner: self, topLevelObjects: nil)
     }
 	
-	class func fromNib<T:NSView>() -> T? {
-		var viewArray = NSArray()
-		guard Bundle.main.loadNibNamed(String(describing: T.self), owner: T.self, topLevelObjects: &viewArray) else {
-			Swift.print("Type:", String(describing: T.self))
-			Swift.print("Type2:", T.self)
-			Swift.print("Type3:", NSStringFromClass(T.self))
-			return nil
+//	class func fromNib<T:NSView>() -> T? {
+//		var viewArray = NSArray()
+//		guard Bundle.main.loadNibNamed(String(describing: T.self), owner: T.self, topLevelObjects: &viewArray) else {
+//			Swift.print("Type:", String(describing: T.self))
+//			Swift.print("Type2:", T.self)
+//			Swift.print("Type3:", NSStringFromClass(T.self))
+//			return nil
+//		}
+//		return viewArray.first(where: { $0 is T }) as? T
+//	}
+	
+	func bringToFront() {
+		if (isInFront()) {
+			LogV("is in front!")
+			return
 		}
-		return viewArray.first(where: { $0 is T }) as? T
+		let superView = self.superview
+		if let superView = superView {
+			self.removeFromSuperview()
+			superView.addSubview(self, positioned: .above, relativeTo: nil)
+		}
+	}
+	
+	func isInFront() -> Bool {
+		let view = self
+		let visibleBool = view.superview?.subviews.last?.isEqual(view)
+		if let visibleBool = visibleBool, visibleBool {
+			return visibleBool
+		} else {
+			return false
+		}
 	}
 }

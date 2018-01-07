@@ -24,15 +24,14 @@ class Snackbar: NSView {
     func updateMessage(_ message: String) {
         self.message.stringValue = message
     }
-    
-	override init(frame frameRect: CGRect) {
-		super.init(frame: frameRect)
-		let bgColor = R.color.menuNavColor
-        Bundle.main.loadNibNamed("Snackbar", owner: self, topLevelObjects: nil)
-        //Swift.print("Snackbar Test", message, self)
+	
+	private func commonInit() {
+		Bundle.main.loadNibNamed("Snackbar", owner: self, topLevelObjects: nil)
 		message.stringValue = ""
-		message.textColor = R.color.white
-        self.setBackground(bgColor)
+		message.textColor = R.color.black
+		self.setBackground(R.color.white)
+//		message.textColor = R.color.white
+//		self.setBackground(R.color.menuNavColor)
 		
 		/*
 		let leftConstraint = NSLayoutConstraint(item: message,
@@ -65,12 +64,18 @@ class Snackbar: NSView {
 		
 		self.addSubview(message)
 		self.frame = self.frame.offsetBy(dx: 0, dy: -self.frame.size.height)
-        //self.frame.origin = CGPoint(x: 0, y: -self.frame.size.height)
+		//self.frame.origin = CGPoint(x: 0, y: -self.frame.size.height)
 		Swift.print("Created Snack")
 //		setBackground(bgColor)
 	}
+    
+	override init(frame frameRect: CGRect) {
+		super.init(frame: frameRect)
+		commonInit()
+	}
 	
 	func showSnackbar() {
+		bringToFront()
 		Swift.print("Aniamting Snackbar")
         if (isOpen) {
 			return
@@ -128,5 +133,6 @@ class Snackbar: NSView {
 	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
+		commonInit()
 	}
 }

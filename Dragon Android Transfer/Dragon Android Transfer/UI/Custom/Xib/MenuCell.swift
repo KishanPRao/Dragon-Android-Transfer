@@ -21,7 +21,7 @@ class MenuCell: NSTableCellView {
     override init(frame frameRect: Foundation.NSRect) {
         super.init(frame: frameRect)
         Bundle.main.loadNibNamed("MenuCell", owner: self, topLevelObjects: nil)
-        Swift.print("Test", contentView.frame, self)
+//        Swift.print("Test", contentView.frame, self)
         text.textColor = R.color.white
 //        contentView.setBackground(R.color.black)
         contentView.frame = frame

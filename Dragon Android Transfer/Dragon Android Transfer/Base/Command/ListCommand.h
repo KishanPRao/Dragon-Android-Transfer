@@ -9,9 +9,15 @@
 
 #include "AdbCommand.h"
 #include <string>
+#include "StringResource.h"
 
 class ListCommand : public AdbCommand {
 	std::string directoryName;
+	
+	std::string escape(std::string str) {
+		std::string escapeDoubleQuotes = StringResource::ESCAPE_DOUBLE_QUOTES;
+		return escapeDoubleQuotes + str + escapeDoubleQuotes;
+	}
 
 public:
 	ListCommand(std::string, shared_ptr<AdbExecutor> executor);

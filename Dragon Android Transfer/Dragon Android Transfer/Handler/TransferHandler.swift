@@ -32,18 +32,23 @@ class TransferHandler {
         return androidHandler.observableActiveDevice.asObservable()
     }
 	
-	func setActiveDevice(_ device: AndroidDevice?) {
-		self.androidHandler.setActiveDevice(device)
+	func setActiveDevice(_ device: AndroidDevice?) -> Bool {
+		let result = self.androidHandler.setActiveDevice(device)
 		self.clearClipboardAndroidItems()
 		self.clearClipboardMacItems()
+		return result
+	}
+	
+	func getActiveDevice() -> AndroidDevice? {
+		return self.androidHandler.getActiveDevice()
 	}
 	
 	func observeFileList() -> Observable<[BaseFile]> {
 		return androidHandler.observableFileList.asObservable()
 	}
 	
-	func updateList(_ path: String) {
-		androidHandler.updateList(path)
+	func updateList(_ path: String, _ force: Bool = false) {
+		androidHandler.updateList(path, force)
 	}
 	
 	func navigateUpList() {

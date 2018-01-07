@@ -18,7 +18,7 @@ std::string PullCommand::execute() {
 	if (executor) {
 		auto properties = make_shared<AdbExecutorProperties>();
 		properties->attributes = commands;
-		properties->executionType = AdbExecutionType::FullAsync;
+		properties->executionType = AdbExecutionType::DeviceAsync;
 		auto data = executor->execute(properties, callback);
 		return data;
 	}

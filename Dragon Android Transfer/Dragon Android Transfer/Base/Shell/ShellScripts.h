@@ -28,7 +28,8 @@ namespace ShellScripts {
 	
 	static std::string LS_FILE_SIZE_COMMAND = "LS_FILE";
 	static std::string GNU_LS_FILE_SIZE = "LS_FILE() { output=$(ls -sk -- \"$1\"); first=${output%% *}; echo \"$first\"; }\n";
-	static std::string SOLARIS_LS_FILE_SIZE = "LS_FILE() { output=$(ls -s -- \"$1\"); first=${output%% *}; echo \"$first\"; }\n";
+//	static std::string SOLARIS_LS_FILE_SIZE = "LS_FILE() { output=$(ls -s -- \"$1\"); first=${output%% *}; echo \"$first\"; }\n";
+	static std::string SOLARIS_LS_FILE_SIZE = "LS_FILE() { output=$(ls -s \"$1\"); first=${output%% *}; echo \"$first\"; }\n";
 	static std::string GNU_LS_SIZE_COMMAND_NAME = "GNU_LS";
 	static std::string GNU_LS_SIZE_COMMAND = "GNU_LS(){ lsOutput=$(ls -AskLR -- \"$1\"); output=$(echo \"$lsOutput\" | grep '^total [0-9]*$'); total=0; for size in $output; do if [ $size = \"total\" ]; then continue; fi; total=$(( total + size )); done; echo \"$total\"; }\n";
 	static std::string SOLARIS_LS_SIZE_COMMAND_NAME = "SOLARIS_LS";

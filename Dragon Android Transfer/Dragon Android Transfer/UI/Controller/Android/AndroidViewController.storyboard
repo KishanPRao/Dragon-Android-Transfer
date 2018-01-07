@@ -124,6 +124,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="658" height="746"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </customView>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tpb-Dr-n2M" customClass="Snackbar" customModule="Dragon_Android_Transfer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="658" height="50"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </customView>
                         </subviews>
                     </view>
                     <connections>
@@ -136,6 +140,7 @@
                         <outlet property="overlayView" destination="bzf-eS-QFI" id="WAP-HB-LzU"/>
                         <outlet property="pathSelector" destination="m7H-0T-VkQ" id="Mrb-w3-C0l"/>
                         <outlet property="pathSelectorRootView" destination="m7k-us-hyl" id="8Ev-BD-Le7"/>
+                        <outlet property="snackbar" destination="tpb-Dr-n2M" id="BAi-oz-sWJ"/>
                         <outlet property="toolbarView" destination="tC3-4U-ZdH" id="D5C-yt-G6c"/>
                     </connections>
                 </viewController>

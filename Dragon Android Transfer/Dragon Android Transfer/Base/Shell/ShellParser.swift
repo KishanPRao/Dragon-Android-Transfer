@@ -11,7 +11,7 @@ import Foundation
 
 @objc
 public class ShellParser: NSObject {
-	static let EXTREME_VERBOSE = false
+	static let EXTREME_VERBOSE = true
 	static let BLOCK_SIZE_IN_FLOAT = Float(1024)
 	
 	static fileprivate func splitLines(_ string: String) -> [String] {
@@ -29,7 +29,7 @@ public class ShellParser: NSObject {
 		var directories: [BaseFile] = [];
 		let outputInLines = splitLines(listString)
 		var noOutput = false
-		//		print("Output:", outputInLines)
+		print("List Output:", outputInLines)
 		noOutput = outputInLines.count <= 0 || outputInLines.count <= 2 || (outputInLines.count == 3 && outputInLines[2].contains("No such file"))
 		//		noOutput = outputInLines.count <= 0 || outputInLines.count <= 2
 		if (noOutput) {
@@ -102,7 +102,7 @@ public class ShellParser: NSObject {
 	//@objc
 	public static func parseStorageOutput(_ fileNames: String, info output: String) -> Array<StorageItem> {
 		var storages = [StorageItem]()
-        storages.append(StorageItem(name: "Internal Storage", location: "/sdcard"))
+		storages.append(StorageItem(name: "Internal Storage", location: "/sdcard"))
 		let outputLines = splitLines(output)
 		let fileNamesLines = splitLines(fileNames)
 		var skipLines = 0
@@ -113,7 +113,7 @@ public class ShellParser: NSObject {
 		while (i < outputLines.count) {
 			let line = outputLines[i]
 			if (!line.contains("self") && !line.contains("emulated") && !line.contains("system")) {
-                storages.append(StorageItem(name: "External Storage", location: "/storage/" + fileNamesLines[i - skipLines]))
+				storages.append(StorageItem(name: "External Storage", location: "/storage/" + fileNamesLines[i - skipLines]))
 			}
 			i = i + 1
 		}

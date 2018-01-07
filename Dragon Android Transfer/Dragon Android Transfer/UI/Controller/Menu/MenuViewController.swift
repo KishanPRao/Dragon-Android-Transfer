@@ -27,6 +27,8 @@ class MenuViewController: NSViewController,
 	internal var storages = [StorageItem]()
 	internal var selectedIndex = -1 as Int
 	
+	var androidDevices = [AndroidDevice]()
+	
 	var isOpen = true
 	
 	@IBAction func closeMenu(_ sender: Any) {
@@ -70,6 +72,19 @@ class MenuViewController: NSViewController,
 	func onPopupSelected(_ sender: Any) {
 		let index = self.popup.indexOfSelectedItem
 		print("Popup Selected", index)
+		guard let device = androidDevices[safe: index] else {
+			return
+		}
+		updateStorageItems([])
+		let result = transferHandler.setActiveDevice(device)
+		if (!result) {
+			updateStorageItems(device.storages)
+		}
+	}
+	
+	internal func updateStorageItems(_ storages: [StorageItem]) {
+		self.storages = storages
+		self.table.reloadData()
 	}
 	
 	func doubleClick(_ sender: AnyObject) {
@@ -103,6 +118,7 @@ class MenuViewController: NSViewController,
 		self.popup.removeAllItems()
 		self.popup.action = #selector(onPopupSelected(_:))
 		self.popup.target = self
+		self.popup.pullsDown = false
 		overlayView.setBackground(R.color.menuBgColor)
 		navigationParent.setBackground(R.color.menuNavColor)
 		navigationParent.dropShadow()
@@ -136,7 +152,7 @@ class MenuViewController: NSViewController,
 	
 	override func viewDidAppear() {
 		super.viewDidAppear()
-		table.makeFirstResponder(self.view.window)
+//		table.makeFirstResponder(self.view.window)
 	}
 	
 	private func animate(open: Bool, handler: @escaping () -> ()) {

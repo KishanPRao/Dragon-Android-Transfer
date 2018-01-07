@@ -104,6 +104,10 @@ public class AndroidHandler: NSObject {
 		return observableAndroidDevices.asObservable()
 	}
 	
+	func getActiveDevice() -> AndroidDevice? {
+		return observableActiveDevice.value
+	}
+	
 	func start() {
 		self.adbDevicesTimer()
 		if (timer != nil) {
@@ -149,7 +153,13 @@ public class AndroidHandler: NSObject {
 		return (activeDevice != nil)
 	}
 	
-	func setActiveDevice(_ device: AndroidDevice?) {
+	func setActiveDevice(_ device: AndroidDevice?) -> Bool {
+		if let activeDevice = activeDevice, 
+		   let device = device, 
+		   activeDevice.id == device.id {
+			LogW("Same Device")
+			return false
+		}
 		activeDevice = device;
 		LogV("Active Device:", activeDevice)
         ThreadUtils.runInMainThread({
@@ -165,13 +175,14 @@ public class AndroidHandler: NSObject {
 				externalStorage = ""
 			}
             if (device!.storages.count > 0) {
-            	updateList(device!.storages[0].location)
+            	updateList(device!.storages[0].location, true)
             }
 		} else {
 			externalStorage = ""
-            updateList("")
+            updateList("", true)
 		}
         observableActiveDevice.value = activeDevice
+		return true
 	}
 	
 	func setUsingExternalStorage(_ usingExternalStorage: Bool) {
@@ -246,7 +257,7 @@ public class AndroidHandler: NSObject {
 			print("Try Enter:", TimeUtils.getCurrentTime())
 		}
 		objc_sync_enter(self)
-		let newDevices = adbHandler.getDevices()
+		var newDevices = adbHandler.getDevices()
 		let same = containSameElements(newDevices, array2: self.observableAndroidDevices.value)
 		if (TIMER_VERBOSE) {
 			LogV("Same: \(same)")
@@ -255,26 +266,53 @@ public class AndroidHandler: NSObject {
             ThreadUtils.runInMainThread({
                 NSObject.sendNotification(AndroidViewController.NotificationSnackbar, ["message": "Updating Devices"])
             })
-			Swift.print("Androidhandler, Main:", ThreadUtils.isMainThread())
+//			LogV("Main:", ThreadUtils.isMainThread())
+			var index = -1
+//			LogI("New Devices: \(newDevices)")
+			for i in 0..<newDevices.count {
+				let device = newDevices[i]
+				if let activeDevice = activeDevice, 
+				   activeDevice.id == device.id {
+					index = i
+//					LogI("Moving to \(i), active: \(activeDevice), device: \(device)")
+				}
+			}
+			if (index == -1) {
+				if (newDevices.count == 0) {
+					setActiveDevice(nil)
+				} else {
+//					LogV("New Active Device: \(newDevices[0])")
+					setActiveDevice(newDevices[0])
+				}
+			} else {
+//				LogV("Rearranging: \(index) active: \(activeDevice)")
+				newDevices = rearrange(array: newDevices, fromIndex: index, toIndex: 0)
+//				LogV("New Devices: \(newDevices)")
+			}
+			LogI("New Devices: \(newDevices)")
 			self.observableAndroidDevices.value = newDevices
-            for device in newDevices {
-                if activeDevice != device {
-                    LogV("New Active Device")
-                    activeDevice = device
-                    setActiveDevice(activeDevice)
-                    //TODO: Smarter checks, previous device check.
-                    break
-                }
-            }
-            if (newDevices.count == 0) {
-                setActiveDevice(nil)
-            }
+//            for device in newDevices {
+//                if activeDevice != device {
+//                    LogV("New Active Device")
+//                    activeDevice = device
+//                    setActiveDevice(activeDevice)
+//                    //TODO: Smarter checks, previous device check.
+//                    break
+//                }
+//            }
         }
 		
 		objc_sync_exit(self)
 		if (TIMER_VERBOSE) {
 			print("Release Lock:", TimeUtils.getCurrentTime())
 		}
+	}
+	
+	func rearrange<T>(array: Array<T>, fromIndex: Int, toIndex: Int) -> Array<T>{
+		var arr = array
+		let element = arr.remove(at: fromIndex)
+		arr.insert(element, at: toIndex)
+		return arr
 	}
 	
 	func containSameElements(_ array1: Array<AndroidDevice>, array2: Array<AndroidDevice>) -> Bool {
@@ -306,11 +344,18 @@ public class AndroidHandler: NSObject {
 
 	let observableFileList = Variable<[BaseFile]>([])
 	
-	func updateList(_ path: String) {
-		currentPath = path
-        observableCurrentPath.value = currentPath
+	func updateList(_ path: String, _ force: Bool = false) {
+		let currentPath = observableCurrentPath.value
+		if (!force && path == currentPath) {
+//			LogV("Diff path: \(path), \(currentPath)")
+			observableFileList.value = observableFileList.value
+			return
+		}
+		self.currentPath = path
+        observableCurrentPath.value = self.currentPath
 		adbHandler.device = activeDevice
 		observableFileList.value =  adbHandler.getDirectoryListing(path)
+//		LogV("List: \(observableFileList.value)")
 	}
 	
 	func updateSizes(_ files: Array<BaseFile>) {
@@ -369,17 +414,17 @@ public class AndroidHandler: NSObject {
 		if (containsSep) {
 			let lastSep = (currentPath.range(of: HandlerConstants.SEPARATOR, options: NSString.CompareOptions.backwards)?.lowerBound)!
 			currentPath = currentPath.substring(to: lastSep)
-            observableCurrentPath.value = currentPath
+//            observableCurrentPath.value = currentPath
 //			if (Verbose) { print("Upper:", currentPath) }
 			if (usingExternalStorage) {
 				if (currentPath.count < externalStorage.count) {
 					currentPath = externalStorage
-                    observableCurrentPath.value = currentPath
+//                    observableCurrentPath.value = currentPath
 				}
 			} else {
 				if (currentPath.count < internalStorage.count) {
 					currentPath = internalStorage
-                    observableCurrentPath.value = currentPath
+//                    observableCurrentPath.value = currentPath
 				}
 			}
 			
@@ -548,7 +593,9 @@ public class AndroidHandler: NSObject {
 				if ((file.size == 0 || file.size == UInt64.max) && file.type == BaseFileType.Directory) {
 					file.size = getSize(sourceFileName)
 				}
-				size = size + file.size
+                if size != UInt64.max {
+					size = size + file.size
+                }
 			}
 			sizeActiveTask.value = size
 			transferTypeActive.value = TransferType.AndroidToMac

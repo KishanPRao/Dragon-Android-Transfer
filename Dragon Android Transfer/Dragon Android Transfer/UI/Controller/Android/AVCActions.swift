@@ -108,7 +108,7 @@ extension AndroidViewController {
                 print("Bg", transferHandler)
                 transferHandler.setActiveDevice(activeDevice)
                 if (activeDevice != nil) {
-                    transferHandler.updateList(transferHandler.getInternalStorage())
+//                    transferHandler.updateList(transferHandler.getInternalStorage(), true)
                     transferHandler.setUsingExternalStorage(false)
                     transferHandler.updateStorage()
                 } else {

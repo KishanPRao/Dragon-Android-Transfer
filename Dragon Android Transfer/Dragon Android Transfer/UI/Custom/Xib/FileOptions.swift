@@ -59,6 +59,7 @@ class FileOptions: NSView {
 				.subscribe(onNext: {
 					hasClipboardItems in
 //					self.LogV("Clipboard Items: \(hasClipboardItems), count: \(self.transferHandler.getClipboardMacItems().count)")
+				/*
 					let pasteboard = NSPasteboard.general()
 //                    if let copiedString = pasteboard.string(forType: NSPasteboardTypeString) {
 //                        self.LogI("File: \(copiedString)")
@@ -77,6 +78,7 @@ class FileOptions: NSView {
 							self.LogV("Path:", path)
 						}
                     }
+                    */
 					if (hasClipboardItems && self.transferHandler.getClipboardMacItems().count > 0) {
 						self.pasteButton.isEnabled = true
 					} else {

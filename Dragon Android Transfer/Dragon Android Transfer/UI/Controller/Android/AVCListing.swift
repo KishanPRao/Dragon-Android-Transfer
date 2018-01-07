@@ -118,7 +118,7 @@ extension AndroidViewController {
 				.observeOn(bgScheduler)
 				.map {
 					transferHandler in
-					transferHandler.updateList(transferHandler.getCurrentPath())
+					transferHandler.updateList(transferHandler.getCurrentPath(), true)
 					transferHandler.updateStorage()
 				}
 				.observeOn(MainScheduler.instance)

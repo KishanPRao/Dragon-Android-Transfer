@@ -79,7 +79,7 @@ shared_ptr<AdbExecutor> executor;
 		
 		device.storages = [ShellParser parseStorageOutput:convert(storageList) info:convert(storageListInfo)];
 		
-		//NSLog(@"New Shell Type: %@, %d", convert(data), CommandConfig::shellType);
+//		NSLog(@"New Shell Type: %@, %d", convert(data), CommandConfig::shellType);
 		//NSLog(@"Storages: %@", device.storages);
 	}
 }
@@ -114,7 +114,7 @@ shared_ptr<AdbExecutor> executor;
 	auto command = make_shared<ListCommand>(path.UTF8String, executor);
 	auto listString = convert(command->execute());
 	auto list = [ShellParser parseListOutput:listString currentPath:path];
-	// NSLog(@"List Output, %@", list);
+	 NSLog(@"List Output, %@", list);
 	return list;
 }
 

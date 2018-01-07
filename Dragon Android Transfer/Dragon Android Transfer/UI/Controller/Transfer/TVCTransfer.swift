@@ -165,11 +165,17 @@ extension TransferViewController {
 		mCurrentProgress = progress
 		//            print("Current File: \(currentFile)")
 		//                print("Update Prog")
-		let copiedSize = UInt64(CGFloat(totalSize) * (CGFloat(progress) / 100.0)) as UInt64
+        let size = CGFloat(totalSize) * (CGFloat(progress) / 100.0)
+        if (size >= CGFloat(UInt64.max)) {
+            return
+        }
+		let copiedSize = UInt64(size) as UInt64
+//        LogV("Copied Size:", copiedSize)
 //        copyDialog?.updateCopyStatus(currentFileCopiedSize, withProgress: CGFloat(progress))
 		transferProgressView.setProgress(CGFloat(progress))
 		
 		let copiedSizeInString = SizeUtils.getBytesInFormat(copiedSize)
+//        LogV("Copied Size:", copiedSizeInString)
 //        pathTransferSize.stringValue = copiedSizeInString + " of " + SizeUtils.getBytesInFormat(totalSize)
 		let range = NSMakeRange(copiedSizeInString.count, 4)
 		pathTransferSize.attributedStringValue = TextUtils.attributedString(
