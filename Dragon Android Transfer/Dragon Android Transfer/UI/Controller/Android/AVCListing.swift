@@ -95,7 +95,7 @@ extension AndroidViewController {
 	}*/
 	
 	func updateList() {
-		LogV("Update List")
+//        LogV("Update List")
 		fileTable.updateList(data: androidDirectoryItems)
 		updateDeviceStatus()
 	}
@@ -145,9 +145,9 @@ extension AndroidViewController {
 					/*let isDirectory = true
 					 if (isDirectory) {*/
 					let path = self.transferHandler.getCurrentPath() + HandlerConstants.SEPARATOR + selectedItem.fileName
-					self.LogV("Opening Dir")
+//                    self.LogV("Opening Dir")
 					self.transferHandler.updateList(path)
-					self.LogV("Opened Dir")
+//                    self.LogV("Opened Dir")
 				}
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: {})

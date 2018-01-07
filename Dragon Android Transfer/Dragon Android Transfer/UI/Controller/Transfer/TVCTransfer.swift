@@ -158,17 +158,17 @@ extension TransferViewController {
 	
 	
 	internal func progressActive(_ progress: Double) {
-		//        print("Progress Active: \(progress)")
 		if (mCurrentProgress == progress) {
 			return
 		}
+		LogV("Progress Active: \(progress)")
 		mCurrentProgress = progress
-		//            print("Current File: \(currentFile)")
+		LogV("Current File: \(currentFile)")
 		//                print("Update Prog")
-        let size = CGFloat(totalSize) * (CGFloat(progress) / 100.0)
-        if (size >= CGFloat(UInt64.max)) {
-            return
-        }
+		let size = CGFloat(totalSize) * (CGFloat(progress) / 100.0)
+		if (size >= CGFloat(UInt64.max)) {
+			return
+		}
 		let copiedSize = UInt64(size) as UInt64
 //        LogV("Copied Size:", copiedSize)
 //        copyDialog?.updateCopyStatus(currentFileCopiedSize, withProgress: CGFloat(progress))

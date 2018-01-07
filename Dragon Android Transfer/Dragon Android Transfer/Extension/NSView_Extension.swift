@@ -52,6 +52,11 @@ extension NSView {
 //		}
 //		return viewArray.first(where: { $0 is T }) as? T
 //	}
+    func makeFirstResponder(_ window: NSWindow?) {
+        if (self.acceptsFirstResponder) {
+            window?.makeFirstResponder(self)
+        }
+    }
 	
 	func bringToFront() {
 		if (isInFront()) {

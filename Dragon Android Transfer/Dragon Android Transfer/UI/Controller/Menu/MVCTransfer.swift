@@ -57,7 +57,7 @@ extension MenuViewController {
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: {
 					path in
-					
+                    self.updateStorageSelection(path)
 				})
 	}
 }

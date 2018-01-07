@@ -19,7 +19,8 @@ class DeviceTableDelegate: NSObject, NSTableViewDelegate {
 	
 	func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
 //		return 25
-		return DimenUtils.getDimension(dimension: Dimens.android_controller_file_table_file_cell_height) - DimenUtils.getDimension(dimension: Dimens.android_controller_file_table_file_cell_margin)
+//        return DimenUtils.getDimension(dimension: Dimens.android_controller_file_table_file_cell_height) - DimenUtils.getDimension(dimension: Dimens.android_controller_file_table_file_cell_margin)
+        return 45
 	}
 	
 	func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
@@ -57,6 +58,7 @@ class DeviceTableDelegate: NSObject, NSTableViewDelegate {
             returnView = spareView
             
         } else {
+//            let height = 40.0 as CGFloat
             let height = 40.0 as CGFloat
             let newCell = FileCell(frame: NSRect(x: 0, y: 0, width: self.fileTable!.frame.size.width, height: height))
             returnView = newCell

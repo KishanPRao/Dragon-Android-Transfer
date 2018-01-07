@@ -6,11 +6,6 @@
 import Foundation
 
 extension NSTableView {
-	func makeFirstResponder(_ window: NSWindow?) {
-		if (self.acceptsFirstResponder) {
-			window?.makeFirstResponder(self)
-		}
-	}
 	
 //	override func keyDown(with event: NSEvent) {
 //		if (event.keyCode == 13) {

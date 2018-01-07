@@ -44,7 +44,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="658" height="8"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                     </customView>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qqk-ZA-ice" customClass="FileOptions" customModule="Dragon_Android_Transfer" customModuleProvider="target">
+                                    <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qqk-ZA-ice" customClass="FileOptions" customModule="Dragon_Android_Transfer" customModuleProvider="target">
                                         <rect key="frame" x="492" y="10" width="166" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
                                     </customView>

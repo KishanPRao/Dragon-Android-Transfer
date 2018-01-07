@@ -522,10 +522,17 @@ public class AndroidHandler: NSObject {
 			}
 			self.currentFile = currentFile
 		} else if (result == AdbExecutionResultWrapper.Result_InProgress) {
+			if progress < 0 {
+				return
+			}
 			let totalSize = Double(self.sizeActiveTask.value)
+			let currentItemSize = Double(self.currentFile!.size)
+			let currentItemTotalProgress = Double(currentItemSize / totalSize) * 100.0
+			let currentProgress = (Double(progress) * Double(currentItemTotalProgress) / 100.0)
+			
 			let previousProgress = (Double(self.previousSizeTask) / totalSize) * 100.0
-			let currentProgress = (Double(progress) / Double(self.totalItems))
-//			print("Prev: \(previousProgress), curr: \(currentProgress)")
+//			let currentProgress = (Double(progress) / Double(self.totalItems))
+			print("Prev: \(previousProgress), curr: \(currentProgress)")
 			self.progressActiveTask.value = previousProgress + currentProgress 
 		} else if (result == AdbExecutionResultWrapper.Result_Canceled) {
 			print("Canceled")

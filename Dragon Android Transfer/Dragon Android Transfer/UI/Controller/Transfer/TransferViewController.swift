@@ -33,14 +33,18 @@ class TransferViewController: NSViewController {
 	internal var currentCopiedSize = 0 as UInt64
 	internal var totalSize: UInt64 = 0
 	
+	let androidImage = NSImage(named: R.drawable.android)
+	let macImage = NSImage(named: R.drawable.mac)
+	
 	internal var alert: DarkAlert? = nil
 	
 	internal let mDockTile: NSDockTile = NSApplication.shared().dockTile
 	internal var mDockProgress: NSProgressIndicator? = nil
 	internal var mCurrentProgress = -1.0
 	
-	
 	public var frameSize = NSRect()
+	
+	private var expanded = false
 	
 	func exit() {
 		NSAnimationContext.runAnimationGroup({ context in
@@ -52,12 +56,7 @@ class TransferViewController: NSViewController {
 			self.view.removeFromSuperview()
 			self.removeFromParentViewController()
 		})
-		overlayView.hide({
-//            self.view.removeFromSuperview()
-//            self.removeFromParentViewController()
-		})
-//		self.view.removeFromSuperview()
-//		self.removeFromParentViewController()
+		overlayView.hide()
 	}
 	
 	func close() {
@@ -78,7 +77,6 @@ class TransferViewController: NSViewController {
 	}
 	
 	let normalMore = NSImage(named: R.drawable.more)
-//	let rotatedMore = NSImage(named: R.drawable.more)!.imageRotated(by: 180)
 	let rotatedMore = NSImage(named: R.drawable.more)!.imageRotatedByDegrees(degrees: 180)
 	
 	private func initUi() {
@@ -86,34 +84,21 @@ class TransferViewController: NSViewController {
 		
 		overlayView.frame = self.view.frame
 		overlayView.setBackground(R.color.menuBgColor)
-		//        overlayView.setOnClickListener {
-		//            self.close()
-		//        }
-		
 		
 		self.transferDialog.setBackground(R.color.transferBg)
 		self.transferDialog.cornerRadius(5.0)
-		//        self.transferDialog.dropShadow()
+//		self.transferDialog.dropShadow()
 		closeButton.setImage(name: R.drawable.cancel_transfer)
 		closeButton.action = #selector(close)
 		closeButton.target = self
 
-//		moreButton.stringValue = ""
-//		moreButton.setColorBackground(R.color.black)
-//		updateButton(moreButton, NSImage.swatchWithColor(color: R.color.menuNavColor, size: moreButton.frame.size).roundCorners())
-//		moreButton.attributedTitle = TextUtils.getTruncatedAttributeString("More")
-//		moreButton.setText(text: "More", textColor: R.color.transferTextColor,
-//				alignment: .left, bgColor: R.color.menuNavColor, 
-//				rounded: true)
 		moreButton.setBackground(R.color.transferBg)
 		moreButton.image = normalMore
 		moreButton.attributedTitle = TextUtils.getTruncatedAttributeString("More",
 				.left,
 				R.color.transferTextColor)
 		moreButton.isBordered = false
-//		moreButton.imageScaling = .scaleNone
 		moreButton.imagePosition = .imageRight
-//		moreButton.isBordered = false
 		
 		initText(pathTransferString)
 		initText(pathTransferSize)
@@ -128,11 +113,10 @@ class TransferViewController: NSViewController {
 		
 		srcDeviceImageView.isHidden = true
 		destDeviceImageView.isHidden = true
-//        toggleExpansion(self)
 		pathTransferString.stringValue = "Updating.."
 		pathTransferSize.stringValue = "Updating.."
-//        progressActive(0)
 //        LogI("Init UI")
+//        self.view.makeFirstResponder(self.view.window)
 	}
 	
 	private func updateButton(_ button: NSButton, _ image: NSImage) {
@@ -146,9 +130,6 @@ class TransferViewController: NSViewController {
 		textField.textColor = R.color.transferTextColor
 	}
 	
-	let androidImage = NSImage(named: R.drawable.android)
-	let macImage = NSImage(named: R.drawable.mac)
-	
 	internal func updateTransferState() {
 		srcDeviceImageView.isHidden = false
 		destDeviceImageView.isHidden = false
@@ -161,9 +142,6 @@ class TransferViewController: NSViewController {
 		}
 	}
 	
-	var expanded = false
-	
-	//    TODO: Expanded in Xib.
 	@IBAction func toggleExpansion(_ sender: Any) {
 //        LogV("Toggle")
 		var hide = false

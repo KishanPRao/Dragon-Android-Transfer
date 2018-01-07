@@ -18,7 +18,7 @@ extension AndroidViewController {
 		tableDelegate.fileTable = fileTable
 		fileTable.dragDelegate = self
 		fileTable.dragUiDelegate = self
-		self.fileTable.intercellSpacing = NSSize(width: 0, height: 5)
+//        self.fileTable.intercellSpacing = NSSize(width: 0, height: 5)
 		let doubleClickSelector: Selector = #selector(AndroidViewController.doubleClickList(_:))
 		fileTable.doubleAction = doubleClickSelector
 		

@@ -11,7 +11,7 @@ import Foundation
 
 @objc
 public class ShellParser: NSObject {
-	static let EXTREME_VERBOSE = true
+	static let EXTREME_VERBOSE = false
 	static let BLOCK_SIZE_IN_FLOAT = Float(1024)
 	
 	static fileprivate func splitLines(_ string: String) -> [String] {
@@ -29,7 +29,7 @@ public class ShellParser: NSObject {
 		var directories: [BaseFile] = [];
 		let outputInLines = splitLines(listString)
 		var noOutput = false
-		print("List Output:", outputInLines)
+//        print("List Output:", outputInLines)
 		noOutput = outputInLines.count <= 0 || outputInLines.count <= 2 || (outputInLines.count == 3 && outputInLines[2].contains("No such file"))
 		//		noOutput = outputInLines.count <= 0 || outputInLines.count <= 2
 		if (noOutput) {
@@ -251,6 +251,6 @@ public class ShellParser: NSObject {
 			let progress = Int(progressString)
 			return progress!
 		}
-		return 0
+		return -1
 	}
 }

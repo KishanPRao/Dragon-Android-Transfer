@@ -50,7 +50,6 @@ class MenuViewController: NSViewController,
 	}
 	
 	private func initUi() {
-		
 		//self.view.wantsLayer = true
 		//self.view.layer?.backgroundColor = R.color.menuBgColor.cgColor
 		//self.view.layerContentsRedrawPolicy = NSViewLayerContentsRedrawPolicy.onSetNeedsDisplay
@@ -85,8 +84,25 @@ class MenuViewController: NSViewController,
 	internal func updateStorageItems(_ storages: [StorageItem]) {
 		self.storages = storages
 		self.table.reloadData()
+        self.updateStorageSelection(transferHandler.getCurrentPath())
 	}
-	
+    
+    internal func updateStorageSelection(_ path: String) {
+        var index = -1
+        for i in 0..<self.storages.count {
+            let storageLocation = self.storages[i].location
+            if path.starts(with: storageLocation) {
+//                self.LogV("Path: \(path), \(i)")
+                index = i
+                break
+            }
+        }
+        if index != -1 {
+            let indexSet = IndexSet(integer: index)
+            self.table.selectRowIndexes(indexSet, byExtendingSelection: true)
+        }
+    }
+    
 	func doubleClick(_ sender: AnyObject) {
 		//openInTable()
 	}
@@ -146,8 +162,6 @@ class MenuViewController: NSViewController,
 		self.tableOuter.frame.origin = CGPoint(x: 0, y: popup.accessibilityFrame().origin.y - popup.cellSize.height)
 		self.tableOuter.frame.size = NSSize(width: frameSize.width * 0.5, height: frameSize.height - popup.cellSize.height)
 		self.table.intercellSpacing = NSSize(width: 0, height: 10)
-		let indexSet = IndexSet(integer: 0)
-		self.table.selectRowIndexes(indexSet, byExtendingSelection: false)
 	}
 	
 	override func viewDidAppear() {
