@@ -68,6 +68,10 @@
 		50F511852001405500CCB22C /* options.png in Resources */ = {isa = PBXBuildFile; fileRef = 50F511842001405500CCB22C /* options.png */; };
 		50F51187200151CB00CCB22C /* PasteboardWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F51186200151CB00CCB22C /* PasteboardWatcher.swift */; };
 		50F511892001527600CCB22C /* PasteboardWatcherDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F511882001527600CCB22C /* PasteboardWatcherDelegate.swift */; };
+		50F91FC920024A3B00C58955 /* MenuStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F91FC820024A3B00C58955 /* MenuStatusView.swift */; };
+		50F91FCB20024A4800C58955 /* MenuStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50F91FCA20024A4800C58955 /* MenuStatusView.xib */; };
+		50F91FCD20024DA000C58955 /* info.png in Resources */ = {isa = PBXBuildFile; fileRef = 50F91FCC20024D9F00C58955 /* info.png */; };
+		50F91FCF200251B300C58955 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F91FCE200251B300C58955 /* Path.swift */; };
 		50FE44A91FF6B84D0099A029 /* SegueFromLeftNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE44A81FF6B84D0099A029 /* SegueFromLeftNew.swift */; };
 		50FE44AB1FF6BA760099A029 /* PushSegue.swift in Resources */ = {isa = PBXBuildFile; fileRef = 50FE44AA1FF6BA760099A029 /* PushSegue.swift */; };
 		50FE44AE1FF6C5080099A029 /* PushAnimatorTrial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE44AC1FF6C0860099A029 /* PushAnimatorTrial.swift */; };
@@ -342,6 +346,10 @@
 		50F51186200151CB00CCB22C /* PasteboardWatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardWatcher.swift; sourceTree = "<group>"; };
 		50F511882001527600CCB22C /* PasteboardWatcherDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardWatcherDelegate.swift; sourceTree = "<group>"; };
 		50F716F31E82F492005CA833 /* MASShortcut.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MASShortcut.framework; path = Pods/../build/Debug/MASShortcut/MASShortcut.framework; sourceTree = "<group>"; };
+		50F91FC820024A3B00C58955 /* MenuStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuStatusView.swift; sourceTree = "<group>"; };
+		50F91FCA20024A4800C58955 /* MenuStatusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuStatusView.xib; sourceTree = "<group>"; };
+		50F91FCC20024D9F00C58955 /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info.png; sourceTree = "<group>"; };
+		50F91FCE200251B300C58955 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		50FE44A81FF6B84D0099A029 /* SegueFromLeftNew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueFromLeftNew.swift; sourceTree = "<group>"; };
 		50FE44AA1FF6BA760099A029 /* PushSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushSegue.swift; sourceTree = "<group>"; };
 		50FE44AC1FF6C0860099A029 /* PushAnimatorTrial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushAnimatorTrial.swift; sourceTree = "<group>"; };
@@ -568,6 +576,7 @@
 				BE3BDEFB8D195743373D18DF /* refresh.png */,
 				BE3BDF4C3E50FACB10B4D3EF /* clipboard_icon_plain.png */,
 				50F511842001405500CCB22C /* options.png */,
+				50F91FCC20024D9F00C58955 /* info.png */,
 				5098AC6D1FFD3C810084449B /* path_selector_div.png */,
 				BE3BD14EBAA39AE998183C61 /* close_button.png */,
 				BE3BD263FE3F94CE594A7D20 /* update_sizes.png */,
@@ -730,6 +739,7 @@
 				50293DF51FEFBF0B00B06B14 /* BaseFile.swift */,
 				50293DF71FEFBF2A00B06B14 /* BaseFileType.swift */,
 				50961BF91FF916A6001B6D3D /* StorageItem.swift */,
+				50F91FCE200251B300C58955 /* Path.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -765,6 +775,8 @@
 				BE3BD664A22E7B7663DBCAC7 /* MenuCell.xib */,
 				50F5117A200139EE00CCB22C /* FileOptions.swift */,
 				50F5117C200139FB00CCB22C /* FileOptions.xib */,
+				50F91FC820024A3B00C58955 /* MenuStatusView.swift */,
+				50F91FCA20024A4800C58955 /* MenuStatusView.xib */,
 			);
 			path = Xib;
 			sourceTree = "<group>";
@@ -1180,11 +1192,13 @@
 				BE3BD0E5A9B8848A8C017AD3 /* CopyDialog.xib in Resources */,
 				BE3BD3CA5BE659E67FC602F6 /* HelpWindow.xib in Resources */,
 				BE3BDBB3DBEEB39658AC9DDD /* AndroidViewController.storyboard in Resources */,
+				50F91FCD20024DA000C58955 /* info.png in Resources */,
 				50F511852001405500CCB22C /* options.png in Resources */,
 				50F511832001401C00CCB22C /* clipboard.png in Resources */,
 				BE3BD86D6970BC033D5B3E58 /* MenuViewController.storyboard in Resources */,
 				BE3BD049FD9C4D474A8E308C /* TransferViewController.storyboard in Resources */,
 				BE3BD07C1550A55D08A853F2 /* Snackbar.xib in Resources */,
+				50F91FCB20024A4800C58955 /* MenuStatusView.xib in Resources */,
 				BE3BDF9F00E6DA1CD6D6CE43 /* FileCell.xib in Resources */,
 				50F511822001401C00CCB22C /* remove.png in Resources */,
 				BE3BD04A725201CFC6692744 /* PathSelector.xib in Resources */,
@@ -1481,6 +1495,7 @@
 				BE3BD1B87F638080742BF2CD /* DragUiDelegate.swift in Sources */,
 				BE3BD1160DCBB842CAF018B2 /* DraggableTableView.swift in Sources */,
 				BE3BDA1B26C25B694341E27B /* DraggableItem.swift in Sources */,
+				50F91FC920024A3B00C58955 /* MenuStatusView.swift in Sources */,
 				BE3BD756779B9E066ABD34FA /* SegueFromLeftOld.swift in Sources */,
 				BE3BDD40E7D724B613AFB166 /* SelectableTableRowView.swift in Sources */,
 				BE3BD7DB41DF423A3A01554C /* ViewController.swift in Sources */,
@@ -1510,6 +1525,7 @@
 				BE3BD85D4ACE9E0C076A3820 /* DeviceInfoCommand.cpp in Sources */,
 				BE3BD3F63BF3B11A5D618039 /* StorageListCommand.cpp in Sources */,
 				BE3BDF0DB532B65C04E311BD /* SimpleAdbCommand.cpp in Sources */,
+				50F91FCF200251B300C58955 /* Path.swift in Sources */,
 				BE3BD05D840B7FC4EC6F0DC2 /* FileExistsCommand.cpp in Sources */,
 				BE3BD32DC2C2B35B0E63F253 /* NewFolderCommand.cpp in Sources */,
 				50CAAF8A1FFFBFCD00911D8E /* SingleClickButton.swift in Sources */,

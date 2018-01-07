@@ -25,30 +25,8 @@ class PathSelector: NSView {
 	
 	@IBOutlet weak var firstImage: NSImageView!
 	@IBOutlet weak var secondImage: NSImageView!
-	
-	class Path: NSObject {
-		func getPathName() -> String {
-			var pathName = ""
-			if (fullPath == "/sdcard") {
-				pathName = "Internal Storage"
-			} else {
-				pathName = name
-			}
-			return pathName
-		}
-		
-		var name: String
-		var fullPath: String
-		
-		init(_ _name: String, _ path: String) {
-			name = _name
-			fullPath = path
-		}
-		
-		override public var description: String {
-			return "Path: \(name), \(fullPath)"
-		}
-	}
+    
+    var disposeBag = DisposeBag()
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
@@ -150,15 +128,15 @@ class PathSelector: NSView {
 				.subscribe(onNext: {
 					transferHandler in
 					transferHandler.updateList(path)
-				})
+				}).addDisposableTo(disposeBag)
 	}
 	
 	private func isCurrentPath(_ path: Path) -> Bool {
-		return (path.fullPath == currentPath)
+		return (path.absolutePath == currentPath)
 	}
 	
 	func first() {
-		let path = paths[0].fullPath
+		let path = paths[0].absolutePath
 		
 		if (path != currentPath) {
 			updateToPath(path)
@@ -167,7 +145,7 @@ class PathSelector: NSView {
 	}
 	
 	func second() {
-		let path = paths[1].fullPath
+		let path = paths[1].absolutePath
 		
 		if (path != currentPath) {
 			LogV("Open", path)
@@ -176,7 +154,7 @@ class PathSelector: NSView {
 	}
 
 /*    func third() {
-        LogV("Open", paths[2].fullPath)
+        LogV("Open", paths[2].absolutePath)
     }
  */
 	var clickableImage: NSImage? = nil
@@ -201,6 +179,11 @@ class PathSelector: NSView {
 		updateText(firstText, "Unknown")
 		updateText(secondText, "Unknown")
 		updateText(thirdText, "Unknown")
+        firstText.isHidden = true
+        firstImage.isHidden = true
+        secondText.isHidden = true
+        secondImage.isHidden = true
+        thirdText.isHidden = true
 		
 		
 		//     thirdText.attributedTitle = NSMutableAttributedString(string: "Internal Storage", attributes: [NSForegroundColorAttributeName: NSColor.white])

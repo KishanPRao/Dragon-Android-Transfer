@@ -18,6 +18,8 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
     public let kPasteboardTypePasteLocation = "com.apple.pastelocation"
     public var draggedRows: IndexSet = []
     public var dragDropRow: Int = DRAG_DROP_NONE
+    
+    public var enableDrag = true
 	
 	func updateList(data: [BaseFile]) {
 		self.mData = data
@@ -46,6 +48,9 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
     }
 	
 	func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableViewDropOperation) -> NSDragOperation {
+        if (!enableDrag) {
+            return []
+        }
         let emptyList = mData.count == 0
 		if (dropOperation == .above) {
             if (emptyList) {
@@ -88,6 +93,9 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
 	
 	
 	func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableViewDropOperation) -> Bool {
+        if (!enableDrag) {
+            return false
+        }
 		let pb = info.draggingPasteboard()
         LogV("Pboard items", pb.pasteboardItems)
         var returnValue = false
@@ -119,6 +127,9 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
 	
 	func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
 //        return DraggableTableView.kFakeDraggableItem
+        if (!enableDrag) {
+            return nil
+        }
         return mData[row] as! NSPasteboardWriting
 	}
 	
@@ -181,6 +192,9 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
     
 //    Copying to Finder, drop destination
     override func draggingEnded(_ sender: NSDraggingInfo?) {
+        if (!enableDrag) {
+            return
+        }
         let oldDrag = dragDropRow
         dragDropRow = DRAG_DROP_NONE
 //        updateItemChanged(index: oldDrag)

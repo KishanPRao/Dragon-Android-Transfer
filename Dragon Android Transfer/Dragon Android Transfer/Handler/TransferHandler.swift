@@ -62,6 +62,10 @@ class TransferHandler {
 	func setUsingExternalStorage(_ usingExternalStorage: Bool) {
 		androidHandler.setUsingExternalStorage(usingExternalStorage)
 	}
+    
+    func resetStorageDetails() {
+        self.androidHandler.resetStorageDetails()
+    }
 	
 	func updateStorage() {
 		self.androidHandler.updateStorage()

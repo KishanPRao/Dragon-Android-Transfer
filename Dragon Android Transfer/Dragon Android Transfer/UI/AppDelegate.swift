@@ -89,7 +89,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 	func isInvalidOperation() -> Bool {
 		let invalid = AppDelegate.isPastingOperation.value
 		if (invalid) {
-			NSSound.init(named: "Funk")!.play()
+			NSSound.init(named: "Funk")?.play()
 			NSApp.requestUserAttention(NSRequestUserAttentionType.informationalRequest)
 		}
 		return invalid

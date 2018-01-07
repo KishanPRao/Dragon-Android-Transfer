@@ -50,4 +50,6 @@ public struct StringResource {
 //					"\n" +
 //					"Do share your feedback to this mail:\n" +
 //					"support.draconian@gmail.com"
+    
+    let textViewPlaceHolder = "Updating.."
 }

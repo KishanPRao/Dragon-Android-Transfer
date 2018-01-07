@@ -74,7 +74,7 @@
                                                 </tableView>
                                             </subviews>
                                         </clipView>
-                                        <scroller key="horizontalScroller" verticalHuggingPriority="750" doubleValue="0.33333333333333331" horizontal="YES" id="U9D-YA-ReE">
+                                        <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="U9D-YA-ReE">
                                             <rect key="frame" x="0.0" y="84" width="200" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
@@ -97,6 +97,10 @@ Gw
                                             <action selector="closeMenu:" target="DwD-Ft-xE8" id="47j-2a-IrP"/>
                                         </connections>
                                     </button>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DTQ-Jz-Tfw" customClass="MenuStatusView" customModule="Dragon_Android_Transfer" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    </customView>
                                 </subviews>
                             </customView>
                         </subviews>
@@ -106,6 +110,7 @@ Gw
                         <outlet property="navigationParent" destination="rF5-jT-N06" id="9mP-9z-XIU"/>
                         <outlet property="overlayView" destination="zpt-X2-nuM" id="oP0-39-HSG"/>
                         <outlet property="popup" destination="96F-kl-kZk" id="wWE-la-Kz2"/>
+                        <outlet property="statusView" destination="DTQ-Jz-Tfw" id="lYb-uK-Vt6"/>
                         <outlet property="table" destination="65t-9Y-FVQ" id="H2N-yN-rqY"/>
                         <outlet property="tableOuter" destination="V72-bJ-WmW" id="dx4-gB-69U"/>
                         <outlet property="testPopup" destination="6zL-2Q-SqR" id="WUv-UO-UKO"/>

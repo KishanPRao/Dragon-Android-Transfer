@@ -170,16 +170,18 @@ public class AndroidHandler: NSObject {
 			let externalDirectories = activeDevice!.storages
 			print("External Directories:", externalDirectories)
 			if (externalDirectories.count > 1) {
-				externalStorage = externalDirectories[1].location
+				externalStorage = externalDirectories[1].path.absolutePath
 			} else {
 				externalStorage = ""
 			}
             if (device!.storages.count > 0) {
-            	updateList(device!.storages[0].location, true)
+            	updateList(device!.storages[0].path.absolutePath, true)
+                updateStorage()
             }
 		} else {
 			externalStorage = ""
             updateList("", true)
+            self.spaceStatus.value = []
 		}
         observableActiveDevice.value = activeDevice
 		return true
@@ -196,7 +198,12 @@ public class AndroidHandler: NSObject {
 	func reset() {
 		currentPath = ""
         observableCurrentPath.value = currentPath
+        self.spaceStatus.value = []
 	}
+    
+    func resetStorageDetails() {
+        self.spaceStatus.value = []
+    }
 	
 	private func exists(_ filePath: String, isFile: Bool) -> Bool {
 		return adbHandler.fileExists(filePath, withFileType: isFile)
@@ -234,9 +241,11 @@ public class AndroidHandler: NSObject {
 	}
 	
 	func updateStorage() {
+        self.spaceStatus.value = []
 		var spaceStatus = [String]()
 		spaceStatus.append(adbHandler.getAvailableSpace(currentPath))
 		spaceStatus.append(adbHandler.getTotalSpace(currentPath))
+//        LogD("Space Status: \(spaceStatus)")
 		self.spaceStatus.value = spaceStatus
 	}
 	
@@ -493,7 +502,7 @@ public class AndroidHandler: NSObject {
 	/* Transfer Specific */
 	static let EmptyFile = BaseFile(fileName: "", path: "", type: 0, size: 0)
 	
-	var hasActiveTask = Variable<FileProgressStatus>(FileProgressStatus.kStatusInProgress)
+	var hasActiveTask = Variable<FileProgressStatus>(FileProgressStatus.kStatusOk)
 	var sizeActiveTask = Variable<UInt64>(0)
 	var transferTypeActive = Variable<Int>(TransferType.AndroidToMac)
 	var fileActiveTask = Variable<BaseFile>(EmptyFile)
@@ -531,8 +540,7 @@ public class AndroidHandler: NSObject {
 			let currentProgress = (Double(progress) * Double(currentItemTotalProgress) / 100.0)
 			
 			let previousProgress = (Double(self.previousSizeTask) / totalSize) * 100.0
-//			let currentProgress = (Double(progress) / Double(self.totalItems))
-			print("Prev: \(previousProgress), curr: \(currentProgress)")
+//			print("Prev: \(previousProgress), curr: \(currentProgress)")
 			self.progressActiveTask.value = previousProgress + currentProgress 
 		} else if (result == AdbExecutionResultWrapper.Result_Canceled) {
 			print("Canceled")

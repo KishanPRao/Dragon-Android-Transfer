@@ -102,7 +102,7 @@ public class ShellParser: NSObject {
 	//@objc
 	public static func parseStorageOutput(_ fileNames: String, info output: String) -> Array<StorageItem> {
 		var storages = [StorageItem]()
-		storages.append(StorageItem(name: "Internal Storage", location: "/sdcard"))
+		storages.append(StorageItem(Path("Internal Storage", "/sdcard")))
 		let outputLines = splitLines(output)
 		let fileNamesLines = splitLines(fileNames)
 		var skipLines = 0
@@ -113,7 +113,7 @@ public class ShellParser: NSObject {
 		while (i < outputLines.count) {
 			let line = outputLines[i]
 			if (!line.contains("self") && !line.contains("emulated") && !line.contains("system")) {
-				storages.append(StorageItem(name: "External Storage", location: "/storage/" + fileNamesLines[i - skipLines]))
+				storages.append(StorageItem(Path("External Storage", "/storage/" + fileNamesLines[i - skipLines])))
 			}
 			i = i + 1
 		}
@@ -131,29 +131,29 @@ public class ShellParser: NSObject {
 		}.map(String.init)
 		return outputInTabs
 	}
-	
-	@objc
-	public static func parseTotalSpace(_ output: String) -> String {
-		var spaceInString = "0B"
-		let outputInTabs = parseSpaceOutput(output)
-		if (outputInTabs.count == 0) {
-			return spaceInString
-		}
-		if let totalSpaceInInt = UInt64(outputInTabs[1]) {
-//			totalSpace = totalSpaceInInt * UInt64(BLOCK_SIZE_IN_FLOAT)
-			spaceInString = SizeUtils.getBytesInFormat(totalSpaceInInt * UInt64(BLOCK_SIZE_IN_FLOAT))
-		} else {
-//			Solaris
-			spaceInString = outputInTabs[1] + "B"
-		}
-		if (EXTREME_VERBOSE) {
-//			print("Output:", outputInTabs)
-		}
-		if (EXTREME_VERBOSE) {
-//			print("Total:", totalSpace)
-		}
-		return spaceInString
-	}
+    
+    @objc
+    public static func parseTotalSpace(_ output: String) -> String {
+        var spaceInString = "0B"
+        let outputInTabs = parseSpaceOutput(output)
+        if (outputInTabs.count == 0) {
+            return spaceInString
+        }
+        if let totalSpaceInInt = UInt64(outputInTabs[1]) {
+            //            totalSpace = totalSpaceInInt * UInt64(BLOCK_SIZE_IN_FLOAT)
+            spaceInString = SizeUtils.getBytesInFormat(totalSpaceInInt * UInt64(BLOCK_SIZE_IN_FLOAT))
+        } else {
+            //            Solaris
+            spaceInString = outputInTabs[1] + "B"
+        }
+        if (EXTREME_VERBOSE) {
+            //            print("Output:", outputInTabs)
+        }
+        if (EXTREME_VERBOSE) {
+            //            print("Total:", totalSpace)
+        }
+        return spaceInString
+    }
 	
 	@objc
 	public static func parseAvailableSpace(_ output: String) -> String {

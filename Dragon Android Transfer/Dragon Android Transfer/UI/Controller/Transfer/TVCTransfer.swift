@@ -38,7 +38,7 @@ extension TransferViewController {
 				.observeOn(bgScheduler)
 				.subscribe(onNext: { transferHandler in
 					transferHandler.push(files, destination: path)
-				})
+				}).addDisposableTo(disposeBag)
 	}
 	
 	func pasteToMac(_ path: String) {
@@ -56,7 +56,7 @@ extension TransferViewController {
 				.observeOn(bgScheduler)
 				.subscribe(onNext: { transferHandler in
 					transferHandler.pull(files, destination: path)
-				})
+				}).addDisposableTo(disposeBag)
 	}
 	
 	func cancelTask() {
@@ -80,7 +80,7 @@ extension TransferViewController {
 						self.finished(status)
 					}
 					self.mCurrentProgress = -1
-				})
+				}).addDisposableTo(disposeBag)
 		
 		transferHandler.sizeActiveTask().skip(1)
 				.observeOn(MainScheduler.instance)
@@ -89,7 +89,7 @@ extension TransferViewController {
 //                if (self.copyDialog != nil) {
 //                    self.copyDialog?.setTotalCopySize(totalSize)
 //                }
-				})
+				}).addDisposableTo(disposeBag)
 		transferHandler.transferTypeActive().skip(1)
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: { value in
@@ -105,7 +105,7 @@ extension TransferViewController {
 					self.updateTransferState()
 //                    self.copyDialog?.setTransferType(transferTypeString)
 //                }
-				})
+				}).addDisposableTo(disposeBag)
 		transferHandler.fileActiveTask().skip(1)
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: { value in
@@ -119,7 +119,7 @@ extension TransferViewController {
 							files = self.transferHandler.getClipboardMacItems()
 						}
 						var i = 0
-						print("Files:", files as Any!)
+//						print("Files:", files as Any!)
 						print("File Name:", fileName)
 						self.currentCopiedSize = 0
 						while (i < files!.count) {
@@ -137,7 +137,7 @@ extension TransferViewController {
 						let range = NSMakeRange(self.currentCopyFile.count, 4)
 						let pathTransferStringValue = self.currentCopyFile + " to " + self.copyDestination
 						let attributedString: NSAttributedString
-						attributedString = TextUtils.attributedString(
+						attributedString = TextUtils.attributedBoldString(
 								from: pathTransferStringValue,
 								color: R.color.transferTextColor,
 								nonBoldRange: range)
@@ -148,12 +148,12 @@ extension TransferViewController {
 						self.pathTransferString.attributedStringValue = attributedString
 						
 					}
-				})
+				}).addDisposableTo(disposeBag)
 		transferHandler.progressActiveTask().skip(1)
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: { progress in
 					self.progressActive(progress)
-				})
+				}).addDisposableTo(disposeBag)
 	}
 	
 	
@@ -161,9 +161,9 @@ extension TransferViewController {
 		if (mCurrentProgress == progress) {
 			return
 		}
-		LogV("Progress Active: \(progress)")
+//		LogV("Progress Active: \(progress)")
 		mCurrentProgress = progress
-		LogV("Current File: \(currentFile)")
+//		LogV("Current File: \(currentFile)")
 		//                print("Update Prog")
 		let size = CGFloat(totalSize) * (CGFloat(progress) / 100.0)
 		if (size >= CGFloat(UInt64.max)) {
@@ -174,11 +174,14 @@ extension TransferViewController {
 //        copyDialog?.updateCopyStatus(currentFileCopiedSize, withProgress: CGFloat(progress))
 		transferProgressView.setProgress(CGFloat(progress))
 		
-		let copiedSizeInString = SizeUtils.getBytesInFormat(copiedSize)
+		var copiedSizeInString = "0B"
+        if copiedSize > 0 {
+        	copiedSizeInString = SizeUtils.getBytesInFormat(copiedSize)
+        }
 //        LogV("Copied Size:", copiedSizeInString)
 //        pathTransferSize.stringValue = copiedSizeInString + " of " + SizeUtils.getBytesInFormat(totalSize)
 		let range = NSMakeRange(copiedSizeInString.count, 4)
-		pathTransferSize.attributedStringValue = TextUtils.attributedString(
+		pathTransferSize.attributedStringValue = TextUtils.attributedBoldString(
 				from: copiedSizeInString + " of " + SizeUtils.getBytesInFormat(totalSize),
 				color: R.color.transferTextColor,
 				nonBoldRange: range)

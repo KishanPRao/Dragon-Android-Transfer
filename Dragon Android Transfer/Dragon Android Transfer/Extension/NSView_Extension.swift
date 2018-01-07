@@ -60,7 +60,7 @@ extension NSView {
 	
 	func bringToFront() {
 		if (isInFront()) {
-			LogV("is in front!")
+//            LogV("is in front!")
 			return
 		}
 		let superView = self.superview

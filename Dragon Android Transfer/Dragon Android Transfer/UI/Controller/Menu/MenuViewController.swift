@@ -22,20 +22,26 @@ class MenuViewController: NSViewController,
 	@IBOutlet weak var testPopup: NSPopUpButton!
 	internal let transferHandler = TransferHandler.sharedInstance
 	internal let bgScheduler = ConcurrentDispatchQueueScheduler(qos: .background)
+    var disposeBag = DisposeBag()
 	
 	public var frameSize = NSRect()
 	internal var storages = [StorageItem]()
 	internal var selectedIndex = -1 as Int
 	
 	var androidDevices = [AndroidDevice]()
-	
+    
+    @IBOutlet weak var statusView: MenuStatusView!
+    
 	var isOpen = true
 	
 	@IBAction func closeMenu(_ sender: Any) {
-		print("Close Menu")
+//        print("Close Menu")
+        if (!isOpen) {
+            return
+        }
 		isOpen = false
 		animate(open: false) {
-			print("Close end")
+//            print("Close end")
 			self.view.removeFromSuperview()
 			self.removeFromParentViewController()
 		}
@@ -43,21 +49,26 @@ class MenuViewController: NSViewController,
 	
 	override func viewWillAppear() {
 		super.viewWillAppear()
-		print("Menu, view!")
+//        print("Menu, view!")
+        initSizes()
 		
-		initUi()
-		observe()
+        isOpen = true
+        animate(open: true) {
+//            print("Opened")
+        }
 	}
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        initUi()
+        observe()
+    }
 	
 	private func initUi() {
 		//self.view.wantsLayer = true
 		//self.view.layer?.backgroundColor = R.color.menuBgColor.cgColor
 		//self.view.layerContentsRedrawPolicy = NSViewLayerContentsRedrawPolicy.onSetNeedsDisplay
 		initUiContent()
-		initSizes()
-		animate(open: true) {
-			print("Opened")
-		}
 		/*overlayView.setOnClickListener() {
 			self.closeMenu(nil)
 		}*/
@@ -89,17 +100,20 @@ class MenuViewController: NSViewController,
     
     internal func updateStorageSelection(_ path: String) {
         var index = -1
+        var storageItem: StorageItem? = nil
         for i in 0..<self.storages.count {
-            let storageLocation = self.storages[i].location
+            let storageLocation = self.storages[i].path.absolutePath
             if path.starts(with: storageLocation) {
 //                self.LogV("Path: \(path), \(i)")
                 index = i
+                storageItem = self.storages[i]
                 break
             }
         }
         if index != -1 {
             let indexSet = IndexSet(integer: index)
             self.table.selectRowIndexes(indexSet, byExtendingSelection: true)
+            self.statusView.updateStorageItem(storageItem!)
         }
     }
     
@@ -113,14 +127,21 @@ class MenuViewController: NSViewController,
 			//LogW("Bad index, menu")
 			return
 		}
-		print("Double Clicked Menu:", index, storages[index])
+//        print("Double Clicked Menu:", index, storages[index])
 		NotificationCenter.default.post(name: Notification.Name(rawValue: AndroidViewController.NotificationStartLoading), object: nil)
 		Observable.just(transferHandler)
+            	.observeOn(MainScheduler.instance)
+            	.map { transferHandler -> TransferHandler in
+                    self.statusView.resetTitle()
+                    self.statusView.resetSize()
+                    return transferHandler
+            	}
 				.observeOn(bgScheduler)
-				.subscribe(onNext: {
-					transferHandler in
-					transferHandler.updateList(self.storages[index].location)
-				})
+            	.subscribe(onNext: { transferHandler in
+                    transferHandler.resetStorageDetails()
+					transferHandler.updateList(self.storages[index].path.absolutePath)
+                    transferHandler.updateStorage()
+				}).addDisposableTo(disposeBag)
 		closeMenu(self)
 	}
 	
@@ -169,9 +190,12 @@ class MenuViewController: NSViewController,
 //		table.makeFirstResponder(self.view.window)
 	}
 	
-	private func animate(open: Bool, handler: @escaping () -> ()) {
+    public func animate(open: Bool, handler: @escaping () -> () = {}) {
 		//window.setFrame(frameSize, display: true)
 		//self.view.frame.size = NSSize(width: frameSize.width, height: frameSize.height)
+        let navigationSize = NSSize(width: frameSize.width * 0.5, height: frameSize.height)
+        self.navigationParent.frame.origin = self.view.frame.origin
+        self.navigationParent.frame.size = navigationSize
 		let animView = self.navigationParent!
 		let fadeView = self.overlayView!
 		var dx = animView.frame.size.width
@@ -184,7 +208,7 @@ class MenuViewController: NSViewController,
 			alpha = 1 - alpha
 		}
 		
-		print("Dx", dx)
+//        print("Dx", dx, animView.frame)
 		NSAnimationContext.runAnimationGroup({ context in
 			context.duration = R.integer.animStartDuration
 			animView.animator().frame = animView.frame.offsetBy(dx: dx, dy: 0)

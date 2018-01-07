@@ -26,6 +26,8 @@ class TransferViewController: NSViewController {
 	//  Transfer related
 	internal let transferHandler = TransferHandler.sharedInstance
 	internal let bgScheduler = ConcurrentDispatchQueueScheduler(qos: .background)
+    var disposeBag = DisposeBag()
+    
 	internal var copyDestination = ""
 	internal var currentCopyFile = ""
 	internal var transferType = -1
@@ -35,6 +37,8 @@ class TransferViewController: NSViewController {
 	
 	let androidImage = NSImage(named: R.drawable.android)
 	let macImage = NSImage(named: R.drawable.mac)
+    let normalMore = NSImage(named: R.drawable.more)
+    let rotatedMore = NSImage(named: R.drawable.more)!.imageRotatedByDegrees(degrees: 180)
 	
 	internal var alert: DarkAlert? = nil
 	
@@ -45,6 +49,8 @@ class TransferViewController: NSViewController {
 	public var frameSize = NSRect()
 	
 	private var expanded = false
+    
+    var transferDialogOrigFrame = NSRect()
 	
 	func exit() {
 		NSAnimationContext.runAnimationGroup({ context in
@@ -74,16 +80,27 @@ class TransferViewController: NSViewController {
 		
 		initNotification()
 		observeTransfer()
+        
+        transferDialogOrigFrame = transferDialog.frame
 	}
 	
-	let normalMore = NSImage(named: R.drawable.more)
-	let rotatedMore = NSImage(named: R.drawable.more)!.imageRotatedByDegrees(degrees: 180)
-	
 	private func initUi() {
+        transferDialog.frame = transferDialogOrigFrame
+        expanded = false
+        currentFile = nil
+        copyDestination = ""
+        currentCopyFile = ""
+        currentCopiedSize = 0
+        totalSize = 0
+        transferProgressView.setProgress(0.0)
+        
 		self.view.frame.size = frameSize.size
 		
 		overlayView.frame = self.view.frame
 		overlayView.setBackground(R.color.menuBgColor)
+        overlayView.setOnClickListener {
+            NSSound.init(named: "Funk")?.play()
+        }
 		
 		self.transferDialog.setBackground(R.color.transferBg)
 		self.transferDialog.cornerRadius(5.0)
@@ -107,14 +124,14 @@ class TransferViewController: NSViewController {
 		timeRemainingText.textColor = R.color.white
 		timeRemainingText.isHidden = false
 		
-		copyingTextField.attributedStringValue = TextUtils.attributedString(from: "Copying",
+		copyingTextField.attributedStringValue = TextUtils.attributedBoldString(from: "Copying",
 				color: R.color.transferTextColor,
 				nonBoldRange: nil)
 		
 		srcDeviceImageView.isHidden = true
 		destDeviceImageView.isHidden = true
-		pathTransferString.stringValue = "Updating.."
-		pathTransferSize.stringValue = "Updating.."
+		pathTransferString.stringValue = R.string.textViewPlaceHolder
+		pathTransferSize.stringValue = R.string.textViewPlaceHolder
 //        LogI("Init UI")
 //        self.view.makeFirstResponder(self.view.window)
 	}
@@ -196,11 +213,13 @@ class TransferViewController: NSViewController {
 				.observeOn(bgScheduler)
 				.map {
 					transferHandler in
-					transferHandler.updateList(transferHandler.getCurrentPath())
+//					self.LogV("Refresh TVC!")
+                    transferHandler.resetStorageDetails()
+					transferHandler.updateList(transferHandler.getCurrentPath(), true)
 					transferHandler.updateStorage()
 				}
 				.observeOn(MainScheduler.instance)
-				.subscribe(onNext: {})
+				.subscribe(onNext: {}).addDisposableTo(disposeBag)
 	}
 	
 	private func initNotification() {

@@ -17,6 +17,7 @@ class FileOptions: NSView {
 	@IBOutlet weak var optionsButton: NSButton!
 	
 	let transferHandler = TransferHandler.sharedInstance
+    var disposeBag = DisposeBag()
 	
 	override init(frame frameRect: NSRect) {
 		super.init(frame: frameRect)
@@ -84,6 +85,6 @@ class FileOptions: NSView {
 					} else {
 						self.pasteButton.isEnabled = false
 					}
-				})
+				}).addDisposableTo(disposeBag)
 	}
 }

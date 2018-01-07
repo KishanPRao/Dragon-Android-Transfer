@@ -76,7 +76,7 @@ class Snackbar: NSView {
 	
 	func showSnackbar() {
 		bringToFront()
-		Swift.print("Aniamting Snackbar")
+//        Swift.print("Aniamting Snackbar")
         if (isOpen) {
 			return
 		}

@@ -35,4 +35,12 @@ class SizeUtils {
         }
         return bytesInString
     }
+    
+    public static func getSpaceInNumber(_ space: String) -> Float {
+        let result = space.trimmingCharacters(in: CharacterSet(charactersIn: "01234567890.").inverted)
+        if let spaceInNumber = Float(result) {
+            return spaceInNumber
+        }
+        return 0.0
+    }
 }

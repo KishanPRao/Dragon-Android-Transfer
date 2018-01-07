@@ -19,4 +19,5 @@ class ImageResource {
     public let paste = "paste"
     public let remove = "remove"
     public let options = "options"
+    public let info = "info"
 }

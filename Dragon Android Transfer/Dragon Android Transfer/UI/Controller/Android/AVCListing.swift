@@ -17,27 +17,27 @@ extension AndroidViewController {
 				.subscribe(onNext: {
 					list in
 					self.reloadFileList(list)
-				})
+				}).addDisposableTo(disposeBag)
 		
 		transferHandler.observeClipboardAndroidItems()
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: {
 					list in
 					self.updateClipboard()
-				})
+				}).addDisposableTo(disposeBag)
 		transferHandler.observeClipboardMacItems()
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: {
 					list in
 					self.updateClipboard()
 					AppDelegate.hasMacClipboardItems = list.count > 0
-				})
+				}).addDisposableTo(disposeBag)
 		transferHandler.observeCurrentPath()
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: {
 					path in
 					self.pathSelector.updateCurrentPath(path)
-				})
+				}).addDisposableTo(disposeBag)
 	}
 	
 	/*
@@ -122,7 +122,7 @@ extension AndroidViewController {
 					transferHandler.updateStorage()
 				}
 				.observeOn(MainScheduler.instance)
-				.subscribe(onNext: {})
+				.subscribe(onNext: {}).addDisposableTo(disposeBag)
 	}
 	
 	internal func openFile(_ selectedItem: BaseFile) {
@@ -150,7 +150,7 @@ extension AndroidViewController {
 //                    self.LogV("Opened Dir")
 				}
 				.observeOn(MainScheduler.instance)
-				.subscribe(onNext: {})
+				.subscribe(onNext: {}).addDisposableTo(disposeBag)
 	}
 	
 	func openSelectedDirectory() {
@@ -191,6 +191,6 @@ extension AndroidViewController {
 								}
 							}
 							self.hideProgress()
-						})
+						}).addDisposableTo(disposeBag)
 	}
 }

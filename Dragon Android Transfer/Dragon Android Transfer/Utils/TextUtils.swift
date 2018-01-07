@@ -24,7 +24,7 @@ class TextUtils {
 		])
 	}
 	
-	static func attributedString(from string: String, color: NSColor, nonBoldRange: NSRange?) -> NSAttributedString {
+	static func attributedBoldString(from string: String, color: NSColor, nonBoldRange: NSRange?) -> NSAttributedString {
 		let fontSize = NSFont.systemFontSize()
 		let style = NSMutableParagraphStyle()
 		style.lineBreakMode = .byTruncatingTail

@@ -46,7 +46,7 @@ extension MenuViewController {
             view.image.image = image
 //            view.image.imageScaling = .scaleProportionallyUpOrDown
             view.image.imageScaling = .scaleAxesIndependently
-            view.text.stringValue = storage.name
+            view.text.stringValue = storage.path.name
         }
         
         return returnView

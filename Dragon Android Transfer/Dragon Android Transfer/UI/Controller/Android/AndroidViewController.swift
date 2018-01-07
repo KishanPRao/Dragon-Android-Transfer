@@ -20,10 +20,13 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		ClipboardDelegate, /*CopyDialogDelegate,*/
 		DragNotificationDelegate, DragUiDelegate,
 		NSUserInterfaceValidations {
+    
 	public static let NotificationStartLoading = "NotificationStartLoading"
 	public static let NotificationSnackbar = "NotificationSnackbar"
 	
+    var disposeBag = DisposeBag()
 	internal let bgScheduler = ConcurrentDispatchQueueScheduler(qos: .background)
+    
 	internal let tableDelegate = DeviceTableDelegate()
 	internal var _androidDirectoryItems: Array<BaseFile> = []
 	internal var androidDirectoryItems: Array<BaseFile> {
@@ -63,7 +66,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 	internal let mDockTile: NSDockTile = NSApplication.shared().dockTile
 	internal var mDockProgress: NSProgressIndicator? = nil
 	//internal var mCircularProgress: IndeterminateProgressView? = nil
-	internal var mCurrentProgress = -1.0
+//    internal var mCurrentProgress = -1.0
 	
 	@IBOutlet weak var loadingProgress: IndeterminateProgress!
 	
@@ -87,7 +90,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		transferHandler.start()
 		
 		observeListing()
-//        observeTransfer()
+        observeTransfer()
 	}
 	
 	func updateDeviceStatus() {
@@ -288,12 +291,15 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 	var transferVc: TransferViewController? = nil
 	
 	func startTransfer() {
+        self.fileTable.enableDrag = false
 		let window = self.view.window!
 		var frameSize = window.frame
 		frameSize.size = NSSize(width: window.frame.width, height: frameSize.height - window.titlebarHeight)
 		
-		let storyBoard = NSStoryboard(name: "TransferViewController", bundle: Bundle.main)
-		transferVc = storyBoard.instantiateInitialController() as! TransferViewController
+        if transferVc == nil {
+			let storyBoard = NSStoryboard(name: "TransferViewController", bundle: Bundle.main)
+			transferVc = storyBoard.instantiateInitialController() as! TransferViewController
+        }
 		if let transferVc = transferVc {
 //            transferVc.view.frame.origin = NSSize()
 			transferVc.frameSize = frameSize
@@ -302,24 +308,26 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		}
 	}
 	
-	var vc: MenuViewController? = nil
+	var menuVc: MenuViewController? = nil
 	
 	@IBAction func menuTapped(_ sender: Any) {
-		if (vc != nil && vc!.isOpen) {
-			vc?.closeMenu(self)
+		if (menuVc != nil && menuVc!.isOpen) {
+			menuVc?.closeMenu(self)
 			return
 		}
-		let window = self.view.window!
-		var frameSize = window.frame
-		frameSize.size = NSSize(width: window.frame.width, height: frameSize.height - window.titlebarHeight)
-		
-		let storyBoard = NSStoryboard(name: "MenuViewController", bundle: Bundle.main)
-		vc = storyBoard.instantiateInitialController() as! MenuViewController
-		if let vc = vc {
-			vc.frameSize = frameSize
-			addChildViewController(vc)
-			view.addSubview(vc.view)
+        let window = self.view.window!
+        var frameSize = window.frame
+        frameSize.size = NSSize(width: window.frame.width, height: frameSize.height - window.titlebarHeight)
+        if menuVc == nil {
+			let storyBoard = NSStoryboard(name: "MenuViewController", bundle: Bundle.main)
+			menuVc = storyBoard.instantiateInitialController() as! MenuViewController
+        }
+		if let menuVc = menuVc {
+			menuVc.frameSize = frameSize
+			addChildViewController(menuVc)
+			view.addSubview(menuVc.view)
 		}
+//        vc?.animate(open: true)
 	}
 	
 	func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {

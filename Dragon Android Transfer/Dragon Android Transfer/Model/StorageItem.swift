@@ -11,21 +11,21 @@ import Cocoa
 
 //@objc
 public class StorageItem: NSObject {
-    public var name: String = ""
-    public var location: String = ""
+//    public var name: String = ""
+//    public var location: String = ""
+    public var path = Path("", "")
     
-    init(name: String, location: String) {
-        self.name = name
-        self.location = location
+    init(_ path: Path) {
+        self.path = path
     }
     
     public var isInternal : Bool {
         get {
-            return location.contains("/sdcard")
+            return path.absolutePath.contains("/sdcard")
         }
     }
     
     public override var description: String {
-        return "StorageItem: \(name, location)"
+        return "StorageItem: \(path.name, path.absolutePath)"
     }
 }

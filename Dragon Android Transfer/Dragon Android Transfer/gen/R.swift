@@ -12,4 +12,5 @@ class R {
 	public internal(set) static var color: Theme = _darkTheme
 	public static let drawable = ImageResource()
 	public static let integer = IntegerResource()
+    public static let string = StringResource()
 }
