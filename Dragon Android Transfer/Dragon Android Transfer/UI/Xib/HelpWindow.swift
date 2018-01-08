@@ -87,7 +87,7 @@ class HelpWindow: NSWindowController {
 //		let origFrame = self.contentViewController!.view.frame
 		let origFrame = self.window!.frame
 //		self.window!.setFrame(DimenUtils.getUpdatedRect2(frame: origFrame, dimensions: Dimens.help_window), display: true)
-		self.window!.setFrame(DimenUtils.getUpdatedRect2(frame: origFrame, dimensions: Dimens.help_window), display: true)
+//        self.window!.setFrame(DimenUtils.getUpdatedRect2(frame: origFrame, dimensions: Dimens.help_window), display: true)
 		
 		textScrollView.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.help_window_text)
 		

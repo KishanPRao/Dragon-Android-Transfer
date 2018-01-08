@@ -287,10 +287,15 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 //			vc?.update(frame)
 			window.setFrameOrigin(frame.origin)
 		}*/
+        
+        if let adWc = adWc, let frame = self.view.window?.frame {
+            adWc.updateFrame(frame)
+        }
 	}
 	
 //    var adVc: AdViewController? = nil
-	let url = "https://dragon-android-transfer-ad.herokuapp.com"
+//    let url = "https://dragon-android-transfer-ad.herokuapp.com"
+    let url = "https://www.flipkart.com"
     var adWc: AdWindowController? = nil
     
 	func openAd() {

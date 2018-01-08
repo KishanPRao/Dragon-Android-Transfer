@@ -12,26 +12,56 @@ class AdWindowController: NSWindowController, WKNavigationDelegate {
 	public var frameSize = NSRect()
     @IBOutlet weak var view: NSView!
     public var url = ""
+    let height = 300.0 as CGFloat
+    var webView: WKWebView? = nil
+    
+    public func updateFrame(_ frame: NSRect) {
+    	frameSize = frame
+        let frame = NSRect(x: frameSize.origin.x + frameSize.width, y: frameSize.origin.y + height / 2.0,
+                           width: frameSize.width, height: height)
+        if let window = window {
+//            window.setFrame(frame, display: true)
+            window.setFrame(frame, display: true, animate: true)
+            self.view.frame.size = window.frame.size
+            webView?.frame.size = frame.size
+        }
+    }
     
     override func windowDidLoad() {
         super.windowDidLoad()
-        let frame = NSRect(x: 0, y: 0, width: frameSize.width, height: 300)
+        LogI("Frame: \(frameSize)")
         if let window = window {
-            LogV("Loaded")
-//            window.setFrame(NSRect(x: 0, y: 0, width: 1920, height: 50), display: true)
-            window.setFrame(frame, display: true, animate: true)
 //            window.styleMask = .borderless
+//            window.styleMask = .fullScreen
+            //            window.styleMask = .titled	//Best
+            window.titleVisibility = .hidden
+            window.titlebarAppearsTransparent = true
+            window .styleMask.remove( [ .resizable ] )
+            
+//            window.resize
+            window.isMovable = false
+            
+            window.standardWindowButton(.zoomButton)?.superview?.setBackground(R.color.windowBg)
+            
+            window.standardWindowButton(.zoomButton)?.isHidden = true
+            window.standardWindowButton(.miniaturizeButton)?.isHidden = true
+            window.standardWindowButton(.fullScreenButton)?.isHidden = true
         }
+        updateFrame(frameSize)
+//        let frame = NSRect(x: frameSize.origin.x + frameSize.width, y: frameSize.origin.y + height / 2.0,
+//                           width: frameSize.width, height: height)
         
-        self.view.frame = frame
+//        self.view.frame = window!.frame
         let url = URL(string: self.url)
         let request = URLRequest(url: url!)
         let webConfiguration = WKWebViewConfiguration()
-        let webView = WKWebView(frame: self.view.frame, configuration: webConfiguration)
-        webView.translatesAutoresizingMaskIntoConstraints = true
-        webView.load(request)
-        webView.navigationDelegate = self
-        self.view.addSubview(webView)
+        webView = WKWebView(frame: self.view.frame, configuration: webConfiguration)
+        if let webView = webView {
+        	webView.translatesAutoresizingMaskIntoConstraints = true
+        	webView.load(request)
+        	webView.navigationDelegate = self
+        	self.view.addSubview(webView)
+        }
         LogV("View Loaded")
     }
  

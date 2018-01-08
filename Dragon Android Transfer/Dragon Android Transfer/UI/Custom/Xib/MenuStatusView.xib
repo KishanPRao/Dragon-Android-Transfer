@@ -45,7 +45,7 @@
                     </textFieldCell>
                 </textField>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xzO-q1-ePa" customClass="ProgressView" customModule="Dragon_Android_Transfer" customModuleProvider="target">
-                    <rect key="frame" x="21" y="62" width="160" height="5"/>
+                    <rect key="frame" x="21" y="62" width="154" height="5"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                 </customView>
             </subviews>

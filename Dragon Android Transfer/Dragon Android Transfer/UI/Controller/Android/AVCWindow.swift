@@ -61,7 +61,7 @@ extension AndroidViewController {
 		self.view.window!.setFrame(finalRect, display: true)
 		view.frame = DimenUtils.getUpdatedRect2(frame: view.frame, dimensions: Dimens.android_controller_size)
 		
-		toolbarView.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_toolbar)
+//        toolbarView.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_toolbar)
 		//fileTable.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table)
 		//		let scrollViewFrame = fileTable.enclosingScrollView!.frame
 		//fileTable.enclosingScrollView!.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table)
