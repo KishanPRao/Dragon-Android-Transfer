@@ -24,11 +24,13 @@ class TextUtils {
 		])
 	}
 	
-	static func attributedBoldString(from string: String, color: NSColor, nonBoldRange: NSRange?) -> NSAttributedString {
+	static func attributedBoldString(from string: String, color: NSColor,
+                                     nonBoldRange: NSRange?,
+                                     _ alignment: NSTextAlignment = .natural) -> NSAttributedString {
 		let fontSize = NSFont.systemFontSize()
 		let style = NSMutableParagraphStyle()
 		style.lineBreakMode = .byTruncatingTail
-		style.alignment = .natural
+		style.alignment = alignment
 		let attrs = [
 			NSFontAttributeName: NSFont.boldSystemFont(ofSize: fontSize),
 			NSForegroundColorAttributeName: color,

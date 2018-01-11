@@ -50,6 +50,12 @@ class TransferViewController: NSViewController {
 	
 	private var expanded = false
     
+    internal var timer: Timer? = nil
+    internal let updateDelay = 3.0
+    
+    internal var previousCopiedSize = 0.0
+    internal var start: DispatchTime? = nil
+    
     var transferDialogOrigFrame = NSRect()
 	
 	func exit() {
@@ -66,9 +72,10 @@ class TransferViewController: NSViewController {
 	}
 	
 	func close() {
-		alert = DarkAlert(message: "Cancel?", info: "Do you want to cancel the current transfer?")
+        alert = DarkAlert(message: "Cancel?", info: "Do you want to cancel the current transfer?",
+                          buttonNames: ["Ok", "Cancel"])
 		let button = alert!.runModal()
-		if (button == NSAlertFirstButtonReturn) {
+		if (button == NSAlertSecondButtonReturn) {
 //            Ok
 			transferHandler.cancelActiveTask()
 			self.exit()
@@ -120,9 +127,6 @@ class TransferViewController: NSViewController {
 		initText(pathTransferString)
 		initText(pathTransferSize)
 		initText(copyingTextField)
-		timeRemainingText.stringValue = ""
-		timeRemainingText.textColor = R.color.white
-		timeRemainingText.isHidden = false
 		
 		copyingTextField.attributedStringValue = TextUtils.attributedBoldString(from: "Copying",
 				color: R.color.transferTextColor,
@@ -132,6 +136,15 @@ class TransferViewController: NSViewController {
 		destDeviceImageView.isHidden = true
 		pathTransferString.stringValue = R.string.textViewPlaceHolder
 		pathTransferSize.stringValue = R.string.textViewPlaceHolder
+        
+//        timeRemainingText.textColor = R.color.transferTextColor
+//        timeRemainingText.alignment = .center
+//        timeRemainingText.stringValue = R.string.textViewPlaceHolder
+        timeRemainingText.attributedStringValue = TextUtils.attributedBoldString(
+                from: R.string.textViewPlaceHolder,
+                color: R.color.transferTextColor,
+                nonBoldRange: nil,
+                .center)
 //        LogI("Init UI")
 //        self.view.makeFirstResponder(self.view.window)
 	}

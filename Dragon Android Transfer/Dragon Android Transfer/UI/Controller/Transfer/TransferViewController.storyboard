@@ -83,7 +83,7 @@
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="ChF-ws-8xD"/>
                                     </imageView>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Qe-mA-h1S">
-                                        <rect key="frame" x="203" y="72" width="37" height="17"/>
+                                        <rect key="frame" x="66" y="72" width="321" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="sSM-7S-Hxv">
                                             <font key="font" metaFont="system"/>

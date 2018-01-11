@@ -30,4 +30,26 @@ class TimeUtils {
 		}
 		return returnValue;
 	}
+    
+    static func getTime(seconds: Double) -> String {
+        var secondsInInt = Int(seconds)
+        var minutes = secondsInInt / 60
+        secondsInInt = secondsInInt % 60
+        let hours = minutes / 60
+        minutes = minutes % 60
+        var time = ""
+        if (hours > 0) {
+            let hoursString = hours > 1 ? "hours" : "hour"
+            time = time + "\(hours) \(hoursString) and "
+        }
+        if (minutes > 0) {
+            let minutesString = minutes > 1 ? "minutes" : "minute"
+            time = time + "\(minutes) \(minutesString) and "
+        }
+        if (secondsInInt > 0) {
+            let secondsString = secondsInInt > 1 ? "seconds" : "second"
+            time = time + "\(secondsInInt) \(secondsString)"
+        }
+        return "\(time) remaining"
+    }
 }

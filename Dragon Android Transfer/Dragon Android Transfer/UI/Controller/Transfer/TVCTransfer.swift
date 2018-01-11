@@ -65,6 +65,49 @@ extension TransferViewController {
 		}
 		transferHandler.cancelActiveTask()
 	}
+    
+    private func stopTimer() {
+        if let timer = self.timer {
+            timer.invalidate()
+        }
+        self.timer = nil
+    }
+    
+    func updateTimeRemaining() {
+//        if (start == nil) {
+//            start = DispatchTime.now()
+//        }
+//        let startTime = self.start!
+        let totalSize = Double(self.totalSize)
+        let sizeCopied = (mCurrentProgress * totalSize / 100.0)
+        LogV("Size Copied: \(sizeCopied), previous: \(previousCopiedSize)")
+        let offset = sizeCopied - previousCopiedSize
+        let remainingSize = totalSize - sizeCopied
+//        let currentTime = DispatchTime.now()
+//        let nanoTime = currentTime.uptimeNanoseconds - startTime.uptimeNanoseconds
+//        let timeTaken = Double(nanoTime) / 1_000_000_000
+        let timeTaken = updateDelay
+        
+        let timeRemaining = (timeTaken * remainingSize) / offset
+//        let timeRemaining = (timeTaken * remainingSize) / sizeCopied
+//        LogI("Time Remaining: \(timeRemaining)")
+        ThreadUtils.runInMainThread {
+            let timeString = TimeUtils.getTime(seconds: timeRemaining)
+            self.timeRemainingText.attributedStringValue = TextUtils.attributedBoldString(
+                from: "\(timeString)",
+                color: R.color.transferTextColor,
+                nonBoldRange: nil,
+                .center)
+//            self.timeRemainingText.stringValue = timeString
+        }
+        previousCopiedSize = sizeCopied
+    }
+    
+    private func startTimer() {
+        timer = Timer.scheduledTimer(timeInterval: TimeInterval(updateDelay), target: self,
+                                     selector: #selector(updateTimeRemaining), userInfo: nil,
+                                     repeats: true)
+    }
 	
 	internal func observeTransfer() {
 		transferHandler.hasActiveTask().skip(1)
@@ -75,8 +118,10 @@ extension TransferViewController {
 						AppDelegate.isPastingOperation.value = true
 //                    self.showCopyDialog()
 						self.mDockProgress?.isHidden = false
+                        self.startTimer()
 					} else {
 						//                        TODO:
+                        self.stopTimer()
 						self.finished(status)
 					}
 					self.mCurrentProgress = -1

@@ -10,20 +10,27 @@ import Foundation
 
 class DarkAlert: NSAlert {
 	
-	init(message: String, info: String) {
+    init(message: String, info: String, buttonNames: [String], fullScreen: Bool = true, textColor: NSColor = R.color.white) {
 		super.init()
 		let alert = self
 		alert.messageText = message
 		alert.informativeText = info
-		alert.addButton(withTitle: "Ok")
-		alert.addButton(withTitle: "Cancel")
-		alert.window.styleMask = .fullSizeContentView
+        for buttonName in buttonNames.reversed() {
+			alert.addButton(withTitle: buttonName)
+        }
+        if fullScreen {
+			alert.window.styleMask = .fullSizeContentView
+        } else {
+            alert.window.backgroundColor = R.color.windowBg
+            alert.window.titlebarAppearsTransparent = true
+            alert.window.titleVisibility = .hidden
+        }
 //		alert.window.contentView?.setBackground(R.color.black)
 		alert.window.contentView?.setBackground(R.color.menuNavColor)
 		
 		for view in (alert.window.contentView?.subviews)! {
 			if let text = (view as? NSTextField) {
-				text.textColor = R.color.white
+				text.textColor = textColor
 				text.isSelectable = false
 			}
 		}

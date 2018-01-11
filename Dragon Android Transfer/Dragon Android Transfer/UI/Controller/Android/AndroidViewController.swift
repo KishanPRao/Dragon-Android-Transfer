@@ -19,7 +19,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 //		FileProgressDelegate,
 		ClipboardDelegate, /*CopyDialogDelegate,*/
 		DragNotificationDelegate, DragUiDelegate,
-		NSUserInterfaceValidations {
+		NSUserInterfaceValidations, NSWindowDelegate {
     
 	public static let NotificationStartLoading = "NotificationStartLoading"
 	public static let NotificationSnackbar = "NotificationSnackbar"
@@ -92,6 +92,18 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		observeListing()
         observeTransfer()
 	}
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        self.view.window?.delegate = self
+    }
+    
+    func windowShouldClose(_ sender: Any) {
+        if let adWc = adWc {
+            LogI("Closing Ad!")
+            adWc.close()
+        }
+    }
 	
 	func updateDeviceStatus() {
 		if (!transferHandler.hasActiveDevice()) {
@@ -168,6 +180,10 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		 checkGuide()
 		 */
 	}
+    
+    func windowDidEndLiveResize(_ notification: Notification) {
+        updateAdSize()
+    }
 	
 	override func viewDidLayout() {
 		super.viewDidLayout()
@@ -288,14 +304,19 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 			window.setFrameOrigin(frame.origin)
 		}*/
         
+        updateAdSize()
+	}
+    
+    internal func updateAdSize() {
         if let adWc = adWc, let frame = self.view.window?.frame {
             adWc.updateFrame(frame)
         }
-	}
+    }
 	
 //    var adVc: AdViewController? = nil
 //    let url = "https://dragon-android-transfer-ad.herokuapp.com"
-    let url = "https://www.flipkart.com"
+//    let url = "https://www.flipkart.com"
+    let url = "http://localhost:3333"
     var adWc: AdWindowController? = nil
     
 	func openAd() {
@@ -346,6 +367,8 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 			view.addSubview(transferVc.view)
 		}
 	}
+    
+//    view
 	
 	var menuVc: MenuViewController? = nil
 	

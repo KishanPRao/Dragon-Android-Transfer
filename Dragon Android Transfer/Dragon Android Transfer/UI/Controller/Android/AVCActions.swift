@@ -21,8 +21,8 @@ extension AndroidViewController {
 		print("Selected", self.androidDirectoryItems[fileTable.selectedRow])
 		
 		transferHandler.updateAndroidFileSize(file: selectedFile, closure: {
-			let alert = NSAlert()
-			alert.messageText = "Name: " + selectedFile.fileName
+//            let alert = NSAlert()
+//            alert.messageText = "Name: " + selectedFile.fileName
 			var infoText: String = ""
 			var image: NSImage
 			if (selectedFile.type == BaseFileType.Directory) {
@@ -33,7 +33,7 @@ extension AndroidViewController {
 			if (NSObject.VERBOSE) {
 				Swift.print("AndroidViewController, image size:", image.size);
 			}
-			alert.icon = image
+//            alert.icon = image
 			infoText = "Path: " + selectedFile.path + "\n"
 			var type = "File"
 			if (selectedFile.type == BaseFileType.Directory) {
@@ -41,7 +41,13 @@ extension AndroidViewController {
 			}
 			infoText = infoText + "Type: " + type + "\n"
 			infoText = infoText + "Size: " + SizeUtils.getBytesInFormat(selectedFile.size) + "\n"
-			alert.informativeText = infoText
+//            alert.informativeText = infoText
+            
+            let alert = DarkAlert(message: "Name: " + selectedFile.fileName, info: infoText,
+                                  buttonNames: ["Ok"],
+                                  fullScreen: false,
+                                  textColor: R.color.transferTextColor)
+            alert.icon = image
 			alert.runModal()
 			//		alert.addButton(withTitle: "Ok")
 			//		let response = alert.runModal()
@@ -86,6 +92,7 @@ extension AndroidViewController {
 		let deleteStringInDialog = (deleteItems.count > 1) ? "the Selected Items" : "'" + deleteItems[0].fileName + "'"
 		//        let selectedItem = self.androidDirectoryItems[fileTable.selectedRow]
 		//        let selectedFileName = selectedItem.fileName
+        //        TODO: Update Delete Dialog!
 		if AlertUtils.showAlert("Do you really want to delete \(deleteStringInDialog)?", info: "", confirm: true) {
 			LogI("Delete", deleteItems)
 			Observable.just(transferHandler)

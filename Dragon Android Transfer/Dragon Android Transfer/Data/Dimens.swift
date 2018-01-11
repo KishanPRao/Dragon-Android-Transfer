@@ -8,8 +8,8 @@ import Foundation
 class Dimens {
 //	Android Controller
 //    static let android_controller_size: Array<Int> = [658, 800]
-    static let android_controller_size: Array<Int> = [600, 400]
-	static let android_controller_toolbar: Array<Int> = [0, 751, 600, 50]
+    static let android_controller_size: Array<Int> = [650, 680]
+	static let android_controller_toolbar: Array<Int> = [0, 751, 650, 50]
 	static let android_controller_toolbar_clipboard_button: Array<Int> = [610, 3, 34, 45]
 	static let android_controller_toolbar_clipboard_items_count: Array<Int> = [610, 16, 34, 17]
 	static let android_controller_toolbar_clipboard_items_count_text_size: Int = 15
