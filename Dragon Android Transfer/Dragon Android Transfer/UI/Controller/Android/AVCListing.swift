@@ -103,7 +103,7 @@ extension AndroidViewController {
 	func reloadFileList(_ items: Array<BaseFile>) {
 		androidDirectoryItems = items
 		updateList()
-		fileTable.makeFirstResponder(self.view.window)
+//        fileTable.makeFirstResponder(self.view.window)
 		hideProgress()
 	}
 	
@@ -154,9 +154,8 @@ extension AndroidViewController {
 	}
 	
 	func openSelectedDirectory() {
-		if (NSObject.VERBOSE) {
-			Swift.print("AndroidViewController, openSelectedDirectory");
-		}
+//        LogI("AndroidViewController, openSelectedDirectory");
+		
 		let selectedItem = self.androidDirectoryItems[fileTable.selectedRow]
 		//		print("Selected", fileTable.selectedRow)
 		//		print("Selected", self.androidDirectoryItems[fileTable.selectedRow])

@@ -52,4 +52,11 @@ public struct StringResource {
 //					"support.draconian@gmail.com"
     
     let textViewPlaceHolder = "Updating.."
+    
+    //    Help:
+    let helpBack = "Go Back"
+    let helpMenu = "Open Menu"
+    
+    let helpDevicesPopup = "Change active device"
+    let helpCloseMenu = "Close Menu"
 }

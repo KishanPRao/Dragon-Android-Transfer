@@ -30,6 +30,8 @@ protocol Theme {
 	var transferBg: NSColor { get }
 	var textColor: NSColor { get }
 	var transferTextColor: NSColor { get }
+    var menuItemSelectCellBg: NSColor {get}
+    var listSelectedBackgroundColor: NSColor{get}
 	
 	var windowBg: NSColor { get }
 }

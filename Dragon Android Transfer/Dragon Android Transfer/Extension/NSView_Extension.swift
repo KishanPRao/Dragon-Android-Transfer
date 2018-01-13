@@ -79,4 +79,15 @@ extension NSView {
 			return false
 		}
 	}
+    
+    func animate(show: Bool) {
+        if (show && alphaValue == 1.0) || (!show && alphaValue == 0) {
+            return
+        }
+        let alpha = (show ? 1.0 : 0.0) as CGFloat
+        NSAnimationContext.runAnimationGroup({ context in
+            context.duration = R.integer.animStartDuration
+            self.animator().alphaValue = alpha
+        }, completionHandler: nil)
+    }
 }

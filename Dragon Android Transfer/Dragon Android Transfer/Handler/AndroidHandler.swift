@@ -60,6 +60,7 @@ public class AndroidHandler: NSObject {
 	}
 	
 	func initialize(_ data: Data) {
+        //        TODO: Bg Thread!
 		adbDirectoryPath = self.extractAdbAsset(data)
 		LogV("Initialize")
 	}
@@ -286,20 +287,30 @@ public class AndroidHandler: NSObject {
 //					LogI("Moving to \(i), active: \(activeDevice), device: \(device)")
 				}
 			}
+            var newActiveDevice: AndroidDevice? = nil
+            var needsUpdate = false
 			if (index == -1) {
 				if (newDevices.count == 0) {
-					setActiveDevice(nil)
+//                    setActiveDevice(nil)
+                    newActiveDevice = nil
 				} else {
 //					LogV("New Active Device: \(newDevices[0])")
-					setActiveDevice(newDevices[0])
+//                    setActiveDevice(newDevices[0])
+                    newActiveDevice = newDevices[0]
 				}
+                needsUpdate = true
 			} else {
 //				LogV("Rearranging: \(index) active: \(activeDevice)")
 				newDevices = rearrange(array: newDevices, fromIndex: index, toIndex: 0)
 //				LogV("New Devices: \(newDevices)")
+                needsUpdate = false
 			}
 			LogI("New Devices: \(newDevices)")
 			self.observableAndroidDevices.value = newDevices
+            if needsUpdate {
+                setActiveDevice(newActiveDevice)
+            }
+            
 //            for device in newDevices {
 //                if activeDevice != device {
 //                    LogV("New Active Device")
@@ -410,16 +421,16 @@ public class AndroidHandler: NSObject {
 				}
 			}
 		}
-		if (Verbose) {
-			print("AndroidHandler, isRootDirectory path:", currentPath);
-			print("AndroidHandler, isRootDirectory:", isRoot);
-		}
+//        if (Verbose) {
+//            LogV("AndroidHandler, isRootDirectory path:", currentPath);
+//            LogV("AndroidHandler, isRootDirectory:", isRoot);
+//        }
 		return isRoot
 	}
 	
 	func navigateUpList()  {
 		let containsSep = currentPath.contains(HandlerConstants.SEPARATOR)
-		print("Contains:", containsSep)
+//        print("Contains:", containsSep)
 		if (containsSep) {
 			let lastSep = (currentPath.range(of: HandlerConstants.SEPARATOR, options: NSString.CompareOptions.backwards)?.lowerBound)!
 			currentPath = currentPath.substring(to: lastSep)
@@ -437,9 +448,9 @@ public class AndroidHandler: NSObject {
 				}
 			}
 			
-			if (Verbose) {
-				print("Upper Path:", currentPath)
-			}
+//            if (Verbose) {
+//                print("Upper Path:", currentPath)
+//            }
 			updateList(currentPath)
 		}
 	}

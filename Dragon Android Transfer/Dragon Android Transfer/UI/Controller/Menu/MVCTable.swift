@@ -10,12 +10,13 @@ import Foundation
 
 extension MenuViewController {
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        let height = 45.0 as CGFloat
-        return height
+        return rowHeight
     }
     
     func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
-        return SelectionTableRowView()
+        let rowView = SelectionTableRowView()
+        rowView.selectedColor = R.color.menuItemSelectBg
+        return rowView
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -24,17 +25,18 @@ extension MenuViewController {
             return nil
         }
         //LogV("Menu Table View")
-        let returnView: MenuCell?
+        let returnCell: MenuCell?
         if let spareView = tableView.make(withIdentifier: "menu_cell",
                                                             owner: self) as? MenuCell {
-            returnView = spareView
+            returnCell = spareView
             
         } else {
-            let height = 35.0 as CGFloat
+//            let height = 35.0 as CGFloat
+            let height = rowHeight
             let newCell = MenuCell(frame: NSRect(x: 0, y: 0, width: self.navigationParent.frame.width, height: height))
-            returnView = newCell
+            returnCell = newCell
         }
-        if let view = returnView {
+        if let cell = returnCell {
             let storage = storages[row]
             var imageName: String
             if (storage.isInternal) {
@@ -43,13 +45,22 @@ extension MenuViewController {
                 imageName = "external_storage"
             }
             let image = NSImage(named: imageName)
-            view.image.image = image
+            cell.image.image = image
 //            view.image.imageScaling = .scaleProportionallyUpOrDown
-            view.image.imageScaling = .scaleAxesIndependently
-            view.text.stringValue = storage.path.name
+            cell.image.imageScaling = .scaleAxesIndependently
+            cell.text.stringValue = storage.path.name
+            if selectedStorageIndex == row {
+//                var nsCell = tableColumn?.dataCell(forRow: row) as! NSCell
+//                tableColumn?.width = cell.contentView.frame.width
+                cell.isSelected = true
+            } else {
+//                tableColumn?.width = cell.contentView.frame.width
+                cell.isSelected = false
+            }
+//            LogI("Selected: \(row), \(selectedStorageIndex), \(cell.isSelected)")
+//            tableColumn.
         }
-        
-        return returnView
+        return returnCell
     }
     
     func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {

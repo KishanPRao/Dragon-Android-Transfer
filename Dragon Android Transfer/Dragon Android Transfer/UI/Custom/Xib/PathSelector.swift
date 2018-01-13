@@ -10,10 +10,6 @@ import Foundation
 import RxSwift
 
 class PathSelector: NSView {
-	/*@IBOutlet weak var firstLabel: NSTextField!
-	@IBOutlet weak var secondLabel: NSTextField!
-	@IBOutlet weak var thirdLabel: NSTextField!
- */
 	override var Verbose: Bool {
 		return false
 	}
@@ -54,6 +50,7 @@ class PathSelector: NSView {
 //        ])
 		
 		button.attributedTitle = TextUtils.getTruncatedAttributeString(text)
+        button.updateMainFont()
 	}
 	
 	private func updateButton(_ button: NSButton, _ image: NSImage) {

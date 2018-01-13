@@ -19,7 +19,7 @@ class AdWindowController: NSWindowController, WKNavigationDelegate {
     
     public func updateFrame(_ frame: NSRect) {
     	frameSize = frame
-        LogD("Update frame: \(frame)")
+//        LogD("Update frame: \(frame)")
         let frame = NSRect(x: frameSize.origin.x + frameSize.width,
                            y: frameSize.origin.y + (frame.size.height / 2.0) - (height / 2.0),
                            width: width,

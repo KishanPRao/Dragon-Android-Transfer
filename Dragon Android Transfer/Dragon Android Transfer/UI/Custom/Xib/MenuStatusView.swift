@@ -26,10 +26,12 @@ class MenuStatusView: NSView {
     }
     
     func updateStorageItem(_ storageItem: StorageItem) {
+        self.animate(show: true)
         title.stringValue = storageItem.path.name
     }
     
     func updateStorageSize(availableSpace: String, totalSpace: String) {
+        self.animate(show: true)
         let middleString = " free of "
         let stringValue = availableSpace + middleString + totalSpace
         let range = NSMakeRange(availableSpace.count, middleString.count)
@@ -46,13 +48,19 @@ class MenuStatusView: NSView {
 //        LogV("Progress: \(progress)")
     }
     
+    func resetNoDevice() {
+        self.animate(show: false)
+    }
+    
     func resetTitle() {
         title.stringValue = R.string.textViewPlaceHolder
+        self.animate(show: true)
     }
     
     func resetSize() {
         progressView.setProgress(0.0)
         sizeStatus.stringValue = R.string.textViewPlaceHolder
+        self.animate(show: true)
     }
     
     private func commonInit() {
@@ -61,7 +69,10 @@ class MenuStatusView: NSView {
         image.setImage(name: R.drawable.info)
         title.textColor = R.color.textColor
         sizeStatus.textColor = R.color.textColor
+        title.updateMainFont()
+        sizeStatus.updateMainFont()
         resetTitle()
         resetSize()
+//        self.alphaValue = 0
     }
 }

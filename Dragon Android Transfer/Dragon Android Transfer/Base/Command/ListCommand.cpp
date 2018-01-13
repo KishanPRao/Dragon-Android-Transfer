@@ -22,6 +22,7 @@ std::string ListCommand::execute() {
 		case ShellType::Gnu:
 		case ShellType::Bsd: {
 			commands = ShellScripts::GNU_LS_FILE_SIZE;
+//            commands = "LS_FILE() { echo \"0\"; }\n";
 			break;
 		}
         case ShellType::Solaris: {

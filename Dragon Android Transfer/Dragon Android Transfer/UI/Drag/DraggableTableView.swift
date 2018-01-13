@@ -67,7 +67,9 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
                 return []
             }
 		} else {
-            if info.draggingSource() == nil {
+//            LogI("Info:", info.draggingSourceOperationMask())
+//            LogV("Src:", NSDragOperation.copy, ",", NSDragOperation.every, ",", NSDragOperation.generic)
+            if (info.draggingSource() == nil && info.draggingSourceOperationMask() != .every) {
                 dragDropRow = row
                 updateItemChanged(index: dragDropRow)
                 if (dragUiDelegate != nil) {
@@ -97,7 +99,7 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
             return false
         }
 		let pb = info.draggingPasteboard()
-        LogV("Pboard items", pb.pasteboardItems)
+//        LogV("Pboard items", pb.pasteboardItems)
         var returnValue = false
         if let pboardItems = pb.pasteboardItems {
             var finderItems = [String]()
@@ -114,6 +116,9 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
                 data = TransferHandler.sharedInstance.getCurrentPathFile()
             } else {
                 data = mData[row]
+            }
+            if finderItems.count == 0 {
+                return false
             }
             LogV("Copy from Finder, file:[", finderItems, "] into app item:", data)
             if let nonNilDelegate = dragDelegate {
@@ -187,6 +192,14 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
         let rowSet = NSIndexSet(index: oldIndex) as IndexSet
         let columnSet = NSIndexSet(index: 0) as IndexSet
         reloadData(forRowIndexes: rowSet, columnIndexes: columnSet)
+    }
+    
+    var enableKeys = true
+    
+    override func keyDown(with event: NSEvent) {
+        if (enableKeys) {
+        	super.keyDown(with: event)
+        }
     }
     
     

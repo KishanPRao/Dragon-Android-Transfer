@@ -26,11 +26,14 @@ class MenuViewController: NSViewController,
 	
 	public var frameSize = NSRect()
 	internal var storages = [StorageItem]()
-	internal var selectedIndex = -1 as Int
 	
 	var androidDevices = [AndroidDevice]()
     
     @IBOutlet weak var statusView: MenuStatusView!
+    
+    internal var selectedStorageIndex = -1
+    
+    let rowHeight = 45.0 as CGFloat
     
 	var isOpen = true
 	
@@ -68,28 +71,61 @@ class MenuViewController: NSViewController,
 		//self.view.wantsLayer = true
 		//self.view.layer?.backgroundColor = R.color.menuBgColor.cgColor
 		//self.view.layerContentsRedrawPolicy = NSViewLayerContentsRedrawPolicy.onSetNeedsDisplay
+        
+        self.testPopup.toolTip = R.string.helpDevicesPopup
+        
+//        self.back.toolTip = R.string.helpCloseMenu
+        
 		initUiContent()
 		/*overlayView.setOnClickListener() {
 			self.closeMenu(nil)
 		}*/
+//        popup.font = NSFont(name: R.font.mainFont, size: popup.font?.pointSize ?? 10.0)
 		
 		overlayView.setOnClickListener() {
-			print("Done")
+//            print("Done")
 			self.closeMenu(self)
 		}
 	}
+    
+    var activeDevice: AndroidDevice? = nil
+    
+    internal func reset() {
+        self.popup.isEnabled = false
+        self.statusView.resetNoDevice()
+        updateStorageItems([])
+    }
 	
 	func onPopupSelected(_ sender: Any) {
 		let index = self.popup.indexOfSelectedItem
-		print("Popup Selected", index)
+		LogI("Popup Selected", index)
 		guard let device = androidDevices[safe: index] else {
 			return
 		}
-		updateStorageItems([])
-		let result = transferHandler.setActiveDevice(device)
-		if (!result) {
-			updateStorageItems(device.storages)
-		}
+//        updateStorageItems([])
+        let activeDevice = transferHandler.getActiveDevice()
+        if let activeDevice = activeDevice,
+            activeDevice.id == device.id {
+//            LogW("Same Device")
+            return
+        } else {
+            reset()
+        }
+        Observable.just(transferHandler)
+            .observeOn(bgScheduler)
+            .map { transferHandler -> Bool in
+                return transferHandler.setActiveDevice(device)
+            }
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { result in
+//                self.LogV("Result: \(result)")
+                if (result) {
+                    self.updateStorageItems(device.storages)
+                } else {
+//                    self.LogI("No Change")
+                }
+                self.popup.isEnabled = true
+            }).addDisposableTo(disposeBag)
 	}
 	
 	internal func updateStorageItems(_ storages: [StorageItem]) {
@@ -110,11 +146,18 @@ class MenuViewController: NSViewController,
                 break
             }
         }
+        let oldIndex = selectedStorageIndex
+        selectedStorageIndex = index
+//        LogV("Reloading: \(index), \(selectedStorageIndex)")
         if index != -1 {
-            let indexSet = IndexSet(integer: index)
-            self.table.selectRowIndexes(indexSet, byExtendingSelection: true)
+            self.table.notifyItemChanged(index: index)
+//            self.table.selectRowIndexes(indexSet, byExtendingSelection: true)
             self.statusView.updateStorageItem(storageItem!)
+        } else {
+//            self.statusView.resetSize()
+//            self.statusView.resetTitle()
         }
+        self.table.notifyItemChanged(index: oldIndex)
     }
     
 	func doubleClick(_ sender: AnyObject) {

@@ -20,4 +20,13 @@ extension NSTableView {
 //		}
 //		return super.performKeyEquivalent(event)
 //	}
+    
+    internal func notifyItemChanged(index: Int) {
+        if index == -1 {
+            return
+        }
+        let indexSet = IndexSet(integer: index)
+        let columnSet = NSIndexSet(index: 0) as IndexSet
+        self.reloadData(forRowIndexes: indexSet, columnIndexes: columnSet)
+    }
 }

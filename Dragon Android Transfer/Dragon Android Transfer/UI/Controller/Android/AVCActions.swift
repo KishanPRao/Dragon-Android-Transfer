@@ -20,41 +20,82 @@ extension AndroidViewController {
 		print("Selected", fileTable.selectedRow)
 		print("Selected", self.androidDirectoryItems[fileTable.selectedRow])
 		
-		transferHandler.updateAndroidFileSize(file: selectedFile, closure: {
-//            let alert = NSAlert()
-//            alert.messageText = "Name: " + selectedFile.fileName
-			var infoText: String = ""
-			var image: NSImage
-			if (selectedFile.type == BaseFileType.Directory) {
-				image = NSImage(named: "folder")!
-			} else {
-				image = NSImage(named: "file")!
-			}
-			if (NSObject.VERBOSE) {
-				Swift.print("AndroidViewController, image size:", image.size);
-			}
-//            alert.icon = image
-			infoText = "Path: " + selectedFile.path + "\n"
-			var type = "File"
-			if (selectedFile.type == BaseFileType.Directory) {
-				type = "Directory"
-			}
-			infoText = infoText + "Type: " + type + "\n"
-			infoText = infoText + "Size: " + SizeUtils.getBytesInFormat(selectedFile.size) + "\n"
-//            alert.informativeText = infoText
+        /*
+        let closure: () -> () = {
+            //            let alert = NSAlert()
+            //            alert.messageText = "Name: " + selectedFile.fileName
+            var infoText: String = ""
+            var image: NSImage
+            if (selectedFile.type == BaseFileType.Directory) {
+                image = NSImage(named: R.drawable.folder)!
+            } else {
+                image = NSImage(named: R.drawable.file)!
+            }
+            if (NSObject.VERBOSE) {
+                Swift.print("AndroidViewController, image size:", image.size);
+            }
+            //            alert.icon = image
+            infoText = "Path: " + selectedFile.path + "\n"
+            var type = "File"
+            if (selectedFile.type == BaseFileType.Directory) {
+                type = "Directory"
+            }
+            infoText = infoText + "Type: " + type + "\n"
+            infoText = infoText + "Size: " + SizeUtils.getBytesInFormat(selectedFile.size) + "\n"
+            //            alert.informativeText = infoText
             
             let alert = DarkAlert(message: "Name: " + selectedFile.fileName, info: infoText,
                                   buttonNames: ["Ok"],
                                   fullScreen: false,
                                   textColor: R.color.transferTextColor)
             alert.icon = image
-			alert.runModal()
-			//		alert.addButton(withTitle: "Ok")
-			//		let response = alert.runModal()
-			//		if (NSObject.VERBOSE) {
-			//			Swift.print("AndroidViewController, alert resp:", response);
-			//		}
-		})
+            alert.runModal()
+            //        alert.addButton(withTitle: "Ok")
+            //        let response = alert.runModal()
+            //        if (NSObject.VERBOSE) {
+            //            Swift.print("AndroidViewController, alert resp:", response);
+            //        }
+        }*/
+        
+        showProgress()
+        
+        Observable.just(transferHandler)
+        	.observeOn(bgScheduler)
+            .map { transferHandler in
+                transferHandler.updateAndroidFileSize(file: selectedFile)
+            }
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: {
+                self.hideProgress()
+                //            let alert = NSAlert()
+                //            alert.messageText = "Name: " + selectedFile.fileName
+                var infoText: String = ""
+                var image: NSImage
+                if (selectedFile.type == BaseFileType.Directory) {
+                    image = NSImage(named: R.drawable.folder)!
+                } else {
+                    image = NSImage(named: R.drawable.file)!
+                }
+                if (NSObject.VERBOSE) {
+                    Swift.print("AndroidViewController, image size:", image.size);
+                }
+                //            alert.icon = image
+                infoText = "Path: " + selectedFile.path + "\n"
+                var type = "File"
+                if (selectedFile.type == BaseFileType.Directory) {
+                    type = "Directory"
+                }
+                infoText = infoText + "Type: " + type + "\n"
+                infoText = infoText + "Size: " + SizeUtils.getBytesInFormat(selectedFile.size) + "\n"
+                //            alert.informativeText = infoText
+                
+                let alert = DarkAlert(message: "Name: " + selectedFile.fileName, info: infoText,
+                                      buttonNames: ["Ok"],
+                                      fullScreen: false,
+                                      textColor: R.color.transferTextColor)
+                alert.icon = image
+                alert.runModal()
+            }).addDisposableTo(disposeBag)
 	}
 	
 	func showNewFolderDialog() {

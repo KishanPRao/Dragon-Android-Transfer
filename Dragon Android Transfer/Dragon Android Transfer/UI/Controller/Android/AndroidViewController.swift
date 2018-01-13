@@ -14,10 +14,10 @@ import MASShortcut
 import RxSwift
 import RxCocoa
 
-class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
+class AndroidViewController: NSViewController,
+    	NSTableViewDelegate,
 		NSControlTextEditingDelegate,
-//		FileProgressDelegate,
-		ClipboardDelegate, /*CopyDialogDelegate,*/
+		ClipboardDelegate,
 		DragNotificationDelegate, DragUiDelegate,
 		NSUserInterfaceValidations, NSWindowDelegate {
     
@@ -27,16 +27,11 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
     var disposeBag = DisposeBag()
 	internal let bgScheduler = ConcurrentDispatchQueueScheduler(qos: .background)
     
-	internal let tableDelegate = DeviceTableDelegate()
-	internal var _androidDirectoryItems: Array<BaseFile> = []
-	internal var androidDirectoryItems: Array<BaseFile> {
-		get {
-			return self._androidDirectoryItems
-		}
-		set {
-			self._androidDirectoryItems = newValue
-			tableDelegate.setAndroidDirectoryItems(items: self._androidDirectoryItems)
-		}
+//    internal let tableDelegate = DeviceTableDelegate()
+	internal var androidDirectoryItems: Array<BaseFile> = [] {
+        didSet {
+//            tableDelegate.setAndroidDirectoryItems(items: androidDirectoryItems)
+        }
 	}
 	@IBOutlet weak var fileTable: DraggableTableView!
 	
@@ -181,8 +176,17 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 		 */
 	}
     
+    private func updateMenuSize() {
+        if let menuVc = menuVc, let window = self.view.window {
+            var frameSize = window.frame
+            frameSize.size = NSSize(width: window.frame.width, height: frameSize.height - window.titlebarHeight)
+            menuVc.frameSize = frameSize
+        }
+    }
+    
     func windowDidEndLiveResize(_ notification: Notification) {
         updateAdSize()
+        updateMenuSize()
     }
 	
 	override func viewDidLayout() {
@@ -225,7 +229,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 	}
 	
 	func doubleClickList(_ sender: AnyObject) {
-		print("Double Clicked:", fileTable.clickedRow)
+//        LogI("Double Clicked:", fileTable.clickedRow)
 		if (fileTable.clickedRow < 0) {
 			LogW("Bad Row")
 			return
@@ -466,7 +470,7 @@ class AndroidViewController: NSViewController, /*NSTableViewDelegate,*/
 	deinit {
 		print("Removing Observer")
 		NotificationCenter.default.removeObserver(self)
-		tableDelegate.cleanup()
+//        tableDelegate.cleanup()
 		transferHandler.terminate()
 	}
 }

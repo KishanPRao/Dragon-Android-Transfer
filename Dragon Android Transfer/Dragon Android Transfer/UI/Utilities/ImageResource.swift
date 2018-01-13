@@ -20,4 +20,7 @@ class ImageResource {
     public let remove = "remove"
     public let options = "options"
     public let info = "info"
+    
+    public let file = "file"
+    public let folder = "folder"
 }

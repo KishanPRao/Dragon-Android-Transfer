@@ -18,8 +18,20 @@ class FileCell: NSTableCellView {
 	override func awakeFromNib() {
 		super.awakeFromNib()
 	}
+    
+    var isSelected: Bool = false {
+        didSet {
+            if (isSelected) {
+                self.contentView.setBackground(R.color.listSelectedBackgroundColor)
+            } else {
+                self.contentView.setBackground(NSColor.clear)
+//                self.contentView.wantsLayer = false
+            }
+        }
+    }
 	
 	private func updateText(_ textField: NSTextField) {
+        textField.updateMainFont()
 		textField.textColor = R.color.textColor
 //		textField.setBackground(R.color.tableItemBg)
 //		textField.setBackground(R.color.clear)
@@ -31,10 +43,11 @@ class FileCell: NSTableCellView {
 //		Swift.print("File Cell Test", contentView.frame, self)
 //        text.textColor = R.color.white
 		
-		updateText(nameField)
-		let fileName = nameField!
-		fileName.textColor = ColorUtils.colorWithHexString(ColorUtils.listTextColor)
-		fileName.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_file_table_file_cell_file_name_text_size))
+//        let fileName = nameField!
+//        fileName.textColor = ColorUtils.colorWithHexString(ColorUtils.listTextColor)
+//        fileName.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_file_table_file_cell_file_name_text_size))
+        
+        updateText(nameField)
 //		fileName.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table_file_cell_file_name)
 		updateText(sizeField)
 		

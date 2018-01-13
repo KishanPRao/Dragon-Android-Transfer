@@ -172,7 +172,7 @@ class TransferHandler {
 		androidHandler.cancelActiveTask()
 	}
 	
-	func updateAndroidFileSize(file: BaseFile, closure: @escaping () -> ()) {
+    func updateAndroidFileSize(file: BaseFile, closure: @escaping () -> () = {}) {
 		self.androidHandler.updateSize(file: file)
 		closure()
 	}

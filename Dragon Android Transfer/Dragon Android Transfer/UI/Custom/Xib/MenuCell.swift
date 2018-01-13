@@ -14,6 +14,18 @@ class MenuCell: NSTableCellView {
     
     @IBOutlet var contentView: NSView!
     
+    var isSelected: Bool = false {
+        didSet {
+            if (isSelected) {
+            	self.contentView.setBackground(R.color.menuItemSelectCellBg)
+            } else {
+//                self.contentView.setBackground(R.color.menuTableColor)
+                self.contentView.setBackground(NSColor.clear)
+//                self.contentView.wantsLayer = false
+            }
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -23,6 +35,7 @@ class MenuCell: NSTableCellView {
         Bundle.main.loadNibNamed("MenuCell", owner: self, topLevelObjects: nil)
 //        Swift.print("Test", contentView.frame, self)
         text.textColor = R.color.white
+        text.updateMainFont()
 //        contentView.setBackground(R.color.black)
         contentView.frame = frame
         addSubview(self.contentView)

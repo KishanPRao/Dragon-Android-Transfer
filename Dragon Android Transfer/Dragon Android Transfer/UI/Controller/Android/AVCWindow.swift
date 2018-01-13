@@ -11,7 +11,8 @@ import Foundation
 extension AndroidViewController {
 	
 	func resetPosition() {
-		let previousFrame = self.view.window!.frame
+		/*
+        let previousFrame = self.view.window!.frame
 		//		let rect = CGRect(x: previousFrame.origin.x, y: 0, width: previousFrame.width, height: previousFrame.height)
 		let screenFrame = self.view.window!.screen!.frame
 		let screenVisibleFrame = self.view.window!.screen!.visibleFrame
@@ -22,6 +23,7 @@ extension AndroidViewController {
 		let rect = CGRect(x: x, y: y, width: previousFrame.width, height: previousFrame.height)
 		//		Swift.print("AndroidViewController, visible:", screenVisibleFrame, ", frame:", screenFrame, ", rect:", rect)
 		self.view.window!.setFrame(rect, display: true)
+ */
 	}
 	
 	

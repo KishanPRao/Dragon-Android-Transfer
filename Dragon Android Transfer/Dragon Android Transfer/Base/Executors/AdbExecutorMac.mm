@@ -167,7 +167,7 @@ void AdbExecutor::setDeviceId(const string &deviceId) {
 		NSLog(@"Warning, Same device!");
 		return;
 	}
-	NSLog(@"New Device: %@, old: %@", convert(deviceId), convert(AdbExecutor::deviceId));
+	NSLog(@"AdbExec, New Device: %@, old: %@", convert(deviceId), convert(AdbExecutor::deviceId));
 	AdbExecutor::deviceId = deviceId;
 }
 

@@ -132,6 +132,24 @@ public class ShellParser: NSObject {
 		return outputInTabs
 	}
     
+    /*
+    @objc
+    public static func parseTotalSpaceInInt(_ output: String) -> UInt64 {
+        var spaceInInt = 0
+        let outputInTabs = parseSpaceOutput(output)
+        if (outputInTabs.count == 0) {
+            return spaceInInt
+        }
+        if let totalSpaceInInt = UInt64(outputInTabs[1]) {
+            //            totalSpace = totalSpaceInInt * UInt64(BLOCK_SIZE_IN_FLOAT)
+            spaceInInt = totalSpaceInInt * UInt64(BLOCK_SIZE_IN_FLOAT)
+        } else {
+            //            Solaris
+            spaceInInt = outputInTabs[1]
+        }
+        return spaceInInt
+    }*/
+    
     @objc
     public static func parseTotalSpace(_ output: String) -> String {
         var spaceInString = "0B"

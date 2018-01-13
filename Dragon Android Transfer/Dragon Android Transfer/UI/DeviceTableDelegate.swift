@@ -16,6 +16,12 @@ class DeviceTableDelegate: NSObject, NSTableViewDelegate {
         //Swift.print("Set Android Dir Items", androidDirectoryItems)
         self.androidDirectoryItems = androidDirectoryItems
     }
+    
+    func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
+        let rowView = SelectionTableRowView()
+        rowView.selectedColor = R.color.listSelectedBackgroundColor
+        return rowView
+    }
 	
 	func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
 //		return 25
@@ -48,7 +54,7 @@ class DeviceTableDelegate: NSObject, NSTableViewDelegate {
 	
 	func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
 		if (row >= self.androidDirectoryItems.count) {
-			print("Warning: Row out of range!")
+            print("Warning: Row out of range: \(row)")
 			return nil
 		}
         
@@ -73,24 +79,28 @@ class DeviceTableDelegate: NSObject, NSTableViewDelegate {
             
             let fileSize = cellView.sizeField!
             fileSize.stringValue = SizeUtils.getBytesInFormat(file.size)
-            fileSize.textColor = ColorUtils.colorWithHexString(ColorUtils.listTextColor)
-            fileSize.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_file_table_file_cell_file_size_text_size))
+//            fileSize.textColor = ColorUtils.colorWithHexString(ColorUtils.listTextColor)
+//            fileSize.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_file_table_file_cell_file_size_text_size))
 //            fileSize.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table_file_cell_file_size)
             
             let fileImage = cellView.fileImage!
 //            fileImage.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table_file_cell_file_image)
             let isDirectory = file.type == BaseFileType.Directory
             if (isDirectory) {
-                fileImage.image = NSImage(named: "folder")
+                fileImage.image = NSImage(named: R.drawable.folder)
             } else {
-                fileImage.image = NSImage(named: "file")
+                fileImage.image = NSImage(named: R.drawable.file)
             }
             if let fileTable = fileTable {
                 let indexSet = fileTable.selectedRowIndexes
                 if (indexSet.contains(row)) {
-                    ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listSelectedBackgroundColor)
+//                    ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listSelectedBackgroundColor)
+                    cellView.isSelected = true
                 } else {
-                    cellView.setBackground(R.color.tableItemBg)
+//                    cellView.setBackground(R.color.tableItemBg)
+//                    cellView.setBackground(R.color.clear)
+//                    cellView.setBackground(NSColor.clear)
+                    cellView.isSelected = false
                     //                ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listItemBackgroundColor)
                 }
                 
@@ -121,9 +131,11 @@ class DeviceTableDelegate: NSObject, NSTableViewDelegate {
 			while (i < androidDirectoryItems.count) {
 				let rowItem = fileTable.rowView(atRow: i, makeIfNecessary: false)
 				if (rowItem != nil) {
-					let cellView = rowItem?.view(atColumn: 0) as! NSView
+//                    let cellView = rowItem?.view(atColumn: 0) as! NSView
+                    let cellView = rowItem?.view(atColumn: 0) as! FileCell
 					if (indexSet.contains(i)) {
-						ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listSelectedBackgroundColor)
+//                        ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listSelectedBackgroundColor)
+                        cellView.isSelected = true
 						
 						if (itemSelected) {
 							AppDelegate.multipleItemsSelected = true
@@ -134,7 +146,9 @@ class DeviceTableDelegate: NSObject, NSTableViewDelegate {
 						}
 						AppDelegate.itemSelected = true
 					} else {
-                        cellView.setBackground(R.color.tableItemBg)
+//                        cellView.setBackground(R.color.tableItemBg)
+//                        cellView.setBackground(NSColor.clear)
+                        cellView.isSelected = false
 //						ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listItemBackgroundColor)
 					}
 				}

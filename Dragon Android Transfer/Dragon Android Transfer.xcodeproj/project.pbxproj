@@ -42,14 +42,26 @@
 		5098AC6C1FFD3A9A0084449B /* NSImageView_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5098AC6B1FFD3A990084449B /* NSImageView_Extension.swift */; };
 		5098AC6E1FFD3C820084449B /* path_selector_div.png in Resources */ = {isa = PBXBuildFile; fileRef = 5098AC6D1FFD3C810084449B /* path_selector_div.png */; };
 		5098AC701FFD3CBA0084449B /* ImageResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5098AC6F1FFD3CBA0084449B /* ImageResource.swift */; };
+		50A3565A2009C14C0088B80B /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A356582009C14B0088B80B /* folder.png */; };
+		50A3565B2009C14C0088B80B /* file.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A356592009C14C0088B80B /* file.png */; };
 		50B020341FE986C500989BA4 /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B020331FE986C500989BA4 /* CollectionExtension.swift */; };
-		50C567221FFA934C00452792 /* AlegreyaSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 50C567211FFA934C00452792 /* AlegreyaSans.ttf */; };
-		50C567241FFA938200452792 /* AlegreyaSans.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 50C567211FFA934C00452792 /* AlegreyaSans.ttf */; };
 		50CAAF8A1FFFBFCD00911D8E /* SingleClickButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CAAF891FFFBFCD00911D8E /* SingleClickButton.swift */; };
 		50CAAF9220000F2A00911D8E /* DarkAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CAAF9120000F2A00911D8E /* DarkAlert.swift */; };
 		50CAAF952000253100911D8E /* android.png in Resources */ = {isa = PBXBuildFile; fileRef = 50CAAF932000253000911D8E /* android.png */; };
 		50CAAF962000253100911D8E /* mac.png in Resources */ = {isa = PBXBuildFile; fileRef = 50CAAF942000253100911D8E /* mac.png */; };
 		50CAAF9820003A0E00911D8E /* String_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CAAF9720003A0E00911D8E /* String_Extension.swift */; };
+		50D1A1EE2009EDC60024219C /* AVCTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D1A1ED2009EDC60024219C /* AVCTable.swift */; };
+		50D37A9820090FAB007A1374 /* FontResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D37A9720090FAB007A1374 /* FontResource.swift */; };
+		50D37A9A2009111F007A1374 /* AlegreyaSans-Regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 50D37A99200910BF007A1374 /* AlegreyaSans-Regular.ttf */; };
+		50D37A9C20091366007A1374 /* NSTextField_ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D37A9B20091366007A1374 /* NSTextField_ext.swift */; };
+		50D37A9E200915FC007A1374 /* Roboto-Regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 50D37A9D200915B6007A1374 /* Roboto-Regular.ttf */; };
+		50D37AA520091735007A1374 /* Slabo27px-Regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 50D37AA420091720007A1374 /* Slabo27px-Regular.ttf */; };
+		50D37AA620091735007A1374 /* Ubuntu-Regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 50D37AA32009171B007A1374 /* Ubuntu-Regular.ttf */; };
+		50D37AA720091735007A1374 /* Cambo-Regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 50D37AA220091716007A1374 /* Cambo-Regular.ttf */; };
+		50D37AA820091735007A1374 /* Arimo-Regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 50D37AA12009170F007A1374 /* Arimo-Regular.ttf */; };
+		50D37AA920091735007A1374 /* Raleway-Regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 50D37AA020091706007A1374 /* Raleway-Regular.ttf */; };
+		50D37AAA20091735007A1374 /* PT_Sans-Web-Regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 50D37A9F200916FE007A1374 /* PT_Sans-Web-Regular.ttf */; };
+		50D37AAC20092EB1007A1374 /* VerticallyAlignedTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D37AAB20092EB1007A1374 /* VerticallyAlignedTextFieldCell.swift */; };
 		50D7D9B41FFE948D00E85E70 /* TextUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7D9B31FFE948D00E85E70 /* TextUtils.swift */; };
 		50D7D9B61FFE97AC00E85E70 /* SelectionTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7D9B51FFE97AC00E85E70 /* SelectionTableRowView.swift */; };
 		50D7D9BC1FFEA37A00E85E70 /* ScrollessScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D7D9BB1FFEA37A00E85E70 /* ScrollessScrollView.m */; };
@@ -192,7 +204,6 @@
 		BE3BDA1FB1387C3949B25E52 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD65DA3E8130849D039FD /* index.html */; };
 		BE3BDA227C3660B22686716F /* SizeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD75F91DBA3B298B91E2D /* SizeUtils.swift */; };
 		BE3BDA30B26F35C7C23F9B56 /* IndeterminateProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD4BE8B8D95E327B543B9 /* IndeterminateProgressView.swift */; };
-		BE3BDA5F8B8040DCA2509A1D /* file.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3BDDFFAFC3F3A5DAC239F2 /* file.png */; };
 		BE3BDA7DF284333F8C68BE59 /* CopyDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD797A84E2FCF1D77271B /* CopyDialog.swift */; };
 		BE3BDAC6FACE3A64C5A41FCD /* FileProgressDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD5B0D93EC150367B8A8C /* FileProgressDelegate.swift */; };
 		BE3BDAE8242721166CAFDEC9 /* AndroidHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDEC3A70E61017CF5C4D5 /* AndroidHandler.swift */; };
@@ -227,7 +238,6 @@
 		BE3BDDC697F4DA2741C2CE97 /* Collection_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD035DD9F5BE7EB5220BE /* Collection_Extension.swift */; };
 		BE3BDDD656E09806D5694906 /* PullCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD903231A6A691CF8F97F /* PullCommand.cpp */; };
 		BE3BDDE9D513271A0265C642 /* Snackbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD81AC439AB91EA5499E0 /* Snackbar.swift */; };
-		BE3BDDEBA7F8D5119F29144D /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD8B0BBFD2BD4175F63BB /* folder.png */; };
 		BE3BDE084524366D5F702AFC /* AndroidDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD86C2E85315AA443F20A /* AndroidDevice.swift */; };
 		BE3BDE253D33B4305FAEE9B7 /* ColoredPopUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD79CDF38FD2B656A1939 /* ColoredPopUpButton.swift */; };
 		BE3BDE25C62FB44F5F8900C9 /* NSViewController_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD9E8FE3599A1D744CDAD /* NSViewController_Extension.swift */; };
@@ -273,10 +283,17 @@
 		50C567231FFA935F00452792 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = AppFonts;
+			dstPath = Fonts;
 			dstSubfolderSpec = 7;
 			files = (
-				50C567241FFA938200452792 /* AlegreyaSans.ttf in CopyFiles */,
+				50D37AA520091735007A1374 /* Slabo27px-Regular.ttf in CopyFiles */,
+				50D37AA620091735007A1374 /* Ubuntu-Regular.ttf in CopyFiles */,
+				50D37AA720091735007A1374 /* Cambo-Regular.ttf in CopyFiles */,
+				50D37AA820091735007A1374 /* Arimo-Regular.ttf in CopyFiles */,
+				50D37AA920091735007A1374 /* Raleway-Regular.ttf in CopyFiles */,
+				50D37AAA20091735007A1374 /* PT_Sans-Web-Regular.ttf in CopyFiles */,
+				50D37A9E200915FC007A1374 /* Roboto-Regular.ttf in CopyFiles */,
+				50D37A9A2009111F007A1374 /* AlegreyaSans-Regular.ttf in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,13 +341,26 @@
 		5098AC6B1FFD3A990084449B /* NSImageView_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSImageView_Extension.swift; sourceTree = "<group>"; };
 		5098AC6D1FFD3C810084449B /* path_selector_div.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = path_selector_div.png; sourceTree = "<group>"; };
 		5098AC6F1FFD3CBA0084449B /* ImageResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageResource.swift; sourceTree = "<group>"; };
+		50A356582009C14B0088B80B /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = folder.png; path = "../../Designs/Mac/Dragon Android Transfer/References/Icons/PSDs/folder.png"; sourceTree = "<group>"; };
+		50A356592009C14C0088B80B /* file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = file.png; path = "../../Designs/Mac/Dragon Android Transfer/References/Icons/PSDs/file.png"; sourceTree = "<group>"; };
 		50B020331FE986C500989BA4 /* CollectionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
-		50C567211FFA934C00452792 /* AlegreyaSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AlegreyaSans.ttf; sourceTree = "<group>"; };
 		50CAAF891FFFBFCD00911D8E /* SingleClickButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleClickButton.swift; sourceTree = "<group>"; };
 		50CAAF9120000F2A00911D8E /* DarkAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkAlert.swift; sourceTree = "<group>"; };
 		50CAAF932000253000911D8E /* android.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = android.png; sourceTree = "<group>"; };
 		50CAAF942000253100911D8E /* mac.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mac.png; sourceTree = "<group>"; };
 		50CAAF9720003A0E00911D8E /* String_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String_Extension.swift; sourceTree = "<group>"; };
+		50D1A1ED2009EDC60024219C /* AVCTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCTable.swift; sourceTree = "<group>"; };
+		50D37A9720090FAB007A1374 /* FontResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontResource.swift; sourceTree = "<group>"; };
+		50D37A99200910BF007A1374 /* AlegreyaSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AlegreyaSans-Regular.ttf"; sourceTree = "<group>"; };
+		50D37A9B20091366007A1374 /* NSTextField_ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTextField_ext.swift; sourceTree = "<group>"; };
+		50D37A9D200915B6007A1374 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		50D37A9F200916FE007A1374 /* PT_Sans-Web-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PT_Sans-Web-Regular.ttf"; sourceTree = "<group>"; };
+		50D37AA020091706007A1374 /* Raleway-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Regular.ttf"; sourceTree = "<group>"; };
+		50D37AA12009170F007A1374 /* Arimo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arimo-Regular.ttf"; sourceTree = "<group>"; };
+		50D37AA220091716007A1374 /* Cambo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cambo-Regular.ttf"; sourceTree = "<group>"; };
+		50D37AA32009171B007A1374 /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Regular.ttf"; sourceTree = "<group>"; };
+		50D37AA420091720007A1374 /* Slabo27px-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Slabo27px-Regular.ttf"; sourceTree = "<group>"; };
+		50D37AAB20092EB1007A1374 /* VerticallyAlignedTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticallyAlignedTextFieldCell.swift; sourceTree = "<group>"; };
 		50D7D9B31FFE948D00E85E70 /* TextUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextUtils.swift; sourceTree = "<group>"; };
 		50D7D9B51FFE97AC00E85E70 /* SelectionTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTableRowView.swift; sourceTree = "<group>"; };
 		50D7D9BA1FFEA37A00E85E70 /* ScrollessScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScrollessScrollView.h; sourceTree = "<group>"; };
@@ -440,7 +470,6 @@
 		BE3BD84AE45EE7CCE8AA60E2 /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		BE3BD86117C6A1984B137A27 /* SelectableTableRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectableTableRowView.swift; sourceTree = "<group>"; };
 		BE3BD86C2E85315AA443F20A /* AndroidDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AndroidDevice.swift; sourceTree = "<group>"; };
-		BE3BD8B0BBFD2BD4175F63BB /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
 		BE3BD8E83B33335EFFAE02FB /* TotalSpaceCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TotalSpaceCommand.hpp; sourceTree = "<group>"; };
 		BE3BD8F9CACDD300FD006959 /* AVCListing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVCListing.swift; sourceTree = "<group>"; };
 		BE3BD903231A6A691CF8F97F /* PullCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PullCommand.cpp; sourceTree = "<group>"; };
@@ -480,7 +509,6 @@
 		BE3BDD930E20C1CA43BD528C /* SimpleAdbCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleAdbCommand.cpp; sourceTree = "<group>"; };
 		BE3BDDA6A14679C99D3339E3 /* TransferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferViewController.swift; sourceTree = "<group>"; };
 		BE3BDDCDBA92242155341F67 /* MacHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacHelper.h; sourceTree = "<group>"; };
-		BE3BDDFFAFC3F3A5DAC239F2 /* file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file.png; sourceTree = "<group>"; };
 		BE3BDE0AFC4FB7666CD75975 /* FileExistsCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FileExistsCommand.hpp; sourceTree = "<group>"; };
 		BE3BDE295CD9D91FD872081A /* BaseExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseExtension.swift; sourceTree = "<group>"; };
 		BE3BDE52E10EBE1D23CA113D /* CommandFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandFactory.h; sourceTree = "<group>"; };
@@ -574,8 +602,8 @@
 				50961C0E1FF966C2001B6D3D /* menu.png */,
 				50961C081FF95CAE001B6D3D /* external_storage.png */,
 				50961C091FF95CAE001B6D3D /* internal_storage.png */,
-				BE3BDDFFAFC3F3A5DAC239F2 /* file.png */,
-				BE3BD8B0BBFD2BD4175F63BB /* folder.png */,
+				50A356592009C14C0088B80B /* file.png */,
+				50A356582009C14B0088B80B /* folder.png */,
 				BE3BD7F3E98C3A92436C5F2C /* clipboard_icon.png */,
 				503D93151FF8EAA0009E7E39 /* menu_back.png */,
 				BE3BD6E19034EA1ACA510769 /* back_button.png */,
@@ -637,7 +665,14 @@
 		50C567201FFA934C00452792 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				50C567211FFA934C00452792 /* AlegreyaSans.ttf */,
+				50D37AA420091720007A1374 /* Slabo27px-Regular.ttf */,
+				50D37AA32009171B007A1374 /* Ubuntu-Regular.ttf */,
+				50D37AA220091716007A1374 /* Cambo-Regular.ttf */,
+				50D37AA12009170F007A1374 /* Arimo-Regular.ttf */,
+				50D37AA020091706007A1374 /* Raleway-Regular.ttf */,
+				50D37A9F200916FE007A1374 /* PT_Sans-Web-Regular.ttf */,
+				50D37A9D200915B6007A1374 /* Roboto-Regular.ttf */,
+				50D37A99200910BF007A1374 /* AlegreyaSans-Regular.ttf */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -702,6 +737,7 @@
 				BE3BDE81BDA18AA71E0DDAC3 /* NSTableView_Extension.swift */,
 				BE3BD035DD9F5BE7EB5220BE /* Collection_Extension.swift */,
 				BE3BD9E8FE3599A1D744CDAD /* NSViewController_Extension.swift */,
+				50D37A9B20091366007A1374 /* NSTextField_ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -817,6 +853,7 @@
 				BE3BD5F8E8F2AA3E81B07AA5 /* AndroidViewController.storyboard */,
 				BE3BD15E362D80E5FFA6089A /* AndroidViewController.swift */,
 				BE3BDFBC6549A31FD7DF3BAE /* AVCUi.swift */,
+				50D1A1ED2009EDC60024219C /* AVCTable.swift */,
 			);
 			path = Android;
 			sourceTree = "<group>";
@@ -843,6 +880,7 @@
 				50CAAF891FFFBFCD00911D8E /* SingleClickButton.swift */,
 				50CAAF9120000F2A00911D8E /* DarkAlert.swift */,
 				BE3BDB8452A7793F38751991 /* TableViewKeys.swift */,
+				50D37AAB20092EB1007A1374 /* VerticallyAlignedTextFieldCell.swift */,
 				BE3BD58FE89F62979C87BBE7 /* Xib */,
 			);
 			path = Custom;
@@ -967,6 +1005,7 @@
 				5096950C1FF765D8005BC423 /* LightTheme.swift */,
 				5098AC6F1FFD3CBA0084449B /* ImageResource.swift */,
 				BE3BD58F84E6678D4CC5BA02 /* IntegerResource.swift */,
+				50D37A9720090FAB007A1374 /* FontResource.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1179,17 +1218,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				503C5A2F1E0FB9300090EB68 /* Assets.xcassets in Resources */,
-				50C567221FFA934C00452792 /* AlegreyaSans.ttf in Resources */,
 				503C5A321E0FB9300090EB68 /* Main.storyboard in Resources */,
 				50F51179200108FF00CCB22C /* transfer_more.png in Resources */,
 				50D7D9C21FFEA87900E85E70 /* cancel.png in Resources */,
-				BE3BDA5F8B8040DCA2509A1D /* file.png in Resources */,
 				50961C111FF9676B001B6D3D /* backward.png in Resources */,
-				BE3BDDEBA7F8D5119F29144D /* folder.png in Resources */,
 				50FE44AB1FF6BA760099A029 /* PushSegue.swift in Resources */,
 				5098AC6E1FFD3C820084449B /* path_selector_div.png in Resources */,
 				BE3BDAF11B0C0A34B5455FA2 /* clipboard_icon.png in Resources */,
 				BE3BD112BC91E0AC5A18FB99 /* back_button.png in Resources */,
+				50A3565B2009C14C0088B80B /* file.png in Resources */,
 				503D93161FF8EAA0009E7E39 /* menu_back.png in Resources */,
 				50F511812001401C00CCB22C /* paste.png in Resources */,
 				50961C0A1FF95CAE001B6D3D /* external_storage.png in Resources */,
@@ -1208,6 +1245,7 @@
 				BE3BD43FFDA218F217C09DBA /* help.rtf in Resources */,
 				BE3BDBF0A3F946760F91F720 /* intro_guide.rtf in Resources */,
 				BE3BD0E5A9B8848A8C017AD3 /* CopyDialog.xib in Resources */,
+				50A3565A2009C14C0088B80B /* folder.png in Resources */,
 				BE3BD3CA5BE659E67FC602F6 /* HelpWindow.xib in Resources */,
 				BE3BDBB3DBEEB39658AC9DDD /* AndroidViewController.storyboard in Resources */,
 				50F91FCD20024DA000C58955 /* info.png in Resources */,
@@ -1480,6 +1518,7 @@
 				BE3BD7DAF4A0DEDEBB668109 /* DimenUtils.swift in Sources */,
 				50B020341FE986C500989BA4 /* CollectionExtension.swift in Sources */,
 				BE3BD3CF4A98FDDACABFF93A /* ColorUtils.swift in Sources */,
+				50D1A1EE2009EDC60024219C /* AVCTable.swift in Sources */,
 				BE3BDA227C3660B22686716F /* SizeUtils.swift in Sources */,
 				BE3BD37C280AAD9C969F3243 /* TimeUtils.swift in Sources */,
 				50293DF61FEFBF0B00B06B14 /* BaseFile.swift in Sources */,
@@ -1517,6 +1556,7 @@
 				BE3BDA1B26C25B694341E27B /* DraggableItem.swift in Sources */,
 				50F91FC920024A3B00C58955 /* MenuStatusView.swift in Sources */,
 				BE3BD756779B9E066ABD34FA /* SegueFromLeftOld.swift in Sources */,
+				50D37AAC20092EB1007A1374 /* VerticallyAlignedTextFieldCell.swift in Sources */,
 				BE3BDD40E7D724B613AFB166 /* SelectableTableRowView.swift in Sources */,
 				BE3BD7DB41DF423A3A01554C /* ViewController.swift in Sources */,
 				BE3BDC4D92033DA885AE5581 /* FileCellView.swift in Sources */,
@@ -1581,6 +1621,7 @@
 				BE3BD98A9BBF4B8A5D355489 /* AVCUi.swift in Sources */,
 				50F5117B200139EE00CCB22C /* FileOptions.swift in Sources */,
 				50D7D9B41FFE948D00E85E70 /* TextUtils.swift in Sources */,
+				50D37A9C20091366007A1374 /* NSTextField_ext.swift in Sources */,
 				BE3BDE36A34F20C0862470AC /* R.swift in Sources */,
 				BE3BDD0E064CA86D1F6A123C /* NSWindow_Extension.swift in Sources */,
 				BE3BD392818B15BDF9FEEAFA /* MVCTable.swift in Sources */,
@@ -1596,6 +1637,7 @@
 				BE3BD975E231F361C9E82C66 /* MenuCell.swift in Sources */,
 				BE3BDDE9D513271A0265C642 /* Snackbar.swift in Sources */,
 				BE3BDFA64BC7A54BC65A4795 /* PathSelector.swift in Sources */,
+				50D37A9820090FAB007A1374 /* FontResource.swift in Sources */,
 				BE3BDDC697F4DA2741C2CE97 /* Collection_Extension.swift in Sources */,
 				BE3BDF43E55E23C9AA555683 /* CommandConfig.cpp in Sources */,
 				BE3BDE25C62FB44F5F8900C9 /* NSViewController_Extension.swift in Sources */,

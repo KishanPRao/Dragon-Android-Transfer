@@ -11,11 +11,7 @@ import Foundation
 extension AndroidViewController {
 	
 	internal func initUi() {
-		//overlayView = ClickableView(frame: NSRect(x: 0, y: 0, width: 100, height: 100))
-		// fileTable.delegate = self
-		fileTable.delegate = tableDelegate
-		tableDelegate.setAndroidDirectoryItems(items: androidDirectoryItems)
-		tableDelegate.fileTable = fileTable
+        fileTable.delegate = self
 		fileTable.dragDelegate = self
 		fileTable.dragUiDelegate = self
 //        self.fileTable.intercellSpacing = NSSize(width: 0, height: 5)
@@ -23,33 +19,39 @@ extension AndroidViewController {
 		fileTable.doubleAction = doubleClickSelector
 		
 		ColorUtils.setBackgroundColorTo(view, color: ColorUtils.mainViewColor)
-		//ColorUtils.setBackgroundColorTo(toolbarView, color: ColorUtils.toolbarColor)
 		toolbarView.setBackground(R.color.toolbarColor)
 		
 		fileTable.backgroundColor = R.color.tableBg
-		fileTable.selectionHighlightStyle = NSTableViewSelectionHighlightStyle.none
+		fileTable.selectionHighlightStyle = .none
 		messageText.alignment = .center
-		messageText.font = NSFont(name: messageText.font!.fontName, size: DimenUtils.getDimension(dimension: Dimens.error_message_text_size))
+//        messageText.font = NSFont(name: messageText.font!.fontName, size: DimenUtils.getDimension(dimension: Dimens.error_message_text_size))
+        let font = NSFont(name: R.font.mainFont, size: DimenUtils.getDimension(dimension: Dimens.error_message_text_size))
+        messageText.font = font
+        messageText.updateMainFont()
 		messageText.textColor = R.color.textColor
 		messageText.setBackground(R.color.tableBg)
 		updateDeviceStatus()
 		
 		menuButton.setImage(name: "menu")
+        //        TODO: Tooltip problem on menu open
+        menuButton.toolTip = R.string.helpMenu
 		backButton.setImage(name: "backward")
+        backButton.toolTip = R.string.helpBack
 		
 		let imageView = NSImageView()
 		imageView.image = NSApplication.shared().applicationIconImage
 		mDockTile.contentView = imageView
 		
-		mDockProgress = NSProgressIndicator(frame: NSMakeRect(0.0, 0.0, mDockTile.size.width, 10))
-		mDockProgress?.style = NSProgressIndicatorStyle.barStyle
-		mDockProgress?.isIndeterminate = false
-		mDockProgress?.minValue = 0
-		mDockProgress?.maxValue = 100
-		imageView.addSubview(mDockProgress!)
-		
-		mDockProgress?.isBezeled = true
-		mDockProgress?.isHidden = true
+        mDockProgress = NSProgressIndicator(frame: NSMakeRect(0.0, 0.0, mDockTile.size.width, 10))
+        if let dockProgress = mDockProgress {
+			dockProgress.style = NSProgressIndicatorStyle.barStyle
+			dockProgress.isIndeterminate = false
+			dockProgress.minValue = 0
+			dockProgress.maxValue = 100
+			imageView.addSubview(dockProgress)
+            dockProgress.isBezeled = true
+            dockProgress.isHidden = true
+        }
 		
 		overlayView.isHidden = true
 		overlayView.setBackground(R.color.menuBgColor)
@@ -72,6 +74,7 @@ extension AndroidViewController {
 	}
 	
 	internal func showProgress() {
+        self.fileTable.enableKeys = false
 		self.loadingProgress.show()
 		self.overlayView.show()
 	}
@@ -79,6 +82,8 @@ extension AndroidViewController {
 	internal func hideProgress() {
 		self.loadingProgress.hide()
 		self.overlayView.hide()
+        self.fileTable.enableKeys = true
+        fileTable.makeFirstResponder(self.view.window)
 		/*
 		NSAnimationContext.runAnimationGroup({ _ in
 			NSAnimationContext.current().duration = 0.5

@@ -15,8 +15,9 @@ extension TransferViewController {
 		let files = transferHandler.getClipboardMacItems()
 		if (files.count == 0) {
 			if (NSObject.VERBOSE) {
-				Swift.print("Paste to android, Warning, NO ITEMS");
+				LogI("Paste to android, Warning, NO ITEMS")
 			}
+            exit()
 			return
 		} else {
 			var i = 0

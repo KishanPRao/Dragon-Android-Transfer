@@ -13,4 +13,5 @@ class R {
 	public static let drawable = ImageResource()
 	public static let integer = IntegerResource()
     public static let string = StringResource()
+    public static let font = FontResource()
 }

@@ -27,6 +27,8 @@ class SelectionTableRowView: NSTableRowView {
         }
     }*/
     
+    var selectedColor = R.color.black
+    
     
     override var isSelected: Bool {
         willSet(newValue) {
@@ -40,10 +42,12 @@ class SelectionTableRowView: NSTableRowView {
         let context: CGContext = NSGraphicsContext.current()!.cgContext
         
         if self.isSelected {
-            context.setFillColor(R.color.menuItemSelectBg.cgColor)
+//            LogV("Fill Selected!")
+            context.setFillColor(selectedColor.cgColor)
 //            context.setFillColor(R.color.menuItemBg.cgColor)
         } else {
             context.setFillColor(self.backgroundColor.cgColor)
+//            context.setFillColor(NSColor.clear.cgColor)
 //            context.setFillColor(R.color.menuItemBg.cgColor)
         }
         

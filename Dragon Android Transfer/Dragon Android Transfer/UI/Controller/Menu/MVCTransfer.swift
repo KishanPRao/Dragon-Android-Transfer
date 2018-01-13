@@ -38,6 +38,19 @@ extension MenuViewController {
                 }
             }
         }
+        for item in self.popup.itemArray {
+            let fontSize = popup.font?.pointSize ?? 10
+            item.attributedTitle = NSAttributedString(string: item.title, attributes: [
+                NSFontAttributeName: NSFont(name: R.font.mainFont, size: fontSize)!,
+//                NSForegroundColorAttributeName: NSColor(calibratedRed: 0.2, green: 0.270588235, blue: 0.031372549, alpha: 1),
+//                NSBaselineOffsetAttributeName: 2
+                ])
+        }
+//        for item in self.popup.itemArray {
+//            item.attributedTitle = NSMutableAttributedString(string: item.title, attributes: [
+//                NSFontAttributeName: NSFont(name: R.font.mainFont, size: fontSize),
+//                ])
+//        }
     }
     
 	internal func observe() {
@@ -56,13 +69,20 @@ extension MenuViewController {
 					if let device = device {
 						//print("Device Storage", device.storages)
 						self.updateStorageItems(device.storages)
-					}
+                    } else {
+                        self.statusView.resetNoDevice()
+                        self.updateStorageItems([])
+                    }
 				}).addDisposableTo(disposeBag)
 		transferHandler.observeCurrentPath()
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: {
 					path in
-                    self.updateStorageSelection(path)
+                    if self.transferHandler.hasActiveDevice() {
+                    	self.updateStorageSelection(path)
+                    } else {
+//                        self.statusView.resetNoDevice()
+                    }
 				}).addDisposableTo(disposeBag)
         
         transferHandler.getSpaceStatus()
@@ -70,7 +90,8 @@ extension MenuViewController {
             .subscribe(onNext: { spaceStatus in
 //                self.LogI("Space Status: \(spaceStatus)")
                 if (spaceStatus.count < 2) {
-                    self.statusView.resetSize()
+//                    self.statusView.resetSize()
+//                    self.statusView.resetNoDevice()
                     return
                 }
                 let available = spaceStatus[0]

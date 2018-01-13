@@ -32,6 +32,7 @@ class DarkAlert: NSAlert {
 			if let text = (view as? NSTextField) {
 				text.textColor = textColor
 				text.isSelectable = false
+                text.updateMainFont()
 			}
 		}
 		
