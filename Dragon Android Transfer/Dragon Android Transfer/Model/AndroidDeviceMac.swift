@@ -1,5 +1,5 @@
 //
-//  AndroidDevice.swift
+//  AndroidDeviceMac.swift
 //  Dragon Android Transfer
 //
 //  Created by Kishan P Rao on 18/01/17.
@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-public class AndroidDevice: NSObject {
+public class AndroidDeviceMac: NSObject {
 	var id : String = ""
 	var name : String = ""
 	var storages = [StorageItem]()
@@ -20,5 +20,5 @@ public class AndroidDevice: NSObject {
 		self.storages = storages
 	}
 	
-    override public var description: String { return "AndroidDevice" + ": \(id, name)" }
+    override public var description: String { return "AndroidDeviceMac" + ": \(id, name)" }
 }

@@ -24,22 +24,22 @@ class TransferHandler {
 		return androidHandler.hasActiveDevice()
     }
 	
-    func observeAndroidDevices() -> Observable<[AndroidDevice]> {
+    func observeAndroidDevices() -> Observable<[AndroidDeviceMac]> {
         return androidHandler.observeAndroidDevices()
     }
     
-    func observeActiveDevice() -> Observable<AndroidDevice?> {
+    func observeActiveDevice() -> Observable<AndroidDeviceMac?> {
         return androidHandler.observableActiveDevice.asObservable()
     }
 	
-	func setActiveDevice(_ device: AndroidDevice?) -> Bool {
+	func setActiveDevice(_ device: AndroidDeviceMac?) -> Bool {
 		let result = self.androidHandler.setActiveDevice(device)
 		self.clearClipboardAndroidItems()
 		self.clearClipboardMacItems()
 		return result
 	}
 	
-	func getActiveDevice() -> AndroidDevice? {
+	func getActiveDevice() -> AndroidDeviceMac? {
 		return self.androidHandler.getActiveDevice()
 	}
 	

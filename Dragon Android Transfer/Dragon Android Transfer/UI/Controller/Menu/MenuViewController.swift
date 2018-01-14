@@ -27,7 +27,7 @@ class MenuViewController: NSViewController,
 	public var frameSize = NSRect()
 	internal var storages = [StorageItem]()
 	
-	var androidDevices = [AndroidDevice]()
+	var androidDevices = [AndroidDeviceMac]()
     
     @IBOutlet weak var statusView: MenuStatusView!
     
@@ -88,7 +88,7 @@ class MenuViewController: NSViewController,
 		}
 	}
     
-    var activeDevice: AndroidDevice? = nil
+    var activeDevice: AndroidDeviceMac? = nil
     
     internal func reset() {
         self.popup.isEnabled = false
@@ -150,14 +150,15 @@ class MenuViewController: NSViewController,
         selectedStorageIndex = index
 //        LogV("Reloading: \(index), \(selectedStorageIndex)")
         if index != -1 {
-            self.table.notifyItemChanged(index: index)
-//            self.table.selectRowIndexes(indexSet, byExtendingSelection: true)
+//            self.table.notifyItemChanged(index: index)
+			let indexSet = IndexSet(integer: index)
+            self.table.selectRowIndexes(indexSet, byExtendingSelection: true)
             self.statusView.updateStorageItem(storageItem!)
         } else {
 //            self.statusView.resetSize()
 //            self.statusView.resetTitle()
         }
-        self.table.notifyItemChanged(index: oldIndex)
+//        self.table.notifyItemChanged(index: oldIndex)
     }
     
 	func doubleClick(_ sender: AnyObject) {

@@ -84,6 +84,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 		NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.screenUpdated), name: NSNotification.Name.NSWindowDidChangeScreen, object: nil)
 		
 		R.setDarkTheme()
+		
+		AppDelegate.showNotification(title: "", message: "")
+	}
+	
+	static func showNotification(title: String, message: String) -> Void {
+		var notification = NSUserNotification()
+		notification.title = "Test from Swift"
+		notification.informativeText = "The body of this Swift notification"
+		notification.soundName = NSUserNotificationDefaultSoundName
+		NSUserNotificationCenter.default.deliver(notification)
 	}
 	
 	func isInvalidOperation() -> Bool {

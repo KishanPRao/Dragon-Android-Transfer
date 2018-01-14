@@ -13,7 +13,7 @@
 #define TransferBlock (nonnull void (^)(NSInteger progress, enum AdbExecutionResultWrapper result))
 
 @class BaseFile;
-@class AndroidDevice;
+@class AndroidDeviceMac;
 //@class StorageItem;
 
 //extern NSString * const MYSomethingHappenedNotification;
@@ -26,7 +26,7 @@
  */
 // TODO: Check if possible to convert as C++ class.
 @interface AndroidAdbHandler : NSObject
-@property(nonatomic, retain) AndroidDevice *_Nullable device;
+@property(nonatomic, retain) AndroidDeviceMac *_Nullable device;
 @property(nonatomic, retain) NSString *_Nullable adbDirectoryPath;
 //@property (nonatomic, retain) AdbExecutor *executor;
 
@@ -38,7 +38,7 @@
 
 - (NSArray<BaseFile *> *_Nonnull)getDirectoryListing:(NSString *_Nonnull)path;
 
-- (NSArray<AndroidDevice *> *_Nonnull)getDevices;
+- (NSArray<AndroidDeviceMac *> *_Nonnull)getDevices;
 
 - (bool)fileExists:(NSString *_Nonnull)path withFileType:(bool)isFile;
 

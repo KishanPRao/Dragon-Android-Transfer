@@ -10,7 +10,7 @@
 		500381471F8D44A0000728E9 /* Dragon_Android_TransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500381461F8D44A0000728E9 /* Dragon_Android_TransferTests.swift */; };
 		5003814F1F8D44F2000728E9 /* testAndroidAdb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5003814E1F8D44F2000728E9 /* testAndroidAdb.swift */; };
 		500381571F8D4510000728E9 /* Dragon_Android_TransferUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500381561F8D4510000728E9 /* Dragon_Android_TransferUITests.swift */; };
-		500381681F8D4984000728E9 /* AndroidDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD86C2E85315AA443F20A /* AndroidDevice.swift */; };
+		500381681F8D4984000728E9 /* AndroidDeviceMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD86C2E85315AA443F20A /* AndroidDeviceMac.swift */; };
 		500381801F8D498F000728E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD9E9DDF981F8F795B66F /* AppDelegate.swift */; };
 		500381821F8D49C7000728E9 /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDCC4280329DAC474762E /* TimeUtils.swift */; };
 		500381831F8D49C7000728E9 /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDCC4280329DAC474762E /* TimeUtils.swift */; };
@@ -238,7 +238,7 @@
 		BE3BDDC697F4DA2741C2CE97 /* Collection_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD035DD9F5BE7EB5220BE /* Collection_Extension.swift */; };
 		BE3BDDD656E09806D5694906 /* PullCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD903231A6A691CF8F97F /* PullCommand.cpp */; };
 		BE3BDDE9D513271A0265C642 /* Snackbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD81AC439AB91EA5499E0 /* Snackbar.swift */; };
-		BE3BDE084524366D5F702AFC /* AndroidDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD86C2E85315AA443F20A /* AndroidDevice.swift */; };
+		BE3BDE084524366D5F702AFC /* AndroidDeviceMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD86C2E85315AA443F20A /* AndroidDeviceMac.swift */; };
 		BE3BDE253D33B4305FAEE9B7 /* ColoredPopUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD79CDF38FD2B656A1939 /* ColoredPopUpButton.swift */; };
 		BE3BDE25C62FB44F5F8900C9 /* NSViewController_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD9E8FE3599A1D744CDAD /* NSViewController_Extension.swift */; };
 		BE3BDE36A34F20C0862470AC /* R.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDD1D612B9E5A72510B12 /* R.swift */; };
@@ -469,7 +469,7 @@
 		BE3BD842071A151360917781 /* AndroidAdbHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AndroidAdbHandler.h; sourceTree = "<group>"; };
 		BE3BD84AE45EE7CCE8AA60E2 /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		BE3BD86117C6A1984B137A27 /* SelectableTableRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectableTableRowView.swift; sourceTree = "<group>"; };
-		BE3BD86C2E85315AA443F20A /* AndroidDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AndroidDevice.swift; sourceTree = "<group>"; };
+		BE3BD86C2E85315AA443F20A /* AndroidDeviceMac.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AndroidDeviceMac.swift; sourceTree = "<group>"; };
 		BE3BD8E83B33335EFFAE02FB /* TotalSpaceCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TotalSpaceCommand.hpp; sourceTree = "<group>"; };
 		BE3BD8F9CACDD300FD006959 /* AVCListing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVCListing.swift; sourceTree = "<group>"; };
 		BE3BD903231A6A691CF8F97F /* PullCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PullCommand.cpp; sourceTree = "<group>"; };
@@ -779,7 +779,7 @@
 		BE3BD3F18BD4C34B13D207DC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BE3BD86C2E85315AA443F20A /* AndroidDevice.swift */,
+				BE3BD86C2E85315AA443F20A /* AndroidDeviceMac.swift */,
 				50F314DF1FAE1C45006BF985 /* ExtensionBaseFile.swift */,
 				50293DF51FEFBF0B00B06B14 /* BaseFile.swift */,
 				50293DF71FEFBF2A00B06B14 /* BaseFileType.swift */,
@@ -1435,7 +1435,7 @@
 				500381841F8D49EF000728E9 /* SizeUtils.swift in Sources */,
 				500381821F8D49C7000728E9 /* TimeUtils.swift in Sources */,
 				5003814F1F8D44F2000728E9 /* testAndroidAdb.swift in Sources */,
-				500381681F8D4984000728E9 /* AndroidDevice.swift in Sources */,
+				500381681F8D4984000728E9 /* AndroidDeviceMac.swift in Sources */,
 				50F314E41FAE28D7006BF985 /* ThreadUtils.swift in Sources */,
 				BE3BD3312610D2D050B7CCB7 /* AbstractHandler.swift in Sources */,
 				BE3BD8931EC9CE6A9A2BCD97 /* AndroidHandler.swift in Sources */,
@@ -1512,7 +1512,7 @@
 			files = (
 				50CAAF9220000F2A00911D8E /* DarkAlert.swift in Sources */,
 				503B88541F928944004E6417 /* StringExtension.swift in Sources */,
-				BE3BDE084524366D5F702AFC /* AndroidDevice.swift in Sources */,
+				BE3BDE084524366D5F702AFC /* AndroidDeviceMac.swift in Sources */,
 				BE3BDC57F874BAFD8C7076B1 /* AppDelegate.swift in Sources */,
 				503D931A1FF8F0A8009E7E39 /* NSView_Extension.swift in Sources */,
 				BE3BD7DAF4A0DEDEBB668109 /* DimenUtils.swift in Sources */,

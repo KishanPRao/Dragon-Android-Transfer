@@ -25,7 +25,8 @@ class DarkTheme: Theme {
 
 //    let tableBg = color("050505") 
 //    let tableBg = color("101010") 
-	let tableBg = color("000000")
+//    let tableBg = color("000000")
+    let tableBg = color("181d21")
 //	let tableItemBg = color("050505")
 	let tableItemBg = color("000000")
 	let transferBg = color("313b4c")
@@ -33,7 +34,7 @@ class DarkTheme: Theme {
 	let transferTextColor = color("b8c2c9")
 
 //	let windowBg = color("050505")
-	let windowBg = color("101010")
+    let windowBg = color("101010")
     
     var listSelectedBackgroundColor = color("092c61")
 }

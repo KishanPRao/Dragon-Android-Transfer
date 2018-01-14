@@ -46,7 +46,7 @@ extension AndroidViewController {
 			.subscribeOn(bgScheduler)
 			.observeOn(MainScheduler.instance)
 			.map {
-				devices -> ([AndroidDevice]) in
+				devices -> ([AndroidDeviceMac]) in
 				Swift.print("Main 1 :", ThreadUtils.isMainThread())
 				Swift.print("Observable Devices", devices)
 				self.showProgress()
@@ -57,7 +57,7 @@ extension AndroidViewController {
 			}
 			.observeOn(bgScheduler)
 			.map {
-				devices -> ([AndroidDevice]) in
+				devices -> ([AndroidDeviceMac]) in
 				Swift.print("Main 2:", ThreadUtils.isMainThread())
 				Swift.print("Observable Devices", devices)
 				var devicesNames = [] as Array<String>
@@ -75,13 +75,13 @@ extension AndroidViewController {
 			}
 			.observeOn(MainScheduler.instance)
 			.map {
-				devices -> ([AndroidDevice]) in
+				devices -> ([AndroidDeviceMac]) in
 				Swift.print("Main 3:", ThreadUtils.isMainThread())
 				Swift.print("Observable Devices", devices)
 				let selectedIndex = self.devicesPopUp.indexOfSelectedItem
 				print("Update Selected:", selectedIndex)
 				self.updatePopupDimens()
-				var activeDevice = nil as AndroidDevice?
+				var activeDevice = nil as AndroidDeviceMac?
 				if (selectedIndex > -1 && selectedIndex < devices.count) {
 					//TODO: Crash if rapid dc & conn.
 					activeDevice = devices[selectedIndex]

@@ -10,9 +10,9 @@ import Foundation
 
 //All delegate methods must be called on Main Thread
 protocol DeviceNotficationDelegate: class {
-	func onConnected(_ device: AndroidDevice)
+	func onConnected(_ device: AndroidDeviceMac)
 	
-	func onDisconnected(_ device: AndroidDevice)
+	func onDisconnected(_ device: AndroidDeviceMac)
 	
 	func onUpdate()
 }

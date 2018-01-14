@@ -115,6 +115,7 @@ string AdbExecutor::executeAdb(string commands, AdbCallback callback) {
 	task.currentDirectoryPath = convert(adbDirectoryPath);
 	auto pipe = [[NSPipe alloc] init];
 	task.standardOutput = pipe;
+	task.standardError = nil;
 	activeTask = task;
 //	TODO: Cancellation..
 	auto outFile = [pipe fileHandleForReading];

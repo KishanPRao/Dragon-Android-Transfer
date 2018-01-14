@@ -227,10 +227,10 @@ public class ShellParser: NSObject {
 	}
 	
 	@objc
-	public static func parseDeviceInfoOutput(_ devId: String, infoString: String) -> AndroidDevice {
+	public static func parseDeviceInfoOutput(_ devId: String, infoString: String) -> AndroidDeviceMac {
 		let deviceName = ShellParser.cleanString(infoString)
 		let deviceId = ShellParser.cleanString(devId)
-		let device = AndroidDevice.init(id: deviceId, name: deviceName)
+		let device = AndroidDeviceMac.init(id: deviceId, name: deviceName)
 		return device
 	}
 	

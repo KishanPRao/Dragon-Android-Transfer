@@ -158,7 +158,7 @@ extension AndroidViewController {
 		}
 	}
 	
-	internal func updateActiveDevice(_ activeDevice: AndroidDevice?) {
+	internal func updateActiveDevice(_ activeDevice: AndroidDeviceMac?) {
 		if (NSObject.VERBOSE) {
 			Swift.print("AndroidViewController, update:" + TimeUtils.getCurrentTime());
 		}

@@ -56,7 +56,7 @@ shared_ptr<AdbExecutor> executor;
 @synthesize device = _device;
 @synthesize adbDirectoryPath = _adbDirectoryPath;
 
-- (void)setDevice:(AndroidDevice *)device; {
+- (void)setDevice:(AndroidDeviceMac *)device; {
 	// TODO: Check device name too! Scenario: first time grant USB access (USB Debugging), no name.
 	if (device != _device && ![device.id isEqualToString:_device.id]) {
 		_device = device;
@@ -78,7 +78,7 @@ shared_ptr<AdbExecutor> executor;
 		auto storageList = make_shared<SimpleAdbCommand>(ShellScripts::STORAGE_LIST, executor)->execute();
 		
 		device.storages = [ShellParser parseStorageOutput:convert(storageList) info:convert(storageListInfo)];
-		
+
 //		NSLog(@"New Shell Type: %@, %d", convert(data), CommandConfig::shellType);
 		//NSLog(@"Storages: %@", device.storages);
 	}
@@ -101,16 +101,16 @@ shared_ptr<AdbExecutor> executor;
 	return self;
 }
 
--(bool) hasActiveDevice {
-    if (_device == nil) {
-        NSLog(@"Empty Device");
-        return false;
-    }
-    return true;
+- (bool)hasActiveDevice {
+	if (_device == nil) {
+		NSLog(@"Empty Device");
+		return false;
+	}
+	return true;
 }
 
 - (NSArray<BaseFile *> *)getDirectoryListing:(NSString *)path {
-    if (![self hasActiveDevice]) { return nil; }
+	if (![self hasActiveDevice]) {return nil;}
 	auto command = make_shared<ListCommand>(path.UTF8String, executor);
 	auto listString = convert(command->execute());
 	auto list = [ShellParser parseListOutput:listString currentPath:path];
@@ -118,12 +118,12 @@ shared_ptr<AdbExecutor> executor;
 	return list;
 }
 
-- (NSArray<AndroidDevice *> *)getDevices {
+- (NSArray<AndroidDeviceMac *> *)getDevices {
 	auto command = make_shared<DeviceListCommand>(executor);
 	auto devicesString = convert(command->execute());
 	auto deviceIds = [ShellParser parseDeviceListOutput:devicesString];
 	// NSLog(@"List Output, %@", deviceIds);
-	NSMutableArray<AndroidDevice *> *devices = [NSMutableArray new];
+	NSMutableArray<AndroidDeviceMac *> *devices = [NSMutableArray new];
 	
 	for (NSString *deviceId in deviceIds) {
 		auto command = make_shared<DeviceInfoCommand>(deviceId.UTF8String, executor);
@@ -137,48 +137,48 @@ shared_ptr<AdbExecutor> executor;
 }
 
 - (bool)fileExists:(NSString *)path withFileType:(bool)isFile {
-    if (![self hasActiveDevice]) { return false; }
+	if (![self hasActiveDevice]) {return false;}
 	auto command = make_shared<FileExistsCommand>(convert(path), isFile, executor);
 	auto output = command->execute();
 	return [ShellParser parseFileExists:convert(output)];
 }
 
 - (bool)createNewFolder:(NSString *)path {
-    if (![self hasActiveDevice]) { return false; }
+	if (![self hasActiveDevice]) {return false;}
 	auto command = make_shared<NewFolderCommand>(convert(path), executor);
 	command->execute();
 	return true;
 }
 
 - (void)deleteFile:(NSString *)path {
-    if (![self hasActiveDevice]) { return; }
+	if (![self hasActiveDevice]) {return;}
 	auto command = make_shared<DeleteCommand>(convert(path), executor);
 	command->execute();
 }
 
 
 - (NSString *)getTotalSpace:(NSString *)path {
-    if (![self hasActiveDevice]) { return @""; }
+	if (![self hasActiveDevice]) {return @"";}
 	auto command = make_shared<TotalSpaceCommand>(convert(path), executor);
 	return [ShellParser parseTotalSpace:convert(command->execute())];
 }
 
 - (NSString *)getAvailableSpace:(NSString *)path {
-    if (![self hasActiveDevice]) { return @""; }
+	if (![self hasActiveDevice]) {return @"";}
 	auto command = make_shared<AvailableSpaceCommand>(convert(path), executor);
 	return [ShellParser parseAvailableSpace:convert(command->execute())];
 	
 }
 
 - (UInt64)getFileSize:(NSString *)path {
-    if (![self hasActiveDevice]) { return 0; }
+	if (![self hasActiveDevice]) {return 0;}
 	auto command = make_shared<FileSizeCommand>(convert(path), executor);
 	return [ShellParser parseFileSize:convert(command->execute())];
 }
 
 //- (void) pull: (void (^)(NSString * output, enum AdbExecutionResult result))completionBlock {
 - (void)pull:(NSString *)sourceFile toDestination:(NSString *)destination :TransferBlock transferBlock {
-    if (![self hasActiveDevice]) { return; }
+	if (![self hasActiveDevice]) {return;}
 	auto command = make_shared<PullCommand>(convert(sourceFile), convert(destination), [transferBlock](std::string output, AdbExecutionResult result) {
 //		NSLog(@"Output Pull: %@, finished: %d", convert(output), result);
 //		[pullBlock: 0, result: result];
@@ -196,7 +196,7 @@ shared_ptr<AdbExecutor> executor;
 }
 
 - (void)push:(NSString *)sourceFile toDestination:(NSString *)destination :TransferBlock transferBlock {
-    if (![self hasActiveDevice]) { return; }
+	if (![self hasActiveDevice]) {return;}
 	auto command = make_shared<PushCommand>(convert(sourceFile), convert(destination), [transferBlock](std::string output, AdbExecutionResult result) {
 		long progress;
 		if (result == AdbExecutionResult::InProgress) {

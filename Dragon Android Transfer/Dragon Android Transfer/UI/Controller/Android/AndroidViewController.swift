@@ -147,9 +147,9 @@ class AndroidViewController: NSViewController,
 		let index = self.devicesPopUp.indexOfSelectedItem
 		print("Popup Selected:", index)
 		if (previousIndex != index) {
-			var activeDevice = nil as AndroidDevice?
+			var activeDevice = nil as AndroidDeviceMac?
 			if (index > -1) {
-				activeDevice = androidDevices[index] as? AndroidDevice
+				activeDevice = androidDevices[index] as? AndroidDeviceMac
 			}
 			updateActiveDevice(activeDevice)
 		}
@@ -222,10 +222,10 @@ class AndroidViewController: NSViewController,
 //        self.stop()
 	}
 	
-	func onConnected(_ device: AndroidDevice) {
+	func onConnected(_ device: AndroidDeviceMac) {
 	}
 	
-	func onDisconnected(_ device: AndroidDevice) {
+	func onDisconnected(_ device: AndroidDeviceMac) {
 	}
 	
 	func doubleClickList(_ sender: AnyObject) {
@@ -389,6 +389,7 @@ class AndroidViewController: NSViewController,
         }
 		if let menuVc = menuVc {
 			menuVc.frameSize = frameSize
+//			TODO: Handle if rapidly open close menu
 			addChildViewController(menuVc)
 			view.addSubview(menuVc.view)
 		}

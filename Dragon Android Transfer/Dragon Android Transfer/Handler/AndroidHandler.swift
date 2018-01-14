@@ -29,10 +29,12 @@ public class AndroidHandler: NSObject {
 	fileprivate var adbLaunchPath: String = ""
 	
 	fileprivate var currentPath: String = ""
-	fileprivate var timer: Timer? = nil
-	fileprivate var activeDevice: AndroidDevice? = nil
+//    fileprivate var timer: Timer? = nil
+    var timer: DispatchSourceTimer? = nil
+
+	fileprivate var activeDevice: AndroidDeviceMac? = nil
     
-    let observableActiveDevice = Variable<AndroidDevice?>(nil)
+    let observableActiveDevice = Variable<AndroidDeviceMac?>(nil)
     
 	
 	fileprivate var deviceNotificationDelegate: DeviceNotficationDelegate? = nil
@@ -99,25 +101,35 @@ public class AndroidHandler: NSObject {
 		deviceNotificationDelegate = delegate
 	}
 	
-	fileprivate var observableAndroidDevices: Variable<[AndroidDevice]> = Variable([])
+	fileprivate var observableAndroidDevices: Variable<[AndroidDeviceMac]> = Variable([])
 	
-	func observeAndroidDevices() -> Observable<[AndroidDevice]> {
+	func observeAndroidDevices() -> Observable<[AndroidDeviceMac]> {
 		return observableAndroidDevices.asObservable()
 	}
 	
-	func getActiveDevice() -> AndroidDevice? {
+	func getActiveDevice() -> AndroidDeviceMac? {
 		return observableActiveDevice.value
 	}
 	
 	func start() {
-		self.adbDevicesTimer()
+//        self.adbDevicesTimer()
 		if (timer != nil) {
-			timer?.invalidate()
+			timer?.cancel()
 			timer = nil
 		}
+        
+        let queue = DispatchQueue.global(qos: .background)
+        timer = DispatchSource.makeTimerSource(queue: queue)
+        guard let timer = timer else {return}
+        
+        timer.scheduleRepeating(deadline: .now(), interval: .seconds(DEVICE_UPDATE_DELAY), leeway: .seconds(1))
+        timer.setEventHandler(handler: {
+            self.adbDevices()
+        })
+        timer.resume()
 		
-		timer = Timer.scheduledTimer(timeInterval: TimeInterval(DEVICE_UPDATE_DELAY), target: self, selector: #selector(AndroidHandler.adbDevicesTimer), userInfo: nil, repeats: true)
-		RunLoop.main.add(timer!, forMode: RunLoopMode.commonModes)
+//        timer = Timer.scheduledTimer(timeInterval: TimeInterval(DEVICE_UPDATE_DELAY), target: self, selector: #selector(AndroidHandler.adbDevicesTimer), userInfo: nil, repeats: true)
+//        RunLoop.main.add(timer!, forMode: RunLoopMode.commonModes)
 //        active = true;
 	}
 	
@@ -127,7 +139,7 @@ public class AndroidHandler: NSObject {
 //        active = false
 //        objc_sync_exit(self)
 		if (timer != nil) {
-			timer?.invalidate()
+			timer?.cancel()
 			timer = nil
 		}
 	}
@@ -138,11 +150,11 @@ public class AndroidHandler: NSObject {
 	}
 	
 	@objc func adbDevicesTimer() {
-		let qualityOfServiceClass = DispatchQoS.QoSClass.background
-		let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
-		backgroundQueue.async(execute: {
+//        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+//        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+//        backgroundQueue.async(execute: {
 			self.adbDevices()
-		})
+//        })
 	}
 	
     /*
@@ -154,7 +166,7 @@ public class AndroidHandler: NSObject {
 		return (activeDevice != nil)
 	}
 	
-	func setActiveDevice(_ device: AndroidDevice?) -> Bool {
+	func setActiveDevice(_ device: AndroidDeviceMac?) -> Bool {
 		if let activeDevice = activeDevice, 
 		   let device = device, 
 		   activeDevice.id == device.id {
@@ -266,12 +278,13 @@ public class AndroidHandler: NSObject {
 		if (TIMER_VERBOSE) {
 			print("Try Enter:", TimeUtils.getCurrentTime())
 		}
-		objc_sync_enter(self)
+//        objc_sync_enter(self)
 		var newDevices = adbHandler.getDevices()
 		let same = containSameElements(newDevices, array2: self.observableAndroidDevices.value)
 		if (TIMER_VERBOSE) {
 			LogV("Same: \(same)")
 		}
+//        LogI("IsMain: \(ThreadUtils.isMainThread())")
 		if (!same) {
             ThreadUtils.runInMainThread({
                 NSObject.sendNotification(AndroidViewController.NotificationSnackbar, ["message": "Updating Devices"])
@@ -287,7 +300,7 @@ public class AndroidHandler: NSObject {
 //					LogI("Moving to \(i), active: \(activeDevice), device: \(device)")
 				}
 			}
-            var newActiveDevice: AndroidDevice? = nil
+            var newActiveDevice: AndroidDeviceMac? = nil
             var needsUpdate = false
 			if (index == -1) {
 				if (newDevices.count == 0) {
@@ -322,7 +335,7 @@ public class AndroidHandler: NSObject {
 //            }
         }
 		
-		objc_sync_exit(self)
+//        objc_sync_exit(self)
 		if (TIMER_VERBOSE) {
 			print("Release Lock:", TimeUtils.getCurrentTime())
 		}
@@ -335,7 +348,7 @@ public class AndroidHandler: NSObject {
 		return arr
 	}
 	
-	func containSameElements(_ array1: Array<AndroidDevice>, array2: Array<AndroidDevice>) -> Bool {
+	func containSameElements(_ array1: Array<AndroidDeviceMac>, array2: Array<AndroidDeviceMac>) -> Bool {
 //        print("Ele:", array1, " Ele2:", array2)
 		guard array1.count == array2.count else {
 			return false // No need to sorting if they already have different counts

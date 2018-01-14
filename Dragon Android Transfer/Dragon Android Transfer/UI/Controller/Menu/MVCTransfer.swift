@@ -11,7 +11,7 @@ import RxSwift
 
 extension MenuViewController {
 	
-    internal func updatePopup(_ devices: [AndroidDevice]) {
+    internal func updatePopup(_ devices: [AndroidDeviceMac]) {
         self.androidDevices = devices
 //        self.LogV("Devices", devices)
         self.popup.removeAllItems()
