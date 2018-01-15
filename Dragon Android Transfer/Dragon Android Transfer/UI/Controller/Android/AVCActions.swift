@@ -92,6 +92,7 @@ extension AndroidViewController {
                 let alert = DarkAlert(message: "Name: " + selectedFile.fileName, info: infoText,
                                       buttonNames: ["Ok"],
                                       fullScreen: false,
+//                                      fullScreen: true,
                                       textColor: R.color.transferTextColor)
                 alert.icon = image
                 alert.runModal()
@@ -147,10 +148,10 @@ extension AndroidViewController {
 					.map {
 						transferHandler in
 						transferHandler.deleteAndroid(deleteItems)
+                        self.refreshInternal()
 					}
 					.observeOn(MainScheduler.instance)
 					.subscribe(onNext: {
-						self.refresh()
 						self.successfulOperation()
 					}).addDisposableTo(disposeBag)
 		} else {

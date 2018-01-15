@@ -12,7 +12,8 @@ import AppKit
 import RxSwift
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
+class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations, 
+		NSUserNotificationCenterDelegate {
     override class var VERBOSE: Bool {
         return false
     }
@@ -84,22 +85,27 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 		NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.screenUpdated), name: NSNotification.Name.NSWindowDidChangeScreen, object: nil)
 		
 		R.setDarkTheme()
-		
-		AppDelegate.showNotification(title: "", message: "")
 	}
 	
-	static func showNotification(title: String, message: String) -> Void {
+	func userNotificationCenter(center: NSUserNotificationCenter, shouldPresentNotification notification: NSUserNotification) -> Bool {
+		return true
+	}
+	
+	static func showNotification(title: String, message: String) {
 		var notification = NSUserNotification()
-		notification.title = "Test from Swift"
-		notification.informativeText = "The body of this Swift notification"
-		notification.soundName = NSUserNotificationDefaultSoundName
+		notification.title = title
+		notification.informativeText = message
+        notification.soundName = NSUserNotificationDefaultSoundName
+//        notification.soundName = R.audio.endCopy
 		NSUserNotificationCenter.default.deliver(notification)
+		
+		NSApp.requestUserAttention(NSRequestUserAttentionType.informationalRequest)
 	}
 	
 	func isInvalidOperation() -> Bool {
 		let invalid = AppDelegate.isPastingOperation.value
 		if (invalid) {
-			NSSound.init(named: "Funk")?.play()
+			NSSound.init(named: R.audio.badOperation)?.play()
 			NSApp.requestUserAttention(NSRequestUserAttentionType.informationalRequest)
 		}
 		return invalid
@@ -116,6 +122,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 		NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.CHANGE_ACTIVE), object: nil)
 	}
 	
+	/*
 	private func getAndroidController() -> AndroidViewController? {
 		if (NSApplication.shared().mainWindow == nil) {
 			Swift.print("AppDelegate, Warning, window not created yet!")
@@ -125,6 +132,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
 		let viewController = window.contentViewController as! ViewController
 		return viewController.androidViewController
 	}
+	*/
 	
 	func applicationDidResignActive(_ notification: Notification) {
 //        print("Inactive")
@@ -272,6 +280,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations {
     }
     
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
+		NSUserNotificationCenter.default.delegate = self
 //		Insert code here to initialize your application
 //        let window = NSApplication.sharedApplication().mainWindow
 //        window?.backgroundColor = NSColor.blackColor()

@@ -17,7 +17,7 @@ extension TransferViewController {
 			if (NSObject.VERBOSE) {
 				LogI("Paste to android, Warning, NO ITEMS")
 			}
-            exit()
+			exit()
 			return
 		} else {
 			var i = 0
@@ -66,49 +66,52 @@ extension TransferViewController {
 		}
 		transferHandler.cancelActiveTask()
 	}
-    
-    private func stopTimer() {
-        if let timer = self.timer {
-            timer.invalidate()
-        }
-        self.timer = nil
-    }
-    
-    func updateTimeRemaining() {
+	
+	private func stopTimer() {
+		if let timer = self.timer {
+			timer.invalidate()
+		}
+		self.timer = nil
+	}
+	
+	func updateTimeRemaining() {
 //        if (start == nil) {
 //            start = DispatchTime.now()
 //        }
 //        let startTime = self.start!
-        let totalSize = Double(self.totalSize)
-        let sizeCopied = (mCurrentProgress * totalSize / 100.0)
-        LogV("Size Copied: \(sizeCopied), previous: \(previousCopiedSize)")
-        let offset = sizeCopied - previousCopiedSize
-        let remainingSize = totalSize - sizeCopied
+		let totalSize = Double(self.totalSize)
+		let sizeCopied = (mCurrentProgress * totalSize / 100.0)
+		LogV("Size Copied: \(sizeCopied), previous: \(previousCopiedSize)")
+		let offset = sizeCopied - previousCopiedSize
+		let remainingSize = totalSize - sizeCopied
 //        let currentTime = DispatchTime.now()
 //        let nanoTime = currentTime.uptimeNanoseconds - startTime.uptimeNanoseconds
 //        let timeTaken = Double(nanoTime) / 1_000_000_000
-        let timeTaken = updateDelay
-        
-        let timeRemaining = (timeTaken * remainingSize) / offset
+		let timeTaken = updateDelay
+		
+		let timeRemaining = (timeTaken * remainingSize) / offset
 //        let timeRemaining = (timeTaken * remainingSize) / sizeCopied
 //        LogI("Time Remaining: \(timeRemaining)")
-        ThreadUtils.runInMainThread {
-            let timeString = TimeUtils.getTime(seconds: timeRemaining)
-            self.timeRemainingText.attributedStringValue = TextUtils.attributedBoldString(
-                from: "\(timeString)",
-                color: R.color.transferTextColor,
-                nonBoldRange: nil,
-                .center)
-//            self.timeRemainingText.stringValue = timeString
+        if  timeRemaining == Double.nan || timeRemaining == Double.infinity {
+            return
         }
-        previousCopiedSize = sizeCopied
-    }
-    
-    private func startTimer() {
-        timer = Timer.scheduledTimer(timeInterval: TimeInterval(updateDelay), target: self,
-                                     selector: #selector(updateTimeRemaining), userInfo: nil,
-                                     repeats: true)
-    }
+		ThreadUtils.runInMainThread {
+			let timeString = TimeUtils.getTime(seconds: timeRemaining)
+			self.timeRemainingText.attributedStringValue = TextUtils.attributedBoldString(
+					from: "\(timeString)",
+					color: R.color.transferTextColor,
+					nonBoldRange: nil,
+					.center)
+//            self.timeRemainingText.stringValue = timeString
+		}
+		previousCopiedSize = sizeCopied
+	}
+	
+	private func startTimer() {
+		timer = Timer.scheduledTimer(timeInterval: TimeInterval(updateDelay), target: self,
+				selector: #selector(updateTimeRemaining), userInfo: nil,
+				repeats: true)
+	}
 	
 	internal func observeTransfer() {
 		transferHandler.hasActiveTask().skip(1)
@@ -119,10 +122,10 @@ extension TransferViewController {
 						AppDelegate.isPastingOperation.value = true
 //                    self.showCopyDialog()
 						self.mDockProgress?.isHidden = false
-                        self.startTimer()
+						self.startTimer()
 					} else {
 						//                        TODO:
-                        self.stopTimer()
+						self.stopTimer()
 						self.finished(status)
 					}
 					self.mCurrentProgress = -1
@@ -221,9 +224,9 @@ extension TransferViewController {
 		transferProgressView.setProgress(CGFloat(progress))
 		
 		var copiedSizeInString = "0B"
-        if copiedSize > 0 {
-        	copiedSizeInString = SizeUtils.getBytesInFormat(copiedSize)
-        }
+		if copiedSize > 0 {
+			copiedSizeInString = SizeUtils.getBytesInFormat(copiedSize)
+		}
 //        LogV("Copied Size:", copiedSizeInString)
 //        pathTransferSize.stringValue = copiedSizeInString + " of " + SizeUtils.getBytesInFormat(totalSize)
 		let range = NSMakeRange(copiedSizeInString.count, 4)
@@ -245,12 +248,19 @@ extension TransferViewController {
 		
 		if (status == FileProgressStatus.kStatusOk) {
 			print("Successful copy")
-			successfulOperation()
+//			successfulOperation()
+			
+			if (AppDelegate.active) {
+				successfulOperation()
+			} else {
+				AppDelegate.showNotification(title: "Completed Transfer", message: "Finished copying")
+			}
 		} else {
 			print("Canceled")
 			//TODO: Sound if canceled.
 		}
 		//TODO: Copy of Marvel's Agents of Shield problem, not disappearing. & bad progress!
+//		TODO: Test copy Death Note (Fatal error: Double value cannot be converted to Int because it is either infinite or NaN)
 		
 		mDockProgress?.isHidden = true
 		mDockTile.display()

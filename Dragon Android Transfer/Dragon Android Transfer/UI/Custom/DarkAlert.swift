@@ -21,12 +21,14 @@ class DarkAlert: NSAlert {
         if fullScreen {
 			alert.window.styleMask = .fullSizeContentView
         } else {
-            alert.window.backgroundColor = R.color.windowBg
+            alert.window.backgroundColor = R.color.dialogWindowColor
             alert.window.titlebarAppearsTransparent = true
             alert.window.titleVisibility = .hidden
         }
 //		alert.window.contentView?.setBackground(R.color.black)
-		alert.window.contentView?.setBackground(R.color.menuNavColor)
+		alert.window.contentView?.setBackground(R.color.dialogBgColor)
+        
+        //        TODO: Update Colors, first responder during Transfer.
 		
 		for view in (alert.window.contentView?.subviews)! {
 			if let text = (view as? NSTextField) {

@@ -14,4 +14,5 @@ class R {
 	public static let integer = IntegerResource()
     public static let string = StringResource()
     public static let font = FontResource()
+    public static let audio = AudioResource()
 }

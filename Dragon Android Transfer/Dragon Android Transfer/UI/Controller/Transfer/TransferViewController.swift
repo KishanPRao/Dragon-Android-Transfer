@@ -243,7 +243,8 @@ class TransferViewController: NSViewController {
 	
 	
 	func successfulOperation() {
-		NSSound(named: "endCopy")?.play()
+		NSSound(named: R.audio.endCopy)?.play()
+//		NSSound(named: NSUserNotificationDefaultSoundName)?.play()
 		NSApp.requestUserAttention(NSRequestUserAttentionType.informationalRequest)
 	}
 }

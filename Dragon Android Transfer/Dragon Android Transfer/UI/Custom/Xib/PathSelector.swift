@@ -161,7 +161,7 @@ class PathSelector: NSView {
 		super.init(coder: aDecoder)
 		Bundle.main.loadNibNamed("PathSelector", owner: self, topLevelObjects: nil)
 		LogV("Path Selector, init coder", firstText)
-		clickableImage = NSImage.swatchWithColor(color: R.color.menuNavColor, size: rootView.frame.size).roundCorners()
+		clickableImage = NSImage.swatchWithColor(color: R.color.pathSelectorSelectableItem, size: rootView.frame.size).roundCorners()
 		disabledImage = NSImage.swatchWithColor(color: R.color.black, size: rootView.frame.size).roundCorners()
 		
 		initButtons()

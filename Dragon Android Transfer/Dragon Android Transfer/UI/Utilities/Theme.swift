@@ -32,6 +32,11 @@ protocol Theme {
 	var transferTextColor: NSColor { get }
     var menuItemSelectCellBg: NSColor {get}
     var listSelectedBackgroundColor: NSColor{get}
+
+    var pathSelectorSelectableItem: NSColor{get}
+    
+    var dialogBgColor: NSColor{get}
+    var dialogWindowColor: NSColor{get}
 	
 	var windowBg: NSColor { get }
 }

@@ -51,7 +51,7 @@ class SizeUtils {
         if let spaceInNumber = Float(result) {
             let baseSize = pow(BLOCK_SIZE_IN_FLOAT, powerBlockSize)
             let spaceInBytes = baseSize * spaceInNumber
-            print("Space: \(spaceInNumber), size: \(spaceInBytes), count: \(powerBlockSize)")
+//            print("Space: \(spaceInNumber), size: \(spaceInBytes), count: \(powerBlockSize)")
             return spaceInBytes
         }
         return 0.0

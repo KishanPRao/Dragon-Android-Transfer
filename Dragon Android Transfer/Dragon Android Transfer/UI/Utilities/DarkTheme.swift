@@ -11,6 +11,8 @@ import Foundation
 class DarkTheme: Theme {
 	static let color = DarkTheme.color(_:)
 	
+    let textColor = color("ffffff")
+    
 	let menuNavColor = color("071326")
 	let menuTableColor = color("071326")
 	let menuBgColor = color("000409", withAlpha: 0.4)
@@ -19,22 +21,30 @@ class DarkTheme: Theme {
     let menuItemSelectCellBg = color("11326c")
 //    let menuItemSelectCellBg = color("091f45")
 	
-	let toolbarColor = color("102038")
-	let toolbarProgressFg = color("163666")
-	let toolbarProgressBg = color("3369bc")
+	let toolbarColor = color("072556")
+	let toolbarProgressFg = color("204582")
+	let toolbarProgressBg = color("6a7991")
+
+	let pathSelectorSelectableItem = color("0e2343")
 
 //    let tableBg = color("050505") 
 //    let tableBg = color("101010") 
 //    let tableBg = color("000000")
-    let tableBg = color("181d21")
+    let tableBg = color("131415")
 //	let tableItemBg = color("050505")
 	let tableItemBg = color("000000")
+//    let listSelectedBackgroundColor = color("0d3475")
+    let listSelectedBackgroundColor = color("24447c")
+
 	let transferBg = color("313b4c")
-	let textColor = color("ffffff")
 	let transferTextColor = color("b8c2c9")
+    let transferProgressFg = color("204582")
+    let transferProgressBg = color("6a7991")
+    
+    let dialogBgColor = color("193360")
+    let dialogWindowColor = color("0f1217")
+//    let dialogWindowColor = color("0b0d11")
 
 //	let windowBg = color("050505")
-    let windowBg = color("101010")
-    
-    var listSelectedBackgroundColor = color("092c61")
+    let windowBg = color("0a0a0a")
 }

@@ -118,12 +118,18 @@ extension AndroidViewController {
 				.observeOn(bgScheduler)
 				.map {
 					transferHandler in
-					transferHandler.updateList(transferHandler.getCurrentPath(), true)
-					transferHandler.updateStorage()
+                    self.refreshInternal()
+//                    transferHandler.updateList(transferHandler.getCurrentPath(), true)
+//                    transferHandler.updateStorage()
 				}
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: {}).addDisposableTo(disposeBag)
 	}
+    
+    internal func refreshInternal() {
+        transferHandler.updateList(transferHandler.getCurrentPath(), true)
+        transferHandler.updateStorage()
+    }
 	
 	internal func openFile(_ selectedItem: BaseFile) {
 		if (selectedItem.type != BaseFileType.Directory) {
