@@ -39,7 +39,7 @@ class SelectionTableRowView: NSTableRowView {
     
     
     override func drawBackground(in dirtyRect: NSRect) {
-        let context: CGContext = NSGraphicsContext.current()!.cgContext
+        let context: CGContext = NSGraphicsContext.current!.cgContext
         
         if self.isSelected {
 //            LogV("Fill Selected!")

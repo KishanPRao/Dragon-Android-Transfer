@@ -65,12 +65,12 @@ class HelpWindow: NSWindowController {
 			helpText.readRTFD(fromFile: rtfPath)
 		}
 		
-		let length = helpText.string!.count
+		let length = helpText.string.count
 		self.helpText.scrollRangeToVisible(NSRange(location: 0, length: length))
 		helpText.needsDisplay = true
 		helpText.needsLayout = true
 		helpText.enclosingScrollView!.hasHorizontalScroller = false
-		helpText.enclosingScrollView!.horizontalScrollElasticity = NSScrollElasticity.none
+		helpText.enclosingScrollView!.horizontalScrollElasticity = NSScrollView.Elasticity.none
 	}
 	
 	func needsUpdating() -> Bool {
@@ -99,12 +99,12 @@ class HelpWindow: NSWindowController {
 		closeButton.needsDisplay = true
 		closeButton.needsLayout = true
 		
-		let length = helpText.string!.count
+		let length = helpText.string.count
 		self.helpText.scrollRangeToVisible(NSRange(location: 0, length: length))
 		helpText.needsDisplay = true
 		helpText.needsLayout = true
 		helpText.enclosingScrollView!.hasHorizontalScroller = false
-		helpText.enclosingScrollView!.horizontalScrollElasticity = NSScrollElasticity.none
+		helpText.enclosingScrollView!.horizontalScrollElasticity = NSScrollView.Elasticity.none
 	}
 	
 	func cancel(_ sender: Any) {

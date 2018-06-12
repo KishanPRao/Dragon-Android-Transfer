@@ -17,27 +17,27 @@ extension AndroidViewController {
 				.subscribe(onNext: {
 					list in
 					self.reloadFileList(list)
-				}).addDisposableTo(disposeBag)
+				}).disposed(by: disposeBag)
 		
 		transferHandler.observeClipboardAndroidItems()
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: {
 					list in
 					self.updateClipboard()
-				}).addDisposableTo(disposeBag)
+				}).disposed(by: disposeBag)
 		transferHandler.observeClipboardMacItems()
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: {
 					list in
 					self.updateClipboard()
 					AppDelegate.hasMacClipboardItems = list.count > 0
-				}).addDisposableTo(disposeBag)
+				}).disposed(by: disposeBag)
 		transferHandler.observeCurrentPath()
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: {
 					path in
 					self.pathSelector.updateCurrentPath(path)
-				}).addDisposableTo(disposeBag)
+				}).disposed(by: disposeBag)
 	}
 	
 	/*
@@ -107,7 +107,7 @@ extension AndroidViewController {
 		hideProgress()
 	}
 	
-	func refresh() {
+	@objc func refresh() {
 		Observable.just(transferHandler)
 				.observeOn(MainScheduler.instance)
 				.map {
@@ -123,7 +123,7 @@ extension AndroidViewController {
 //                    transferHandler.updateStorage()
 				}
 				.observeOn(MainScheduler.instance)
-				.subscribe(onNext: {}).addDisposableTo(disposeBag)
+				.subscribe(onNext: {}).disposed(by: disposeBag)
 	}
     
     internal func refreshInternal() {
@@ -156,10 +156,10 @@ extension AndroidViewController {
 //                    self.LogV("Opened Dir")
 				}
 				.observeOn(MainScheduler.instance)
-				.subscribe(onNext: {}).addDisposableTo(disposeBag)
+				.subscribe(onNext: {}).disposed(by: disposeBag)
 	}
 	
-	func openSelectedDirectory() {
+	@objc func openSelectedDirectory() {
 //        LogI("AndroidViewController, openSelectedDirectory");
 		
 		let selectedItem = self.androidDirectoryItems[fileTable.selectedRow]
@@ -196,6 +196,6 @@ extension AndroidViewController {
 								}
 							}
 							self.hideProgress()
-						}).addDisposableTo(disposeBag)
+						}).disposed(by: disposeBag)
 	}
 }

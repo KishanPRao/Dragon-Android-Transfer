@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-extension AndroidViewController {
+@objc extension AndroidViewController {
     
     func copyFromAndroid(_ notification: Notification) {
         print("Copy From Android")
@@ -33,7 +33,7 @@ extension AndroidViewController {
         transferHandler.updateClipboardAndroidItems(copyItemsAndroid)
     }
     
-    func copyFromMac(_ notification: Notification) {
+    @objc func copyFromMac(_ notification: Notification) {
         print("Copy From Mac", TimeUtils.getCurrentTime())
         var copyItemsMac: Array<BaseFile> = []
         if (transferHandler.isFinderActive()) {
@@ -57,6 +57,6 @@ extension AndroidViewController {
                 } else {
                     self.fileTable.enableDrag = true
                 }
-            }).addDisposableTo(disposeBag)
+            }).disposed(by: disposeBag)
     }
 }

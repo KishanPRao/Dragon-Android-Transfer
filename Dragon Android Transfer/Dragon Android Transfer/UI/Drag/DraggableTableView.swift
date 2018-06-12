@@ -47,7 +47,7 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
         return dragDropRow
     }
 	
-	func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableViewDropOperation) -> NSDragOperation {
+	func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
         if (!enableDrag) {
             return []
         }
@@ -94,7 +94,7 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
 //    }
 	
 	
-	func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableViewDropOperation) -> Bool {
+	func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
         if (!enableDrag) {
             return false
         }
@@ -104,7 +104,7 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
         if let pboardItems = pb.pasteboardItems {
             var finderItems = [String]()
             for item in pboardItems {
-                if let itemData = item.data(forType: kUTTypeFileURL as String),
+                if let itemData = item.data(forType: NSPasteboard.PasteboardType(rawValue: kUTTypeFileURL as String as String)),
                     let path = (URL(dataRepresentation: itemData, relativeTo: nil)?.path) {
                     finderItems.append(path)
                 }
@@ -122,7 +122,7 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
             }
             LogV("Copy from Finder, file:[", finderItems, "] into app item:", data)
             if let nonNilDelegate = dragDelegate {
-                nonNilDelegate.dragItem(items: finderItems, fromFinderIntoAppItem: data as! DraggableItem)
+                nonNilDelegate.dragItem(items: finderItems, fromFinderIntoAppItem: data as DraggableItem)
             }
             return true
         }
@@ -140,7 +140,7 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
 	
 	required init?(coder: NSCoder) {
 		super.init(coder: coder)
-		register(forDraggedTypes: [kPasteBoardType])
+		registerForDraggedTypes([kPasteBoardType])
 		setDraggingSourceOperationMask(NSDragOperation.copy, forLocal: false)
 		headerView = nil
 		allowsMultipleSelection = true
@@ -204,7 +204,7 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
     
     
 //    Copying to Finder, drop destination
-    override func draggingEnded(_ sender: NSDraggingInfo?) {
+    override func draggingEnded(_ sender: NSDraggingInfo) {
         if (!enableDrag) {
             return
         }
@@ -214,44 +214,42 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
         if (dragUiDelegate != nil) {
             dragUiDelegate?.onDropDestination(oldDrag)
         }
-        if let senderUnwrap = sender {
-            var appItems = [BaseFile]()
-            let pb = senderUnwrap.draggingPasteboard()
+        var appItems = [BaseFile]()
+        let pb = sender.draggingPasteboard()
 //            LogI("Items", senderUnwrap.draggingPasteboard().pasteboardItems)
-            var draggedIndex = -1
-            for item in pb.pasteboardItems! {
-                if let data = item.data(forType: kWritableType) {
-    //                LogI("Item", item.data(forType: kWritableType))
-    //                LogV("Item", item.string(forType: kWritableType))
-                    let index = convertDataToInt(data: data as NSData)
+        var draggedIndex = -1
+        for item in pb.pasteboardItems! {
+            if let data = item.data(forType: NSPasteboard.PasteboardType(rawValue: kWritableType)) {
+//                LogI("Item", item.data(forType: kWritableType))
+//                LogV("Item", item.string(forType: kWritableType))
+                let index = convertDataToInt(data: data as NSData)
 //                    LogV("Index", index)
-                    draggedIndex = index
-                    appItems.append(mData[index])
-                } else {
+                draggedIndex = index
+                appItems.append(mData[index])
+            } else {
 //                    LogW("Bad!")
-                }
             }
-            
-            let indexSet = selectedRowIndexes
-            var currentIndex = indexSet.first
-            while (currentIndex != nil && currentIndex != NSNotFound) {
-                if (currentIndex != draggedIndex) {
-                    let currentItem = mData[currentIndex!]
-                    appItems.append(currentItem)
-                }
-                currentIndex = indexSet.integerGreaterThan(currentIndex!)
+        }
+        
+        let indexSet = selectedRowIndexes
+        var currentIndex = indexSet.first
+        while (currentIndex != nil && currentIndex != NSNotFound) {
+            if (currentIndex != draggedIndex) {
+                let currentItem = mData[currentIndex!]
+                appItems.append(currentItem)
             }
-            
-            if (pb.types?.contains(kPasteboardTypePasteLocation))! {
-                let url = NSURL(string: (pb.string(forType: kPasteboardTypePasteLocation))!)
-                if let copyPath = url?.absoluteURL?.path {
-                    LogV("Copy from app item:", appItems, "to", copyPath)
-                    if let nonNilDelegate = dragDelegate {
-                        nonNilDelegate.dragItem(items: appItems as! [DraggableItem], fromAppToFinderLocation: copyPath)
-                    }
-                } else {
+            currentIndex = indexSet.integerGreaterThan(currentIndex!)
+        }
+        
+        if (pb.types?.contains(NSPasteboard.PasteboardType(rawValue: kPasteboardTypePasteLocation)))! {
+            let url = NSURL(string: (pb.string(forType: NSPasteboard.PasteboardType(rawValue: kPasteboardTypePasteLocation)))!)
+            if let copyPath = url?.absoluteURL?.path {
+                LogV("Copy from app item:", appItems, "to", copyPath)
+                if let nonNilDelegate = dragDelegate {
+                    nonNilDelegate.dragItem(items: appItems as! [DraggableItem], fromAppToFinderLocation: copyPath)
+                }
+            } else {
 //                    LogE("Cannot Copy!")
-                }
             }
         }
 	}

@@ -12,7 +12,7 @@ import RxSwift
 extension AndroidViewController {
 	
 	
-	func getSelectedItemInfo() {
+	@objc func getSelectedItemInfo() {
 		if (NSObject.VERBOSE) {
 			Swift.print("AndroidViewController, getSelectedItemInfo");
 		}
@@ -72,9 +72,9 @@ extension AndroidViewController {
                 var infoText: String = ""
                 var image: NSImage
                 if (selectedFile.type == BaseFileType.Directory) {
-                    image = NSImage(named: R.drawable.folder)!
+                    image = NSImage(named: NSImage.Name(rawValue: R.drawable.folder))!
                 } else {
-                    image = NSImage(named: R.drawable.file)!
+                    image = NSImage(named: NSImage.Name(rawValue: R.drawable.file))!
                 }
                 if (NSObject.VERBOSE) {
                     Swift.print("AndroidViewController, image size:", image.size);
@@ -96,10 +96,10 @@ extension AndroidViewController {
                                       textColor: R.color.transferTextColor)
                 alert.icon = image
                 alert.runModal()
-            }).addDisposableTo(disposeBag)
+            }).disposed(by: disposeBag)
 	}
 	
-	func showNewFolderDialog() {
+	@objc func showNewFolderDialog() {
 		if (NSObject.VERBOSE) {
 			Swift.print("AndroidViewController, showNewFolderDialog")
 		}
@@ -116,7 +116,7 @@ extension AndroidViewController {
 		}
 	}
 	
-	func deleteFileDialog() {
+	@objc func deleteFileDialog() {
 		if (Verbose) {
 			Swift.print("AndroidViewController, deleteFileDialog")
 		}
@@ -153,7 +153,7 @@ extension AndroidViewController {
 					.observeOn(MainScheduler.instance)
 					.subscribe(onNext: {
 						self.successfulOperation()
-					}).addDisposableTo(disposeBag)
+					}).disposed(by: disposeBag)
 		} else {
 			LogV("Do not Delete!")
 		}
@@ -193,6 +193,6 @@ extension AndroidViewController {
 					if (NSObject.VERBOSE) {
 						Swift.print("AndroidViewController, update fin:" + TimeUtils.getCurrentTime());
 					}
-				}).addDisposableTo(disposeBag)
+				}).disposed(by: disposeBag)
 	}
 }

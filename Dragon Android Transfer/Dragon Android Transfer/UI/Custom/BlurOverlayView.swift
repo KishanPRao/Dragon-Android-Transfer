@@ -8,7 +8,7 @@
 
 import Foundation
 
-class BlurOverlayView: NSView {
+class BlurOverlayView: VerboseView {
     
     override init(frame frameRect: Foundation.NSRect) {
         super.init(frame: frameRect)

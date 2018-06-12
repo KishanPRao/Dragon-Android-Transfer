@@ -18,7 +18,7 @@ extension NSButton {
 	}
 	
 	public func setImage(name: String) {
-		self.setImage(image: NSImage(named: name)!)
+		self.setImage(image: NSImage(named: NSImage.Name(rawValue: name))!)
 	}
 	
 	func setColorBackground(_ color: NSColor, _ rounded: Bool = false) {

@@ -8,7 +8,7 @@ import Foundation
 extension NSViewController {
 	
 	class func loadFromStoryboard<T: NSViewController>(name: String) -> T {
-		let storyBoard = NSStoryboard(name: name, bundle: Bundle.main)
+		let storyBoard = NSStoryboard(name: NSStoryboard.Name(rawValue: name), bundle: Bundle.main)
 //		print("Loading Storyboard")
 		return storyBoard.instantiateInitialController() as! T
 	}

@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-public class AndroidDeviceMac: NSObject {
+@objcMembers public class AndroidDeviceMac: NSObject {
 	var id : String = ""
 	var name : String = ""
 	var storages = [StorageItem]()

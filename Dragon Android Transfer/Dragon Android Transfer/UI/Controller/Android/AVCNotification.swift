@@ -13,7 +13,7 @@ extension AndroidViewController {
     
     func initNotification() {
 //        print("Adding Observer")
-        NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.copyFromAndroid), name: NSNotification.Name(rawValue: StatusTypeNotification.COPY_FROM_ANDROID), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(copyFromAndroid), name: NSNotification.Name(rawValue: StatusTypeNotification.COPY_FROM_ANDROID), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.copyFromMac), name: NSNotification.Name(rawValue: StatusTypeNotification.COPY_FROM_MAC), object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.pasteToAndroid), name: NSNotification.Name(rawValue: StatusTypeNotification.PASTE_TO_ANDROID), object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.pasteToMac), name: NSNotification.Name(rawValue: StatusTypeNotification.PASTE_TO_MAC), object: nil)
@@ -23,7 +23,7 @@ extension AndroidViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.stop), name: NSNotification.Name(rawValue: StatusTypeNotification.STOP), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.activeChange), name: NSNotification.Name(rawValue: StatusTypeNotification.CHANGE_ACTIVE), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.checkGuide), name: NSNotification.Name(rawValue: StatusTypeNotification.FINISHED_LAUNCH), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.screenUpdated), name: NSNotification.Name.NSWindowDidChangeScreen, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.screenUpdated), name: NSWindow.didChangeScreenNotification, object: nil)
         
         //		Menu Item Related
         NotificationCenter.default.addObserver(self, selector: #selector(AndroidViewController.openSelectedDirectory), name: NSNotification.Name(rawValue: StatusTypeNotification.OPEN_FILE), object: nil)
@@ -42,7 +42,7 @@ extension AndroidViewController {
         NSObject.observeNotification(self, AndroidViewController.NotificationSnackbar, selector: selector)
     }
     
-    func snackbarNotification(_ notification: Notification) {
+    @objc func snackbarNotification(_ notification: Notification) {
         let message = notification.userInfo?["message"] as! String
         LogV("snackbarNotification:", message)
         showSnackbar(message)

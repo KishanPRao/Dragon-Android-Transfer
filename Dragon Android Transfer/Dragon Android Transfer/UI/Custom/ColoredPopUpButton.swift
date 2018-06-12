@@ -112,7 +112,7 @@ class ColoredPopUpButton : NSPopUpButtonCell {
 	override func draw(withFrame cellFrame: NSRect, in controlView: NSView) {
 		super.draw(withFrame: cellFrame, in: controlView)
 		NSColor.red.set()
-		NSRectFill(cellFrame)
+		cellFrame.fill()
 	}
 	
 	

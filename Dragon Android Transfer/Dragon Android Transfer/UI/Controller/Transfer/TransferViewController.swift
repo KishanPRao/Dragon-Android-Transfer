@@ -35,14 +35,14 @@ class TransferViewController: NSViewController {
 	internal var currentCopiedSize = 0 as UInt64
 	internal var totalSize: UInt64 = 0
 	
-	let androidImage = NSImage(named: R.drawable.android)
-	let macImage = NSImage(named: R.drawable.mac)
-    let normalMore = NSImage(named: R.drawable.more)
-    let rotatedMore = NSImage(named: R.drawable.more)!.imageRotatedByDegrees(degrees: 180)
+	let androidImage = NSImage(named: NSImage.Name(rawValue: R.drawable.android))
+	let macImage = NSImage(named: NSImage.Name(rawValue: R.drawable.mac))
+    let normalMore = NSImage(named: NSImage.Name(rawValue: R.drawable.more))
+    let rotatedMore = NSImage(named: NSImage.Name(rawValue: R.drawable.more))!.imageRotatedByDegrees(degrees: 180)
 	
 	internal var alert: DarkAlert? = nil
 	
-	internal let mDockTile: NSDockTile = NSApplication.shared().dockTile
+	internal let mDockTile: NSDockTile = NSApplication.shared.dockTile
 	internal var mDockProgress: NSProgressIndicator? = nil
 	internal var mCurrentProgress = -1.0
 	
@@ -71,11 +71,11 @@ class TransferViewController: NSViewController {
 		overlayView.hide()
 	}
 	
-	func close() {
+	@objc func close() {
         alert = DarkAlert(message: "Cancel?", info: "Do you want to cancel the current transfer?",
                           buttonNames: ["Ok", "Cancel"])
 		let button = alert!.runModal()
-		if (button == NSAlertSecondButtonReturn) {
+		if (button == NSApplication.ModalResponse.alertSecondButtonReturn) {
 //            Ok
 			transferHandler.cancelActiveTask()
 			self.exit()
@@ -106,7 +106,7 @@ class TransferViewController: NSViewController {
 		overlayView.frame = self.view.frame
 		overlayView.setBackground(R.color.menuBgColor)
         overlayView.setOnClickListener {
-            NSSound.init(named: "Funk")?.play()
+            NSSound.init(named: NSSound.Name(rawValue: "Funk"))?.play()
         }
 		
 		self.transferDialog.setBackground(R.color.transferBg)
@@ -232,7 +232,7 @@ class TransferViewController: NSViewController {
 					transferHandler.updateStorage()
 				}
 				.observeOn(MainScheduler.instance)
-				.subscribe(onNext: {}).addDisposableTo(disposeBag)
+				.subscribe(onNext: {}).disposed(by: disposeBag)
 	}
 	
 	private func initNotification() {
@@ -243,8 +243,8 @@ class TransferViewController: NSViewController {
 	
 	
 	func successfulOperation() {
-		NSSound(named: R.audio.endCopy)?.play()
+		NSSound(named: NSSound.Name(rawValue: R.audio.endCopy))?.play()
 //		NSSound(named: NSUserNotificationDefaultSoundName)?.play()
-		NSApp.requestUserAttention(NSRequestUserAttentionType.informationalRequest)
+		NSApp.requestUserAttention(NSApplication.RequestUserAttentionType.informationalRequest)
 	}
 }

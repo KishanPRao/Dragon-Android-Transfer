@@ -11,7 +11,7 @@ import RxSwift
 
 extension TransferViewController {
 	
-	func pasteToAndroid(_ path: String) {
+	@objc func pasteToAndroid(_ path: String) {
 		let files = transferHandler.getClipboardMacItems()
 		if (files.count == 0) {
 			if (NSObject.VERBOSE) {
@@ -39,10 +39,10 @@ extension TransferViewController {
 				.observeOn(bgScheduler)
 				.subscribe(onNext: { transferHandler in
 					transferHandler.push(files, destination: path)
-				}).addDisposableTo(disposeBag)
+				}).disposed(by: disposeBag)
 	}
 	
-	func pasteToMac(_ path: String) {
+	@objc func pasteToMac(_ path: String) {
 		print("Paste to Mac")
 		let files = transferHandler.getClipboardAndroidItems()
 		if (files.count == 0) {
@@ -57,7 +57,7 @@ extension TransferViewController {
 				.observeOn(bgScheduler)
 				.subscribe(onNext: { transferHandler in
 					transferHandler.pull(files, destination: path)
-				}).addDisposableTo(disposeBag)
+				}).disposed(by: disposeBag)
 	}
 	
 	func cancelTask() {
@@ -74,7 +74,7 @@ extension TransferViewController {
 		self.timer = nil
 	}
 	
-	func updateTimeRemaining() {
+	@objc func updateTimeRemaining() {
 //        if (start == nil) {
 //            start = DispatchTime.now()
 //        }
@@ -129,7 +129,7 @@ extension TransferViewController {
 						self.finished(status)
 					}
 					self.mCurrentProgress = -1
-				}).addDisposableTo(disposeBag)
+				}).disposed(by: disposeBag)
 		
 		transferHandler.sizeActiveTask().skip(1)
 				.observeOn(MainScheduler.instance)
@@ -138,7 +138,7 @@ extension TransferViewController {
 //                if (self.copyDialog != nil) {
 //                    self.copyDialog?.setTotalCopySize(totalSize)
 //                }
-				}).addDisposableTo(disposeBag)
+				}).disposed(by: disposeBag)
 		transferHandler.transferTypeActive().skip(1)
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: { value in
@@ -154,7 +154,7 @@ extension TransferViewController {
 					self.updateTransferState()
 //                    self.copyDialog?.setTransferType(transferTypeString)
 //                }
-				}).addDisposableTo(disposeBag)
+				}).disposed(by: disposeBag)
 		transferHandler.fileActiveTask().skip(1)
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: { value in
@@ -192,17 +192,17 @@ extension TransferViewController {
 								nonBoldRange: range)
 						attributedString.boundingRect(with: NSSize(width: 300, height: 50), options: (
 								//NSStringDrawingOptions.usesLineFragmentOrigin
-								NSStringDrawingOptions.usesFontLeading
+								NSString.DrawingOptions.usesFontLeading
 						))
 						self.pathTransferString.attributedStringValue = attributedString
 						
 					}
-				}).addDisposableTo(disposeBag)
+				}).disposed(by: disposeBag)
 		transferHandler.progressActiveTask().skip(1)
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: { progress in
 					self.progressActive(progress)
-				}).addDisposableTo(disposeBag)
+				}).disposed(by: disposeBag)
 	}
 	
 	

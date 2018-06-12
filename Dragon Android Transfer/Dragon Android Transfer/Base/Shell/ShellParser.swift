@@ -9,7 +9,7 @@
 import Cocoa
 import Foundation
 
-@objc
+@objcMembers
 public class ShellParser: NSObject {
 	static let EXTREME_VERBOSE = false
 	static let BLOCK_SIZE_IN_FLOAT = Float(1024)

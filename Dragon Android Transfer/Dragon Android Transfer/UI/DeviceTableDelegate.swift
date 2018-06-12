@@ -59,7 +59,7 @@ class DeviceTableDelegate: NSObject, NSTableViewDelegate {
 		}
         
         let returnView: FileCell?
-        if let spareView = tableView.make(withIdentifier: "file_cell",
+        if let spareView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "file_cell"),
                                           owner: self) as? FileCell {
             returnView = spareView
             
@@ -87,9 +87,9 @@ class DeviceTableDelegate: NSObject, NSTableViewDelegate {
 //            fileImage.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table_file_cell_file_image)
             let isDirectory = file.type == BaseFileType.Directory
             if (isDirectory) {
-                fileImage.image = NSImage(named: R.drawable.folder)
+                fileImage.image = NSImage(named: NSImage.Name(rawValue: R.drawable.folder))
             } else {
-                fileImage.image = NSImage(named: R.drawable.file)
+                fileImage.image = NSImage(named: NSImage.Name(rawValue: R.drawable.file))
             }
             if let fileTable = fileTable {
                 let indexSet = fileTable.selectedRowIndexes

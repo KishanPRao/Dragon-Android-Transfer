@@ -35,13 +35,14 @@ class ColoredButton: NSButton {
 //			currentFont = NSFont(name: font!.fontName, size: DimenUtils.getDimension(dimension: Dimens.android_controller_device_selector_storage_text_size))
 //		}
 		let style = NSMutableParagraphStyle()
-		style.alignment = NSCenterTextAlignment
-		var attrsDictionary: [String: AnyObject]
+		style.alignment = .center
+		var attrsDictionary: [NSAttributedStringKey: AnyObject]
 		if (isSelected) {
-			attrsDictionary = [NSForegroundColorAttributeName: textSelectedColor, NSParagraphStyleAttributeName: style, NSFontAttributeName: font!];
+			attrsDictionary = [NSAttributedStringKey.foregroundColor: textSelectedColor, NSAttributedStringKey.paragraphStyle: style, NSAttributedStringKey.font: font!];
 		} else {
-			attrsDictionary = [NSForegroundColorAttributeName: textDeselectedColor, NSParagraphStyleAttributeName: style, NSFontAttributeName: font!];
+			attrsDictionary = [NSAttributedStringKey.foregroundColor: textDeselectedColor, NSAttributedStringKey.paragraphStyle: style, NSAttributedStringKey.font: font!];
 		}
+        NSAttributedString(string: title, attributes: attrsDictionary)
 		let attString = NSAttributedString(string: title, attributes: attrsDictionary)
 		attributedTitle = attString
 		setNeedsDisplay()
@@ -63,7 +64,7 @@ class ColoredButton: NSButton {
 			normalColor.set()
 //			NSRectFill(dirtyRect)
 		}
-		NSRectFill(dirtyRect)
+		dirtyRect.fill()
 		super.draw(dirtyRect)
 	}
 }

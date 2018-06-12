@@ -10,6 +10,7 @@
 #define IncludeSwift_h
 
 #import <AppKit/AppKit.h>
+#import <WebKit/WebKit.h>
 #import "Dragon_Android_Transfer-Swift.h"
 
 #endif /* IncludeSwift_h */

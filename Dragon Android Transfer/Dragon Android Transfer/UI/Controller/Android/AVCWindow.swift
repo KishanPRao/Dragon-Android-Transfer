@@ -10,7 +10,7 @@ import Foundation
 
 extension AndroidViewController {
 	
-	func resetPosition() {
+	@objc func resetPosition() {
 		/*
         let previousFrame = self.view.window!.frame
 		//		let rect = CGRect(x: previousFrame.origin.x, y: 0, width: previousFrame.width, height: previousFrame.height)
@@ -105,19 +105,19 @@ extension AndroidViewController {
 	}
 	
 	internal func getScreenResolution() {
-		let screenArray = NSScreen.screens()
+		let screenArray = NSScreen.screens
 		var index = 0
-		while (index < screenArray!.count) {
-			let screen = screenArray![index]
+		while (index < screenArray.count) {
+			let screen = screenArray[index]
 			index = index + 1
 			Swift.print("AndroidViewController, screen:", screen)
 			//			screen.
 		}
-		Swift.print("AndroidViewController, screens:", screenArray!)
+		Swift.print("AndroidViewController, screens:", screenArray)
 		//		let screenRect = 
 	}
 	
-	func screenUpdated() {
+	@objc func screenUpdated() {
 		/*updateWindowSize()
 		 checkGuide()
 		 */

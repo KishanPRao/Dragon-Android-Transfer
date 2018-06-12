@@ -9,6 +9,7 @@
 #import "AdbExecutionResultWrapper.h"
 
 //#import "Dragon_Android_Transfer-Swift.h"
+//#import "IncludeSwift.h"
 
 #define TransferBlock (nonnull void (^)(NSInteger progress, enum AdbExecutionResultWrapper result))
 

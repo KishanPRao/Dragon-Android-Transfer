@@ -39,7 +39,7 @@ class FileCell: NSTableCellView {
 	
 	override init(frame frameRect: Foundation.NSRect) {
 		super.init(frame: frameRect)
-		Bundle.main.loadNibNamed("FileCell", owner: self, topLevelObjects: nil)
+		Bundle.main.loadNibNamed(NSNib.Name(rawValue: "FileCell"), owner: self, topLevelObjects: nil)
 //		Swift.print("File Cell Test", contentView.frame, self)
 //        text.textColor = R.color.white
 		

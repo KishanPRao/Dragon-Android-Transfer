@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ProgressView: NSView {
+class ProgressView: VerboseView {
 //    let PROGRESS_BACKGROUND_COLOR = ColorUtils.colorWithHexString("#5abbb2")
 //    let PROGRESS_FOREGROUND_COLOR = ColorUtils.colorWithHexString("#009688")
     let PROGRESS_BACKGROUND_COLOR = ColorUtils.colorWithHexString(ColorUtils.progressBackgroundColor)
@@ -44,7 +44,7 @@ class ProgressView: NSView {
     }
     
     override func draw(_ dirtyRect: NSRect) {
-		if (NSObject.VERBOSE) {
+		if (VerboseView.VERBOSE) {
 //			Swift.print("ProgressView, Drawing");
 		}
         PROGRESS_BACKGROUND_COLOR.set()

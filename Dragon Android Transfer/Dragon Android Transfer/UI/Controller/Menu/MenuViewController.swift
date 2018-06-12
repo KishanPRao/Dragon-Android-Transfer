@@ -96,7 +96,7 @@ class MenuViewController: NSViewController,
         updateStorageItems([])
     }
 	
-	func onPopupSelected(_ sender: Any) {
+	@objc func onPopupSelected(_ sender: Any) {
 		let index = self.popup.indexOfSelectedItem
 		LogI("Popup Selected", index)
 		guard let device = androidDevices[safe: index] else {
@@ -125,7 +125,7 @@ class MenuViewController: NSViewController,
 //                    self.LogI("No Change")
                 }
                 self.popup.isEnabled = true
-            }).addDisposableTo(disposeBag)
+            }).disposed(by: disposeBag)
 	}
 	
 	internal func updateStorageItems(_ storages: [StorageItem]) {
@@ -185,11 +185,11 @@ class MenuViewController: NSViewController,
                     transferHandler.resetStorageDetails()
 					transferHandler.updateList(self.storages[index].path.absolutePath)
                     transferHandler.updateStorage()
-				}).addDisposableTo(disposeBag)
+				}).disposed(by: disposeBag)
 		closeMenu(self)
 	}
 	
-	func tableAction(_ sender: AnyObject) {
+	@objc func tableAction(_ sender: AnyObject) {
 //        print("tableAction Menu:", index)
 		openInTable()
 	}

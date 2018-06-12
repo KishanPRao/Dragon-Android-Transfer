@@ -262,6 +262,9 @@
 		DAC5916A202F7A0300534084 /* file.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC59169202F7A0300534084 /* file.png */; };
 		DAC59170202F7A5F00534084 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC5916F202F7A5F00534084 /* cancel.png */; };
 		DAC59172202F7A8400534084 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC59171202F7A8400534084 /* folder.png */; };
+		DAE8B56520D01A3500520FB3 /* VerboseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE8B56420D01A3500520FB3 /* VerboseObject.swift */; };
+		DAE8B56820D01BD000520FB3 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE8B56720D01BD000520FB3 /* Log.swift */; };
+		DAE8B56A20D01D6C00520FB3 /* VerboseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE8B56920D01D6C00520FB3 /* VerboseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -542,6 +545,9 @@
 		DAC59169202F7A0300534084 /* file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file.png; sourceTree = "<group>"; };
 		DAC5916F202F7A5F00534084 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
 		DAC59171202F7A8400534084 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
+		DAE8B56420D01A3500520FB3 /* VerboseObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerboseObject.swift; sourceTree = "<group>"; };
+		DAE8B56720D01BD000520FB3 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		DAE8B56920D01D6C00520FB3 /* VerboseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerboseView.swift; sourceTree = "<group>"; };
 		FD6E29BC824473C340CAB23B /* Pods_Dragon_Android_TransferTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dragon_Android_TransferTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -782,12 +788,14 @@
 		BE3BD3F18BD4C34B13D207DC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DAE8B56420D01A3500520FB3 /* VerboseObject.swift */,
 				BE3BD86C2E85315AA443F20A /* AndroidDeviceMac.swift */,
 				50F314DF1FAE1C45006BF985 /* ExtensionBaseFile.swift */,
 				50293DF51FEFBF0B00B06B14 /* BaseFile.swift */,
 				50293DF71FEFBF2A00B06B14 /* BaseFileType.swift */,
 				50961BF91FF916A6001B6D3D /* StorageItem.swift */,
 				50F91FCE200251B300C58955 /* Path.swift */,
+				DAE8B56920D01D6C00520FB3 /* VerboseView.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -832,6 +840,7 @@
 		BE3BD599DEEFDAA772585262 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				DAE8B56620D01BC500520FB3 /* Logger */,
 				BE3BDED8D1C80713401499D7 /* DimenUtils.swift */,
 				BE3BD7F1239BA6A5E7685902 /* ColorUtils.swift */,
 				BE3BD75F91DBA3B298B91E2D /* SizeUtils.swift */,
@@ -1085,6 +1094,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DAE8B56620D01BC500520FB3 /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				DAE8B56720D01BD000520FB3 /* Log.swift */,
+			);
+			path = Logger;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1161,7 +1178,7 @@
 					Adb,
 				);
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Kishan P Rao";
 				TargetAttributes = {
 					500381431F8D44A0000728E9 = {
@@ -1176,7 +1193,7 @@
 					};
 					503C5A261E0FB92F0090EB68 = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 0920;
 					};
 				};
 			};
@@ -1611,6 +1628,7 @@
 				BE3BD18B21658A76373A84E1 /* ShellResolver.cpp in Sources */,
 				BE3BDC7A6DF3C18127CFFF78 /* ShellParser.swift in Sources */,
 				BE3BD0BD51163ECA8A5D5591 /* AlertUtils.m in Sources */,
+				DAE8B56520D01A3500520FB3 /* VerboseObject.swift in Sources */,
 				BE3BDE555397795773311960 /* BridgingUtils.m in Sources */,
 				5096950F1FF76865005BC423 /* R_Extension.swift in Sources */,
 				BE3BD9BD2020E50C8DE0DD28 /* PushCommand.cpp in Sources */,
@@ -1623,6 +1641,7 @@
 				BE3BD8EDE4315A9DDE83BC28 /* AVCActions.swift in Sources */,
 				BE3BDF9E75310567DF68036E /* AVCDrag.swift in Sources */,
 				BE3BD42A08E8DFFB9237CD83 /* AndroidViewController.swift in Sources */,
+				DAE8B56A20D01D6C00520FB3 /* VerboseView.swift in Sources */,
 				BE3BD98A9BBF4B8A5D355489 /* AVCUi.swift in Sources */,
 				50F5117B200139EE00CCB22C /* FileOptions.swift in Sources */,
 				50D7D9B41FFE948D00E85E70 /* TextUtils.swift in Sources */,
@@ -1640,6 +1659,7 @@
 				BE3BDF368388FB6EFDF95098 /* TransferViewController.swift in Sources */,
 				BE3BD69562588F8B7C7D203D /* FileCell.swift in Sources */,
 				BE3BD975E231F361C9E82C66 /* MenuCell.swift in Sources */,
+				DAE8B56820D01BD000520FB3 /* Log.swift in Sources */,
 				BE3BDDE9D513271A0265C642 /* Snackbar.swift in Sources */,
 				BE3BDFA64BC7A54BC65A4795 /* PathSelector.swift in Sources */,
 				50D37A9820090FAB007A1374 /* FontResource.swift in Sources */,
@@ -1692,7 +1712,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kishanprao.Dragon-Android-TransferTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dragon Android Transfer.app/Contents/MacOS/Dragon Android Transfer";
 			};
 			name = Debug;
@@ -1712,7 +1732,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kishanprao.Dragon-Android-TransferTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dragon Android Transfer.app/Contents/MacOS/Dragon Android Transfer";
 			};
 			name = Release;
@@ -1731,7 +1751,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kishanprao.Dragon-Android-TransferUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = "Dragon Android Transfer";
 			};
 			name = Debug;
@@ -1750,7 +1770,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kishanprao.Dragon-Android-TransferUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = "Dragon Android Transfer";
 			};
 			name = Release;
@@ -1764,14 +1784,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1796,13 +1822,17 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include/;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1815,14 +1845,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1842,12 +1878,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include/;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1871,7 +1910,8 @@
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Dragon_Android_Transfer-Swift.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				USER_HEADER_SEARCH_PATHS = "Pods/**";
 			};
 			name = Debug;
@@ -1896,7 +1936,8 @@
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Dragon_Android_Transfer-Swift.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				USER_HEADER_SEARCH_PATHS = "Pods/**";
 			};
 			name = Release;

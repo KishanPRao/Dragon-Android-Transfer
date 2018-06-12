@@ -13,19 +13,19 @@ public class DraggableItem: NSObject, NSPasteboardWriting {
     var index: Int = -1
 
 	//      Copying to Finder
-	public func writingOptions(forType type: String, pasteboard: NSPasteboard) -> NSPasteboardWritingOptions {
+	public func writingOptions(forType type: NSPasteboard.PasteboardType, pasteboard: NSPasteboard) -> NSPasteboard.WritingOptions {
 //        kPasteBoardType
-		pasteboard.declareTypes([NSFilenamesPboardType], owner: self)
+		pasteboard.declareTypes([kPasteBoardType], owner: self)
 //		LogV("writingOptions", type, pasteboard, type)
 		return DraggableItem.sFakeUrl.writingOptions(forType: type, pasteboard: pasteboard)
 	}
 
-	public func writableTypes(for pasteboard: NSPasteboard) -> [String] {
+	public func writableTypes(for pasteboard: NSPasteboard) -> [NSPasteboard.PasteboardType] {
 //		LogV("writableTypes")
-		return [kWritableType]
+		return [NSPasteboard.PasteboardType(rawValue: kWritableType)]
 	}
 
-	public func pasteboardPropertyList(forType type: String) -> Any? {
+	public func pasteboardPropertyList(forType type: NSPasteboard.PasteboardType) -> Any? {
 //		LogV("pasteboardPropertyList")
 //        return DraggableItem.sFakeUrl.pasteboardPropertyList(forType: type)
         return index

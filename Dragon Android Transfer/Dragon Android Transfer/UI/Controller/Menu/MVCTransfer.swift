@@ -41,7 +41,7 @@ extension MenuViewController {
         for item in self.popup.itemArray {
             let fontSize = popup.font?.pointSize ?? 10
             item.attributedTitle = NSAttributedString(string: item.title, attributes: [
-                NSFontAttributeName: NSFont(name: R.font.mainFont, size: fontSize)!,
+                NSAttributedStringKey.font: NSFont(name: R.font.mainFont, size: fontSize)!,
 //                NSForegroundColorAttributeName: NSColor(calibratedRed: 0.2, green: 0.270588235, blue: 0.031372549, alpha: 1),
 //                NSBaselineOffsetAttributeName: 2
                 ])
@@ -59,7 +59,7 @@ extension MenuViewController {
 				.subscribe(onNext: {
 					devices in
                     self.updatePopup(devices)
-				}).addDisposableTo(disposeBag)
+				}).disposed(by: disposeBag)
 		
 		transferHandler.observeActiveDevice()
 				.observeOn(MainScheduler.instance)
@@ -73,7 +73,7 @@ extension MenuViewController {
                         self.statusView.resetNoDevice()
                         self.updateStorageItems([])
                     }
-				}).addDisposableTo(disposeBag)
+				}).disposed(by: disposeBag)
 		transferHandler.observeCurrentPath()
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: {
@@ -83,7 +83,7 @@ extension MenuViewController {
                     } else {
 //                        self.statusView.resetNoDevice()
                     }
-				}).addDisposableTo(disposeBag)
+				}).disposed(by: disposeBag)
         
         transferHandler.getSpaceStatus()
             .observeOn(MainScheduler.instance)
@@ -97,6 +97,6 @@ extension MenuViewController {
                 let available = spaceStatus[0]
                 let total = spaceStatus[1]
                 self.statusView.updateStorageSize(availableSpace: available, totalSpace: total)
-            }).addDisposableTo(disposeBag)
+            }).disposed(by: disposeBag)
 	}
 }

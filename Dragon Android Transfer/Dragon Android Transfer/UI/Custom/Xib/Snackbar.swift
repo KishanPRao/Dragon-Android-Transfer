@@ -26,7 +26,7 @@ class Snackbar: NSView {
     }
 	
 	private func commonInit() {
-		Bundle.main.loadNibNamed("Snackbar", owner: self, topLevelObjects: nil)
+		Bundle.main.loadNibNamed(NSNib.Name(rawValue: "Snackbar"), owner: self, topLevelObjects: nil)
 		message.stringValue = ""
 		message.textColor = R.color.black
         message.updateMainFont()
@@ -84,7 +84,7 @@ class Snackbar: NSView {
 		animate(open: true)
 	}
 	
-	func hideSnackbar() {
+	@objc func hideSnackbar() {
         if (!isOpen) {
             return
         }

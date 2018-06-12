@@ -81,7 +81,7 @@ class IndeterminateProgress: NSView {
     
     override func draw(_ dirtyRect: NSRect) {
         progressBackground.set()
-        NSRectFill(backgroundRect)
+        backgroundRect.fill()
         progressForeground.set()
         path.fill()
         

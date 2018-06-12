@@ -12,7 +12,7 @@ class MyCustomSwiftAnimator: NSObject, NSViewControllerPresentationAnimator {
 		let topVC = viewController
 		topVC.view.wantsLayer = true
 //		topVC.view.layerContentsRedrawPolicy = .onSetNeedsDisplay
-		topVC.view.layerContentsRedrawPolicy = NSViewLayerContentsRedrawPolicy.onSetNeedsDisplay
+		topVC.view.layerContentsRedrawPolicy = NSView.LayerContentsRedrawPolicy.onSetNeedsDisplay
 		topVC.view.alphaValue = 0
 		bottomVC.view.addSubview(topVC.view)
 //		var frame : CGRect = NSRectToCGRect(bottomVC.view.frame)
@@ -29,7 +29,7 @@ class MyCustomSwiftAnimator: NSObject, NSViewControllerPresentationAnimator {
 	func animateDismissal(of viewController: NSViewController, from fromViewController: NSViewController) {
 		let topVC = viewController
 		topVC.view.wantsLayer = true
-		topVC.view.layerContentsRedrawPolicy = NSViewLayerContentsRedrawPolicy.onSetNeedsDisplay
+		topVC.view.layerContentsRedrawPolicy = NSView.LayerContentsRedrawPolicy.onSetNeedsDisplay
 		
 		NSAnimationContext.runAnimationGroup({ (context) -> Void in
 			context.duration = 0.2

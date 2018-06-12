@@ -39,7 +39,7 @@ extension NSView {
 		let nibName = String(describing: type(of: self))
 //        LogV("Load Nib for", nibName)
 //        LogV("Load Nib for", String(describing: type(of: self)))
-		Bundle.main.loadNibNamed(nibName, owner: self, topLevelObjects: nil)
+		Bundle.main.loadNibNamed(NSNib.Name(rawValue: nibName), owner: self, topLevelObjects: nil)
     }
 	
 //	class func fromNib<T:NSView>() -> T? {

@@ -16,6 +16,6 @@ extension NSImageView {
     }
     
     public func setImage(name: String) {
-        self.setImage(image: NSImage(named: name)!)
+        self.setImage(image: NSImage(named: NSImage.Name(rawValue: name))!)
     }
 }

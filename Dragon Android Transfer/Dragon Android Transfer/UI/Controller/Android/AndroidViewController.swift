@@ -58,7 +58,7 @@ class AndroidViewController: NSViewController,
 	
 	internal var needsUpdatePopupDimens = false
 	
-	internal let mDockTile: NSDockTile = NSApplication.shared().dockTile
+	internal let mDockTile: NSDockTile = NSApplication.shared.dockTile
 	internal var mDockProgress: NSProgressIndicator? = nil
 	//internal var mCircularProgress: IndeterminateProgressView? = nil
 //    internal var mCurrentProgress = -1.0
@@ -74,7 +74,7 @@ class AndroidViewController: NSViewController,
 		// transferHandler.setDeviceNotificationDelegate(self)
 		
 		showGuide = transferHandler.isFirstLaunch()
-		let data = NSDataAsset.init(name: "adb")?.data
+		let data = NSDataAsset.init(name: NSDataAsset.Name(rawValue: "adb"))?.data
 		transferHandler.initializeAndroid(data!)
 		
 		self.initUi()
@@ -159,7 +159,7 @@ class AndroidViewController: NSViewController,
 		super.viewWillAppear()
 //        start()
 		fileTable.makeFirstResponder(self.view.window)
-		NotificationCenter.default.addObserver(self, selector: #selector(windowMoved), name: NSNotification.Name.NSWindowDidMove, object: self.view.window!)
+		NotificationCenter.default.addObserver(self, selector: #selector(windowMoved), name: NSWindow.didMoveNotification, object: self.view.window!)
 		
 		/*updateWindowSize()
 		checkGuide()
@@ -201,7 +201,7 @@ class AndroidViewController: NSViewController,
 		return showGuide
 	}
 	
-	func checkGuide() {
+	@objc func checkGuide() {
 		if (showGuide) {
 //			TODO: Guide.
 			if (NSObject.VERBOSE) {
@@ -228,7 +228,7 @@ class AndroidViewController: NSViewController,
 	func onDisconnected(_ device: AndroidDeviceMac) {
 	}
 	
-	func doubleClickList(_ sender: AnyObject) {
+	@objc func doubleClickList(_ sender: AnyObject) {
 //        LogI("Double Clicked:", fileTable.clickedRow)
 		if (fileTable.clickedRow < 0) {
 			LogW("Bad Row")
@@ -238,15 +238,15 @@ class AndroidViewController: NSViewController,
 		openFile(selectedItem)
 	}
 	
-	func start() {
+	@objc func start() {
 		//		transferHandler.start()
 	}
 	
-	func stop() {
+	@objc func stop() {
 		//		transferHandler.stop()
 	}
 	
-	func activeChange() {
+	@objc func activeChange() {
 //        print("Active Changed:", AppDelegate.isAppInForeground())
 		if (AppDelegate.isAppInForeground()) {
 			start()
@@ -256,8 +256,8 @@ class AndroidViewController: NSViewController,
 	}
 	
 	func successfulOperation() {
-		NSSound(named: "endCopy")?.play()
-		NSApp.requestUserAttention(NSRequestUserAttentionType.informationalRequest)
+		NSSound(named: NSSound.Name(rawValue: "endCopy"))?.play()
+		NSApp.requestUserAttention(NSApplication.RequestUserAttentionType.informationalRequest)
 	}
 	
 	internal func updateClipboard() {
@@ -266,11 +266,11 @@ class AndroidViewController: NSViewController,
 		AppDelegate.hasClipboardItems.value = clipboardItems.count > 0
 	}
 	
-	func selectAllFiles() {
+	@objc func selectAllFiles() {
 		fileTable.selectAll(nil)
 	}
 	
-	func clearClipboard() {
+	@objc func clearClipboard() {
 		if (NSObject.VERBOSE) {
 			Swift.print("AndroidViewController, clearClipboard");
 		}
@@ -298,7 +298,7 @@ class AndroidViewController: NSViewController,
 
 //    var timer: NSTimer? = nil
 	
-	func windowMoved() {
+	@objc func windowMoved() {
 		//LogV("Win Moved", view.window?.frame)
 		/*if let window = vc?.view.window {
 			var frame = window.frame
@@ -324,7 +324,7 @@ class AndroidViewController: NSViewController,
     var adWc: AdWindowController? = nil
     
 	func openAd() {
-        adWc = AdWindowController(windowNibName: "AdWindowController")
+        adWc = AdWindowController(windowNibName: NSNib.Name(rawValue: "AdWindowController"))
         let window = self.view.window!
         var frameSize = window.frame
         frameSize.size = NSSize(width: window.frame.width, height: frameSize.height - window.titlebarHeight)
@@ -416,12 +416,12 @@ class AndroidViewController: NSViewController,
 	let floatingLevel = Int(CGWindowLevelForKey(CGWindowLevelKey.floatingWindow))
 	let normalLevel = Int(CGWindowLevelForKey(CGWindowLevelKey.normalWindow))
 	
-	func stayOnTop() {
-		if (self.view.window?.level == normalLevel) {
-			self.view.window?.level = floatingLevel
+	@objc func stayOnTop() {
+        if ((self.view.window?.level)!.rawValue == normalLevel) {
+			self.view.window?.level = NSWindow.Level(rawValue: floatingLevel)
 			AppDelegate.isFloatingWindow = true
 		} else {
-			self.view.window?.level = normalLevel
+			self.view.window?.level = NSWindow.Level(rawValue: normalLevel)
 			AppDelegate.isFloatingWindow = false
 		}
 //        self.view.window?.level = Int(CGWindowLevelForKey(.CGWindowLevelKey.floatingWindow))
@@ -442,9 +442,9 @@ class AndroidViewController: NSViewController,
 	
 	internal var dirtyWindow: Bool = true
 	
-	func showHelpWindow() {
+	@objc func showHelpWindow() {
 		if (helpWindow == nil) {
-			helpWindow = HelpWindow(windowNibName: "HelpWindow")
+			helpWindow = HelpWindow(windowNibName: NSNib.Name(rawValue: "HelpWindow"))
 		}
 		if (self.view.window == nil) {
 			if (NSObject.VERBOSE) {

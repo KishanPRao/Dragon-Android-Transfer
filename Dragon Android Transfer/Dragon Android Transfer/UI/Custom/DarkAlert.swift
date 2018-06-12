@@ -19,7 +19,7 @@ class DarkAlert: NSAlert {
 			alert.addButton(withTitle: buttonName)
         }
         if fullScreen {
-			alert.window.styleMask = .fullSizeContentView
+			alert.window.styleMask = NSWindow.StyleMask.fullSizeContentView
         } else {
             alert.window.backgroundColor = R.color.dialogWindowColor
             alert.window.titlebarAppearsTransparent = true

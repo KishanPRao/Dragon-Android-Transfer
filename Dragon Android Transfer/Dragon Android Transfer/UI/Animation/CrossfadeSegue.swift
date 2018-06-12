@@ -7,14 +7,14 @@ import Foundation
 
 class CrossfadeSegue: NSStoryboardSegue {
 	
-	override init(identifier: String?, source sourceController: Any, destination destinationController: Any) {
+	override init(identifier: NSStoryboardSegue.Identifier, source sourceController: Any, destination destinationController: Any) {
 		let myIdentifier: String
 		if identifier == nil {
 			myIdentifier = ""
 		} else {
-			myIdentifier = identifier!
+			myIdentifier = identifier.rawValue
 		}
-		super.init(identifier: myIdentifier, source: sourceController, destination: destinationController)
+		super.init(identifier: NSStoryboardSegue.Identifier(rawValue: myIdentifier), source: sourceController, destination: destinationController)
 	}
 	
 	
@@ -32,7 +32,7 @@ class CrossfadeSegue: NSStoryboardSegue {
 		sourceViewController.view.wantsLayer = true
 		destinationViewController.view.wantsLayer = true
 		
-		containerViewController.transition(from: sourceViewController, to: destinationViewController, options: NSViewControllerTransitionOptions.crossfade, completionHandler: nil)
+		containerViewController.transition(from: sourceViewController, to: destinationViewController, options: NSViewController.TransitionOptions.crossfade, completionHandler: nil)
 		
 		sourceViewController.view.animator().setFrameSize(targetSize)
 		destinationViewController.view.animator().setFrameSize(targetSize)

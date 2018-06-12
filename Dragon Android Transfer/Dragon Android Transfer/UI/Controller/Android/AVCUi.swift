@@ -39,12 +39,12 @@ extension AndroidViewController {
         backButton.toolTip = R.string.helpBack
 		
 		let imageView = NSImageView()
-		imageView.image = NSApplication.shared().applicationIconImage
+		imageView.image = NSApplication.shared.applicationIconImage
 		mDockTile.contentView = imageView
 		
         mDockProgress = NSProgressIndicator(frame: NSMakeRect(0.0, 0.0, mDockTile.size.width, 10))
         if let dockProgress = mDockProgress {
-			dockProgress.style = NSProgressIndicatorStyle.barStyle
+			dockProgress.style = NSProgressIndicator.Style.bar
 			dockProgress.isIndeterminate = false
 			dockProgress.minValue = 0
 			dockProgress.maxValue = 100
@@ -73,7 +73,7 @@ extension AndroidViewController {
 		//        parent.center fromView:parent.superview];
 	}
 	
-	internal func showProgress() {
+	@objc internal func showProgress() {
         self.fileTable.enableKeys = false
 		self.loadingProgress.show()
 		self.overlayView.show()

@@ -13,10 +13,10 @@ import RxCocoa
 /*
  Stores State of Android Devices. Sends approp info to UI.
  */
-public class AndroidHandler: NSObject {
-	override class var VERBOSE: Bool {
+public class AndroidHandler: VerboseObject {
+	/*override class var VERBOSE: Bool {
 		return true
-	}
+	}*/
 	let EXTREME_VERBOSE = false
 	let TIMER_VERBOSE = false
 //    let DEVICE_UPDATE_DELAY = 0.01

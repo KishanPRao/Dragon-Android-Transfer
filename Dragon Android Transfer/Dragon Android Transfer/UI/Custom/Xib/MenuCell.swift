@@ -33,7 +33,7 @@ class MenuCell: NSTableCellView {
 	
 	override init(frame frameRect: Foundation.NSRect) {
 		super.init(frame: frameRect)
-		Bundle.main.loadNibNamed("MenuCell", owner: self, topLevelObjects: nil)
+		Bundle.main.loadNibNamed(NSNib.Name(rawValue: "MenuCell"), owner: self, topLevelObjects: nil)
 //        Swift.print("Test", contentView.frame, self)
 		text.textColor = R.color.white
 		text.updateMainFont()

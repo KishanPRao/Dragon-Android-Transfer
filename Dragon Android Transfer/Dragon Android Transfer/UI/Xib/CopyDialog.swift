@@ -130,7 +130,7 @@ class CopyDialog: NSView {
 //    }
 	
 	fileprivate func loadFromNib() {
-		NSNib(nibNamed: "CopyDialog", bundle: nil)?.instantiate(withOwner: self, topLevelObjects: nil)
+		NSNib(nibNamed: NSNib.Name(rawValue: "CopyDialog"), bundle: nil)?.instantiate(withOwner: self, topLevelObjects: nil)
 		rootView.wantsLayer = true
 		rootView.layer?.backgroundColor = NSColor.black.cgColor
 		rootView.layer?.masksToBounds = true
@@ -163,7 +163,7 @@ class CopyDialog: NSView {
 //        Swift.print("Views:", rootView.subviews.last)
 //        Swift.print("View Source:", transferTypeView)
 //        progressView = rootView.subviews.last as? ProgressView
-		let image = NSImage(named: "close_button.png")
+		let image = NSImage(named: NSImage.Name(rawValue: "close_button.png"))
 		StyleUtils.updateButton(closeButton!, withImage: image)
 	}
 	

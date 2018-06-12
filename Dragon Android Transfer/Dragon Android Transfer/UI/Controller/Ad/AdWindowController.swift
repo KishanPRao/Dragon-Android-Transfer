@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+//import WebKit
 
 class AdWindowController: NSWindowController, WKNavigationDelegate {
 	public var frameSize = NSRect()
@@ -42,7 +43,7 @@ class AdWindowController: NSWindowController, WKNavigationDelegate {
         if let window = window {
             window.titleVisibility = .hidden
             window.titlebarAppearsTransparent = true
-            window.styleMask.remove( [ .resizable ] )
+            window.styleMask.remove( [ NSWindow.StyleMask.resizable ] )
             
             if isClosable {
 //                window.standardWindowButton(.zoomButton)?.superview?.setBackground(R.color.windowBg)

@@ -12,11 +12,11 @@ import AppKit
 import RxSwift
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations, 
+class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidations, 
 		NSUserNotificationCenterDelegate {
-    override class var VERBOSE: Bool {
-        return false
-    }
+//    override class var VERBOSE: Bool {
+//        return false
+//    }
 	static let MASShortcutCopy = "copyShortcut"
 	static let MASShortcutPaste = "pasteShortcut"
 	@IBOutlet weak var shortcutView: MASShortcutView?
@@ -44,10 +44,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations,
 //		NSApp.activate(ignoringOtherApps: true)
 		let defaults = UserDefaults.standard
 		
-		let defaultCopyShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_C), modifierFlags: NSEventModifierFlags.command.rawValue + NSEventModifierFlags.shift.rawValue)
+		let defaultCopyShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_C), modifierFlags: NSEvent.ModifierFlags.command.rawValue + NSEvent.ModifierFlags.shift.rawValue)
 		let defaultCopyShortcutData = NSKeyedArchiver.archivedData(withRootObject: defaultCopyShortcut!)
 		
-		let defaultPasteShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_V), modifierFlags: NSEventModifierFlags.command.rawValue + NSEventModifierFlags.shift.rawValue)
+		let defaultPasteShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_V), modifierFlags: NSEvent.ModifierFlags.command.rawValue + NSEvent.ModifierFlags.shift.rawValue)
 		let defaultPasteShortcutData = NSKeyedArchiver.archivedData(withRootObject: defaultPasteShortcut!)
 		
 		defaults.register(defaults: [
@@ -82,7 +82,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations,
 			}
 			
 		}
-		NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.screenUpdated), name: NSNotification.Name.NSWindowDidChangeScreen, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.screenUpdated), name: NSWindow.didChangeScreenNotification, object: nil)
 		
 		R.setDarkTheme()
 	}
@@ -99,19 +99,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations,
 //        notification.soundName = R.audio.endCopy
 		NSUserNotificationCenter.default.deliver(notification)
 		
-		NSApp.requestUserAttention(NSRequestUserAttentionType.informationalRequest)
+		NSApp.requestUserAttention(NSApplication.RequestUserAttentionType.informationalRequest)
 	}
 	
 	func isInvalidOperation() -> Bool {
 		let invalid = AppDelegate.isPastingOperation.value
 		if (invalid) {
-			NSSound.init(named: R.audio.badOperation)?.play()
-			NSApp.requestUserAttention(NSRequestUserAttentionType.informationalRequest)
+			NSSound.init(named: NSSound.Name(rawValue: R.audio.badOperation))?.play()
+			NSApp.requestUserAttention(NSApplication.RequestUserAttentionType.informationalRequest)
 		}
 		return invalid
 	}
 	
-	func screenUpdated() {
+	@objc func screenUpdated() {
 //		if (helpWindow != nil) {
 //			helpWindow!.updateSizes()
 //		}
@@ -194,14 +194,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserInterfaceValidations,
             return true
         }
         if (item.tag == MenuItemIdentifier.stayOnTop) {
-            let mainMenu = NSApplication.shared().mainMenu
+            let mainMenu = NSApplication.shared.mainMenu
             let windowMenu = mainMenu?.item(at: 4)?.submenu
             for item in (windowMenu?.items)! {
                 if item.tag == MenuItemIdentifier.stayOnTop {
                     if (AppDelegate.isFloatingWindow) {
-                        item.state = NSOnState
+                        item.state = .on
                     } else {
-                    	item.state = NSOffState
+                    	item.state = .off
                     }
                 }
             }

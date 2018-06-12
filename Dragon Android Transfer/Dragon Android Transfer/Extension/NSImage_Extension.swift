@@ -53,7 +53,7 @@ extension NSImage {
 		image.lockFocus()
 		tint.set()
 		let imageRect = NSRect(origin: NSZeroPoint, size: image.size)
-		NSRectFillUsingOperation(imageRect, NSCompositeSourceAtop)
+		imageRect.fill(using: .destinationAtop)
 		image.unlockFocus()
 		return image
 	}

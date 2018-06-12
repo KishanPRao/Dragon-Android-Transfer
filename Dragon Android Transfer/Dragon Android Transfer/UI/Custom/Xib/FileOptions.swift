@@ -85,6 +85,6 @@ class FileOptions: NSView {
 					} else {
 						self.pasteButton.isEnabled = false
 					}
-				}).addDisposableTo(disposeBag)
+				}).disposed(by: disposeBag)
 	}
 }

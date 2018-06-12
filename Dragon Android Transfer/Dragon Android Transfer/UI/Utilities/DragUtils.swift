@@ -8,7 +8,8 @@ import Foundation
 //public let kPasteboardTypePasteLocation = "com.apple.pastelocation"
 //private let sFakeLocation = "fakeLocation"
 //public let sFakeUrl = NSURL(string: sFakeLocation)!
-public let kPasteBoardType = NSFilenamesPboardType
+//kUTTypeFileURL for Swift 4 issue?
+public let kPasteBoardType = NSPasteboard.PasteboardType("NSFilenamesPboardType")
 public let kWritableType = kPasteboardTypeFileURLPromise
 //let kFakeDraggableItem = DraggableItem()
 let sFakeLocation = "fakeLocation"

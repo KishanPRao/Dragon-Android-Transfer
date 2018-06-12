@@ -9,10 +9,10 @@
 import Foundation
 import RxSwift
 
-class PathSelector: NSView {
-	override var Verbose: Bool {
+class PathSelector: VerboseView {
+	/*override var Verbose: Bool {
 		return false
-	}
+	}*/
 	@IBOutlet var rootView: NSView!
 	
 	@IBOutlet weak var firstText: NSButton!
@@ -125,14 +125,14 @@ class PathSelector: NSView {
 				.subscribe(onNext: {
 					transferHandler in
 					transferHandler.updateList(path)
-				}).addDisposableTo(disposeBag)
+				}).disposed(by: disposeBag)
 	}
 	
 	private func isCurrentPath(_ path: Path) -> Bool {
 		return (path.absolutePath == currentPath)
 	}
 	
-	func first() {
+	@objc func first() {
 		let path = paths[0].absolutePath
 		
 		if (path != currentPath) {
@@ -141,7 +141,7 @@ class PathSelector: NSView {
 		}
 	}
 	
-	func second() {
+	@objc func second() {
 		let path = paths[1].absolutePath
 		
 		if (path != currentPath) {
@@ -159,7 +159,7 @@ class PathSelector: NSView {
 	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
-		Bundle.main.loadNibNamed("PathSelector", owner: self, topLevelObjects: nil)
+		Bundle.main.loadNibNamed(NSNib.Name(rawValue: "PathSelector"), owner: self, topLevelObjects: nil)
 		LogV("Path Selector, init coder", firstText)
 		clickableImage = NSImage.swatchWithColor(color: R.color.pathSelectorSelectableItem, size: rootView.frame.size).roundCorners()
 		disabledImage = NSImage.swatchWithColor(color: R.color.black, size: rootView.frame.size).roundCorners()
@@ -191,7 +191,7 @@ class PathSelector: NSView {
 			  ))
 	   */
 		
-		let image = NSImage(named: R.drawable.path_selector_div)
+		let image = NSImage(named: NSImage.Name(rawValue: R.drawable.path_selector_div))
 		firstImage.setImage(image: image!)
 		secondImage.setImage(image: image!)
 		

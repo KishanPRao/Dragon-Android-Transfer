@@ -40,7 +40,8 @@
 
 @class ShellParser;
 @class BaseFile;
-@class AndroidDevice;
+//@class AndroidDevice;
+@class AndroidDeviceMac;
 
 shared_ptr<AdbExecutor> executor;
 // @interface AndroidAdbHandler()

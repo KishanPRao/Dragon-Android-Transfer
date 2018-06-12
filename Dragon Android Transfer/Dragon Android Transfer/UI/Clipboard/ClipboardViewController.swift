@@ -41,12 +41,12 @@ class ClipboardViewController: NSViewController, NSTableViewDataSource {
 		clipboardTable.target = self
 		
 		clipboardTable.backgroundColor = ColorUtils.colorWithHexString(ColorUtils.listBackgroundColor)
-		clipboardTable.selectionHighlightStyle = NSTableViewSelectionHighlightStyle.none
+		clipboardTable.selectionHighlightStyle = NSTableView.SelectionHighlightStyle.none
 		
-		clipboardCloseIcon = NSImage(named: "close_button.png")
+		clipboardCloseIcon = NSImage(named: NSImage.Name(rawValue: "close_button.png"))
 		StyleUtils.updateButton(clipboardCloseButton, withImage: clipboardCloseIcon)
 		
-		let image = NSImage(named: "update_sizes.png")
+		let image = NSImage(named: NSImage.Name(rawValue: "update_sizes.png"))
 		StyleUtils.updateButton(updateSizesButton, withImage: image)
 		
 		ColorUtils.setBackgroundColorTo(clipboardMainBG, color: ColorUtils.statusViewColor)
@@ -112,7 +112,7 @@ class ClipboardViewController: NSViewController, NSTableViewDataSource {
 	}
 	
 	func tableView(_ tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-		let cellView = tableView.make(withIdentifier: "clipboardCell", owner: self) as! ClipboardTableCellView
+		let cellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "clipboardCell"), owner: self) as! ClipboardTableCellView
 		cellView.frame = DimenUtils.getUpdatedRect2(frame: cellView.frame, dimensions: [Dimens.clipboard_controller_clip_cell_width, Dimens.clipboard_controller_clip_cell_height])
 		//      Possibility “This NSLayoutConstraint is being configured with a constant that exceeds internal limits” error to occur. Old version SDK?
 		let file = self.clipboardItems![row];
@@ -131,9 +131,9 @@ class ClipboardViewController: NSViewController, NSTableViewDataSource {
 		let fileImage = cellView.fileImage!
 		fileImage.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.clipboard_controller_clip_cell_file_image)
 		if (file.type == BaseFileType.Directory) {
-			fileImage.image = NSImage(named: "folder")
+			fileImage.image = NSImage(named: NSImage.Name(rawValue: "folder"))
 		} else {
-			fileImage.image = NSImage(named: "file")
+			fileImage.image = NSImage(named: NSImage.Name(rawValue: "file"))
 		}
 		cellView.showFullPath = false
 		cellView.objectValue = file
@@ -154,7 +154,7 @@ class ClipboardViewController: NSViewController, NSTableViewDataSource {
 		return DimenUtils.getDimension(dimension: Dimens.clipboard_controller_clip_cell_height) - DimenUtils.getDimension(dimension: Dimens.clipboard_controller_clip_cell_margin)
 	}
 	
-	func updateWindowSize() {
+	@objc func updateWindowSize() {
 		if (NSObject.VERBOSE) {
             Swift.print("ClipboardViewController, updateWindowSize")
         }
@@ -209,19 +209,19 @@ class ClipboardViewController: NSViewController, NSTableViewDataSource {
 //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.pasteToMac), name: StatusTypeNotification.PASTE_TO_MAC, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(ClipboardViewController.activeChange), name: NSNotification.Name(rawValue: StatusTypeNotification.CHANGE_ACTIVE), object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(ClipboardViewController.clearClipboard), name: NSNotification.Name(rawValue: StatusTypeNotification.MENU_CLEAR_CLIPBOARD), object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(ClipboardViewController.updateWindowSize), name: NSNotification.Name.NSWindowDidChangeScreen, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(ClipboardViewController.updateWindowSize), name: NSWindow.didChangeScreenNotification, object: nil)
 	}
 	
-	func activeChange() {
+	@objc func activeChange() {
 	}
 	
-	func clearClipboard() {
+	@objc func clearClipboard() {
 		transferHandler.clearClipboardAndroidItems()
 		transferHandler.clearClipboardMacItems()
 		updateClipboard()
 	}
 	
-	func updateClipboard() {
+	@objc func updateClipboard() {
 		clipboardItems = transferHandler.getClipboardItems()
 		clipboardTable.reloadData()
 		totalSizeText.stringValue = ""

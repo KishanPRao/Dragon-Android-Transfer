@@ -26,7 +26,7 @@ extension MenuViewController {
         }
         //LogV("Menu Table View")
         let returnCell: MenuCell?
-        if let spareView = tableView.make(withIdentifier: "menu_cell",
+        if let spareView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "menu_cell"),
                                                             owner: self) as? MenuCell {
             returnCell = spareView
             
@@ -44,7 +44,7 @@ extension MenuViewController {
             } else {
                 imageName = "external_storage"
             }
-            let image = NSImage(named: imageName)
+            let image = NSImage(named: NSImage.Name(rawValue: imageName))
             cell.image.image = image
 //            view.image.imageScaling = .scaleProportionallyUpOrDown
             cell.image.imageScaling = .scaleAxesIndependently
