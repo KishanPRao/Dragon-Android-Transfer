@@ -39,21 +39,6 @@ extension AndroidViewController {
 		backButton.setImage(name: "backward")
         backButton.toolTip = R.string.helpBack
 		
-		let imageView = NSImageView()
-		imageView.image = NSApplication.shared.applicationIconImage
-		mDockTile.contentView = imageView
-		
-        mDockProgress = NSProgressIndicator(frame: NSMakeRect(0.0, 0.0, mDockTile.size.width, 10))
-        if let dockProgress = mDockProgress {
-			dockProgress.style = NSProgressIndicator.Style.bar
-			dockProgress.isIndeterminate = false
-			dockProgress.minValue = 0
-			dockProgress.maxValue = 100
-			imageView.addSubview(dockProgress)
-            dockProgress.isBezeled = true
-            dockProgress.isHidden = true
-        }
-		
 		overlayView.isHidden = true
 		overlayView.setBackground(R.color.menuBgColor)
 		

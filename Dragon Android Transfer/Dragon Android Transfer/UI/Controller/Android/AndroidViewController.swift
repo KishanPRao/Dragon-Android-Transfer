@@ -58,8 +58,6 @@ class AndroidViewController: NSViewController,
 	
 	internal var needsUpdatePopupDimens = false
 	
-	internal let mDockTile: NSDockTile = NSApplication.shared.dockTile
-	internal var mDockProgress: NSProgressIndicator? = nil
 	//internal var mCircularProgress: IndeterminateProgressView? = nil
 //    internal var mCurrentProgress = -1.0
 	

@@ -45,6 +45,7 @@ class TransferViewController: NSViewController {
 	internal let mDockTile: NSDockTile = NSApplication.shared.dockTile
 	internal var mDockProgress: NSProgressIndicator? = nil
 	internal var mCurrentProgress = -1.0
+    internal var mProgress: Progress? = nil
 	
 	public var frameSize = NSRect()
 	
@@ -147,6 +148,21 @@ class TransferViewController: NSViewController {
                 .center)
 //        LogI("Init UI")
 //        self.view.makeFirstResponder(self.view.window)
+        
+        let imageView = NSImageView()
+        imageView.image = NSApplication.shared.applicationIconImage
+        mDockTile.contentView = imageView
+        
+        mDockProgress = NSProgressIndicator(frame: NSMakeRect(0.0, 0.0, mDockTile.size.width, 10))
+        if let dockProgress = mDockProgress {
+            dockProgress.style = NSProgressIndicator.Style.bar
+            dockProgress.isIndeterminate = false
+            dockProgress.minValue = 0
+            dockProgress.maxValue = 100
+            imageView.addSubview(dockProgress)
+            dockProgress.isBezeled = true
+            dockProgress.isHidden = true
+        }
 	}
 	
 	private func updateButton(_ button: NSButton, _ image: NSImage) {
