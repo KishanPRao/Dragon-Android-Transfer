@@ -99,6 +99,15 @@ class AndroidViewController: NSViewController,
             adWc.close()
         }
     }
+    
+    func resetDeviceStatus() {
+        AppDelegate.itemSelected = false
+        AppDelegate.directoryItemSelected = false
+        AppDelegate.multipleItemsSelected = false
+        let canGoBackward = !transferHandler.isRootDirectory()
+        AppDelegate.canGoBackward = canGoBackward
+        backButton.isEnabled = canGoBackward
+    }
 	
 	func updateDeviceStatus() {
 		if (!transferHandler.hasActiveDevice()) {
@@ -126,9 +135,6 @@ class AndroidViewController: NSViewController,
 			AppDelegate.hasItems = true
 			messageText.isHidden = true
 		}
-		AppDelegate.itemSelected = false
-		AppDelegate.directoryItemSelected = false
-		AppDelegate.multipleItemsSelected = false
 		let canGoBackward = !transferHandler.isRootDirectory()
 		AppDelegate.canGoBackward = canGoBackward
 		backButton.isEnabled = canGoBackward

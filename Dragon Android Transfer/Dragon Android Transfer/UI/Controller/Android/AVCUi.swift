@@ -30,6 +30,7 @@ extension AndroidViewController {
         messageText.updateMainFont()
 		messageText.textColor = R.color.textColor
 		messageText.setBackground(R.color.tableBg)
+        self.resetDeviceStatus()
 		updateDeviceStatus()
 		
 		menuButton.setImage(name: "menu")

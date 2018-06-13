@@ -122,26 +122,23 @@ extension AndroidViewController {
             var itemSelected = false
             while (i < androidDirectoryItems.count) {
                 let rowItem = fileTable.rowView(atRow: i, makeIfNecessary: false)
-                if (rowItem != nil) {
-                    //                    let cellView = rowItem?.view(atColumn: 0) as! NSView
-                    let cellView = rowItem?.view(atColumn: 0) as! FileCell
-                    if (indexSet.contains(i)) {
-                        //                        ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listSelectedBackgroundColor)
+                if (indexSet.contains(i)) {
+                    if  let rowItem = rowItem {
+                        let cellView = rowItem.view(atColumn: 0) as! FileCell
                         cellView.isSelected = true
-                        
-                        if (itemSelected) {
-                            AppDelegate.multipleItemsSelected = true
-                        }
-                        itemSelected = true
-                        if (self.androidDirectoryItems[i].type == BaseFileType.Directory) {
-                            AppDelegate.directoryItemSelected = true
-                        }
-                        AppDelegate.itemSelected = true
-                    } else {
-                        //                        cellView.setBackground(R.color.tableItemBg)
-                        //                        cellView.setBackground(NSColor.clear)
+                    }
+                    if (itemSelected) {
+                        AppDelegate.multipleItemsSelected = true
+                    }
+                    itemSelected = true
+                    if (self.androidDirectoryItems[i].type == BaseFileType.Directory) {
+                        AppDelegate.directoryItemSelected = true
+                    }
+                    AppDelegate.itemSelected = true
+                } else {
+                    if  let rowItem = rowItem {
+                        let cellView = rowItem.view(atColumn: 0) as! FileCell
                         cellView.isSelected = false
-                        //                        ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listItemBackgroundColor)
                     }
                 }
                 i = i + 1

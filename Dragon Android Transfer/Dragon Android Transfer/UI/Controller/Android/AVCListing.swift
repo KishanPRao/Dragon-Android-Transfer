@@ -96,6 +96,7 @@ extension AndroidViewController {
 	
 	func updateList() {
 //        LogV("Update List")
+        self.resetDeviceStatus()
 		fileTable.updateList(data: androidDirectoryItems)
 		updateDeviceStatus()
 	}
@@ -187,7 +188,7 @@ extension AndroidViewController {
 				.subscribe(
 						onNext: {
 							for (i, item) in self.androidDirectoryItems.enumerated() {
-								//                LogV("Item", item, "Prev", previousDirectory)
+//                                self.LogV("Item", item, "Prev", previousDirectory)
 								if (item.getFullPath() == previousDirectory) {
 									self.fileTable.updateItemChanged(index: i)
 									self.fileTable.scrollRowToVisible(i)

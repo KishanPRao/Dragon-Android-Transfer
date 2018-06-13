@@ -53,7 +53,8 @@ class DarkAlert: NSAlert {
 	
 	public func end() {
 		ThreadUtils.runInMainThreadIfNeeded {
-			NSApp.endSheet(self.window)
+//            NSApp.endSheet(self.window)
+            self.window.endSheet(self.window)
 		}
 	}
 }

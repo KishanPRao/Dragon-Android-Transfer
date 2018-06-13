@@ -185,6 +185,7 @@ extension AndroidViewController {
 					transferHandler in
 					print("UI Stuff")
 					//					self.updateClipboard()
+                    self.resetDeviceStatus()
 					self.updateDeviceStatus()
 					self.hideProgress()
 				}.subscribe(onNext: {

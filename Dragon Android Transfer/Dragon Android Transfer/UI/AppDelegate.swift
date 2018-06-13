@@ -27,7 +27,11 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
 	
 	static var active = false;
 	static var itemSelected = false
-	static var directoryItemSelected = false
+    static var directoryItemSelected: Bool = false /*{
+        didSet {
+            Swift.print("Here: \(directoryItemSelected)")
+        }
+    }*/
 	static var multipleItemsSelected = false
 	static var hasItems = false
 	static var hasMacClipboardItems = false
@@ -156,6 +160,7 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
 		if (VERBOSE) {
 			Swift.print("AppDelegate, validateInterfaceMenuItem:", item.tag);
 			Swift.print("AppDelegate, validateInterfaceMenuItem, isPasting:", AppDelegate.isPastingOperation.value)
+            Swift.print("AppDelegate: \(AppDelegate.directoryItemSelected), \(AppDelegate.multipleItemsSelected), \(MenuItemIdentifier.fileOpenFile)")
 		}
 		if (item.tag == MenuItemIdentifier.fileOpenFile && AppDelegate.directoryItemSelected && !AppDelegate.multipleItemsSelected) {
 			return !AppDelegate.isPastingOperation.value
