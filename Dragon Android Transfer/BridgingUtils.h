@@ -10,4 +10,7 @@
 
 @interface BridgingUtils : NSObject
 + (unsigned)parseIntFromData:(NSData *)data;
+
++ (long)nr_getAllocatedSize:(NSURL *)url error:(NSError * __autoreleasing *)error;
+
 @end

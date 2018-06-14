@@ -106,6 +106,36 @@ class MacHandler: NSObject {
 		return output! as String
 	}
 	
+    func getSize(_ directoryName: String) -> UInt64 {
+        var size = 0 as UInt64
+        let directoryURL = URL(fileURLWithPath: directoryName)
+        size = UInt64(BridgingUtils.nr_getAllocatedSize(directoryURL, error: nil))
+        
+        print("Size: \(size)")
+        
+        /*let prefetchedProperties = [
+            URLResourceKey.isRegularFileKey,
+            URLResourceKey.fileAllocatedSizeKey,
+            URLResourceKey.totalFileAllocatedSizeKey,
+        ];
+        let enumerator = FileManager.default.enumerator(at: directoryURL,
+                                                        includingPropertiesForKeys: prefetchedProperties,
+                                                        options: FileManager.DirectoryEnumerationOptions(rawValue: 0),
+                                                        errorHandler: nil)
+        
+        for contentItemURL in enumerator! {
+            if let contentItemURL = contentItemURL as? NSURL {
+                var fileSize: AutoreleasingUnsafeMutablePointer<NSNumber?> = nil
+                
+                
+                contentItemURL.getResourceValue(fileSize, forKey: NSURLTotalFileAllocatedSizeKey)
+                
+                print("File Size: \(fileSize), \(fileSize.pointee?.doubleValue)")
+            }
+        }*/
+        return size
+    }
+    /*
 	func getSize(_ directoryName: String) -> UInt64 {
 		var size = 0 as UInt64
 //		let command = "cd "+ESCAPE_DOUBLE_QUOTES+directoryName+ESCAPE_DOUBLE_QUOTES+"; du -sk;"
@@ -129,7 +159,7 @@ class MacHandler: NSObject {
 		print("Size:" + String(size))
 //		du -s
 		return size
-	}
+	}*/
 	
 	func getActiveFiles() -> Array<BaseFile>! {
 		var path = getActivePath()

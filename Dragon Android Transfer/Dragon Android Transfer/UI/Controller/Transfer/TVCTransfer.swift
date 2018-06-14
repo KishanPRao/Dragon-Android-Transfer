@@ -127,8 +127,6 @@ extension TransferViewController {
 						//                        TODO:
 						self.stopTimer()
 						self.finished(status)
-                        self.mProgress?.unpublish()
-                        self.mProgress?.cancel()
 					}
 					self.mCurrentProgress = -1
 				}).disposed(by: disposeBag)
@@ -200,23 +198,26 @@ extension TransferViewController {
 						))
 						self.pathTransferString.attributedStringValue = attributedString
 						
-                        self.mProgress?.unpublish()
-                        self.mProgress?.cancel()
-                        
-                        let destinationFile = self.copyDestination + HandlerConstants.SEPARATOR + self.currentCopyFile
-                        let userInfo = [
-                            ProgressUserInfoKey.fileOperationKindKey: Progress.FileOperationKind.downloading,
-                            ProgressUserInfoKey.fileURLKey: NSURL(fileURLWithPath: destinationFile)
-                            ] as [ProgressUserInfoKey : Any]
-                        
-                        self.mProgress = Progress(parent: nil, userInfo: userInfo)
-                        if let progressTracker = self.mProgress {
-                            progressTracker.kind = ProgressKind.file
-                            progressTracker.completedUnitCount = 0
-                            progressTracker.totalUnitCount = 100
-                            progressTracker.isPausable = false
-                            progressTracker.isCancellable = true
-                            progressTracker.publish()
+                        if (self.transferType == TransferType.AndroidToMac) {
+                            if let progressTracker = self.mProgress {
+                                progressTracker.unpublish()
+                                progressTracker.cancel()
+                            }
+                            
+                            let destinationFile = self.copyDestination + HandlerConstants.SEPARATOR + self.currentCopyFile
+                            let userInfo : [ProgressUserInfoKey : Any] = [
+                                ProgressUserInfoKey.fileOperationKindKey: Progress.FileOperationKind.downloading,
+                                ProgressUserInfoKey.fileURLKey: NSURL(fileURLWithPath: destinationFile)
+                            ]
+                            self.mProgress = Progress(parent: nil, userInfo: userInfo)
+                            if let progressTracker = self.mProgress {
+                                progressTracker.kind = ProgressKind.file
+                                progressTracker.completedUnitCount = 0
+                                progressTracker.totalUnitCount = 100
+                                progressTracker.isPausable = false
+                                progressTracker.isCancellable = true
+                                progressTracker.publish()
+                            }
                         }
 					}
 				}).disposed(by: disposeBag)
@@ -257,56 +258,9 @@ extension TransferViewController {
 				from: copiedSizeInString + " of " + SizeUtils.getBytesInFormat(totalSize),
 				color: R.color.transferTextColor,
 				nonBoldRange: range)
-        /*do {
-            let fileAttr = try FileManager.default.attributesOfItem(atPath: destinationFile)
-            for attr in fileAttr {
-                LogD("\(attr.key) : \(attr.value)")
-            }
-            let extendAttr = fileAttr.values[fileAttr.index(forKey: FileAttributeKey(rawValue: "NSFileExtendedAttributes"))!]
-            let mutableAttr = (extendAttr as! NSDictionary).mutableCopy() as! NSMutableDictionary
-            let progressData = ["0.1" .data(using: String.Encoding.ascii)]
-            mutableAttr.setValue(progressData, forKey: "com.apple.progress.fractionCompleted")
-        } catch {
-            LogE("File Manager issue")
-        }*/
-        
-//        let progressL = Progress(totalUnitCount: 5)
-//        let userInfo = [
-//            ProgressUserInfoKey.fileOperationKindKey: Progress.FileOperationKind.downloading,
-//            ProgressUserInfoKey.fileURLKey: URL(string: destinationFile)
-//            ] as [ProgressUserInfoKey : Any]
-        
-//        let userInfo = [
-//            //            kNSProgressFileLocationCanChangeKeyName: true,
-//            "NSProgressFileOperationKindKey": "NSProgressFileOperationKindDownloading",
-//            "NSProgressFileURLKey": destinationFile
-//        ]
- 
-//        progressL.publish()
-//        progressL.setUserInfoObject(self.currentFile!.getFullPath(), forKey: ProgressUserInfoKey(rawValue: "NSProgressFileURLKey"))
-        
-//        progress.fileTotalCount = 1
-//        progress.fileOperationKind = Progress.FileOperationKind.downloading
-        
-        
-//        let destinationFile = copyDestination + HandlerConstants.SEPARATOR + self.currentCopyFile
-//        let userInfo = [
-//            //            kNSProgressFileLocationCanChangeKeyName: true,
-//            ProgressUserInfoKey.fileOperationKindKey: Progress.FileOperationKind.downloading,
-//            ProgressUserInfoKey.fileURLKey: NSURL(fileURLWithPath: destinationFile)
-//            ] as [ProgressUserInfoKey : Any]
-//
-//        let progressL = Progress(parent: nil, userInfo: userInfo)
-//        progressL.kind = ProgressKind.file
-//        progressL.totalUnitCount = 100
-//        //        progress.fileURL = URL(string: self.currentFile!.getFullPath())
-//
-//        progressL.isPausable = false
-//        progressL.isCancellable = true
-//        progressL.completedUnitCount = Int64(progress)
-//        progressL.publish()
-        
-        mProgress?.completedUnitCount = Int64(progress)
+        if (self.transferType == TransferType.AndroidToMac) {
+            mProgress?.completedUnitCount = Int64(progress)
+        }
         
         //        NSWorkspace.shared.noteFileSystemChanged(destinationFile)
         
@@ -342,6 +296,14 @@ extension TransferViewController {
 		if (transferType == TransferType.MacToAndroid) {
 			refresh()
 		}
+        
+        if (transferType == TransferType.AndroidToMac) {
+            if let progressTracker = self.mProgress {
+                progressTracker.unpublish()
+                progressTracker.cancel()
+            }
+        }
+        
 		if let alert = alert {
 			alert.end()
 		}

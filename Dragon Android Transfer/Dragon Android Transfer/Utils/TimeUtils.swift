@@ -46,10 +46,12 @@ class TimeUtils {
             let minutesString = minutes > 1 ? "minutes" : "minute"
             time = time + "\(minutes) \(minutesString) and "
         }
-        if (secondsInInt > 0) {
-            let secondsString = secondsInInt > 1 ? "seconds" : "second"
-            time = time + "\(secondsInInt) \(secondsString)"
-        }
+//        if (secondsInInt > 0) {
+        let secondsString = secondsInInt == 1 ? "second" : "seconds"
+        time = time + "\(secondsInInt) \(secondsString)"
+//        }
+        print("Time Remaining: \(time)")
+        print("Time Values: \(secondsInInt), \(minutes), \(hours)")
         return "\(time) remaining"
     }
 }
