@@ -15,8 +15,8 @@ extension R {
         R.color = R._darkTheme
         //print("Set Dark:", R.color.dark, R.color.dark)
     }
-    /*
+    
     public static func setLightTheme() {
         R.color = R._lightTheme
-    }*/
+    }
 }

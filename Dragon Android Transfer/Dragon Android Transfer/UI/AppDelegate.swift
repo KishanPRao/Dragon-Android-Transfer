@@ -88,7 +88,8 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
 		}
 		NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.screenUpdated), name: NSWindow.didChangeScreenNotification, object: nil)
 		
-		R.setDarkTheme()
+        R.setDarkTheme()
+//        R.setLightTheme()
 	}
 	
 	func userNotificationCenter(center: NSUserNotificationCenter, shouldPresentNotification notification: NSUserNotification) -> Bool {

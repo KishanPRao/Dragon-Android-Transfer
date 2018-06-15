@@ -88,42 +88,46 @@ DQ
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Edit" id="5QF-Oa-p0T">
+                            <menuItem title="Edit" id="8ZX-02-k2R">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Edit" id="W48-6f-4Dl">
+                                <menu key="submenu" title="Edit" id="uOZ-HA-mcz">
                                     <items>
-                                        <menuItem title="Copy" tag="1" keyEquivalent="C" id="x3v-GG-iWU">
+                                        <menuItem title="Copy" tag="1" keyEquivalent="C" id="CF6-H3-LCE">
                                             <connections>
-                                                <action selector="copyFiles:" target="Voe-Tx-rLC" id="NRy-Rn-f7M"/>
+                                                <action selector="copyFiles:" target="Voe-Tx-rLC" id="G10-l0-SUS"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Paste" tag="2" keyEquivalent="V" id="gVA-U4-sdL">
+                                        <menuItem title="Paste" tag="2" keyEquivalent="V" id="xEf-w9-0EY">
                                             <connections>
-                                                <action selector="pasteFiles:" target="Voe-Tx-rLC" id="cbJ-Be-Q55"/>
+                                                <action selector="pasteFiles:" target="Voe-Tx-rLC" id="cvv-QB-HmD"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Select All" tag="3" keyEquivalent="a" id="Ruw-6m-B2m">
+                                        <menuItem title="Select All" tag="3" keyEquivalent="a" id="py8-de-XLU">
                                             <connections>
-                                                <action selector="selectAll:" target="Voe-Tx-rLC" id="ELa-Hr-nxE"/>
+                                                <action selector="selectAll:" target="Voe-Tx-rLC" id="53Z-jo-eH3"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Delete" tag="12" id="j2H-uU-XxD" userLabel="Delete">
+                                        <menuItem title="Delete" tag="12" id="X3C-pa-aFt" userLabel="Delete">
                                             <string key="keyEquivalent" base64-UTF8="YES">
 CA
 </string>
                                             <connections>
-                                                <action selector="delete:" target="Voe-Tx-rLC" id="hAe-H4-szT"/>
+                                                <action selector="delete:" target="Voe-Tx-rLC" id="uS4-cf-a1U"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="uyl-h8-XO2"/>
-                                        <menuItem title="Clear Clipboard" tag="5" id="xb6-p7-wXY">
+                                        <menuItem isSeparatorItem="YES" id="XHj-yp-tNH"/>
+                                        <menuItem title="Clear Clipboard" tag="5" id="iHk-zl-u2N">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="clearClipboard:" target="Voe-Tx-rLC" id="Jff-jy-zYZ"/>
+                                                <action selector="clearClipboard:" target="Voe-Tx-rLC" id="g2s-64-vJB"/>
                                             </connections>
                                         </menuItem>
                                     </items>
                                 </menu>
+                            </menuItem>
+                            <menuItem title="View" id="5QF-Oa-p0T">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="View" id="W48-6f-4Dl"/>
                             </menuItem>
                             <menuItem title="Go" id="H8h-7b-M4v">
                                 <modifierMask key="keyEquivalentModifierMask"/>
