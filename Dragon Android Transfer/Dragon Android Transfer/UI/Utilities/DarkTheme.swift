@@ -12,6 +12,7 @@ class DarkTheme: Theme {
 	static let color = DarkTheme.color(_:)
 	
     let textColor = color("ffffff")
+//    let textColor = color("d0d0d0")
     
 	let menuNavColor = color("071326")
 	let menuTableColor = color("071326")

@@ -247,7 +247,7 @@ extension TransferViewController {
 //        copyDialog?.updateCopyStatus(currentFileCopiedSize, withProgress: CGFloat(progress))
 		transferProgressView.setProgress(CGFloat(progress))
 		
-		var copiedSizeInString = "0B"
+		var copiedSizeInString = SizeUtils.ZERO_BYTES
 		if copiedSize > 0 {
 			copiedSizeInString = SizeUtils.getBytesInFormat(copiedSize)
 		}

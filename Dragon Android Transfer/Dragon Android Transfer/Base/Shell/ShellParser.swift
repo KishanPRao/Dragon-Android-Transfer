@@ -152,7 +152,7 @@ public class ShellParser: NSObject {
     
     @objc
     public static func parseTotalSpace(_ output: String) -> String {
-        var spaceInString = "0B"
+        var spaceInString = SizeUtils.ZERO_BYTES
         let outputInTabs = parseSpaceOutput(output)
         if (outputInTabs.count == 0) {
             return spaceInString
@@ -162,7 +162,7 @@ public class ShellParser: NSObject {
             spaceInString = SizeUtils.getBytesInFormat(totalSpaceInInt * UInt64(BLOCK_SIZE_IN_FLOAT))
         } else {
             //            Solaris
-            spaceInString = outputInTabs[1] + "B"
+            spaceInString = outputInTabs[1] + " B"
         }
         if (EXTREME_VERBOSE) {
             //            print("Output:", outputInTabs)
@@ -175,7 +175,7 @@ public class ShellParser: NSObject {
 	
 	@objc
 	public static func parseAvailableSpace(_ output: String) -> String {
-		var spaceInString = "0B"
+		var spaceInString = SizeUtils.ZERO_BYTES
 		let outputInTabs = parseSpaceOutput(output)
 		if (outputInTabs.count == 0) {
 			return spaceInString
@@ -187,7 +187,7 @@ public class ShellParser: NSObject {
 			}
 		} else {
 //			Solaris
-			spaceInString = outputInTabs[3] + "B"
+			spaceInString = outputInTabs[3] + " B"
 		}
 		return spaceInString
 	}

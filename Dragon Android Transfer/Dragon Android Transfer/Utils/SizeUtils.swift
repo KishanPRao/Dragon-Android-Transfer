@@ -10,6 +10,7 @@ import Foundation
 
 class SizeUtils {
     static let BLOCK_SIZE_IN_FLOAT = Float(1024)
+    static let ZERO_BYTES = "0 B"
     
     static func getBytesInFormat(_ bytesInInt: UInt64) -> String {
         if (bytesInInt == UInt64.max || bytesInInt == 0) {
@@ -23,15 +24,15 @@ class SizeUtils {
                 bytesInFloat = bytesInFloat / BLOCK_SIZE_IN_FLOAT
                 if (bytesInFloat > BLOCK_SIZE_IN_FLOAT) {
                     bytesInFloat = bytesInFloat / BLOCK_SIZE_IN_FLOAT
-                    bytesInString = String(format: "%.2f", bytesInFloat)+"GB"
+                    bytesInString = String(format: "%.2f ", bytesInFloat)+"GB"
                 } else {
-                    bytesInString = String(format: "%.2f", bytesInFloat)+"MB"
+                    bytesInString = String(format: "%.2f ", bytesInFloat)+"MB"
                 }
             } else {
-                bytesInString = String(format: "%.0f", bytesInFloat)+"KB"
+                bytesInString = String(format: "%.0f ", bytesInFloat)+"KB"
             }
         } else {
-            bytesInString = String(format: "%.0f", bytesInFloat)+"B"
+            bytesInString = String(format: "%.0f ", bytesInFloat)+"B"
         }
         return bytesInString
     }

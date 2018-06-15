@@ -7,18 +7,47 @@
 //
 
 import Foundation
-/*
+
 class LightTheme: Theme {
-	var dark: Bool {
-		get {
-			return false
-		}
-	}
-	
-	var menuBgColor: NSColor {
-		get {
-			return colorWithHexString("#ffffff")
-		}
-	}
+    
+    let textColor = color("000000")
+    
+    let menuNavColor = color("0fffff")
+    let menuTableColor = color("0fffff")
+    let menuBgColor = color("0fffff", withAlpha: 0.4)
+    let menuItemBg = color("ffffff")
+    let menuItemSelectBg = color("091f45")
+    let menuItemSelectCellBg = color("11326c")
+    
+    let toolbarColor = color("072556")
+    let toolbarProgressFg = color("204582")
+    let toolbarProgressBg = color("6a7991")
+    
+    let pathSelectorSelectableItem = color("0e2343")
+    
+    let tableBg = color("ffffff")
+    let tableItemBg = color("ffffff")
+    let listSelectedBackgroundColor = color("55999c")
+    
+    let transferBg = color("313b4c")
+    let transferTextColor = color("b8c2c9")
+    let transferProgressFg = color("204582")
+    let transferProgressBg = color("6a7991")
+    
+    let dialogBgColor = color("193360")
+    let dialogWindowColor = color("0f1217")
+    let windowBg = color("fafafa")
+    
+//    var dark: Bool {
+//        get {
+//            return false
+//        }
+//    }
+//
+//    var menuBgColor: NSColor {
+//        get {
+//            return colorWithHexString("#ffffff")
+//        }
+//    }
 }
-*/
+
