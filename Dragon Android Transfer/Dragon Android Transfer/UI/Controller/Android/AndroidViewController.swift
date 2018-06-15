@@ -163,7 +163,13 @@ class AndroidViewController: NSViewController,
 		super.viewWillAppear()
 //        start()
 		fileTable.makeFirstResponder(self.view.window)
-		NotificationCenter.default.addObserver(self, selector: #selector(windowMoved), name: NSWindow.didMoveNotification, object: self.view.window!)
+		addNotification(#selector(windowMoved),
+                        name: NSWindow.didMoveNotification,
+                        object: self.view.window)
+        
+        addNotification(#selector(AndroidViewController.windowIsClosing),
+                        name: NSWindow.willCloseNotification,
+                        object: self.view.window)
 		
 		/*updateWindowSize()
 		checkGuide()

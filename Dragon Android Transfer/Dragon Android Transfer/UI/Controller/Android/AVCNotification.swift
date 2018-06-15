@@ -10,8 +10,8 @@ import Foundation
 
 extension AndroidViewController {
     
-    func addNotification(_ selector: Selector, name notificationName: Notification.Name) {
-        NotificationCenter.default.addObserver(self, selector: selector, name: notificationName, object: nil)
+    func addNotification(_ selector: Selector, name notificationName: Notification.Name, object: Any? = nil) {
+        NotificationCenter.default.addObserver(self, selector: selector, name: notificationName, object: object)
     }
     
     func addNotification(_ selector: Selector, name notificationRawValue: String) {
@@ -35,7 +35,6 @@ extension AndroidViewController {
         
 //        Window related
         addNotification(#selector(AndroidViewController.screenUpdated), name: NSWindow.didChangeScreenNotification)
-        addNotification(#selector(AndroidViewController.windowIsClosing), name: NSWindow.willCloseNotification)
         
         //		Menu Item Related
         addNotification(#selector(AndroidViewController.openSelectedDirectory), name: StatusTypeNotification.OPEN_FILE)
