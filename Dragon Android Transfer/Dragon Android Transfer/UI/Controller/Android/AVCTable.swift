@@ -12,6 +12,14 @@ extension AndroidViewController {
     
     func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
         let rowView = SelectionTableRowView()
+        /*guard let fileTable = fileTable else {
+            return rowView
+        }
+        if (fileTable.dragDropRow == row) {
+            rowView.selectedColor = R.color.mainViewColor
+        } else {
+            rowView.selectedColor = R.color.listSelectedBackgroundColor
+        }*/
         rowView.selectedColor = R.color.listSelectedBackgroundColor
         return rowView
     }
@@ -84,6 +92,17 @@ extension AndroidViewController {
                 fileImage.image = NSImage(named: NSImage.Name(rawValue: R.drawable.file))
             }
             if let fileTable = fileTable {
+                if (!isDirectory) {
+                    if (fileTable.dragDropRow == row) {
+                        //                        print("AVC Drag color: \(row)")
+                        //                        ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.mainViewColor)
+                        cellView.isDraggingCell = true
+                    } else {
+                        cellView.isDraggingCell = false
+                        //                        print("AVC Clear color: \(row), \(fileTable.dragDropRow)")
+                        //                        ColorUtils.setBackgroundColorTo(cellView, color: R.color.clear)
+                    }
+                }
                 let indexSet = fileTable.selectedRowIndexes
                 if (indexSet.contains(row)) {
                     //                    ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listSelectedBackgroundColor)
@@ -94,12 +113,6 @@ extension AndroidViewController {
                     //                    cellView.setBackground(NSColor.clear)
                     cellView.isSelected = false
                     //                ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listItemBackgroundColor)
-                }
-                
-                if (!isDirectory && fileTable.dragDropRow == row) {
-                    ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.mainViewColor)
-                } else {
-                    //            setBackgroundColorTo(cellView, color: ColorUtils.listBackgroundColor)
                 }
             }
         }
@@ -144,9 +157,5 @@ extension AndroidViewController {
                 i = i + 1
             }
         }
-    }
-    
-    func cleanup() {
-        fileTable = nil
     }
 }

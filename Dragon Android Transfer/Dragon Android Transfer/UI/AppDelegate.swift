@@ -67,9 +67,11 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
 			}
 			
 			if (AppDelegate.isAppInForeground()) {
-				NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.COPY_FROM_ANDROID), object: nil)
+				NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.COPY_FROM_ANDROID),
+                                                object: nil)
 			} else {
-				NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.COPY_FROM_MAC), object: nil)
+				NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.COPY_FROM_MAC),
+                                                object: nil)
 			}
 		}
 		
@@ -157,7 +159,7 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
 	}
 	
 	public static func validateInterfaceMenuItem(item: NSValidatedUserInterfaceItem!) -> Bool {
-//        LogV("Vbose", Verbose, "")
+        print("Vbose", "Here!!")
 		if (VERBOSE) {
 			Swift.print("AppDelegate, validateInterfaceMenuItem:", item.tag);
 			Swift.print("AppDelegate, validateInterfaceMenuItem, isPasting:", AppDelegate.isPastingOperation.value)
@@ -197,6 +199,9 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
 			return true
         }
         if (item.tag == MenuItemIdentifier.newFolder) {
+            return true
+        }
+        if (item.tag == MenuItemIdentifier.defaultAlwaysOn) {
             return true
         }
         if (item.tag == MenuItemIdentifier.stayOnTop) {
@@ -300,7 +305,12 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
 	public func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
 		return true
 	}
-	
+    
+    func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.QuitIfNeeded),
+                                        object: nil)
+        return NSApplication.TerminateReply.terminateLater
+    }
 	
 	func applicationWillTerminate(_ aNotification: Notification) {
 // 		Insert code here to tear down your application

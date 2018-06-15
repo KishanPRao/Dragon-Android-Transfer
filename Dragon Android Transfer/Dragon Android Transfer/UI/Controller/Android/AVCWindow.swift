@@ -122,4 +122,9 @@ extension AndroidViewController {
 		 checkGuide()
 		 */
 	}
+    
+    @objc func windowIsClosing() {
+//        print("Window is Closing")
+        quitIfNeededInternal(false)
+    }
 }

@@ -16,5 +16,9 @@ class DarkWindow: NSWindow {
 		titlebarAppearsTransparent = true
 		titleVisibility = .hidden
 //		styleMask = .hudWindow
+        /*var style = styleMask
+        style.insert(.resizable)
+        styleMask = style*/
+
 	}
 }

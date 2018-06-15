@@ -104,10 +104,22 @@ class DeviceTableDelegate: NSObject, NSTableViewDelegate {
                     //                ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listItemBackgroundColor)
                 }
                 
-                if (!isDirectory && fileTable.dragDropRow == row) {
+                /*if (!isDirectory && fileTable.dragDropRow == row) {
+                    print("Clear color: \(row)")
                     ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.mainViewColor)
                 } else {
+                    print("Clear color: \(row)")
+                    ColorUtils.setBackgroundColorTo(cellView, color: R.color.clear)
                     //            setBackgroundColorTo(cellView, color: ColorUtils.listBackgroundColor)
+                }*/
+                if (!isDirectory) {
+                    if (fileTable.dragDropRow == row) {
+                        print("Drag color: \(row)")
+                        ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.mainViewColor)
+                    } else {
+                        print("Clear color: \(row)")
+                        ColorUtils.setBackgroundColorTo(cellView, color: R.color.clear)
+                    }
                 }
             }
         }

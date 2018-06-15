@@ -54,6 +54,11 @@ class ColorUtils {
             alpha: CGFloat(alpha)
         )
     }
+    
+    static func setBackgroundColorTo(_ view: NSView, color: NSColor) {
+        view.wantsLayer = true
+        view.layer?.backgroundColor = color.cgColor
+    }
 	
 	static func setBackgroundColorTo(_ view: NSView, color: String) {
 		view.wantsLayer = true

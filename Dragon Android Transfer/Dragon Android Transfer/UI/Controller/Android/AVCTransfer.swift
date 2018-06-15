@@ -48,7 +48,7 @@ import RxSwift
     }
     
     func observeTransfer() {
-        transferHandler.hasActiveTask()
+        transferHandler.activeTaskStatus()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { status in
                 self.LogV("Status: \(status)")

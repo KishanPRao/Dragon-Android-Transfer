@@ -17,3 +17,9 @@ let sFakeUrl = NSURL(string: sFakeLocation)!
 
 public let DRAG_DROP_NONE = -1
 public let DRAG_DROP_WHOLE = -2
+
+enum DragMode: Int {
+    case kUnknown
+    case kDragFromFinder
+    case kDragFromApp
+}

@@ -19,10 +19,16 @@ class FileCell: NSTableCellView {
 		super.awakeFromNib()
 	}
     
+    var isDraggingCell = false
+    
     var isSelected: Bool = false {
         didSet {
             if (isSelected) {
-                self.contentView.setBackground(R.color.listSelectedBackgroundColor)
+                if (self.isDraggingCell) {
+                    self.contentView.setBackground(R.color.mainViewColor)
+                } else {
+                    self.contentView.setBackground(R.color.listSelectedBackgroundColor)
+                }
             } else {
                 self.contentView.setBackground(NSColor.clear)
 //                self.contentView.wantsLayer = false

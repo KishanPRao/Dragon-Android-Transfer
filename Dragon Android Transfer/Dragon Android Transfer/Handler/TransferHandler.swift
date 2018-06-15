@@ -92,6 +92,7 @@ class TransferHandler {
 	}
 	
 	func terminate() {
+//        androidHandler.cancelActiveTask()
 		androidHandler.terminate()
 	}
 	
@@ -110,9 +111,14 @@ class TransferHandler {
 	func pull(_ sourceFiles: Array<BaseFile>, destination: String) {
 		androidHandler.pull(sourceFiles, destination: destination)
 	}
-	func hasActiveTask() -> Observable<FileProgressStatus> {
+    
+	func activeTaskStatus() -> Observable<FileProgressStatus> {
 		return androidHandler.hasActiveTask.asObservable()
 	}
+    
+    func hasActiveTask() -> Bool {
+        return androidHandler.hasActiveTask.value == FileProgressStatus.kStatusInProgress
+    }
 	
 	func sizeActiveTask() -> Observable<UInt64> {
 		return androidHandler.sizeActiveTask.asObservable()

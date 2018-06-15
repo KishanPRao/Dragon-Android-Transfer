@@ -52,9 +52,11 @@ class TransferViewController: NSViewController {
 	private var expanded = false
     
     internal var timer: Timer? = nil
-    internal let updateDelay = 3.0
+    private static let kDefaultUpdateDelay = 3.0
+    internal let updateDelay = kDefaultUpdateDelay
     
     internal var previousCopiedSize = 0.0
+    internal var averageCopyAmount = 0.0
     internal var start: DispatchTime? = nil
     
     var transferDialogOrigFrame = NSRect()
@@ -72,7 +74,7 @@ class TransferViewController: NSViewController {
 		overlayView.hide()
 	}
 	
-	@objc func close() {
+	@objc func cancelTransferInternal() {
         alert = DarkAlert(message: "Cancel?", info: "Do you want to cancel the current transfer?",
                           buttonNames: ["Ok", "Cancel"])
 		let button = alert!.runModal()
@@ -80,8 +82,16 @@ class TransferViewController: NSViewController {
 //            Ok
 			transferHandler.cancelActiveTask()
 			self.exit()
+            onClick()
 		}
 	}
+    
+    var onClick: () -> () = {}
+    
+    func cancelTransfer(_ onClick: (@escaping () -> ())) {
+        self.onClick = onClick
+        cancelTransferInternal()
+    }
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -114,7 +124,7 @@ class TransferViewController: NSViewController {
 		self.transferDialog.cornerRadius(5.0)
 //		self.transferDialog.dropShadow()
 		closeButton.setImage(name: R.drawable.cancel_transfer)
-		closeButton.action = #selector(close)
+		closeButton.action = #selector(cancelTransferInternal)
 		closeButton.target = self
 
 		moreButton.setBackground(R.color.transferBg)

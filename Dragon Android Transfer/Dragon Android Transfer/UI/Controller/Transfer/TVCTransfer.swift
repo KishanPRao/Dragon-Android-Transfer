@@ -82,16 +82,25 @@ extension TransferViewController {
 		let totalSize = Double(self.totalSize)
 		let sizeCopied = (mCurrentProgress * totalSize / 100.0)
 		LogV("Size Copied: \(sizeCopied), previous: \(previousCopiedSize)")
-		let offset = sizeCopied - previousCopiedSize
+		var offset = sizeCopied - previousCopiedSize
+        
+        if (averageCopyAmount == 0.0) {
+            averageCopyAmount = offset
+        }
+        
+        offset = (averageCopyAmount + offset) / 2.0
+        averageCopyAmount = offset
+        
 		let remainingSize = totalSize - sizeCopied
 //        let currentTime = DispatchTime.now()
 //        let nanoTime = currentTime.uptimeNanoseconds - startTime.uptimeNanoseconds
 //        let timeTaken = Double(nanoTime) / 1_000_000_000
 		let timeTaken = updateDelay
 		
+        LogV("Remaining:\(remainingSize), offset: \(offset), time taken: \(timeTaken)")
 		let timeRemaining = (timeTaken * remainingSize) / offset
 //        let timeRemaining = (timeTaken * remainingSize) / sizeCopied
-//        LogI("Time Remaining: \(timeRemaining)")
+        LogI("Time Remaining: \(timeRemaining)")
         if  timeRemaining == Double.nan || timeRemaining == Double.infinity {
             return
         }
@@ -114,7 +123,7 @@ extension TransferViewController {
 	}
 	
 	internal func observeTransfer() {
-		transferHandler.hasActiveTask().skip(1)
+		transferHandler.activeTaskStatus().skip(1)
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: { status in
 					if (status == FileProgressStatus.kStatusInProgress) {
@@ -308,5 +317,7 @@ extension TransferViewController {
 			alert.end()
 		}
 		exit()
+        previousCopiedSize = 0.0
+        averageCopyAmount = 0.0
 	}
 }

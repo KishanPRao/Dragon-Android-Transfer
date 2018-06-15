@@ -20,6 +20,8 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
     public var dragDropRow: Int = DRAG_DROP_NONE
     
     public var enableDrag = true
+    
+    var dragMode = DragMode.kUnknown
 	
 	func updateList(data: [BaseFile]) {
 		self.mData = data
@@ -47,7 +49,8 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
         return dragDropRow
     }
 	
-	func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
+	func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo,
+                   proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
         if (!enableDrag) {
             return []
         }
@@ -70,11 +73,16 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
 //            LogI("Info:", info.draggingSourceOperationMask())
 //            LogV("Src:", NSDragOperation.copy, ",", NSDragOperation.every, ",", NSDragOperation.generic)
             if (info.draggingSource() == nil && info.draggingSourceOperationMask() != .every) {
+                dragMode = DragMode.kDragFromFinder
+                let oldIndex = dragDropRow
                 dragDropRow = row
-                updateItemChanged(index: dragDropRow)
+                updateItemSelected(index: dragDropRow)
+                updateItemChanged(index: oldIndex)
+//                updateItemChanged(index: dragDropRow)
                 if (dragUiDelegate != nil) {
                     dragUiDelegate?.onDropDestination(row)
                 }
+//                print("Return Copy")
                 return [.copy]
             } else {
                 return []
@@ -94,7 +102,8 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
 //    }
 	
 	
-	func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
+	func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo,
+                   row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
         if (!enableDrag) {
             return false
         }
@@ -120,6 +129,11 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
             if finderItems.count == 0 {
                 return false
             }
+            let oldDrag = dragDropRow
+            dragDropRow = DRAG_DROP_NONE
+            updateItemChanged(index: oldDrag)
+            deselectAllRows(oldDrag)
+//            deselectAllRows()
             LogV("Copy from Finder, file:[", finderItems, "] into app item:", data)
             if let nonNilDelegate = dragDelegate {
                 nonNilDelegate.dragItem(items: finderItems, fromFinderIntoAppItem: data as DraggableItem)
@@ -169,7 +183,7 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
         return 0
     }
     
-    func updateItemChanged(index i: Int) {
+    func updateItemSelected(index i: Int) {
         var row = i
         if (row < 0) {
             row = 0
@@ -183,15 +197,32 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
         reloadData(forRowIndexes: rowSet, columnIndexes: columnSet)
     }
     
-    func deselectAllRows(_ oldIndex: Int) {
+    func updateItemChanged(index i: Int) {
+        var row = i
+        if (row < 0) {
+            row = 0
+        } else if (row >= numberOfRows) {
+            row = numberOfRows - 1;
+        }
+        let rowSet = NSIndexSet(index: row) as IndexSet
+        let columnSet = NSIndexSet(index: 0) as IndexSet
+        reloadData(forRowIndexes: rowSet, columnIndexes: columnSet)
+    }
+    
+    func deselectAllRows(_ updateIndex: Int) {
         deselectAll(nil)
-        if (oldIndex >= numberOfRows || oldIndex < 0) {
+        if (updateIndex >= numberOfRows || updateIndex < 0) {
 //            LogW("Bad Deselect Index")
             return
         }
-        let rowSet = NSIndexSet(index: oldIndex) as IndexSet
+        let rowSet = NSIndexSet(index: updateIndex) as IndexSet
         let columnSet = NSIndexSet(index: 0) as IndexSet
         reloadData(forRowIndexes: rowSet, columnIndexes: columnSet)
+    }
+    
+    func deselectAllRows() {
+        deselectAll(nil)
+        reloadData()
     }
     
     var enableKeys = true
@@ -208,26 +239,34 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
         if (!enableDrag) {
             return
         }
-        let oldDrag = dragDropRow
-        dragDropRow = DRAG_DROP_NONE
-//        updateItemChanged(index: oldDrag)
-        if (dragUiDelegate != nil) {
-            dragUiDelegate?.onDropDestination(oldDrag)
+//        print("Drag Mode: \(dragMode)")
+        if (dragMode == DragMode.kDragFromFinder) {
+            dragMode = DragMode.kUnknown
+//            LogW("Bad State")
+            let oldDrag = dragDropRow
+            dragDropRow = DRAG_DROP_NONE
+            updateItemChanged(index: oldDrag)
+            deselectAllRows(oldDrag)
+//            deselectAllRows()
+            return
         }
+//        print("Drag Ended")
         var appItems = [BaseFile]()
         let pb = sender.draggingPasteboard()
-//            LogI("Items", senderUnwrap.draggingPasteboard().pasteboardItems)
+//        LogI("Items", sender.draggingPasteboard().pasteboardItems)
         var draggedIndex = -1
         for item in pb.pasteboardItems! {
+//            LogI("Item", item.data(forType: NSPasteboard.PasteboardType(rawValue: kWritableType)))
+//            LogV("Item", item.string(forType: NSPasteboard.PasteboardType(rawValue: kWritableType)))
+//            LogV("Item", item.types)
+//            LogV("Index", index)
             if let data = item.data(forType: NSPasteboard.PasteboardType(rawValue: kWritableType)) {
-//                LogI("Item", item.data(forType: kWritableType))
-//                LogV("Item", item.string(forType: kWritableType))
                 let index = convertDataToInt(data: data as NSData)
-//                    LogV("Index", index)
                 draggedIndex = index
                 appItems.append(mData[index])
             } else {
-//                    LogW("Bad!")
+                LogW("Bad!")
+//                return
             }
         }
         
@@ -246,11 +285,20 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
             if let copyPath = url?.absoluteURL?.path {
                 LogV("Copy from app item:", appItems, "to", copyPath)
                 if let nonNilDelegate = dragDelegate {
-                    nonNilDelegate.dragItem(items: appItems as! [DraggableItem], fromAppToFinderLocation: copyPath)
+                    nonNilDelegate.dragItem(items: appItems as! [DraggableItem],
+                                            fromAppToFinderLocation: copyPath)
                 }
             } else {
-//                    LogE("Cannot Copy!")
+                LogE("Cannot Copy!")
             }
         }
+        dragMode = DragMode.kUnknown
+        let oldDrag = dragDropRow
+        dragDropRow = DRAG_DROP_NONE
+        updateItemChanged(index: oldDrag)
+        /*if (dragUiDelegate != nil) {
+         dragUiDelegate?.onDropDestination(oldDrag)
+         }*/
+        deselectAllRows()
 	}
 }

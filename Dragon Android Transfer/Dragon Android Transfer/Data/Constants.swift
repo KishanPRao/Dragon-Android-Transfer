@@ -19,6 +19,7 @@ public enum StatusTypeNotification {
 	static let PASTE_TO_ANDROID = "PASTE_TO_ANDROID"
 	static let PASTE_TO_MAC = "PASTE_TO_MAC"
 	static let STOP = "STOP"
+    static let QuitIfNeeded = "QuitIfNeeded"
 	static let CHANGE_ACTIVE = "CHANGE_ACTIVE"
 	static let FINISHED_LAUNCH = "FINISHED_LAUNCH"
 	static let SHOW_HELP = "SHOW_HELP"
@@ -57,4 +58,5 @@ public enum MenuItemIdentifier {
     static let newFolder = 11
     static let editDelete = 12
     static let stayOnTop = 13
+    static let defaultAlwaysOn = 999
 }

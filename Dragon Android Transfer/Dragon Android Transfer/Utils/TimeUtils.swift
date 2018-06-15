@@ -47,6 +47,7 @@ class TimeUtils {
             time = time + "\(minutes) \(minutesString) and "
         }
 //        if (secondsInInt > 0) {
+//        secondsInInt = secondsInInt < 0 ? 0 : secondsInInt
         let secondsString = secondsInInt == 1 ? "second" : "seconds"
         time = time + "\(secondsInInt) \(secondsString)"
 //        }

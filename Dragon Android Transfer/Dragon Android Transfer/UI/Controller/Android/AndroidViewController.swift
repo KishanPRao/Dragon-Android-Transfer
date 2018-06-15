@@ -223,6 +223,7 @@ class AndroidViewController: NSViewController,
 	
 	override func viewWillDisappear() {
 		super.viewWillDisappear()
+//        Never called.
 //        self.stop()
 	}
 	
@@ -337,6 +338,8 @@ class AndroidViewController: NSViewController,
             adWc.url = url
             adWc.frameSize = frameSize
         	adWc.showWindow(self)
+            
+            window.makeKeyAndOrderFront(window)
         }
         /*let window = self.view.window!
         var frameSize = window.frame
@@ -471,6 +474,38 @@ class AndroidViewController: NSViewController,
 		}
 //		}
 	}
+    
+    func cleanup(_ termination: Bool) {
+        print("Cleanup")
+        transferHandler.terminate()
+        NotificationCenter.default.removeObserver(self)
+        print("Quit")
+        if (termination) {
+            NSApp.reply(toApplicationShouldTerminate: true)
+        } else {
+            NSApp.reply(toApplicationShouldTerminate: true)
+            NSApp.terminate(self)
+        }
+    }
+    
+    @objc func quitIfNeeded() {
+        quitIfNeededInternal(true)
+    }
+    
+    func quitIfNeededInternal(_ termination: Bool) {
+        print("quitIfNeeded, termination: \(termination)")
+        
+        if (transferHandler.hasActiveTask()) {
+            transferVc?.cancelTransfer {
+                print("Canceled, done!")
+                ThreadUtils.runInMainThread {
+                    self.cleanup(termination)
+                }
+            }
+        } else {
+            cleanup(termination)
+        }
+    }
 	
 	deinit {
 		print("Removing Observer")

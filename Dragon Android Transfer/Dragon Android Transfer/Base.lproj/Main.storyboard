@@ -125,10 +125,6 @@ CA
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="View" id="5QF-Oa-p0T">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="View" id="W48-6f-4Dl"/>
-                            </menuItem>
                             <menuItem title="Go" id="H8h-7b-M4v">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Go" id="HyV-fh-RgO">
@@ -145,6 +141,10 @@ CA
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="View" id="5QF-Oa-p0T">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="View" id="W48-6f-4Dl"/>
+                            </menuItem>
                             <menuItem title="Window" id="8fu-IC-Nny">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Window" id="yQT-gC-9vM">
@@ -153,6 +153,12 @@ CA
                                             <connections>
                                                 <action selector="miniaturizeAll:" target="hnw-xV-0zn" id="rtS-K4-EWj"/>
                                             </connections>
+                                        </menuItem>
+                                        <menuItem title="Zoom" tag="999" keyEquivalent="m" id="4tN-yT-U9a">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                        </menuItem>
+                                        <menuItem title="Zoom All" tag="999" id="EmU-Ep-LCU">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
                                         <menuItem title="Reset Position" tag="10" id="ajK-Ku-B7k">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -195,7 +201,7 @@ CA
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Dragon Android Transfer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA" customClass="DarkWindow" customModule="Dragon_Android_Transfer" customModuleProvider="target">
+                    <window key="window" title="Dragon Android Transfer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA" customClass="DarkWindow" customModuleProvider="target">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <rect key="contentRect" x="585" y="346" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>

@@ -549,6 +549,7 @@ public class AndroidHandler: VerboseObject {
 			if (currentFile == nil) {
 				print("Done Exec!")
 				self.hasActiveTask.value = FileProgressStatus.kStatusOk
+                self.startedTask = false
 			} else {
 				self.previousSizeTask += previousFile!.size
 //				print("Prev Size: \(self.previousSizeTask), total: \(self.sizeActiveTask.value)")
@@ -569,6 +570,7 @@ public class AndroidHandler: VerboseObject {
 		} else if (result == AdbExecutionResultWrapper.Result_Canceled) {
 			print("Canceled")
 			self.hasActiveTask.value = FileProgressStatus.kStatusCanceled
+            self.startedTask = false
 		}
 	};
 

@@ -190,7 +190,7 @@ extension AndroidViewController {
 							for (i, item) in self.androidDirectoryItems.enumerated() {
 //                                self.LogV("Item", item, "Prev", previousDirectory)
 								if (item.getFullPath() == previousDirectory) {
-									self.fileTable.updateItemChanged(index: i)
+									self.fileTable.updateItemSelected(index: i)
 									self.fileTable.scrollRowToVisible(i)
 									AppDelegate.itemSelected = true
 									AppDelegate.directoryItemSelected = true

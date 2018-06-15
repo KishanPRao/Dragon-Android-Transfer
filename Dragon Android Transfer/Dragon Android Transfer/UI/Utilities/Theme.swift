@@ -39,6 +39,7 @@ protocol Theme {
     var dialogWindowColor: NSColor{get}
 	
 	var windowBg: NSColor { get }
+    var mainViewColor: NSColor { get }
 }
 
 extension Theme {

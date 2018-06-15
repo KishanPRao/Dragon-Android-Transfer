@@ -60,6 +60,7 @@ class AdWindowController: NSWindowController, WKNavigationDelegate {
             window.standardWindowButton(.zoomButton)?.isHidden = true
             window.standardWindowButton(.miniaturizeButton)?.isHidden = true
             window.standardWindowButton(.fullScreenButton)?.isHidden = true
+            
         }
         updateFrame(frameSize)
 //        let frame = NSRect(x: frameSize.origin.x + frameSize.width, y: frameSize.origin.y + height / 2.0,
@@ -81,7 +82,6 @@ class AdWindowController: NSWindowController, WKNavigationDelegate {
         LogV("View Loaded")
         //        TODO: If failed loading..
     }
- 
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         LogV("Failed")

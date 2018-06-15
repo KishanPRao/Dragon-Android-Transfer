@@ -48,4 +48,5 @@ class DarkTheme: Theme {
 
 //	let windowBg = color("050505")
     let windowBg = color("0a0a0a")
+    let mainViewColor = color("#424242")
 }
