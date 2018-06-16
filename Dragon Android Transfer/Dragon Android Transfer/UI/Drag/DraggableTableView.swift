@@ -16,6 +16,7 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
 	public var dragDelegate: DragNotificationDelegate? = nil
     public var dragUiDelegate: DragUiDelegate? = nil
     public let kPasteboardTypePasteLocation = "com.apple.pastelocation"
+//    public let kNSURLPboardType = NSPasteboard.PasteboardType.init(rawValue: "Apple URL pasteboard type")
     public var draggedRows: IndexSet = []
     public var dragDropRow: Int = DRAG_DROP_NONE
     
@@ -72,16 +73,17 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
 		} else {
 //            LogI("Info:", info.draggingSourceOperationMask())
 //            LogV("Src:", NSDragOperation.copy, ",", NSDragOperation.every, ",", NSDragOperation.generic)
-            if (info.draggingSource() == nil && info.draggingSourceOperationMask() != .every) {
+//            From external source
+//            if (info.draggingSource() == nil && info.draggingSourceOperationMask() != .every) {
+            if (info.draggingSource() == nil &&
+                (info.draggingSourceOperationMask().rawValue & NSDragOperation.copy.rawValue) == 1) {
                 dragMode = DragMode.kDragFromFinder
                 let oldIndex = dragDropRow
                 dragDropRow = row
                 updateItemSelected(index: dragDropRow)
                 updateItemChanged(index: oldIndex)
 //                updateItemChanged(index: dragDropRow)
-                if (dragUiDelegate != nil) {
-                    dragUiDelegate?.onDropDestination(row)
-                }
+                dragUiDelegate?.onDropDestination(row)
 //                print("Return Copy")
                 return [.copy]
             } else {
@@ -133,6 +135,7 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
             dragDropRow = DRAG_DROP_NONE
             updateItemChanged(index: oldDrag)
             deselectAllRows(oldDrag)
+            dragUiDelegate?.onDragCompleted()
 //            deselectAllRows()
             LogV("Copy from Finder, file:[", finderItems, "] into app item:", data)
             if let nonNilDelegate = dragDelegate {
@@ -280,6 +283,8 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
             currentIndex = indexSet.integerGreaterThan(currentIndex!)
         }
         
+//        LogD("Type: \(kNSURLPboardType)")
+//        LogD("pb: \(pb.types)")
         if (pb.types?.contains(NSPasteboard.PasteboardType(rawValue: kPasteboardTypePasteLocation)))! {
             let url = NSURL(string: (pb.string(forType: NSPasteboard.PasteboardType(rawValue: kPasteboardTypePasteLocation)))!)
             if let copyPath = url?.absoluteURL?.path {
@@ -291,7 +296,20 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
             } else {
                 LogE("Cannot Copy!")
             }
-        }
+        }/* else if (pb.types?.contains(kNSURLPboardType))! {
+            let url = NSURL(string: (pb.string(forType: kNSURLPboardType))!)
+            if let copyPath = url?.absoluteURL?.path {
+                LogV("Copy from app item:", appItems, "to", copyPath)
+                if let nonNilDelegate = dragDelegate {
+                    nonNilDelegate.dragItem(items: appItems as! [DraggableItem],
+                                            fromAppToFinderLocation: copyPath)
+                }
+            } else {
+                LogE("Cannot Copy!")
+            }
+        } else {
+            LogW("No pb: \(pb.types)")
+        }*/
         dragMode = DragMode.kUnknown
         let oldDrag = dragDropRow
         dragDropRow = DRAG_DROP_NONE
@@ -299,6 +317,7 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
         /*if (dragUiDelegate != nil) {
          dragUiDelegate?.onDropDestination(oldDrag)
          }*/
+        dragUiDelegate?.onDragCompleted()
         deselectAllRows()
 	}
 }

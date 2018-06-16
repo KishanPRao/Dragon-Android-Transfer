@@ -82,6 +82,7 @@ extension AndroidViewController {
             //            })
             let color = ColorUtils.colorWithHexString(ColorUtils.listSelectedBackgroundColor) as NSColor
             fileTable.layer?.borderWidth = 2
+            //            TODO: Set color only once!
             fileTable.layer?.borderColor = color.cgColor
         } else {
             fileTable.layer?.borderWidth = 0
@@ -90,5 +91,9 @@ extension AndroidViewController {
             //                self.fileTable.backgroundColor = self.tableBgColor
             //            })
         }
+    }
+    
+    func onDragCompleted() {
+        fileTable.layer?.borderWidth = 0
     }
 }

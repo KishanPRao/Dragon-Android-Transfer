@@ -11,4 +11,6 @@ import Foundation
 protocol DragUiDelegate {
     
     func onDropDestination(_ row: Int)
+    
+    func onDragCompleted()
 }
