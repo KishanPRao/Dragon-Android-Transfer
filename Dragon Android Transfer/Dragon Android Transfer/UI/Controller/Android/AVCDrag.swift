@@ -43,7 +43,8 @@ extension AndroidViewController {
         let fileManager = FileManager.default
         //        do {
         for item in items {
-            let path = item.stringByDeletingLastPathComponent + HandlerConstants.SEPARATOR
+//            let path = item.stringByDeletingLastPathComponent + HandlerConstants.SEPARATOR
+            let path = item.stringByDeletingLastPathComponent
             var isDirectory: ObjCBool = false
             fileManager.fileExists(atPath: item, isDirectory: &isDirectory)
             var type: Int

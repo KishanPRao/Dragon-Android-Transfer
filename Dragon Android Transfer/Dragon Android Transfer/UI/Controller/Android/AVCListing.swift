@@ -99,6 +99,7 @@ extension AndroidViewController {
         self.resetDeviceStatus()
 		fileTable.updateList(data: androidDirectoryItems)
 		updateDeviceStatus()
+        fileTable.scrollRowToVisible(0)
 	}
 	
 	func reloadFileList(_ items: Array<BaseFile>) {

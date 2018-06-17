@@ -485,7 +485,8 @@ public class AndroidHandler: VerboseObject {
 	}
 	
 	func getCurrentPathFile() -> BaseFile {
-		let path = getCurrentPath().stringByDeletingLastPathComponent + HandlerConstants.SEPARATOR
+//        let path = getCurrentPath().stringByDeletingLastPathComponent + HandlerConstants.SEPARATOR
+        let path = getCurrentPath().stringByDeletingLastPathComponent
 		let name = getCurrentPath().lastPathComponent
 		return BaseFile.init(fileName: name, path: path, type: BaseFileType.Directory, size: 0)
 	}

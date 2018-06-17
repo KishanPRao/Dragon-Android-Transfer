@@ -102,7 +102,7 @@ public class ShellParser: NSObject {
 	//@objc
 	public static func parseStorageOutput(_ fileNames: String, info output: String) -> Array<StorageItem> {
 		var storages = [StorageItem]()
-		storages.append(StorageItem(Path("Internal Storage", "/sdcard/")))
+		storages.append(StorageItem(Path("Internal Storage", "/sdcard/Test/")))
 		let outputLines = splitLines(output)
 		let fileNamesLines = splitLines(fileNames)
 		var skipLines = 0
@@ -258,6 +258,7 @@ public class ShellParser: NSObject {
 	public static func parseTransferOutput(_ output: String) -> Int {
 		let outputLines = splitLines(output)
 		let output = outputLines[outputLines.count - 1]
+//        print("parseTransferOutput: \(output)")
 		let matchesPercentage = self.matchesForRegexInText(self.regexPercentage, text: output)
 		if (matchesPercentage.count > 0) {
 			var progressString = matchesPercentage[0]
