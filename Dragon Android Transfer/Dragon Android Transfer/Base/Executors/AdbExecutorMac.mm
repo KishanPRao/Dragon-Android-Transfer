@@ -132,10 +132,10 @@ string AdbExecutor::executeAdb(string commands, AdbCallback callback) {
 							return;
 						}
 						auto data = [pipe fileHandleForReading].availableData;
-//						NSLog(@"Task Data, %@", data);
+//                        NSLog(@"Task Data, %@", data);
 						if (data.length > 0) {
 							auto str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//							NSLog(@"Task Data, %@", str);
+//                            NSLog(@"Task Data, %@", str);
 							callback(convert(str), AdbExecutionResult::InProgress);
 							[outFile waitForDataInBackgroundAndNotify];
 						} /*else {

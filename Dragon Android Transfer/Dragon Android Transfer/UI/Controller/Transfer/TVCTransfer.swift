@@ -196,7 +196,8 @@ extension TransferViewController {
 						print("File Name:", fileName)
 						self.currentCopiedSize = 0
 						while (i < files!.count) {
-							if (fileName.contains(files![i].fileName)) {
+//                            if (fileName.contains(files![i].fileName)) {
+                            if (fileName == files![i].fileName) {   //TODO: If directory and has '/' in end, etc. Any scenario w/ mismatch?
 								self.currentFile = files![i]
 								self.currentCopyFile = self.currentFile!.fileName
 								break
@@ -256,9 +257,9 @@ extension TransferViewController {
 		if (mCurrentProgress == progress) {
 			return
 		}
-        LogV("Progress Active: \(progress)")
+//        LogV("Progress Active: \(progress)")
 		mCurrentProgress = progress
-//		LogV("Current File: \(currentFile)")
+//        LogV("Current File: \(currentFile)")
 		//                print("Update Prog")
         
         if (self.totalSize == 0) {

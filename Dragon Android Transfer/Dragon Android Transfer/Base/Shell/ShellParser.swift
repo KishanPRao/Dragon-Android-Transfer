@@ -102,7 +102,7 @@ public class ShellParser: NSObject {
 	//@objc
 	public static func parseStorageOutput(_ fileNames: String, info output: String) -> Array<StorageItem> {
 		var storages = [StorageItem]()
-		storages.append(StorageItem(Path("Internal Storage", "/sdcard/Test")))
+		storages.append(StorageItem(Path("Internal Storage", "/sdcard/")))
 		let outputLines = splitLines(output)
 		let fileNamesLines = splitLines(fileNames)
 		var skipLines = 0

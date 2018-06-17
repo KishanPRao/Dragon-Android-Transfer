@@ -42,7 +42,7 @@ class ColoredButton: NSButton {
 		} else {
 			attrsDictionary = [NSAttributedStringKey.foregroundColor: textDeselectedColor, NSAttributedStringKey.paragraphStyle: style, NSAttributedStringKey.font: font!];
 		}
-        NSAttributedString(string: title, attributes: attrsDictionary)
+//        NSAttributedString(string: title, attributes: attrsDictionary)
 		let attString = NSAttributedString(string: title, attributes: attrsDictionary)
 		attributedTitle = attString
 		setNeedsDisplay()

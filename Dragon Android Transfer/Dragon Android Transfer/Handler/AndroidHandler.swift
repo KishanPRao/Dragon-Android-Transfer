@@ -565,7 +565,7 @@ public class AndroidHandler: VerboseObject {
 			let currentProgress = (Double(progress) * Double(currentItemTotalProgress) / 100.0)
 			
 			let previousProgress = (Double(self.previousSizeTask) / totalSize) * 100.0
-            print("Prev: \(previousProgress), curr: \(currentProgress)")
+//            print("Prev: \(previousProgress), curr: \(currentProgress)")
 			self.progressActiveTask.value = previousProgress + currentProgress
 		} else if (result == AdbExecutionResultWrapper.Result_Canceled) {
 			print("Canceled")
