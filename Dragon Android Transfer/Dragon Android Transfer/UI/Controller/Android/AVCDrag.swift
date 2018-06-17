@@ -54,7 +54,7 @@ extension AndroidViewController {
             }
             let name = item.lastPathComponent
             //            var attr = try fileManager.attributesOfItem(atPath: item)
-            //            let fileSize = attr[FileAttributeKey.size] as! UInt64
+            //            let fileSize = attr[FileAttributeKey.size] as! Number
             let file = BaseFile.init(fileName: name, path: path, type: type, size: 0)
             LogI("File", file)
             copyItemsMac.append(file)

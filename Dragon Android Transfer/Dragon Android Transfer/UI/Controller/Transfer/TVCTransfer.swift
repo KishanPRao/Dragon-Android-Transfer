@@ -23,13 +23,23 @@ extension TransferViewController {
 			var i = 0
 			var updateSizes = false
 			while (i < files.count) {
-				if (files[i].size == 0 || files[i].size == UInt64.max) {
+				if (files[i].size == 0 || files[i].size == Number.max) {
 					updateSizes = true
 				}
 				i = i + 1
 			}
 			if (updateSizes) {
-				transferHandler.updateSizes()
+                ThreadUtils.runInBackgroundThreadAsync {
+                    self.transferHandler.updateSizes()
+                    
+                    var size = Number(0)
+                    var filesIterator = files.makeIterator()
+                    while let file = filesIterator.next() {
+                        size = size + file.size
+                    }
+//                    self.totalSize = size
+                    self.transferHandler.updateTotalSize(size)
+                }
 			}
 		}
 		copyDestination = path
@@ -79,6 +89,9 @@ extension TransferViewController {
 //            start = DispatchTime.now()
 //        }
 //        let startTime = self.start!
+        if (self.totalSize == 0) {
+            return
+        }
 		let totalSize = Double(self.totalSize)
 		let sizeCopied = (mCurrentProgress * totalSize / 100.0)
 		LogV("Size Copied: \(sizeCopied), previous: \(previousCopiedSize)")
@@ -243,15 +256,20 @@ extension TransferViewController {
 		if (mCurrentProgress == progress) {
 			return
 		}
-//		LogV("Progress Active: \(progress)")
+        LogV("Progress Active: \(progress)")
 		mCurrentProgress = progress
 //		LogV("Current File: \(currentFile)")
 		//                print("Update Prog")
+        
+        if (self.totalSize == 0) {
+            return
+        }
+        
 		let size = CGFloat(totalSize) * (CGFloat(progress) / 100.0)
-		if (size >= CGFloat(UInt64.max)) {
+		if (size >= CGFloat(Number.max)) {
 			return
 		}
-		let copiedSize = UInt64(size) as UInt64
+		let copiedSize = Number(size) as Number
 //        LogV("Copied Size:", copiedSize)
 //        copyDialog?.updateCopyStatus(currentFileCopiedSize, withProgress: CGFloat(progress))
 		transferProgressView.setProgress(CGFloat(progress))

@@ -15,10 +15,10 @@ class TimeUtils {
 		let date = Date()
 		let calendar = Calendar.current
 		let components = (calendar as NSCalendar).components([.hour, .minute, .second, .nanosecond], from: date)
-		let hour = components.hour
-		let minute = components.minute
-		let second = components.second
-		let nanosecond = components.nanosecond
+        let hour = components.hour! //TODO: Might crash? Remove this debugging later!
+		let minute = components.minute!
+		let second = components.second!
+		let nanosecond = components.nanosecond!
 		var returnValue = "[Hour:"+String(describing: hour)
 		returnValue = returnValue+", Minute:"+String(describing: minute)
 		returnValue = returnValue+", Second:"+String(describing: second)
@@ -30,6 +30,10 @@ class TimeUtils {
 		}
 		return returnValue;
 	}
+    
+    static let getDispatchTime = {
+        return DispatchTime.now()
+    }
     
     static func getTime(seconds: Double) -> String {
         var secondsInInt = Int(seconds)

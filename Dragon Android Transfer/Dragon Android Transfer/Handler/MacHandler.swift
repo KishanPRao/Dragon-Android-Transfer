@@ -72,13 +72,13 @@ class MacHandler: NSObject {
 		return output
 	}
 
-//	func getFileSize(fileName: String) -> UInt64 {
-//		var size = 0 as UInt64
+//	func getFileSize(fileName: String) -> Number {
+//		var size = 0 as Number
 //		let script = "set fileName to (POSIX file \"" + fileName + "\" as alias)\n" +
 //				"tell application \"Finder\" to set fileSize to size of file fileName\n" +
 //				"return fileSize"
 //		print("Script to Run:", script)
-//		size = UInt64(runScript(script))!
+//		size = Number(runScript(script))!
 //		print("Size:" + String(size))
 //		return size
 //	}
@@ -106,12 +106,20 @@ class MacHandler: NSObject {
 		return output! as String
 	}
 	
-    func getSize(_ directoryName: String) -> UInt64 {
-        var size = 0 as UInt64
-        let directoryURL = URL(fileURLWithPath: directoryName)
-        size = UInt64(BridgingUtils.nr_getAllocatedSize(directoryURL, error: nil))
+    func getSize(_ directoryName: String) -> Number {
+//        let startTime = TimeUtils.getCurrentTime()
+        let startDispatch = TimeUtils.getDispatchTime()
+        var size = 0 as Number
+//        let directoryURL = URL(fileURLWithPath: directoryName)
+//        size = Number(BridgingUtils.nr_getAllocatedSize(URL(fileURLWithPath: directoryName), error: nil))
         
-        print("Size: \(size)")
+        size = getSizeFind(directoryName)
+        
+//        print("Size: \(size), start: \(startTime), end: \(TimeUtils.getCurrentTime())")
+        
+        let nanoTime = TimeUtils.getDispatchTime().uptimeNanoseconds - startDispatch.uptimeNanoseconds
+        let timeInterval = Double(nanoTime) / 1_000_000_000
+        print("Size: \(size), time taken: \(timeInterval)")
         
         /*let prefetchedProperties = [
             URLResourceKey.isRegularFileKey,
@@ -135,9 +143,32 @@ class MacHandler: NSObject {
         }*/
         return size
     }
-    /*
-	func getSize(_ directoryName: String) -> UInt64 {
-		var size = 0 as UInt64
+    
+    func getSizeFind(_ directoryName: String) -> Number {
+        var size = 0 as Number
+        let command = "find " + ESCAPE_DOUBLE_QUOTES + directoryName + ESCAPE_DOUBLE_QUOTES + " ! -type d -print0 | xargs -0 stat -f '%z' | awk '{sum += $1} END{print sum}'"
+        print("Command to Run:", command)
+        let output = bashShell(command)
+        let outputStringArray = output.split {
+            $0 == " " || $0 == "\t"
+            }.map(String.init)
+        print("Output:", outputStringArray)
+        let maxSizeInMBytes = Number.max / 1024
+        if let sizeInInt = Number(ShellParser.cleanString(outputStringArray[0])) {
+            size = sizeInInt / 1024 //KB
+            if (size > maxSizeInMBytes) {
+                size = Number.max
+            } else {
+                size = size * 1024
+            }
+            //            size = sizeInInt
+        }
+        print("Size:" + String(size))
+        return size
+    }
+    
+	func getSizeDu(_ directoryName: String) -> Number {
+		var size = 0 as Number
 //		let command = "cd "+ESCAPE_DOUBLE_QUOTES+directoryName+ESCAPE_DOUBLE_QUOTES+"; du -sk;"
 		let command = "du -sk " + ESCAPE_DOUBLE_QUOTES + directoryName + ESCAPE_DOUBLE_QUOTES + ";"
 		print("Command to Run:", command)
@@ -146,11 +177,11 @@ class MacHandler: NSObject {
 			$0 == " " || $0 == "\t"
 		}.map(String.init)
 		print("Output:", outputStringArray)
-		let maxSizeInMBytes = UInt64.max / 1024
-		if let sizeInInt = UInt64(outputStringArray[0]) {
+		let maxSizeInMBytes = Number.max / 1024
+		if let sizeInInt = Number(outputStringArray[0]) {
 			size = sizeInInt
 			if (size > maxSizeInMBytes) {
-				size = UInt64.max
+				size = Number.max
 			} else {
 				size = size * 1024
 			}
@@ -159,7 +190,7 @@ class MacHandler: NSObject {
 		print("Size:" + String(size))
 //		du -s
 		return size
-	}*/
+	}
 	
 	func getActiveFiles() -> Array<BaseFile>! {
 		var path = getActivePath()
@@ -204,7 +235,7 @@ class MacHandler: NSObject {
 			}
 			let output = runScript(fileTypeScript)
 			var type: Int
-//			var size: UInt64
+//			var size: Number
 			if (output.contains(HandlerConstants.DIRECTORY)) {
 				type = BaseFileType.Directory;
 //				size = getSize(fileName)
@@ -227,7 +258,7 @@ class MacHandler: NSObject {
 		var i = 0;
 		while i < files.count {
 			let fileName = files[i].path + files[i].fileName
-			var size: UInt64
+			var size: Number
 			if (files[i].type == BaseFileType.Directory) {
 				size = getSize(fileName)
 			} else {

@@ -8,12 +8,15 @@
 
 import Foundation
 
+//TODO: What happens if 32 bit architecture?
+typealias Number = UInt64
+
 class SizeUtils {
     static let BLOCK_SIZE_IN_FLOAT = Float(1024)
     static let ZERO_BYTES = "0 B"
     
-    static func getBytesInFormat(_ bytesInInt: UInt64) -> String {
-        if (bytesInInt == UInt64.max || bytesInInt == 0) {
+    static func getBytesInFormat(_ bytesInInt: Number) -> String {
+        if (bytesInInt == Number.max || bytesInInt == 0) {
             return "Folder"
         }
         var bytesInFloat = Float(bytesInInt)

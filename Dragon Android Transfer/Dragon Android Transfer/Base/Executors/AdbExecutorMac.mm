@@ -47,7 +47,7 @@ string AdbExecutor::execute(shared_ptr<AdbExecutorProperties> properties, AdbCal
 	}
 	auto adbArgs = [adbArgsArray componentsJoinedByString:@""];
 	if (properties->executionType == AdbExecutionType::DeviceAsync) {
-//		std::cout<<"Calling Adb Args:"<<adbArgs.UTF8String<<std::endl;
+//        std::cout<<"Calling Adb Args:"<<adbArgs.UTF8String<<std::endl;
 		auto output = executeAdb(adbArgs.UTF8String, callback);
 //		std::cout<<"Calling Callback:"<<output<<std::endl;
 //		callback(output);

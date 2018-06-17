@@ -34,7 +34,7 @@ class CopyDialog: NSView {
 	var mCurrentTransfer = ""
 //    var mCopiedSize = ""
 	var mTimeLeft = ""
-	var mTotalCopySize = 0 as UInt64
+	var mTotalCopySize = 0 as Number
 	var delegate: CopyDialogDelegate?
 	
 	override init(frame frameRect: NSRect) {
@@ -106,12 +106,12 @@ class CopyDialog: NSView {
 		mTimeLeft = string
 	}
 	
-	func setTotalCopySize(_ size: UInt64) {
+	func setTotalCopySize(_ size: Number) {
 		mTotalCopySize = size
 		totalSizeView?.stringValue = SizeUtils.getBytesInFormat(size)
 	}
 	
-	func updateCopyStatus(_ copiedSize: UInt64, withProgress progress: CGFloat) {
+	func updateCopyStatus(_ copiedSize: Number, withProgress progress: CGFloat) {
 //		let progress = (CGFloat(copiedSize) / CGFloat(mTotalCopySize) * 100.0)
 		progressView?.setProgress(progress)
 //        if (CopyDialog.VERBOSE) {

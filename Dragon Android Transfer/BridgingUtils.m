@@ -96,6 +96,8 @@
         return NO;
     };
     
+//    NSLog(@"1");
+    
     NSNumber *fileSize;
     NSNumber *isDirectory;
     if (! [directoryURL getResourceValue:&isDirectory forKey:NSURLIsDirectoryKey error:error])
@@ -108,7 +110,8 @@
         }
         return fileSize.unsignedLongLongValue;
     }
-        
+//    NSLog(@"2");
+    
     // We have to enumerate all directory contents, including subdirectories.
     NSDirectoryEnumerator *enumerator = [[NSFileManager defaultManager] enumeratorAtURL:directoryURL
                                                              includingPropertiesForKeys:prefetchedProperties
@@ -116,6 +119,7 @@
                                                                            errorHandler:errorHandler];
     
     // Start the traversal:
+//    NSLog(@"3");
     for (NSURL *contentItemURL in enumerator) {
         
         // Bail out on errors from the errorHandler.
@@ -123,32 +127,45 @@
             return NO;
         
         // Get the type of this item, making sure we only sum up sizes of regular files.
-        NSNumber *isRegularFile;
+        /*NSNumber *isRegularFile;
         if (! [contentItemURL getResourceValue:&isRegularFile forKey:NSURLIsRegularFileKey error:error])
             return NO;
         if (! [isRegularFile boolValue])
             continue; // Ignore anything except regular files.
+         */
+        
+//        NSLog(@"3.1: %@", contentItemURL.path);
+        auto dict = [[NSFileManager defaultManager] attributesOfItemAtPath:contentItemURL.path error:nil];
+        if (dict[NSFileType] == nil || dict[NSFileType] != NSFileTypeRegular) {
+            continue;
+        }
+//        NSLog(@"3.2");
         
         // To get the file's size we first try the most comprehensive value in terms of what the file may use on disk.
         // This includes metadata, compression (on file system level) and block size.
         NSNumber *fileSize;
         //        Working: NSURLFileSizeKey, expected: NSURLTotalFileAllocatedSizeKey
+//        NSLog(@"3.3");
         [contentItemURL getResourceValue:&fileSize forKey:NSURLFileSizeKey error:error];
+//        NSLog(@"3.4");
         
 //        NSLog(@"Size: %ld", fileSize.unsignedLongLongValue);
         
         // In case the value is unavailable we use the fallback value (excluding meta data and compression)
         // This value should always be available.
         if (fileSize == nil) {
+//            NSLog(@"3.5");
             if (! [contentItemURL getResourceValue:&fileSize forKey:NSURLFileAllocatedSizeKey error:error])
                 return NO;
             
+//            NSLog(@"3.6");
             NSAssert(fileSize != nil, @"huh? NSURLFileAllocatedSizeKey should always return a value");
         }
         
         // We're good, add up the value.
         accumulatedSize += [fileSize unsignedLongLongValue];
     }
+//    NSLog(@"4");
     
     // Bail out on errors from the errorHandler.
     if (errorDidOccur)

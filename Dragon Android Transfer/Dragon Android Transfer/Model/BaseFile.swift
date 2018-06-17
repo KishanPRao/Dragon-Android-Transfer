@@ -14,12 +14,12 @@ public class BaseFile: DraggableItem/*, CustomDebugStringConvertible*/ {
 	var fileName: String = ""
 	var path: String = ""
 	var type: Int
-	var size: UInt64
+	var size: Number
 	
 	//    UI Specific:
 	//    var index: Int = -1
 	
-	init(fileName: String, path: String, type: Int, size: UInt64) {
+	init(fileName: String, path: String, type: Int, size: Number) {
 		self.fileName = fileName
 		self.path = path
 		self.type = type

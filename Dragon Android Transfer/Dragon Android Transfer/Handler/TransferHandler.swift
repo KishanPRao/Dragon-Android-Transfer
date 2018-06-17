@@ -120,9 +120,13 @@ class TransferHandler {
         return androidHandler.hasActiveTask.value == FileProgressStatus.kStatusInProgress
     }
 	
-	func sizeActiveTask() -> Observable<UInt64> {
+	func sizeActiveTask() -> Observable<Number> {
 		return androidHandler.sizeActiveTask.asObservable()
 	}
+    
+    func updateTotalSize(_ size: Number) {
+        androidHandler.sizeActiveTask.value = size
+    }
 	
 	func transferTypeActive() -> Observable<Int> {
 		return androidHandler.transferTypeActive.asObservable()

@@ -34,7 +34,7 @@ class ColorUtils {
     }
     
     static func colorWithHexString(_ hex: String, withAlpha alpha: CGFloat) -> NSColor {
-        var cString: String = hex.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines).uppercased()
+        var cString: String = ShellParser.cleanString(hex).uppercased()
         
         if cString.hasPrefix("#") {
             cString = (cString as NSString).substring(from: 1)

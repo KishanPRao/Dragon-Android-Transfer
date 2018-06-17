@@ -270,7 +270,7 @@ public class AndroidHandler: VerboseObject {
 		return internalStorage
 	}
 	
-	fileprivate func getSize(_ filePath: String) -> UInt64 {
+	fileprivate func getSize(_ filePath: String) -> Number {
 		return adbHandler.getFileSize(filePath)
 	}
 	
@@ -404,7 +404,7 @@ public class AndroidHandler: VerboseObject {
 	
 	func updateSize(file: BaseFile) {
 		let filePath = file.path + HandlerConstants.SEPARATOR + file.fileName
-		var size: UInt64
+		var size: Number
 		if (file.type == BaseFileType.Directory) {
 			size = getSize(filePath)
 		} else {
@@ -527,7 +527,7 @@ public class AndroidHandler: VerboseObject {
 	static let EmptyFile = BaseFile(fileName: "", path: "", type: 0, size: 0)
 	
 	var hasActiveTask = Variable<FileProgressStatus>(FileProgressStatus.kStatusOk)
-	var sizeActiveTask = Variable<UInt64>(0)
+	var sizeActiveTask = Variable<Number>(0)
 	var transferTypeActive = Variable<Int>(TransferType.AndroidToMac)
 	var fileActiveTask = Variable<BaseFile>(EmptyFile)
 	var progressActiveTask = Variable<Double>(0.0)
@@ -535,7 +535,7 @@ public class AndroidHandler: VerboseObject {
 	fileprivate var startedTask: Bool = false
 	
 	private var filesIterator: IndexingIterator<[BaseFile]>?
-	private var previousSizeTask = 0 as UInt64
+	private var previousSizeTask = 0 as Number
 	private var totalItems = 0 as Int
 	private var currentFile: BaseFile?
 	
@@ -559,14 +559,14 @@ public class AndroidHandler: VerboseObject {
 			if progress < 0 {
 				return
 			}
-			let totalSize = Double(self.sizeActiveTask.value)
+            let totalSize = Double(self.sizeActiveTask.value)       //TODO: Fix some other way?
 			let currentItemSize = Double(self.currentFile!.size)
 			let currentItemTotalProgress = Double(currentItemSize / totalSize) * 100.0
 			let currentProgress = (Double(progress) * Double(currentItemTotalProgress) / 100.0)
 			
 			let previousProgress = (Double(self.previousSizeTask) / totalSize) * 100.0
-//			print("Prev: \(previousProgress), curr: \(currentProgress)")
-			self.progressActiveTask.value = previousProgress + currentProgress 
+            print("Prev: \(previousProgress), curr: \(currentProgress)")
+			self.progressActiveTask.value = previousProgress + currentProgress
 		} else if (result == AdbExecutionResultWrapper.Result_Canceled) {
 			print("Canceled")
 			self.hasActiveTask.value = FileProgressStatus.kStatusCanceled
@@ -574,6 +574,7 @@ public class AndroidHandler: VerboseObject {
 		}
 	};
 
+//    Push to Android
 	func push(_ sourceFiles: Array<BaseFile>, destination: String) {
 		print("Pushing: \(sourceFiles) to \(destination)")
 		cancelTask = false
@@ -582,18 +583,18 @@ public class AndroidHandler: VerboseObject {
 		if (activeDevice != nil) {
 			startedTask = false
 			totalItems = sourceFiles.count
-			var size = 0 as UInt64
+			var size = 0 as Number
 			filesIterator = sourceFiles.makeIterator()
 			var sourceFileName = ""
 			while let file = filesIterator!.next() {
 				sourceFileName = file.path + HandlerConstants.SEPARATOR + file.fileName
 //				TODO: Worst case!
-//				if ((file.size == 0 || file.size == UInt64.max) && file.type == BaseFileType.Directory) {
+//				if ((file.size == 0 || file.size == Number.max) && file.type == BaseFileType.Directory) {
 //					file.size = getSize(sourceFileName)
 //				}
 				size = size + file.size
 			}
-			sizeActiveTask.value = size
+//            sizeActiveTask.value = size   //Temporarily, may have hazardous effects!
 			transferTypeActive.value = TransferType.MacToAndroid
 			filesIterator = sourceFiles.makeIterator()
 			currentFile = self.filesIterator!.next()
@@ -618,6 +619,7 @@ public class AndroidHandler: VerboseObject {
 		}
 	}
 
+//    Pull from Android
 	func pull(_ sourceFiles: Array<BaseFile>, destination: String) {
 		print("Pulling: \(sourceFiles) to \(destination)")
 		cancelTask = false
@@ -627,14 +629,14 @@ public class AndroidHandler: VerboseObject {
 			startedTask = false
 			totalItems = sourceFiles.count
 			filesIterator = sourceFiles.makeIterator()
-			var size = 0 as UInt64
+			var size = 0 as Number
 			var sourceFileName = ""
 			while let file = filesIterator!.next() {
 				sourceFileName = file.path + HandlerConstants.SEPARATOR + file.fileName
-				if ((file.size == 0 || file.size == UInt64.max) && file.type == BaseFileType.Directory) {
+				if ((file.size == 0 || file.size == Number.max) && file.type == BaseFileType.Directory) {
 					file.size = getSize(sourceFileName)
 				}
-                if size != UInt64.max {
+                if size != Number.max {
 					size = size + file.size
                 }
 			}

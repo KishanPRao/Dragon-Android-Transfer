@@ -38,10 +38,10 @@ public class ShellParser: NSObject {
 			return directories
 		}
 		var i = 0
-		let maxSizeInMBytes = UInt64.max / 1024
+		let maxSizeInMBytes = Number.max / 1024
 		while (i < outputInLines.count) {
 			var fileType = BaseFileType.File;
-			var sizeInKiloBytes = UInt64.max as UInt64
+			var sizeInKiloBytes = Number.max as Number
 			var name = ""
 			var extraNewLine = ""
 			while (!isFileTypeString(str: outputInLines[i])) {
@@ -57,10 +57,10 @@ public class ShellParser: NSObject {
 				let sizeStringArray = outputInLines[i].split {
 					$0 == " " || $0 == "\t"
 				}.map(String.init)
-				if let sizeInInt = UInt64(sizeStringArray[0]) {
+				if let sizeInInt = Number(sizeStringArray[0]) {
 					sizeInKiloBytes = sizeInInt
 					if (sizeInKiloBytes > maxSizeInMBytes) {
-						sizeInKiloBytes = UInt64.max
+						sizeInKiloBytes = Number.max
 					} else {
 						sizeInKiloBytes = sizeInKiloBytes * 1024
 					}
@@ -134,15 +134,15 @@ public class ShellParser: NSObject {
     
     /*
     @objc
-    public static func parseTotalSpaceInInt(_ output: String) -> UInt64 {
+    public static func parseTotalSpaceInInt(_ output: String) -> Number {
         var spaceInInt = 0
         let outputInTabs = parseSpaceOutput(output)
         if (outputInTabs.count == 0) {
             return spaceInInt
         }
-        if let totalSpaceInInt = UInt64(outputInTabs[1]) {
-            //            totalSpace = totalSpaceInInt * UInt64(BLOCK_SIZE_IN_FLOAT)
-            spaceInInt = totalSpaceInInt * UInt64(BLOCK_SIZE_IN_FLOAT)
+        if let totalSpaceInInt = Number(outputInTabs[1]) {
+            //            totalSpace = totalSpaceInInt * Number(BLOCK_SIZE_IN_FLOAT)
+            spaceInInt = totalSpaceInInt * Number(BLOCK_SIZE_IN_FLOAT)
         } else {
             //            Solaris
             spaceInInt = outputInTabs[1]
@@ -157,9 +157,9 @@ public class ShellParser: NSObject {
         if (outputInTabs.count == 0) {
             return spaceInString
         }
-        if let totalSpaceInInt = UInt64(outputInTabs[1]) {
-            //            totalSpace = totalSpaceInInt * UInt64(BLOCK_SIZE_IN_FLOAT)
-            spaceInString = SizeUtils.getBytesInFormat(totalSpaceInInt * UInt64(BLOCK_SIZE_IN_FLOAT))
+        if let totalSpaceInInt = Number(outputInTabs[1]) {
+            //            totalSpace = totalSpaceInInt * Number(BLOCK_SIZE_IN_FLOAT)
+            spaceInString = SizeUtils.getBytesInFormat(totalSpaceInInt * Number(BLOCK_SIZE_IN_FLOAT))
         } else {
             //            Solaris
             spaceInString = outputInTabs[1] + " B"
@@ -180,9 +180,9 @@ public class ShellParser: NSObject {
 		if (outputInTabs.count == 0) {
 			return spaceInString
 		}
-		if let totalSpaceInInt = UInt64(outputInTabs[1]) {
-			if let usedSpaceInInt = UInt64(outputInTabs[2]) {
-				let availableSpaceInInt = (totalSpaceInInt - usedSpaceInInt) * UInt64(BLOCK_SIZE_IN_FLOAT) as UInt64
+		if let totalSpaceInInt = Number(outputInTabs[1]) {
+			if let usedSpaceInInt = Number(outputInTabs[2]) {
+				let availableSpaceInInt = (totalSpaceInInt - usedSpaceInInt) * Number(BLOCK_SIZE_IN_FLOAT) as Number
 				spaceInString = SizeUtils.getBytesInFormat(availableSpaceInInt)
 			}
 		} else {
@@ -202,15 +202,16 @@ public class ShellParser: NSObject {
 	
 	@objc
 	public static func parseFileSize(_ rawOutput: String) -> UInt64 {
-		let maxSizeInMBytes = UInt64.max / 1024
-		var sizeInBytes = UInt64.max as UInt64
-		let sizeStringArray = rawOutput.split {
+		let maxSizeInMBytes = Number.max / 1024
+		var sizeInBytes = Number.max as Number
+		let sizeStringArray = cleanString(rawOutput).split {
 			$0 == " " || $0 == "\t"
 		}.map(String.init)
-		if sizeStringArray.count > 0, let sizeInInt = UInt64(sizeStringArray[0]) {
-			sizeInBytes = sizeInInt
+		if sizeStringArray.count > 0, let sizeInInt = Number(sizeStringArray[0]) {
+            sizeInBytes = sizeInInt
+//            sizeInBytes = sizeInInt / 1024 //KB
 			if (sizeInBytes > maxSizeInMBytes) {
-				sizeInBytes = UInt64.max
+				sizeInBytes = Number.max
 			} else {
 				sizeInBytes = sizeInBytes * 1024
 			}
@@ -263,9 +264,7 @@ public class ShellParser: NSObject {
 			progressString.remove(at: progressString.startIndex)
 			progressString.remove(at: progressString.index(before: progressString.endIndex))
 			progressString.remove(at: progressString.index(before: progressString.endIndex))
-			progressString = progressString.trimmingCharacters(
-					in: CharacterSet.whitespacesAndNewlines
-			)
+			progressString = cleanString(progressString)
 			let progress = Int(progressString)
 			return progress!
 		}

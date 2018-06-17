@@ -10,7 +10,7 @@ import Foundation
 
 //All delegate methods must be called on Main Thread
 protocol FileProgressDelegate: class {
-	func onStart(_ totalSize: UInt64, transferType: Int)
+	func onStart(_ totalSize: Number, transferType: Int)
     
     func currentFile(_ fileName: String)
 	

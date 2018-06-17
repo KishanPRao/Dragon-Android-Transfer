@@ -32,8 +32,8 @@ class TransferViewController: NSViewController {
 	internal var currentCopyFile = ""
 	internal var transferType = -1
 	internal var currentFile: BaseFile? = nil
-	internal var currentCopiedSize = 0 as UInt64
-	internal var totalSize: UInt64 = 0
+	internal var currentCopiedSize = 0 as Number
+	internal var totalSize: Number = 0
 	
 	let androidImage = NSImage(named: NSImage.Name(rawValue: R.drawable.android))
 	let macImage = NSImage(named: NSImage.Name(rawValue: R.drawable.mac))

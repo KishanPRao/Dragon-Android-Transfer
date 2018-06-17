@@ -6,11 +6,18 @@
 import Foundation
 
 class ThreadUtils {
-	
-	static func runInBackgroundThread(_ closure: @escaping () -> ()) {
-		DispatchQueue.global(qos: .background).async {
-			closure()
-		}
+    
+    static func runInBackgroundThread(_ closure: @escaping () -> ()) {
+        DispatchQueue.global(qos: .background).async {
+            closure()
+        }
+    }
+    
+    static func runInBackgroundThreadAsync(_ closure: @escaping () -> ()) {
+        let concurrentQueue = DispatchQueue(label: "com.queue.Concurrent", attributes: .concurrent)
+        concurrentQueue.async {
+            closure()
+        }
     }
     
     static func runInMainThread(_ closure: @escaping () -> ()) {

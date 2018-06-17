@@ -47,7 +47,10 @@ namespace ShellScripts {
     static std::string Bsd_Disk = Gnu_Disk;
     static std::string Solaris_Disk = "df ";
     
-    static std::string File_Size = "du -sk ";
+    static std::string File_Size = "du -sk ";   //older
+    static std::string File_Size_Prefix = "cd ";
+    static std::string File_Size_Suffix = "; sum=0; for x in $(find . ! -type d -print0 | xargs -0 stat -c \"%s\" *);"
+    "do sum=$(($sum + $x)); done; echo $sum";
     /*
     static std::string Gnu_File_Size = "du -sk ";
     static std::string Bsd_File_Size = Gnu_Disk;

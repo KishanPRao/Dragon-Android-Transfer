@@ -24,7 +24,7 @@ class testAndroidAdb: XCTestCase {
             expect = e
         }
         
-        func onStart(_ totalSize: UInt64, transferType: Int) {
+        func onStart(_ totalSize: Number, transferType: Int) {
             
         }
         

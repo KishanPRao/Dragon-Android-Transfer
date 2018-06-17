@@ -91,9 +91,9 @@ class ClipboardViewController: NSViewController, NSTableViewDataSource {
 		if (clipboardItems!.count > 0) {
 			clipboardTable.reloadData()
 			var i = 0
-			var total: UInt64 = 0
+			var total: Number = 0
 			while i < clipboardItems!.count {
-				if (clipboardItems![i].size == UInt64.max || clipboardItems![i].size == 0 || total + clipboardItems![i].size >= UInt64.max) {
+				if (clipboardItems![i].size == Number.max || clipboardItems![i].size == 0 || total + clipboardItems![i].size >= Number.max) {
 					total = 0
 					break
 				} else {
