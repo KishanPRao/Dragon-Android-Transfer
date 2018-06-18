@@ -159,8 +159,9 @@ string AdbExecutor::executeAdb(string commands, AdbCallback callback) {
 	[task launch];
 //	NSLog(@"Task Launched");
 	[task waitUntilExit];
-    auto errorData = [[errorPipe fileHandleForReading] readDataToEndOfFile];
+    /*auto errorData = [[errorPipe fileHandleForReading] readDataToEndOfFile];
     auto errorOutput = [[NSString alloc] initWithData:errorData encoding:NSUTF8StringEncoding];
+     */
     NSLog(@"AdbExecutor, Exit Status: %d", task.terminationStatus);
 //    NSLog(@"AdbExecutor, Error: %@", errorOutput);
 //	NSLog(@"Task After Exit");
