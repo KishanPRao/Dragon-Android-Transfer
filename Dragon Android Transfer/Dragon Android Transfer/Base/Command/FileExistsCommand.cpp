@@ -13,7 +13,7 @@
 std::string FileExistsCommand::execute() {
     std::string quotes = StringResource::ESCAPE_DOUBLE_QUOTES;
     std::string commands = "";
-    commands = commands + "[ -" + (isFile ? "f" : "d") + " " + quotes + filePath + quotes + " ]" +
+    commands = commands + "[ -" + (isFile ? "f" : "d") + " " + quotes + escapePath(filePath, true) + quotes + " ]" +
 				" && echo " + quotes + StringResource::EXIST + quotes +
 				" || echo " + quotes + StringResource::NOT_EXIST + quotes;
     if (executor) {

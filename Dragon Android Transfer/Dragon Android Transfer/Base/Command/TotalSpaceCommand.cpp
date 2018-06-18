@@ -30,7 +30,7 @@ std::string TotalSpaceCommand::execute() {
             break;
     }
     std::string commands = "";
-    commands = commands + diskCommand + escapeDoubleQuotes + path + escapeDoubleQuotes;
+    commands = commands + diskCommand + escapeDoubleQuotes + escapePath(path, true) + escapeDoubleQuotes;
     if (executor) {
         auto properties = make_shared<AdbExecutorProperties>();
         properties->attributes = commands;

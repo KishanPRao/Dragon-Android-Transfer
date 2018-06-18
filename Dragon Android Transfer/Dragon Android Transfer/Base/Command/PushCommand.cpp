@@ -11,7 +11,8 @@
 std::string PushCommand::execute() {
 	std::string dq = StringResource::ESCAPE_DOUBLE_QUOTES;
 	std::string commands = "";
-	commands = commands + "push " + dq + sourcePath + dq + " " + dq + destinationPath + dq + ";";
+    //    TODO: Need to escape destinationPath?
+	commands = commands + "push " + dq + escapePath(sourcePath) + dq + " " + dq + escapePath(destinationPath) + dq + ";";
 	if (executor) {
 		auto properties = make_shared<AdbExecutorProperties>();
 		properties->attributes = commands;

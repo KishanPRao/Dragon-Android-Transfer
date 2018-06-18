@@ -9,6 +9,11 @@
 
 #import <string>
 
+/*
+ TODO: ShellCommand, Push/Pull (Transfer) other type of command.
+ ShellCommand contains pure virtual method buildCommand.
+ TransferCommand contains src & dest.
+ */
 class Command {
 public:
 	virtual std::string execute() = 0;

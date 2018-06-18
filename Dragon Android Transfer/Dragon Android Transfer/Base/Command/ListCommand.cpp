@@ -37,7 +37,7 @@ std::string ListCommand::execute() {
 			"; if [ -d " + name + " ]; then echo " + escapeDoubleQuotes + StringResource::DIRECTORY_TYPE + escapeDoubleQuotes + "; echo \"0\"; else echo " + escapeDoubleQuotes + StringResource::FILE_TYPE + escapeDoubleQuotes + "; " + ShellScripts::LS_FILE_SIZE_COMMAND + " " + name + "; fi; done;";
 			*/
 	
-	std::string location = directoryName;
+	std::string location = escapePath(directoryName, true);
 	std::string escapedOne =  escape("1");
 	std::string escapedZero =  escape("0");
 	std::string escapedArg =  escape("$1");

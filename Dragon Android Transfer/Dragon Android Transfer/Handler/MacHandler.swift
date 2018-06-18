@@ -146,7 +146,7 @@ class MacHandler: NSObject {
     
     func getSizeFind(_ directoryName: String) -> Number {
         var size = 0 as Number
-        let command = "find " + ESCAPE_DOUBLE_QUOTES + directoryName + ESCAPE_DOUBLE_QUOTES + " ! -type d -print0 | xargs -0 stat -f '%z' | awk '{sum += $1} END{print sum}'"
+        let command = "find " + ESCAPE_DOUBLE_QUOTES + directoryName.escapeString() + ESCAPE_DOUBLE_QUOTES + " ! -type d -print0 | xargs -0 stat -f '%z' | awk '{sum += $1} END{print sum}'"
 //        print("Command to Run:", command)
         let output = bashShell(command)
         let outputStringArray = output.split {
@@ -257,7 +257,7 @@ class MacHandler: NSObject {
 //		var activeFiles: Array<BaseFile> = [];
 		var i = 0;
 		while i < files.count {
-			let fileName = files[i].path + files[i].fileName
+			let fileName = files[i].getFullPath()
 			var size: Number
 			if (files[i].type == BaseFileType.Directory) {
 				size = getSize(fileName)

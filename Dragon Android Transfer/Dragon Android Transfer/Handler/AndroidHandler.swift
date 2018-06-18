@@ -242,7 +242,8 @@ public class AndroidHandler: VerboseObject {
 			// let _ = adbShell(command)
 			print("Delete, \(file.getFullPath())")
 			// TODO: TEST!!!
-			adbHandler.deleteFile(file.getFullPath().escapeString())
+//            adbHandler.deleteFile(file.getFullPath().escapeStringInSingleQuotes())
+            adbHandler.deleteFile(file.getFullPath())
 		}
 	}
 	
@@ -387,7 +388,8 @@ public class AndroidHandler: VerboseObject {
 		self.currentPath = path
         observableCurrentPath.value = self.currentPath
 		adbHandler.device = activeDevice
-		observableFileList.value =  adbHandler.getDirectoryListing(path)
+//        observableFileList.value =  adbHandler.getDirectoryListing(path.escapeStringInSingleQuotes())
+        observableFileList.value =  adbHandler.getDirectoryListing(path)
 //		LogV("List: \(observableFileList.value)")
 	}
 	
@@ -611,7 +613,8 @@ public class AndroidHandler: VerboseObject {
 				}
 				self.fileActiveTask.value = file
 				sourceFileName = file.path + HandlerConstants.SEPARATOR + file.fileName
-				adbHandler.push(sourceFileName, toDestination: destination, transferBlock)
+//                adbHandler.push(sourceFileName.escapeString(), toDestination: destination, transferBlock)
+                adbHandler.push(sourceFileName, toDestination: destination, transferBlock)
 				print("After Single Push!")
 			}
 			print("After Push!")

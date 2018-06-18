@@ -53,7 +53,7 @@ string AdbExecutor::execute(shared_ptr<AdbExecutorProperties> properties, AdbCal
 //		callback(output);
 		return "";
 	} else {
-		return executeAdb(adbArgs.UTF8String);
+		return executeAdb(adbArgs.UTF8String, properties->executionType);
 	}
 }
 
@@ -78,7 +78,7 @@ void AdbExecutor::startAdbIfNotStarted() {
 	[task waitUntilExit];
 }
 
-string AdbExecutor::executeAdb(string commands) {
+string AdbExecutor::executeAdb(string commands, AdbExecutionType executionType) {
 	//killAdbIfRunning();
 	startAdbIfNotStarted();
 	auto task = [[NSTask alloc] init];
@@ -86,9 +86,13 @@ string AdbExecutor::executeAdb(string commands) {
 	task.launchPath = adbLaunchPath;
 	task.arguments = @[@"-l", @"-c", convert(commands)];
 	task.currentDirectoryPath = convert(adbDirectoryPath);
+    
+    if (executionType == AdbExecutionType::Shell) {
+        NSLog(@"\nexecuteAdb: %s\n", commands.c_str());
+    }
 	
 	auto pipe = [[NSPipe alloc] init];
-	task.standardOutput = pipe;
+    task.standardOutput = pipe;
 	[task launch];
 	
 //	TODO: On shell error, redirect, send empty or something similar. No effect to UI!
@@ -115,7 +119,13 @@ string AdbExecutor::executeAdb(string commands, AdbCallback callback) {
 	task.currentDirectoryPath = convert(adbDirectoryPath);
 	auto pipe = [[NSPipe alloc] init];
 	task.standardOutput = pipe;
-	task.standardError = nil;
+    task.standardError = nil;
+    
+    NSLog(@"\nexecuteAdb: %s\n", commands.c_str());
+    /*
+    auto errorPipe = [[NSPipe alloc] init];
+    task.standardError = errorPipe;
+     */
 	activeTask = task;
 //	TODO: Cancellation..
 	auto outFile = [pipe fileHandleForReading];
@@ -149,7 +159,17 @@ string AdbExecutor::executeAdb(string commands, AdbCallback callback) {
 	[task launch];
 //	NSLog(@"Task Launched");
 	[task waitUntilExit];
+    auto errorData = [[errorPipe fileHandleForReading] readDataToEndOfFile];
+    auto errorOutput = [[NSString alloc] initWithData:errorData encoding:NSUTF8StringEncoding];
+    NSLog(@"AdbExecutor, Exit Status: %d", task.terminationStatus);
+//    NSLog(@"AdbExecutor, Error: %@", errorOutput);
 //	NSLog(@"Task After Exit");
+    //    TODO: Handle error state!
+    /*if (task.terminationStatus) {
+        auto data = [pipe fileHandleForReading].availableData;
+        auto str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"AdbExecutor, error output:%@", str);
+    }*/
 	if (activeTask != nil) {
 		callback("", AdbExecutionResult::Ok);
 		[[NSNotificationCenter defaultCenter] removeObserver: dataAvailable];

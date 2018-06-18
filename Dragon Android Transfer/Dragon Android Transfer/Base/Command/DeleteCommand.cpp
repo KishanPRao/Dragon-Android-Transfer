@@ -13,7 +13,7 @@
 std::string DeleteCommand::execute() {
     std::string escapeDoubleQuotes = StringResource::ESCAPE_DOUBLE_QUOTES;
     std::string commands = "";
-    commands = commands + "rm -rf " + escapeDoubleQuotes + path + escapeDoubleQuotes;
+    commands = commands + "rm -rf " + escapeDoubleQuotes + escapePath(path, true) + escapeDoubleQuotes;
     std::cout<<"Delete:"<< commands<<std::endl;
     if (executor) {
         auto properties = make_shared<AdbExecutorProperties>();

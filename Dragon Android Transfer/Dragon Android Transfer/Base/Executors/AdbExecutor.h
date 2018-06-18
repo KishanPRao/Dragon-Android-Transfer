@@ -22,7 +22,7 @@ private:
     
     string adbDirectoryPath;
     
-    string executeAdb(string );
+    string executeAdb(string, AdbExecutionType);
 	
     string executeAdb(string, AdbCallback);
     

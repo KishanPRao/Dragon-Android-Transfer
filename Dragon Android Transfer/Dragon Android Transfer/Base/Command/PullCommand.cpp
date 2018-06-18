@@ -14,7 +14,7 @@
 std::string PullCommand::execute() {
 	std::string dq = StringResource::ESCAPE_DOUBLE_QUOTES;
 	std::string commands = "";
-	commands = commands + "pull " + dq + sourcePath + dq + " " + dq + destinationPath + dq + ";";
+	commands = commands + "pull " + dq + escapePath(sourcePath) + dq + " " + dq + escapePath(destinationPath) + dq + ";";
 	if (executor) {
 		auto properties = make_shared<AdbExecutorProperties>();
 		properties->attributes = commands;

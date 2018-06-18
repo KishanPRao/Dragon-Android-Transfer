@@ -9,19 +9,27 @@
 import Foundation
 
 extension String {
-    func escapeString() -> String {
-        var newString = self.replacingOccurrences(of: "\"", with: "\"\"")
+    func escapeStringInSingleQuotes() -> String {
+        //        var newString = self.replacingOccurrences(of: "\"", with: "\"\"") //TODO: What was this used for?
+        var newString = self.replacingOccurrences(of: "\"", with: "\\\"")
 //        if newString.contains(",") || newString.contains("\n") || newString.contains("'") {
 //            newString = String(format: "\"%@\"", newString)
 //            Swift.print("Escaped: \(newString)")
 //        }
         //        TODO: Newline char in name?
-        newString = newString.replacingOccurrences(of: "'", with: "'\''")
+        newString = newString.replacingOccurrences(of: "'", with: "'\\''")
         //        Reference: https://stackoverflow.com/questions/10989899/single-quote-inside-of-double-quoted-string-on-linux-command-line
         Swift.print("Escaped: \(newString)")
         
 //        newString = newString.replacingOccurrences(of: "'", with: "\'")
 //        Swift.print("Escaped: \(newString)")
+        return newString
+    }
+    
+    func escapeString() -> String {
+        var newString = self.replacingOccurrences(of: "\"", with: "\\\"")
+//        newString = newString.replacingOccurrences(of: "'", with: "'\\''")
+        Swift.print("Escaped: \(newString)")
         return newString
     }
 }
