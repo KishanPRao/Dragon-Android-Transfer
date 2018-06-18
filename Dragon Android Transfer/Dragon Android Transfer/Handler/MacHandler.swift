@@ -113,7 +113,8 @@ class MacHandler: NSObject {
 //        let directoryURL = URL(fileURLWithPath: directoryName)
 //        size = Number(BridgingUtils.nr_getAllocatedSize(URL(fileURLWithPath: directoryName), error: nil))
         
-        size = getSizeFind(directoryName)
+        size = getSizeFind(directoryName)   //Proper!
+//        size = getSizeDu(directoryName)
         
 //        print("Size: \(size), start: \(startTime), end: \(TimeUtils.getCurrentTime())")
         

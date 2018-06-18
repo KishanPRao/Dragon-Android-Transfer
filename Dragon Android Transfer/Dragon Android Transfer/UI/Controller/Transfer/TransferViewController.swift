@@ -52,9 +52,11 @@ class TransferViewController: NSViewController {
 	private var expanded = false
     
     internal var timer: Timer? = nil
-    private static let kDefaultUpdateDelay = 3.0
+    internal static let kDefaultUpdateDelay = 3.0
     internal let updateDelay = kDefaultUpdateDelay
     
+    internal var previousTime = TimeUtils.getDispatchTime()
+    internal var currentUpdateDelay = kDefaultUpdateDelay
     internal var previousCopiedSize = 0.0
     internal var averageCopyAmount = 0.0
     internal var start: DispatchTime? = nil

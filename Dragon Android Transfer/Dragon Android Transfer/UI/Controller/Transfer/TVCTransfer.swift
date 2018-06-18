@@ -95,6 +95,12 @@ extension TransferViewController {
 		let totalSize = Double(self.totalSize)
 		let sizeCopied = (mCurrentProgress * totalSize / 100.0)
 		LogV("Size Copied: \(sizeCopied), previous: \(previousCopiedSize)")
+        
+        if (sizeCopied == previousCopiedSize) {
+//            currentUpdateDelay += TransferViewController.kDefaultUpdateDelay
+            return
+        }
+        
 		var offset = sizeCopied - previousCopiedSize
         
         if (averageCopyAmount == 0.0) {
@@ -108,8 +114,13 @@ extension TransferViewController {
 //        let currentTime = DispatchTime.now()
 //        let nanoTime = currentTime.uptimeNanoseconds - startTime.uptimeNanoseconds
 //        let timeTaken = Double(nanoTime) / 1_000_000_000
-		let timeTaken = updateDelay
-		
+//        let timeTaken = currentUpdateDelay
+//        currentUpdateDelay = TransferViewController.kDefaultUpdateDelay
+        let currentTime = TimeUtils.getDispatchTime()
+        let timeTakenInNano = currentTime.uptimeNanoseconds - previousTime.uptimeNanoseconds
+		previousTime = currentTime
+        let timeTaken = Double(timeTakenInNano) / 1_000_000_000
+        
         LogV("Remaining:\(remainingSize), offset: \(offset), time taken: \(timeTaken)")
 		let timeRemaining = (timeTaken * remainingSize) / offset
 //        let timeRemaining = (timeTaken * remainingSize) / sizeCopied
@@ -130,6 +141,7 @@ extension TransferViewController {
 	}
 	
 	private func startTimer() {
+        previousTime = TimeUtils.getDispatchTime()
 		timer = Timer.scheduledTimer(timeInterval: TimeInterval(updateDelay), target: self,
 				selector: #selector(updateTimeRemaining), userInfo: nil,
 				repeats: true)
@@ -248,14 +260,16 @@ extension TransferViewController {
 		transferHandler.progressActiveTask().skip(1)
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: { progress in
-					self.progressActive(progress)
+                    if (self.progressActive(progress)) {
+                        self.updateTimeRemaining()
+                    }
 				}).disposed(by: disposeBag)
 	}
 	
 	
-	internal func progressActive(_ progress: Double) {
+    internal func progressActive(_ progress: Double) -> Bool {
 		if (mCurrentProgress == progress) {
-			return
+			return false
 		}
 //        LogV("Progress Active: \(progress)")
 		mCurrentProgress = progress
@@ -263,12 +277,12 @@ extension TransferViewController {
 		//                print("Update Prog")
         
         if (self.totalSize == 0) {
-            return
+            return false
         }
         
 		let size = CGFloat(totalSize) * (CGFloat(progress) / 100.0)
 		if (size >= CGFloat(Number.max)) {
-			return
+			return false
 		}
 		let copiedSize = Number(size) as Number
 //        LogV("Copied Size:", copiedSize)
@@ -294,6 +308,7 @@ extension TransferViewController {
         
 		mDockProgress?.doubleValue = Double(progress)
 		mDockTile.display()
+        return true
 	}
 	
 	
