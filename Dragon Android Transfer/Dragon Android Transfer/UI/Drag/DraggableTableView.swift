@@ -57,17 +57,22 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
         }
         let emptyList = mData.count == 0
 		if (dropOperation == .above) {
-            if (emptyList) {
-                let oldIndex = dragDropRow
-                dragDropRow = DRAG_DROP_WHOLE
-                deselectAllRows(oldIndex)
-                return [.copy]
-            } else if (row >= mData.count) {
-                let oldIndex = dragDropRow
-                dragDropRow = DRAG_DROP_WHOLE
-                deselectAllRows(oldIndex)
-                return [.copy]
+            if (info.draggingSource() == nil) {
+                if (emptyList) {
+                    let oldIndex = dragDropRow
+                    dragDropRow = DRAG_DROP_WHOLE
+                    deselectAllRows(oldIndex)
+                    return [.copy]
+                } else if (row >= mData.count) {
+                    let oldIndex = dragDropRow
+                    dragDropRow = DRAG_DROP_WHOLE
+                    deselectAllRows(oldIndex)
+                    return [.copy]
+                } else {
+                    return []
+                }
             } else {
+                LogW("App to App")
                 return []
             }
 		} else {
@@ -152,7 +157,7 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
         if (!enableDrag) {
             return nil
         }
-        return mData[row] as! NSPasteboardWriting
+        return mData[row] as NSPasteboardWriting
 	}
 	
 	required init?(coder: NSCoder) {
