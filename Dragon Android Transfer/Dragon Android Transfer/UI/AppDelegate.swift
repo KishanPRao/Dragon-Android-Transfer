@@ -159,11 +159,11 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
 	}
 	
 	public static func validateInterfaceMenuItem(item: NSValidatedUserInterfaceItem!) -> Bool {
-        print("Vbose", "Here!!")
+//        print("Vbose", "Here!!")
 		if (VERBOSE) {
-			Swift.print("AppDelegate, validateInterfaceMenuItem:", item.tag);
-			Swift.print("AppDelegate, validateInterfaceMenuItem, isPasting:", AppDelegate.isPastingOperation.value)
-            Swift.print("AppDelegate: \(AppDelegate.directoryItemSelected), \(AppDelegate.multipleItemsSelected), \(MenuItemIdentifier.fileOpenFile)")
+//            Swift.print("AppDelegate, validateInterfaceMenuItem:", item.tag);
+//            Swift.print("AppDelegate, validateInterfaceMenuItem, isPasting:", AppDelegate.isPastingOperation.value)
+//            Swift.print("AppDelegate: \(AppDelegate.directoryItemSelected), \(AppDelegate.multipleItemsSelected), \(MenuItemIdentifier.fileOpenFile)")
 		}
 		if (item.tag == MenuItemIdentifier.fileOpenFile && AppDelegate.directoryItemSelected && !AppDelegate.multipleItemsSelected) {
 			return !AppDelegate.isPastingOperation.value

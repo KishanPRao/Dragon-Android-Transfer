@@ -12,7 +12,7 @@ class OverlayView: ClickableView {
 	let timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
 	
 	func show() {
-//        cancelActiveAnimation = true
+        cancelActiveAnimation = true
 		self.alphaValue = 0.0
 		self.isHidden = false
 		self.needsDisplay = true
@@ -21,23 +21,24 @@ class OverlayView: ClickableView {
 			context.duration = R.integer.animStartDuration
 			self.animator().alphaValue = 1.0
 		}, completionHandler: {
+            self.cancelActiveAnimation = false
 //            if (!self.cancelActiveAnimation) {
 //                self.isHidden = true
 //            }
 		})
 	}
 
-//    var cancelActiveAnimation = false
+    var cancelActiveAnimation = false
 	
 	func hide(_ handler: @escaping () -> () = {}) {
 		NSAnimationContext.runAnimationGroup({ context in
 			context.timingFunction = timingFunction
-			context.duration = R.integer.animEndDuration
+			context.duration = R.integer.overlayAnimHideDuration
 			self.animator().alphaValue = 0.0
 		}, completionHandler: {
-//            if (!self.cancelActiveAnimation) {
-			self.isHidden = true
-//            }
+            if (!self.cancelActiveAnimation) {
+                self.isHidden = true
+            }
 			handler()
 		})
 	}

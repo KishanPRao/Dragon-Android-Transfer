@@ -8,4 +8,8 @@ import Foundation
 class IntegerResource {
 	let animStartDuration = 0.25
 	let animEndDuration = 0.15
+    
+    let overlayAnimHideDuration = 0.45
+//    let progressAnimStartDuration = 0.15
+    let progressAnimHideDuration = 0.35
 }

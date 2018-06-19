@@ -31,12 +31,20 @@ class TimeUtils {
 		return returnValue;
 	}
     
-    static let getDispatchTime = {
+    static func getDispatchTime() -> DispatchTime {
         return DispatchTime.now()
     }
     
+    static func getDifference(_ previousTime: DispatchTime) -> Double {
+        let currentTime = TimeUtils.getDispatchTime()
+        let timeTakenInNano = currentTime.uptimeNanoseconds - previousTime.uptimeNanoseconds
+        let timeTaken = Double(timeTakenInNano) / 1_000_000
+        return timeTaken
+    }
+    
     static func getTime(seconds: Double) -> String {
-        var secondsInInt = Int(seconds)
+//        var secondsInInt = Int(seconds)
+        var secondsInInt = Number(seconds)
         var minutes = secondsInInt / 60
         secondsInInt = secondsInInt % 60
         let hours = minutes / 60

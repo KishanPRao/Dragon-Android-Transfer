@@ -104,9 +104,11 @@ extension AndroidViewController {
 	
 	func reloadFileList(_ items: Array<BaseFile>) {
 		androidDirectoryItems = items
+//        let startTime = TimeUtils.getDispatchTime()
 		updateList()
 //        fileTable.makeFirstResponder(self.view.window)
 		hideProgress()
+//        print("Update List Time Taken: \(TimeUtils.getDifference(startTime))ms")
 	}
 	
 	@objc func refresh() {
@@ -197,7 +199,7 @@ extension AndroidViewController {
 									AppDelegate.directoryItemSelected = true
 								}
 							}
-							self.hideProgress()
+//                            self.hideProgress()
 						}).disposed(by: disposeBag)
 	}
 }

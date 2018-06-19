@@ -11,12 +11,7 @@ import Foundation
 extension AndroidViewController {
 	
 	internal func initUi() {
-        fileTable.delegate = self
-		fileTable.dragDelegate = self
-		fileTable.dragUiDelegate = self
-//        self.fileTable.intercellSpacing = NSSize(width: 0, height: 5)
-		let doubleClickSelector: Selector = #selector(AndroidViewController.doubleClickList(_:))
-		fileTable.doubleAction = doubleClickSelector
+        initTable()
 		
 		ColorUtils.setBackgroundColorTo(view, color: ColorUtils.mainViewColor)
 		toolbarView.setBackground(R.color.toolbarColor)

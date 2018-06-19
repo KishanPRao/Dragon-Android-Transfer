@@ -14,8 +14,13 @@ extension NSView {
 	internal static let FPS_DELAY = Int(FPS / (1000.0 as Double))
 	
 	public func setBackground(_ color: NSColor) {
-		self.wantsLayer = true
+//        let startTime = TimeUtils.getDispatchTime()
+//        if (!self.wantsLayer) {
+        self.wantsLayer = true
+//        }
+//        print("---1. Layer Time Taken: \(TimeUtils.getDifference(startTime))ms")
 		layer?.backgroundColor = color.cgColor
+//        print("---2. Layer Time Taken: \(TimeUtils.getDifference(startTime))ms")
 	}
 	
 	func dropShadow() {

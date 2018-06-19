@@ -88,7 +88,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="fileCell" focusRingType="exterior" id="klu-HO-cM9">
+                                                        <tableCellView identifier="fileCell" focusRingType="exterior" id="klu-HO-cM9" customClass="FileCell" customModule="Dragon_Android_Transfer" customModuleProvider="target">
                                                             <rect key="frame" x="1" y="1" width="647" height="40"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         </tableCellView>

@@ -60,4 +60,8 @@ extension NSObject {
 	static func observeNotification(_ handler: Any, _ name: String, selector: Selector) {
 		NotificationCenter.default.addObserver(handler, selector: selector, name: NSNotification.Name(rawValue: name), object: nil)
 	}
+    
+    static func printStackTrace() {
+        Thread.callStackSymbols.forEach{print($0)}
+    }
 }

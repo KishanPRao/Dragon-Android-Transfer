@@ -15,6 +15,7 @@ class SizeUtils {
     static let BLOCK_SIZE_IN_FLOAT = Float(1024)
     static let ZERO_BYTES = "0 B"
     
+    // TODO: Cache calculated data somewhere! (100 items?)
     static func getBytesInFormat(_ bytesInInt: Number) -> String {
         if (bytesInInt == Number.max || bytesInInt == 0) {
             return "Folder"

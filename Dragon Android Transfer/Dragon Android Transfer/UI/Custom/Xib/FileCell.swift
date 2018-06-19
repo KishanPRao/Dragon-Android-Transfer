@@ -9,7 +9,8 @@
 import Foundation
 
 class FileCell: NSTableCellView {
-	
+    public static let Identifier = NSUserInterfaceItemIdentifier(rawValue: "fileCell")
+    
 	@IBOutlet var nameField: NSTextField!
 	@IBOutlet var fileImage: NSImageView!
 	@IBOutlet var sizeField: NSTextField!
@@ -42,24 +43,31 @@ class FileCell: NSTableCellView {
 //		textField.setBackground(R.color.tableItemBg)
 //		textField.setBackground(R.color.clear)
 	}
+    
+    func initCell() {
+        Bundle.main.loadNibNamed(NSNib.Name(rawValue: "FileCell"), owner: self, topLevelObjects: nil)
+        //        Swift.print("File Cell Test", contentView.frame, self)
+        //        text.textColor = R.color.white
+        
+        //        let fileName = nameField!
+        //        fileName.textColor = ColorUtils.colorWithHexString(ColorUtils.listTextColor)
+        //        fileName.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_file_table_file_cell_file_name_text_size))
+        
+        updateText(nameField)
+        //        fileName.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table_file_cell_file_name)
+        updateText(sizeField)
+        
+        contentView.frame = frame
+//        LogD("tableView, cell Initialized!")
+        addSubview(self.contentView)
+        //        text.frame.size.width = frame.size.width
+    }
 	
 	override init(frame frameRect: Foundation.NSRect) {
 		super.init(frame: frameRect)
-		Bundle.main.loadNibNamed(NSNib.Name(rawValue: "FileCell"), owner: self, topLevelObjects: nil)
-//		Swift.print("File Cell Test", contentView.frame, self)
-//        text.textColor = R.color.white
-		
-//        let fileName = nameField!
-//        fileName.textColor = ColorUtils.colorWithHexString(ColorUtils.listTextColor)
-//        fileName.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_file_table_file_cell_file_name_text_size))
+//        LogD("tableView, cell frame init")
         
-        updateText(nameField)
-//		fileName.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table_file_cell_file_name)
-		updateText(sizeField)
-		
-		contentView.frame = frame
-		addSubview(self.contentView)
-//        text.frame.size.width = frame.size.width
+//        initCell()
 	}
 	
 	/*
@@ -69,5 +77,9 @@ class FileCell: NSTableCellView {
 	
 	required init?(coder: NSCoder) {
 		super.init(coder: coder)
+        if (!frame.isEmpty) {
+            initCell()
+        }
+//        LogD("tableView, cell init: \(frame)")
 	}
 }

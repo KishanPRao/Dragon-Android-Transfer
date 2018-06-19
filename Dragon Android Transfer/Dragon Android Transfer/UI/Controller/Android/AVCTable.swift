@@ -10,6 +10,16 @@ import Foundation
 
 extension AndroidViewController {
     
+    internal func initTable() {
+        fileTable.delegate = self
+        fileTable.dragDelegate = self
+        fileTable.dragUiDelegate = self
+        //        self.fileTable.intercellSpacing = NSSize(width: 0, height: 5)
+        let doubleClickSelector: Selector = #selector(AndroidViewController.doubleClickList(_:))
+        fileTable.doubleAction = doubleClickSelector
+//        fileTable.register(NSNib.init(nibNamed: NSNib.Name("FileCell"), bundle: nil), forIdentifier: FileCell.Identifier)
+    }
+    
     func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
         let rowView = SelectionTableRowView()
         /*guard let fileTable = fileTable else {
@@ -53,23 +63,29 @@ extension AndroidViewController {
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         if (row >= self.androidDirectoryItems.count) {
-            print("Warning: Row out of range: \(row)")
+            LogW("Warning: Row out of range: \(row)")
             return nil
         }
+//        let startTime = TimeUtils.getDispatchTime()
         
-        //        TODO: During drag on top of any item (file item), grays out for all items in directory.
         let returnView: FileCell?
-        if let spareView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "file_cell"),
-                                          owner: self) as? FileCell {
+        if let spareView = tableView.makeView(withIdentifier: FileCell.Identifier,
+                                          owner: nil) as? FileCell {
+//            print("tableView, Make view: \(row)")
+//            print("tableView frame: \(spareView.frame)")
             returnView = spareView
             
         } else {
             //            let height = 40.0 as CGFloat
             let height = 40.0 as CGFloat
             let newCell = FileCell(frame: NSRect(x: 0, y: 0, width: self.fileTable!.frame.size.width, height: height))
+//            newCell.identifier = NSUserInterfaceItemIdentifier(rawValue: "file_cell")
             returnView = newCell
+            //            Not used. TODO: Remove, if needed
+            print("tableView, New Cell: \(row)")
             //      Possibility “This NSLayoutConstraint is being configured with a constant that exceeds internal limits” error to occur. Old version SDK?
         }
+//        print("1. tableView, Cell Time Taken: \(TimeUtils.getDifference(startTime))ms")
         
         if let cellView = returnView {
             let file = self.androidDirectoryItems[row]
@@ -82,6 +98,7 @@ extension AndroidViewController {
             //            fileSize.textColor = ColorUtils.colorWithHexString(ColorUtils.listTextColor)
             //            fileSize.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_file_table_file_cell_file_size_text_size))
             //            fileSize.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table_file_cell_file_size)
+//            print("2. Cell Time Taken: \(TimeUtils.getDifference(startTime))ms")
             
             let fileImage = cellView.fileImage!
             //            fileImage.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table_file_cell_file_image)
@@ -91,6 +108,7 @@ extension AndroidViewController {
             } else {
                 fileImage.image = NSImage(named: NSImage.Name(rawValue: R.drawable.file))
             }
+//            print("3. Cell Time Taken: \(TimeUtils.getDifference(startTime))ms")
             if let fileTable = fileTable {
                 if (!isDirectory) {
                     if (fileTable.dragDropRow == row) {
@@ -103,19 +121,29 @@ extension AndroidViewController {
                         //                        ColorUtils.setBackgroundColorTo(cellView, color: R.color.clear)
                     }
                 }
+//                print("4. Cell Time Taken: \(TimeUtils.getDifference(startTime))ms")
                 let indexSet = fileTable.selectedRowIndexes
+//                print("5. Cell Time Taken: \(TimeUtils.getDifference(startTime))ms")
                 if (indexSet.contains(row)) {
+//                    print("6. Cell Time Taken: \(TimeUtils.getDifference(startTime))ms")
                     //                    ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listSelectedBackgroundColor)
-                    cellView.isSelected = true
+                    if (!cellView.isSelected) {
+                        cellView.isSelected = true
+                    }
                 } else {
+//                    print("6. Cell Time Taken: \(TimeUtils.getDifference(startTime))ms")
                     //                    cellView.setBackground(R.color.tableItemBg)
                     //                    cellView.setBackground(R.color.clear)
                     //                    cellView.setBackground(NSColor.clear)
-                    cellView.isSelected = false
+                    if (cellView.isSelected) {
+                        cellView.isSelected = false
+                    }
                     //                ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listItemBackgroundColor)
                 }
+//                print("7. Cell Time Taken: \(TimeUtils.getDifference(startTime))ms")
             }
         }
+//        print("Cell Time Taken: \(TimeUtils.getDifference(startTime))ms")
         return returnView
     }
     

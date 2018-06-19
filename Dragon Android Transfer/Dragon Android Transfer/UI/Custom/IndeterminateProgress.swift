@@ -57,28 +57,6 @@ class IndeterminateProgress: NSView {
         commonInit()
     }
     
-    func show() {
-        cancelActiveAnimation = true
-        self.alphaValue = 1.0
-        self.isHidden = false
-        self.needsDisplay = true
-    }
-    
-    var cancelActiveAnimation = false
-    
-    func hide() {
-        NSAnimationContext.runAnimationGroup({ context in
-            context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-            context.duration = 0.5
-            self.animator().alphaValue = 0.0
-        }, completionHandler: {
-            //print("Animation completed")
-            if (!self.cancelActiveAnimation) {
-            	self.isHidden = true
-            }
-        })
-    }
-    
     override func draw(_ dirtyRect: NSRect) {
         progressBackground.set()
         backgroundRect.fill()
@@ -92,5 +70,32 @@ class IndeterminateProgress: NSView {
                 self.needsDisplay = true
             })
         }
+    }
+    
+    func show() {
+//        print("Show")
+        cancelActiveAnimation = true
+        self.alphaValue = 1.0
+        self.isHidden = false
+        self.needsDisplay = true
+//        print("Show done")
+    }
+    
+    var cancelActiveAnimation = false
+    
+    func hide() {
+//        print("Hide")
+//        NSObject.printStackTrace()
+        NSAnimationContext.runAnimationGroup({ context in
+            context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            context.duration = R.integer.progressAnimHideDuration
+            self.animator().alphaValue = 0.0
+        }, completionHandler: {
+            //print("Animation completed")
+            if (!self.cancelActiveAnimation) {
+            	self.isHidden = true
+            }
+//            print("Hide done")
+        })
     }
 }

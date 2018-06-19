@@ -268,8 +268,9 @@ public class ShellParser: NSObject {
 			progressString.remove(at: progressString.index(before: progressString.endIndex))
 			progressString.remove(at: progressString.index(before: progressString.endIndex))
 			progressString = cleanString(progressString)
-			let progress = Int(progressString)
-			return progress!
+            if let progress = Int(progressString) {
+                return progress
+            }
 		}
 		return -1
 	}

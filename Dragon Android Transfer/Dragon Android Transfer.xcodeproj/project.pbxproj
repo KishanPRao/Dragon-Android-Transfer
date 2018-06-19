@@ -259,9 +259,9 @@
 		BE3BDFCE24CB423E5C753535 /* BaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDE295CD9D91FD872081A /* BaseExtension.swift */; };
 		BE3BDFE9AE56EA9F863D7065 /* ListCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDBDE327B0A1968AB193B /* ListCommand.cpp */; };
 		BE3BDFF20674FE9E4D059CB7 /* DisabledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDBB5E059C6147F64EDCE /* DisabledTextField.swift */; };
+		DA39B9E420D8D5B60041AE89 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = DA39B9E320D8D5B60041AE89 /* folder.png */; };
 		DAC5916A202F7A0300534084 /* file.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC59169202F7A0300534084 /* file.png */; };
 		DAC59170202F7A5F00534084 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC5916F202F7A5F00534084 /* cancel.png */; };
-		DAC59172202F7A8400534084 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC59171202F7A8400534084 /* folder.png */; };
 		DAE8B56520D01A3500520FB3 /* VerboseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE8B56420D01A3500520FB3 /* VerboseObject.swift */; };
 		DAE8B56820D01BD000520FB3 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE8B56720D01BD000520FB3 /* Log.swift */; };
 		DAE8B56A20D01D6C00520FB3 /* VerboseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE8B56920D01D6C00520FB3 /* VerboseView.swift */; };
@@ -542,9 +542,9 @@
 		BE3BDFD2EC443A4947EC87B5 /* logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = logger.h; sourceTree = "<group>"; };
 		D4F2E244205540B32D87D1CF /* Pods-Dragon Android Transfer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dragon Android Transfer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dragon Android Transfer/Pods-Dragon Android Transfer.debug.xcconfig"; sourceTree = "<group>"; };
 		D76E99487AF2B4AB76B28F08 /* Pods_Dragon_Android_Transfer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dragon_Android_Transfer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA39B9E320D8D5B60041AE89 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
 		DAC59169202F7A0300534084 /* file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file.png; sourceTree = "<group>"; };
 		DAC5916F202F7A5F00534084 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
-		DAC59171202F7A8400534084 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
 		DAE8B56420D01A3500520FB3 /* VerboseObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerboseObject.swift; sourceTree = "<group>"; };
 		DAE8B56720D01BD000520FB3 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		DAE8B56920D01D6C00520FB3 /* VerboseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerboseView.swift; sourceTree = "<group>"; };
@@ -612,7 +612,7 @@
 				50961C081FF95CAE001B6D3D /* external_storage.png */,
 				50961C091FF95CAE001B6D3D /* internal_storage.png */,
 				DAC59169202F7A0300534084 /* file.png */,
-				DAC59171202F7A8400534084 /* folder.png */,
+				DA39B9E320D8D5B60041AE89 /* folder.png */,
 				BE3BD7F3E98C3A92436C5F2C /* clipboard_icon.png */,
 				503D93151FF8EAA0009E7E39 /* menu_back.png */,
 				BE3BD6E19034EA1ACA510769 /* back_button.png */,
@@ -1280,7 +1280,7 @@
 				50DFEDBC2002A377004BAE01 /* AdWindowController.xib in Resources */,
 				BE3BD04A725201CFC6692744 /* PathSelector.xib in Resources */,
 				BE3BDD6D61EEB37FFAA132F9 /* MenuCell.xib in Resources */,
-				DAC59172202F7A8400534084 /* folder.png in Resources */,
+				DA39B9E420D8D5B60041AE89 /* folder.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
