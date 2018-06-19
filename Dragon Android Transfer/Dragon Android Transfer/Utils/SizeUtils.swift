@@ -8,9 +8,6 @@
 
 import Foundation
 
-//TODO: What happens if 32 bit architecture?
-typealias Number = UInt64
-
 class SizeUtils {
     static let BLOCK_SIZE_IN_FLOAT = Float(1024)
     static let ZERO_BYTES = "0 B"

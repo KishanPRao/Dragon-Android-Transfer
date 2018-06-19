@@ -44,7 +44,7 @@ class TimeUtils {
     
     static func getTime(seconds: Double) -> String {
 //        var secondsInInt = Int(seconds)
-        var secondsInInt = Number(seconds)
+        var secondsInInt = Number(seconds.roundUp())
         var minutes = secondsInInt / 60
         secondsInInt = secondsInInt % 60
         let hours = minutes / 60

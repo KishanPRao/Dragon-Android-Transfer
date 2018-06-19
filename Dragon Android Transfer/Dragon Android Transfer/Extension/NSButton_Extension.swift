@@ -44,10 +44,10 @@ extension NSButton {
 		self.attributedTitle = TextUtils.getTruncatedAttributeString(text, alignment)
 	}
     
-    func updateMainFont() {
-        let fontSize = self.font?.pointSize ?? 10.0
+    func updateMainFont(_ fontSize: CGFloat = 40.0) {
+//        let fontSize = self.font?.pointSize ?? 10.0
 //        let mainFont = NSFont(name: R.font.mainFont, size: fontSize)
-        let mainFont = NSFont(name: R.font.mainFont, size: 40.0)
+        let mainFont = NSFont(name: R.font.mainFont, size: fontSize)
         self.font = mainFont
     }
 }

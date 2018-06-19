@@ -259,6 +259,7 @@
 		BE3BDFCE24CB423E5C753535 /* BaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDE295CD9D91FD872081A /* BaseExtension.swift */; };
 		BE3BDFE9AE56EA9F863D7065 /* ListCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDBDE327B0A1968AB193B /* ListCommand.cpp */; };
 		BE3BDFF20674FE9E4D059CB7 /* DisabledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDBB5E059C6147F64EDCE /* DisabledTextField.swift */; };
+		DA06CB7120D9707400448053 /* DarkAlertUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA06CB7020D9707400448053 /* DarkAlertUtils.swift */; };
 		DA39B9E420D8D5B60041AE89 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = DA39B9E320D8D5B60041AE89 /* folder.png */; };
 		DAC5916A202F7A0300534084 /* file.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC59169202F7A0300534084 /* file.png */; };
 		DAC59170202F7A5F00534084 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC5916F202F7A5F00534084 /* cancel.png */; };
@@ -542,6 +543,7 @@
 		BE3BDFD2EC443A4947EC87B5 /* logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = logger.h; sourceTree = "<group>"; };
 		D4F2E244205540B32D87D1CF /* Pods-Dragon Android Transfer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dragon Android Transfer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dragon Android Transfer/Pods-Dragon Android Transfer.debug.xcconfig"; sourceTree = "<group>"; };
 		D76E99487AF2B4AB76B28F08 /* Pods_Dragon_Android_Transfer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dragon_Android_Transfer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA06CB7020D9707400448053 /* DarkAlertUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkAlertUtils.swift; sourceTree = "<group>"; };
 		DA39B9E320D8D5B60041AE89 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
 		DAC59169202F7A0300534084 /* file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file.png; sourceTree = "<group>"; };
 		DAC5916F202F7A5F00534084 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
@@ -894,6 +896,7 @@
 				BE3BDB8452A7793F38751991 /* TableViewKeys.swift */,
 				50D37AAB20092EB1007A1374 /* VerticallyAlignedTextFieldCell.swift */,
 				BE3BD58FE89F62979C87BBE7 /* Xib */,
+				DA06CB7020D9707400448053 /* DarkAlertUtils.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -1646,6 +1649,7 @@
 				50F5117B200139EE00CCB22C /* FileOptions.swift in Sources */,
 				50D7D9B41FFE948D00E85E70 /* TextUtils.swift in Sources */,
 				50D37A9C20091366007A1374 /* NSTextField_ext.swift in Sources */,
+				DA06CB7120D9707400448053 /* DarkAlertUtils.swift in Sources */,
 				BE3BDE36A34F20C0862470AC /* R.swift in Sources */,
 				BE3BDD0E064CA86D1F6A123C /* NSWindow_Extension.swift in Sources */,
 				BE3BD392818B15BDF9FEEAFA /* MVCTable.swift in Sources */,

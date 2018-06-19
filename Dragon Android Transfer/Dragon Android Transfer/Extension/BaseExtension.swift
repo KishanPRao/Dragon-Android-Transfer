@@ -5,6 +5,15 @@
 
 import Foundation
 
+//TODO: What happens if 32 bit architecture?
+typealias Number = UInt64
+
+extension Double {
+    func roundUp() -> Double {
+        return self < 0.0 ? 0.0 : self
+    }
+}
+
 extension NSObject {
 	class var VERBOSE: Bool {
 		return true

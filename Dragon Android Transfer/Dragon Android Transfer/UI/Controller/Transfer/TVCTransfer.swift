@@ -122,12 +122,13 @@ extension TransferViewController {
         let timeTaken = Double(timeTakenInNano) / 1_000_000_000
         
         LogV("Remaining:\(remainingSize), offset: \(offset), time taken: \(timeTaken)")
-		let timeRemaining = (timeTaken * remainingSize) / offset
+		var timeRemaining = (timeTaken * remainingSize) / offset
 //        let timeRemaining = (timeTaken * remainingSize) / sizeCopied
         LogI("Time Remaining: \(timeRemaining)")
         if  timeRemaining == Double.nan || timeRemaining == Double.infinity {
             return
         }
+        timeRemaining = timeRemaining < 0 ? 0.0 : timeRemaining
 		ThreadUtils.runInMainThread {
 			let timeString = TimeUtils.getTime(seconds: timeRemaining)
 			self.timeRemainingText.attributedStringValue = TextUtils.attributedBoldString(

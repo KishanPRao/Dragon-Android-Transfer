@@ -80,7 +80,7 @@ class TransferViewController: NSViewController {
         alert = DarkAlert(message: "Cancel?", info: "Do you want to cancel the current transfer?",
                           buttonNames: ["Ok", "Cancel"])
 		let button = alert!.runModal()
-		if (button == NSApplication.ModalResponse.alertSecondButtonReturn) {
+		if (button == NSApplication.ModalResponse.alertFirstButtonReturn) {
 //            Ok
 			transferHandler.cancelActiveTask()
 			self.exit()

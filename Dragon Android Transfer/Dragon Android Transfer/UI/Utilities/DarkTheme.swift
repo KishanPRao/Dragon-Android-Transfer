@@ -22,7 +22,8 @@ class DarkTheme: Theme {
     let menuItemSelectCellBg = color("11326c")
 //    let menuItemSelectCellBg = color("091f45")
 	
-	let toolbarColor = color("003b6f")
+//    let toolbarColor = color("003b6f")
+    let toolbarColor = color("134876")
 	let toolbarProgressFg = color("1a64a3")
 	let toolbarProgressBg = color("47a0f2")
 
@@ -36,14 +37,17 @@ class DarkTheme: Theme {
 	let tableItemBg = color("000000")
 //    let listSelectedBackgroundColor = color("0d3475")
     let listSelectedBackgroundColor = color("092c61")
+//    let listSelectedBackgroundColor = color("2f2f2f")
 
 	let transferBg = color("313b4c")
 	let transferTextColor = color("b8c2c9")
     let transferProgressFg = color("204582")
     let transferProgressBg = color("6a7991")
     
-    let dialogBgColor = color("193360")
-    let dialogWindowColor = color("0f1217")
+//    let dialogBgColor = color("193360")
+    let dialogBgColor = color("313b4c")
+//    let dialogWindowColor = color("0f1217")
+    let dialogWindowColor = color("313b4c")
 //    let dialogWindowColor = color("0b0d11")
 
 //	let windowBg = color("050505")

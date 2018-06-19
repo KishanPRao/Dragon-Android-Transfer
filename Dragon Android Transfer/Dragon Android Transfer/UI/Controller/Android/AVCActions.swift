@@ -106,7 +106,7 @@ extension AndroidViewController {
 		if let folderName = AlertUtils.input("Create New Folder", info: "Enter the name of the new folder:", defaultValue: "Untitled Folder") {
 			Swift.print("AndroidViewController, folder:", folderName)
 			if (transferHandler.folderExists(folderName)) {
-				AlertUtils.showAlert("Folder '\(folderName)' already exists!", info: "", confirm: false)
+				DarkAlertUtils.showAlert("Folder '\(folderName)' already exists!", info: "", confirm: false)
 			} else {
 				transferHandler.createAndroidFolder(folderName)
 				refresh()
@@ -135,7 +135,7 @@ extension AndroidViewController {
 		//        let selectedItem = self.androidDirectoryItems[fileTable.selectedRow]
 		//        let selectedFileName = selectedItem.fileName
         //        TODO: Update Delete Dialog!
-		if AlertUtils.showAlert("Do you really want to delete \(deleteStringInDialog)?", info: "", confirm: true) {
+		if DarkAlertUtils.showAlert("Do you really want to delete \(deleteStringInDialog)?", info: "", confirm: true) {
 			LogI("Delete", deleteItems)
 			Observable.just(transferHandler)
 					.observeOn(MainScheduler.instance)

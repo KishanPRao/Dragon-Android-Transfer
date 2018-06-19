@@ -10,13 +10,17 @@ import Foundation
 
 class DarkAlert: NSAlert {
 	
+    //    TODO: Show dialog in middle of screen? Window?
     init(message: String, info: String, buttonNames: [String], fullScreen: Bool = true, textColor: NSColor = R.color.white) {
 		super.init()
 		let alert = self
-		alert.messageText = message
-		alert.informativeText = info
-        for buttonName in buttonNames.reversed() {
-			alert.addButton(withTitle: buttonName)
+        for buttonName in buttonNames {
+			let button = alert.addButton(withTitle: buttonName)
+            button.setText(text: button.title, textColor: R.color.black,
+                           alignment: .center, bgColor: R.color.white,
+                           rounded: true)
+            button.imageScaling = .scaleNone
+            button.updateMainFont(13.0)
         }
         if fullScreen {
 			alert.window.styleMask = NSWindow.StyleMask.fullSizeContentView
@@ -30,14 +34,17 @@ class DarkAlert: NSAlert {
         
         //        TODO: Update Colors, first responder during Transfer.
 		
-		for view in (alert.window.contentView?.subviews)! {
-			if let text = (view as? NSTextField) {
-				text.textColor = textColor
-				text.isSelectable = false
-                text.updateMainFont()
-			}
-		}
-		
+        for view in (alert.window.contentView?.subviews)! {
+            if let text = (view as? NSTextField) {
+                text.isSelectable = false
+                text.updateMainFontInIncrement(2.0)
+                text.textColor = textColor
+            }
+        }
+        alert.messageText = message
+        alert.informativeText = info
+        
+		/*
 		for button in alert.buttons {
 //            button.setBackground(R.color.menuBgColor)
 //            button.image = NSImage.swatchWithColor(color: R.color.gray, size: button.frame.size)
@@ -48,7 +55,9 @@ class DarkAlert: NSAlert {
 					alignment: .center, bgColor: R.color.white,
 					rounded: true)
 			button.imageScaling = .scaleNone
-		}
+            button.updateMainFont(13.0)
+            button
+		}*/
 	}
 	
 	public func end() {

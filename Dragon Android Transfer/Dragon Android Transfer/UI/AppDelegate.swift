@@ -152,9 +152,9 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
 	}
 	
 	func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
-		if (Verbose) {
-			Swift.print("AppDelegate, item:", item);
-		}
+//        if (Verbose) {
+//            Swift.print("AppDelegate, item:", item);
+//        }
 		return AppDelegate.validateInterfaceMenuItem(item: item)
 	}
 	

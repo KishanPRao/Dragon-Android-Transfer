@@ -653,7 +653,6 @@ public class AndroidHandler: VerboseObject {
 			print("------Start Time:", TimeUtils.getCurrentTime())
 			
 			startedTask = true
-//			adbHandler.pull("/sdcard/Android/app.apk", toDestination: "/Users/kishanprao/Test/") {  progress, result in
 			while let file = currentFile {
 				if (cancelTask) {
 					print("Task Canceled")
