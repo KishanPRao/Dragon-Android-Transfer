@@ -10,13 +10,17 @@ import Cocoa
 
 class DarkAlertUtils: NSObject {
 
-    static func showAlert(_ message: String, info: String, confirm: Bool) -> Bool {
+    static func showAlert(_ message: String, info: String, confirm: Bool, 
+                          style: NSAlert.Style = .critical) -> Bool {
         var buttons: [String] = []
         buttons.append("OK")
         if (confirm) {
             buttons.append("Cancel")
         }
-        let alert = DarkAlert(message: message, info: info, buttonNames: buttons)
+        let alert = DarkAlert(message: message, info: info, buttonNames: buttons,
+            fullScreen: false,
+            textColor: R.color.transferTextColor)
+        alert.alertStyle = style
         let button = alert.runModal()
         if (button == NSApplication.ModalResponse.alertFirstButtonReturn) {
             return true
@@ -24,31 +28,28 @@ class DarkAlertUtils: NSObject {
         return false
     }
     
-//    TODO
-    /*
-    + (NSString *)input:(NSString *)title info:(NSString *)info defaultValue:(NSString *)defaultValue {
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText:title];
-    [alert setInformativeText:info];
-    [alert setAlertStyle:NSInformationalAlertStyle];
-    [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Cancel"];
     
-    NSTextField *input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 200, 24)];
-    [input setTranslatesAutoresizingMaskIntoConstraints:true];
-    [input setStringValue:defaultValue];
-    
-    [alert setAccessoryView:input];
-    [[alert window] setInitialFirstResponder: input];
-    NSInteger button = [alert runModal];
-    if (button == NSAlertFirstButtonReturn) {
-    [input validateEditing];
-    return [input stringValue];
-    } else if (button == NSAlertSecondButtonReturn) {
-    return nil;
-    } else {
-    //        NSAssert1(NO, @"Invalid input dialog button %d", button);
-    return nil;
+    static func input(_ title: String, info: String, defaultValue: String) -> String? {
+        let alert = DarkAlert(message: title, info: info,
+                              buttonNames: ["OK", "Cancel"],
+                              fullScreen: false,
+                              textColor: R.color.transferTextColor)
+        alert.alertStyle = .informational
+        let input = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
+        input.isEditable = true
+        input.translatesAutoresizingMaskIntoConstraints = true
+        input.stringValue = defaultValue
+        
+        alert.accessoryView = input
+        alert.window.initialFirstResponder = input
+        let response = alert.runModal()
+        if (response == NSApplication.ModalResponse.alertFirstButtonReturn) {
+            input.validateEditing()
+            return input.stringValue
+        } else if (response == NSApplication.ModalResponse.alertSecondButtonReturn) {
+            return nil
+        }
+//        print("Invalid input dialog response \(response)")
+        return nil
     }
-    }*/
 }
