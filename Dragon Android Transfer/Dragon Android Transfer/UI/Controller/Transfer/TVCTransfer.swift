@@ -116,10 +116,16 @@ extension TransferViewController {
 //        let timeTaken = Double(nanoTime) / 1_000_000_000
 //        let timeTaken = currentUpdateDelay
 //        currentUpdateDelay = TransferViewController.kDefaultUpdateDelay
+        
+        //        TODO: Instead, total copy time taken considered, instead of previous, avg!
         let currentTime = TimeUtils.getDispatchTime()
         let timeTakenInNano = currentTime.uptimeNanoseconds - previousTime.uptimeNanoseconds
-		previousTime = currentTime
         let timeTaken = Double(timeTakenInNano) / 1_000_000_000
+        
+        if (timeTaken < updateDelay) {
+            return
+        }
+        previousTime = currentTime
         
         LogV("Remaining:\(remainingSize), offset: \(offset), time taken: \(timeTaken)")
 		var timeRemaining = (timeTaken * remainingSize) / offset

@@ -155,7 +155,7 @@ class TransferViewController: NSViewController {
 //        timeRemainingText.alignment = .center
 //        timeRemainingText.stringValue = R.string.textViewPlaceHolder
         timeRemainingText.attributedStringValue = TextUtils.attributedBoldString(
-                from: R.string.textViewPlaceHolder,
+                from: R.string.timeRemainingPlaceHolder,
                 color: R.color.transferTextColor,
                 nonBoldRange: nil,
                 .center)

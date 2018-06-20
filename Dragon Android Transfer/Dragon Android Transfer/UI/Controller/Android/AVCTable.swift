@@ -110,24 +110,30 @@ extension AndroidViewController {
             }
 //            print("3. Cell Time Taken: \(TimeUtils.getDifference(startTime))ms")
             if let fileTable = fileTable {
-                if (!isDirectory) {
+                let previousDragging = cellView.isDraggingCell
+                cellView.isDraggingCell = (!isDirectory && fileTable.dragDropRow == row)
+                print("Dragging \(cellView.isDraggingCell): \(row)")
+                /*if (!isDirectory) {
                     if (fileTable.dragDropRow == row) {
                         //                        print("AVC Drag color: \(row)")
                         //                        ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.mainViewColor)
                         cellView.isDraggingCell = true
                     } else {
                         cellView.isDraggingCell = false
+                        print("Not dragging cell: \(row)")
                         //                        print("AVC Clear color: \(row), \(fileTable.dragDropRow)")
                         //                        ColorUtils.setBackgroundColorTo(cellView, color: R.color.clear)
                     }
-                }
+                }*/
 //                print("4. Cell Time Taken: \(TimeUtils.getDifference(startTime))ms")
                 let indexSet = fileTable.selectedRowIndexes
 //                print("5. Cell Time Taken: \(TimeUtils.getDifference(startTime))ms")
+                let needUpdate = cellView.isDraggingCell != previousDragging
                 if (indexSet.contains(row)) {
 //                    print("6. Cell Time Taken: \(TimeUtils.getDifference(startTime))ms")
                     //                    ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listSelectedBackgroundColor)
-                    if (!cellView.isSelected) {
+                    print("Dragging: \(row), Selected: \(cellView.isSelected), dd: \(cellView.isDraggingCell)")
+                    if (needUpdate || !cellView.isSelected) {
                         cellView.isSelected = true
                     }
                 } else {
@@ -135,7 +141,7 @@ extension AndroidViewController {
                     //                    cellView.setBackground(R.color.tableItemBg)
                     //                    cellView.setBackground(R.color.clear)
                     //                    cellView.setBackground(NSColor.clear)
-                    if (cellView.isSelected) {
+                    if (needUpdate || cellView.isSelected) {
                         cellView.isSelected = false
                     }
                     //                ColorUtils.setBackgroundColorTo(cellView, color: ColorUtils.listItemBackgroundColor)

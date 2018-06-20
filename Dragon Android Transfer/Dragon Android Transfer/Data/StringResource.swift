@@ -52,6 +52,7 @@ public struct StringResource {
 //					"support.draconian@gmail.com"
     
     let textViewPlaceHolder = "Updating.."
+    let timeRemainingPlaceHolder = "Calculating time remaining..."
     
     //    Help:
     let helpBack = "Go Back"

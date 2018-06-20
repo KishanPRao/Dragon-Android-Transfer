@@ -40,60 +40,6 @@ extension AndroidViewController {
 				}).disposed(by: disposeBag)
 	}
 	
-	/*
-	internal func observeDevices() {
-		transferHandler.observeAndroidDevices()
-			.subscribeOn(bgScheduler)
-			.observeOn(MainScheduler.instance)
-			.map {
-				devices -> ([AndroidDeviceMac]) in
-				Swift.print("Main 1 :", ThreadUtils.isMainThread())
-				Swift.print("Observable Devices", devices)
-				self.showProgress()
-				if (!self.externalStorageButton.isHidden) {
-					self.externalStorageButton.isHidden = true
-				}
-				return devices
-			}
-			.observeOn(bgScheduler)
-			.map {
-				devices -> ([AndroidDeviceMac]) in
-				Swift.print("Main 2:", ThreadUtils.isMainThread())
-				Swift.print("Observable Devices", devices)
-				var devicesNames = [] as Array<String>
-				var i = 0
-				self.androidDevices.removeAllObjects()
-				self.androidDevices.addObjects(from: devices)
-				while i < devices.count {
-					devicesNames.append(devices[i].name)
-					i = i + 1
-				}
-				self.devicesPopUp.removeAllItems()
-				self.devicesPopUp.addItems(withTitles: devicesNames)
-				return devices
-				
-			}
-			.observeOn(MainScheduler.instance)
-			.map {
-				devices -> ([AndroidDeviceMac]) in
-				Swift.print("Main 3:", ThreadUtils.isMainThread())
-				Swift.print("Observable Devices", devices)
-				let selectedIndex = self.devicesPopUp.indexOfSelectedItem
-				print("Update Selected:", selectedIndex)
-				self.updatePopupDimens()
-				var activeDevice = nil as AndroidDeviceMac?
-				if (selectedIndex > -1 && selectedIndex < devices.count) {
-					//TODO: Crash if rapid dc & conn.
-					activeDevice = devices[selectedIndex]
-				}
-				self.updateActiveDevice(activeDevice)
-				return devices
-			}.subscribe(onNext: {
-				devices in
-				print("Result : ", devices)
-			})
-	}*/
-	
 	func updateList() {
 //        LogV("Update List")
         self.resetDeviceStatus()

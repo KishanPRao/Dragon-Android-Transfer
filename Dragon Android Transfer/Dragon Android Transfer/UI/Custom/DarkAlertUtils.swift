@@ -10,8 +10,9 @@ import Cocoa
 
 class DarkAlertUtils: NSObject {
 
-    static func showAlert(_ message: String, info: String, confirm: Bool, 
-                          style: NSAlert.Style = .critical) -> Bool {
+//    Key value pairs, send all params, include image for 'info' action.
+    static func showAlert(_ message: String, info: String, confirm: Bool,
+                          style: NSAlert.Style = .informational) -> Bool {
         var buttons: [String] = []
         buttons.append("OK")
         if (confirm) {

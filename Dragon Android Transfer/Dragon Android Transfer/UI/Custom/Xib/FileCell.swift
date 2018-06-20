@@ -26,7 +26,8 @@ class FileCell: NSTableCellView {
         didSet {
             if (isSelected) {
                 if (self.isDraggingCell) {
-                    self.contentView.setBackground(R.color.mainViewColor)
+//                    self.contentView.setBackground(R.color.mainViewColor)
+                    self.contentView.setBackground(R.color.tableItemBg)
                 } else {
                     self.contentView.setBackground(R.color.listSelectedBackgroundColor)
                 }
