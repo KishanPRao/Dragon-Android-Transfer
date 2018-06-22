@@ -262,6 +262,8 @@
 		DAAF120520DCC25900E075B8 /* Ubuntu-Bold.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */; };
 		DAAF120720DCE77100E075B8 /* NonDeselectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAF120620DCE77100E075B8 /* NonDeselectTableView.swift */; };
 		DAAF120920DCF98800E075B8 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAF120820DCF98800E075B8 /* refresh.png */; };
+		DAAF120D20DD532F00E075B8 /* UnitBezierMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = DAAF120C20DD532F00E075B8 /* UnitBezierMac.mm */; };
+		DAAF120F20DD573600E075B8 /* UnitBezier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAAF120E20DD573600E075B8 /* UnitBezier.cpp */; };
 		DAC5916A202F7A0300534084 /* file.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC59169202F7A0300534084 /* file.png */; };
 		DAC59170202F7A5F00534084 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC5916F202F7A5F00534084 /* cancel.png */; };
 		DAE8B56520D01A3500520FB3 /* VerboseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE8B56420D01A3500520FB3 /* VerboseObject.swift */; };
@@ -548,6 +550,10 @@
 		DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
 		DAAF120620DCE77100E075B8 /* NonDeselectTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonDeselectTableView.swift; sourceTree = "<group>"; };
 		DAAF120820DCF98800E075B8 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
+		DAAF120A20DD52EC00E075B8 /* UnitBezier.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnitBezier.h; sourceTree = "<group>"; };
+		DAAF120B20DD532F00E075B8 /* UnitBezierMac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnitBezierMac.h; sourceTree = "<group>"; };
+		DAAF120C20DD532F00E075B8 /* UnitBezierMac.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = UnitBezierMac.mm; sourceTree = "<group>"; };
+		DAAF120E20DD573600E075B8 /* UnitBezier.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UnitBezier.cpp; sourceTree = "<group>"; };
 		DAC59169202F7A0300534084 /* file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file.png; sourceTree = "<group>"; };
 		DAC5916F202F7A5F00534084 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
 		DAE8B56420D01A3500520FB3 /* VerboseObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerboseObject.swift; sourceTree = "<group>"; };
@@ -820,6 +826,10 @@
 				BE3BDF9DF12733C10195D46C /* BridgeHelper.h */,
 				BE3BD07AE75AC50256BB9815 /* CommandType.h */,
 				BE3BDECAA43B1F596EC76E89 /* CommandFactory.cpp */,
+				DAAF120A20DD52EC00E075B8 /* UnitBezier.h */,
+				DAAF120E20DD573600E075B8 /* UnitBezier.cpp */,
+				DAAF120B20DD532F00E075B8 /* UnitBezierMac.h */,
+				DAAF120C20DD532F00E075B8 /* UnitBezierMac.mm */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1623,12 +1633,14 @@
 				BE3BD997583170883563D454 /* DeleteCommand.cpp in Sources */,
 				BE3BDB43AA8BAD090A486622 /* TotalSpaceCommand.cpp in Sources */,
 				BE3BD29F2F154A0AECFAD74B /* AvailableSpaceCommand.cpp in Sources */,
+				DAAF120F20DD573600E075B8 /* UnitBezier.cpp in Sources */,
 				BE3BD10A17A4F6FC76A3D731 /* FileSizeCommand.cpp in Sources */,
 				BE3BDDD656E09806D5694906 /* PullCommand.cpp in Sources */,
 				50FE44A91FF6B84D0099A029 /* SegueFromLeftNew.swift in Sources */,
 				BE3BD192CE9F4157090C7FF1 /* logger.cpp in Sources */,
 				503D93181FF8ED1B009E7E39 /* ImageButton.swift in Sources */,
 				509695091FF7623E005BC423 /* Theme.swift in Sources */,
+				DAAF120D20DD532F00E075B8 /* UnitBezierMac.mm in Sources */,
 				506D09881FFBE6E900FEA857 /* IndeterminateProgress.swift in Sources */,
 				BE3BDB8502B96665F2BD39A9 /* MacHelper.mm in Sources */,
 				BE3BD10A9B765DCC5FF46FB7 /* CommandFactory.cpp in Sources */,

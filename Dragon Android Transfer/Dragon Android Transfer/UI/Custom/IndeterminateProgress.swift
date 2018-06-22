@@ -57,6 +57,18 @@ class IndeterminateProgress: NSView {
         commonInit()
     }
     
+//    let dummyAnimation =
+    
+    func getTime() {
+        /*let path = NSBezierPath(rect: CGRect(x: 0, y: 0,
+                                       width: 500,
+                                       height: 500)
+        let fillLayer = CAShapeLayer(layer: self.layer)
+        fillLayer.path = path.cgPath*/
+        let s = UnitBezierMac()
+        s.sampleY(0)
+    }
+    
     override func draw(_ dirtyRect: NSRect) {
         progressBackground.set()
         backgroundRect.fill()
@@ -67,6 +79,15 @@ class IndeterminateProgress: NSView {
             //            TODO: Animate using kCAMediaTimingFunctionEaseInEaseOut function, somehow.
             ThreadUtils.runInMainThreadAfter(delayMs: NSView.FPS_DELAY, {
                 self.xOffset = self.xOffset + 5
+                let timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+                
+                var point1: [Float] = [0.1,0.1]
+                var point2: [Float] = [0.1,0.1]
+                
+                timingFunction.getControlPoint(at: 1, values: &point1)
+                timingFunction.getControlPoint(at: 2, values: &point2)
+                
+                print("Indeterminate: \(String(describing: point1)),\(String(describing: point2))")
                 self.update()
                 self.needsDisplay = true
             })
@@ -74,28 +95,37 @@ class IndeterminateProgress: NSView {
     }
     
     func show() {
-//        print("Show")
-        cancelActiveAnimation = true
+        print("Show")
+        if (isHiding) {
+            cancelActiveAnimation = true
+        }
         self.alphaValue = 1.0
         self.isHidden = false
         self.needsDisplay = true
-//        print("Show done")
+        print("Show done")
     }
     
+    var isHiding = false
     var cancelActiveAnimation = false
     
     func hide() {
 //        print("Hide")
 //        NSObject.printStackTrace()
+        isHiding = true
         NSAnimationContext.runAnimationGroup({ context in
             context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
             context.duration = R.number.progressAnimHideDuration
             self.animator().alphaValue = 0.0
         }, completionHandler: {
+            self.isHiding = false
             //print("Animation completed")
             if (!self.cancelActiveAnimation) {
             	self.isHidden = true
+                print("Hidden Progress!")
+            } else {
+                print("Not Hidden!")
             }
+            self.cancelActiveAnimation = false
 //            print("Hide done")
         })
     }

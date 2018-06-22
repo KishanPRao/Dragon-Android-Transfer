@@ -15,6 +15,7 @@
 #import <WebKit/WebKit.h>
 
 #import "AndroidAdbHandler.h"
+#import "UnitBezierMac.h"
 #import "AlertUtils.h"
 #import "BridgingUtils.h"
 #import "NibLoader.h"
