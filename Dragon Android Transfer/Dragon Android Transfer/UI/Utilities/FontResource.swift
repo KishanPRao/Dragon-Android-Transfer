@@ -11,6 +11,7 @@ import Foundation
 class FontResource {
 //    let mainFont = "AlegreyaSans-Regular"
     let mainFont = "Ubuntu-Regular"
+    let mainBoldFont = "Ubuntu-Bold"
 //    let mainFont = "Raleway-Regular"
 //    let mainFont = "PT_Sans-Web-Regular"
     //    TODO: Bold Font

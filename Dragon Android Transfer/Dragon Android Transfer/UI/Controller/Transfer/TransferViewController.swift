@@ -66,7 +66,7 @@ class TransferViewController: NSViewController {
 	func exit() {
 		NSAnimationContext.runAnimationGroup({ context in
 			context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-			context.duration = R.integer.animEndDuration
+			context.duration = R.number.animEndDuration
 			self.transferDialog.animator().frame.size = NSSize(width: 0, height: 0)
 			self.transferDialog.animator().frame.origin = CGPoint(x: self.view.frame.width / 2.0, y: self.view.frame.height / 2.0)
 		}, completionHandler: {
@@ -114,6 +114,8 @@ class TransferViewController: NSViewController {
         currentCopiedSize = 0
         totalSize = 0
         transferProgressView.setProgress(0.0)
+        transferProgressView.progressBgColor = R.color.transferProgressBg
+        transferProgressView.progressFgColor = R.color.transferProgressFg
         
 		self.view.frame.size = frameSize.size
 		
@@ -133,8 +135,9 @@ class TransferViewController: NSViewController {
 		moreButton.setBackground(R.color.transferBg)
 		moreButton.image = normalMore
 		moreButton.attributedTitle = TextUtils.getTruncatedAttributeString("More",
-				.left,
-				R.color.transferTextColor)
+                                                                           alignment: .left,
+                                                                           useUnderline: false,
+                                                                           color: R.color.transferTextColor)
 		moreButton.isBordered = false
 		moreButton.imagePosition = .imageRight
 		
@@ -238,7 +241,7 @@ class TransferViewController: NSViewController {
 		self.transferDialog.frame.origin = CGPoint(x: self.view.frame.width / 2.0, y: self.view.frame.height / 2.0)
 		NSAnimationContext.runAnimationGroup({ context in
 			context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-			context.duration = R.integer.animStartDuration
+			context.duration = R.number.animStartDuration
 			self.transferDialog.animator().frame.size = origSize
 			self.transferDialog.animator().frame.origin = origOrigin
 		}, completionHandler: nil)

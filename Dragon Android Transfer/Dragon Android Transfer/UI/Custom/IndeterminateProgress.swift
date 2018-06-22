@@ -64,6 +64,7 @@ class IndeterminateProgress: NSView {
         path.fill()
         
         if (!isHidden) {
+            //            TODO: Animate using kCAMediaTimingFunctionEaseInEaseOut function, somehow.
             ThreadUtils.runInMainThreadAfter(delayMs: NSView.FPS_DELAY, {
                 self.xOffset = self.xOffset + 5
                 self.update()
@@ -88,7 +89,7 @@ class IndeterminateProgress: NSView {
 //        NSObject.printStackTrace()
         NSAnimationContext.runAnimationGroup({ context in
             context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-            context.duration = R.integer.progressAnimHideDuration
+            context.duration = R.number.progressAnimHideDuration
             self.animator().alphaValue = 0.0
         }, completionHandler: {
             //print("Animation completed")

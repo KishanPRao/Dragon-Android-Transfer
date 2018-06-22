@@ -108,7 +108,6 @@
 		BE3BD0BC8FB4E46F77952D71 /* NSViewController_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD9E8FE3599A1D744CDAD /* NSViewController_Extension.swift */; };
 		BE3BD0BD51163ECA8A5D5591 /* AlertUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD4C7EAE158473C89B0E1 /* AlertUtils.m */; };
 		BE3BD0BFD49829866DA0F303 /* ClipboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDB097E5E3776E3C533A9 /* ClipboardViewController.swift */; };
-		BE3BD0CC16F11CA8AD3B2D4E /* TableViewKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDB8452A7793F38751991 /* TableViewKeys.swift */; };
 		BE3BD0DAFD01DF437ADDF7C9 /* DraggableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDC7CF24C3F020FF8484B /* DraggableTableView.swift */; };
 		BE3BD0E5A9B8848A8C017AD3 /* CopyDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD08ACB1E71CAFEDC0EA1 /* CopyDialog.xib */; };
 		BE3BD0F4C5A7EF122AD8ADE6 /* AdbExecutorMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD9793A76066F013F8293 /* AdbExecutorMac.mm */; };
@@ -136,7 +135,6 @@
 		BE3BD38C8918A54949EAC5AC /* SegueFromLeftOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDE8034FD05FF612778EF /* SegueFromLeftOld.swift */; };
 		BE3BD3909031FF01D5520F49 /* Snackbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD81AC439AB91EA5499E0 /* Snackbar.swift */; };
 		BE3BD392818B15BDF9FEEAFA /* MVCTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDC0D0DE4617F91793CEB /* MVCTable.swift */; };
-		BE3BD3A9EC324B60D172E185 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3BDEFB8D195743373D18DF /* refresh.png */; };
 		BE3BD3B0A01FF62638822C38 /* PushCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD4B4838E58D71435680F /* PushCommand.cpp */; };
 		BE3BD3CA5BE659E67FC602F6 /* HelpWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD2D5E6A92AAE4A73DF66 /* HelpWindow.xib */; };
 		BE3BD3CF4A98FDDACABFF93A /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD7F1239BA6A5E7685902 /* ColorUtils.swift */; };
@@ -189,12 +187,11 @@
 		BE3BD8EDE4315A9DDE83BC28 /* AVCActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDD84202B808433F118D6 /* AVCActions.swift */; };
 		BE3BD8EE0F08AADB11B72710 /* HelpWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD1150BDBC59E1E4EE59E /* HelpWindow.swift */; };
 		BE3BD9080982F66CADE02C28 /* HelpWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD2D5E6A92AAE4A73DF66 /* HelpWindow.xib */; };
-		BE3BD9725949A8036826EB22 /* IntegerResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD58F84E6678D4CC5BA02 /* IntegerResource.swift */; };
+		BE3BD9725949A8036826EB22 /* NumberResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD58F84E6678D4CC5BA02 /* NumberResource.swift */; };
 		BE3BD975E231F361C9E82C66 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD41B757B51397AC78AA2 /* MenuCell.swift */; };
 		BE3BD98A9BBF4B8A5D355489 /* AVCUi.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDFBC6549A31FD7DF3BAE /* AVCUi.swift */; };
 		BE3BD997583170883563D454 /* DeleteCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD60EAFC03007A46FE2F4 /* DeleteCommand.cpp */; };
 		BE3BD99A586FADDBD3B7DDCF /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD84AE45EE7CCE8AA60E2 /* ProgressView.swift */; };
-		BE3BD9BA2219AB6F7E051904 /* TableViewKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDB8452A7793F38751991 /* TableViewKeys.swift */; };
 		BE3BD9BD2020E50C8DE0DD28 /* PushCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD4B4838E58D71435680F /* PushCommand.cpp */; };
 		BE3BD9C6949E9F5050D4D401 /* ThreadUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDC1EC5EA8A5A0A17A378 /* ThreadUtils.swift */; };
 		BE3BD9D55D5C9670B8ACFA0F /* PrintUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD4CF42CD0C36BF15D950 /* PrintUtils.swift */; };
@@ -250,7 +247,7 @@
 		BE3BDF0DB532B65C04E311BD /* SimpleAdbCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDD930E20C1CA43BD528C /* SimpleAdbCommand.cpp */; };
 		BE3BDF368388FB6EFDF95098 /* TransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDDA6A14679C99D3339E3 /* TransferViewController.swift */; };
 		BE3BDF43E55E23C9AA555683 /* CommandConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDF237C5E63BBBEB20EE5 /* CommandConfig.cpp */; };
-		BE3BDF47D133535B2723303C /* IntegerResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD58F84E6678D4CC5BA02 /* IntegerResource.swift */; };
+		BE3BDF47D133535B2723303C /* NumberResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD58F84E6678D4CC5BA02 /* NumberResource.swift */; };
 		BE3BDF9E75310567DF68036E /* AVCDrag.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD29697E49FE6B53E5E90 /* AVCDrag.swift */; };
 		BE3BDF9F00E6DA1CD6D6CE43 /* FileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD9DD832AF8F7C03CB8FE /* FileCell.xib */; };
 		BE3BDFA64BC7A54BC65A4795 /* PathSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD3AFAB6C6A1C807BE233 /* PathSelector.swift */; };
@@ -261,6 +258,10 @@
 		BE3BDFF20674FE9E4D059CB7 /* DisabledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDBB5E059C6147F64EDCE /* DisabledTextField.swift */; };
 		DA06CB7120D9707400448053 /* DarkAlertUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA06CB7020D9707400448053 /* DarkAlertUtils.swift */; };
 		DA39B9E420D8D5B60041AE89 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = DA39B9E320D8D5B60041AE89 /* folder.png */; };
+		DAAF120420DCC23300E075B8 /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */; };
+		DAAF120520DCC25900E075B8 /* Ubuntu-Bold.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */; };
+		DAAF120720DCE77100E075B8 /* NonDeselectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAF120620DCE77100E075B8 /* NonDeselectTableView.swift */; };
+		DAAF120920DCF98800E075B8 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = DAAF120820DCF98800E075B8 /* refresh.png */; };
 		DAC5916A202F7A0300534084 /* file.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC59169202F7A0300534084 /* file.png */; };
 		DAC59170202F7A5F00534084 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC5916F202F7A5F00534084 /* cancel.png */; };
 		DAE8B56520D01A3500520FB3 /* VerboseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE8B56420D01A3500520FB3 /* VerboseObject.swift */; };
@@ -292,6 +293,7 @@
 			dstPath = Fonts;
 			dstSubfolderSpec = 7;
 			files = (
+				DAAF120520DCC25900E075B8 /* Ubuntu-Bold.ttf in CopyFiles */,
 				50D37AA520091735007A1374 /* Slabo27px-Regular.ttf in CopyFiles */,
 				50D37AA620091735007A1374 /* Ubuntu-Regular.ttf in CopyFiles */,
 				50D37AA720091735007A1374 /* Cambo-Regular.ttf in CopyFiles */,
@@ -449,7 +451,7 @@
 		BE3BD55127085F27DE775E28 /* CustomSwiftAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSwiftAnimator.swift; sourceTree = "<group>"; };
 		BE3BD5615C960F68E04FDA73 /* DeleteCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DeleteCommand.hpp; sourceTree = "<group>"; };
 		BE3BD58E0B938C1E22B9DA59 /* StorageListCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StorageListCommand.hpp; sourceTree = "<group>"; };
-		BE3BD58F84E6678D4CC5BA02 /* IntegerResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegerResource.swift; sourceTree = "<group>"; };
+		BE3BD58F84E6678D4CC5BA02 /* NumberResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberResource.swift; sourceTree = "<group>"; };
 		BE3BD5A174AC494406F68801 /* intro_guide.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = intro_guide.rtf; sourceTree = "<group>"; };
 		BE3BD5B0D93EC150367B8A8C /* FileProgressDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileProgressDelegate.swift; sourceTree = "<group>"; };
 		BE3BD5F8E8F2AA3E81B07AA5 /* AndroidViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AndroidViewController.storyboard; sourceTree = "<group>"; };
@@ -492,7 +494,6 @@
 		BE3BDB16DB0C701832D6D2BC /* endCopy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = endCopy.mp3; sourceTree = "<group>"; };
 		BE3BDB3E2A1E4A083D7DA873 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		BE3BDB4BDA4AF8C469F2136D /* ClipboardDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClipboardDelegate.swift; sourceTree = "<group>"; };
-		BE3BDB8452A7793F38751991 /* TableViewKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewKeys.swift; sourceTree = "<group>"; };
 		BE3BDBB5E059C6147F64EDCE /* DisabledTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisabledTextField.swift; sourceTree = "<group>"; };
 		BE3BDBC1DF68ADDF6B3C551C /* ListCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCommand.h; sourceTree = "<group>"; };
 		BE3BDBDE327B0A1968AB193B /* ListCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ListCommand.cpp; sourceTree = "<group>"; };
@@ -529,7 +530,6 @@
 		BE3BDED8D1C80713401499D7 /* DimenUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DimenUtils.swift; sourceTree = "<group>"; };
 		BE3BDEF13CA38DBEC207CD7E /* StyleUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleUtils.swift; sourceTree = "<group>"; };
 		BE3BDEF99F9695AD6D7B4402 /* AndroidShellResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AndroidShellResource.swift; sourceTree = "<group>"; };
-		BE3BDEFB8D195743373D18DF /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		BE3BDF237C5E63BBBEB20EE5 /* CommandConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CommandConfig.cpp; sourceTree = "<group>"; };
 		BE3BDF2646B4FF28CCC5B703 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BE3BDF2E49F9802CC53731B1 /* AdbCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdbCommand.h; sourceTree = "<group>"; };
@@ -545,6 +545,9 @@
 		D76E99487AF2B4AB76B28F08 /* Pods_Dragon_Android_Transfer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dragon_Android_Transfer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA06CB7020D9707400448053 /* DarkAlertUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkAlertUtils.swift; sourceTree = "<group>"; };
 		DA39B9E320D8D5B60041AE89 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
+		DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
+		DAAF120620DCE77100E075B8 /* NonDeselectTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonDeselectTableView.swift; sourceTree = "<group>"; };
+		DAAF120820DCF98800E075B8 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		DAC59169202F7A0300534084 /* file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file.png; sourceTree = "<group>"; };
 		DAC5916F202F7A5F00534084 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
 		DAE8B56420D01A3500520FB3 /* VerboseObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerboseObject.swift; sourceTree = "<group>"; };
@@ -619,8 +622,8 @@
 				503D93151FF8EAA0009E7E39 /* menu_back.png */,
 				BE3BD6E19034EA1ACA510769 /* back_button.png */,
 				50F51178200108FE00CCB22C /* transfer_more.png */,
-				BE3BDEFB8D195743373D18DF /* refresh.png */,
 				BE3BDF4C3E50FACB10B4D3EF /* clipboard_icon_plain.png */,
+				DAAF120820DCF98800E075B8 /* refresh.png */,
 				50F511842001405500CCB22C /* options.png */,
 				50F91FCC20024D9F00C58955 /* info.png */,
 				5098AC6D1FFD3C810084449B /* path_selector_div.png */,
@@ -676,6 +679,7 @@
 		50C567201FFA934C00452792 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */,
 				50D37AA420091720007A1374 /* Slabo27px-Regular.ttf */,
 				50D37AA32009171B007A1374 /* Ubuntu-Regular.ttf */,
 				50D37AA220091716007A1374 /* Cambo-Regular.ttf */,
@@ -893,10 +897,10 @@
 				50D7D9BB1FFEA37A00E85E70 /* ScrollessScrollView.m */,
 				50CAAF891FFFBFCD00911D8E /* SingleClickButton.swift */,
 				50CAAF9120000F2A00911D8E /* DarkAlert.swift */,
-				BE3BDB8452A7793F38751991 /* TableViewKeys.swift */,
 				50D37AAB20092EB1007A1374 /* VerticallyAlignedTextFieldCell.swift */,
 				BE3BD58FE89F62979C87BBE7 /* Xib */,
 				DA06CB7020D9707400448053 /* DarkAlertUtils.swift */,
+				DAAF120620DCE77100E075B8 /* NonDeselectTableView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -1019,7 +1023,7 @@
 				5096950A1FF76428005BC423 /* DarkTheme.swift */,
 				5096950C1FF765D8005BC423 /* LightTheme.swift */,
 				5098AC6F1FFD3CBA0084449B /* ImageResource.swift */,
-				BE3BD58F84E6678D4CC5BA02 /* IntegerResource.swift */,
+				BE3BD58F84E6678D4CC5BA02 /* NumberResource.swift */,
 				50D37A9720090FAB007A1374 /* FontResource.swift */,
 				BE3BD404BB59903BA4D0F6D3 /* AudioResource.swift */,
 			);
@@ -1252,7 +1256,6 @@
 				503D93161FF8EAA0009E7E39 /* menu_back.png in Resources */,
 				50F511812001401C00CCB22C /* paste.png in Resources */,
 				50961C0A1FF95CAE001B6D3D /* external_storage.png in Resources */,
-				BE3BD3A9EC324B60D172E185 /* refresh.png in Resources */,
 				BE3BDC8FE02DB6B1BDDFD082 /* clipboard_icon_plain.png in Resources */,
 				BE3BD4342179DB442FD36053 /* close_button.png in Resources */,
 				50CAAF962000253100911D8E /* mac.png in Resources */,
@@ -1269,11 +1272,13 @@
 				BE3BD43FFDA218F217C09DBA /* help.rtf in Resources */,
 				BE3BDBF0A3F946760F91F720 /* intro_guide.rtf in Resources */,
 				BE3BD0E5A9B8848A8C017AD3 /* CopyDialog.xib in Resources */,
+				DAAF120420DCC23300E075B8 /* Ubuntu-Bold.ttf in Resources */,
 				BE3BD3CA5BE659E67FC602F6 /* HelpWindow.xib in Resources */,
 				BE3BDBB3DBEEB39658AC9DDD /* AndroidViewController.storyboard in Resources */,
 				50F91FCD20024DA000C58955 /* info.png in Resources */,
 				50F511852001405500CCB22C /* options.png in Resources */,
 				50F511832001401C00CCB22C /* clipboard.png in Resources */,
+				DAAF120920DCF98800E075B8 /* refresh.png in Resources */,
 				BE3BD86D6970BC033D5B3E58 /* MenuViewController.storyboard in Resources */,
 				BE3BD049FD9C4D474A8E308C /* TransferViewController.storyboard in Resources */,
 				BE3BD07C1550A55D08A853F2 /* Snackbar.xib in Resources */,
@@ -1483,9 +1488,8 @@
 				BE3BD3B0A01FF62638822C38 /* PushCommand.cpp in Sources */,
 				BE3BD51D05677230C1D522CC /* R.swift in Sources */,
 				BE3BD481EE7E1ECFB9BAB89D /* NSWindow_Extension.swift in Sources */,
-				BE3BDF47D133535B2723303C /* IntegerResource.swift in Sources */,
+				BE3BDF47D133535B2723303C /* NumberResource.swift in Sources */,
 				BE3BDCE538836C8F5FD3DE0C /* NSTableView_Extension.swift in Sources */,
-				BE3BD0CC16F11CA8AD3B2D4E /* TableViewKeys.swift in Sources */,
 				BE3BD3909031FF01D5520F49 /* Snackbar.swift in Sources */,
 				BE3BD49231CF52B8ABEE7670 /* Collection_Extension.swift in Sources */,
 				BE3BD512886BC25A550F8BDF /* CommandConfig.cpp in Sources */,
@@ -1613,6 +1617,7 @@
 				BE3BDF0DB532B65C04E311BD /* SimpleAdbCommand.cpp in Sources */,
 				50F91FCF200251B300C58955 /* Path.swift in Sources */,
 				BE3BD05D840B7FC4EC6F0DC2 /* FileExistsCommand.cpp in Sources */,
+				DAAF120720DCE77100E075B8 /* NonDeselectTableView.swift in Sources */,
 				BE3BD32DC2C2B35B0E63F253 /* NewFolderCommand.cpp in Sources */,
 				50CAAF8A1FFFBFCD00911D8E /* SingleClickButton.swift in Sources */,
 				BE3BD997583170883563D454 /* DeleteCommand.cpp in Sources */,
@@ -1656,9 +1661,8 @@
 				506D098A1FFBECE200FEA857 /* NSRect_Extension.swift in Sources */,
 				BE3BDD0F6C64C70A7CDDE47F /* MenuViewController.swift in Sources */,
 				BE3BDEABF4423BB229370157 /* MVCTransfer.swift in Sources */,
-				BE3BD9725949A8036826EB22 /* IntegerResource.swift in Sources */,
+				BE3BD9725949A8036826EB22 /* NumberResource.swift in Sources */,
 				BE3BD4EB06E9E32A7344866B /* NSTableView_Extension.swift in Sources */,
-				BE3BD9BA2219AB6F7E051904 /* TableViewKeys.swift in Sources */,
 				BE3BDBF53A093B11D609BDAC /* TVCTransfer.swift in Sources */,
 				BE3BDF368388FB6EFDF95098 /* TransferViewController.swift in Sources */,
 				BE3BD69562588F8B7C7D203D /* FileCell.swift in Sources */,

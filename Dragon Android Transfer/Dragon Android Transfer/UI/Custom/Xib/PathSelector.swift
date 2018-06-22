@@ -37,7 +37,7 @@ class PathSelector: VerboseView {
 	
 	let indentSize = 1.0 as CGFloat
 	
-	private func updateText(_ button: NSButton, _ text: String) {
+    private func updateText(_ button: NSButton, _ text: String, useUnderline : Bool = false) {
 //        let style = NSMutableParagraphStyle()
 //        style.alignment = .center
 ////        style.headIndent = indentSize
@@ -49,7 +49,9 @@ class PathSelector: VerboseView {
 //            NSParagraphStyleAttributeName: style
 //        ])
 		
-		button.attributedTitle = TextUtils.getTruncatedAttributeString(text)
+		button.attributedTitle = TextUtils.getTruncatedAttributeString(text,
+                                                                       alignment: .center,
+                                                                       useUnderline: useUnderline)
         button.updateMainFont()
 	}
 	
@@ -100,10 +102,11 @@ class PathSelector: VerboseView {
 				
 				let pathElement = Path(directory, path)
 				paths.append(pathElement)
-				let image = isCurrentPath(pathElement) ? disabledImage! : clickableImage!
+                let isLast = isCurrentPath(pathElement)
+				let image = isLast ? disabledImage! : clickableImage!
 				updateButton(button, image)
 				button.imageScaling = .scaleAxesIndependently
-				updateText(button, pathElement.getPathName())
+				updateText(button, pathElement.getPathName(), useUnderline: isLast)
 				button.isHidden = false
 				
 				if (updateTextPosition > 0) {

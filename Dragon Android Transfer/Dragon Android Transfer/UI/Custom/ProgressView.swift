@@ -11,8 +11,8 @@ import Foundation
 class ProgressView: VerboseView {
 //    let PROGRESS_BACKGROUND_COLOR = ColorUtils.colorWithHexString("#5abbb2")
 //    let PROGRESS_FOREGROUND_COLOR = ColorUtils.colorWithHexString("#009688")
-    let PROGRESS_BACKGROUND_COLOR = ColorUtils.colorWithHexString(ColorUtils.progressBackgroundColor)
-    let PROGRESS_FOREGROUND_COLOR = ColorUtils.colorWithHexString(ColorUtils.progressForegroundColor)
+    var progressBgColor = R.color.white
+    var progressFgColor = R.color.black
     
     var mProgress: CGFloat = 0.0
     
@@ -47,9 +47,9 @@ class ProgressView: VerboseView {
 		if (VerboseView.VERBOSE) {
 //			Swift.print("ProgressView, Drawing");
 		}
-        PROGRESS_BACKGROUND_COLOR.set()
+        progressBgColor.set()
         NSBezierPath.fill(dirtyRect)
-        PROGRESS_FOREGROUND_COLOR.set()
+        progressFgColor.set()
         let width = dirtyRect.width * (mProgress / 100.0)
         let rect = CGRect(x: 0, y: 0, width: width, height: dirtyRect.height)
         NSBezierPath.fill(rect)

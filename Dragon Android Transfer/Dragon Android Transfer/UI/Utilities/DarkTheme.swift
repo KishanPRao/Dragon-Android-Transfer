@@ -9,48 +9,59 @@
 import Foundation
 
 class DarkTheme: Theme {
-	static let color = DarkTheme.color(_:)
-	
+    static let color = DarkTheme.color(_:)
+    
     let textColor = color("ffffff")
-//    let textColor = color("d0d0d0")
+    //    let textColor = color("d0d0d0")
     
-	let menuNavColor = color("071326")
-	let menuTableColor = color("071326")
-	let menuBgColor = color("000409", withAlpha: 0.4)
-	let menuItemBg = color("040a14")
-	let menuItemSelectBg = color("091f45")
-    let menuItemSelectCellBg = color("11326c")
-//    let menuItemSelectCellBg = color("091f45")
-	
-//    let toolbarColor = color("003b6f")
+//    static let menuNavigationColor = "181e28"
+    static let menuNavigationColor = "0d1c33"
+    let menuNavColor = color(menuNavigationColor)
+    let menuTableColor = color(menuNavigationColor)
+    let menuBgColor = color("000409", withAlpha: 0.4)
+    let menuItemBg = color("040a14")
+    let menuItemSelectBg = color("2a4a83")
+    let menuItemSelectCellBg = color("2a4a83")
+//    let menuProgressFg = color("204582")
+    let menuProgressFg = color("4065a2")
+    let menuProgressBg = color("414854")
+    //    let menuItemSelectCellBg = color("000000")
+    //    let menuItemSelectCellBg = color("091f45")
+    
+    //    let toolbarColor = color("003b6f")
     let toolbarColor = color("134876")
-	let toolbarProgressFg = color("1a64a3")
-	let toolbarProgressBg = color("47a0f2")
-
-	let pathSelectorSelectableItem = color("0e2343")
-
-//    let tableBg = color("050505") 
-//    let tableBg = color("101010") 
-//    let tableBg = color("000000")
-    let tableBg = color("131415")
-//	let tableItemBg = color("050505")
-	let tableItemBg = color("000000")
-//    let listSelectedBackgroundColor = color("0d3475")
-    let listSelectedBackgroundColor = color("092c61")
-//    let listSelectedBackgroundColor = color("2f2f2f")
-
-	let transferBg = color("313b4c")
-	let transferTextColor = color("b8c2c9")
-    let transferProgressFg = color("204582")
-    let transferProgressBg = color("6a7991")
+    let toolbarProgressFg = color("1a64a3") //TODO: Confirm color
+    let toolbarProgressBg = color("47a0f2")
     
-//    let dialogBgColor = color("193360")
+//    let pathSelectorSelectableItem = color("0e2343")
+    let pathSelectorSelectableItem = color("30353a")
+    
+    //    let tableBg = color("050505")
+    //    let tableBg = color("101010")
+    //    let tableBg = color("000000")
+    let tableBg = color("131415")
+    //	let tableItemBg = color("050505")
+    let tableItemBg = color("000000")
+    //    let listSelectedBackgroundColor = color("0d3475")
+    let listSelectedBackgroundColor = color("092c61")
+    //    let listSelectedBackgroundColor = color("2f2f2f")
+    
+    let transferBg = color("313b4c")
+    let transferTextColor = color("b8c2c9")
+//    let transferProgressFg = color("ffffff")
+    let transferProgressFg = color("4a94d3")
+//    let transferProgressFg = color("204582")
+    let transferProgressBg = color("6a7991")
+    //    let transferProgressFg = color("15468a")
+    //    let transferProgressBg = color("406ead")
+    
+    //    let dialogBgColor = color("193360")
     let dialogBgColor = color("313b4c")
-//    let dialogWindowColor = color("0f1217")
+    //    let dialogWindowColor = color("0f1217")
     let dialogWindowColor = color("313b4c")
-//    let dialogWindowColor = color("0b0d11")
-
-//	let windowBg = color("050505")
+    //    let dialogWindowColor = color("0b0d11")
+    
+    //	let windowBg = color("050505")
     let windowBg = color("0a0a0a")
     let mainViewColor = color("#424242")
 }

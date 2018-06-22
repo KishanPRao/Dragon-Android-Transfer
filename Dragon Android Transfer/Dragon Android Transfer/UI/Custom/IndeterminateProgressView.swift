@@ -9,6 +9,7 @@
 import Foundation
 
 class IndeterminateProgressView : NSView {
+//    Spinning Indeterminate, like Android.
     let PROGRESS_FOREGROUND_COLOR = ColorUtils.colorWithHexString(ColorUtils.indeterminateProgressForegroundColor)
     let circularPath = NSBezierPath()
     let lineWidth = 5.0 as CGFloat

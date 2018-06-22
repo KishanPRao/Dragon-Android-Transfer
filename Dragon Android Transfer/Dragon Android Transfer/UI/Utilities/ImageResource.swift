@@ -23,4 +23,7 @@ class ImageResource {
     
     public let file = "file"
     public let folder = "folder"
+    
+    public let menu_back = "menu_back"
+    public let refresh = "refresh"
 }

@@ -36,7 +36,7 @@ class MenuCell: NSTableCellView {
 		Bundle.main.loadNibNamed(NSNib.Name(rawValue: "MenuCell"), owner: self, topLevelObjects: nil)
 //        Swift.print("Test", contentView.frame, self)
 		text.textColor = R.color.white
-		text.updateMainFont()
+		text.updateMainFont(R.number.menuItemSize)
 //        contentView.setBackground(R.color.black)
 		contentView.frame = frame
 		addSubview(self.contentView)

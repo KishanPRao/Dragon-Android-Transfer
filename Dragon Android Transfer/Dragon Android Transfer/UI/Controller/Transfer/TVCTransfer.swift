@@ -335,10 +335,9 @@ extension TransferViewController {
 				AppDelegate.showNotification(title: "Completed Transfer", message: "Finished copying")
 			}
 		} else {
-			print("Canceled")
+			LogD("Canceled")
 			//TODO: Sound if canceled.
 		}
-		//TODO: Copy of Marvel's Agents of Shield problem, not disappearing. & bad progress!
 //		TODO: Test copy Death Note (Fatal error: Double value cannot be converted to Int because it is either infinite or NaN)
 		
 		mDockProgress?.isHidden = true

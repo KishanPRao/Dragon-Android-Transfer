@@ -571,7 +571,7 @@ public class AndroidHandler: VerboseObject {
 //            print("Prev: \(previousProgress), curr: \(currentProgress)")
 			self.progressActiveTask.value = previousProgress + currentProgress
 		} else if (result == AdbExecutionResultWrapper.Result_Canceled) {
-			print("Canceled")
+            print("AndroidHandler: Canceled")
 			self.hasActiveTask.value = FileProgressStatus.kStatusCanceled
             self.startedTask = false
 		}

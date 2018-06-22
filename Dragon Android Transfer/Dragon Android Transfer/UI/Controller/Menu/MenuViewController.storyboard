@@ -19,12 +19,12 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </customView>
                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rF5-jT-N06" customClass="ClickableView" customModule="Dragon_Android_Transfer" customModuleProvider="target">
-                                <rect key="frame" x="143" y="26" width="200" height="172"/>
+                                <rect key="frame" x="143" y="25" width="200" height="172"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                 <subviews>
                                     <popUpButton fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6zL-2Q-SqR">
-                                        <rect key="frame" x="51" y="127" width="123" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <rect key="frame" x="51" y="125" width="85" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <popUpButtonCell key="cell" type="bevel" title="Item" bezelStyle="regularSquare" imagePosition="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" pullsDown="YES" selectedItem="61k-1p-o8K" id="96F-kl-kZk">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="menu"/>
@@ -41,11 +41,11 @@
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <clipView key="contentView" ambiguous="YES" drawsBackground="NO" copiesOnScroll="NO" id="B6o-v5-rqJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="85"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="20" rowSizeStyle="automatic" viewBased="YES" id="65t-9Y-FVQ" customClass="TableViewKeys" customModule="Dragon_Android_Transfer" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="203" height="100"/>
+                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="20" rowSizeStyle="automatic" viewBased="YES" id="65t-9Y-FVQ" customClass="NonDeselectTableView" customModule="Dragon_Android_Transfer" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="203" height="85"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -75,7 +75,7 @@
                                             </subviews>
                                         </clipView>
                                         <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="U9D-YA-ReE">
-                                            <rect key="frame" x="0.0" y="84" width="200" height="16"/>
+                                            <rect key="frame" x="0.0" y="85" width="200" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="e5M-UJ-rfi">
@@ -97,6 +97,20 @@ Gw
                                             <action selector="closeMenu:" target="DwD-Ft-xE8" id="47j-2a-IrP"/>
                                         </connections>
                                     </button>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zcw-bX-f4B">
+                                        <rect key="frame" x="156" y="126" width="57" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="push" bezelStyle="rounded" image="refresh" imagePosition="only" alignment="center" borderStyle="border" inset="2" id="XG3-GD-RVX">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="refreshMenu:" target="DwD-Ft-xE8" id="IKR-JT-m4b"/>
+                                        </connections>
+                                    </button>
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DTQ-Jz-Tfw" customClass="MenuStatusView" customModule="Dragon_Android_Transfer" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="150"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -110,6 +124,7 @@ Gw
                         <outlet property="navigationParent" destination="rF5-jT-N06" id="9mP-9z-XIU"/>
                         <outlet property="overlayView" destination="zpt-X2-nuM" id="oP0-39-HSG"/>
                         <outlet property="popup" destination="96F-kl-kZk" id="wWE-la-Kz2"/>
+                        <outlet property="refresh" destination="zcw-bX-f4B" id="6vL-Py-jKW"/>
                         <outlet property="statusView" destination="DTQ-Jz-Tfw" id="lYb-uK-Vt6"/>
                         <outlet property="table" destination="65t-9Y-FVQ" id="H2N-yN-rqY"/>
                         <outlet property="tableOuter" destination="V72-bJ-WmW" id="dx4-gB-69U"/>
@@ -122,6 +137,6 @@ Gw
         </scene>
     </scenes>
     <resources>
-        <image name="refresh" width="512" height="512"/>
+        <image name="refresh" width="33.333332061767578" height="33.333332061767578"/>
     </resources>
 </document>

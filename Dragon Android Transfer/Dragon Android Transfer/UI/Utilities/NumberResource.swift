@@ -5,11 +5,18 @@
 
 import Foundation
 
-class IntegerResource {
+typealias TextSizeType = CGFloat
+
+class NumberResource {
 	let animStartDuration = 0.25
 	let animEndDuration = 0.15
     
     let overlayAnimHideDuration = 0.45
 //    let progressAnimStartDuration = 0.15
     let progressAnimHideDuration = 0.35
+    
+    let menuPopupSize: TextSizeType = 17.0
+    let menuStatusTitleSize: TextSizeType = 17.0
+    let menuStatusInfoSize: TextSizeType = 16.0
+    let menuItemSize: TextSizeType = 15.5
 }

@@ -39,7 +39,7 @@ extension MenuViewController {
             }
         }
         for item in self.popup.itemArray {
-            let fontSize = popup.font?.pointSize ?? 10
+            let fontSize: CGFloat = R.number.menuPopupSize
             item.attributedTitle = NSAttributedString(string: item.title, attributes: [
                 NSAttributedStringKey.font: NSFont(name: R.font.mainFont, size: fontSize)!,
 //                NSForegroundColorAttributeName: NSColor(calibratedRed: 0.2, green: 0.270588235, blue: 0.031372549, alpha: 1),
@@ -67,9 +67,14 @@ extension MenuViewController {
 					device in
 					//print("Device", device)
 					if let device = device {
+                        self.refresh.isEnabled = true
 						//print("Device Storage", device.storages)
 						self.updateStorageItems(device.storages)
+                        self.activeDevice = device
                     } else {
+                        self.stopAnimation()
+                        self.refresh.isEnabled = false
+                        self.activeDevice = nil
                         self.statusView.resetNoDevice()
                         self.updateStorageItems([])
                     }
@@ -97,6 +102,7 @@ extension MenuViewController {
                 let available = spaceStatus[0]
                 let total = spaceStatus[1]
                 self.statusView.updateStorageSize(availableSpace: available, totalSpace: total)
+                self.stopAnimation()
             }).disposed(by: disposeBag)
 	}
 }

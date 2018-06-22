@@ -27,7 +27,11 @@ class MenuStatusView: NSView {
     
     func updateStorageItem(_ storageItem: StorageItem) {
         self.animate(show: true)
-        title.stringValue = storageItem.path.name
+//        title.stringValue = storageItem.path.name
+        
+        title.attributedStringValue = TextUtils.attributedBoldString(from: storageItem.path.name,
+                                                                     color: R.color.textColor, nonBoldRange: nil,
+                                                                     fontSize: R.number.menuStatusTitleSize)
     }
     
     func updateStorageSize(availableSpace: String, totalSpace: String) {
@@ -37,7 +41,8 @@ class MenuStatusView: NSView {
         let range = NSMakeRange(availableSpace.count, middleString.count)
         sizeStatus.attributedStringValue = TextUtils.attributedBoldString(from: stringValue,
                                                                       color: R.color.textColor,
-                                                                      nonBoldRange: range)
+                                                                      nonBoldRange: range,
+                                                                      fontSize: R.number.menuStatusInfoSize)
         
         let availableSpaceInNumber = SizeUtils.getSpaceInNumber(availableSpace)
         let totalSpaceInNumber = SizeUtils.getSpaceInNumber(totalSpace)
@@ -73,6 +78,8 @@ class MenuStatusView: NSView {
         sizeStatus.updateMainFont()
         resetTitle()
         resetSize()
+        progressView.progressBgColor = R.color.menuProgressBg
+        progressView.progressFgColor = R.color.menuProgressFg
 //        self.alphaValue = 0
     }
 }

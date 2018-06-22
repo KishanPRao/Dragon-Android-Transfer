@@ -8,6 +8,7 @@
 
 import Foundation
 import Cocoa
+import Carbon.HIToolbox
 
 class DraggableTableView: NSTableView, NSTableViewDataSource {
 //	public static let kPasteBoardType = NSFilenamesPboardType
@@ -191,52 +192,11 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
         return 0
     }
     
-    func updateItemSelected(index i: Int) {
-        var row = i
-        if (row < 0) {
-            row = 0
-        } else if (row >= numberOfRows) {
-            row = numberOfRows - 1;
-        }
-        let rowSet = NSIndexSet(index: row) as IndexSet
-        selectRowIndexes(rowSet, byExtendingSelection: false)
-        
-        let columnSet = NSIndexSet(index: 0) as IndexSet
-        reloadData(forRowIndexes: rowSet, columnIndexes: columnSet)
-    }
-    
-    func updateItemChanged(index i: Int) {
-        var row = i
-        if (row < 0) {
-            row = 0
-        } else if (row >= numberOfRows) {
-            row = numberOfRows - 1;
-        }
-        let rowSet = NSIndexSet(index: row) as IndexSet
-        let columnSet = NSIndexSet(index: 0) as IndexSet
-        reloadData(forRowIndexes: rowSet, columnIndexes: columnSet)
-    }
-    
-    func deselectAllRows(_ updateIndex: Int) {
-        deselectAll(nil)
-        if (updateIndex >= numberOfRows || updateIndex < 0) {
-//            LogW("Bad Deselect Index")
-            return
-        }
-        let rowSet = NSIndexSet(index: updateIndex) as IndexSet
-        let columnSet = NSIndexSet(index: 0) as IndexSet
-        reloadData(forRowIndexes: rowSet, columnIndexes: columnSet)
-    }
-    
-    func deselectAllRows() {
-        deselectAll(nil)
-        reloadData()
-    }
-    
     var enableKeys = true
     
     override func keyDown(with event: NSEvent) {
-        if (enableKeys) {
+        let useKeys = enableKeys || (event.keyCode == kVK_Escape)
+        if (useKeys) {
         	super.keyDown(with: event)
         }
     }

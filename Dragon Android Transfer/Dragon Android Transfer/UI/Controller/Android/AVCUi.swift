@@ -20,9 +20,9 @@ extension AndroidViewController {
 		fileTable.selectionHighlightStyle = .none
 		messageText.alignment = .center
 //        messageText.font = NSFont(name: messageText.font!.fontName, size: DimenUtils.getDimension(dimension: Dimens.error_message_text_size))
-        let font = NSFont(name: R.font.mainFont, size: DimenUtils.getDimension(dimension: Dimens.error_message_text_size))
-        messageText.font = font
-        messageText.updateMainFont()
+//        let font = NSFont(name: R.font.mainFont, size: DimenUtils.getDimension(dimension: Dimens.error_message_text_size))
+//        messageText.font = font
+        messageText.updateMainFont(18.0)
 		messageText.textColor = R.color.textColor
 		messageText.setBackground(R.color.tableBg)
         self.resetDeviceStatus()

@@ -19,6 +19,9 @@ protocol Theme {
 	
 	var menuNavColor: NSColor { get }
 	var menuTableColor: NSColor { get }
+    var menuProgressFg: NSColor { get }
+    var menuProgressBg: NSColor { get }
+    
 	var toolbarColor: NSColor { get }
 	var toolbarProgressFg: NSColor { get }
 	var toolbarProgressBg: NSColor { get }
@@ -30,6 +33,8 @@ protocol Theme {
 	var transferBg: NSColor { get }
 	var textColor: NSColor { get }
 	var transferTextColor: NSColor { get }
+    var transferProgressFg: NSColor { get }
+    var transferProgressBg: NSColor { get }
     var menuItemSelectCellBg: NSColor {get}
     var listSelectedBackgroundColor: NSColor{get}
 

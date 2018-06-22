@@ -18,6 +18,8 @@ class LightTheme: Theme {
     let menuItemBg = color("ffffff")
     let menuItemSelectBg = color("091f45")
     let menuItemSelectCellBg = color("11326c")
+    let menuProgressFg = color("204582")
+    let menuProgressBg = color("414854")
     
     let toolbarColor = color("072556")
     let toolbarProgressFg = color("204582")

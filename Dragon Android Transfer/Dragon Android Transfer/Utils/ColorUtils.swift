@@ -25,8 +25,8 @@ class ColorUtils {
 	static let listTextColor = "#ffffff"
 	static let statusViewColor = "#071326"
 	
-	static let progressBackgroundColor = "#0091ea"
-	static let progressForegroundColor = "#01579b"
+//    static let progressBackgroundColor = "#0091ea"
+//    static let progressForegroundColor = "#01579b"
     static let indeterminateProgressForegroundColor = "#17d85e"
     
     static func colorWithHexString(_ hex: String) -> NSColor {

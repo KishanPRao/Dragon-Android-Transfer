@@ -12,7 +12,7 @@ class R {
 //    public internal(set) static var color: Theme = _lightTheme
     public internal(set) static var color: Theme = _darkTheme
 	public static let drawable = ImageResource()
-	public static let integer = IntegerResource()
+	public static let number = NumberResource()
     public static let string = StringResource()
     public static let font = FontResource()
     public static let audio = AudioResource()

@@ -22,15 +22,15 @@ extension AndroidViewController {
     
     func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
         let rowView = SelectionTableRowView()
-        /*guard let fileTable = fileTable else {
+        guard let fileTable = fileTable else {
             return rowView
         }
         if (fileTable.dragDropRow == row) {
             rowView.selectedColor = R.color.mainViewColor
         } else {
             rowView.selectedColor = R.color.listSelectedBackgroundColor
-        }*/
-        rowView.selectedColor = R.color.listSelectedBackgroundColor
+        }
+//        rowView.selectedColor = R.color.listSelectedBackgroundColor
         return rowView
     }
     
@@ -112,7 +112,7 @@ extension AndroidViewController {
             if let fileTable = fileTable {
                 let previousDragging = cellView.isDraggingCell
                 cellView.isDraggingCell = (!isDirectory && fileTable.dragDropRow == row)
-                print("Dragging \(cellView.isDraggingCell): \(row)")
+//                print("Dragging \(cellView.isDraggingCell): \(row)")
                 /*if (!isDirectory) {
                     if (fileTable.dragDropRow == row) {
                         //                        print("AVC Drag color: \(row)")

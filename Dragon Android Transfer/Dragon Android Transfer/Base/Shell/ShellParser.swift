@@ -9,6 +9,7 @@
 import Cocoa
 import Foundation
 
+//@objc
 @objcMembers
 public class ShellParser: NSObject {
 	static let EXTREME_VERBOSE = false
@@ -164,7 +165,10 @@ public class ShellParser: NSObject {
             spaceInString = SizeUtils.getBytesInFormat(totalSpaceInInt * Number(BLOCK_SIZE_IN_FLOAT))
         } else {
             //            Solaris
-            spaceInString = outputInTabs[1] + " B"
+            spaceInString = outputInTabs[1]
+            let index = spaceInString.index(spaceInString.endIndex, offsetBy: -1)
+            spaceInString.insert(" ", at: index)
+            spaceInString = spaceInString + "B"
         }
         if (EXTREME_VERBOSE) {
             //            print("Output:", outputInTabs)
@@ -189,7 +193,10 @@ public class ShellParser: NSObject {
 			}
 		} else {
 //			Solaris
-			spaceInString = outputInTabs[3] + " B"
+            spaceInString = outputInTabs[3]
+            let index = spaceInString.index(spaceInString.endIndex, offsetBy: -1)
+            spaceInString.insert(" ", at: index)
+            spaceInString = spaceInString + "B"
 		}
 		return spaceInString
 	}

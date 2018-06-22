@@ -18,7 +18,7 @@ class OverlayView: ClickableView {
 		self.needsDisplay = true
 		NSAnimationContext.runAnimationGroup({ context in
 			context.timingFunction = timingFunction
-			context.duration = R.integer.animStartDuration
+			context.duration = R.number.animStartDuration
 			self.animator().alphaValue = 1.0
 		}, completionHandler: {
             self.cancelActiveAnimation = false
@@ -33,7 +33,7 @@ class OverlayView: ClickableView {
 	func hide(_ handler: @escaping () -> () = {}) {
 		NSAnimationContext.runAnimationGroup({ context in
 			context.timingFunction = timingFunction
-			context.duration = R.integer.overlayAnimHideDuration
+			context.duration = R.number.overlayAnimHideDuration
 			self.animator().alphaValue = 0.0
 		}, completionHandler: {
             if (!self.cancelActiveAnimation) {

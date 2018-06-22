@@ -41,7 +41,7 @@ extension NSButton {
 		}
 		self.setImage(image: image)
 		self.imageScaling = .scaleAxesIndependently
-		self.attributedTitle = TextUtils.getTruncatedAttributeString(text, alignment)
+        self.attributedTitle = TextUtils.getTruncatedAttributeString(text, alignment: alignment)
 	}
     
     func updateMainFont(_ fontSize: CGFloat = 40.0) {

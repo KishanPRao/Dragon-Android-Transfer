@@ -452,6 +452,11 @@ class AndroidViewController: NSViewController,
 		super.init(coder: coder)
 		self.initNotification()
 	}
+    
+    override func cancelOperation(_ sender: Any?) {
+//        LogI("Cancel Operation")
+        //        TODO:
+    }
 	
 	internal var dirtyWindow: Bool = true
 	

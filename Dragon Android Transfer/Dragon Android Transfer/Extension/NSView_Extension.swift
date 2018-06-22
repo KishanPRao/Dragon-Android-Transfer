@@ -91,7 +91,7 @@ extension NSView {
         }
         let alpha = (show ? 1.0 : 0.0) as CGFloat
         NSAnimationContext.runAnimationGroup({ context in
-            context.duration = R.integer.animStartDuration
+            context.duration = R.number.animStartDuration
             self.animator().alphaValue = alpha
         }, completionHandler: nil)
     }
