@@ -60,4 +60,7 @@ public struct StringResource {
     
     let helpDevicesPopup = "Change active device"
     let helpCloseMenu = "Close Menu"
+    
+    let ok = "OK"
+    let cancel = "Cancel"
 }

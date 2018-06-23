@@ -11,18 +11,20 @@ import Foundation
 class DarkAlert: NSAlert {
 	
     //    TODO: Show dialog in middle of screen? Window?
-    init(message: String, info: String, buttonNames: [String], fullScreen: Bool = true, textColor: NSColor = R.color.white) {
+    init(property: AlertProperty) {
 		super.init()
 		let alert = self
-        for buttonName in buttonNames {
-			let button = alert.addButton(withTitle: buttonName)
-            button.setText(text: button.title, textColor: R.color.black,
-                           alignment: .center, bgColor: R.color.white,
+        for buttonProperty in property.buttons {
+			let button = alert.addButton(withTitle: buttonProperty.title)
+            button.setText(text: buttonProperty.title,
+                           textColor: buttonProperty.textColor,
+                           alignment: .center,
+                           bgColor: buttonProperty.bgColor,
                            rounded: true)
             button.imageScaling = .scaleNone
-            button.updateMainFont(13.0)
+            button.updateMainFont(buttonProperty.textSize)
         }
-        if fullScreen {
+        if property.fullScreen {
 			alert.window.styleMask = NSWindow.StyleMask.fullSizeContentView
         } else {
             alert.window.backgroundColor = R.color.dialogWindowColor
@@ -38,11 +40,12 @@ class DarkAlert: NSAlert {
             if let text = (view as? NSTextField) {
                 text.isSelectable = false
                 text.updateMainFontInIncrement(2.0)
-                text.textColor = textColor
+                text.textColor = property.textColor
             }
         }
-        alert.messageText = message
-        alert.informativeText = info
+        alert.messageText = property.message
+        alert.informativeText = property.info
+        alert.alertStyle = property.style
         
 		/*
 		for button in alert.buttons {

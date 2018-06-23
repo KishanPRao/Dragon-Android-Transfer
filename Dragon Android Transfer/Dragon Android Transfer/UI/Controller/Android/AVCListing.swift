@@ -111,7 +111,11 @@ extension AndroidViewController {
 	
 	@objc func openSelectedDirectory() {
 //        LogI("AndroidViewController, openSelectedDirectory");
-		
+        
+        if (fileTable.selectedRow < 0) {
+            LogW("Bad Index")
+            return
+        }
 		let selectedItem = self.androidDirectoryItems[fileTable.selectedRow]
 		//		print("Selected", fileTable.selectedRow)
 		//		print("Selected", self.androidDirectoryItems[fileTable.selectedRow])
@@ -143,6 +147,7 @@ extension AndroidViewController {
 									self.fileTable.scrollRowToVisible(i)
 									AppDelegate.itemSelected = true
 									AppDelegate.directoryItemSelected = true
+                                    break
 								}
 							}
 //                            self.hideProgress()

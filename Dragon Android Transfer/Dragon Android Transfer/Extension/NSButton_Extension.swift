@@ -32,7 +32,9 @@ extension NSButton {
 		self.isBordered = false
 	}
 	
-	func setText(text: String, textColor: NSColor, alignment: NSTextAlignment, bgColor: NSColor, rounded: Bool = false) {
+	func setText(text: String, textColor: NSColor,
+                 alignment: NSTextAlignment, bgColor: NSColor,
+                 rounded: Bool = false) {
 		let style = NSMutableParagraphStyle()
 		style.alignment = alignment
 		var image = NSImage.swatchWithColor(color: bgColor, size: self.frame.size)
@@ -41,7 +43,9 @@ extension NSButton {
 		}
 		self.setImage(image: image)
 		self.imageScaling = .scaleAxesIndependently
-        self.attributedTitle = TextUtils.getTruncatedAttributeString(text, alignment: alignment)
+        //        Color change not working:
+//        self.attributedTitle = TextUtils.attributedBoldString(from: text, color: R.color.white, nonBoldRange: nil, fontSize: 15.0, .center)
+//        self.attributedStringValue = TextUtils.attributedBoldString(from: text, color: R.color.white, nonBoldRange: nil, fontSize: 15.0, .center)
 	}
     
     func updateMainFont(_ fontSize: CGFloat = 40.0) {

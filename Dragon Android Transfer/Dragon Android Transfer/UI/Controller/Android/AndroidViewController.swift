@@ -28,11 +28,11 @@ class AndroidViewController: NSViewController,
 	internal let bgScheduler = ConcurrentDispatchQueueScheduler(qos: .background)
     
 //    internal let tableDelegate = DeviceTableDelegate()
-	internal var androidDirectoryItems: Array<BaseFile> = [] {
+	internal var androidDirectoryItems: Array<BaseFile> = [] /*{
         didSet {
 //            tableDelegate.setAndroidDirectoryItems(items: androidDirectoryItems)
         }
-	}
+	}*/
 	@IBOutlet weak var fileTable: DraggableTableView!
 	
     @IBOutlet weak var fileOptions: FileOptions!
@@ -280,7 +280,7 @@ class AndroidViewController: NSViewController,
 	@objc func selectAllFiles() {
 		fileTable.selectAll(nil)
 	}
-	
+	 
 	@objc func clearClipboard() {
 		if (NSObject.VERBOSE) {
 			Swift.print("AndroidViewController, clearClipboard");

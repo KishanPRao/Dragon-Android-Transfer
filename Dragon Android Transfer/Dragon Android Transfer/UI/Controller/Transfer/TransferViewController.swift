@@ -78,8 +78,13 @@ class TransferViewController: NSViewController {
 	
 	@objc func cancelTransferInternal() {
         //        TODO: fullScreen param not used. Problem?
-        alert = DarkAlert(message: "Cancel?", info: "Do you want to cancel the current transfer?",
-                          buttonNames: ["Ok", "Cancel"])
+        let alertProps = AlertProperty()
+        alertProps.message = "Cancel?"
+        alertProps.info = "Do you want to cancel the current transfer?"
+        alertProps.addButton(button: AlertButtonProperty(title: R.string.ok))
+        alertProps.addButton(button: AlertButtonProperty(title: R.string.cancel))
+        alertProps.style = .critical
+        alert = DarkAlert(property: alertProps)
 		let button = alert!.runModal()
 		if (button == NSApplication.ModalResponse.alertFirstButtonReturn) {
 //            Ok

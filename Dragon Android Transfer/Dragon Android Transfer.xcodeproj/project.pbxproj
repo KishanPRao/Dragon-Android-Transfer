@@ -259,6 +259,7 @@
 		DA06CB7120D9707400448053 /* DarkAlertUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA06CB7020D9707400448053 /* DarkAlertUtils.swift */; };
 		DA39B9E420D8D5B60041AE89 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = DA39B9E320D8D5B60041AE89 /* folder.png */; };
 		DA41CE4220DE4CB7006E0A4C /* AnimationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA41CE4120DE4CB7006E0A4C /* AnimationUtils.swift */; };
+		DA41CE4420DE687B006E0A4C /* AlertProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA41CE4320DE687B006E0A4C /* AlertProperties.swift */; };
 		DAAF120420DCC23300E075B8 /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */; };
 		DAAF120520DCC25900E075B8 /* Ubuntu-Bold.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */; };
 		DAAF120720DCE77100E075B8 /* NonDeselectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAF120620DCE77100E075B8 /* NonDeselectTableView.swift */; };
@@ -549,6 +550,7 @@
 		DA06CB7020D9707400448053 /* DarkAlertUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkAlertUtils.swift; sourceTree = "<group>"; };
 		DA39B9E320D8D5B60041AE89 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
 		DA41CE4120DE4CB7006E0A4C /* AnimationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationUtils.swift; sourceTree = "<group>"; };
+		DA41CE4320DE687B006E0A4C /* AlertProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertProperties.swift; sourceTree = "<group>"; };
 		DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
 		DAAF120620DCE77100E075B8 /* NonDeselectTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonDeselectTableView.swift; sourceTree = "<group>"; };
 		DAAF120820DCF98800E075B8 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
@@ -810,6 +812,7 @@
 				50961BF91FF916A6001B6D3D /* StorageItem.swift */,
 				50F91FCE200251B300C58955 /* Path.swift */,
 				DAE8B56920D01D6C00520FB3 /* VerboseView.swift */,
+				DA41CE4320DE687B006E0A4C /* AlertProperties.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1625,6 +1628,7 @@
 				BE3BDB93125B4F8F31159F09 /* AndroidAdbHandler.mm in Sources */,
 				BE3BDFE9AE56EA9F863D7065 /* ListCommand.cpp in Sources */,
 				BE3BD4C277570BF38157A99A /* DeviceListCommand.cpp in Sources */,
+				DA41CE4420DE687B006E0A4C /* AlertProperties.swift in Sources */,
 				BE3BD85D4ACE9E0C076A3820 /* DeviceInfoCommand.cpp in Sources */,
 				BE3BD3F63BF3B11A5D618039 /* StorageListCommand.cpp in Sources */,
 				BE3BDF0DB532B65C04E311BD /* SimpleAdbCommand.cpp in Sources */,

@@ -19,4 +19,6 @@ class NumberResource {
     let menuStatusTitleSize: TextSizeType = 16.0
     let menuStatusInfoSize: TextSizeType = 15.0
     let menuItemSize: TextSizeType = 14.5
+    
+    let dialogButtonTextSize: TextSizeType = 13.0
 }

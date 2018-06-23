@@ -20,17 +20,21 @@ extension AndroidViewController {
 //        fileTable.register(NSNib.init(nibNamed: NSNib.Name("FileCell"), bundle: nil), forIdentifier: FileCell.Identifier)
     }
     
+    //    TODO: Reuse!
     func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
+//        let startTime = TimeUtils.getDispatchTime()
         let rowView = SelectionTableRowView()
-        guard let fileTable = fileTable else {
-            return rowView
-        }
-        if (fileTable.dragDropRow == row) {
-            rowView.selectedColor = R.color.mainViewColor
-        } else {
+//        guard let fileTable = fileTable else {
+//            return rowView
+//        }
+//        Gets called only on creation!
+//        if (fileTable.dragDropRow == row) {
+//            rowView.selectedColor = R.color.mainViewColor
+//        } else {
             rowView.selectedColor = R.color.listSelectedBackgroundColor
-        }
+//        }
 //        rowView.selectedColor = R.color.listSelectedBackgroundColor
+//        print("Row Time Taken: \(TimeUtils.getDifference(startTime)) ms")
         return rowView
     }
     
@@ -82,7 +86,7 @@ extension AndroidViewController {
 //            newCell.identifier = NSUserInterfaceItemIdentifier(rawValue: "file_cell")
             returnView = newCell
             //            Not used. TODO: Remove, if needed
-            print("tableView, New Cell: \(row)")
+            LogW("tableView, New Cell: \(row)")
             //      Possibility “This NSLayoutConstraint is being configured with a constant that exceeds internal limits” error to occur. Old version SDK?
         }
 //        print("1. tableView, Cell Time Taken: \(TimeUtils.getDifference(startTime))ms")
@@ -149,7 +153,7 @@ extension AndroidViewController {
 //                print("7. Cell Time Taken: \(TimeUtils.getDifference(startTime))ms")
             }
         }
-//        print("Cell Time Taken: \(TimeUtils.getDifference(startTime))ms")
+//        print("Cell Time Taken: \(TimeUtils.getDifference(startTime)) ms")
         return returnView
     }
     
@@ -161,6 +165,9 @@ extension AndroidViewController {
             //            let selectedItem = self.androidDirectoryItems[self.fileTable.selectedRow].fileName
             //            print("Selected:", selectedItem)
             
+//            guard let fileTable = fileTable else {
+//                return rowView
+//            }
             let indexSet = fileTable.selectedRowIndexes
             var i = 0
             AppDelegate.itemSelected = false
@@ -168,11 +175,16 @@ extension AndroidViewController {
             AppDelegate.directoryItemSelected = false
             var itemSelected = false
             while (i < androidDirectoryItems.count) {
-                let rowItem = fileTable.rowView(atRow: i, makeIfNecessary: false)
+                let rowItem = fileTable.rowView(atRow: i, makeIfNecessary: false) as? SelectionTableRowView
                 if (indexSet.contains(i)) {
                     if  let rowItem = rowItem {
                         let cellView = rowItem.view(atColumn: 0) as! FileCell
                         cellView.isSelected = true
+                        if (fileTable.dragDropRow == i) {
+                            rowItem.selectedColor = R.color.tableBg
+                        } else {
+                            rowItem.selectedColor = R.color.listSelectedBackgroundColor
+                        }
                     }
                     if (itemSelected) {
                         AppDelegate.multipleItemsSelected = true
@@ -192,4 +204,5 @@ extension AndroidViewController {
             }
         }
     }
+    
 }

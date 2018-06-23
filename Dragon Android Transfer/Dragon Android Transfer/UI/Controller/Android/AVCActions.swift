@@ -51,11 +51,12 @@ extension AndroidViewController {
                 infoText = infoText + "Type: " + type + "\n"
                 infoText = infoText + "Size: " + SizeUtils.getBytesInFormat(selectedFile.size) + "\n"
                 
-                let alert = DarkAlert(message: "Name: " + selectedFile.fileName, info: infoText,
-                                      buttonNames: ["Ok"],
-                                      fullScreen: false,
-//                                      fullScreen: true,
-                                      textColor: R.color.transferTextColor)
+                let alertProps = AlertProperty()
+                alertProps.message = "Name: " + selectedFile.fileName
+                alertProps.info = infoText
+                alertProps.textColor = R.color.transferTextColor
+                alertProps.addButton(button: AlertButtonProperty(title: R.string.ok))
+                let alert = DarkAlert(property: alertProps)
                 alert.icon = image
                 alert.alertStyle = .informational
                 alert.runModal()
@@ -66,11 +67,24 @@ extension AndroidViewController {
 		if (NSObject.VERBOSE) {
 			Swift.print("AndroidViewController, showNewFolderDialog")
 		}
-		if let folderName = DarkAlertUtils.input("Create New Folder", info: "Enter the name of the new folder:", defaultValue: "Untitled Folder") {
+        let inputAlertProps = InputAlertProperty()
+        inputAlertProps.message = "Create New Folder"
+        inputAlertProps.info = "Enter the name of the new folder:"
+        inputAlertProps.textColor = R.color.transferTextColor
+        inputAlertProps.addButton(button: AlertButtonProperty(title: R.string.ok))
+        inputAlertProps.addButton(button: AlertButtonProperty(title: R.string.cancel))
+        inputAlertProps.defaultValue = "Untitled Folder"
+        
+		if let folderName = DarkAlertUtils.input(property: inputAlertProps) {
 			Swift.print("AndroidViewController, folder:", folderName)
 			if (transferHandler.folderExists(folderName)) {
-                DarkAlertUtils.showAlert("Folder '\(folderName)' already exists!", info: "",
-                                         confirm: false, style: .critical)
+                let alertProps = AlertProperty()
+                alertProps.message = "Folder '\(folderName)' already exists!"
+                alertProps.textColor = R.color.transferTextColor
+                alertProps.addButton(button: AlertButtonProperty(title: R.string.ok))
+                alertProps.style = .critical
+                
+                DarkAlertUtils.showAlert(property: alertProps)
 			} else {
 				transferHandler.createAndroidFolder(folderName)
 				refresh()
@@ -99,8 +113,15 @@ extension AndroidViewController {
 		//        let selectedItem = self.androidDirectoryItems[fileTable.selectedRow]
 		//        let selectedFileName = selectedItem.fileName
         //        TODO: Update Delete Dialog!
-        if DarkAlertUtils.showAlert("Do you really want to delete \(deleteStringInDialog)?", info: "",
-                                    confirm: true, style: .critical) {
+        
+        let alertProps = AlertProperty()
+        alertProps.message = "Do you really want to delete \(deleteStringInDialog)?"
+        alertProps.textColor = R.color.transferTextColor
+        alertProps.addButton(button: AlertButtonProperty(title: R.string.ok))
+        alertProps.addButton(button: AlertButtonProperty(title: R.string.cancel))
+        alertProps.style = .critical
+        
+        if DarkAlertUtils.showAlert(property: alertProps) {
 			LogI("Delete", deleteItems)
 			Observable.just(transferHandler)
 					.observeOn(MainScheduler.instance)

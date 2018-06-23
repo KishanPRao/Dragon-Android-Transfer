@@ -46,7 +46,7 @@ NSTableViewDelegate, NSTableViewDataSource {
         isOpen = false
         animate(open: false) {
             //            print("Close end")
-            self.refreshStorageSelection()
+//            self.refreshStorageSelection()
             self.view.removeFromSuperview()
             self.removeFromParentViewController()
         }
@@ -58,6 +58,7 @@ NSTableViewDelegate, NSTableViewDataSource {
         initSizes()
         
         isOpen = true
+        self.refreshStorageSelection()
         animate(open: true) {
             //            print("Opened")
         }
