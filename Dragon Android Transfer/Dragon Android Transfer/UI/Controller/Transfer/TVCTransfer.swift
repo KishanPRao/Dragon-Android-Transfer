@@ -163,6 +163,7 @@ extension TransferViewController {
 						AppDelegate.isPastingOperation.value = true
 //                    self.showCopyDialog()
 						self.mDockProgress?.isHidden = false
+                        self.transferProgressView.resetProgress()
 						self.startTimer()
 					} else {
 						//                        TODO:

@@ -9,6 +9,8 @@
 #ifndef UnitBezier_h
 #define UnitBezier_h
 
+using namespace std;
+
 class UnitBezier {
 public:
     UnitBezier(double p1x, double p1y, double p2x, double p2y);
@@ -22,7 +24,7 @@ public:
     // Given an x value, find a parametric value it came from.
     double solveCurveX(double x, double epsilon);
     
-    double solve(double x, double epsilon);
+    double solve(double x, double epsilon = 1e-6);
     
 private:
     double ax;

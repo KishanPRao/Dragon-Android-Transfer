@@ -58,7 +58,7 @@ class IndeterminateProgressView : NSView {
         circularPath.stroke()
         
         if (!isHidden) {
-            ThreadUtils.runInMainThreadAfter(delayMs: IndeterminateProgressView.FPS_DELAY, {
+            ThreadUtils.runInMainThreadAfter(delayMs: IndeterminateProgressView.Fps30_Delay, {
                 self.needsDisplay = true
             })
         }

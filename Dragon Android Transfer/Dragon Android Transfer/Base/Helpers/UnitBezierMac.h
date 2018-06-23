@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, BezierCurveType) {
+    kLinear,
+    kEaseInEaseOut,
+    kEaseIn,
+    kEaseOut
+};
+
 @interface UnitBezierMac : NSObject
-- (double) sampleY: (double) y;
+@property (nonatomic, assign) BezierCurveType curveType;
+
+- (void) updateCurveType: (BezierCurveType) curveType;
+- (double) solve: (double) x;
 @end

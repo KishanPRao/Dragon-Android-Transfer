@@ -258,6 +258,7 @@
 		BE3BDFF20674FE9E4D059CB7 /* DisabledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDBB5E059C6147F64EDCE /* DisabledTextField.swift */; };
 		DA06CB7120D9707400448053 /* DarkAlertUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA06CB7020D9707400448053 /* DarkAlertUtils.swift */; };
 		DA39B9E420D8D5B60041AE89 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = DA39B9E320D8D5B60041AE89 /* folder.png */; };
+		DA41CE4220DE4CB7006E0A4C /* AnimationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA41CE4120DE4CB7006E0A4C /* AnimationUtils.swift */; };
 		DAAF120420DCC23300E075B8 /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */; };
 		DAAF120520DCC25900E075B8 /* Ubuntu-Bold.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */; };
 		DAAF120720DCE77100E075B8 /* NonDeselectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAF120620DCE77100E075B8 /* NonDeselectTableView.swift */; };
@@ -547,10 +548,11 @@
 		D76E99487AF2B4AB76B28F08 /* Pods_Dragon_Android_Transfer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dragon_Android_Transfer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA06CB7020D9707400448053 /* DarkAlertUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkAlertUtils.swift; sourceTree = "<group>"; };
 		DA39B9E320D8D5B60041AE89 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
+		DA41CE4120DE4CB7006E0A4C /* AnimationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationUtils.swift; sourceTree = "<group>"; };
 		DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
 		DAAF120620DCE77100E075B8 /* NonDeselectTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonDeselectTableView.swift; sourceTree = "<group>"; };
 		DAAF120820DCF98800E075B8 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
-		DAAF120A20DD52EC00E075B8 /* UnitBezier.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnitBezier.h; sourceTree = "<group>"; };
+		DAAF120A20DD52EC00E075B8 /* UnitBezier.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UnitBezier.hpp; sourceTree = "<group>"; };
 		DAAF120B20DD532F00E075B8 /* UnitBezierMac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnitBezierMac.h; sourceTree = "<group>"; };
 		DAAF120C20DD532F00E075B8 /* UnitBezierMac.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = UnitBezierMac.mm; sourceTree = "<group>"; };
 		DAAF120E20DD573600E075B8 /* UnitBezier.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UnitBezier.cpp; sourceTree = "<group>"; };
@@ -826,7 +828,7 @@
 				BE3BDF9DF12733C10195D46C /* BridgeHelper.h */,
 				BE3BD07AE75AC50256BB9815 /* CommandType.h */,
 				BE3BDECAA43B1F596EC76E89 /* CommandFactory.cpp */,
-				DAAF120A20DD52EC00E075B8 /* UnitBezier.h */,
+				DAAF120A20DD52EC00E075B8 /* UnitBezier.hpp */,
 				DAAF120E20DD573600E075B8 /* UnitBezier.cpp */,
 				DAAF120B20DD532F00E075B8 /* UnitBezierMac.h */,
 				DAAF120C20DD532F00E075B8 /* UnitBezierMac.mm */,
@@ -1036,6 +1038,7 @@
 				BE3BD58F84E6678D4CC5BA02 /* NumberResource.swift */,
 				50D37A9720090FAB007A1374 /* FontResource.swift */,
 				BE3BD404BB59903BA4D0F6D3 /* AudioResource.swift */,
+				DA41CE4120DE4CB7006E0A4C /* AnimationUtils.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1671,6 +1674,7 @@
 				BE3BDD0E064CA86D1F6A123C /* NSWindow_Extension.swift in Sources */,
 				BE3BD392818B15BDF9FEEAFA /* MVCTable.swift in Sources */,
 				506D098A1FFBECE200FEA857 /* NSRect_Extension.swift in Sources */,
+				DA41CE4220DE4CB7006E0A4C /* AnimationUtils.swift in Sources */,
 				BE3BDD0F6C64C70A7CDDE47F /* MenuViewController.swift in Sources */,
 				BE3BDEABF4423BB229370157 /* MVCTransfer.swift in Sources */,
 				BE3BD9725949A8036826EB22 /* NumberResource.swift in Sources */,

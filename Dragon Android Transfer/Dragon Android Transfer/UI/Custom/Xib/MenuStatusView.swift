@@ -63,7 +63,7 @@ class MenuStatusView: NSView {
     }
     
     func resetSize() {
-        progressView.setProgress(0.0)
+        progressView.resetProgress()
         sizeStatus.stringValue = R.string.textViewPlaceHolder
         self.animate(show: true)
     }

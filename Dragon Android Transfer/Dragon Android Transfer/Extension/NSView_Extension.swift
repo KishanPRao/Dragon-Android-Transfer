@@ -9,9 +9,10 @@
 import Foundation
 
 extension NSView {
-	internal static let FPS = 30.0 as Double
-	//internal static let FPS = 60.0 as Double
-	internal static let FPS_DELAY = Int(FPS / (1000.0 as Double))
+	internal static let Fps30 = 30.0 as Double
+	internal static let Fps30_Delay = Int(Fps30 / (1000.0 as Double))
+    internal static let Fps60 = 60.0 as Double
+    internal static let Fps60_Delay = Int(Fps60 / (1000.0 as Double))
 	
 	public func setBackground(_ color: NSColor) {
 //        let startTime = TimeUtils.getDispatchTime()

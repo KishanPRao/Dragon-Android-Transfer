@@ -17,10 +17,14 @@ class IndeterminateProgress: NSView {
     var path = NSBezierPath()
     
     var xOffset: CGFloat = 0.0
+    let xOffsetStep: CGFloat = 5.5
     
     private func update() {
         var width = frame.width / 2.0
-        let xOffset = self.xOffset.truncatingRemainder(dividingBy: frame.width)
+        var xOffset = self.xOffset.truncatingRemainder(dividingBy: frame.width)
+        let t = Double((xOffset / self.frame.width))
+        xOffset = self.frame.width * CGFloat(self.getTime(t));
+//        print("Indeterminate: \(xOffset), \(t) -> \(self.getTime(t))")
         let totalSize = xOffset + width
         
         //LogV("Offset:", xOffset, " total:", totalSize)
@@ -59,14 +63,13 @@ class IndeterminateProgress: NSView {
     
 //    let dummyAnimation =
     
-    func getTime() {
+    func getTime(_ t: Double) -> Double {
         /*let path = NSBezierPath(rect: CGRect(x: 0, y: 0,
                                        width: 500,
                                        height: 500)
         let fillLayer = CAShapeLayer(layer: self.layer)
         fillLayer.path = path.cgPath*/
-        let s = UnitBezierMac()
-        s.sampleY(0)
+        return AnimationUtils.solve(t: t, curveType: .easeInEaseOut)
     }
     
     override func draw(_ dirtyRect: NSRect) {
@@ -76,18 +79,18 @@ class IndeterminateProgress: NSView {
         path.fill()
         
         if (!isHidden) {
-            //            TODO: Animate using kCAMediaTimingFunctionEaseInEaseOut function, somehow.
-            ThreadUtils.runInMainThreadAfter(delayMs: NSView.FPS_DELAY, {
-                self.xOffset = self.xOffset + 5
-                let timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+            ThreadUtils.runInMainThreadAfter(delayMs: IndeterminateProgress.Fps60_Delay, {
+                self.xOffset = self.xOffset + self.xOffsetStep
+                /*let timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
                 
                 var point1: [Float] = [0.1,0.1]
                 var point2: [Float] = [0.1,0.1]
                 
                 timingFunction.getControlPoint(at: 1, values: &point1)
                 timingFunction.getControlPoint(at: 2, values: &point2)
-                
+ 
                 print("Indeterminate: \(String(describing: point1)),\(String(describing: point2))")
+ */
                 self.update()
                 self.needsDisplay = true
             })

@@ -7,7 +7,7 @@
 //
 
 #include <stdio.h>
-#include "UnitBezier.h"
+#include "UnitBezier.hpp"
 #include <math.h>
 
     UnitBezier::UnitBezier(double p1x, double p1y, double p2x, double p2y)
@@ -39,7 +39,7 @@
     }
     
     // Given an x value, find a parametric value it came from.
-    double UnitBezier::solveCurveX(double x, double epsilon)
+    double UnitBezier::solveCurveX(double x, double epsilon = 1e-6)
     {
         double t0;
         double t1;
