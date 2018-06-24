@@ -162,7 +162,8 @@ extension TransferViewController {
 //                    self.fileTable.layer?.borderWidth = 0
 						AppDelegate.isPastingOperation.value = true
 //                    self.showCopyDialog()
-						self.mDockProgress?.isHidden = false
+//                        self.mDockProgress?.animate(show: true)
+                        self.mDockProgress?.isHidden = false
                         self.transferProgressView.resetProgress()
 						self.startTimer()
 					} else {
@@ -314,7 +315,8 @@ extension TransferViewController {
         
         //        NSWorkspace.shared.noteFileSystemChanged(destinationFile)
         
-		mDockProgress?.doubleValue = Double(progress)
+//        mDockProgress?.doubleValue = Double(progress)
+        mDockProgress?.setProgress(CGFloat(progress))
 		mDockTile.display()
         return true
 	}
@@ -341,7 +343,8 @@ extension TransferViewController {
 		}
 //		TODO: Test copy Death Note (Fatal error: Double value cannot be converted to Int because it is either infinite or NaN)
 		
-		mDockProgress?.isHidden = true
+//        self.mDockProgress?.animate(show: false)
+        mDockProgress?.isHidden = true
 		mDockTile.display()
 		if (transferType == TransferType.MacToAndroid) {
 			refresh()

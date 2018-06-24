@@ -28,9 +28,10 @@ class Snackbar: NSView {
 	private func commonInit() {
 		Bundle.main.loadNibNamed(NSNib.Name(rawValue: "Snackbar"), owner: self, topLevelObjects: nil)
 		message.stringValue = ""
-		message.textColor = R.color.black
+        message.textColor = R.color.textColor
+//        message.textColor = R.color.transferTextColor
         message.updateMainFont()
-		self.setBackground(R.color.white)
+		self.setBackground(R.color.transferBg)
 //		message.textColor = R.color.white
 //		self.setBackground(R.color.menuNavColor)
 		

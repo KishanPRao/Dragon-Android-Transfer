@@ -40,4 +40,5 @@ class AlertProperty: NSObject {
 
 class InputAlertProperty: AlertProperty {
     var defaultValue: String = ""
+    var icon: NSImage = NSImage(named: R.drawable.imageName(R.drawable.folder))!
 }

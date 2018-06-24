@@ -260,6 +260,8 @@
 		DA39B9E420D8D5B60041AE89 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = DA39B9E320D8D5B60041AE89 /* folder.png */; };
 		DA41CE4220DE4CB7006E0A4C /* AnimationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA41CE4120DE4CB7006E0A4C /* AnimationUtils.swift */; };
 		DA41CE4420DE687B006E0A4C /* AlertProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA41CE4320DE687B006E0A4C /* AlertProperties.swift */; };
+		DA48DA5A20DFA99800171295 /* AbstractProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48DA5920DFA99800171295 /* AbstractProgressView.swift */; };
+		DA48DA5C20DFAB2000171295 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48DA5B20DFAB2000171295 /* CircularProgressView.swift */; };
 		DAAF120420DCC23300E075B8 /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */; };
 		DAAF120520DCC25900E075B8 /* Ubuntu-Bold.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */; };
 		DAAF120720DCE77100E075B8 /* NonDeselectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAF120620DCE77100E075B8 /* NonDeselectTableView.swift */; };
@@ -551,6 +553,8 @@
 		DA39B9E320D8D5B60041AE89 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
 		DA41CE4120DE4CB7006E0A4C /* AnimationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationUtils.swift; sourceTree = "<group>"; };
 		DA41CE4320DE687B006E0A4C /* AlertProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertProperties.swift; sourceTree = "<group>"; };
+		DA48DA5920DFA99800171295 /* AbstractProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractProgressView.swift; sourceTree = "<group>"; };
+		DA48DA5B20DFAB2000171295 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
 		DAAF120620DCE77100E075B8 /* NonDeselectTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonDeselectTableView.swift; sourceTree = "<group>"; };
 		DAAF120820DCF98800E075B8 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
@@ -894,6 +898,7 @@
 		BE3BD6C1A5E807A74813769E /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				BE3BD58FE89F62979C87BBE7 /* Xib */,
 				BE3BD40AE738BD024E549A5E /* ClickableView.swift */,
 				50DC06351FFD6F0B00B0CDDB /* OverlayView.swift */,
 				BE3BD84AE45EE7CCE8AA60E2 /* ProgressView.swift */,
@@ -913,9 +918,10 @@
 				50CAAF891FFFBFCD00911D8E /* SingleClickButton.swift */,
 				50CAAF9120000F2A00911D8E /* DarkAlert.swift */,
 				50D37AAB20092EB1007A1374 /* VerticallyAlignedTextFieldCell.swift */,
-				BE3BD58FE89F62979C87BBE7 /* Xib */,
 				DA06CB7020D9707400448053 /* DarkAlertUtils.swift */,
 				DAAF120620DCE77100E075B8 /* NonDeselectTableView.swift */,
+				DA48DA5920DFA99800171295 /* AbstractProgressView.swift */,
+				DA48DA5B20DFAB2000171295 /* CircularProgressView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -1612,6 +1618,7 @@
 				50DFEDBB2002A377004BAE01 /* AdWindowController.swift in Sources */,
 				50961BFE1FF92DCF001B6D3D /* NSButton_Extension.swift in Sources */,
 				BE3BDCBA1F920EFDA3ADCCF7 /* PrintUtils.swift in Sources */,
+				DA48DA5A20DFA99800171295 /* AbstractProgressView.swift in Sources */,
 				BE3BDA06EB0630E43703247B /* DeviceNotificationDelegate.swift in Sources */,
 				BE3BD5D86DD31394390BEBB0 /* FileProgressDelegate.swift in Sources */,
 				BE3BDFCE24CB423E5C753535 /* BaseExtension.swift in Sources */,
@@ -1656,6 +1663,7 @@
 				BE3BDC7A6DF3C18127CFFF78 /* ShellParser.swift in Sources */,
 				BE3BD0BD51163ECA8A5D5591 /* AlertUtils.m in Sources */,
 				DAE8B56520D01A3500520FB3 /* VerboseObject.swift in Sources */,
+				DA48DA5C20DFAB2000171295 /* CircularProgressView.swift in Sources */,
 				BE3BDE555397795773311960 /* BridgingUtils.m in Sources */,
 				5096950F1FF76865005BC423 /* R_Extension.swift in Sources */,
 				BE3BD9BD2020E50C8DE0DD28 /* PushCommand.cpp in Sources */,

@@ -138,7 +138,9 @@ string AdbExecutor::executeAdb(string commands, AdbCallback callback) {
 					usingBlock:^(NSNotification *notification) {
 //						NSLog(@"Task Block");
 						if (activeTask == nil) {
+//                            NSLog(@"Task canceled");
 							callback("", AdbExecutionResult::Canceled);
+                            [[NSNotificationCenter defaultCenter] removeObserver: dataAvailable];
 							return;
 						}
 						auto data = [pipe fileHandleForReading].availableData;
@@ -147,13 +149,21 @@ string AdbExecutor::executeAdb(string commands, AdbCallback callback) {
 							auto str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 //                            NSLog(@"Task Data, %@", str);
 							callback(convert(str), AdbExecutionResult::InProgress);
+//                            NSLog(@"waitForDataInBackgroundAndNotify");
 							[outFile waitForDataInBackgroundAndNotify];
+//                            NSLog(@"waitForDataInBackgroundAndNotify, done");
 						} /*else {
 //							NSLog(@"Task Length 0");
 //							TODO: Done Content, somehow:
 							callback("", AdbExecutionResult::Ok);
 							[[NSNotificationCenter defaultCenter] removeObserver: dataAvailable];
 						}*/
+                        if (activeTask == nil) {
+//                            NSLog(@"Task canceled, second");
+                            callback("", AdbExecutionResult::Canceled);
+                            [[NSNotificationCenter defaultCenter] removeObserver: dataAvailable];
+                            return;
+                        }
 					}];
 	
 	[task launch];

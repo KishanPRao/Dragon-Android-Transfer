@@ -26,4 +26,8 @@ class ImageResource {
     
     public let menu_back = "menu_back"
     public let refresh = "refresh"
+    
+    public func imageName(_ name: String) -> NSImage.Name {
+        return NSImage.Name(rawValue: name)
+    }
 }

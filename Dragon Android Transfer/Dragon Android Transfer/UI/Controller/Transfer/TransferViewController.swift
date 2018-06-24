@@ -43,7 +43,8 @@ class TransferViewController: NSViewController {
 	internal var alert: DarkAlert? = nil
 	
 	internal let mDockTile: NSDockTile = NSApplication.shared.dockTile
-	internal var mDockProgress: NSProgressIndicator? = nil
+//    internal var mDockProgress: NSProgressIndicator? = nil
+    internal var mDockProgress: CircularProgressView? = nil
 	internal var mCurrentProgress = -1.0
     internal var mProgress: Progress? = nil
 	
@@ -174,7 +175,7 @@ class TransferViewController: NSViewController {
         imageView.image = NSApplication.shared.applicationIconImage
         mDockTile.contentView = imageView
         
-        mDockProgress = NSProgressIndicator(frame: NSMakeRect(0.0, 0.0, mDockTile.size.width, 10))
+        /*mDockProgress = NSProgressIndicator(frame: NSMakeRect(0.0, 0.0, mDockTile.size.width, 10))
         if let dockProgress = mDockProgress {
             dockProgress.style = NSProgressIndicator.Style.bar
             dockProgress.isIndeterminate = false
@@ -182,6 +183,15 @@ class TransferViewController: NSViewController {
             dockProgress.maxValue = 100
             imageView.addSubview(dockProgress)
             dockProgress.isBezeled = true
+            dockProgress.isHidden = true
+        }*/
+        mDockProgress = CircularProgressView(frame: NSMakeRect(0.0, 0.0,
+                                                               mDockTile.size.width,
+                                                               mDockTile.size.height))
+        if let dockProgress = mDockProgress {
+            dockProgress.progressFgColor = R.color.menuProgressFg
+            dockProgress.progressBgColor = R.color.menuProgressBg
+            imageView.addSubview(dockProgress)
             dockProgress.isHidden = true
         }
 	}

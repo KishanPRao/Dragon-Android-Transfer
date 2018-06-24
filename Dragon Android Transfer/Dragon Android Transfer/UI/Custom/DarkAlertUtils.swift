@@ -31,6 +31,7 @@ class DarkAlertUtils: NSObject {
         input.stringValue = property.defaultValue
         
         alert.accessoryView = input
+        alert.icon = property.icon
         alert.window.initialFirstResponder = input
         let response = alert.runModal()
         if (response == NSApplication.ModalResponse.alertFirstButtonReturn) {

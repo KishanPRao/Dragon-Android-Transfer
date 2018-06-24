@@ -8,7 +8,8 @@
 
 import Foundation
 
-class IndeterminateProgressView : NSView {
+//Unused. If needed, extend from AbstractProgressView.
+class IndeterminateCircularProgressView : NSView {
 //    Spinning Indeterminate, like Android.
     let PROGRESS_FOREGROUND_COLOR = ColorUtils.colorWithHexString(ColorUtils.indeterminateProgressForegroundColor)
     let circularPath = NSBezierPath()
@@ -58,7 +59,7 @@ class IndeterminateProgressView : NSView {
         circularPath.stroke()
         
         if (!isHidden) {
-            ThreadUtils.runInMainThreadAfter(delayMs: IndeterminateProgressView.Fps30_Delay, {
+            ThreadUtils.runInMainThreadAfter(delayMs: IndeterminateCircularProgressView.Fps60_Delay, {
                 self.needsDisplay = true
             })
         }
