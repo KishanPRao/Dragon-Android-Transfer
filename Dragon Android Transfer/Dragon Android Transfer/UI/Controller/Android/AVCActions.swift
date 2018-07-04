@@ -55,7 +55,9 @@ extension AndroidViewController {
                 alertProps.message = "Name: " + selectedFile.fileName
                 alertProps.info = infoText
                 alertProps.textColor = R.color.transferTextColor
-                alertProps.addButton(button: AlertButtonProperty(title: R.string.ok))
+                let buttonProp = AlertButtonProperty(title: R.string.ok)
+                buttonProp.isSelected = true
+                alertProps.addButton(button: buttonProp)
                 let alert = DarkAlert(property: alertProps)
                 alert.icon = image
                 alert.alertStyle = .informational
@@ -71,7 +73,9 @@ extension AndroidViewController {
         inputAlertProps.message = "Create New Folder"
         inputAlertProps.info = "Enter the name of the new folder:"
         inputAlertProps.textColor = R.color.transferTextColor
-        inputAlertProps.addButton(button: AlertButtonProperty(title: R.string.ok))
+        let buttonProp = AlertButtonProperty(title: R.string.ok)
+        buttonProp.isSelected = true
+        inputAlertProps.addButton(button: buttonProp)
         inputAlertProps.addButton(button: AlertButtonProperty(title: R.string.cancel))
         inputAlertProps.defaultValue = "Untitled Folder"
         
@@ -81,7 +85,9 @@ extension AndroidViewController {
                 let alertProps = AlertProperty()
                 alertProps.message = "Folder '\(folderName)' already exists!"
                 alertProps.textColor = R.color.transferTextColor
-                alertProps.addButton(button: AlertButtonProperty(title: R.string.ok))
+                let buttonProp = AlertButtonProperty(title: R.string.ok)
+                buttonProp.isSelected = true
+                alertProps.addButton(button: buttonProp)
                 alertProps.style = .critical
                 
                 DarkAlertUtils.showAlert(property: alertProps)
@@ -117,7 +123,9 @@ extension AndroidViewController {
         let alertProps = AlertProperty()
         alertProps.message = "Do you really want to delete \(deleteStringInDialog)?"
         alertProps.textColor = R.color.transferTextColor
-        alertProps.addButton(button: AlertButtonProperty(title: R.string.ok))
+        let buttonProp = AlertButtonProperty(title: R.string.ok)
+        buttonProp.isSelected = true
+        alertProps.addButton(button: buttonProp)
         alertProps.addButton(button: AlertButtonProperty(title: R.string.cancel))
         alertProps.style = .critical
         

@@ -19,6 +19,44 @@ extension NSImage {
 		image.unlockFocus()
 		return image
 	}
+    
+    class func gradientWithColors(colors: [CGColor], size: NSSize) -> NSImage {
+        let contentsScale: CGFloat = 1
+        let width = Int(size.width * contentsScale)
+        let height = Int(size.height * contentsScale)
+        let bytesPerRow = width * 4
+        let alignedBytesPerRow = ((bytesPerRow + (64 - 1)) / 64) * 64
+        
+        let context = CGContext(
+            data: nil,
+            width: width,
+            height: height,
+            bitsPerComponent: 8,
+            bytesPerRow: alignedBytesPerRow,
+            space: NSScreen.main?.colorSpace?.cgColorSpace ?? CGColorSpaceCreateDeviceRGB(),
+            bitmapInfo: CGImageAlphaInfo.noneSkipLast.rawValue
+            )!
+        
+        context.scaleBy(x: contentsScale, y: contentsScale)
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        var locations = [CGFloat]()
+        
+        for i in 0...colors.endIndex {
+            locations.append(CGFloat(i) / CGFloat(colors.count))
+        }
+        
+        let gradient = CGGradient(colorsSpace: colorSpace, colors: colors as CFArray, locations: locations)
+        let center = CGPoint(x: size.width / 2.0, y: size.height / 2.0)
+        context.drawLinearGradient(gradient!,
+                                   start: CGPoint(x: center.x, y: 0.0),
+                                   end: CGPoint(x: center.x, y: size.height),
+                                   options: CGGradientDrawingOptions(rawValue: 0))
+        
+        let image = NSImage(cgImage:  context.makeImage()!, size: size)
+        return image
+//        image.unlockFocus()
+//        return image
+    }
 	
 	/*
 	func roundCorners() -> NSImage {

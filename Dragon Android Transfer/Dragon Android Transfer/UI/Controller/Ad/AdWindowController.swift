@@ -35,6 +35,7 @@ class AdWindowController: NSWindowController, WKNavigationDelegate {
             self.view.frame.size = viewFrame.size
             webView?.frame.size = viewFrame.size
         }
+        LogV("Test, updateFrame")
     }
     
     override func windowDidLoad() {
@@ -79,7 +80,7 @@ class AdWindowController: NSWindowController, WKNavigationDelegate {
         	self.view.addSubview(webView)
         }
         self.view.setBackground(R.color.black)
-        LogV("View Loaded")
+        LogV("windowDidLoad")
         //        TODO: If failed loading..
     }
     
@@ -91,19 +92,37 @@ class AdWindowController: NSWindowController, WKNavigationDelegate {
         LogV("Start")
     }
     
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        LogV("Finish")
-        webView.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
-            if complete != nil {
-                webView.evaluateJavaScript("document.body.offsetHeight", completionHandler: { (height, error) in
-                    if let height = height as? CGFloat {
-//                    self.frameSize.size.height = height! as! CGFloat
-                    	self.height = height + self.window!.titlebarHeight
-                        self.LogI("Height: \(self.height)")
-                    	self.updateFrame(self.frameSize)
-                    }
-                })
+    func waitUntilFullyLoaded(_ webView :WKWebView, _ completionHandler: @escaping () -> Void) {
+        webView.evaluateJavaScript("document.readyState === 'complete'") { (evaluation, _) in
+            if let fullyLoaded = evaluation as? Bool {
+                if !fullyLoaded {
+//                    self.LogD("Webview not fully loaded yet...")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                        self.waitUntilFullyLoaded(webView, completionHandler)
+                    })
+                } else {
+//                    self.LogD("Webview fully loaded!")
+                    completionHandler()
+                }
             }
-        })
+        }
+    }
+
+    
+    func updateHeight(_ webView: WKWebView) {
+        waitUntilFullyLoaded(webView) {
+            webView.evaluateJavaScript("document.body.offsetHeight", completionHandler: { (height, error) in
+                if let height = height as? CGFloat {
+                    self.height = height + (self.window!.titlebarHeight * 2)
+                    self.LogI("Height: \(self.height), title: \(self.window!.titlebarHeight)")
+                    self.updateFrame(self.frameSize)
+                }
+            })
+        }
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        LogV("didFinish")
+        updateHeight(webView)
     }
 }

@@ -331,7 +331,14 @@ class AndroidViewController: NSViewController,
 //    var adVc: AdViewController? = nil
 //    let url = "https://dragon-android-transfer-ad.herokuapp.com"
 //    let url = "https://www.flipkart.com"
-    let url = "http://localhost:3333"
+    //    TODO: Move to Strings file.
+    static let hostUrl = "http://localhost:3333"
+//    static let hostUrl = "http://kishanprao.herokuapp.com"
+    static let requestUrl = hostUrl + "/ads/dragon-android-transfer-request"
+    static let adType0Url = requestUrl + "?type=0"
+    static let adType1Url = requestUrl + "?type=1"
+    static let adType2Url = requestUrl + "?type=2"
+    
     var adWc: AdWindowController? = nil
     
 	func openAd() {
@@ -341,7 +348,7 @@ class AndroidViewController: NSViewController,
         frameSize.size = NSSize(width: window.frame.width, height: frameSize.height - window.titlebarHeight)
         
         if let adWc = adWc {
-            adWc.url = url
+            adWc.url = AndroidViewController.adType1Url
             adWc.frameSize = frameSize
         	adWc.showWindow(self)
             

@@ -13,15 +13,18 @@ class AlertButtonProperty: NSObject {
     var bgColor: NSColor
     var textColor: NSColor
     var textSize: TextSizeType
+    var isSelected: Bool
     
     init(title: String = "",
          bgColor: NSColor = R.color.white,
          textColor: NSColor  = R.color.black,
-         textSize: TextSizeType = R.number.dialogButtonTextSize) {
+         textSize: TextSizeType = R.number.dialogButtonTextSize,
+         isSelected: Bool = false) {
         self.title = title
         self.bgColor = bgColor
         self.textColor = textColor
         self.textSize = textSize
+        self.isSelected = isSelected
     }
 }
 

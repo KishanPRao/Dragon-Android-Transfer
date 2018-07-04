@@ -82,7 +82,9 @@ class TransferViewController: NSViewController {
         let alertProps = AlertProperty()
         alertProps.message = "Cancel?"
         alertProps.info = "Do you want to cancel the current transfer?"
-        alertProps.addButton(button: AlertButtonProperty(title: R.string.ok))
+        let buttonProp = AlertButtonProperty(title: R.string.ok)
+        buttonProp.isSelected = true
+        alertProps.addButton(button: buttonProp)
         alertProps.addButton(button: AlertButtonProperty(title: R.string.cancel))
         alertProps.style = .critical
         alert = DarkAlert(property: alertProps)
@@ -120,7 +122,8 @@ class TransferViewController: NSViewController {
         currentCopiedSize = 0
         totalSize = 0
         transferProgressView.resetProgress()
-        transferProgressView.progressBgColor = R.color.transferProgressBg
+//        transferProgressView.progressBgColor = R.color.transferProgressBg
+        transferProgressView.progressBgColor = R.color.white
         transferProgressView.progressFgColor = R.color.transferProgressFg
         
 		self.view.frame.size = frameSize.size
@@ -190,7 +193,8 @@ class TransferViewController: NSViewController {
                                                                mDockTile.size.height))
         if let dockProgress = mDockProgress {
             dockProgress.progressFgColor = R.color.menuProgressFg
-            dockProgress.progressBgColor = R.color.menuProgressBg
+//            dockProgress.progressBgColor = R.color.menuProgressBg
+            dockProgress.progressBgColor = R.color.white        //a bit more bluish.
             imageView.addSubview(dockProgress)
             dockProgress.isHidden = true
         }

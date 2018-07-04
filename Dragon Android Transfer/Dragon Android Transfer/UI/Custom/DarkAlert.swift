@@ -20,6 +20,7 @@ class DarkAlert: NSAlert {
                            textColor: buttonProperty.textColor,
                            alignment: .center,
                            bgColor: buttonProperty.bgColor,
+                           isSelected: buttonProperty.isSelected,
                            rounded: true)
             button.imageScaling = .scaleNone
             button.updateMainFont(buttonProperty.textSize)
@@ -41,6 +42,7 @@ class DarkAlert: NSAlert {
                 text.isSelectable = false
                 text.updateMainFontInIncrement(2.0)
                 text.textColor = property.textColor
+                text.translatesAutoresizingMaskIntoConstraints = true
             }
         }
         alert.messageText = property.message

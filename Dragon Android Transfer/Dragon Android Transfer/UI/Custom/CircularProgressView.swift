@@ -10,7 +10,8 @@ import Cocoa
 
 class CircularProgressView: AbstractProgressView {
     let circularPath = NSBezierPath()
-    let lineWidth = 5.0 as CGFloat
+//    let lineWidth = 5.0 as CGFloat
+    let lineWidth = 7.0 as CGFloat
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -46,6 +47,7 @@ class CircularProgressView: AbstractProgressView {
                                startAngle: -endAngle + offset,
                                endAngle: offset,
                                clockwise: false)
+        circularPath.lineCapStyle = .roundLineCapStyle
         circularPath.stroke()
     }
     
