@@ -15,7 +15,7 @@ class LightTheme: Theme {
     static let menuNavigationColor = color("002366")
     let menuNavColor = menuNavigationColor
     let menuTableColor = menuNavigationColor
-    let menuBgColor = color("002366", withAlpha: 0.4)
+    let menuBgColor = color("071a34", withAlpha: 0.4)
     let menuItemBg = color("ffffff")
     let menuItemSelectBg = color("2258b9")
     let menuItemSelectCellBg = color("2258b9")

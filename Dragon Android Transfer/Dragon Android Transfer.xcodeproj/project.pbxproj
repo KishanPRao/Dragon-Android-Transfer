@@ -264,6 +264,10 @@
 		DA463DD220F4D33E00EBF189 /* file_l.png in Resources */ = {isa = PBXBuildFile; fileRef = DA463DCF20F4D33D00EBF189 /* file_l.png */; };
 		DA463DD320F4D33E00EBF189 /* path_selector_div_l.png in Resources */ = {isa = PBXBuildFile; fileRef = DA463DD020F4D33D00EBF189 /* path_selector_div_l.png */; };
 		DA463DD420F4D33E00EBF189 /* backward_l.png in Resources */ = {isa = PBXBuildFile; fileRef = DA463DD120F4D33E00EBF189 /* backward_l.png */; };
+		DA463DD920F4E1E600EBF189 /* cancel_l.png in Resources */ = {isa = PBXBuildFile; fileRef = DA463DD520F4E1E400EBF189 /* cancel_l.png */; };
+		DA463DDA20F4E1E600EBF189 /* mac_l.png in Resources */ = {isa = PBXBuildFile; fileRef = DA463DD620F4E1E500EBF189 /* mac_l.png */; };
+		DA463DDB20F4E1E600EBF189 /* android_l.png in Resources */ = {isa = PBXBuildFile; fileRef = DA463DD720F4E1E500EBF189 /* android_l.png */; };
+		DA463DDC20F4E1E600EBF189 /* transfer_more_l.png in Resources */ = {isa = PBXBuildFile; fileRef = DA463DD820F4E1E500EBF189 /* transfer_more_l.png */; };
 		DA48DA5A20DFA99800171295 /* AbstractProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48DA5920DFA99800171295 /* AbstractProgressView.swift */; };
 		DA48DA5C20DFAB2000171295 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48DA5B20DFAB2000171295 /* CircularProgressView.swift */; };
 		DAAF120420DCC23300E075B8 /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */; };
@@ -562,6 +566,10 @@
 		DA463DCF20F4D33D00EBF189 /* file_l.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file_l.png; sourceTree = "<group>"; };
 		DA463DD020F4D33D00EBF189 /* path_selector_div_l.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = path_selector_div_l.png; sourceTree = "<group>"; };
 		DA463DD120F4D33E00EBF189 /* backward_l.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backward_l.png; sourceTree = "<group>"; };
+		DA463DD520F4E1E400EBF189 /* cancel_l.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_l.png; sourceTree = "<group>"; };
+		DA463DD620F4E1E500EBF189 /* mac_l.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mac_l.png; sourceTree = "<group>"; };
+		DA463DD720F4E1E500EBF189 /* android_l.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = android_l.png; sourceTree = "<group>"; };
+		DA463DD820F4E1E500EBF189 /* transfer_more_l.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transfer_more_l.png; sourceTree = "<group>"; };
 		DA48DA5920DFA99800171295 /* AbstractProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractProgressView.swift; sourceTree = "<group>"; };
 		DA48DA5B20DFAB2000171295 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
@@ -660,6 +668,10 @@
 				DA463DD120F4D33E00EBF189 /* backward_l.png */,
 				DA463DCF20F4D33D00EBF189 /* file_l.png */,
 				DA463DD020F4D33D00EBF189 /* path_selector_div_l.png */,
+				DA463DD720F4E1E500EBF189 /* android_l.png */,
+				DA463DD520F4E1E400EBF189 /* cancel_l.png */,
+				DA463DD620F4E1E500EBF189 /* mac_l.png */,
+				DA463DD820F4E1E500EBF189 /* transfer_more_l.png */,
 				BE3BDB3E2A1E4A083D7DA873 /* Credits.rtf */,
 				BE3BD65DA3E8130849D039FD /* index.html */,
 				BE3BDB16DB0C701832D6D2BC /* endCopy.mp3 */,
@@ -1297,8 +1309,11 @@
 				BE3BD4342179DB442FD36053 /* close_button.png in Resources */,
 				50CAAF962000253100911D8E /* mac.png in Resources */,
 				DA463DD320F4D33E00EBF189 /* path_selector_div_l.png in Resources */,
+				DA463DDA20F4E1E600EBF189 /* mac_l.png in Resources */,
+				DA463DD920F4E1E600EBF189 /* cancel_l.png in Resources */,
 				50CAAF952000253100911D8E /* android.png in Resources */,
 				DAC59170202F7A5F00534084 /* cancel.png in Resources */,
+				DA463DDB20F4E1E600EBF189 /* android_l.png in Resources */,
 				BE3BD0680117384D1A25829B /* update_sizes.png in Resources */,
 				BE3BD17F8436D360FDCB20EC /* Credits.rtf in Resources */,
 				BE3BDA1FB1387C3949B25E52 /* index.html in Resources */,
@@ -1327,6 +1342,7 @@
 				50DFEDBC2002A377004BAE01 /* AdWindowController.xib in Resources */,
 				BE3BD04A725201CFC6692744 /* PathSelector.xib in Resources */,
 				BE3BDD6D61EEB37FFAA132F9 /* MenuCell.xib in Resources */,
+				DA463DDC20F4E1E600EBF189 /* transfer_more_l.png in Resources */,
 				DA39B9E420D8D5B60041AE89 /* folder.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
