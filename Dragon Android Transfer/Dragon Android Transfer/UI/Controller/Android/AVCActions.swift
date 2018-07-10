@@ -54,7 +54,7 @@ extension AndroidViewController {
                 let alertProps = AlertProperty()
                 alertProps.message = "Name: " + selectedFile.fileName
                 alertProps.info = infoText
-                alertProps.textColor = R.color.transferTextColor
+                alertProps.textColor = R.color.dialogTextColor
                 let buttonProp = AlertButtonProperty(title: R.string.ok)
                 buttonProp.isSelected = true
                 alertProps.addButton(button: buttonProp)
@@ -72,7 +72,7 @@ extension AndroidViewController {
         let inputAlertProps = InputAlertProperty()
         inputAlertProps.message = "Create New Folder"
         inputAlertProps.info = "Enter the name of the new folder:"
-        inputAlertProps.textColor = R.color.transferTextColor
+        inputAlertProps.textColor = R.color.dialogTextColor
         let buttonProp = AlertButtonProperty(title: R.string.ok)
         buttonProp.isSelected = true
         inputAlertProps.addButton(button: buttonProp)
@@ -84,7 +84,7 @@ extension AndroidViewController {
 			if (transferHandler.folderExists(folderName)) {
                 let alertProps = AlertProperty()
                 alertProps.message = "Folder '\(folderName)' already exists!"
-                alertProps.textColor = R.color.transferTextColor
+                alertProps.textColor = R.color.dialogTextColor
                 let buttonProp = AlertButtonProperty(title: R.string.ok)
                 buttonProp.isSelected = true
                 alertProps.addButton(button: buttonProp)
@@ -122,7 +122,7 @@ extension AndroidViewController {
         
         let alertProps = AlertProperty()
         alertProps.message = "Do you really want to delete \(deleteStringInDialog)?"
-        alertProps.textColor = R.color.transferTextColor
+        alertProps.textColor = R.color.dialogTextColor
         let buttonProp = AlertButtonProperty(title: R.string.ok)
         buttonProp.isSelected = true
         alertProps.addButton(button: buttonProp)

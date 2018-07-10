@@ -30,7 +30,7 @@ class MenuStatusView: NSView {
 //        title.stringValue = storageItem.path.name
         
         title.attributedStringValue = TextUtils.attributedBoldString(from: storageItem.path.name,
-                                                                     color: R.color.textColor, nonBoldRange: nil,
+                                                                     color: R.color.menuFontColor, nonBoldRange: nil,
                                                                      fontSize: R.number.menuStatusTitleSize)
     }
     
@@ -40,7 +40,7 @@ class MenuStatusView: NSView {
         let stringValue = availableSpace + middleString + totalSpace
         let range = NSMakeRange(availableSpace.count, middleString.count)
         sizeStatus.attributedStringValue = TextUtils.attributedBoldString(from: stringValue,
-                                                                      color: R.color.textColor,
+                                                                      color: R.color.menuFontColor,
                                                                       nonBoldRange: range,
                                                                       fontSize: R.number.menuStatusInfoSize)
         
@@ -72,8 +72,8 @@ class MenuStatusView: NSView {
         loadNib()
         self.addSubview(rootView)
         image.setImage(name: R.drawable.info)
-        title.textColor = R.color.textColor
-        sizeStatus.textColor = R.color.textColor
+        title.textColor = R.color.menuFontColor
+        sizeStatus.textColor = R.color.menuFontColor
         title.updateMainFont()
         sizeStatus.updateMainFont()
         resetTitle()

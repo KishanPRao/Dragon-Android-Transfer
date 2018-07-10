@@ -9,7 +9,10 @@
 import Foundation
 
 class ImageResource {
-    public let path_selector_div = "path_selector_div"
+    public var path_selector_div: String { get {return R.isDark() ? "path_selector_div" : "path_selector_div_l"}}
+    public var path_selector_back: String { get { return R.isDark() ? "backward": "backward_l" } }
+    public var file: String {get{return R.isDark() ? "file" : "file_l"}}
+    
     public let cancel_transfer = "cancel"
     public let android = "android"
     public let mac = "mac"
@@ -21,7 +24,6 @@ class ImageResource {
     public let options = "options"
     public let info = "info"
     
-    public let file = "file"
     public let folder = "folder"
     
     public let menu_back = "menu_back"

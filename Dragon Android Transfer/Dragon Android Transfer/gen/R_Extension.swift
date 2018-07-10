@@ -16,6 +16,10 @@ extension R {
         //print("Set Dark:", R.color.dark, R.color.dark)
     }
     
+    public static func isDark() -> Bool {
+        return R.color.isDark
+    }
+    
     public static func setLightTheme() {
         R.color = R._lightTheme
     }

@@ -91,13 +91,11 @@ class PathSelector: VerboseView {
     }
     
     func addElement(_ pathElement: Path, _ updateTextPosition: Int) {
-//        let directory = directories[index]
-//        LogI("Display Directory:", name)
-        LogV("Update Text:", updateTextPosition)
+//        LogV("Update Text:", updateTextPosition)
         
         let button = textArray[updateTextPosition]
         
-        LogI("Path Element: \(pathElement)")
+//        LogI("Path Element: \(pathElement)")
         paths.append(pathElement)
         let isLast = isCurrentPath(pathElement)
         let image = isLast ? disabledImage! : clickableImage!
@@ -117,27 +115,26 @@ class PathSelector: VerboseView {
         var paths = [Path]()
         self.currentPath = currentPath
         let storagePath = getStoragePath(currentPath)
+        
+        for button in textArray {
+            button.isHidden = true
+        }
+        for arrow in arrowsArray {
+            //            TODO: Make the 'current path' button black!
+            arrow.isHidden = true
+        }
         if let storagePath = storagePath {
-            LogV("Storage Path: \(storagePath)")
+//            LogV("Storage Path: \(storagePath)")
             let newPath = currentPath.replacingOccurrences(of: storagePath.absolutePath, with: "")
             let directories = newPath.split {
                 $0 == "/"
             }.map(String.init)
-            LogI("New Path: \(newPath), dirs: \(directories)")
+//            LogI("New Path: \(newPath), dirs: \(directories)")
             var size = directories.count
-            
-            for button in textArray {
-                button.isHidden = true
-            }
-            for arrow in arrowsArray {
-                //            TODO: Make the 'current path' button black!
-                arrow.isHidden = true
-            }
             
             paths.append(storagePath)
             
             var path = ""
-//            addElement(storagePath, 0)
             
             for index in 0..<size {
                 let name = directories[index]
@@ -154,8 +151,8 @@ class PathSelector: VerboseView {
                 }
             }
             
-            LogD("Paths", paths)
-            LogD("Current:", currentPath)
+//            LogD("Paths", paths)
+//            LogD("Current:", currentPath)
         }
         self.paths = paths
 	}
@@ -185,7 +182,7 @@ class PathSelector: VerboseView {
 		
 		if (path != currentPath) {
 			updateToPath(path)
-			LogV("Open", path)
+//            LogV("Open", path)
 		}
 	}
 	
@@ -193,7 +190,7 @@ class PathSelector: VerboseView {
 		let path = paths[1].absolutePath
 		
 		if (path != currentPath) {
-			LogV("Open", path)
+//            LogV("Open", path)
 			updateToPath(path)
 		}
 	}
@@ -210,7 +207,7 @@ class PathSelector: VerboseView {
 		Bundle.main.loadNibNamed(NSNib.Name(rawValue: "PathSelector"), owner: self, topLevelObjects: nil)
 		LogV("Path Selector, init coder", firstText)
 		clickableImage = NSImage.swatchWithColor(color: R.color.pathSelectorSelectableItem, size: rootView.frame.size).roundCorners()
-		disabledImage = NSImage.swatchWithColor(color: R.color.black, size: rootView.frame.size).roundCorners()
+		disabledImage = NSImage.swatchWithColor(color: R.color.pathSelectorBg, size: rootView.frame.size).roundCorners()
 		
 		initButtons()
 		

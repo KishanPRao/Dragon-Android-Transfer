@@ -9,37 +9,41 @@
 import Foundation
 
 class LightTheme: Theme {
-    
+    let isDark = false
     let textColor = color("000000")
     
-    let menuNavColor = color("0fffff")
-    let menuTableColor = color("0fffff")
-    let menuBgColor = color("0fffff", withAlpha: 0.4)
+    static let menuNavigationColor = color("002366")
+    let menuNavColor = menuNavigationColor
+    let menuTableColor = menuNavigationColor
+    let menuBgColor = color("002366", withAlpha: 0.4)
     let menuItemBg = color("ffffff")
-    let menuItemSelectBg = color("091f45")
-    let menuItemSelectCellBg = color("11326c")
-    let menuProgressFg = color("204582")
-    let menuProgressBg = color("414854")
+    let menuItemSelectBg = color("2258b9")
+    let menuItemSelectCellBg = color("2258b9")
+    let menuProgressFg = color("1057d4")
+    let menuProgressBg = color("749adc")
+    let menuFontColor = color("ffffff")
     
-    let toolbarColor = color("072556")
-    let toolbarProgressFg = color("204582")
-    let toolbarProgressBg = color("6a7991")
+    let toolbarColor = color("2b83f1")
+    let toolbarProgressFg = color("e0f0ff")
+    let toolbarProgressBg = color("44a8e8")
     
-    let pathSelectorSelectableItem = color("0e2343")
+    let pathSelectorSelectableItem = color("cfcac5")
+    let pathSelectorBg = color("ffffff")
     
     let tableBg = color("ffffff")
     let tableItemBg = color("ffffff")
-    let listSelectedBackgroundColor = color("55999c")
+    let listSelectedBackgroundColor = color("a7cbfc")
     
-    let transferBg = color("313b4c")
-    let transferTextColor = color("b8c2c9")
-    let transferProgressFg = color("204582")
-    let transferProgressBg = color("6a7991")
+    let transferBg = color("f8f8f8")
+    let transferTextColor = color("232323")
+    let transferProgressFg = color("679af7")
+    let transferProgressBg = color("646669")
     
-    let dialogBgColor = color("193360")
-    let dialogWindowColor = color("0f1217")
+    let dialogBgColor = color("edecec")
+    let dialogWindowColor = color("fafafa")
+    let dialogTextColor = color("2c2c2c")
     let windowBg = color("fafafa")
-    let mainViewColor = color("#424242")
+    let mainViewColor = color("424242")
 //    var dark: Bool {
 //        get {
 //            return false

@@ -9,6 +9,7 @@
 import Foundation
 
 class DarkTheme: Theme {
+    let isDark = true
     static let color = DarkTheme.color(_:)
     
     let textColor = color("ffffff")
@@ -25,6 +26,7 @@ class DarkTheme: Theme {
 //    let menuProgressFg = color("204582")
     let menuProgressFg = color("4065a2")
     let menuProgressBg = color("414854")
+    let menuFontColor = color("ffffff")
     //    let menuItemSelectCellBg = color("000000")
     //    let menuItemSelectCellBg = color("091f45")
     
@@ -35,6 +37,7 @@ class DarkTheme: Theme {
     
 //    let pathSelectorSelectableItem = color("0e2343")
     let pathSelectorSelectableItem = color("30353a")
+    let pathSelectorBg = color("000000")
     
     //    let tableBg = color("050505")
     //    let tableBg = color("101010")
@@ -51,7 +54,8 @@ class DarkTheme: Theme {
 //    let transferProgressFg = color("ffffff")
     let transferProgressFg = color("4a94d3")
 //    let transferProgressFg = color("204582")
-    let transferProgressBg = color("6a7991")
+//    let transferProgressBg = color("6a7991")
+    let transferProgressBg = color("ffffff")
     //    let transferProgressFg = color("15468a")
     //    let transferProgressBg = color("406ead")
     
@@ -60,6 +64,7 @@ class DarkTheme: Theme {
     //    let dialogWindowColor = color("0f1217")
     let dialogWindowColor = color("313b4c")
     //    let dialogWindowColor = color("0b0d11")
+    let dialogTextColor = color("b8c2c9")
     
     //	let windowBg = color("050505")
     let windowBg = color("0a0a0a")

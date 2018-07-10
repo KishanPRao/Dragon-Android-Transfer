@@ -31,7 +31,7 @@ class AlertButtonProperty: NSObject {
 class AlertProperty: NSObject {
     var message: String = ""
     var info: String = ""
-    var textColor = R.color.textColor
+    var textColor = R.color.dialogTextColor
     var fullScreen = false
     var style: NSAlert.Style = .informational
     var buttons: [AlertButtonProperty] = []

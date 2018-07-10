@@ -31,7 +31,7 @@ extension AndroidViewController {
 		menuButton.setImage(name: "menu")
         //        TODO: Tooltip problem on menu open
         menuButton.toolTip = R.string.helpMenu
-		backButton.setImage(name: "backward")
+		backButton.setImage(name: R.drawable.path_selector_back)
         backButton.toolTip = R.string.helpBack
 		
 		overlayView.isHidden = true
@@ -49,7 +49,7 @@ extension AndroidViewController {
 		mCircularProgress?.isHidden = true
  */
 		
-		pathSelectorRootView.setBackground(R.color.black)
+		pathSelectorRootView.setBackground(R.color.pathSelectorBg)
 		loadingProgress.isHidden = true
 		//        parent.center fromView:parent.superview];
 	}

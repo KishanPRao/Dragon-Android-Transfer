@@ -261,6 +261,9 @@
 		DA41CE4220DE4CB7006E0A4C /* AnimationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA41CE4120DE4CB7006E0A4C /* AnimationUtils.swift */; };
 		DA41CE4420DE687B006E0A4C /* AlertProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA41CE4320DE687B006E0A4C /* AlertProperties.swift */; };
 		DA463DCE20F49D1200EBF189 /* AuthCheckCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA463DCC20F49D1100EBF189 /* AuthCheckCommand.cpp */; };
+		DA463DD220F4D33E00EBF189 /* file_l.png in Resources */ = {isa = PBXBuildFile; fileRef = DA463DCF20F4D33D00EBF189 /* file_l.png */; };
+		DA463DD320F4D33E00EBF189 /* path_selector_div_l.png in Resources */ = {isa = PBXBuildFile; fileRef = DA463DD020F4D33D00EBF189 /* path_selector_div_l.png */; };
+		DA463DD420F4D33E00EBF189 /* backward_l.png in Resources */ = {isa = PBXBuildFile; fileRef = DA463DD120F4D33E00EBF189 /* backward_l.png */; };
 		DA48DA5A20DFA99800171295 /* AbstractProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48DA5920DFA99800171295 /* AbstractProgressView.swift */; };
 		DA48DA5C20DFAB2000171295 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48DA5B20DFAB2000171295 /* CircularProgressView.swift */; };
 		DAAF120420DCC23300E075B8 /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */; };
@@ -556,6 +559,9 @@
 		DA41CE4320DE687B006E0A4C /* AlertProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertProperties.swift; sourceTree = "<group>"; };
 		DA463DCC20F49D1100EBF189 /* AuthCheckCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AuthCheckCommand.cpp; sourceTree = "<group>"; };
 		DA463DCD20F49D1100EBF189 /* AuthCheckCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AuthCheckCommand.hpp; sourceTree = "<group>"; };
+		DA463DCF20F4D33D00EBF189 /* file_l.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file_l.png; sourceTree = "<group>"; };
+		DA463DD020F4D33D00EBF189 /* path_selector_div_l.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = path_selector_div_l.png; sourceTree = "<group>"; };
+		DA463DD120F4D33E00EBF189 /* backward_l.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backward_l.png; sourceTree = "<group>"; };
 		DA48DA5920DFA99800171295 /* AbstractProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractProgressView.swift; sourceTree = "<group>"; };
 		DA48DA5B20DFAB2000171295 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
@@ -651,6 +657,9 @@
 				50F5117F2001401B00CCB22C /* remove.png */,
 				50CAAF932000253000911D8E /* android.png */,
 				50CAAF942000253100911D8E /* mac.png */,
+				DA463DD120F4D33E00EBF189 /* backward_l.png */,
+				DA463DCF20F4D33D00EBF189 /* file_l.png */,
+				DA463DD020F4D33D00EBF189 /* path_selector_div_l.png */,
 				BE3BDB3E2A1E4A083D7DA873 /* Credits.rtf */,
 				BE3BD65DA3E8130849D039FD /* index.html */,
 				BE3BDB16DB0C701832D6D2BC /* endCopy.mp3 */,
@@ -1276,6 +1285,7 @@
 				503C5A321E0FB9300090EB68 /* Main.storyboard in Resources */,
 				50F51179200108FF00CCB22C /* transfer_more.png in Resources */,
 				50961C111FF9676B001B6D3D /* backward.png in Resources */,
+				DA463DD420F4D33E00EBF189 /* backward_l.png in Resources */,
 				50FE44AB1FF6BA760099A029 /* PushSegue.swift in Resources */,
 				5098AC6E1FFD3C820084449B /* path_selector_div.png in Resources */,
 				BE3BDAF11B0C0A34B5455FA2 /* clipboard_icon.png in Resources */,
@@ -1286,6 +1296,7 @@
 				BE3BDC8FE02DB6B1BDDFD082 /* clipboard_icon_plain.png in Resources */,
 				BE3BD4342179DB442FD36053 /* close_button.png in Resources */,
 				50CAAF962000253100911D8E /* mac.png in Resources */,
+				DA463DD320F4D33E00EBF189 /* path_selector_div_l.png in Resources */,
 				50CAAF952000253100911D8E /* android.png in Resources */,
 				DAC59170202F7A5F00534084 /* cancel.png in Resources */,
 				BE3BD0680117384D1A25829B /* update_sizes.png in Resources */,
@@ -1294,6 +1305,7 @@
 				DAC5916A202F7A0300534084 /* file.png in Resources */,
 				50961C0F1FF966C2001B6D3D /* menu.png in Resources */,
 				50961C0B1FF95CAE001B6D3D /* internal_storage.png in Resources */,
+				DA463DD220F4D33E00EBF189 /* file_l.png in Resources */,
 				BE3BD869D6B5C24C762444B0 /* endCopy.mp3 in Resources */,
 				50F5117D200139FB00CCB22C /* FileOptions.xib in Resources */,
 				BE3BD43FFDA218F217C09DBA /* help.rtf in Resources */,

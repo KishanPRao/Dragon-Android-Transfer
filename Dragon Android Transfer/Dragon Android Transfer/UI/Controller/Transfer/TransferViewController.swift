@@ -122,8 +122,7 @@ class TransferViewController: NSViewController {
         currentCopiedSize = 0
         totalSize = 0
         transferProgressView.resetProgress()
-//        transferProgressView.progressBgColor = R.color.transferProgressBg
-        transferProgressView.progressBgColor = R.color.white
+        transferProgressView.progressBgColor = R.color.transferProgressBg
         transferProgressView.progressFgColor = R.color.transferProgressFg
         
 		self.view.frame.size = frameSize.size

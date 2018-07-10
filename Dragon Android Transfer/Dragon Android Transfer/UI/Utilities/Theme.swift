@@ -10,6 +10,7 @@ import Foundation
 
 protocol Theme {
 	//func color(_ hex: String) -> NSColor
+    var isDark: Bool {get}
 	var black: NSColor { get }
 	var gray: NSColor { get }
 	var white: NSColor { get }
@@ -21,6 +22,7 @@ protocol Theme {
 	var menuTableColor: NSColor { get }
     var menuProgressFg: NSColor { get }
     var menuProgressBg: NSColor { get }
+    var menuFontColor: NSColor {get}
     
 	var toolbarColor: NSColor { get }
 	var toolbarProgressFg: NSColor { get }
@@ -39,9 +41,11 @@ protocol Theme {
     var listSelectedBackgroundColor: NSColor{get}
 
     var pathSelectorSelectableItem: NSColor{get}
+    var pathSelectorBg: NSColor{get}
     
     var dialogBgColor: NSColor{get}
     var dialogWindowColor: NSColor{get}
+    var dialogTextColor: NSColor{get}
 	
 	var windowBg: NSColor { get }
     var mainViewColor: NSColor { get }
