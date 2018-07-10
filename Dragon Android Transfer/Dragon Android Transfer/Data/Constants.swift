@@ -58,5 +58,7 @@ public enum MenuItemIdentifier {
     static let newFolder = 11
     static let editDelete = 12
     static let stayOnTop = 13
+    static let darkTheme = 14
+    static let lightTheme = 15
     static let defaultAlwaysOn = 999
 }

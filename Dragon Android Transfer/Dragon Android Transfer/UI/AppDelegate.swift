@@ -19,13 +19,19 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
 //    }
 	static let MASShortcutCopy = "copyShortcut"
 	static let MASShortcutPaste = "pasteShortcut"
+    
+    static let DarkThemeKey = "DarkTheme"
+    
 	@IBOutlet weak var shortcutView: MASShortcutView?
 //    static let MASObservingContext = &MASObservingContext;
 //	@IBOutlet weak var window: NSWindow!
 
 //    var viewController: ViewController!
 	
-	static var active = false;
+    @IBOutlet weak var darkThemeMenuItem: NSMenuItem!
+    @IBOutlet weak var lightThemeMenuItem: NSMenuItem!
+    
+    static var active = false;
 	static var itemSelected = false
     static var directoryItemSelected: Bool = false /*{
         didSet {
@@ -90,8 +96,18 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
 		}
 		NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.screenUpdated), name: NSWindow.didChangeScreenNotification, object: nil)
 		
-        R.setDarkTheme()
-        R.setLightTheme()
+        var darkTheme = true
+        if (UserDefaults.standard.object(forKey: AppDelegate.DarkThemeKey) == nil) {
+            UserDefaults.standard.set(darkTheme, forKey: AppDelegate.DarkThemeKey)
+        } else {
+            darkTheme = UserDefaults.standard.bool(forKey: AppDelegate.DarkThemeKey)
+        }
+        
+        if (darkTheme) {
+            R.setDarkTheme()
+        } else {
+            R.setLightTheme()
+        }
 	}
 	
 	func userNotificationCenter(center: NSUserNotificationCenter, shouldPresentNotification notification: NSUserNotification) -> Bool {
@@ -157,8 +173,28 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
 //        }
 		return AppDelegate.validateInterfaceMenuItem(item: item)
 	}
+    
+    static func updateThemeItem(_ darkThemeItem: Bool) {
+        let darkTheme = UserDefaults.standard.bool(forKey: AppDelegate.DarkThemeKey)
+        let mainMenu = NSApplication.shared.mainMenu
+        let windowMenu = mainMenu?.item(at: 5)?.submenu
+        let tag = darkThemeItem ? MenuItemIdentifier.darkTheme : MenuItemIdentifier.lightTheme
+        for menuItem in (windowMenu?.items)! {
+            if let submenu = menuItem.submenu {
+                for item in submenu.items {
+                    if item.tag == tag {
+                        if ((darkTheme && darkThemeItem) || (!darkTheme && !darkThemeItem)) {
+                            item.state = .on
+                        } else {
+                            item.state = .off
+                        }
+                    }
+                }
+            }
+        }
+    }
 	
-	public static func validateInterfaceMenuItem(item: NSValidatedUserInterfaceItem!) -> Bool {
+	static func validateInterfaceMenuItem(item: NSValidatedUserInterfaceItem!) -> Bool {
 //        print("Vbose", "Here!!")
 		if (VERBOSE) {
 //            Swift.print("AppDelegate, validateInterfaceMenuItem:", item.tag);
@@ -202,6 +238,14 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
             return true
         }
         if (item.tag == MenuItemIdentifier.defaultAlwaysOn) {
+            return true
+        }
+        if (item.tag == MenuItemIdentifier.darkTheme) {
+            updateThemeItem(true)
+            return true
+        }
+        if (item.tag == MenuItemIdentifier.lightTheme) {
+            updateThemeItem(false)
             return true
         }
         if (item.tag == MenuItemIdentifier.stayOnTop) {
@@ -289,6 +333,37 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
     @IBAction func stayOnTop(_ sender: Any) {
         NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.STAY_ON_TOP), object: nil)
     }
+    
+    @IBAction func changeTheme(_ sender: Any) {
+        LogV("Change theme: \(sender)")
+        if let menuItem = sender as? NSMenuItem {
+            if (menuItem.state == .on) {
+                return
+            }
+            var darkTheme = false
+            if (menuItem.tag == MenuItemIdentifier.darkTheme) {
+                darkTheme = true
+            }
+            
+            let alertProps = AlertProperty()
+            alertProps.message = "This will restart the application."
+            alertProps.info = "Are you sure you want to change the theme?"
+            alertProps.textColor = R.color.dialogTextColor
+            let buttonProp = AlertButtonProperty(title: R.string.ok)
+            buttonProp.isSelected = true
+            alertProps.addButton(button: buttonProp)
+            alertProps.addButton(button: AlertButtonProperty(title: R.string.cancel))
+            alertProps.style = .informational
+            
+            if DarkAlertUtils.showAlert(property: alertProps) {
+                UserDefaults.standard.set(darkTheme, forKey: AppDelegate.DarkThemeKey)
+                NSApp.relaunch()
+            }
+            
+            LogV("Change to dark theme: \(darkTheme)")
+        }
+    }
+    
     
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		NSUserNotificationCenter.default.delegate = self

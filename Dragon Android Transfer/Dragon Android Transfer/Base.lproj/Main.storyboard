@@ -56,6 +56,22 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Go" id="H8h-7b-M4v">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Go" id="HyV-fh-RgO">
+                                    <items>
+                                        <menuItem title="Backward" tag="4" id="5f3-NA-ozi">
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="navigateBackward:" target="Voe-Tx-rLC" id="kx7-lf-UP0"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem title="File" id="xlg-8p-8mk">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="File" id="QTk-I3-Yhd">
@@ -125,26 +141,6 @@ CA
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Go" id="H8h-7b-M4v">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Go" id="HyV-fh-RgO">
-                                    <items>
-                                        <menuItem title="Backward" tag="4" id="5f3-NA-ozi">
-                                            <string key="keyEquivalent" base64-UTF8="YES">
-CA
-</string>
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="navigateBackward:" target="Voe-Tx-rLC" id="kx7-lf-UP0"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
-                            </menuItem>
-                            <menuItem title="View" id="5QF-Oa-p0T">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="View" id="W48-6f-4Dl"/>
-                            </menuItem>
                             <menuItem title="Window" id="8fu-IC-Nny">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Window" id="yQT-gC-9vM">
@@ -174,6 +170,32 @@ CA
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="View" id="5QF-Oa-p0T">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="View" id="W48-6f-4Dl">
+                                    <items>
+                                        <menuItem title="Theme" id="P5B-qj-MWB">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <menu key="submenu" title="Theme" id="cAr-AP-eW4">
+                                                <items>
+                                                    <menuItem title="Dark" state="on" tag="14" id="LTv-Yw-R0I">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="changeTheme:" target="Voe-Tx-rLC" id="Z4H-is-JjD"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Light" tag="15" id="NAO-LR-M3f">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="changeTheme:" target="Voe-Tx-rLC" id="eEI-wK-gAA"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                </items>
+                                            </menu>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem title="Help" id="wpr-3q-Mcd">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
@@ -192,7 +214,12 @@ CA
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Dragon_Android_Transfer" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Dragon_Android_Transfer" customModuleProvider="target">
+                    <connections>
+                        <outlet property="darkThemeMenuItem" destination="LTv-Yw-R0I" id="CF2-LO-WgY"/>
+                        <outlet property="lightThemeMenuItem" destination="NAO-LR-M3f" id="Jyw-Io-5ZM"/>
+                    </connections>
+                </customObject>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
@@ -201,7 +228,7 @@ CA
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Dragon Android Transfer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA" customClass="DarkWindow" customModuleProvider="target">
+                    <window key="window" title="Dragon Android Transfer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA" customClass="DarkWindow" customModule="Dragon_Android_Transfer" customModuleProvider="target">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <rect key="contentRect" x="585" y="346" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>

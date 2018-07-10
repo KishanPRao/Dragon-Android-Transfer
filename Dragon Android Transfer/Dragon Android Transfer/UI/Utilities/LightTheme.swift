@@ -44,6 +44,9 @@ class LightTheme: Theme {
     let dialogTextColor = color("2c2c2c")
     let windowBg = color("fafafa")
     let mainViewColor = color("424242")
+    
+    let snackbarBg = color("1b54a9")
+    let snackbarTextColor = color("ffffff")
 //    var dark: Bool {
 //        get {
 //            return false

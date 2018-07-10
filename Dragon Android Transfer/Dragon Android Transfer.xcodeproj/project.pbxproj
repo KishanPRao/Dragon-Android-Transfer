@@ -270,6 +270,7 @@
 		DA463DDC20F4E1E600EBF189 /* transfer_more_l.png in Resources */ = {isa = PBXBuildFile; fileRef = DA463DD820F4E1E500EBF189 /* transfer_more_l.png */; };
 		DA48DA5A20DFA99800171295 /* AbstractProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48DA5920DFA99800171295 /* AbstractProgressView.swift */; };
 		DA48DA5C20DFAB2000171295 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48DA5B20DFAB2000171295 /* CircularProgressView.swift */; };
+		DA4B897E20F501C4001E93A1 /* App_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4B897D20F501C4001E93A1 /* App_Extension.swift */; };
 		DAAF120420DCC23300E075B8 /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */; };
 		DAAF120520DCC25900E075B8 /* Ubuntu-Bold.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */; };
 		DAAF120720DCE77100E075B8 /* NonDeselectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAF120620DCE77100E075B8 /* NonDeselectTableView.swift */; };
@@ -572,6 +573,7 @@
 		DA463DD820F4E1E500EBF189 /* transfer_more_l.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transfer_more_l.png; sourceTree = "<group>"; };
 		DA48DA5920DFA99800171295 /* AbstractProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractProgressView.swift; sourceTree = "<group>"; };
 		DA48DA5B20DFAB2000171295 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
+		DA4B897D20F501C4001E93A1 /* App_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App_Extension.swift; sourceTree = "<group>"; };
 		DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
 		DAAF120620DCE77100E075B8 /* NonDeselectTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonDeselectTableView.swift; sourceTree = "<group>"; };
 		DAAF120820DCF98800E075B8 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
@@ -791,6 +793,7 @@
 				BE3BD035DD9F5BE7EB5220BE /* Collection_Extension.swift */,
 				BE3BD9E8FE3599A1D744CDAD /* NSViewController_Extension.swift */,
 				50D37A9B20091366007A1374 /* NSTextField_ext.swift */,
+				DA4B897D20F501C4001E93A1 /* App_Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1685,6 +1688,7 @@
 				BE3BD10A17A4F6FC76A3D731 /* FileSizeCommand.cpp in Sources */,
 				BE3BDDD656E09806D5694906 /* PullCommand.cpp in Sources */,
 				50FE44A91FF6B84D0099A029 /* SegueFromLeftNew.swift in Sources */,
+				DA4B897E20F501C4001E93A1 /* App_Extension.swift in Sources */,
 				BE3BD192CE9F4157090C7FF1 /* logger.cpp in Sources */,
 				503D93181FF8ED1B009E7E39 /* ImageButton.swift in Sources */,
 				509695091FF7623E005BC423 /* Theme.swift in Sources */,
@@ -1975,7 +1979,7 @@
 				);
 				INFOPLIST_FILE = "Dragon Android Transfer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.draconiantechnologies.Dragon-Android-Transfer";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.quetz.dragon-android-transfer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Bridging-Header.h";
@@ -2001,7 +2005,7 @@
 				);
 				INFOPLIST_FILE = "Dragon Android Transfer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.draconiantechnologies.Dragon-Android-Transfer";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.quetz.dragon-android-transfer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/Bridging-Header.h";

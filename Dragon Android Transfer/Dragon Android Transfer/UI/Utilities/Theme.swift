@@ -49,6 +49,9 @@ protocol Theme {
 	
 	var windowBg: NSColor { get }
     var mainViewColor: NSColor { get }
+    
+    var snackbarBg: NSColor {get}
+    var snackbarTextColor: NSColor {get}
 }
 
 extension Theme {
