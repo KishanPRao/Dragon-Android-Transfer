@@ -11,6 +11,7 @@ enum AdbExecutionResult {
 	InProgress,
 	Ok,
 	Canceled,
+    Error
 };
 
 

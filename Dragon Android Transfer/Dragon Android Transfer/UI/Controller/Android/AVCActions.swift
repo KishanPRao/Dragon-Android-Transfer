@@ -167,7 +167,8 @@ extension AndroidViewController {
 					if (activeDevice != nil) {
 //                    transferHandler.updateList(transferHandler.getInternalStorage(), true)
                         transferHandler.resetStorageDetails()
-						transferHandler.setUsingExternalStorage(false)
+                        transferHandler.setUsingExternalStorage(false)  //Not sure how used yet!
+//                        transferHandler.setUsingExternalStorage(true)
 						transferHandler.updateStorage()
 					} else {
 						self.reset()

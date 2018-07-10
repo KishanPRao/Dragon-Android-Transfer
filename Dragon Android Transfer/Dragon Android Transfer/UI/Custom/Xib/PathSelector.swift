@@ -23,6 +23,15 @@ class PathSelector: VerboseView {
 	@IBOutlet weak var secondImage: NSImageView!
     
     var disposeBag = DisposeBag()
+    
+    var textArray = [NSButton]()
+    var arrowsArray = [NSImageView]()
+    
+    var storages = [StorageItem]() {
+        didSet {
+            self.updateCurrentPath(self.currentPath)
+        }
+    }
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
@@ -64,59 +73,91 @@ class PathSelector: VerboseView {
 		updateButton(firstText, disabledImage!)
 		updateButton(secondText, disabledImage!)
 		updateButton(thirdText, disabledImage!)
+        textArray = [firstText, secondText, thirdText]
+        arrowsArray = [firstImage, secondImage]
 	}
 	
 	var paths = [Path]()
 	var currentPath = ""
+    
+    func getStoragePath(_ path: String) -> Path? {
+        for storage in storages {
+//            LogV("Storage Path check: \(storage)")
+            if (path.starts(with: storage.path.absolutePath)) {
+                return storage.path
+            }
+        }
+        return nil
+    }
+    
+    func addElement(_ pathElement: Path, _ updateTextPosition: Int) {
+//        let directory = directories[index]
+//        LogI("Display Directory:", name)
+        LogV("Update Text:", updateTextPosition)
+        
+        let button = textArray[updateTextPosition]
+        
+        LogI("Path Element: \(pathElement)")
+        paths.append(pathElement)
+        let isLast = isCurrentPath(pathElement)
+        let image = isLast ? disabledImage! : clickableImage!
+        updateButton(button, image)
+        button.imageScaling = .scaleAxesIndependently
+        updateText(button, pathElement.name, useUnderline: isLast)
+        button.isHidden = false
+        
+        if (updateTextPosition > 0) {
+            let arrow = arrowsArray[updateTextPosition - 1]
+            arrow.isHidden = false
+        }
+    }
 	
 	func updateCurrentPath(_ currentPath: String) {
-		let directories = currentPath.split {
-			$0 == "/"
-		}.map(String.init)
-		let size = directories.count
-		let textArray = [firstText, secondText, thirdText]
-		let arrowsArray = [firstImage, secondImage]
-		
-		for button in textArray {
-			button?.isHidden = true
-		}
-		for arrow in arrowsArray {
-			//            TODO: Make the 'current path' button black!
-			arrow?.isHidden = true
-		}
-		self.currentPath = currentPath
-		
-		paths.removeAll()
-		var path = ""
-		for index in 0..<size {
-			path = path + "/" + directories[index]
-			//TODO: Merge multiple directories, for external storage.
-			if (size - index <= 3) {
-				let directory = directories[index]
-				LogI("Display Directory:", directory)
-				let maxIndex = size > 3 ? 3 : size
-				let updateTextPosition = maxIndex - (size - index)
-				LogV("Update Text:", updateTextPosition)
-				
-				let button = textArray[updateTextPosition]!
-				
-				let pathElement = Path(directory, path)
-				paths.append(pathElement)
-                let isLast = isCurrentPath(pathElement)
-				let image = isLast ? disabledImage! : clickableImage!
-				updateButton(button, image)
-				button.imageScaling = .scaleAxesIndependently
-				updateText(button, pathElement.getPathName(), useUnderline: isLast)
-				button.isHidden = false
-				
-				if (updateTextPosition > 0) {
-					let arrow = arrowsArray[updateTextPosition - 1]!
-					arrow.isHidden = false
-				}
-			}
-		}
-		LogD("Paths", paths)
-		LogD("Current:", currentPath)
+//        paths.removeAll()
+        var paths = [Path]()
+        self.currentPath = currentPath
+        let storagePath = getStoragePath(currentPath)
+        if let storagePath = storagePath {
+            LogV("Storage Path: \(storagePath)")
+            let newPath = currentPath.replacingOccurrences(of: storagePath.absolutePath, with: "")
+            let directories = newPath.split {
+                $0 == "/"
+            }.map(String.init)
+            LogI("New Path: \(newPath), dirs: \(directories)")
+            var size = directories.count
+            
+            for button in textArray {
+                button.isHidden = true
+            }
+            for arrow in arrowsArray {
+                //            TODO: Make the 'current path' button black!
+                arrow.isHidden = true
+            }
+            
+            paths.append(storagePath)
+            
+            var path = ""
+//            addElement(storagePath, 0)
+            
+            for index in 0..<size {
+                let name = directories[index]
+                path = path + "/" + name
+                paths.append(Path(name, storagePath.absolutePath + path))
+            }
+            
+            size = paths.count
+            let maxIndex = size > 3 ? 3 : size
+            for index in 0..<size {
+                if (size - index <= 3) {
+                    let updateTextPosition = maxIndex - (size - index)
+                    addElement(paths[index], updateTextPosition)
+                }
+            }
+            
+            LogD("Paths", paths)
+            LogD("Current:", currentPath)
+        }
+        self.paths = paths
 	}
 	
 	internal let bgScheduler = ConcurrentDispatchQueueScheduler(qos: .background)

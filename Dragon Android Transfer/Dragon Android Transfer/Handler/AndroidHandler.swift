@@ -173,8 +173,12 @@ public class AndroidHandler: VerboseObject {
 			LogW("Same Device")
 			return false
 		}
+        if let device = device, !adbHandler.isAuthorized(device) {
+            LogW("Device not authorized: \(device)")
+            return false
+        }
 		activeDevice = device;
-		LogV("Active Device:", activeDevice)
+		LogV("Active Device: \(activeDevice)")
         ThreadUtils.runInMainThread({
         	NSObject.sendNotification(AndroidViewController.NotificationStartLoading)
         })
@@ -201,7 +205,7 @@ public class AndroidHandler: VerboseObject {
 	}
 	
 	func setUsingExternalStorage(_ usingExternalStorage: Bool) {
-		self.usingExternalStorage = usingExternalStorage
+        self.usingExternalStorage = usingExternalStorage    //Not sure how used yet!
 	}
 	
 	func isUsingExternalStorage() -> Bool {

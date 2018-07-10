@@ -216,7 +216,8 @@ NSTableViewDelegate, NSTableViewDataSource {
     
     @objc func tableAction(_ sender: AnyObject) {
         //        print("tableAction Menu:", index)
-        openInTable(table.clickedRow, external: true)
+//        openInTable(table.clickedRow, external: true)
+        openInTable(table.clickedRow, external: false)
     }
     
     private func initUiContent() {

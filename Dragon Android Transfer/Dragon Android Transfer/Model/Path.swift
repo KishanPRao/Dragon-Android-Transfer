@@ -9,16 +9,6 @@
 import Foundation
 
 public class Path: NSObject {
-    func getPathName() -> String {
-        var pathName = ""
-        if (absolutePath == "/sdcard") {
-            pathName = "Internal Storage"
-        } else {
-            pathName = name
-        }
-        return pathName
-    }
-    
     public var name: String
     public var absolutePath: String
     
@@ -26,6 +16,18 @@ public class Path: NSObject {
         name = _name
         absolutePath = path
     }
+    
+    /*func getPathName() -> String {
+        var pathName = ""
+        if (absolutePath == "/sdcard") {
+            pathName = "Internal Storage"
+        } else if (absolutePath == "/storage/9C33-6BBD") {
+            pathName = "External Storage"
+        } else {
+            pathName = name
+        }
+        return pathName
+    }*/
     
     override public var description: String {
         return "Path: \(name), \(absolutePath)"

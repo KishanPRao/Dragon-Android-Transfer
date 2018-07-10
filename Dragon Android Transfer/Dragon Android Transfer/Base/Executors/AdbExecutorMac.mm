@@ -53,7 +53,7 @@ string AdbExecutor::execute(shared_ptr<AdbExecutorProperties> properties, AdbCal
 //		callback(output);
 		return "";
 	} else {
-		return executeAdb(adbArgs.UTF8String, properties->executionType);
+		return executeAdb(adbArgs.UTF8String, properties->executionType, callback);
 	}
 }
 
@@ -76,9 +76,10 @@ void AdbExecutor::startAdbIfNotStarted() {
 	task.currentDirectoryPath = convert(adbDirectoryPath);
 	[task launch];
 	[task waitUntilExit];
+//    NSLog(@"AdbExecutor, startAdbIfNotStarted: Exit Status: %d", task.terminationStatus);
 }
 
-string AdbExecutor::executeAdb(string commands, AdbExecutionType executionType) {
+string AdbExecutor::executeAdb(string commands, AdbExecutionType executionType, AdbCallback callback) {
 	//killAdbIfRunning();
 	startAdbIfNotStarted();
 	auto task = [[NSTask alloc] init];
@@ -86,10 +87,13 @@ string AdbExecutor::executeAdb(string commands, AdbExecutionType executionType) 
 	task.launchPath = adbLaunchPath;
 	task.arguments = @[@"-l", @"-c", convert(commands)];
 	task.currentDirectoryPath = convert(adbDirectoryPath);
-    
+
+//    NSLog(@"\nexecuteAdb: %s, type: %d\n", commands.c_str(), executionType);
     if (executionType == AdbExecutionType::Shell) {
         NSLog(@"\nexecuteAdb: %s\n", commands.c_str());
     }
+    auto errorPipe = [[NSPipe alloc] init];
+    task.standardError = errorPipe;
 	
 	auto pipe = [[NSPipe alloc] init];
     task.standardOutput = pipe;
@@ -98,12 +102,17 @@ string AdbExecutor::executeAdb(string commands, AdbExecutionType executionType) 
 //	TODO: On shell error, redirect, send empty or something similar. No effect to UI!
 	auto data = [[pipe fileHandleForReading] readDataToEndOfFile];
 	auto output = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    auto errorData = [[errorPipe fileHandleForReading] readDataToEndOfFile];
+    auto errorOutput = [[NSString alloc] initWithData:errorData encoding:NSUTF8StringEncoding];
 	if (EXTREME_VERBOSE) {
 		NSLog(@"AdbExecutor, Commands: %@", convert(commands));
 	}
-	// if (EXTREME_VERBOSE) {
-	//     NSLog(@"AdbExecutor, %@", output);
-	// }
+//     if (EXTREME_VERBOSE) {
+//    NSLog(@"AdbExecutor, output: %@, error: %@", output, errorOutput);
+    if ([errorOutput containsString: @"error"]) {
+        callback(errorOutput.UTF8String, AdbExecutionResult::Error);
+    }
+//     }
 	[task waitUntilExit];
 	return [output UTF8String];
 }
@@ -121,7 +130,7 @@ string AdbExecutor::executeAdb(string commands, AdbCallback callback) {
 	task.standardOutput = pipe;
     task.standardError = nil;
     
-    NSLog(@"\nexecuteAdb: %s\n", commands.c_str());
+    NSLog(@"\nexecuteAdb, with callback: %s\n", commands.c_str());
     /*
     auto errorPipe = [[NSPipe alloc] init];
     task.standardError = errorPipe;

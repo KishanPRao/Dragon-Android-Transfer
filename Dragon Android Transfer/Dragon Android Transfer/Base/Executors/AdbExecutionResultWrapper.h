@@ -13,6 +13,7 @@ typedef NS_ENUM(NSInteger, AdbExecutionResultWrapper) {
 	Result_InProgress,
 	Result_Ok,
 	Result_Canceled,
+    Result_Error,
 };
 
 AdbExecutionResultWrapper wrapper(enum AdbExecutionResult result) {
@@ -26,6 +27,9 @@ AdbExecutionResultWrapper wrapper(enum AdbExecutionResult result) {
 		case Canceled: {
 			return Result_Canceled;
 		}
+        case Error: {
+            return Result_Error;
+        }
 	}
 }
 

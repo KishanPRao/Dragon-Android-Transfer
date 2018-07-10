@@ -70,7 +70,11 @@ class AdWindowController: NSWindowController, WKNavigationDelegate {
 //        self.view.frame = window!.frame
         let url = URL(string: self.url)
         let request = URLRequest(url: url!)
+        LogD("Requesting: \(self.url)")
+        let preferences = WKPreferences()
+        preferences.javaScriptEnabled = true
         let webConfiguration = WKWebViewConfiguration()
+        webConfiguration.preferences = preferences
         webView = WKWebView(frame: self.view.frame, configuration: webConfiguration)
         if let webView = webView {
             webView.acceptsTouchEvents = true

@@ -174,7 +174,7 @@ class AndroidViewController: NSViewController,
 		/*updateWindowSize()
 		checkGuide()
 		 */
-        openAd()
+//        openAd()
 	}
 	
 	override func viewWillLayout() {
@@ -195,7 +195,7 @@ class AndroidViewController: NSViewController,
     }
     
     func windowDidEndLiveResize(_ notification: Notification) {
-        updateAdSize()
+//        updateAdSize()
         updateMenuSize()
     }
 	
@@ -319,7 +319,7 @@ class AndroidViewController: NSViewController,
 			window.setFrameOrigin(frame.origin)
 		}*/
         
-        updateAdSize()
+//        updateAdSize()
 	}
     
     internal func updateAdSize() {
@@ -332,8 +332,8 @@ class AndroidViewController: NSViewController,
 //    let url = "https://dragon-android-transfer-ad.herokuapp.com"
 //    let url = "https://www.flipkart.com"
     //    TODO: Move to Strings file.
-    static let hostUrl = "http://localhost:3333"
-//    static let hostUrl = "http://kishanprao.herokuapp.com"
+//    static let hostUrl = "http://localhost:3333"
+    static let hostUrl = "http://kishanprao.herokuapp.com"
     static let requestUrl = hostUrl + "/ads/dragon-android-transfer-request"
     static let adType0Url = requestUrl + "?type=0"
     static let adType1Url = requestUrl + "?type=1"
@@ -352,6 +352,7 @@ class AndroidViewController: NSViewController,
             adWc.frameSize = frameSize
         	adWc.showWindow(self)
             
+            //            First responder main window: TODO, any issue?
             window.makeKeyAndOrderFront(window)
         }
         /*let window = self.view.window!

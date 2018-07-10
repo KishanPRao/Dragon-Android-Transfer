@@ -16,7 +16,7 @@ DeviceInfoCommand::DeviceInfoCommand(std::string deviceId, shared_ptr<AdbExecuto
 
 std::string DeviceInfoCommand::execute() {
     std::string commands = "-s " + deviceId + " shell getprop ro.product.model";
-    // std::cout<<"Adb Device Info, Command:"<<commands<<std::endl;
+//     std::cout<<"Adb Device Info, Command:"<<commands<<std::endl;
     if (executor) {
 		auto properties = make_shared<AdbExecutorProperties>();
 		properties->attributes = commands;

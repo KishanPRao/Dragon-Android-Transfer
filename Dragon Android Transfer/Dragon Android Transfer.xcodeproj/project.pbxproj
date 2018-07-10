@@ -260,6 +260,7 @@
 		DA39B9E420D8D5B60041AE89 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = DA39B9E320D8D5B60041AE89 /* folder.png */; };
 		DA41CE4220DE4CB7006E0A4C /* AnimationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA41CE4120DE4CB7006E0A4C /* AnimationUtils.swift */; };
 		DA41CE4420DE687B006E0A4C /* AlertProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA41CE4320DE687B006E0A4C /* AlertProperties.swift */; };
+		DA463DCE20F49D1200EBF189 /* AuthCheckCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA463DCC20F49D1100EBF189 /* AuthCheckCommand.cpp */; };
 		DA48DA5A20DFA99800171295 /* AbstractProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48DA5920DFA99800171295 /* AbstractProgressView.swift */; };
 		DA48DA5C20DFAB2000171295 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48DA5B20DFAB2000171295 /* CircularProgressView.swift */; };
 		DAAF120420DCC23300E075B8 /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */; };
@@ -553,6 +554,8 @@
 		DA39B9E320D8D5B60041AE89 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
 		DA41CE4120DE4CB7006E0A4C /* AnimationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationUtils.swift; sourceTree = "<group>"; };
 		DA41CE4320DE687B006E0A4C /* AlertProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertProperties.swift; sourceTree = "<group>"; };
+		DA463DCC20F49D1100EBF189 /* AuthCheckCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AuthCheckCommand.cpp; sourceTree = "<group>"; };
+		DA463DCD20F49D1100EBF189 /* AuthCheckCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AuthCheckCommand.hpp; sourceTree = "<group>"; };
 		DA48DA5920DFA99800171295 /* AbstractProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractProgressView.swift; sourceTree = "<group>"; };
 		DA48DA5B20DFAB2000171295 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
@@ -959,6 +962,8 @@
 				BE3BD4B4838E58D71435680F /* PushCommand.cpp */,
 				BE3BDC7FE804A1EA176C2E18 /* PushCommand.h */,
 				BE3BDF237C5E63BBBEB20EE5 /* CommandConfig.cpp */,
+				DA463DCC20F49D1100EBF189 /* AuthCheckCommand.cpp */,
+				DA463DCD20F49D1100EBF189 /* AuthCheckCommand.hpp */,
 			);
 			path = Command;
 			sourceTree = "<group>";
@@ -1600,6 +1605,7 @@
 				5098AC6C1FFD3A9A0084449B /* NSImageView_Extension.swift in Sources */,
 				BE3BD5D597FE4AA22E298EFB /* CustomSwiftAnimator.swift in Sources */,
 				BE3BD284856999A467420E8C /* DisabledTextField.swift in Sources */,
+				DA463DCE20F49D1200EBF189 /* AuthCheckCommand.cpp in Sources */,
 				5098AC701FFD3CBA0084449B /* ImageResource.swift in Sources */,
 				BE3BDFCBE0994AEA0312BA2D /* DragNotificationDelegate.swift in Sources */,
 				BE3BD1B87F638080742BF2CD /* DragUiDelegate.swift in Sources */,

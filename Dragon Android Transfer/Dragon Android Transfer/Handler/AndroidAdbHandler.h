@@ -41,6 +41,8 @@
 
 - (NSArray<AndroidDeviceMac *> *_Nonnull)getDevices;
 
+- (bool)isAuthorized:(AndroidDeviceMac *_Nonnull)device;
+
 - (bool)fileExists:(NSString *_Nonnull)path withFileType:(bool)isFile;
 
 - (bool)createNewFolder:(NSString *_Nonnull)path;

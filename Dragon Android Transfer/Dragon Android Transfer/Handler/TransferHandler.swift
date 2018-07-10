@@ -32,7 +32,7 @@ class TransferHandler {
         return androidHandler.observableActiveDevice.asObservable()
     }
 	
-	func setActiveDevice(_ device: AndroidDeviceMac?) -> Bool {
+	@discardableResult func setActiveDevice(_ device: AndroidDeviceMac?) -> Bool {
 		let result = self.androidHandler.setActiveDevice(device)
 		self.clearClipboardAndroidItems()
 		self.clearClipboardMacItems()

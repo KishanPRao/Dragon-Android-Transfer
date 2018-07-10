@@ -22,7 +22,7 @@ private:
     
     string adbDirectoryPath;
     
-    string executeAdb(string, AdbExecutionType);
+    string executeAdb(string, AdbExecutionType, AdbCallback callback);
 	
     string executeAdb(string, AdbCallback);
     
@@ -36,7 +36,7 @@ public:
     
     void killAdbIfRunning();
 	
-	string execute(shared_ptr<AdbExecutorProperties> properties, AdbCallback callback = {});
+    string execute(shared_ptr<AdbExecutorProperties> properties, AdbCallback callback = [](std::string output, AdbExecutionResult result) {});
 	
 	void cancel();
 };

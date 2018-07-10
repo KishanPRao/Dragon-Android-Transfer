@@ -37,6 +37,7 @@
 #import "FileSizeCommand.hpp"
 #import "PullCommand.hpp"
 #import "PushCommand.h"
+#import "AuthCheckCommand.hpp"
 
 @class ShellParser;
 @class BaseFile;
@@ -57,7 +58,7 @@ shared_ptr<AdbExecutor> executor;
 @synthesize device = _device;
 @synthesize adbDirectoryPath = _adbDirectoryPath;
 
-- (void)setDevice:(AndroidDeviceMac *)device; {
+- (void)setDevice:(AndroidDeviceMac *)device {
 	// TODO: Check device name too! Scenario: first time grant USB access (USB Debugging), no name.
 	if (device != _device && ![device.id isEqualToString:_device.id]) {
 		_device = device;
@@ -85,7 +86,7 @@ shared_ptr<AdbExecutor> executor;
 	}
 }
 
-- (void)setAdbDirectoryPath:(NSString *)adbDirectoryPath; {
+- (void)setAdbDirectoryPath:(NSString *)adbDirectoryPath {
 	if (adbDirectoryPath != _adbDirectoryPath) {
 		_adbDirectoryPath = adbDirectoryPath;
 		executor->setAdbDirectoryPath(_adbDirectoryPath.UTF8String);
@@ -135,6 +136,21 @@ shared_ptr<AdbExecutor> executor;
 		[devices addObject:device];
 	}
 	return devices;
+}
+
+- (bool)isAuthorized:(AndroidDeviceMac *_Nonnull)device {
+//    NSLog(@"isAuth");
+    auto authorized = true;
+    auto command = make_shared<AuthCheckCommand>([&authorized](std::string output, AdbExecutionResult result) {
+        auto wrapperResult = AdbExecutionResultWrapper(result);
+//        NSLog(@"isAuthorized, Result: %ld", wrapperResult);
+        if (wrapperResult == AdbExecutionResultWrapper::Result_Error) {
+            authorized = false;
+        }
+    }, device.id.UTF8String, executor);
+    auto infoString = convert(command->execute());
+//    NSLog(@"isAuthorized, info output, %@, auth: %d", infoString, authorized);
+    return authorized;
 }
 
 - (bool)fileExists:(NSString *)path withFileType:(bool)isFile {

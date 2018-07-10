@@ -38,6 +38,17 @@ extension AndroidViewController {
 					path in
 					self.pathSelector.updateCurrentPath(path)
 				}).disposed(by: disposeBag)
+        transferHandler.observeActiveDevice()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: {
+                device in
+                print("Device", device)
+                if let device = device {
+                    self.pathSelector.storages = device.storages
+                } else {
+                    self.pathSelector.storages = []
+                }
+            }).disposed(by: disposeBag)
 	}
 	
 	func updateList() {

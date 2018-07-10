@@ -86,14 +86,24 @@ extension NSImage {
 		return composedImage
 	}*/
 	
-	func imageTintedWithColor(tint: NSColor) -> NSImage {
-		let image = NSImage(cgImage: self.cgImage!, size: self.size)
-		image.lockFocus()
-		tint.set()
-		let imageRect = NSRect(origin: NSZeroPoint, size: image.size)
-		imageRect.fill(using: .destinationAtop)
-		image.unlockFocus()
-		return image
+	func imageTintedBy(color tint: NSColor) -> NSImage {
+//        let image = NSImage(cgImage: self.cgImage!, size: self.size)
+//        image.lockFocus()
+//        tint.set()
+//        let imageRect = NSRect(origin: NSZeroPoint, size: image.size)
+//        imageRect.fill(using: .destinationAtop)
+//        image.unlockFocus()
+        let image = self
+        guard let tinted = image.copy() as? NSImage else { return image }
+        tinted.lockFocus()
+        tint.set()
+        
+        let imageRect = NSRect(origin: NSZeroPoint, size: image.size)
+        imageRect.fill(using: .sourceAtop)
+//        imageRect.fill(using: .difference)    //invert for icons, light theme.
+        
+        tinted.unlockFocus()
+        return tinted
 	}
 	
 	func imageRotated(by degrees: CGFloat) -> NSImage {

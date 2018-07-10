@@ -18,6 +18,7 @@ extension NSButton {
     }
     
     public func setImage(name: String) {
+//        .imageTintedBy(color: R.color.white)
         self.setImage(image: NSImage(named: NSImage.Name(rawValue: name))!)
     }
     
