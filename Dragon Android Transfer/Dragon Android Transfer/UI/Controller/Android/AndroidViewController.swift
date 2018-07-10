@@ -98,11 +98,16 @@ class AndroidViewController: NSViewController,
         }
     }
     
+    func canGoBackward() -> Bool {
+//        !transferHandler.isRootDirectory()
+        return pathSelector.canGoBackward()
+    }
+    
     func resetDeviceStatus() {
         AppDelegate.itemSelected = false
         AppDelegate.directoryItemSelected = false
         AppDelegate.multipleItemsSelected = false
-        let canGoBackward = !transferHandler.isRootDirectory()
+        let canGoBackward = self.canGoBackward()
         AppDelegate.canGoBackward = canGoBackward
         backButton.isEnabled = canGoBackward
     }
@@ -133,7 +138,7 @@ class AndroidViewController: NSViewController,
 			AppDelegate.hasItems = true
 			messageText.isHidden = true
 		}
-		let canGoBackward = !transferHandler.isRootDirectory()
+		let canGoBackward = self.canGoBackward()
 		AppDelegate.canGoBackward = canGoBackward
 		backButton.isEnabled = canGoBackward
 	}

@@ -159,6 +159,10 @@ class PathSelector: VerboseView {
         }
         self.paths = paths
 	}
+    
+    func canGoBackward() -> Bool {
+        return paths.count > 1
+    }
 	
 	internal let bgScheduler = ConcurrentDispatchQueueScheduler(qos: .background)
 	
