@@ -145,6 +145,14 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
 		AppDelegate.active = true
 		NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.CHANGE_ACTIVE), object: nil)
 	}
+    
+    @IBAction func openFeedback(_ sender: Any) {
+        if let url = URL(string: "https://kishanprao.herokuapp.com/contact"),
+            NSWorkspace.shared.open(url) {
+//            print("default browser was successfully opened")
+        }
+    }
+    
 	
 	/*
 	private func getAndroidController() -> AndroidViewController? {
@@ -393,6 +401,7 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
 	}
 
 	static func reset() {
+        AppDelegate.activeDevice = false
 		AppDelegate.hasItems = false
 		AppDelegate.canGoBackward = false
 		AppDelegate.hasMacClipboardItems = false
