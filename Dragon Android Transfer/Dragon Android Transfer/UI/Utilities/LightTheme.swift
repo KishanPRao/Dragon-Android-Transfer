@@ -15,7 +15,8 @@ class LightTheme: Theme {
     static let menuNavigationColor = color("002366")
     let menuNavColor = menuNavigationColor
     let menuTableColor = menuNavigationColor
-    let menuBgColor = color("071a34", withAlpha: 0.4)
+//    let menuBgColor = color("071a34", withAlpha: 0.4)
+    let menuBgColor = color("002366", withAlpha: 0.4)
     let menuItemBg = color("ffffff")
     let menuItemSelectBg = color("2258b9")
     let menuItemSelectCellBg = color("2258b9")
@@ -34,7 +35,8 @@ class LightTheme: Theme {
     let tableItemBg = color("ffffff")
     let listSelectedBackgroundColor = color("a7cbfc")
     
-    let transferBg = color("f8f8f8")
+//    let transferBg = color("f8f8f8")
+    let transferBg = color("e7f3ff")
     let transferTextColor = color("232323")
     let transferProgressFg = color("679af7")
     let transferProgressBg = color("646669")
@@ -47,6 +49,9 @@ class LightTheme: Theme {
     
     let snackbarBg = color("1b54a9")
     let snackbarTextColor = color("ffffff")
+    
+    let dockProgressFg = color("00e810")
+    let dockProgressBg = NSColor.clear
 //    var dark: Bool {
 //        get {
 //            return false

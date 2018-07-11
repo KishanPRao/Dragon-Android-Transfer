@@ -191,9 +191,9 @@ class TransferViewController: NSViewController {
                                                                mDockTile.size.width,
                                                                mDockTile.size.height))
         if let dockProgress = mDockProgress {
-            dockProgress.progressFgColor = R.color.menuProgressFg
+            dockProgress.progressFgColor = R.color.dockProgressFg
 //            dockProgress.progressBgColor = R.color.menuProgressBg
-            dockProgress.progressBgColor = R.color.white        //a bit more bluish.
+            dockProgress.progressBgColor = R.color.dockProgressBg        //a bit more bluish.
             imageView.addSubview(dockProgress)
             dockProgress.isHidden = true
         }

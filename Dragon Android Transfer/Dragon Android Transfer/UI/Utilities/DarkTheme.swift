@@ -72,4 +72,7 @@ class DarkTheme: Theme {
     
     let snackbarBg = color("313b4c")
     let snackbarTextColor = color("ffffff")
+    
+    let dockProgressFg = color("00e810")
+    let dockProgressBg = NSColor.clear
 }

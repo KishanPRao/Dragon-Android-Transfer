@@ -52,6 +52,9 @@ protocol Theme {
     
     var snackbarBg: NSColor {get}
     var snackbarTextColor: NSColor {get}
+    
+    var dockProgressFg: NSColor{get}
+    var dockProgressBg: NSColor{get}
 }
 
 extension Theme {
