@@ -32,6 +32,7 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
     @IBOutlet weak var lightThemeMenuItem: NSMenuItem!
     
     static var active = false;
+    static var activeDevice = false;
 	static var itemSelected = false
     static var directoryItemSelected: Bool = false /*{
         didSet {
@@ -222,20 +223,17 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
 		if (item.tag == MenuItemIdentifier.clearClipboard && AppDelegate.hasClipboardItems.value) {
 			return !AppDelegate.isPastingOperation.value
 		}
+        if (item.tag == MenuItemIdentifier.refresh || item.tag == MenuItemIdentifier.newFolder) {
+            return AppDelegate.activeDevice && !AppDelegate.isPastingOperation.value
+        }
 		if (item.tag == MenuItemIdentifier.help) {
 			return true
 		}
 		if (item.tag == MenuItemIdentifier.minimize) {
 			return true
 		}
-		if (item.tag == MenuItemIdentifier.refresh) {
-			return true
-		}
 		if (item.tag == MenuItemIdentifier.resetPosition) {
 			return true
-        }
-        if (item.tag == MenuItemIdentifier.newFolder) {
-            return true
         }
         if (item.tag == MenuItemIdentifier.defaultAlwaysOn) {
             return true

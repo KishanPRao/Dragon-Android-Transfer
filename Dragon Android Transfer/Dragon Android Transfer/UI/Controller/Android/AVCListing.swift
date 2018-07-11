@@ -45,7 +45,9 @@ extension AndroidViewController {
                 print("Device", device)
                 if let device = device {
                     self.pathSelector.storages = device.storages
+                    AppDelegate.activeDevice = true
                 } else {
+                    AppDelegate.activeDevice = false
                     self.pathSelector.storages = []
                 }
             }).disposed(by: disposeBag)
