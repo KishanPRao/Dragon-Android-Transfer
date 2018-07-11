@@ -10,6 +10,7 @@ target 'Dragon Android Transfer' do
     inhibit_all_warnings! #Ignore warnings, Specific = , :inhibit_warnings => true
     
 	pod 'MASShortcut'
+#    pod 'Sparkle'
 	pod 'RxSwift', $rxVersion
 	pod 'RxCocoa', $rxVersion
 	

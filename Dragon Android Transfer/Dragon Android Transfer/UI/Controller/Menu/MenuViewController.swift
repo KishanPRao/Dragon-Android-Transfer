@@ -185,6 +185,17 @@ NSTableViewDelegate, NSTableViewDataSource {
         //openInTable()
     }
     
+//    let externalStorageBetaKey = "ExternalStorageBeta"
+//
+//    func externalStorageBetaAuth() -> Bool {
+//        let defaults = UserDefaults.standard
+//        if (defaults.bool(forKey: externalStorageBetaKey)) {
+//            return false
+//        } else {
+//
+//        }
+//    }
+    
     private func openInTable(_ index: Int, external: Bool) {
         if (index < 0) {
             LogW("Bad index, menu")
@@ -197,6 +208,12 @@ NSTableViewDelegate, NSTableViewDataSource {
         Observable.just(transferHandler)
             .observeOn(MainScheduler.instance)
             .map { transferHandler -> TransferHandler in
+//                if (oldIndex != index && index > 0) {
+//                    if (!self.externalStorageBetaAuth()) {
+//                        return nil
+//                    }
+//                }
+                
                 if (oldIndex != index) {
                     self.statusView.resetTitle()
                 }
@@ -205,19 +222,21 @@ NSTableViewDelegate, NSTableViewDataSource {
             }
             .observeOn(bgScheduler)
             .subscribe(onNext: { transferHandler in
-                transferHandler.resetStorageDetails()
-                transferHandler.updateList(self.storages[index].path.absolutePath)
-                transferHandler.updateStorage()
+//                if let transferHandler = transferHandler {
+                    transferHandler.resetStorageDetails()
+                    transferHandler.updateList(self.storages[index].path.absolutePath)
+                    transferHandler.updateStorage()
+//                }
             }).disposed(by: disposeBag)
-        if (external) {
-            closeMenu(self)
-        }
+//        if (external) {
+//            closeMenu(self)
+//        }
     }
     
     @objc func tableAction(_ sender: AnyObject) {
         //        print("tableAction Menu:", index)
 //        openInTable(table.clickedRow, external: true)
-        openInTable(table.clickedRow, external: false)
+        openInTable(table.clickedRow, external: true)
     }
     
     private func initUiContent() {
