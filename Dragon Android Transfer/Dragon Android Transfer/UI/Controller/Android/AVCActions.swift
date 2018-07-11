@@ -57,6 +57,7 @@ extension AndroidViewController {
                 alertProps.textColor = R.color.dialogTextColor
                 let buttonProp = AlertButtonProperty(title: R.string.ok)
                 buttonProp.isSelected = true
+                buttonProp.bgColor = R.color.dialogSelectionColor
                 alertProps.addButton(button: buttonProp)
                 let alert = DarkAlert(property: alertProps)
                 alert.icon = image
@@ -75,6 +76,7 @@ extension AndroidViewController {
         inputAlertProps.textColor = R.color.dialogTextColor
         let buttonProp = AlertButtonProperty(title: R.string.ok)
         buttonProp.isSelected = true
+        buttonProp.bgColor = R.color.dialogSelectionColor
         inputAlertProps.addButton(button: buttonProp)
         inputAlertProps.addButton(button: AlertButtonProperty(title: R.string.cancel))
         inputAlertProps.defaultValue = "Untitled Folder"
@@ -87,6 +89,7 @@ extension AndroidViewController {
                 alertProps.textColor = R.color.dialogTextColor
                 let buttonProp = AlertButtonProperty(title: R.string.ok)
                 buttonProp.isSelected = true
+                buttonProp.bgColor = R.color.dialogSelectionColor
                 alertProps.addButton(button: buttonProp)
                 alertProps.style = .critical
                 
@@ -115,16 +118,18 @@ extension AndroidViewController {
 			deleteItems.append(currentItem)
 			currentIndex = indexSet.integerGreaterThan(currentIndex!)
 		}
-		let deleteStringInDialog = (deleteItems.count > 1) ? "the Selected Items" : "'" + deleteItems[0].fileName + "'"
+		let deleteStringInDialog = (deleteItems.count > 1) ? "the Selected Items" : "`" + deleteItems[0].fileName + "`"
 		//        let selectedItem = self.androidDirectoryItems[fileTable.selectedRow]
 		//        let selectedFileName = selectedItem.fileName
         //        TODO: Update Delete Dialog!
         
         let alertProps = AlertProperty()
-        alertProps.message = "Do you really want to delete \(deleteStringInDialog)?"
+        alertProps.message = "Are you sure you want to delete \(deleteStringInDialog)?"
+//        alertProps.info = "This item will be deleted immediately. You cannot undo this action."
         alertProps.textColor = R.color.dialogTextColor
         let buttonProp = AlertButtonProperty(title: R.string.ok)
         buttonProp.isSelected = true
+        buttonProp.bgColor = R.color.dialogSelectionDangerColor
         alertProps.addButton(button: buttonProp)
         alertProps.addButton(button: AlertButtonProperty(title: R.string.cancel))
         alertProps.style = .critical

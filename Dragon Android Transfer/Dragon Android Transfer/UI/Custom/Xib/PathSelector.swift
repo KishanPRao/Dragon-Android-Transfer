@@ -90,6 +90,13 @@ class PathSelector: VerboseView {
         return nil
     }
     
+    func getActiveItemName() -> String {
+        if (paths.count > 0) {
+            return paths[paths.count - 1].name
+        }
+        return ""
+    }
+    
     func addElement(_ pathElement: Path, _ updateTextPosition: Int) {
 //        LogV("Update Text:", updateTextPosition)
         
@@ -155,6 +162,7 @@ class PathSelector: VerboseView {
 //            LogD("Current:", currentPath)
         }
         self.paths = paths
+        NSObject.sendNotification(AndroidViewController.NotificationWindowTitle)
 	}
     
     func canGoBackward() -> Bool {

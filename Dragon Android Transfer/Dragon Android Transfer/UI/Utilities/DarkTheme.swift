@@ -65,6 +65,8 @@ class DarkTheme: Theme {
     let dialogWindowColor = color("313b4c")
     //    let dialogWindowColor = color("0b0d11")
     let dialogTextColor = color("b8c2c9")
+    let dialogSelectionColor = color("5a95f5")
+    let dialogSelectionDangerColor = color("e45454")
     
     //	let windowBg = color("050505")
     let windowBg = color("0a0a0a")
@@ -72,7 +74,4 @@ class DarkTheme: Theme {
     
     let snackbarBg = color("313b4c")
     let snackbarTextColor = color("ffffff")
-    
-    let dockProgressFg = color("00e810")
-    let dockProgressBg = NSColor.clear
 }

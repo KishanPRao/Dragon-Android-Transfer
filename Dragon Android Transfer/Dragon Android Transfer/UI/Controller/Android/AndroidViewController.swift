@@ -23,6 +23,7 @@ class AndroidViewController: NSViewController,
     
 	public static let NotificationStartLoading = "NotificationStartLoading"
 	public static let NotificationSnackbar = "NotificationSnackbar"
+    public static let NotificationWindowTitle = "NotificationWindowTitle"
 	
     var disposeBag = DisposeBag()
 	internal let bgScheduler = ConcurrentDispatchQueueScheduler(qos: .background)
@@ -180,6 +181,14 @@ class AndroidViewController: NSViewController,
 		checkGuide()
 		 */
 //        openAd()
+        
+        if let window = self.view.window {
+            if (R.color.isDark) {
+                window.appearance = NSAppearance(named: .vibrantDark)
+            }
+            window.titlebarAppearsTransparent = true
+            window.backgroundColor = R.color.windowBg
+        }
 	}
 	
 	override func viewWillLayout() {

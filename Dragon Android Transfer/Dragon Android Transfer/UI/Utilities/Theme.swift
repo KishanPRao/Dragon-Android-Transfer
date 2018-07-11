@@ -46,6 +46,8 @@ protocol Theme {
     var dialogBgColor: NSColor{get}
     var dialogWindowColor: NSColor{get}
     var dialogTextColor: NSColor{get}
+    var dialogSelectionColor: NSColor{get}
+    var dialogSelectionDangerColor: NSColor{get}
 	
 	var windowBg: NSColor { get }
     var mainViewColor: NSColor { get }
@@ -73,6 +75,9 @@ extension Theme {
 	static func color(_ hex: String) -> NSColor {
 		return Self.color(hex, withAlpha: 1.0)
 	}
+    
+    var dockProgressFg: NSColor {get {return Self.color("0ec932")}}
+    var dockProgressBg: NSColor {get {return NSColor.clear}}
 	
 	var black: NSColor {
 		get {

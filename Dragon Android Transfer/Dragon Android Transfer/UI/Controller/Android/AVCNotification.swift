@@ -35,6 +35,7 @@ extension AndroidViewController {
         
 //        Window related
         addNotification(#selector(AndroidViewController.screenUpdated), name: NSWindow.didChangeScreenNotification)
+        addNotification(#selector(AndroidViewController.updateWindowTitle), name: AndroidViewController.NotificationWindowTitle)
         
         //		Menu Item Related
         addNotification(#selector(AndroidViewController.openSelectedDirectory), name: StatusTypeNotification.OPEN_FILE)

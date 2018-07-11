@@ -84,6 +84,7 @@ class TransferViewController: NSViewController {
         alertProps.info = "Do you want to cancel the current transfer?"
         let buttonProp = AlertButtonProperty(title: R.string.ok)
         buttonProp.isSelected = true
+        buttonProp.bgColor = R.color.dialogSelectionDangerColor
         alertProps.addButton(button: buttonProp)
         alertProps.addButton(button: AlertButtonProperty(title: R.string.cancel))
         alertProps.style = .critical

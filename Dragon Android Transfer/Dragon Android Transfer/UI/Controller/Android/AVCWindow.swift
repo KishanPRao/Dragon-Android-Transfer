@@ -25,6 +25,19 @@ extension AndroidViewController {
 		self.view.window!.setFrame(rect, display: true)
  */
 	}
+    
+    @objc func updateWindowTitle() {
+        var title = pathSelector.getActiveItemName()
+//        if let device = transferHandler.getActiveDevice() {
+//
+//        }
+        if (title == "") {
+            title = "Dragon Android Transfer"
+        }
+        if let window = self.view.window {
+            window.title = title
+        }
+    }
 	
 	
 	func updateWindowSize() {

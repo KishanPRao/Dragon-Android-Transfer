@@ -351,6 +351,7 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
             alertProps.textColor = R.color.dialogTextColor
             let buttonProp = AlertButtonProperty(title: R.string.ok)
             buttonProp.isSelected = true
+            buttonProp.bgColor = R.color.dialogSelectionColor
             alertProps.addButton(button: buttonProp)
             alertProps.addButton(button: AlertButtonProperty(title: R.string.cancel))
             alertProps.style = .informational

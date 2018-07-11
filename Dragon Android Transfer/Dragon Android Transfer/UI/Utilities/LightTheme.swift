@@ -44,14 +44,14 @@ class LightTheme: Theme {
     let dialogBgColor = color("edecec")
     let dialogWindowColor = color("fafafa")
     let dialogTextColor = color("2c2c2c")
+    let dialogSelectionColor = color("79bdfc")
+    let dialogSelectionDangerColor = color("f14545")
+    
     let windowBg = color("fafafa")
     let mainViewColor = color("424242")
     
     let snackbarBg = color("1b54a9")
     let snackbarTextColor = color("ffffff")
-    
-    let dockProgressFg = color("00e810")
-    let dockProgressBg = NSColor.clear
 //    var dark: Bool {
 //        get {
 //            return false
