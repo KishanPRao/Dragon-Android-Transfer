@@ -17,6 +17,9 @@ extension AndroidViewController {
         //        self.fileTable.intercellSpacing = NSSize(width: 0, height: 5)
         let doubleClickSelector: Selector = #selector(AndroidViewController.doubleClickList(_:))
         fileTable.doubleAction = doubleClickSelector
+        if (R.isDark()) {
+            fileTable.enclosingScrollView?.verticalScroller?.setBackground(R.color.tableScrollColor)
+        }
 //        fileTable.register(NSNib.init(nibNamed: NSNib.Name("FileCell"), bundle: nil), forIdentifier: FileCell.Identifier)
     }
     

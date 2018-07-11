@@ -63,4 +63,7 @@ public struct StringResource {
     
     let ok = "OK"
     let cancel = "Cancel"
+    
+//    let noActiveDevice = "No Active Device.\nPlease connect a device with USB Debugging enabled."
+    let noActiveDevice = "No Active Device.\nFor instructions, go to `Help -> Dragon Android Transfer Help`"
 }

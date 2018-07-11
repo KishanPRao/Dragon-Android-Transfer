@@ -52,6 +52,9 @@ class LightTheme: Theme {
     
     let snackbarBg = color("1b54a9")
     let snackbarTextColor = color("ffffff")
+    
+    let helpBgColor = color("fafafa")
+    let tableScrollColor = color("fefefe")
 //    var dark: Bool {
 //        get {
 //            return false

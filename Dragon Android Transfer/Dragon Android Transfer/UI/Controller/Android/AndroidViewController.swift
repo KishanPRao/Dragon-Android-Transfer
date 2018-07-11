@@ -124,7 +124,7 @@ class AndroidViewController: NSViewController,
 //            font = NSFont(name: "AlegreyaSans.ttf", size: 5.0)
 //            messageText.font = font
 			LogV("No ACTIVE Device")
-			messageText.stringValue = "No Active Device.\nPlease connect a device with USB Debugging enabled."
+			messageText.stringValue = R.string.noActiveDevice
 			let canGoBackward = false
 			AppDelegate.canGoBackward = canGoBackward
 			backButton.isEnabled = canGoBackward
@@ -497,14 +497,21 @@ class AndroidViewController: NSViewController,
 //		let androidViewController = getAndroidController()
 //		if (androidViewController != nil) {
 //		helpWindow!.setIsIntro(intro: androidViewController!.shouldShowGuide())
-		helpWindow!.setIsIntro(intro: shouldShowGuide())
-		helpWindow!.updateSizes()
-		helpWindow!.isShowing = true
-		window.beginSheet(helpWindow!.window!) { response in
-			if (NSObject.VERBOSE) {
-				Swift.print("AndroidViewController, Resp!");
-			}
-		}
+        if let helpWindow = helpWindow {
+            helpWindow.setIsIntro(intro: shouldShowGuide())
+            helpWindow.updateSizes()
+            helpWindow.isShowing = true
+            /*window.beginSheet(helpWindow!.window!) { response in
+                if (NSObject.VERBOSE) {
+                    Swift.print("AndroidViewController, Resp!");
+                }
+            }*/
+            if let window = self.view.window {
+                helpWindow.showWindow(self)
+//                window.makeKeyAndOrderFront(window)
+            }
+        }
+ 
 //		}
 	}
     

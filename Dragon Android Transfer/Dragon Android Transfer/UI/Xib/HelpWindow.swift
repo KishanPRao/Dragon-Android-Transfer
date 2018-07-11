@@ -19,7 +19,7 @@ class HelpWindow: NSWindowController {
 //	init() {
 //		super.init()
 //	}
-    @IBOutlet weak var closeButton: NSButton!
+//    @IBOutlet weak var closeButton: NSButton!
 
 	func setIsIntro(intro: Bool) {
 		self.isIntro = intro
@@ -41,13 +41,29 @@ class HelpWindow: NSWindowController {
 		isShowing = true
 		initialized = true
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
-        ColorUtils.setBackgroundColorTo(self.window!.contentView!, color: ColorUtils.blackColor)
-        ColorUtils.setBackgroundColorTo(helpText, color: ColorUtils.blackColor)
+//        ColorUtils.setBackgroundColorTo(self.window!.contentView!, color: ColorUtils.blackColor)
+        window?.contentView?.setBackground(R.color.helpBgColor)
+//        textScrollView.setBackground(R.color.helpBgColor)
+//        textClipView.setBackground(R.color.helpBgColor)
+        textScrollView.borderType = .noBorder
+        helpText.textContainerInset = NSSize(width: 30, height: 30)
+//        ColorUtils.setBackgroundColorTo(helpText, color: ColorUtils.blackColor)
 //                ColorUtils.setBackgroundColorTo(textScrollView, color: ColorUtils.blackColor)
 //                ColorUtils.setBackgroundColorTo(textClipView, color: ColorUtils.blackColor)
 //		if let rtfPath = Bundle.mainBundle().URLForResource("help", withExtension: "rtf") {
 		updateText()
 		updateSizes()
+        
+        
+        if let window = self.window {
+            if (R.color.isDark) {
+                window.appearance = NSAppearance(named: .vibrantDark)
+            }
+            window.titlebarAppearsTransparent = true
+            window.backgroundColor = R.color.windowBg
+        }
+        
+        self.helpText.makeFirstResponder(self.window)
 	}
 	
 	func updateText() {
@@ -58,15 +74,21 @@ class HelpWindow: NSWindowController {
 			return
 		}
 		var fileName = "help"
-		if (isIntro) {
-			fileName = "intro_guide"
-		}
+        if (!R.isDark()) {
+            fileName = "help_l"
+        }
+//        if (isIntro) {
+//            fileName = "intro_guide"
+//        }
 		if let rtfPath = Bundle.main.path(forResource: fileName, ofType: "rtf") {
 			helpText.readRTFD(fromFile: rtfPath)
 		}
 		
 		let length = helpText.string.count
 		self.helpText.scrollRangeToVisible(NSRange(location: 0, length: length))
+//        helpText.backgroundColor = NSColor.red
+//        helpText.setBackground(R.color.black)
+//        helpText.textColor = NSColor.blue
 		helpText.needsDisplay = true
 		helpText.needsLayout = true
 		helpText.enclosingScrollView!.hasHorizontalScroller = false
@@ -89,22 +111,26 @@ class HelpWindow: NSWindowController {
 //		self.window!.setFrame(DimenUtils.getUpdatedRect2(frame: origFrame, dimensions: Dimens.help_window), display: true)
 //        self.window!.setFrame(DimenUtils.getUpdatedRect2(frame: origFrame, dimensions: Dimens.help_window), display: true)
 		
-		textScrollView.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.help_window_text)
+//        textScrollView.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.help_window_text)
 		
 //		helpText.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.hew)
-		helpText.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.help_window_text_size))
+//        helpText.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.help_window_text_size))
 		
-		closeButton.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.help_window_close_text_size))
-		closeButton.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.help_window_close)
-		closeButton.needsDisplay = true
-		closeButton.needsLayout = true
+//        closeButton.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.help_window_close_text_size))
+//        closeButton.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.help_window_close)
+//        closeButton.needsDisplay = true
+//        closeButton.needsLayout = true
 		
 		let length = helpText.string.count
 		self.helpText.scrollRangeToVisible(NSRange(location: 0, length: length))
 		helpText.needsDisplay = true
 		helpText.needsLayout = true
-		helpText.enclosingScrollView!.hasHorizontalScroller = false
-		helpText.enclosingScrollView!.horizontalScrollElasticity = NSScrollView.Elasticity.none
+        
+        
+//        let scroll = NSSizeMake(helpText.frame.height, origFrame.size.width)
+//        helpText.enclosingScrollView?.horizontalScroller = nil
+		helpText.enclosingScrollView?.hasHorizontalScroller = false
+		helpText.enclosingScrollView?.horizontalScrollElasticity = NSScrollView.Elasticity.none
 	}
 	
 	func cancel(_ sender: Any) {

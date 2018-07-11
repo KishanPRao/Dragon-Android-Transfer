@@ -30,6 +30,7 @@ protocol Theme {
 	
 	var tableBg: NSColor { get }
 	var tableItemBg: NSColor { get }
+    var tableScrollColor: NSColor{get}
 	var menuItemBg: NSColor { get }
 	var menuItemSelectBg: NSColor { get }
 	var transferBg: NSColor { get }
@@ -57,6 +58,9 @@ protocol Theme {
     
     var dockProgressFg: NSColor{get}
     var dockProgressBg: NSColor{get}
+    
+//    var helpTextColor: NSColor{get}
+    var helpBgColor: NSColor{get}
 }
 
 extension Theme {

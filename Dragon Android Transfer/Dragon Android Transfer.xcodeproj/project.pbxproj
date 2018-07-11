@@ -210,7 +210,6 @@
 		BE3BDBB3DBEEB39658AC9DDD /* AndroidViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD5F8E8F2AA3E81B07AA5 /* AndroidViewController.storyboard */; };
 		BE3BDBE621A826D0CBF7DFA2 /* AVCListing.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD8F9CACDD300FD006959 /* AVCListing.swift */; };
 		BE3BDBE94D2598210F140C32 /* SelectableTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD86117C6A1984B137A27 /* SelectableTableRowView.swift */; };
-		BE3BDBF0A3F946760F91F720 /* intro_guide.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BE3BD5A174AC494406F68801 /* intro_guide.rtf */; };
 		BE3BDBF53A093B11D609BDAC /* TVCTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BD15DB982ECD713DAA374 /* TVCTransfer.swift */; };
 		BE3BDC18BB4358AF85250981 /* BaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDE295CD9D91FD872081A /* BaseExtension.swift */; };
 		BE3BDC1DDDC0D54EED0E1B61 /* AndroidShellResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3BDEF99F9695AD6D7B4402 /* AndroidShellResource.swift */; };
@@ -271,6 +270,7 @@
 		DA48DA5A20DFA99800171295 /* AbstractProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48DA5920DFA99800171295 /* AbstractProgressView.swift */; };
 		DA48DA5C20DFAB2000171295 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48DA5B20DFAB2000171295 /* CircularProgressView.swift */; };
 		DA4B897E20F501C4001E93A1 /* App_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4B897D20F501C4001E93A1 /* App_Extension.swift */; };
+		DA9066DE20F66E9B00C35961 /* help_l.rtf in Resources */ = {isa = PBXBuildFile; fileRef = DA9066DD20F66E9B00C35961 /* help_l.rtf */; };
 		DAAF120420DCC23300E075B8 /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */; };
 		DAAF120520DCC25900E075B8 /* Ubuntu-Bold.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */; };
 		DAAF120720DCE77100E075B8 /* NonDeselectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAF120620DCE77100E075B8 /* NonDeselectTableView.swift */; };
@@ -467,7 +467,6 @@
 		BE3BD5615C960F68E04FDA73 /* DeleteCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DeleteCommand.hpp; sourceTree = "<group>"; };
 		BE3BD58E0B938C1E22B9DA59 /* StorageListCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StorageListCommand.hpp; sourceTree = "<group>"; };
 		BE3BD58F84E6678D4CC5BA02 /* NumberResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberResource.swift; sourceTree = "<group>"; };
-		BE3BD5A174AC494406F68801 /* intro_guide.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = intro_guide.rtf; sourceTree = "<group>"; };
 		BE3BD5B0D93EC150367B8A8C /* FileProgressDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileProgressDelegate.swift; sourceTree = "<group>"; };
 		BE3BD5F8E8F2AA3E81B07AA5 /* AndroidViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AndroidViewController.storyboard; sourceTree = "<group>"; };
 		BE3BD60613DBA5FB8A059C0F /* MacHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacHandler.swift; sourceTree = "<group>"; };
@@ -574,6 +573,7 @@
 		DA48DA5920DFA99800171295 /* AbstractProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractProgressView.swift; sourceTree = "<group>"; };
 		DA48DA5B20DFAB2000171295 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		DA4B897D20F501C4001E93A1 /* App_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App_Extension.swift; sourceTree = "<group>"; };
+		DA9066DD20F66E9B00C35961 /* help_l.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = help_l.rtf; sourceTree = "<group>"; };
 		DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
 		DAAF120620DCE77100E075B8 /* NonDeselectTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonDeselectTableView.swift; sourceTree = "<group>"; };
 		DAAF120820DCF98800E075B8 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
@@ -680,7 +680,7 @@
 				6E93CDD63DA7EE8968DB391B /* Pods */,
 				D4C33354EAA7E8CA24921F0F /* Frameworks */,
 				BE3BD067D7FB225535465C16 /* help.rtf */,
-				BE3BD5A174AC494406F68801 /* intro_guide.rtf */,
+				DA9066DD20F66E9B00C35961 /* help_l.rtf */,
 				50C567201FFA934C00452792 /* Resources */,
 			);
 			sourceTree = "<group>";
@@ -1312,6 +1312,7 @@
 				BE3BD4342179DB442FD36053 /* close_button.png in Resources */,
 				50CAAF962000253100911D8E /* mac.png in Resources */,
 				DA463DD320F4D33E00EBF189 /* path_selector_div_l.png in Resources */,
+				DA9066DE20F66E9B00C35961 /* help_l.rtf in Resources */,
 				DA463DDA20F4E1E600EBF189 /* mac_l.png in Resources */,
 				DA463DD920F4E1E600EBF189 /* cancel_l.png in Resources */,
 				50CAAF952000253100911D8E /* android.png in Resources */,
@@ -1327,7 +1328,6 @@
 				BE3BD869D6B5C24C762444B0 /* endCopy.mp3 in Resources */,
 				50F5117D200139FB00CCB22C /* FileOptions.xib in Resources */,
 				BE3BD43FFDA218F217C09DBA /* help.rtf in Resources */,
-				BE3BDBF0A3F946760F91F720 /* intro_guide.rtf in Resources */,
 				BE3BD0E5A9B8848A8C017AD3 /* CopyDialog.xib in Resources */,
 				DAAF120420DCC23300E075B8 /* Ubuntu-Bold.ttf in Resources */,
 				BE3BD3CA5BE659E67FC602F6 /* HelpWindow.xib in Resources */,

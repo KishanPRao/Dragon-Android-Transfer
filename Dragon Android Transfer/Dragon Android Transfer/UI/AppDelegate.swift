@@ -177,7 +177,7 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
     static func updateThemeItem(_ darkThemeItem: Bool) {
         let darkTheme = UserDefaults.standard.bool(forKey: AppDelegate.DarkThemeKey)
         let mainMenu = NSApplication.shared.mainMenu
-        let windowMenu = mainMenu?.item(at: 5)?.submenu
+        let windowMenu = mainMenu?.item(at: 3)?.submenu
         let tag = darkThemeItem ? MenuItemIdentifier.darkTheme : MenuItemIdentifier.lightTheme
         for menuItem in (windowMenu?.items)! {
             if let submenu = menuItem.submenu {
@@ -195,7 +195,7 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
     }
 	
 	static func validateInterfaceMenuItem(item: NSValidatedUserInterfaceItem!) -> Bool {
-//        print("Vbose", "Here!!")
+        print("validateInterfaceMenuItem: \(item.tag)")
 		if (VERBOSE) {
 //            Swift.print("AppDelegate, validateInterfaceMenuItem:", item.tag);
 //            Swift.print("AppDelegate, validateInterfaceMenuItem, isPasting:", AppDelegate.isPastingOperation.value)
@@ -250,7 +250,7 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
         }
         if (item.tag == MenuItemIdentifier.stayOnTop) {
             let mainMenu = NSApplication.shared.mainMenu
-            let windowMenu = mainMenu?.item(at: 4)?.submenu
+            let windowMenu = mainMenu?.item(at: 5)?.submenu
             for item in (windowMenu?.items)! {
                 if item.tag == MenuItemIdentifier.stayOnTop {
                     if (AppDelegate.isFloatingWindow) {
@@ -346,12 +346,12 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
             }
             
             let alertProps = AlertProperty()
-            alertProps.message = "This will restart the application."
+            alertProps.message = "The application will be restarted."
             alertProps.info = "Are you sure you want to change the theme?"
             alertProps.textColor = R.color.dialogTextColor
             let buttonProp = AlertButtonProperty(title: R.string.ok)
             buttonProp.isSelected = true
-            buttonProp.bgColor = R.color.dialogSelectionColor
+//            buttonProp.bgColor = R.color.dialogSelectionColor
             alertProps.addButton(button: buttonProp)
             alertProps.addButton(button: AlertButtonProperty(title: R.string.cancel))
             alertProps.style = .informational

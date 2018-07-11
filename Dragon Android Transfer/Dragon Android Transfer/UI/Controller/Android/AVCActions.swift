@@ -57,7 +57,7 @@ extension AndroidViewController {
                 alertProps.textColor = R.color.dialogTextColor
                 let buttonProp = AlertButtonProperty(title: R.string.ok)
                 buttonProp.isSelected = true
-                buttonProp.bgColor = R.color.dialogSelectionColor
+//                buttonProp.bgColor = R.color.dialogSelectionColor
                 alertProps.addButton(button: buttonProp)
                 let alert = DarkAlert(property: alertProps)
                 alert.icon = image
@@ -76,7 +76,7 @@ extension AndroidViewController {
         inputAlertProps.textColor = R.color.dialogTextColor
         let buttonProp = AlertButtonProperty(title: R.string.ok)
         buttonProp.isSelected = true
-        buttonProp.bgColor = R.color.dialogSelectionColor
+//        buttonProp.bgColor = R.color.dialogSelectionColor
         inputAlertProps.addButton(button: buttonProp)
         inputAlertProps.addButton(button: AlertButtonProperty(title: R.string.cancel))
         inputAlertProps.defaultValue = "Untitled Folder"
@@ -89,7 +89,7 @@ extension AndroidViewController {
                 alertProps.textColor = R.color.dialogTextColor
                 let buttonProp = AlertButtonProperty(title: R.string.ok)
                 buttonProp.isSelected = true
-                buttonProp.bgColor = R.color.dialogSelectionColor
+//                buttonProp.bgColor = R.color.dialogSelectionColor
                 alertProps.addButton(button: buttonProp)
                 alertProps.style = .critical
                 
@@ -129,7 +129,7 @@ extension AndroidViewController {
         alertProps.textColor = R.color.dialogTextColor
         let buttonProp = AlertButtonProperty(title: R.string.ok)
         buttonProp.isSelected = true
-        buttonProp.bgColor = R.color.dialogSelectionDangerColor
+//        buttonProp.bgColor = R.color.dialogSelectionDangerColor
         alertProps.addButton(button: buttonProp)
         alertProps.addButton(button: AlertButtonProperty(title: R.string.cancel))
         alertProps.style = .critical

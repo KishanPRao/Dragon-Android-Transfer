@@ -56,22 +56,6 @@
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Go" id="H8h-7b-M4v">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Go" id="HyV-fh-RgO">
-                                    <items>
-                                        <menuItem title="Backward" tag="4" id="5f3-NA-ozi">
-                                            <string key="keyEquivalent" base64-UTF8="YES">
-CA
-</string>
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="navigateBackward:" target="Voe-Tx-rLC" id="kx7-lf-UP0"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
-                            </menuItem>
                             <menuItem title="File" id="xlg-8p-8mk">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="File" id="QTk-I3-Yhd">
@@ -141,35 +125,6 @@ CA
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Window" id="8fu-IC-Nny">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Window" id="yQT-gC-9vM">
-                                    <items>
-                                        <menuItem title="Minimize" tag="8" keyEquivalent="m" id="Vua-jW-ugy">
-                                            <connections>
-                                                <action selector="miniaturizeAll:" target="hnw-xV-0zn" id="rtS-K4-EWj"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Zoom" tag="999" keyEquivalent="m" id="4tN-yT-U9a">
-                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
-                                        </menuItem>
-                                        <menuItem title="Zoom All" tag="999" id="EmU-Ep-LCU">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="Reset Position" tag="10" id="ajK-Ku-B7k">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="resetPosition:" target="Voe-Tx-rLC" id="P8V-3S-zbZ"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Stay on top" tag="13" keyEquivalent="F" id="8OR-U1-XNh">
-                                            <connections>
-                                                <action selector="stayOnTop:" target="Voe-Tx-rLC" id="FQv-if-c9d"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
-                            </menuItem>
                             <menuItem title="View" id="5QF-Oa-p0T">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="View" id="W48-6f-4Dl">
@@ -192,6 +147,51 @@ CA
                                                     </menuItem>
                                                 </items>
                                             </menu>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Go" id="H8h-7b-M4v">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Go" id="HyV-fh-RgO">
+                                    <items>
+                                        <menuItem title="Backward" tag="4" id="5f3-NA-ozi">
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="navigateBackward:" target="Voe-Tx-rLC" id="kx7-lf-UP0"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Window" id="8fu-IC-Nny">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Window" id="yQT-gC-9vM">
+                                    <items>
+                                        <menuItem title="Minimize" tag="8" keyEquivalent="m" id="Vua-jW-ugy">
+                                            <connections>
+                                                <action selector="miniaturizeAll:" target="hnw-xV-0zn" id="rtS-K4-EWj"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Zoom" tag="999" keyEquivalent="m" id="4tN-yT-U9a">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="zoom:" target="Ady-hI-5gd" id="iOk-Nl-Wov"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Reset Position" tag="10" id="ajK-Ku-B7k">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="resetPosition:" target="Voe-Tx-rLC" id="P8V-3S-zbZ"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Stay on top" tag="13" keyEquivalent="F" id="8OR-U1-XNh">
+                                            <connections>
+                                                <action selector="stayOnTop:" target="Voe-Tx-rLC" id="FQv-if-c9d"/>
+                                            </connections>
                                         </menuItem>
                                     </items>
                                 </menu>

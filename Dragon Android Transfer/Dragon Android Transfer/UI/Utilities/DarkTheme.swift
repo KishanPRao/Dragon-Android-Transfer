@@ -74,4 +74,7 @@ class DarkTheme: Theme {
     
     let snackbarBg = color("313b4c")
     let snackbarTextColor = color("ffffff")
+    
+    let helpBgColor = color("282828")
+    let tableScrollColor = color("313131")
 }
