@@ -358,7 +358,12 @@ extension TransferViewController {
         }
         
 		if let alert = alert {
-			alert.end()
+            let alertWindow = alert.window
+            NSApp.abortModal()
+            alert.end()
+            alertWindow.orderOut(self)
+//            LogI("Dismiss alert!")
+            self.alert = nil
 		}
 		exit()
         previousCopiedSize = 0.0

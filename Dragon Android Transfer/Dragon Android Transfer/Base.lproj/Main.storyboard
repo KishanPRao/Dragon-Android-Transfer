@@ -205,7 +205,7 @@ CA
                                                 <action selector="showHelpWindow:" target="Voe-Tx-rLC" id="vNc-OW-F12"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Feedback" tag="999" id="nOW-OH-3SJ">
+                                        <menuItem title="Feedback / Suggestions" tag="999" id="nOW-OH-3SJ">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="openFeedback:" target="Voe-Tx-rLC" id="TS8-kh-lXG"/>
