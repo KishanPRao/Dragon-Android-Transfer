@@ -6,6 +6,8 @@
 import Foundation
 
 struct PrintUtils {
+    static let DebugMode = NSObject.VERBOSE
+    
     static private func PrintItem(_ TAG: String, _ item: Any, terminator: String) {
         if let items = item as? Array<Any> {
             for index in items.indices.dropLast() {
@@ -13,12 +15,16 @@ struct PrintUtils {
             }
             PrintItem(TAG, items.last ?? "", terminator: "\n")
         } else {
-            Swift.print(item, terminator: terminator)
+            if (DebugMode) {
+                Swift.print(item, terminator: terminator)
+            }
         }
     }
     
 	static public func Print(_ TAG: String, _ itemsAny: Any) {
-			Swift.print("[" + TAG + "]:", terminator: " ")
+        if (DebugMode) {
+            Swift.print("[" + TAG + "]:", terminator: " ")
             PrintItem(TAG, itemsAny, terminator: "\n")
+        }
 	}
 }

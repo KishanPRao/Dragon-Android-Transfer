@@ -20,7 +20,7 @@ class ClipboardTableCellView: NSTableCellView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        Swift.print("Items:", subviews)
+        print("Items:", subviews)
         nameField = subviews[0] as? NSTextField
         fileImage = subviews[1] as? NSImageView
         sizeField = subviews[2] as? NSTextField

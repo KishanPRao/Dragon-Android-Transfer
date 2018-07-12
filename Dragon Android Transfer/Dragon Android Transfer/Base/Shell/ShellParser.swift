@@ -205,7 +205,7 @@ public class ShellParser: NSObject {
 	public static func parseFileExists(_ rawOutput: String) -> Bool {
 		let output = rawOutput.replacingOccurrences(of: "\r\n", with: "").replacingOccurrences(of: "\n", with: "")
 		let exists = (output == HandlerConstants.EXIST)
-		Swift.print("AndroidHandler, exists:", exists)
+		print("AndroidHandler, exists:", exists)
 		return exists
 	}
 	

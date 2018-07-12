@@ -238,7 +238,7 @@ class AndroidViewController: NSViewController,
 	
 	override func updateViewConstraints() {
 		super.updateViewConstraints()
-		Swift.print("AndroidViewController, 2")
+//        print("AndroidViewController, 2")
 	}
 	
 	override func viewWillDisappear() {

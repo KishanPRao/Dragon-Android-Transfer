@@ -16,7 +16,7 @@ std::string FileSizeCommand::execute() {
     std::string commands = "";
     commands = commands + ShellScripts::File_Size + escapeDoubleQuotes + escapePath(path, true) + escapeDoubleQuotes;
 //    commands = commands + ShellScripts::File_Size_Prefix + path + ShellScripts::File_Size_Suffix;
-    std::cout<<"Size command:"<<commands<<std::endl;
+//    std::cout<<"Size command:"<<commands<<std::endl;
     if (executor) {
         auto properties = make_shared<AdbExecutorProperties>();
         properties->attributes = commands;

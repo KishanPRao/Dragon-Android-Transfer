@@ -15,6 +15,12 @@
 static NSString *convert(std::string str) {
     return [MacHelper convert:str];
 }
+
+#define PRODUCTION_MODE
+
+#ifdef PRODUCTION_MODE
+#define NSLog(s,...)
+#endif
 /*
 std::string ReplaceString(std::string subject, const std::string& search,
                           const std::string& replace) {

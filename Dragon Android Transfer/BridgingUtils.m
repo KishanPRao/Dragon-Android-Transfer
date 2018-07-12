@@ -7,6 +7,7 @@
 //
 
 #import "BridgingUtils.h"
+#import "BridgeHelper.h"
 #import <Cocoa/Cocoa.h>
 
 @implementation BridgingUtils

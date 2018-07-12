@@ -37,7 +37,7 @@ class HelpWindow: NSWindowController {
 	
 	override func windowDidLoad() {
 		super.windowDidLoad()
-		Swift.print("HelpWindow, windowDidLoad")
+		print("HelpWindow, windowDidLoad")
 		isShowing = true
 		initialized = true
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.

@@ -77,20 +77,20 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
                 return []
             }
 		} else {
-//            LogI("Info:", info.draggingSourceOperationMask())
-//            LogV("Src:", NSDragOperation.copy, ",", NSDragOperation.every, ",", NSDragOperation.generic)
+            LogI("Info:", info.draggingSourceOperationMask())
+            LogV("Src:", NSDragOperation.copy, ",", NSDragOperation.every, ",", NSDragOperation.generic)
 //            From external source
 //            if (info.draggingSource() == nil && info.draggingSourceOperationMask() != .every) {
             if (info.draggingSource() == nil &&
                 (info.draggingSourceOperationMask().rawValue & NSDragOperation.copy.rawValue) == 1) {
-                dragMode = DragMode.kDragFromFinder
+                dragMode = DragMode.kDragFromFinder //other scenarios not handled!
                 let oldIndex = dragDropRow
                 dragDropRow = row
                 updateItemSelected(index: dragDropRow)
                 updateItemChanged(index: oldIndex)
 //                updateItemChanged(index: dragDropRow)
                 dragUiDelegate?.onDropDestination(row)
-//                print("Return Copy")
+                print("Return Copy")
                 return [.copy]
             } else {
                 return []
@@ -147,6 +147,7 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
             if let nonNilDelegate = dragDelegate {
                 nonNilDelegate.dragItem(items: finderItems, fromFinderIntoAppItem: data as DraggableItem)
             }
+            dragMode = DragMode.kUnknown
             return true
         }
 		
@@ -176,7 +177,7 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
             do {
                 return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
             } catch {
-                Swift.print(error.localizedDescription)
+                print(error.localizedDescription)
             }
         }
         return nil
@@ -207,10 +208,10 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
         if (!enableDrag) {
             return
         }
-//        print("Drag Mode: \(dragMode)")
+        print("Drag Mode: \(dragMode)")
         if (dragMode == DragMode.kDragFromFinder) {
             dragMode = DragMode.kUnknown
-//            LogW("Bad State")
+            LogW("Bad State")
             let oldDrag = dragDropRow
             dragDropRow = DRAG_DROP_NONE
             updateItemChanged(index: oldDrag)
@@ -221,13 +222,13 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
 //        print("Drag Ended")
         var appItems = [BaseFile]()
         let pb = sender.draggingPasteboard()
-//        LogI("Items", sender.draggingPasteboard().pasteboardItems)
+        LogI("Items", sender.draggingPasteboard().pasteboardItems)
         var draggedIndex = -1
         for item in pb.pasteboardItems! {
-//            LogI("Item", item.data(forType: NSPasteboard.PasteboardType(rawValue: kWritableType)))
-//            LogV("Item", item.string(forType: NSPasteboard.PasteboardType(rawValue: kWritableType)))
-//            LogV("Item", item.types)
-//            LogV("Index", index)
+            LogI("Item", item.data(forType: NSPasteboard.PasteboardType(rawValue: kWritableType)))
+            LogV("Item", item.string(forType: NSPasteboard.PasteboardType(rawValue: kWritableType)))
+            LogV("Item", item.types)
+            LogV("Index", index)
             if let data = item.data(forType: NSPasteboard.PasteboardType(rawValue: kWritableType)) {
                 let index = convertDataToInt(data: data as NSData)
                 draggedIndex = index
@@ -249,11 +250,11 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
         }
         
 //        LogD("Type: \(kNSURLPboardType)")
-//        LogD("pb: \(pb.types)")
+        LogD("pb: \(pb.types)")
         if (pb.types?.contains(NSPasteboard.PasteboardType(rawValue: kPasteboardTypePasteLocation)))! {
             let url = NSURL(string: (pb.string(forType: NSPasteboard.PasteboardType(rawValue: kPasteboardTypePasteLocation)))!)
             if let copyPath = url?.absoluteURL?.path {
-                LogV("Copy from app item:", appItems, "to", copyPath)
+                LogV("Copy from app, items:", appItems, "to", copyPath)
                 if let nonNilDelegate = dragDelegate {
                     nonNilDelegate.dragItem(items: appItems as! [DraggableItem],
                                             fromAppToFinderLocation: copyPath)
@@ -284,5 +285,6 @@ class DraggableTableView: NSTableView, NSTableViewDataSource {
          }*/
         dragUiDelegate?.onDragCompleted()
         deselectAllRows()
+        LogD("draggingEnded")
 	}
 }

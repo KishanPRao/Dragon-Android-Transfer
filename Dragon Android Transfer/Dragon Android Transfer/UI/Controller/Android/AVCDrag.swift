@@ -73,7 +73,7 @@ extension AndroidViewController {
     
     func onDropDestination(_ row: Int) {
         if (row >= self.androidDirectoryItems.count || row < 0) {
-//            LogV("Warning: Drop Row out of range: \(row)")
+//            LogW("Drop Row out of range: \(row)")
             return
         }
         let isDirectory = androidDirectoryItems[row].type == BaseFileType.Directory

@@ -82,7 +82,7 @@ extension AndroidViewController {
         inputAlertProps.defaultValue = "Untitled Folder"
         
 		if let folderName = DarkAlertUtils.input(property: inputAlertProps) {
-			Swift.print("AndroidViewController, folder:", folderName)
+            print("AndroidViewController, folder:", folderName)
 			if (transferHandler.folderExists(folderName)) {
                 let alertProps = AlertProperty()
                 alertProps.message = "Folder '\(folderName)' already exists!"
@@ -99,7 +99,7 @@ extension AndroidViewController {
 				refresh()
 			}
 		} else {
-			Swift.print("AndroidViewController, no folder")
+			print("AndroidViewController, no folder")
 		}
 	}
 	

@@ -28,7 +28,7 @@ class MacHandler: NSObject {
 					"return isFinderActive()\n"
 	
 	func isFinderActive() -> Bool {
-		Swift.print("isFinderActive, ", TimeUtils.getCurrentTime())
+		print("isFinderActive, ", TimeUtils.getCurrentTime())
 		var result = false
 		if (runScript(MacHandler.RUNNABLE_FINDER_ACTIVE_SCRIPT) == "true") {
 			result = true
@@ -39,7 +39,7 @@ class MacHandler: NSObject {
 	}
 	
 	func getActivePath() -> String {
-		Swift.print("getActivePath, ")
+		print("getActivePath, ")
 		let script =
 				"tell application \"Finder\"\n" +
 						"try\n" +

@@ -11,7 +11,7 @@
 #include "AdbExecutorProperties.h"
 
 std::string SimpleAdbCommand::execute() {
-    std::cout<<"Adb Simple Command:"<<commands<<std::endl;
+//    std::cout<<"Adb Simple Command:"<<commands<<std::endl;
     if (executor) {
         auto properties = make_shared<AdbExecutorProperties>();
         properties->attributes = commands;

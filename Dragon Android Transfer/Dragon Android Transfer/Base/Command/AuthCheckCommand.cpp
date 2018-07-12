@@ -14,7 +14,7 @@
 std::string AuthCheckCommand::execute() {
 //    Device Info command.
     std::string commands = "-s " + deviceId + " shell getprop ro.product.model";
-    std::cout<<"Adb Device Info, Command:"<<commands<<std::endl;
+//    std::cout<<"Adb Device Info, Command:"<<commands<<std::endl;
     if (executor) {
         auto properties = make_shared<AdbExecutorProperties>();
         properties->attributes = commands;

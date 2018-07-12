@@ -7,6 +7,7 @@
 //
 
 #import "NibLoader.h"
+#import "BridgeHelper.h"
 
 @implementation NibLoader
 + (NSView *)loadWithNibNamed:(NSString *)nibNamed owner:(id)owner class:(Class)loadClass {

@@ -67,7 +67,7 @@ class Snackbar: NSView {
 		self.addSubview(message)
 		self.frame = self.frame.offsetBy(dx: 0, dy: -self.frame.size.height)
 		//self.frame.origin = CGPoint(x: 0, y: -self.frame.size.height)
-		Swift.print("Created Snack")
+//        Swift.print("Created Snackbar")
 //		setBackground(bgColor)
 	}
     

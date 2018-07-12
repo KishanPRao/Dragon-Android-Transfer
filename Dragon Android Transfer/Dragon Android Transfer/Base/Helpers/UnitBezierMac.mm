@@ -64,7 +64,7 @@ shared_ptr<UnitBezier> bezier;
     if (bezier) {
         return bezier->solve(x);
     } else {
-        std::cout<<"No active bezier!"<<std::endl;
+//        std::cout<<"No active bezier!"<<std::endl;
         return x;
     }
 }

@@ -95,7 +95,7 @@ extension AndroidViewController {
 		//		if (helpWindow != nil && helpWindow!.isShowing) {
 		if (helpWindow != nil && helpWindow!.isShowing && helpWindow!.needsUpdating()) {
 			//			helpWindow!.updateSizes()
-			Swift.print("AndroidViewController, updating Help")
+//            Swift.print("AndroidViewController, updating Help")
 			helpWindow!.endSheet()
 			helpWindow!.setIsIntro(intro: shouldShowGuide())
 			helpWindow!.updateSizes()

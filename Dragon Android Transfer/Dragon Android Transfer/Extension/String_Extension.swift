@@ -19,7 +19,7 @@ extension String {
         //        TODO: Newline char in name?
         newString = newString.replacingOccurrences(of: "'", with: "'\\''")
         //        Reference: https://stackoverflow.com/questions/10989899/single-quote-inside-of-double-quoted-string-on-linux-command-line
-        Swift.print("Escaped: \(newString)")
+//        Swift.print("Escaped: \(newString)")
         
 //        newString = newString.replacingOccurrences(of: "'", with: "\'")
 //        Swift.print("Escaped: \(newString)")
@@ -29,7 +29,7 @@ extension String {
     func escapeString() -> String {
         var newString = self.replacingOccurrences(of: "\"", with: "\\\"")
 //        newString = newString.replacingOccurrences(of: "'", with: "'\\''")
-        Swift.print("Escaped: \(newString)")
+//        Swift.print("Escaped: \(newString)")
         return newString
     }
 }

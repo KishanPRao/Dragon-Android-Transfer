@@ -8,15 +8,23 @@ import Foundation
 //TODO: What happens if 32 bit architecture?
 typealias Number = UInt64
 
+let DEBUG = false
+
 extension Double {
     func roundUp() -> Double {
         return self < 0.0 ? 0.0 : self
     }
 }
 
+func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
+    if (DEBUG) {
+        Swift.print(items[0], separator:separator, terminator: terminator)
+    }
+}
+
 extension NSObject {
 	class var VERBOSE: Bool {
-		return true
+		return DEBUG
 	}
 	
 	var TAG: String {
