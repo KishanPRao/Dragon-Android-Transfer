@@ -49,8 +49,12 @@ class MacHandler: NSObject {
 						"end try\n" +
 						"end tell"
 		
-		let path = runScript(script)
+		var path = runScript(script)
 		
+        if (path.last == "/") {
+            path = String(path.dropLast())
+        }
+        
 		print("Path:" + path)
 		
 		return path
@@ -215,7 +219,8 @@ class MacHandler: NSObject {
 			let lastComponent = (path as NSString).lastPathComponent
 //            print("Last Comp:", lastComponent," Path:", path)
 			if (lastComponent == outputNames[0]) {
-				path = (path as NSString).deletingLastPathComponent + HandlerConstants.SEPARATOR
+//                path = (path as NSString).deletingLastPathComponent + HandlerConstants.SEPARATOR
+                path = (path as NSString).deletingLastPathComponent
 			}
 		}
 		print("Path:", path)

@@ -208,7 +208,7 @@ class TransferHandler {
 		return macHandler.getActiveFiles()
 	}
 	
-	func getActivePath() -> String {
+	func getMacPath() -> String {
 		return macHandler.getActivePath()
 	}
 	

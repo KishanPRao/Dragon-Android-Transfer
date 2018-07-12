@@ -18,15 +18,36 @@ extension AndroidViewController {
         addNotification(selector, name: NSNotification.Name(rawValue: notificationRawValue))
     }
     
+    @objc func pasteToAndroid(_ notification: Notification) {
+        LogI("Shortcut, Paste to Android: \(transferHandler.getClipboardMacItems()) => \(transferHandler.getCurrentPath())")
+        if (transferHandler.getClipboardMacItems().count > 0) {
+            startTransfer()
+            if let transferVc = transferVc {
+                transferVc.pasteToAndroid(transferHandler.getCurrentPath())
+            }
+        }
+    }
+    
+    @objc func pasteToMac(_ notification: Notification) {
+        LogI("Shortcut, Paste to Mac: \(transferHandler.getClipboardAndroidItems()) => \(transferHandler.getMacPath())")
+        if (transferHandler.getClipboardAndroidItems().count > 0) {
+            startTransfer()
+            if let transferVc = transferVc {
+                transferVc.pasteToMac(transferHandler.getMacPath())
+            }
+        }
+    }
+    
     func initNotification() {
 //        print("Adding Observer")
-        addNotification(#selector(copyFromAndroid), name: StatusTypeNotification.COPY_FROM_ANDROID)
+        addNotification(#selector(AndroidViewController.copyFromAndroid), name: StatusTypeNotification.COPY_FROM_ANDROID)
         addNotification(#selector(AndroidViewController.copyFromMac), name: StatusTypeNotification.COPY_FROM_MAC)
-//        addNotification(#selector(AndroidViewController.pasteToAndroid), name: StatusTypeNotification.PASTE_TO_ANDROID)
-//        addNotification(#selector(AndroidViewController.pasteToMac), name: StatusTypeNotification.PASTE_TO_MAC)
-//        addNotification(#selector(AndroidViewController.copyFromAndroid), name: StatusTypeNotification.MENU_COPY_FILES)
-//        addNotification(#selector(AndroidViewController.pasteToAndroid), name: StatusTypeNotification.MENU_PASTE_FILES)
+        addNotification(#selector(AndroidViewController.pasteToAndroid), name: StatusTypeNotification.PASTE_TO_ANDROID)
+        addNotification(#selector(AndroidViewController.pasteToMac), name: StatusTypeNotification.PASTE_TO_MAC)
+        
+        addNotification(#selector(AndroidViewController.pasteToAndroid), name: StatusTypeNotification.MENU_PASTE_FILES)
         addNotification(#selector(AndroidViewController.copyFromAndroid), name: StatusTypeNotification.MENU_COPY_FILES)
+        
         addNotification(#selector(AndroidViewController.stop), name: StatusTypeNotification.STOP)
         addNotification(#selector(AndroidViewController.activeChange), name: StatusTypeNotification.CHANGE_ACTIVE)
         addNotification(#selector(AndroidViewController.checkGuide), name: StatusTypeNotification.FINISHED_LAUNCH)

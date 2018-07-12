@@ -11,7 +11,7 @@ import RxSwift
 
 @objc extension AndroidViewController {
     
-    func copyFromAndroid(_ notification: Notification) {
+    @objc func copyFromAndroid(_ notification: Notification) {
         print("Copy From Android")
         print("Selected", fileTable.selectedRowIndexes)
         let indexSet = fileTable.selectedRowIndexes
