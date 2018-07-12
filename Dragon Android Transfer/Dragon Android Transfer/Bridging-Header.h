@@ -13,6 +13,8 @@
 #import <MASShortcut/Shortcut.h>
 #import <Foundation/Foundation.h>
 #import <WebKit/WebKit.h>
+//#import <CrashReporter/CrashReporter.h>
+
 
 #import "AndroidAdbHandler.h"
 #import "UnitBezierMac.h"

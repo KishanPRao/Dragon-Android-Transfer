@@ -10,6 +10,7 @@ import Cocoa
 import MASShortcut
 import AppKit
 import RxSwift
+//import CrashReporter
 
 @NSApplicationMain
 class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidations, 
@@ -371,9 +372,37 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
         }
     }
     
+    /*func handleCrashReport(_ crashReporter: PLCrashReporter) {
+        LogI("handleCrashReport")
+        
+        guard let crashData = try? crashReporter.loadPendingCrashReportDataAndReturnError(), let report = try? PLCrashReport(data: crashData), !report.isKind(of: NSNull.classForCoder()) else {
+            crashReporter.purgePendingCrashReport()
+            return
+        }
+        
+        let crash = PLCrashReportTextFormatter.stringValue(for: report, with: PLCrashReportTextFormatiOS)! as NSString
+        // process the crash report, send it to a server, log it, etc
+//        LogE("CRASH REPORT:\n \(crash)")
+        crashReporter.purgePendingCrashReport()
+    }
+    
+    func setupCrashReporting() {
+        guard let crashReporter = PLCrashReporter.shared() else {
+            return
+        }
+        
+        if crashReporter.hasPendingCrashReport() {
+            handleCrashReport(crashReporter)
+        }
+        
+        if !crashReporter.enable() {
+            LogE("Could not enable crash reporter")
+        }
+    }*/
     
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		NSUserNotificationCenter.default.delegate = self
+//        setupCrashReporting()
 //		Insert code here to initialize your application
 //        let window = NSApplication.sharedApplication().mainWindow
 //        window?.backgroundColor = NSColor.blackColor()

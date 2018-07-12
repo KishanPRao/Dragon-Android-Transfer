@@ -23,7 +23,12 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem title="Provide Feedback or Suggestions" tag="999" id="nOW-OH-3SJ">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="openFeedback:" target="Voe-Tx-rLC" id="TS8-kh-lXG"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -197,12 +202,6 @@ CA
                                         <menuItem title="Dragon Android Transfer Help" tag="7" keyEquivalent="?" id="FKE-Sm-Kum">
                                             <connections>
                                                 <action selector="showHelpWindow:" target="Voe-Tx-rLC" id="vNc-OW-F12"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Feedback / Suggestions" tag="999" id="nOW-OH-3SJ">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="openFeedback:" target="Voe-Tx-rLC" id="TS8-kh-lXG"/>
                                             </connections>
                                         </menuItem>
                                     </items>

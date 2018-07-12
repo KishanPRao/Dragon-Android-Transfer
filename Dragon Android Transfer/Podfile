@@ -11,6 +11,7 @@ target 'Dragon Android Transfer' do
     
 	pod 'MASShortcut'
 #    pod 'Sparkle'
+#    pod 'PLCrashReporter', '~> 1.2'
 	pod 'RxSwift', $rxVersion
 	pod 'RxCocoa', $rxVersion
 	
