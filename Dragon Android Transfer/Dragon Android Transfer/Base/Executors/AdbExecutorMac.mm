@@ -119,6 +119,21 @@ string AdbExecutor::executeAdb(string commands, AdbExecutionType executionType, 
 
 //typedef (^notification_block_t)(NSNotification *);
 NSTask *activeTask = nil;
+id dataAvailable;
+AdbCallback *adbCallback;
+
+bool cancelCleanup() {
+    if (activeTask == nil && adbCallback != nil && dataAvailable != nil) {
+        NSLog(@"AdbExecutor, cancelCleanup");
+        (*adbCallback)("", AdbExecutionResult::Canceled);
+        [[NSNotificationCenter defaultCenter] removeObserver: dataAvailable];
+        adbCallback = nil;
+        dataAvailable = nil;
+        return true;
+    }
+    return false;
+}
+
 string AdbExecutor::executeAdb(string commands, AdbCallback callback) {
 	startAdbIfNotStarted();
 	auto task = [[NSTask alloc] init];
@@ -131,27 +146,26 @@ string AdbExecutor::executeAdb(string commands, AdbCallback callback) {
     task.standardError = nil;
     
     NSLog(@"\nexecuteAdb, with callback: %s\n", commands.c_str());
-    /*
+#ifndef PRODUCTION_MODE
     auto errorPipe = [[NSPipe alloc] init];
     task.standardError = errorPipe;
-     */
+#endif
+     
 	activeTask = task;
+    adbCallback = &callback;
 //	TODO: Cancellation..
 	auto outFile = [pipe fileHandleForReading];
 	[outFile waitForDataInBackgroundAndNotify];
-	id dataAvailable;
 	dataAvailable = [[NSNotificationCenter defaultCenter]
 			addObserverForName:NSFileHandleDataAvailableNotification
 						object:outFile
 						 queue:nil
 					usingBlock:^(NSNotification *notification) {
-//						NSLog(@"Task Block");
-						if (activeTask == nil) {
-//                            NSLog(@"Task canceled");
-							callback("", AdbExecutionResult::Canceled);
-                            [[NSNotificationCenter defaultCenter] removeObserver: dataAvailable];
-							return;
-						}
+                        NSLog(@"AdbExecutor, Task Block");
+                        if (cancelCleanup()) {
+                            NSLog(@"AdbExecutor, canceled");
+                            return;
+                        }
 						auto data = [pipe fileHandleForReading].availableData;
 //                        NSLog(@"Task Data, %@", data);
 						if (data.length > 0) {
@@ -167,34 +181,37 @@ string AdbExecutor::executeAdb(string commands, AdbCallback callback) {
 							callback("", AdbExecutionResult::Ok);
 							[[NSNotificationCenter defaultCenter] removeObserver: dataAvailable];
 						}*/
-                        if (activeTask == nil) {
-//                            NSLog(@"Task canceled, second");
-                            callback("", AdbExecutionResult::Canceled);
-                            [[NSNotificationCenter defaultCenter] removeObserver: dataAvailable];
+                        if (cancelCleanup()) {
+                            NSLog(@"AdbExecutor, canceled: second");
                             return;
                         }
 					}];
 	
 	[task launch];
-//	NSLog(@"Task Launched");
+    NSLog(@"AdbExecutor, Task Launched");
 	[task waitUntilExit];
-    /*auto errorData = [[errorPipe fileHandleForReading] readDataToEndOfFile];
-    auto errorOutput = [[NSString alloc] initWithData:errorData encoding:NSUTF8StringEncoding];
-     */
+    
     NSLog(@"AdbExecutor, Exit Status: %d", task.terminationStatus);
-//    NSLog(@"AdbExecutor, Error: %@", errorOutput);
-//	NSLog(@"Task After Exit");
+    
+#ifndef PRODUCTION_MODE
+    auto errorData = [[errorPipe fileHandleForReading] readDataToEndOfFile];
+    auto errorOutput = [[NSString alloc] initWithData:errorData encoding:NSUTF8StringEncoding];
+    NSLog(@"AdbExecutor, Error: %@", errorOutput);
+#endif
+    NSLog(@"AdbExecutor, Task After Exit");
     //    TODO: Handle error state!
     /*if (task.terminationStatus) {
         auto data = [pipe fileHandleForReading].availableData;
         auto str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSLog(@"AdbExecutor, error output:%@", str);
     }*/
-	if (activeTask != nil) {
+	if (activeTask != nil && dataAvailable != nil) {
 		callback("", AdbExecutionResult::Ok);
 		[[NSNotificationCenter defaultCenter] removeObserver: dataAvailable];
 	}
 	activeTask = nil;
+    dataAvailable = nil;
+    adbCallback = nil;
 	return "";
 }
 
@@ -217,5 +234,9 @@ void AdbExecutor::cancel() {
 		NSLog(@"Cancelling active task");
 		[activeTask terminate];
 		activeTask = nil;
+        if (cancelCleanup()) {
+            NSLog(@"AdbExecutor, cancel, canceled");
+            return;
+        }
 	}
 }
