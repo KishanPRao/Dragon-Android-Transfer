@@ -8,7 +8,9 @@ import Foundation
 //TODO: What happens if 32 bit architecture?
 typealias Number = UInt64
 
+//let DEBUG = true
 let DEBUG = false
+let FILE_WRITE = false
 
 extension Double {
     func roundUp() -> Double {
@@ -16,9 +18,51 @@ extension Double {
     }
 }
 
+extension String {
+    func appendLine(to url: URL) throws {
+        try self.appending("\n").append(to: url)
+    }
+    func append(to url: URL) throws {
+        let data = self.data(using: String.Encoding.utf8)
+        try data?.append(to: url)
+    }
+}
+
+extension Data {
+    func append(to url: URL) throws {
+        if let fileHandle = try? FileHandle(forWritingTo: url) {
+            defer {
+                fileHandle.closeFile()
+            }
+            fileHandle.seekToEndOfFile()
+            fileHandle.write(self)
+        } else {
+            try write(to: url)
+        }
+    }
+}
+
+
 func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
     if (DEBUG) {
-        Swift.print(items[0], separator:separator, terminator: terminator)
+        
+//        for item in items {
+            Swift.print(items)
+//        }
+        if (FILE_WRITE) {
+        let path = "/Users/Kishan/dump.txt"
+            for item in items {
+                
+                if let string = item as? String {
+                    do {
+                        let url = URL(fileURLWithPath: path)
+    //                    try "Test \(NSDate())".appendLineToURL(url)
+                        try string.appendLine(to: url)
+    //                    let result = try String(contentsOfURL: url)
+                    } catch {}
+                }
+            }
+        }
     }
 }
 

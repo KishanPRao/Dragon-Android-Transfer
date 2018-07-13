@@ -16,14 +16,16 @@ struct PrintUtils {
             PrintItem(TAG, items.last ?? "", terminator: "\n")
         } else {
             if (DebugMode) {
-                Swift.print(item, terminator: terminator)
+//                Swift.print(item, terminator: terminator)
+                print(item, terminator: terminator)
             }
         }
     }
     
 	static public func Print(_ TAG: String, _ itemsAny: Any) {
         if (DebugMode) {
-            Swift.print("[" + TAG + "]:", terminator: " ")
+//            Swift.print("[" + TAG + "]:", terminator: " ")
+            print("[" + TAG + "]:", terminator: " ")
             PrintItem(TAG, itemsAny, terminator: "\n")
         }
 	}

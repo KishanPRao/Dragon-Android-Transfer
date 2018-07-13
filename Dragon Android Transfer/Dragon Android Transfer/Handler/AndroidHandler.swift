@@ -548,7 +548,7 @@ public class AndroidHandler: VerboseObject {
 	
 	typealias TransferBlockType = (Int, AdbExecutionResultWrapper) -> Void
 	lazy var transferBlock: TransferBlockType = { progress, result in
-//				print("Pull: \(progress), \(result)")
+        print("Pull: \(progress), \(result)")
 		if (result == AdbExecutionResultWrapper.Result_Ok) {
 			print("Completed!")
 			let previousFile = self.currentFile

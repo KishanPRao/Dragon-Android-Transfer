@@ -89,7 +89,9 @@ extension TransferViewController {
 //            start = DispatchTime.now()
 //        }
 //        let startTime = self.start!
+        LogI("updateTimeRemaining")
         if (self.totalSize == 0) {
+            LogI("No size yet")
             return
         }
 		let totalSize = Double(self.totalSize)
@@ -98,6 +100,7 @@ extension TransferViewController {
         
         if (sizeCopied == previousCopiedSize) {
 //            currentUpdateDelay += TransferViewController.kDefaultUpdateDelay
+            LogI("same size")
             return
         }
         
@@ -148,6 +151,7 @@ extension TransferViewController {
 	}
 	
 	private func startTimer() {
+        LogI("Start Timer")
         previousTime = TimeUtils.getDispatchTime()
 		timer = Timer.scheduledTimer(timeInterval: TimeInterval(updateDelay), target: self,
 				selector: #selector(updateTimeRemaining), userInfo: nil,
@@ -178,6 +182,7 @@ extension TransferViewController {
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: { totalSize in
 					self.totalSize = totalSize
+                    print("Total Size: \(totalSize)")
 //                if (self.copyDialog != nil) {
 //                    self.copyDialog?.setTotalCopySize(totalSize)
 //                }
@@ -269,6 +274,7 @@ extension TransferViewController {
 		transferHandler.progressActiveTask().skip(1)
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: { progress in
+                    print("Progress Active: \(progress)")
                     if (self.progressActive(progress)) {
                         self.updateTimeRemaining()
                     }

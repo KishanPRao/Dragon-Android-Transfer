@@ -12,15 +12,40 @@
 #import "MacHelper.h"
 //#include <iostream>
 
+#define PRODUCTION_MODE
+//#define FILE_WRITE
+
+#ifdef PRODUCTION_MODE
+#define NSLog(s,...)
+#else
+#endif
+
 static NSString *convert(std::string str) {
     return [MacHelper convert:str];
 }
 
-#define PRODUCTION_MODE
-
-#ifdef PRODUCTION_MODE
-#define NSLog(s,...)
+static void writeLog(NSString* content) {
+#ifdef FILE_WRITE
+    content = [NSString stringWithFormat:@"%@\n",content];
+    
+    //get the documents directory:
+    //    NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSString *fileName = @"/Users/Kishan/dump.txt";
+    
+    NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:fileName];
+    if (fileHandle){
+        [fileHandle seekToEndOfFile];
+        [fileHandle writeData:[content dataUsingEncoding:NSUTF8StringEncoding]];
+        [fileHandle closeFile];
+    }
+    else{
+        [content writeToFile:fileName
+                  atomically:YES
+                    encoding:NSStringEncodingConversionAllowLossy
+                       error:nil];
+    }
 #endif
+}
 /*
 std::string ReplaceString(std::string subject, const std::string& search,
                           const std::string& replace) {

@@ -197,8 +197,10 @@ shared_ptr<AdbExecutor> executor;
 - (void)pull:(NSString *)sourceFile toDestination:(NSString *)destination :TransferBlock transferBlock {
 	if (![self hasActiveDevice]) {return;}
 	auto command = make_shared<PullCommand>(convert(sourceFile), convert(destination), [transferBlock](std::string output, AdbExecutionResult result) {
-//		NSLog(@"Output Pull: %@, finished: %d", convert(output), result);
+//        NSLog(@"Output Pull: %@, result: %d", convert(output), result);
 //		[pullBlock: 0, result: result];
+        writeLog(@"Output pull:");
+        writeLog(convert(output));
 		long progress;
 		if (result == AdbExecutionResult::InProgress) {
 			progress = [ShellParser parseTransferOutput:convert(output)];
@@ -215,6 +217,9 @@ shared_ptr<AdbExecutor> executor;
 - (void)push:(NSString *)sourceFile toDestination:(NSString *)destination :TransferBlock transferBlock {
 	if (![self hasActiveDevice]) {return;}
 	auto command = make_shared<PushCommand>(convert(sourceFile), convert(destination), [transferBlock](std::string output, AdbExecutionResult result) {
+//        NSLog(@"Output Push: %@, result: %d", convert(output), result);
+        writeLog(@"Output push:");
+        writeLog(convert(output));
 		long progress;
 		if (result == AdbExecutionResult::InProgress) {
 			progress = [ShellParser parseTransferOutput:convert(output)];
