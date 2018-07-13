@@ -16,7 +16,8 @@ class AbstractProgressView: VerboseView {
     var animationProgress: CGFloat = 0.0
     var previousProgress: CGFloat = 0.0
     
-    var animationDurationInMs = 500
+//    var animationDurationInMs = 500
+    var animationDurationInMs = 100
     let animationDelayInMs = NSView.Fps60_Delay
     var startTime = DispatchTime.now()
     
@@ -30,9 +31,15 @@ class AbstractProgressView: VerboseView {
     }
  */
     
+    let minThreshold: CGFloat = 10.0
+    
     func setProgress(_ progress: CGFloat) {
         //        Swift.print("ProgressView, Time:", TimeUtils.getCurrentTime(), ", Progress:", progress)
-        previousProgress = mProgress
+//        if ((mProgress - animationProgress) > minThreshold) {
+            previousProgress = mProgress
+//        } else {
+//            previousProgress = animationProgress
+//        }
         mProgress = progress
         startTime = TimeUtils.getDispatchTime()
         needsDisplay = true
