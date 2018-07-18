@@ -12,17 +12,17 @@ class LightTheme: Theme {
     let isDark = false
     let textColor = color("000000")
     
-    static let menuNavigationColor = color("4666c4")
+    static let menuNavigationColor = color("395fcb")
     let menuNavColor = menuNavigationColor
     let menuTableColor = menuNavigationColor
 //    let menuBgColor = color("071a34", withAlpha: 0.4)
     let menuBgColor = color("002366", withAlpha: 0.4)
 //    let menuItemBg = color("ffffff")
-    static let menuItemSelectBgColor = "7185da"
+    static let menuItemSelectBgColor = "304497"
     let menuItemSelectBg = color(menuItemSelectBgColor)
     let menuItemSelectCellBg = color(menuItemSelectBgColor)
-    let menuProgressFg = color("849bff")
-    let menuProgressBg = color("cdd4ee")
+    let menuProgressFg = color("adbdff")
+    let menuProgressBg = color("ebefff")
     let menuFontColor = color("ffffff")
     
     let toolbarColor = color("5172d1")
