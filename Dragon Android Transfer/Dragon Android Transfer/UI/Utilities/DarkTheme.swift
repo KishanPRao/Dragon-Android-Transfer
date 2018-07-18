@@ -16,12 +16,12 @@ class DarkTheme: Theme {
     //    let textColor = color("d0d0d0")
     
 //    static let menuNavigationColor = "181e28"
-    static let menuNavigationColor = "002976"
+    static let menuNavigationColor = "1c2f83"
     let menuNavColor = color(menuNavigationColor)
     let menuTableColor = color(menuNavigationColor)
     let menuBgColor = color("000409", withAlpha: 0.4)
 //    let menuItemBg = color("040a14")
-    static let menuItemSelectBgColor = "2268f0"
+    static let menuItemSelectBgColor = "475aaa"
     let menuItemSelectBg = color(menuItemSelectBgColor)
     let menuItemSelectCellBg = color(menuItemSelectBgColor)
 //    let menuProgressFg = color("204582")
@@ -32,7 +32,7 @@ class DarkTheme: Theme {
     //    let menuItemSelectCellBg = color("091f45")
     
     //    let toolbarColor = color("003b6f")
-    let toolbarColor = color("003bb3")
+    let toolbarColor = color("1c2f83")
     let toolbarProgressFg = color("cfffd5") //TODO: Confirm color
     let toolbarProgressBg = color("10bea8")
     
