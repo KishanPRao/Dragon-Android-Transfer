@@ -31,7 +31,7 @@ protocol Theme {
 	var tableBg: NSColor { get }
 	var tableItemBg: NSColor { get }
     var tableScrollColor: NSColor{get}
-	var menuItemBg: NSColor { get }
+//    var menuItemBg: NSColor { get }
 	var menuItemSelectBg: NSColor { get }
 	var transferBg: NSColor { get }
 	var textColor: NSColor { get }

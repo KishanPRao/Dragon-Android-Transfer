@@ -50,15 +50,8 @@
 		50CAAF9820003A0E00911D8E /* String_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CAAF9720003A0E00911D8E /* String_Extension.swift */; };
 		50D1A1EE2009EDC60024219C /* AVCTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D1A1ED2009EDC60024219C /* AVCTable.swift */; };
 		50D37A9820090FAB007A1374 /* FontResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D37A9720090FAB007A1374 /* FontResource.swift */; };
-		50D37A9A2009111F007A1374 /* AlegreyaSans-Regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 50D37A99200910BF007A1374 /* AlegreyaSans-Regular.ttf */; };
 		50D37A9C20091366007A1374 /* NSTextField_ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D37A9B20091366007A1374 /* NSTextField_ext.swift */; };
-		50D37A9E200915FC007A1374 /* Roboto-Regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 50D37A9D200915B6007A1374 /* Roboto-Regular.ttf */; };
-		50D37AA520091735007A1374 /* Slabo27px-Regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 50D37AA420091720007A1374 /* Slabo27px-Regular.ttf */; };
 		50D37AA620091735007A1374 /* Ubuntu-Regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 50D37AA32009171B007A1374 /* Ubuntu-Regular.ttf */; };
-		50D37AA720091735007A1374 /* Cambo-Regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 50D37AA220091716007A1374 /* Cambo-Regular.ttf */; };
-		50D37AA820091735007A1374 /* Arimo-Regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 50D37AA12009170F007A1374 /* Arimo-Regular.ttf */; };
-		50D37AA920091735007A1374 /* Raleway-Regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 50D37AA020091706007A1374 /* Raleway-Regular.ttf */; };
-		50D37AAA20091735007A1374 /* PT_Sans-Web-Regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 50D37A9F200916FE007A1374 /* PT_Sans-Web-Regular.ttf */; };
 		50D37AAC20092EB1007A1374 /* VerticallyAlignedTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D37AAB20092EB1007A1374 /* VerticallyAlignedTextFieldCell.swift */; };
 		50D7D9B41FFE948D00E85E70 /* TextUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7D9B31FFE948D00E85E70 /* TextUtils.swift */; };
 		50D7D9B61FFE97AC00E85E70 /* SelectionTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7D9B51FFE97AC00E85E70 /* SelectionTableRowView.swift */; };
@@ -309,14 +302,7 @@
 			dstSubfolderSpec = 7;
 			files = (
 				DAAF120520DCC25900E075B8 /* Ubuntu-Bold.ttf in CopyFiles */,
-				50D37AA520091735007A1374 /* Slabo27px-Regular.ttf in CopyFiles */,
 				50D37AA620091735007A1374 /* Ubuntu-Regular.ttf in CopyFiles */,
-				50D37AA720091735007A1374 /* Cambo-Regular.ttf in CopyFiles */,
-				50D37AA820091735007A1374 /* Arimo-Regular.ttf in CopyFiles */,
-				50D37AA920091735007A1374 /* Raleway-Regular.ttf in CopyFiles */,
-				50D37AAA20091735007A1374 /* PT_Sans-Web-Regular.ttf in CopyFiles */,
-				50D37A9E200915FC007A1374 /* Roboto-Regular.ttf in CopyFiles */,
-				50D37A9A2009111F007A1374 /* AlegreyaSans-Regular.ttf in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,15 +358,8 @@
 		50CAAF9720003A0E00911D8E /* String_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String_Extension.swift; sourceTree = "<group>"; };
 		50D1A1ED2009EDC60024219C /* AVCTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCTable.swift; sourceTree = "<group>"; };
 		50D37A9720090FAB007A1374 /* FontResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontResource.swift; sourceTree = "<group>"; };
-		50D37A99200910BF007A1374 /* AlegreyaSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AlegreyaSans-Regular.ttf"; sourceTree = "<group>"; };
 		50D37A9B20091366007A1374 /* NSTextField_ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTextField_ext.swift; sourceTree = "<group>"; };
-		50D37A9D200915B6007A1374 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
-		50D37A9F200916FE007A1374 /* PT_Sans-Web-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PT_Sans-Web-Regular.ttf"; sourceTree = "<group>"; };
-		50D37AA020091706007A1374 /* Raleway-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Regular.ttf"; sourceTree = "<group>"; };
-		50D37AA12009170F007A1374 /* Arimo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arimo-Regular.ttf"; sourceTree = "<group>"; };
-		50D37AA220091716007A1374 /* Cambo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cambo-Regular.ttf"; sourceTree = "<group>"; };
 		50D37AA32009171B007A1374 /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Regular.ttf"; sourceTree = "<group>"; };
-		50D37AA420091720007A1374 /* Slabo27px-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Slabo27px-Regular.ttf"; sourceTree = "<group>"; };
 		50D37AAB20092EB1007A1374 /* VerticallyAlignedTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticallyAlignedTextFieldCell.swift; sourceTree = "<group>"; };
 		50D7D9B31FFE948D00E85E70 /* TextUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextUtils.swift; sourceTree = "<group>"; };
 		50D7D9B51FFE97AC00E85E70 /* SelectionTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTableRowView.swift; sourceTree = "<group>"; };
@@ -720,14 +699,7 @@
 			isa = PBXGroup;
 			children = (
 				DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */,
-				50D37AA420091720007A1374 /* Slabo27px-Regular.ttf */,
 				50D37AA32009171B007A1374 /* Ubuntu-Regular.ttf */,
-				50D37AA220091716007A1374 /* Cambo-Regular.ttf */,
-				50D37AA12009170F007A1374 /* Arimo-Regular.ttf */,
-				50D37AA020091706007A1374 /* Raleway-Regular.ttf */,
-				50D37A9F200916FE007A1374 /* PT_Sans-Web-Regular.ttf */,
-				50D37A9D200915B6007A1374 /* Roboto-Regular.ttf */,
-				50D37A99200910BF007A1374 /* AlegreyaSans-Regular.ttf */,
 			);
 			path = Resources;
 			sourceTree = "<group>";

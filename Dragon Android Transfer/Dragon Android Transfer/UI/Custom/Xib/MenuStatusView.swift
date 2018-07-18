@@ -78,6 +78,7 @@ class MenuStatusView: NSView {
         sizeStatus.updateMainFont()
         resetTitle()
         resetSize()
+        progressView.animationDurationInMs = 500
         progressView.progressBgColor = R.color.menuProgressBg
         progressView.progressFgColor = R.color.menuProgressFg
 //        self.alphaValue = 0

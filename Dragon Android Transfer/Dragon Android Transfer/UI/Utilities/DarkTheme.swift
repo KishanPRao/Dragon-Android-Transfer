@@ -16,24 +16,25 @@ class DarkTheme: Theme {
     //    let textColor = color("d0d0d0")
     
 //    static let menuNavigationColor = "181e28"
-    static let menuNavigationColor = "0d1c33"
+    static let menuNavigationColor = "002976"
     let menuNavColor = color(menuNavigationColor)
     let menuTableColor = color(menuNavigationColor)
     let menuBgColor = color("000409", withAlpha: 0.4)
-    let menuItemBg = color("040a14")
-    let menuItemSelectBg = color("2a4a83")
-    let menuItemSelectCellBg = color("2a4a83")
+//    let menuItemBg = color("040a14")
+    static let menuItemSelectBgColor = "2268f0"
+    let menuItemSelectBg = color(menuItemSelectBgColor)
+    let menuItemSelectCellBg = color(menuItemSelectBgColor)
 //    let menuProgressFg = color("204582")
-    let menuProgressFg = color("4065a2")
-    let menuProgressBg = color("414854")
+    let menuProgressFg = color("3a76ff")
+    let menuProgressBg = color("4a587d")
     let menuFontColor = color("ffffff")
     //    let menuItemSelectCellBg = color("000000")
     //    let menuItemSelectCellBg = color("091f45")
     
     //    let toolbarColor = color("003b6f")
-    let toolbarColor = color("134876")
-    let toolbarProgressFg = color("1a64a3") //TODO: Confirm color
-    let toolbarProgressBg = color("47a0f2")
+    let toolbarColor = color("003bb3")
+    let toolbarProgressFg = color("cfffd5") //TODO: Confirm color
+    let toolbarProgressBg = color("10bea8")
     
 //    let pathSelectorSelectableItem = color("0e2343")
     let pathSelectorSelectableItem = color("30353a")
@@ -42,11 +43,11 @@ class DarkTheme: Theme {
     //    let tableBg = color("050505")
     //    let tableBg = color("101010")
     //    let tableBg = color("000000")
-    let tableBg = color("131415")
+    let tableBg = color("282828")
     //	let tableItemBg = color("050505")
     let tableItemBg = color("000000")
     //    let listSelectedBackgroundColor = color("0d3475")
-    let listSelectedBackgroundColor = color("092c61")
+    let listSelectedBackgroundColor = color("3e4c8a")
     //    let listSelectedBackgroundColor = color("2f2f2f")
     
     let transferBg = color("313b4c")
@@ -72,7 +73,7 @@ class DarkTheme: Theme {
     let windowBg = color("0a0a0a")
     let mainViewColor = color("#424242")
     
-    let snackbarBg = color("313b4c")
+    let snackbarBg = color("3f445a")
     let snackbarTextColor = color("ffffff")
     
     let helpBgColor = color("282828")
