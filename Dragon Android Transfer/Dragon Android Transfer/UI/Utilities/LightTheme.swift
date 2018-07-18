@@ -18,10 +18,10 @@ class LightTheme: Theme {
 //    let menuBgColor = color("071a34", withAlpha: 0.4)
     let menuBgColor = color("002366", withAlpha: 0.4)
 //    let menuItemBg = color("ffffff")
-    static let menuItemSelectBgColor = "304497"
+    static let menuItemSelectBgColor = "6a85f4"
     let menuItemSelectBg = color(menuItemSelectBgColor)
     let menuItemSelectCellBg = color(menuItemSelectBgColor)
-    let menuProgressFg = color("adbdff")
+    let menuProgressFg = color("7d9be4")
     let menuProgressBg = color("ebefff")
     let menuFontColor = color("ffffff")
     
