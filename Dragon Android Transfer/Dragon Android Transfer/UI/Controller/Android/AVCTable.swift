@@ -61,12 +61,12 @@ extension AndroidViewController {
         return true
     }
     
-    /*
     @IBAction func tableSelectionChanged(_ sender: Any) {
+//        Remove later, conn by storyboard.
         if (NSObject.VERBOSE) {
             //            Swift.print("AndroidViewController: tableSelectionChanged:", fileTable.selectedRow);
         }
-    }*/
+    }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         if (row >= self.androidDirectoryItems.count) {
