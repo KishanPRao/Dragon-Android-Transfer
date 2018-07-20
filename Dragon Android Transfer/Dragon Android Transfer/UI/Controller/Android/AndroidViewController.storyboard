@@ -20,11 +20,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m7k-us-hyl">
-                                        <rect key="frame" x="65" y="10" width="400" height="45"/>
+                                        <rect key="frame" x="65" y="10" width="565" height="45"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="phA-Vu-RnN">
-                                                <rect key="frame" x="2" y="8" width="35" height="28"/>
+                                                <rect key="frame" x="0.0" y="8" width="35" height="28"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yhC-Dr-o3P">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -35,7 +35,7 @@
                                                 </connections>
                                             </button>
                                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m7H-0T-VkQ" customClass="PathSelector" customModule="Dragon_Android_Transfer" customModuleProvider="target">
-                                                <rect key="frame" x="42" y="5" width="345" height="35"/>
+                                                <rect key="frame" x="42" y="5" width="510" height="35"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                             </customView>
                                         </subviews>

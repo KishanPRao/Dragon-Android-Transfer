@@ -16,7 +16,8 @@ class LightTheme: Theme {
     let menuNavColor = menuNavigationColor
     let menuTableColor = menuNavigationColor
 //    let menuBgColor = color("071a34", withAlpha: 0.4)
-    let menuBgColor = color("002366", withAlpha: 0.4)
+//    let menuBgColor = color("002366", withAlpha: 0.4)
+    let menuBgColor = color("000000", withAlpha: 0.4)
 //    let menuItemBg = color("ffffff")
     static let menuItemSelectBgColor = "5772e1"
     let menuItemSelectBg = color(menuItemSelectBgColor)
@@ -59,6 +60,10 @@ class LightTheme: Theme {
     
     let helpBgColor = color("fafafa")
     let tableScrollColor = color("fefefe")
+    
+    
+    let pathSelectorTextColor = color("d3d8df")
+    let pathSelectorLastTextColor = color("ffffff")
 //    var dark: Bool {
 //        get {
 //            return false

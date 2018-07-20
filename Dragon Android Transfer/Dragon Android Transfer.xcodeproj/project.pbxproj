@@ -263,6 +263,7 @@
 		DA48DA5A20DFA99800171295 /* AbstractProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48DA5920DFA99800171295 /* AbstractProgressView.swift */; };
 		DA48DA5C20DFAB2000171295 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48DA5B20DFAB2000171295 /* CircularProgressView.swift */; };
 		DA4B897E20F501C4001E93A1 /* App_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4B897D20F501C4001E93A1 /* App_Extension.swift */; };
+		DA701C2F21021C4400C95AAD /* toolbar_back.png in Resources */ = {isa = PBXBuildFile; fileRef = DA701C2E21021C4300C95AAD /* toolbar_back.png */; };
 		DA9066DE20F66E9B00C35961 /* help_l.rtf in Resources */ = {isa = PBXBuildFile; fileRef = DA9066DD20F66E9B00C35961 /* help_l.rtf */; };
 		DAAF120420DCC23300E075B8 /* Ubuntu-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */; };
 		DAAF120520DCC25900E075B8 /* Ubuntu-Bold.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */; };
@@ -552,6 +553,7 @@
 		DA48DA5920DFA99800171295 /* AbstractProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractProgressView.swift; sourceTree = "<group>"; };
 		DA48DA5B20DFAB2000171295 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		DA4B897D20F501C4001E93A1 /* App_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App_Extension.swift; sourceTree = "<group>"; };
+		DA701C2E21021C4300C95AAD /* toolbar_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolbar_back.png; sourceTree = "<group>"; };
 		DA9066DD20F66E9B00C35961 /* help_l.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = help_l.rtf; sourceTree = "<group>"; };
 		DAAF120320DCC23300E075B8 /* Ubuntu-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Bold.ttf"; sourceTree = "<group>"; };
 		DAAF120620DCE77100E075B8 /* NonDeselectTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonDeselectTableView.swift; sourceTree = "<group>"; };
@@ -653,6 +655,7 @@
 				DA463DD520F4E1E400EBF189 /* cancel_l.png */,
 				DA463DD620F4E1E500EBF189 /* mac_l.png */,
 				DA463DD820F4E1E500EBF189 /* transfer_more_l.png */,
+				DA701C2E21021C4300C95AAD /* toolbar_back.png */,
 				BE3BDB3E2A1E4A083D7DA873 /* Credits.rtf */,
 				BE3BD65DA3E8130849D039FD /* index.html */,
 				BE3BDB16DB0C701832D6D2BC /* endCopy.mp3 */,
@@ -1314,6 +1317,7 @@
 				50F91FCB20024A4800C58955 /* MenuStatusView.xib in Resources */,
 				BE3BDF9F00E6DA1CD6D6CE43 /* FileCell.xib in Resources */,
 				50F511822001401C00CCB22C /* remove.png in Resources */,
+				DA701C2F21021C4400C95AAD /* toolbar_back.png in Resources */,
 				50DFEDBC2002A377004BAE01 /* AdWindowController.xib in Resources */,
 				BE3BD04A725201CFC6692744 /* PathSelector.xib in Resources */,
 				BE3BDD6D61EEB37FFAA132F9 /* MenuCell.xib in Resources */,

@@ -49,7 +49,8 @@ extension AndroidViewController {
 		mCircularProgress?.isHidden = true
  */
 		
-		pathSelectorRootView.setBackground(R.color.pathSelectorBg)
+//        pathSelectorRootView.setBackground(R.color.pathSelectorBg)
+        pathSelectorRootView.setBackground(R.color.clear)
 		loadingProgress.isHidden = true
 		//        parent.center fromView:parent.superview];
 	}

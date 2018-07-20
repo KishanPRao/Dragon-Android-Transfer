@@ -46,7 +46,10 @@ class PathSelector: VerboseView {
 	
 	let indentSize = 1.0 as CGFloat
 	
-    private func updateText(_ button: NSButton, _ text: String, useUnderline : Bool = false) {
+    private func updateText(_ button: NSButton, _ text: String,
+                            useUnderline : Bool = false,
+                            textColor : NSColor = R.color.textColor,
+                            bold: Bool = false) {
 //        let style = NSMutableParagraphStyle()
 //        style.alignment = .center
 ////        style.headIndent = indentSize
@@ -57,10 +60,16 @@ class PathSelector: VerboseView {
 //            NSForegroundColorAttributeName: R.color.white,
 //            NSParagraphStyleAttributeName: style
 //        ])
-		
-		button.attributedTitle = TextUtils.getTruncatedAttributeString(text,
-                                                                       alignment: .center,
-                                                                       useUnderline: useUnderline)
+        
+        if (bold) {
+            button.attributedTitle = TextUtils.attributedBoldString(from: text, color: textColor,
+                                                   nonBoldRange: nil, fontSize: NSFont.systemFontSize, .center)
+        } else {
+            button.attributedTitle = TextUtils.getTruncatedAttributeString(text,
+                                                                           alignment: .center,
+                                                                           useUnderline: useUnderline,
+                                                                           color: textColor)
+        }
         button.updateMainFont()
 	}
 	
@@ -108,8 +117,10 @@ class PathSelector: VerboseView {
         let image = isLast ? disabledImage! : clickableImage!
         updateButton(button, image)
         button.imageScaling = .scaleAxesIndependently
-        updateText(button, pathElement.name, useUnderline: isLast)
+        let textColor = isLast ? R.color.pathSelectorLastTextColor : R.color.pathSelectorTextColor
+        updateText(button, pathElement.name, useUnderline: isLast, textColor: textColor, bold: isLast)
         button.isHidden = false
+//        button.isEnabled = !isLast
         
         if (updateTextPosition > 0) {
             let arrow = arrowsArray[updateTextPosition - 1]
@@ -214,8 +225,13 @@ class PathSelector: VerboseView {
 		super.init(coder: aDecoder)
 		Bundle.main.loadNibNamed(NSNib.Name(rawValue: "PathSelector"), owner: self, topLevelObjects: nil)
 		LogV("Path Selector, init coder", firstText)
-		clickableImage = NSImage.swatchWithColor(color: R.color.pathSelectorSelectableItem, size: rootView.frame.size).roundCorners()
-		disabledImage = NSImage.swatchWithColor(color: R.color.pathSelectorBg, size: rootView.frame.size).roundCorners()
+//        let clickableColor = R.color.pathSelectorSelectableItem
+//        let clickableColor = R.color.listSelectedBackgroundColor
+        let clickableColor = R.color.toolbarColor
+		clickableImage = NSImage.swatchWithColor(color: clickableColor, size: rootView.frame.size).roundCorners()
+//        let disabledColor = R.color.pathSelectorBg
+        let disabledColor = R.color.toolbarColor
+		disabledImage = NSImage.swatchWithColor(color: disabledColor, size: rootView.frame.size).roundCorners()
 		
 		initButtons()
 		

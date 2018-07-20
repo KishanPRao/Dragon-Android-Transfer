@@ -9,8 +9,10 @@
 import Foundation
 
 class ImageResource {
-    public var path_selector_div: String { get {return R.isDark() ? "path_selector_div" : "path_selector_div_l"}}
-    public var path_selector_back: String { get { return R.isDark() ? "backward": "backward_l" } }
+//    public var path_selector_div: String { get {return R.isDark() ? "path_selector_div" : "path_selector_div_l"}}
+    public var path_selector_div: String { get {return "path_selector_div"}}
+//    public var path_selector_back: String { get { return R.isDark() ? "backward": "backward_l" } }
+    public var path_selector_back: String { get { return "toolbar_back" } }
     public var file: String {get{return R.isDark() ? "file" : "file_l"}}
     
     public var cancel_transfer: String {get{return R.isDark() ? "cancel" : "cancel_l"}}

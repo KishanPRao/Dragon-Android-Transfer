@@ -43,6 +43,8 @@ protocol Theme {
 
     var pathSelectorSelectableItem: NSColor{get}
     var pathSelectorBg: NSColor{get}
+    var pathSelectorTextColor: NSColor {get}
+    var pathSelectorLastTextColor: NSColor {get}
     
     var dialogBgColor: NSColor{get}
     var dialogWindowColor: NSColor{get}

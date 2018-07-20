@@ -19,7 +19,8 @@ class DarkTheme: Theme {
     static let menuNavigationColor = "19286a"
     let menuNavColor = color(menuNavigationColor)
     let menuTableColor = color(menuNavigationColor)
-    let menuBgColor = color("000409", withAlpha: 0.4)
+//    let menuBgColor = color("000409", withAlpha: 0.4)
+    let menuBgColor = color("000000", withAlpha: 0.4)
 //    let menuItemBg = color("040a14")
     static let menuItemSelectBgColor = "4456a5"
     let menuItemSelectBg = color(menuItemSelectBgColor)
@@ -39,6 +40,7 @@ class DarkTheme: Theme {
 //    let pathSelectorSelectableItem = color("0e2343")
 //    let pathSelectorSelectableItem = color("30353a")
 //    let pathSelectorBg = color("000000")
+//    let pathSelectorSelectableItem = color("30353a")
     let pathSelectorSelectableItem = color("30353a")
     let pathSelectorBg = color("131313")
     
@@ -80,4 +82,7 @@ class DarkTheme: Theme {
     
     let helpBgColor = color("282828")
     let tableScrollColor = color("313131")
+    
+    let pathSelectorTextColor = color("b8c2c9")
+    let pathSelectorLastTextColor = color("ffffff")
 }
