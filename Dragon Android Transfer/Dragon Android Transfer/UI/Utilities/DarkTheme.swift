@@ -12,6 +12,8 @@ class DarkTheme: Theme {
     let isDark = true
     static let color = DarkTheme.color(_:)
     
+    static let windowColor = "212121"
+    
     let textColor = color("ffffff")
     //    let textColor = color("d0d0d0")
     
@@ -32,7 +34,6 @@ class DarkTheme: Theme {
     //    let menuItemSelectCellBg = color("000000")
     //    let menuItemSelectCellBg = color("091f45")
     
-    //    let toolbarColor = color("003b6f")
     let toolbarColor = color("1c2f83")
     let toolbarProgressFg = color("9dbdf1")
     let toolbarProgressBg = color("438aff")
@@ -47,7 +48,7 @@ class DarkTheme: Theme {
     //    let tableBg = color("050505")
     //    let tableBg = color("101010")
     //    let tableBg = color("000000")
-    let tableBg = color("282828")
+    let tableBg = color(windowColor)
     //	let tableItemBg = color("050505")
     let tableItemBg = color("000000")
     //    let listSelectedBackgroundColor = color("0d3475")

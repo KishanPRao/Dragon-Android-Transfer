@@ -12,6 +12,8 @@ class LightTheme: Theme {
     let isDark = false
     let textColor = color("000000")
     
+    static let windowColor = "ececec"
+    
     static let menuNavigationColor = color("2044a9")
     let menuNavColor = menuNavigationColor
     let menuTableColor = menuNavigationColor
@@ -36,8 +38,8 @@ class LightTheme: Theme {
     let pathSelectorSelectableItem = color("ffffff")
     let pathSelectorBg = color("d8dbdf")
     
-    let tableBg = color("ffffff")
-    let tableItemBg = color("ffffff")
+    let tableBg = color(windowColor)
+    let tableItemBg = color(windowColor)
     let listSelectedBackgroundColor = color("bfcbff")
     
 //    let transferBg = color("f8f8f8")
