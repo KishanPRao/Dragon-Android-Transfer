@@ -197,7 +197,8 @@ class PathSelector: VerboseView {
 	}
 	
 	@objc func first() {
-		let path = paths[0].absolutePath
+        let index = paths.count > 3 ? paths.count - 3 : 0
+		let path = paths[index].absolutePath
 		
 		if (path != currentPath) {
 			updateToPath(path)
@@ -206,7 +207,8 @@ class PathSelector: VerboseView {
 	}
 	
 	@objc func second() {
-		let path = paths[1].absolutePath
+        let index = paths.count > 3 ? paths.count - 2 : 1
+        let path = paths[index].absolutePath
 		
 		if (path != currentPath) {
 //            LogV("Open", path)
