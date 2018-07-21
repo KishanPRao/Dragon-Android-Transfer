@@ -6,6 +6,7 @@
 import Foundation
 
 class AudioResource {
-	let endCopy = "endCopy"
+    let endCopy = "Tink"
+    let endCopyAlt = "endCopy"
 	let badOperation = "Funk"
 }
