@@ -27,7 +27,7 @@
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="Dk4-Vh-yh9"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LNs-qI-dto">
-                    <rect key="frame" x="51" y="85" width="131" height="30"/>
+                    <rect key="frame" x="51" y="87" width="131" height="30"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="Status Title" id="ihX-28-zaH" customClass="VerticallyAlignedTextFieldCell" customModule="Dragon_Android_Transfer" customModuleProvider="target">
                         <font key="font" metaFont="system" size="16"/>

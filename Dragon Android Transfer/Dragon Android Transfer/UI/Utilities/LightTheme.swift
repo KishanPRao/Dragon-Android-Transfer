@@ -27,8 +27,8 @@ class LightTheme: Theme {
     let menuFontColor = color("ffffff")
     
     let toolbarColor = color("5172d1")
-    let toolbarProgressFg = color("c2ffdc")
-    let toolbarProgressBg = color("17e3ba")
+    let toolbarProgressFg = color("f8fbff")
+    let toolbarProgressBg = color("6caaf0")
     
 //    let pathSelectorSelectableItem = color("cfcac5")
 //    let pathSelectorBg = color("ffffff")

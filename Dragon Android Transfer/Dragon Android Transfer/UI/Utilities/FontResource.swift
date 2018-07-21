@@ -9,10 +9,16 @@
 import Foundation
 
 class FontResource {
-//    let mainFont = "AlegreyaSans-Regular"
     let mainFont = "Ubuntu-Regular"
     let mainBoldFont = "Ubuntu-Bold"
+    
+//    let mainFont = "HelveticaNeue"
+//    let mainBoldFont = "HelveticaNeue-Bold"
+    
+//    let mainFont = NSFont.systemFont(ofSize: 1).fontName
+//    let mainBoldFont = NSFont.boldSystemFont(ofSize: 1).fontName
+    
+//    let mainFont = "AlegreyaSans-Regular"
 //    let mainFont = "Raleway-Regular"
 //    let mainFont = "PT_Sans-Web-Regular"
-    //    TODO: Bold Font
 }

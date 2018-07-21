@@ -116,7 +116,10 @@ public class ShellParser: NSObject {
 		while (i < outputLines.count) {
 			let line = outputLines[i]
 			if (!line.contains("self") && !line.contains("emulated") && !line.contains("system")) {
-				storages.append(StorageItem(Path("External Storage", "/storage/" + fileNamesLines[i - skipLines])))
+                let fileNameIndex = i - skipLines
+                if (fileNamesLines.count > i && fileNameIndex >= 0) {
+                    storages.append(StorageItem(Path("External Storage", "/storage/" + fileNamesLines[fileNameIndex])))
+                }
 			}
 			i = i + 1
 		}

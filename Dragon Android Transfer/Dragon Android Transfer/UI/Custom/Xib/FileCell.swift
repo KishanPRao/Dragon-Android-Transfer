@@ -40,7 +40,8 @@ class FileCell: NSTableCellView {
 	
 	private func updateText(_ textField: NSTextField) {
         textField.updateMainFont()
-		textField.textColor = R.color.textColor
+//        textField.textColor = R.color.textColor
+        textField.textColor = R.color.white
 //		textField.setBackground(R.color.tableItemBg)
 //		textField.setBackground(R.color.clear)
 	}
@@ -54,9 +55,12 @@ class FileCell: NSTableCellView {
         //        fileName.textColor = ColorUtils.colorWithHexString(ColorUtils.listTextColor)
         //        fileName.font = NSFont.userFont(ofSize: DimenUtils.getDimension(dimension: Dimens.android_controller_file_table_file_cell_file_name_text_size))
         
-        updateText(nameField)
+        nameField.updateMainFont()
+        nameField.textColor = R.color.textColor
         //        fileName.frame = DimenUtils.getUpdatedRect(dimensions: Dimens.android_controller_file_table_file_cell_file_name)
-        updateText(sizeField)
+        
+        sizeField.updateMainFont()
+        sizeField.textColor = R.color.dialogTextColor
         
         contentView.frame = frame
 //        LogD("tableView, cell Initialized!")

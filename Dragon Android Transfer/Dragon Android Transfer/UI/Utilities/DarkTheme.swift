@@ -34,8 +34,8 @@ class DarkTheme: Theme {
     
     //    let toolbarColor = color("003b6f")
     let toolbarColor = color("1c2f83")
-    let toolbarProgressFg = color("cfffd5") //TODO: Confirm color
-    let toolbarProgressBg = color("10bea8")
+    let toolbarProgressFg = color("9dbdf1")
+    let toolbarProgressBg = color("438aff")
     
 //    let pathSelectorSelectableItem = color("0e2343")
 //    let pathSelectorSelectableItem = color("30353a")
