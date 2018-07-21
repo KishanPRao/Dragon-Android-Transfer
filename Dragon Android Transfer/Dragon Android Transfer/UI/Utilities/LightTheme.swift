@@ -41,8 +41,8 @@ class LightTheme: Theme {
     let listSelectedBackgroundColor = color("bfcbff")
     
 //    let transferBg = color("f8f8f8")
-    let transferBg = color("edecec")
-    let transferTextColor = color("232323")
+    let transferBg = color("f8f9fd")
+    let transferTextColor = color("505050")
     let transferProgressFg = color("6789f7")
     let transferProgressBg = color("646669")
     
@@ -56,7 +56,7 @@ class LightTheme: Theme {
     let mainViewColor = color("424242")
     
     let snackbarBg = color("7281c1")
-    let snackbarTextColor = color("ffffff")
+    let snackbarTextColor = color("e8e8e8")
     
     let helpBgColor = color("fafafa")
     let tableScrollColor = color("fefefe")
@@ -64,16 +64,5 @@ class LightTheme: Theme {
     
     let pathSelectorTextColor = color("d3d8df")
     let pathSelectorLastTextColor = color("ffffff")
-//    var dark: Bool {
-//        get {
-//            return false
-//        }
-//    }
-//
-//    var menuBgColor: NSColor {
-//        get {
-//            return colorWithHexString("#ffffff")
-//        }
-//    }
 }
 

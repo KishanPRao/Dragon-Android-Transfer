@@ -90,6 +90,8 @@ class AndroidViewController: NSViewController,
     override func viewDidAppear() {
         super.viewDidAppear()
         self.view.window?.delegate = self
+        
+//        startTransfer()
     }
     
     func windowShouldClose(_ sender: Any) {
@@ -187,7 +189,7 @@ class AndroidViewController: NSViewController,
                 window.appearance = NSAppearance(named: .vibrantDark)
             }
             window.titlebarAppearsTransparent = true
-            window.backgroundColor = R.color.windowBg
+//            window.backgroundColor = R.color.windowBg
         }
 	}
 	
@@ -322,7 +324,6 @@ class AndroidViewController: NSViewController,
 	
 	@IBAction func backButtonPressed(_ button: NSButton) {
         navigateUpDirectory()
-//		startTransfer()
 	}
 
 //    var timer: NSTimer? = nil

@@ -54,7 +54,9 @@ class DarkTheme: Theme {
     let listSelectedBackgroundColor = color("3e4c8a")
     //    let listSelectedBackgroundColor = color("2f2f2f")
     
-    let transferBg = color("313b4c")
+    static let dialogColor = "3b4152"
+    
+    let transferBg = color(dialogColor)
     let transferTextColor = color("b8c2c9")
 //    let transferProgressFg = color("ffffff")
     let transferProgressFg = color("6789f7")
@@ -65,9 +67,9 @@ class DarkTheme: Theme {
     //    let transferProgressBg = color("406ead")
     
     //    let dialogBgColor = color("193360")
-    let dialogBgColor = color("313b4c")
+    let dialogBgColor = color(dialogColor)
     //    let dialogWindowColor = color("0f1217")
-    let dialogWindowColor = color("313b4c")
+    let dialogWindowColor = color(dialogColor)
     //    let dialogWindowColor = color("0b0d11")
     let dialogTextColor = color("b8c2c9")
     let dialogSelectionColor = color("5a95f5")
