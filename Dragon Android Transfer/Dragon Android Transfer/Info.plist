@@ -44,6 +44,8 @@
 	<string>_PRODUCT_NAME_ Help</string>
 	<key>HPDBookType</key>
 	<string>3</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>NSAppTransportSecurity</key>
