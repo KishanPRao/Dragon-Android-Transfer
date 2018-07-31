@@ -19,7 +19,8 @@
 auto EXTREME_VERBOSE = false;
 
 string AdbExecutor::execute(shared_ptr<AdbExecutorProperties> properties, AdbCallback callback) {
-	auto resourcePath = NSBundle.mainBundle.resourcePath;
+//    auto resourcePath = NSBundle.mainBundle.resourcePath;
+    auto resourcePath = NSSearchPathForDirectoriesInDomains(NSApplicationScriptsDirectory, NSUserDomainMask, true)[0];
 	id adbPath = [[NSMutableString alloc] init];
 	[adbPath appendString:resourcePath];
 	[adbPath appendString:@"/adb"];

@@ -63,18 +63,22 @@ public class AndroidHandler: VerboseObject {
 	
 	func initialize(_ data: Data) {
         //        TODO: Bg Thread!
-		adbDirectoryPath = self.extractAdbAsset(data)
+//        adbDirectoryPath = self.extractAdbAsset(data)
+        
+        adbDirectoryPath = AdbScript.directory.path
 		LogV("Initialize")
 	}
+    
+//    let resourcePath = Bundle.main.resourcePath!
+    let resourcePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
 	
 	func isFirstLaunch() -> Bool {
-		let resourcePath = Bundle.main.resourcePath!
 		let fileManager = FileManager.default
+        print("Resource: \(resourcePath)")
 		return !(fileManager.fileExists(atPath: resourcePath + "/adb"))
 	}
 	
 	func extractAdbAsset(_ data: Data) -> String {
-		let resourcePath = Bundle.main.resourcePath!
 		if (!isFirstLaunch()) {
 			return resourcePath
 		}

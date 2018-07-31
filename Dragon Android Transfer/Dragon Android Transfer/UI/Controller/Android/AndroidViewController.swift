@@ -87,9 +87,24 @@ class AndroidViewController: NSViewController,
         observeTransfer()
 	}
     
+    var firstLaunchWc: NSWindowController? = nil
+    
     override func viewDidAppear() {
         super.viewDidAppear()
+        
+        if (!FirstLaunchController.isFirstLaunchFinished()) {
+            LogI("First Launch sequence")
+            firstLaunchWc = NSViewController.loadFromStoryboard(name: "FirstLaunchController")
+            firstLaunchWc?.showWindow(self)
+            self.view.window?.close()
+            return
+        }
+        
         self.view.window?.delegate = self
+        
+        addNotification(#selector(AndroidViewController.windowIsClosing),
+                        name: NSWindow.willCloseNotification,
+                        object: self.view.window)
         
 //        startTransfer()
     }
@@ -173,10 +188,6 @@ class AndroidViewController: NSViewController,
 		fileTable.makeFirstResponder(self.view.window)
 		addNotification(#selector(windowMoved),
                         name: NSWindow.didMoveNotification,
-                        object: self.view.window)
-        
-        addNotification(#selector(AndroidViewController.windowIsClosing),
-                        name: NSWindow.willCloseNotification,
                         object: self.view.window)
 		
 		/*updateWindowSize()
