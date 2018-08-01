@@ -90,7 +90,8 @@ class MacHandler: NSObject {
 	fileprivate func bashShell(_ commands: String) -> String {
 		let task = Process()
 		task.launchPath = "/bin/bash"
-		task.arguments = ["-l", "-c", commands]
+//        task.arguments = ["-l", "-c", commands]
+        task.arguments = ["-c", commands]
 		
 		let pipe = Pipe()
 		task.standardOutput = pipe

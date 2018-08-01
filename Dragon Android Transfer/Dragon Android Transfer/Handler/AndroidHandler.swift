@@ -515,7 +515,8 @@ public class AndroidHandler: VerboseObject {
 	fileprivate func bashShell(_ commands: String) {
 		let task = Process()
 		task.launchPath = "/bin/bash"
-		task.arguments = ["-l", "-c", commands]
+//        task.arguments = ["-l", "-c", commands]
+        task.arguments = ["-c", commands]
 		
 		let pipe = Pipe()
 		task.standardOutput = pipe

@@ -53,7 +53,8 @@ class FirstLaunchController: NSViewController {
     }
     
     @IBAction func clicked(_ sender: Any) {
-        chooseFile()
+//        chooseFile()
+        buildAdb()
     }
     
     func dialogOK(title: String, text: String) {
@@ -95,6 +96,54 @@ class FirstLaunchController: NSViewController {
                     self.showErrorDialog()
                 }
             }
+        }
+    }
+    
+    func buildAdb(){
+        let savePanel = NSSavePanel()
+        savePanel.directoryURL = FileManager.default.urls(for: .applicationScriptsDirectory, in: .userDomainMask).first!
+        
+        savePanel.title = "Select the folder to copy the script"
+        savePanel.message = "The `adb` executable will be copied into the scripts folder."
+        savePanel.nameFieldStringValue = "adb"
+        savePanel.showsHiddenFiles = false
+        savePanel.showsTagField = false
+        savePanel.canCreateDirectories = false
+        savePanel.allowsOtherFileTypes = false
+        savePanel.isExtensionHidden = false
+        
+        if savePanel.runModal().rawValue == NSFileHandlingPanelOKButton {
+            if let url = savePanel.url,
+                url.absoluteString == AdbScript.url.absoluteString,
+                let data = NSDataAsset.init(name: NSDataAsset.Name(rawValue: "adb"))?.data {
+                print("Path: \(url.path)")
+                print("Adb: \(adbFile.path)")
+                
+                let filePath = AdbScript.url.path
+                let created = FileManager.default.createFile(atPath: filePath, contents: data, attributes: nil)
+                print("Dir: \(filePath), created: \(created)")
+                
+                if (created) {
+                    let fm = FileManager.default
+                    
+                    var attributes = [FileAttributeKey : Any]()
+                    attributes[.posixPermissions] = 0o777
+                    do {
+                        try fm.setAttributes(attributes, ofItemAtPath: filePath)
+                        finish()
+                    } catch let error {
+                        print("Permissions error: ", error)
+                        showErrorDialog()
+                    }
+                } else {
+                    print("Adb file not created")
+                    showErrorDialog()
+                }
+            } else {
+                showErrorDialog()
+            }
+        } else {
+            print("Canceled")
         }
     }
 }

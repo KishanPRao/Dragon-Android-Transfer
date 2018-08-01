@@ -273,7 +273,6 @@
 		DAAF120F20DD573600E075B8 /* UnitBezier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DAAF120E20DD573600E075B8 /* UnitBezier.cpp */; };
 		DABE0EBF2110D3A300EC546E /* FirstLaunchController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DABE0EBD2110D3A100EC546E /* FirstLaunchController.storyboard */; };
 		DABE0EC02110D3A300EC546E /* FirstLaunchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABE0EBE2110D3A200EC546E /* FirstLaunchController.swift */; };
-		DABE0EC22110D7EF00EC546E /* adb.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DABE0EC12110D7EE00EC546E /* adb.bundle */; };
 		DAC5916A202F7A0300534084 /* file.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC59169202F7A0300534084 /* file.png */; };
 		DAC59170202F7A5F00534084 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC5916F202F7A5F00534084 /* cancel.png */; };
 		DAE8B56520D01A3500520FB3 /* VerboseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE8B56420D01A3500520FB3 /* VerboseObject.swift */; };
@@ -567,7 +566,6 @@
 		DAAF120E20DD573600E075B8 /* UnitBezier.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UnitBezier.cpp; sourceTree = "<group>"; };
 		DABE0EBD2110D3A100EC546E /* FirstLaunchController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FirstLaunchController.storyboard; sourceTree = "<group>"; };
 		DABE0EBE2110D3A200EC546E /* FirstLaunchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstLaunchController.swift; sourceTree = "<group>"; };
-		DABE0EC12110D7EE00EC546E /* adb.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = adb.bundle; sourceTree = "<group>"; };
 		DAC59169202F7A0300534084 /* file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file.png; sourceTree = "<group>"; };
 		DAC5916F202F7A5F00534084 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
 		DAE8B56420D01A3500520FB3 /* VerboseObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerboseObject.swift; sourceTree = "<group>"; };
@@ -692,7 +690,6 @@
 				503C5A301E0FB9300090EB68 /* Main.storyboard */,
 				503C5A331E0FB9300090EB68 /* Info.plist */,
 				507AB7F71E2A374C00C749D1 /* Bridging-Header.h */,
-				DABE0EC12110D7EE00EC546E /* adb.bundle */,
 				BE3BD3F18BD4C34B13D207DC /* Model */,
 				BE3BD7C502EA7B190F21ED5D /* UI */,
 				BE3BD599DEEFDAA772585262 /* Utils */,
@@ -1318,7 +1315,6 @@
 				BE3BDC8FE02DB6B1BDDFD082 /* clipboard_icon_plain.png in Resources */,
 				BE3BD4342179DB442FD36053 /* close_button.png in Resources */,
 				50CAAF962000253100911D8E /* mac.png in Resources */,
-				DABE0EC22110D7EF00EC546E /* adb.bundle in Resources */,
 				DA463DD320F4D33E00EBF189 /* path_selector_div_l.png in Resources */,
 				DA9066DE20F66E9B00C35961 /* help_l.rtf in Resources */,
 				DA463DDA20F4E1E600EBF189 /* mac_l.png in Resources */,

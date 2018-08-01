@@ -63,7 +63,8 @@ void AdbExecutor::killAdbIfRunning() {
 	auto task = [[NSTask alloc] init];
 	auto adbLaunchPath = convert("/bin/bash");
 	task.launchPath = adbLaunchPath;
-	task.arguments = @[@"-l", @"-c", commands];
+//    task.arguments = @[@"-l", @"-c", commands];
+    task.arguments = @[@"-c", commands];
 	[task launch];
 	[task waitUntilExit];
 }
@@ -73,7 +74,7 @@ void AdbExecutor::startAdbIfNotStarted() {
 	auto task = [[NSTask alloc] init];
 	auto adbLaunchPath = convert("/bin/bash");
 	task.launchPath = adbLaunchPath;
-	task.arguments = @[@"-l", @"-c", commands];
+	task.arguments = @[@"-c", commands];
 	task.currentDirectoryPath = convert(adbDirectoryPath);
 	[task launch];
 	[task waitUntilExit];
@@ -86,7 +87,7 @@ string AdbExecutor::executeAdb(string commands, AdbExecutionType executionType, 
 	auto task = [[NSTask alloc] init];
 	auto adbLaunchPath = convert("/bin/bash");
 	task.launchPath = adbLaunchPath;
-	task.arguments = @[@"-l", @"-c", convert(commands)];
+	task.arguments = @[@"-c", convert(commands)];
 	task.currentDirectoryPath = convert(adbDirectoryPath);
 
 //    NSLog(@"\nexecuteAdb: %s, type: %d\n", commands.c_str(), executionType);
@@ -140,7 +141,7 @@ string AdbExecutor::executeAdb(string commands, AdbCallback callback) {
 	auto task = [[NSTask alloc] init];
 	auto adbLaunchPath = convert("/bin/bash");
 	task.launchPath = adbLaunchPath;
-	task.arguments = @[@"-l", @"-c", convert(commands)];
+	task.arguments = @[@"-c", convert(commands)];
 	task.currentDirectoryPath = convert(adbDirectoryPath);
 	auto pipe = [[NSPipe alloc] init];
 	task.standardOutput = pipe;
