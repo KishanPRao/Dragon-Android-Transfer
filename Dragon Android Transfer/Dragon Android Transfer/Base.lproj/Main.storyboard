@@ -97,12 +97,14 @@ DQ
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Edit" id="uOZ-HA-mcz">
                                     <items>
-                                        <menuItem title="Copy" tag="1" keyEquivalent="C" id="CF6-H3-LCE">
+                                        <menuItem title="Copy" tag="1" id="CF6-H3-LCE">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="copyFiles:" target="Voe-Tx-rLC" id="G10-l0-SUS"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Paste" tag="2" keyEquivalent="V" id="xEf-w9-0EY">
+                                        <menuItem title="Paste" tag="2" id="xEf-w9-0EY">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="pasteFiles:" target="Voe-Tx-rLC" id="cvv-QB-HmD"/>
                                             </connections>

@@ -54,48 +54,49 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
 		super.awakeFromNib()
 //      To bring to front
 //		NSApp.activate(ignoringOtherApps: true)
-		let defaults = UserDefaults.standard
+//        let defaults = UserDefaults.standard
 		
-		let defaultCopyShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_C), modifierFlags: NSEvent.ModifierFlags.command.rawValue + NSEvent.ModifierFlags.shift.rawValue)
-		let defaultCopyShortcutData = NSKeyedArchiver.archivedData(withRootObject: defaultCopyShortcut!)
-		
-		let defaultPasteShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_V), modifierFlags: NSEvent.ModifierFlags.command.rawValue + NSEvent.ModifierFlags.shift.rawValue)
-		let defaultPasteShortcutData = NSKeyedArchiver.archivedData(withRootObject: defaultPasteShortcut!)
-		
-		defaults.register(defaults: [
-				AppDelegate.MASShortcutCopy: defaultCopyShortcutData,
-				AppDelegate.MASShortcutPaste: defaultPasteShortcutData
-		])
-		
-		MASShortcutBinder.shared().bindShortcut(withDefaultsKey: AppDelegate.MASShortcutCopy) {
-			print("Copy, Foreground:", AppDelegate.isAppInForeground())
-			
-			if (self.isInvalidOperation()) {
-				return
-			}
-			
-			if (AppDelegate.isAppInForeground()) {
-				NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.COPY_FROM_ANDROID),
-                                                object: nil)
-			} else {
-				NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.COPY_FROM_MAC),
-                                                object: nil)
-			}
-		}
-		
-		MASShortcutBinder.shared().bindShortcut(withDefaultsKey: AppDelegate.MASShortcutPaste) {
-			print("Paste, Foreground:", AppDelegate.isAppInForeground())
-			
-			if (self.isInvalidOperation()) {
-				return
-			}
-			if (AppDelegate.isAppInForeground()) {
-				NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.PASTE_TO_ANDROID), object: nil)
-			} else {
-				NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.PASTE_TO_MAC), object: nil)
-			}
-			
-		}
+//        let defaultCopyShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_C), modifierFlags: NSEvent.ModifierFlags.command.rawValue + NSEvent.ModifierFlags.shift.rawValue)
+//        let defaultCopyShortcutData = NSKeyedArchiver.archivedData(withRootObject: defaultCopyShortcut!)
+//
+//        let defaultPasteShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_V), modifierFlags: NSEvent.ModifierFlags.command.rawValue + NSEvent.ModifierFlags.shift.rawValue)
+//        let defaultPasteShortcutData = NSKeyedArchiver.archivedData(withRootObject: defaultPasteShortcut!)
+//
+//        defaults.register(defaults: [
+//                AppDelegate.MASShortcutCopy: defaultCopyShortcutData,
+//                AppDelegate.MASShortcutPaste: defaultPasteShortcutData
+//        ])
+//
+//        MASShortcutBinder.shared().bindShortcut(withDefaultsKey: AppDelegate.MASShortcutCopy) {
+//            print("Copy, Foreground:", AppDelegate.isAppInForeground())
+//
+//            if (self.isInvalidOperation()) {
+//                return
+//            }
+//
+//            if (AppDelegate.isAppInForeground()) {
+//                NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.COPY_FROM_ANDROID),
+//                                                object: nil)
+//            } else {
+//                NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.COPY_FROM_MAC),
+//                                                object: nil)
+//            }
+//        }
+//
+//        MASShortcutBinder.shared().bindShortcut(withDefaultsKey: AppDelegate.MASShortcutPaste) {
+//            print("Paste, Foreground:", AppDelegate.isAppInForeground())
+//
+//            if (self.isInvalidOperation()) {
+//                return
+//            }
+//            if (AppDelegate.isAppInForeground()) {
+//                NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.PASTE_TO_ANDROID), object: nil)
+//            } else {
+//                NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.PASTE_TO_MAC), object: nil)
+//            }
+//
+//        }
+        
 		NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.screenUpdated), name: NSWindow.didChangeScreenNotification, object: nil)
 		
         var darkTheme = true
