@@ -16,7 +16,8 @@ extension AndroidViewController {
 				.observeOn(MainScheduler.instance)
 				.subscribe(onNext: {
 					list in
-					self.reloadFileList(list)
+                    self.reloadFileList(list)
+//                    self.reloadFileList([BaseFile(fileName: "Test", path: "/", type: 0, size: 20)])
 				}).disposed(by: disposeBag)
 		
 		transferHandler.observeClipboardAndroidItems()

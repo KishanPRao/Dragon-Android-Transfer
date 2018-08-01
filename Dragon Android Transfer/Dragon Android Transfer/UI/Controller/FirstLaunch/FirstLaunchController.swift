@@ -18,6 +18,7 @@ class FirstLaunchController: NSViewController {
     static let kFirstLaunchKey = "FirstLaunchFinished"
     
     class func isFirstLaunchFinished() -> Bool {
+        //        TODO: Also check if file exists! Do not allow to go further unless setup done.
         return UserDefaults.standard.bool(forKey: kFirstLaunchKey)
     }
     
@@ -63,45 +64,16 @@ class FirstLaunchController: NSViewController {
         alert.informativeText = text
         alert.alertStyle = .critical
         alert.addButton(withTitle: "OK")
+        alert.runModal()
     }
     
     func showErrorDialog() {
-        self.dialogOK(title: "Something went wrong", text: "Please select the right directory.")
+        self.dialogOK(title: "Something went wrong", text: "Please select the correct directory.")
     }
     
-    func chooseFile() {
-        let openPanel = NSOpenPanel();
-        openPanel.title = "Select the folder to copy the script"
-        openPanel.message = "The `adb` executable will be copied into the scripts folder."
-        openPanel.showsResizeIndicator = true
-        openPanel.canChooseDirectories = true
-        openPanel.canChooseFiles = false
-        openPanel.allowsMultipleSelection = false
-        openPanel.directoryURL = AdbScript.directory
-        
-        openPanel.beginSheetModal(for: self.view.window!) { (result) in
-            if (result.rawValue == NSFileHandlingPanelOKButton) {
-                if let url = openPanel.url, url.absoluteString == AdbScript.directory.absoluteString,
-                    let fileUrl = URL(string: url.absoluteString + "/adb") {
-                    //                    print("Got url, \(self.adbFile) => \(fileUrl)")
-                    do {
-                        try FileManager.default.copyItem(at: self.adbFile, to: fileUrl)
-                        print("Copied!")
-                        self.finish()
-                    } catch {
-                        print(error.localizedDescription)
-                    }
-                } else {
-                    print("Something went wrong, please select right directory!")
-                    self.showErrorDialog()
-                }
-            }
-        }
-    }
-    
-    func buildAdb(){
+    func buildAdb() {
         let savePanel = NSSavePanel()
-        savePanel.directoryURL = FileManager.default.urls(for: .applicationScriptsDirectory, in: .userDomainMask).first!
+        savePanel.directoryURL = AdbScript.directory
         
         savePanel.title = "Select the folder to copy the script"
         savePanel.message = "The `adb` executable will be copied into the scripts folder."
@@ -140,6 +112,7 @@ class FirstLaunchController: NSViewController {
                     showErrorDialog()
                 }
             } else {
+                print("Couldn't copy")
                 showErrorDialog()
             }
         } else {

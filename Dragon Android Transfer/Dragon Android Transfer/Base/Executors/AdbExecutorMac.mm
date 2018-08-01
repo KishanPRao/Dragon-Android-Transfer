@@ -110,7 +110,7 @@ string AdbExecutor::executeAdb(string commands, AdbExecutionType executionType, 
 		NSLog(@"AdbExecutor, Commands: %@", convert(commands));
 	}
 //     if (EXTREME_VERBOSE) {
-//    NSLog(@"AdbExecutor, output: %@, error: %@", output, errorOutput);
+    NSLog(@"AdbExecutor, output: %@, error: %@", output, errorOutput);
     if ([errorOutput containsString: @"error"]) {
         callback(errorOutput.UTF8String, AdbExecutionResult::Error);
     }
