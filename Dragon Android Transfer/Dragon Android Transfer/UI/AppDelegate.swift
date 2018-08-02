@@ -222,32 +222,42 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
 //            Swift.print("AppDelegate, validateInterfaceMenuItem, isPasting:", AppDelegate.isPastingOperation.value)
 //            Swift.print("AppDelegate: \(AppDelegate.directoryItemSelected), \(AppDelegate.multipleItemsSelected), \(MenuItemIdentifier.fileOpenFile)")
 		}
-		if (item.tag == MenuItemIdentifier.fileOpenFile && AppDelegate.directoryItemSelected && !AppDelegate.multipleItemsSelected) {
-			return !AppDelegate.isPastingOperation.value
+		if (item.tag == MenuItemIdentifier.fileOpenFile) {
+			return AppDelegate.directoryItemSelected &&
+                !AppDelegate.multipleItemsSelected &&
+                !AppDelegate.isPastingOperation.value
 		}
-		if (item.tag == MenuItemIdentifier.getInfo && AppDelegate.itemSelected && !AppDelegate.multipleItemsSelected) {
-			return !AppDelegate.isPastingOperation.value
+		if (item.tag == MenuItemIdentifier.getInfo) {
+			return AppDelegate.itemSelected &&
+                !AppDelegate.multipleItemsSelected &&
+                !AppDelegate.isPastingOperation.value
 		}
-		if (item.tag == MenuItemIdentifier.editCopy && AppDelegate.itemSelected) {
-			return !AppDelegate.isPastingOperation.value
+		if (item.tag == MenuItemIdentifier.editCopy) {
+			return AppDelegate.itemSelected && !AppDelegate.isPastingOperation.value
 		}
-		if (item.tag == MenuItemIdentifier.editPaste && AppDelegate.hasMacClipboardItems) {
-			return !AppDelegate.isPastingOperation.value
+		if (item.tag == MenuItemIdentifier.editPaste) {
+			return AppDelegate.hasMacClipboardItems && !AppDelegate.isPastingOperation.value
 		}
-		if (item.tag == MenuItemIdentifier.editSelectAll && AppDelegate.hasItems) {
-			return !AppDelegate.isPastingOperation.value
+		if (item.tag == MenuItemIdentifier.editSelectAll) {
+			return AppDelegate.hasItems &&
+                !AppDelegate.isPastingOperation.value &&
+                FirstLaunchController.isFirstLaunchFinished()
 		}
-		if (item.tag == MenuItemIdentifier.goBackward && AppDelegate.canGoBackward) {
-			return !AppDelegate.isPastingOperation.value
+		if (item.tag == MenuItemIdentifier.goBackward) {
+			return AppDelegate.canGoBackward &&
+                !AppDelegate.isPastingOperation.value
 		}
-		if (item.tag == MenuItemIdentifier.clearClipboard && AppDelegate.hasClipboardItems.value) {
-			return !AppDelegate.isPastingOperation.value
+		if (item.tag == MenuItemIdentifier.clearClipboard) {
+			return AppDelegate.hasClipboardItems.value &&
+                !AppDelegate.isPastingOperation.value
 		}
         if (item.tag == MenuItemIdentifier.refresh || item.tag == MenuItemIdentifier.newFolder) {
-            return AppDelegate.activeDevice && !AppDelegate.isPastingOperation.value
+            return AppDelegate.activeDevice &&
+                !AppDelegate.isPastingOperation.value &&
+                FirstLaunchController.isFirstLaunchFinished()
         }
 		if (item.tag == MenuItemIdentifier.help) {
-			return true
+			return FirstLaunchController.isFirstLaunchFinished()
 		}
 		if (item.tag == MenuItemIdentifier.minimize) {
 			return true
@@ -278,11 +288,12 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
                     }
                 }
             }
-            return true
+            return FirstLaunchController.isFirstLaunchFinished()
         }
 //        if (item.tag == MenuItemIdentifier.editDelete && AppDelegate.itemSelected && !AppDelegate.multipleItemsSelected) {
-        if (item.tag == MenuItemIdentifier.editDelete && AppDelegate.itemSelected) {
-			return !AppDelegate.isPastingOperation.value
+        if (item.tag == MenuItemIdentifier.editDelete) {
+			return AppDelegate.itemSelected &&
+                !AppDelegate.isPastingOperation.value
 		}
 		return false
 	}

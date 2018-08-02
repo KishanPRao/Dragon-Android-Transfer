@@ -10,7 +10,7 @@
         <scene sceneID="9Oj-uK-j6h">
             <objects>
                 <windowController id="KZv-wX-aqu" sceneMemberID="viewController">
-                    <window key="window" title="First Launch" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="pux-0M-DFr">
+                    <window key="window" title="Setup" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="pux-0M-DFr">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <rect key="contentRect" x="294" y="314" width="540" height="340"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
@@ -52,7 +52,7 @@ DQ
                                 <rect key="frame" x="18" y="72" width="444" height="178"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" title="Text" id="usn-dp-qWU" customClass="VerticallyAlignedTextFieldCell" customModule="Dragon_Android_Transfer" customModuleProvider="target">
-                                    <font key="font" metaFont="system" size="20"/>
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>

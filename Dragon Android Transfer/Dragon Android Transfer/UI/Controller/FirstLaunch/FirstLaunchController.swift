@@ -35,11 +35,23 @@ class FirstLaunchController: NSViewController {
         if let window = self.view.window {
             window.updateWindowColor()
         }
-        messageText.stringValue = R.string.firstLaunchMessage
-        messageText.textColor = R.color.firstLaunchText
-        messageText.alignment = .center
+//        messageText.stringValue = R.string.firstLaunchMessage
+//        messageText.textColor = R.color.firstLaunchText
+//        messageText.alignment = .center
         messageText.font = NSFont(name: R.font.mainFont,
-                                  size: messageText.font?.pointSize ?? NSFont.systemFontSize)
+                                  size: 18)
+        let textParagraph = NSMutableParagraphStyle()
+        textParagraph.lineSpacing = 8.0
+        textParagraph.alignment = .center
+        let textColor = R.color.firstLaunchText
+
+        let attribs = [
+            NSAttributedStringKey.foregroundColor: textColor,
+            NSAttributedStringKey.paragraphStyle: textParagraph
+        ]
+        let attrString = NSAttributedString.init(string: R.string.firstLaunchMessage, attributes: attribs)
+        messageText.attributedStringValue = attrString
+
         
 //        cta.setText(text: R.string.firstLaunchCta,
 //                    textColor: R.color.transferTextColor,
@@ -54,7 +66,7 @@ class FirstLaunchController: NSViewController {
                     bgColor: R.color.firstLaunchCtaBg,
                     isSelected: false,
                     rounded: true)
-        cta.focusRingType = .none
+//        cta.focusRingType = .none
         
         view.setBackground(R.color.firstLaunchBg)
     }

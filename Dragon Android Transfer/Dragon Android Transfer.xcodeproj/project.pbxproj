@@ -77,11 +77,8 @@
 		50F91FCD20024DA000C58955 /* info.png in Resources */ = {isa = PBXBuildFile; fileRef = 50F91FCC20024D9F00C58955 /* info.png */; };
 		50F91FCF200251B300C58955 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F91FCE200251B300C58955 /* Path.swift */; };
 		50FE44A91FF6B84D0099A029 /* SegueFromLeftNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE44A81FF6B84D0099A029 /* SegueFromLeftNew.swift */; };
-		50FE44AB1FF6BA760099A029 /* PushSegue.swift in Resources */ = {isa = PBXBuildFile; fileRef = 50FE44AA1FF6BA760099A029 /* PushSegue.swift */; };
 		50FE44AE1FF6C5080099A029 /* PushAnimatorTrial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE44AC1FF6C0860099A029 /* PushAnimatorTrial.swift */; };
 		50FE44AF1FF6C5080099A029 /* PushAnimatorTrial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE44AC1FF6C0860099A029 /* PushAnimatorTrial.swift */; };
-		50FE44B01FF6C50C0099A029 /* PushSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE44AA1FF6BA760099A029 /* PushSegue.swift */; };
-		50FE44B11FF6C50D0099A029 /* PushSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE44AA1FF6BA760099A029 /* PushSegue.swift */; };
 		50FE44B21FF6C51B0099A029 /* PushAnimatorTrial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE44AC1FF6C0860099A029 /* PushAnimatorTrial.swift */; };
 		51228DE463F84080BF00A549 /* Pods_Dragon_Android_Transfer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D76E99487AF2B4AB76B28F08 /* Pods_Dragon_Android_Transfer.framework */; };
 		58404B644B2960F748912234 /* Pods_Dragon_Android_TransferTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6E29BC824473C340CAB23B /* Pods_Dragon_Android_TransferTests.framework */; };
@@ -389,7 +386,6 @@
 		50F91FCC20024D9F00C58955 /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info.png; sourceTree = "<group>"; };
 		50F91FCE200251B300C58955 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		50FE44A81FF6B84D0099A029 /* SegueFromLeftNew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueFromLeftNew.swift; sourceTree = "<group>"; };
-		50FE44AA1FF6BA760099A029 /* PushSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushSegue.swift; sourceTree = "<group>"; };
 		50FE44AC1FF6C0860099A029 /* PushAnimatorTrial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushAnimatorTrial.swift; sourceTree = "<group>"; };
 		6B57E05A04A8CF6A133E8C85 /* Pods-Dragon Android TransferUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dragon Android TransferUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dragon Android TransferUITests/Pods-Dragon Android TransferUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B7D8F895498525A7BB7E0CB4 /* Pods-Dragon Android TransferTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dragon Android TransferTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dragon Android TransferTests/Pods-Dragon Android TransferTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1012,7 +1008,6 @@
 		BE3BD8A8851B1169677F31C6 /* Animation */ = {
 			isa = PBXGroup;
 			children = (
-				50FE44AA1FF6BA760099A029 /* PushSegue.swift */,
 				BE3BD20F5F9E13F0255E1522 /* CrossfadeSegue.swift */,
 				BE3BD55127085F27DE775E28 /* CustomSwiftAnimator.swift */,
 				BE3BDE8034FD05FF612778EF /* SegueFromLeftOld.swift */,
@@ -1305,7 +1300,6 @@
 				50F51179200108FF00CCB22C /* transfer_more.png in Resources */,
 				50961C111FF9676B001B6D3D /* backward.png in Resources */,
 				DA463DD420F4D33E00EBF189 /* backward_l.png in Resources */,
-				50FE44AB1FF6BA760099A029 /* PushSegue.swift in Resources */,
 				5098AC6E1FFD3C820084449B /* path_selector_div.png in Resources */,
 				BE3BDAF11B0C0A34B5455FA2 /* clipboard_icon.png in Resources */,
 				BE3BD112BC91E0AC5A18FB99 /* back_button.png in Resources */,
@@ -1537,7 +1531,6 @@
 				BE3BD9D55D5C9670B8ACFA0F /* PrintUtils.swift in Sources */,
 				BE3BD469737964877BBAD5D4 /* DeviceNotificationDelegate.swift in Sources */,
 				BE3BDAC6FACE3A64C5A41FCD /* FileProgressDelegate.swift in Sources */,
-				50FE44B01FF6C50C0099A029 /* PushSegue.swift in Sources */,
 				BE3BDC18BB4358AF85250981 /* BaseExtension.swift in Sources */,
 				BE3BD844D6836981F9289AEF /* BaseObject.swift in Sources */,
 				BE3BDFA6B9ED9545B157F47D /* Constants.swift in Sources */,
@@ -1592,7 +1585,6 @@
 				BE3BD54911DEDA003D454001 /* AndroidHandler.swift in Sources */,
 				BE3BD3527936F50D34E47D2D /* PrintUtils.swift in Sources */,
 				BE3BD625179F845E2CD3169E /* BaseExtension.swift in Sources */,
-				50FE44B11FF6C50D0099A029 /* PushSegue.swift in Sources */,
 				BE3BD8EE0F08AADB11B72710 /* HelpWindow.swift in Sources */,
 				BE3BDA7DF284333F8C68BE59 /* CopyDialog.swift in Sources */,
 				BE3BDE4DF33694979BCFED13 /* AndroidViewController.swift in Sources */,

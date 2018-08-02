@@ -73,7 +73,8 @@ public struct StringResource {
 //    First Launch
 //    let firstLaunchMessage = "This application requires copying of a file into the scripts folder to enable execution.\nPlease click the button below to continue."
     let firstLaunchMessage =
-    "This application requires copying of a file into the scripts folder to enable execution.\n" +
-    "Please click the button below to continue."
-    let firstLaunchCta = "Click to select the folder"
+    "To enable operation of Dragon Android Transfer, a file (adb) has to be copied into the scripts folder.\n" +
+    "Please click the button below to continue.\n" +
+    "The correct folder will be automatically selected. Click on `Save` to start using the application."
+    let firstLaunchCta = "Continue"
 }
