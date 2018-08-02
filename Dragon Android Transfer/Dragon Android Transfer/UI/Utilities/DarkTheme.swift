@@ -88,4 +88,9 @@ class DarkTheme: Theme {
     
     let pathSelectorTextColor = color("b8c2c9")
     let pathSelectorLastTextColor = color("ffffff")
+    
+    let firstLaunchBg = color("282828")
+    let firstLaunchText = color("cccccc")
+    let firstLaunchCtaText = color("000000")
+    let firstLaunchCtaBg = color("ffffff")
 }

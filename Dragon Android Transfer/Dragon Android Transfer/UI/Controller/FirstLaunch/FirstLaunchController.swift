@@ -36,7 +36,7 @@ class FirstLaunchController: NSViewController {
             window.updateWindowColor()
         }
         messageText.stringValue = R.string.firstLaunchMessage
-        messageText.textColor = R.color.textColor
+        messageText.textColor = R.color.firstLaunchText
         messageText.alignment = .center
         messageText.font = NSFont(name: R.font.mainFont,
                                   size: messageText.font?.pointSize ?? NSFont.systemFontSize)
@@ -49,13 +49,14 @@ class FirstLaunchController: NSViewController {
 //                    rounded: true)
         
         cta.setText(text: R.string.firstLaunchCta,
-                    textColor: R.color.black,
+                    textColor: R.color.firstLaunchCtaText,
                     alignment: .center,
-                    bgColor: R.color.white,
+                    bgColor: R.color.firstLaunchCtaBg,
                     isSelected: false,
                     rounded: true)
+        cta.focusRingType = .none
         
-        view.setBackground(R.color.helpBgColor)
+        view.setBackground(R.color.firstLaunchBg)
     }
     
     override func viewDidLoad() {

@@ -72,6 +72,8 @@ public struct StringResource {
     
 //    First Launch
 //    let firstLaunchMessage = "This application requires copying of a file into the scripts folder to enable execution.\nPlease click the button below to continue."
-    let firstLaunchMessage = "This application requires copying of a file into the scripts folder to enable execution.\nPlease click the button below to continue."
+    let firstLaunchMessage =
+    "This application requires copying of a file into the scripts folder to enable execution.\n" +
+    "Please click the button below to continue."
     let firstLaunchCta = "Click to select the folder"
 }

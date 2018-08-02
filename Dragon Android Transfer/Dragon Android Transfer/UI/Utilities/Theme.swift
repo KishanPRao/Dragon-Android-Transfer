@@ -63,6 +63,11 @@ protocol Theme {
     
 //    var helpTextColor: NSColor{get}
     var helpBgColor: NSColor{get}
+    
+    var firstLaunchBg: NSColor{get}
+    var firstLaunchText: NSColor{get}
+    var firstLaunchCtaText: NSColor{get}
+    var firstLaunchCtaBg: NSColor{get}
 }
 
 extension Theme {

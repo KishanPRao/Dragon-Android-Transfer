@@ -66,5 +66,10 @@ class LightTheme: Theme {
     
     let pathSelectorTextColor = color("d3d8df")
     let pathSelectorLastTextColor = color("ffffff")
+    
+    let firstLaunchBg = color("fafafa")
+    let firstLaunchText = color("222222")
+    let firstLaunchCtaText = color("ffffff")
+    let firstLaunchCtaBg = color("7f7f7f")
 }
 
