@@ -23,7 +23,7 @@ class HelpWindow: NSWindowController {
 
 	func setIsIntro(intro: Bool) {
 		self.isIntro = intro
-		updateText()
+//        updateText()
 	}
 	
 	override init(window: NSWindow!) {
@@ -56,11 +56,12 @@ class HelpWindow: NSWindowController {
         
         
         if let window = self.window {
-            if (R.color.isDark) {
-                window.appearance = NSAppearance(named: .vibrantDark)
-            }
-            window.titlebarAppearsTransparent = true
-            window.backgroundColor = R.color.windowBg
+//            if (R.color.isDark) {
+//                window.appearance = NSAppearance(named: .vibrantDark)
+//            }
+//            window.titlebarAppearsTransparent = true
+//            window.backgroundColor = R.color.windowBg
+            window.updateWindowColor()
         }
         
         self.helpText.makeFirstResponder(self.window)

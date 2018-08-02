@@ -69,4 +69,9 @@ public struct StringResource {
     
 //    let noActiveDevice = "No Active Device.\nPlease connect a device with USB Debugging enabled."
     let noActiveDevice = "No Active Device.\nFor instructions, go to `Help -> Dragon Android Transfer Help`"
+    
+//    First Launch
+//    let firstLaunchMessage = "This application requires copying of a file into the scripts folder to enable execution.\nPlease click the button below to continue."
+    let firstLaunchMessage = "This application requires copying of a file into the scripts folder to enable execution.\nPlease click the button below to continue."
+    let firstLaunchCta = "Click to select the folder"
 }

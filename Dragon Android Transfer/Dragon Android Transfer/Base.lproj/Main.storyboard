@@ -74,6 +74,11 @@ DQ
                                                 <action selector="openSelectedFile:" target="Voe-Tx-rLC" id="6DX-L4-HMc"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Close" keyEquivalent="w" id="nzK-cA-hnb">
+                                            <connections>
+                                                <action selector="performClose:" target="Ady-hI-5gd" id="qoQ-Xn-VlI"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Get Info" tag="6" keyEquivalent="i" id="xJl-Yk-koe">
                                             <connections>
                                                 <action selector="getInfo:" target="Voe-Tx-rLC" id="IyZ-gh-5rj"/>
@@ -178,15 +183,15 @@ CA
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Window" id="yQT-gC-9vM">
                                     <items>
-                                        <menuItem title="Minimize" tag="8" keyEquivalent="m" id="Vua-jW-ugy">
+                                        <menuItem title="Minimize" keyEquivalent="m" id="1Uk-PP-wVa">
                                             <connections>
-                                                <action selector="miniaturizeAll:" target="hnw-xV-0zn" id="rtS-K4-EWj"/>
+                                                <action selector="performMiniaturize:" target="Ady-hI-5gd" id="4UW-wB-wZb"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Zoom" tag="999" keyEquivalent="m" id="4tN-yT-U9a">
+                                        <menuItem title="Zoom" keyEquivalent="m" id="1ne-1g-9y4">
                                             <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                             <connections>
-                                                <action selector="zoom:" target="Ady-hI-5gd" id="iOk-Nl-Wov"/>
+                                                <action selector="performZoom:" target="Ady-hI-5gd" id="Lvk-OU-nK1"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Stay on top" tag="13" keyEquivalent="F" id="8OR-U1-XNh">
@@ -201,7 +206,8 @@ CA
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
                                     <items>
-                                        <menuItem title="Dragon Android Transfer Help" tag="7" keyEquivalent="?" id="FKE-Sm-Kum">
+                                        <menuItem title="Dragon Android Transfer Help" tag="7" id="FKE-Sm-Kum">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="showHelpWindow:" target="Voe-Tx-rLC" id="vNc-OW-F12"/>
                                             </connections>

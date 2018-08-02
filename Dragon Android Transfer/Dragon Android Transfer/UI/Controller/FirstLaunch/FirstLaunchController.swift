@@ -31,16 +31,27 @@ class FirstLaunchController: NSViewController {
     
     var wc: NSWindowController? = nil
     
+    private func initUi() {
+        messageText.string = R.string.firstLaunchMessage
+        messageText.textColor = R.color.textColor
+        messageText.alignment = .center
+        
+        cta.title = R.string.firstLaunchCta
+        view.setBackground(R.color.helpBgColor)
+        
+        if let window = self.view.window {
+            window.updateWindowColor()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        messageText.string = "This application requires copying of a file into the scripts folder to enable execution.\nPlease click the button below to continue."
-        cta.title = "Click to select the folder"
         print("FirstLaunchController, viewDidLoad")
     }
     
     override func viewDidAppear() {
         super.viewDidAppear()
+        initUi()
         print("FirstLaunchController, viewDidAppear")
     }
     
@@ -54,7 +65,6 @@ class FirstLaunchController: NSViewController {
     }
     
     @IBAction func clicked(_ sender: Any) {
-//        chooseFile()
         buildAdb()
     }
     

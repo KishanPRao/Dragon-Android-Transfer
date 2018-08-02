@@ -96,6 +96,7 @@ class AndroidViewController: NSViewController,
             LogI("First Launch sequence")
             firstLaunchWc = NSViewController.loadFromStoryboard(name: "FirstLaunchController")
             firstLaunchWc?.showWindow(self)
+            removeNotifications()
             self.view.window?.close()
             return
         }
@@ -196,11 +197,7 @@ class AndroidViewController: NSViewController,
 //        openAd()
         
         if let window = self.view.window {
-            if (R.color.isDark) {
-                window.appearance = NSAppearance(named: .vibrantDark)
-            }
-            window.titlebarAppearsTransparent = true
-//            window.backgroundColor = R.color.windowBg
+            window.updateWindowColor()
         }
 	}
 	
@@ -499,23 +496,23 @@ class AndroidViewController: NSViewController,
 	internal var dirtyWindow: Bool = true
 	
 	@objc func showHelpWindow() {
-		if (helpWindow == nil) {
-			helpWindow = HelpWindow(windowNibName: NSNib.Name(rawValue: "HelpWindow"))
-		}
 		if (self.view.window == nil) {
 			if (NSObject.VERBOSE) {
 				Swift.print("AndroidViewController, Warning, window not created yet!")
 			}
 			return
 		}
+        if (helpWindow == nil) {
+            helpWindow = HelpWindow(windowNibName: NSNib.Name(rawValue: "HelpWindow"))
+        }
 //		let window = NSApplication.shared().mainWindow!
-		let window = self.view.window!
+//        let window = self.view.window!
 //		let androidViewController = getAndroidController()
 //		if (androidViewController != nil) {
 //		helpWindow!.setIsIntro(intro: androidViewController!.shouldShowGuide())
         if let helpWindow = helpWindow {
-            helpWindow.setIsIntro(intro: shouldShowGuide())
-            helpWindow.updateSizes()
+//            helpWindow.setIsIntro(intro: shouldShowGuide())
+//            helpWindow.updateSizes()
             helpWindow.isShowing = true
             /*window.beginSheet(helpWindow!.window!) { response in
                 if (NSObject.VERBOSE) {

@@ -10,6 +10,10 @@ import Foundation
 
 extension AndroidViewController {
     
+    func removeNotifications() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func addNotification(_ selector: Selector, name notificationName: Notification.Name, object: Any? = nil) {
         NotificationCenter.default.addObserver(self, selector: selector, name: notificationName, object: object)
     }

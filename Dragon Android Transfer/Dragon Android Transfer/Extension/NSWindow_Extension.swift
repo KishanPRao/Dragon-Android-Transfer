@@ -10,5 +10,13 @@ public extension NSWindow {
 		let contentHeight = contentRect(forFrameRect: frame).height
 		return frame.height - contentHeight
 	}
+    
+    public func updateWindowColor() {
+        let window = self
+        if (R.color.isDark) {
+            window.appearance = NSAppearance(named: .vibrantDark)
+        }
+        window.titlebarAppearsTransparent = true
+    }
 }
 

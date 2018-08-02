@@ -185,6 +185,16 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
 		return AppDelegate.validateInterfaceMenuItem(item: item)
 	}
     
+    /*override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        print("validateMenuItem: \(menuItem.tag)")
+        return true
+    }*/
+    
+    override func validateToolbarItem(_ item: NSToolbarItem) -> Bool {
+        print("validateToolbarItem: \(item.tag)")
+        return super.validateToolbarItem(item)
+    }
+    
     static func updateThemeItem(_ darkThemeItem: Bool) {
         let darkTheme = UserDefaults.standard.bool(forKey: AppDelegate.DarkThemeKey)
         let mainMenu = NSApplication.shared.mainMenu
@@ -206,7 +216,7 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
     }
 	
 	static func validateInterfaceMenuItem(item: NSValidatedUserInterfaceItem!) -> Bool {
-        print("validateInterfaceMenuItem: \(item.tag)")
+//        print("validateInterfaceMenuItem: \(item.tag)")
 		if (VERBOSE) {
 //            Swift.print("AppDelegate, validateInterfaceMenuItem:", item.tag);
 //            Swift.print("AppDelegate, validateInterfaceMenuItem, isPasting:", AppDelegate.isPastingOperation.value)
@@ -419,6 +429,9 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
 	}
     
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
+        if (!FirstLaunchController.isFirstLaunchFinished()) {
+            return NSApplication.TerminateReply.terminateNow
+        }
         NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.QuitIfNeeded),
                                         object: nil)
         return NSApplication.TerminateReply.terminateLater
