@@ -91,6 +91,11 @@ extension NSButton {
         //        fillGradientLayer()
         
         self.imageScaling = .scaleAxesIndependently
+        self.attributedTitle = TextUtils.getTruncatedAttributeString(text,
+                                                                     alignment: alignment,
+                                                                     useUnderline: false,
+                                                                     color: textColor,
+                                                                     fontName: R.font.mainFont)
         //        Color change not working:
         //        self.attributedTitle = TextUtils.attributedBoldString(from: text, color: R.color.white, nonBoldRange: nil, fontSize: 15.0, .center)
         //        self.attributedStringValue = TextUtils.attributedBoldString(from: text, color: R.color.white, nonBoldRange: nil, fontSize: 15.0, .center)

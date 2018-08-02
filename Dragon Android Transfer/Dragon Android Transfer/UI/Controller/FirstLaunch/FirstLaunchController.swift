@@ -27,21 +27,35 @@ class FirstLaunchController: NSViewController {
     }
     
     @IBOutlet weak var cta: NSButton!
-    @IBOutlet var messageText: NSTextView!
+    @IBOutlet var messageText: NSTextField!
     
     var wc: NSWindowController? = nil
     
     private func initUi() {
-        messageText.string = R.string.firstLaunchMessage
-        messageText.textColor = R.color.textColor
-        messageText.alignment = .center
-        
-        cta.title = R.string.firstLaunchCta
-        view.setBackground(R.color.helpBgColor)
-        
         if let window = self.view.window {
             window.updateWindowColor()
         }
+        messageText.stringValue = R.string.firstLaunchMessage
+        messageText.textColor = R.color.textColor
+        messageText.alignment = .center
+        messageText.font = NSFont(name: R.font.mainFont,
+                                  size: messageText.font?.pointSize ?? NSFont.systemFontSize)
+        
+//        cta.setText(text: R.string.firstLaunchCta,
+//                    textColor: R.color.transferTextColor,
+//                    alignment: .center,
+//                    bgColor: R.color.transferBg,
+//                    isSelected: false,
+//                    rounded: true)
+        
+        cta.setText(text: R.string.firstLaunchCta,
+                    textColor: R.color.black,
+                    alignment: .center,
+                    bgColor: R.color.white,
+                    isSelected: false,
+                    rounded: true)
+        
+        view.setBackground(R.color.helpBgColor)
     }
     
     override func viewDidLoad() {
