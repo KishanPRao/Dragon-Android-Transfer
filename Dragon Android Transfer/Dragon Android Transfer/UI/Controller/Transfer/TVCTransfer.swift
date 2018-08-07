@@ -57,7 +57,7 @@ extension TransferViewController {
 		let files = transferHandler.getClipboardAndroidItems()
 		if (files.count == 0) {
 			if (NSObject.VERBOSE) {
-				Swift.print("Paste to mac, Warning, NO ITEMS");
+				print("Paste to mac, Warning, NO ITEMS");
 			}
 			return
 		}
@@ -72,7 +72,7 @@ extension TransferViewController {
 	
 	func cancelTask() {
 		if (NSObject.VERBOSE) {
-			Swift.print("Cancel Active Task");
+			print("Cancel Active Task");
 		}
 		transferHandler.cancelActiveTask()
 	}

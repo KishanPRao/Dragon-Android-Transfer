@@ -149,7 +149,7 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
 	}
     
     @IBAction func openFeedback(_ sender: Any) {
-        if let url = URL(string: "https://kishanprao.herokuapp.com/dat-feedback"),
+        if let url = URL(string: "\(R.string.hostUrl)/dat-feedback"),
             NSWorkspace.shared.open(url) {
 //            print("default browser was successfully opened")
         }

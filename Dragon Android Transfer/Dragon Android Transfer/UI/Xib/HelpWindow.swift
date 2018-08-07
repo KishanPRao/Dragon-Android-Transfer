@@ -69,7 +69,7 @@ class HelpWindow: NSWindowController {
 	
 	func updateText() {
 		if (NSObject.VERBOSE) {
-			Swift.print("HelpWindow, update Text, init:", initialized)
+			print("HelpWindow, update Text, init:", initialized)
 		}
 		if (!initialized) {
 			return
@@ -103,7 +103,7 @@ class HelpWindow: NSWindowController {
 	}
 	
 	func updateSizes() {
-		Swift.print("HelpWindow, update Sizes, init:", initialized)
+		print("HelpWindow, update Sizes, init:", initialized)
 		if (!initialized) {
 			return
 		}
@@ -136,7 +136,7 @@ class HelpWindow: NSWindowController {
 	
 	func cancel(_ sender: Any) {
 		if (NSObject.VERBOSE) {
-			Swift.print("HelpWindow, cancel!")
+			print("HelpWindow, cancel!")
 		}
 		endSheet()
 	}

@@ -360,6 +360,7 @@ class AndroidViewController: NSViewController,
 //    let url = "https://www.flipkart.com"
     //    TODO: Move to Strings file.
 //    static let hostUrl = "http://localhost:3333"
+//    static let hostUrl = "http://kishanprao.herokuapp.com"
     static let hostUrl = "http://kishanprao.herokuapp.com"
     static let requestUrl = hostUrl + "/ads/dragon-android-transfer-request"
     static let adType0Url = requestUrl + "?type=0"
