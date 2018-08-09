@@ -39,9 +39,9 @@ class FirstLaunchController: NSViewController {
 //        messageText.textColor = R.color.firstLaunchText
 //        messageText.alignment = .center
         messageText.font = NSFont(name: R.font.mainFont,
-                                  size: 18)
+                                  size: 16)
         let textParagraph = NSMutableParagraphStyle()
-        textParagraph.lineSpacing = 8.0
+        textParagraph.lineSpacing = 4.0
         textParagraph.alignment = .center
         let textColor = R.color.firstLaunchText
 
@@ -112,8 +112,8 @@ class FirstLaunchController: NSViewController {
         let savePanel = NSSavePanel()
         savePanel.directoryURL = AdbScript.directory
         
-        savePanel.title = "Select the folder to copy the script"
-        savePanel.message = "The `adb` executable will be copied into the scripts folder."
+        savePanel.title = "The folder is automatically selected, click on `Save` to finish."
+        savePanel.message = "The file will be copied into the scripts folder."
         savePanel.nameFieldStringValue = "adb"
         savePanel.showsHiddenFiles = false
         savePanel.showsTagField = false
