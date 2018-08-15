@@ -136,6 +136,15 @@ bool cancelCleanup() {
     return false;
 }
 
+NSString* getNSStringFromData(NSData *data) {
+    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+}
+
+string getStringFromData(NSData *data) {
+    auto str = getNSStringFromData(data);
+    return convert(str);
+}
+
 string AdbExecutor::executeAdb(string commands, AdbCallback callback) {
 	startAdbIfNotStarted();
 	auto task = [[NSTask alloc] init];
@@ -170,10 +179,12 @@ string AdbExecutor::executeAdb(string commands, AdbCallback callback) {
                         }
 						auto data = [pipe fileHandleForReading].availableData;
 //                        NSLog(@"Task Data, %@", data);
-						if (data.length > 0) {
-							auto str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+						if (data != nil && data.length > 0) {
+//                            auto str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 //                            NSLog(@"Task Data, %@", str);
-							callback(convert(str), AdbExecutionResult::InProgress);
+//                            callback(convert(str), AdbExecutionResult::InProgress);
+                            auto str = getStringFromData(data);
+							callback(str, AdbExecutionResult::InProgress);
 //                            NSLog(@"waitForDataInBackgroundAndNotify");
 							[outFile waitForDataInBackgroundAndNotify];
 //                            NSLog(@"waitForDataInBackgroundAndNotify, done");

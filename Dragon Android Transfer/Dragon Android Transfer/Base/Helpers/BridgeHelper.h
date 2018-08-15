@@ -58,6 +58,9 @@ std::string ReplaceString(std::string subject, const std::string& search,
 }*/
 
 static std::string convert(NSString* str) {
+    if (str == nil) {
+        return "";
+    }
     std::string s = str.UTF8String;
 //    size_t pos = 0;
 //    std::string subject = s;

@@ -269,6 +269,9 @@ public class ShellParser: NSObject {
 	@objc
 	public static func parseTransferOutput(_ output: String) -> Int {
 		let outputLines = splitLines(output)
+        if (outputLines.count < 1) {
+            return -1
+        }
 		let output = outputLines[outputLines.count - 1]
 //        print("parseTransferOutput: \(output)")
 		let matchesPercentage = self.matchesForRegexInText(self.regexPercentage, text: output)
