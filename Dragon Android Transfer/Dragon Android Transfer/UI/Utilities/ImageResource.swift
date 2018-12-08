@@ -31,6 +31,9 @@ class ImageResource {
     public let menu_back = "menu_back"
     public let refresh = "refresh"
     
+    public let app_icon_copy = "app_icon_copy"
+    public let app_icon_paste = "app_icon_paste"
+    
     public func imageName(_ name: String) -> NSImage.Name {
         return NSImage.Name(rawValue: name)
     }

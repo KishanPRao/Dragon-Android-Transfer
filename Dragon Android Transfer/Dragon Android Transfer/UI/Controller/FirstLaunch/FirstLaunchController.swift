@@ -31,6 +31,30 @@ class FirstLaunchController: NSViewController {
     
     var wc: NSWindowController? = nil
     
+    static func copyNonSandbox() {
+        if let data = NSDataAsset.init(name: NSDataAsset.Name(rawValue: "adb"))?.data {
+            
+            let filePath = AdbScript.url.path
+            let created = FileManager.default.createFile(atPath: filePath, contents: data, attributes: nil)
+            print("Dir: \(filePath), created: \(created)")
+            
+            if (created) {
+                let fm = FileManager.default
+                
+                var attributes = [FileAttributeKey : Any]()
+                attributes[.posixPermissions] = 0o777
+                do {
+                    try fm.setAttributes(attributes, ofItemAtPath: filePath)
+                } catch let error {
+                    print("Permissions error: ", error)
+                }
+            } else {
+                print("Adb file not created")
+            }
+        }
+        FirstLaunchController.firstLaunchFinished()
+    }
+    
     private func initUi() {
         if let window = self.view.window {
             window.updateWindowColor()

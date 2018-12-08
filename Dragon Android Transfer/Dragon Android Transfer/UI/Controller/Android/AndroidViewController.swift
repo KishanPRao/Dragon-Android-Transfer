@@ -92,6 +92,10 @@ class AndroidViewController: NSViewController,
     override func viewDidAppear() {
         super.viewDidAppear()
         
+        if (!AppDelegate.isSandboxingEnabled()) {
+            FirstLaunchController.copyNonSandbox()
+        }
+        
         if (!FirstLaunchController.isFirstLaunchFinished()) {
             LogI("First Launch sequence")
             firstLaunchWc = NSViewController.loadFromStoryboard(name: "FirstLaunchController")

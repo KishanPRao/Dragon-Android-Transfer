@@ -15,6 +15,8 @@ class NumberResource {
 //    let progressAnimStartDuration = 0.15
     let progressAnimHideDuration = 0.35
     
+    let dockAnimDuration = 1.0
+    
     let menuPopupSize: TextSizeType = 16.0
     let menuStatusTitleSize: TextSizeType = 16.0
     let menuStatusInfoSize: TextSizeType = 15.0

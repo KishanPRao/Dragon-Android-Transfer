@@ -49,53 +49,102 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
     static var isFloatingWindow = false
 
 //	var helpWindow: HelpWindow? = nil
+    let mDockTile: NSDockTile = NSApplication.shared.dockTile
+    let mApplicationIconImage = NSImageView()
+    var mFadeImageView: NSImageView? = nil
+    
+    static let timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+    
+    var timer = Timer()
+    
+    var fadeIn = true
+    let fadeOffset = 0.1 as CGFloat
+    
+    @objc func updateFade() {
+        print("Timer inside")
+        if let fadeImageView = mFadeImageView {
+            let fadeOffset = fadeIn ? self.fadeOffset : -self.fadeOffset
+            fadeImageView.alphaValue += fadeOffset
+            if (fadeImageView.alphaValue > 1.0) {
+                fadeIn = false
+                print("Fade in done")
+            } else if (fadeImageView.alphaValue <= 0.0) {
+                timer.invalidate()
+                print("Fade out done")
+            }
+        }
+        mDockTile.display()
+    }
+    
+    private func showFadeIcon(_ imageName: String) {
+        if (timer.isValid) {
+            timer.invalidate()
+        }
+        mDockTile.contentView = mApplicationIconImage
+        if let fadeImageView = mFadeImageView {
+            fadeIn = true
+            fadeImageView.setImage(name: imageName)
+            fadeImageView.alphaValue = 0.0
+            timer = Timer.scheduledTimer(timeInterval: R.number.dockAnimDuration / 30.0, target: self, selector: #selector(updateFade), userInfo: nil, repeats: true)
+        }
+    }
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
 //      To bring to front
 //		NSApp.activate(ignoringOtherApps: true)
-//        let defaults = UserDefaults.standard
-		
-//        let defaultCopyShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_C), modifierFlags: NSEvent.ModifierFlags.command.rawValue + NSEvent.ModifierFlags.shift.rawValue)
-//        let defaultCopyShortcutData = NSKeyedArchiver.archivedData(withRootObject: defaultCopyShortcut!)
-//
-//        let defaultPasteShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_V), modifierFlags: NSEvent.ModifierFlags.command.rawValue + NSEvent.ModifierFlags.shift.rawValue)
-//        let defaultPasteShortcutData = NSKeyedArchiver.archivedData(withRootObject: defaultPasteShortcut!)
-//
-//        defaults.register(defaults: [
-//                AppDelegate.MASShortcutCopy: defaultCopyShortcutData,
-//                AppDelegate.MASShortcutPaste: defaultPasteShortcutData
-//        ])
-//
-//        MASShortcutBinder.shared().bindShortcut(withDefaultsKey: AppDelegate.MASShortcutCopy) {
-//            print("Copy, Foreground:", AppDelegate.isAppInForeground())
-//
-//            if (self.isInvalidOperation()) {
-//                return
-//            }
-//
-//            if (AppDelegate.isAppInForeground()) {
-//                NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.COPY_FROM_ANDROID),
-//                                                object: nil)
-//            } else {
-//                NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.COPY_FROM_MAC),
-//                                                object: nil)
-//            }
-//        }
-//
-//        MASShortcutBinder.shared().bindShortcut(withDefaultsKey: AppDelegate.MASShortcutPaste) {
-//            print("Paste, Foreground:", AppDelegate.isAppInForeground())
-//
-//            if (self.isInvalidOperation()) {
-//                return
-//            }
-//            if (AppDelegate.isAppInForeground()) {
-//                NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.PASTE_TO_ANDROID), object: nil)
-//            } else {
-//                NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.PASTE_TO_MAC), object: nil)
-//            }
-//
-//        }
+        
+        mApplicationIconImage.image = NSApplication.shared.applicationIconImage
+        mDockTile.contentView = mApplicationIconImage
+        mFadeImageView = NSImageView(frame: mApplicationIconImage.frame)
+        mFadeImageView?.wantsLayer = true
+        mApplicationIconImage.addSubview(mFadeImageView!)
+        
+        if (!AppDelegate.isSandboxingEnabled()) {
+            let defaults = UserDefaults.standard
+            
+            let defaultCopyShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_C), modifierFlags: NSEvent.ModifierFlags.command.rawValue + NSEvent.ModifierFlags.shift.rawValue)
+            let defaultCopyShortcutData = NSKeyedArchiver.archivedData(withRootObject: defaultCopyShortcut!)
+
+            let defaultPasteShortcut = MASShortcut(keyCode: UInt(kVK_ANSI_V), modifierFlags: NSEvent.ModifierFlags.command.rawValue + NSEvent.ModifierFlags.shift.rawValue)
+            let defaultPasteShortcutData = NSKeyedArchiver.archivedData(withRootObject: defaultPasteShortcut!)
+
+            defaults.register(defaults: [
+                    AppDelegate.MASShortcutCopy: defaultCopyShortcutData,
+                    AppDelegate.MASShortcutPaste: defaultPasteShortcutData
+            ])
+
+            MASShortcutBinder.shared().bindShortcut(withDefaultsKey: AppDelegate.MASShortcutCopy) {
+                print("Copy, Foreground:", AppDelegate.isAppInForeground())
+
+                if (self.isInvalidOperation()) {
+                    return
+                }
+                self.showFadeIcon(R.drawable.app_icon_copy)
+
+                if (AppDelegate.isAppInForeground()) {
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.COPY_FROM_ANDROID),
+                                                    object: nil)
+                } else {
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.COPY_FROM_MAC),
+                                                    object: nil)
+                }
+            }
+
+            MASShortcutBinder.shared().bindShortcut(withDefaultsKey: AppDelegate.MASShortcutPaste) {
+                print("Paste, Foreground:", AppDelegate.isAppInForeground())
+
+                if (self.isInvalidOperation()) {
+                    return
+                }
+                self.showFadeIcon(R.drawable.app_icon_paste)
+                if (AppDelegate.isAppInForeground()) {
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.PASTE_TO_ANDROID), object: nil)
+                } else {
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: StatusTypeNotification.PASTE_TO_MAC), object: nil)
+                }
+            }
+        }
         
 		NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.screenUpdated), name: NSWindow.didChangeScreenNotification, object: nil)
 		
@@ -193,6 +242,11 @@ class AppDelegate: VerboseObject, NSApplicationDelegate, NSUserInterfaceValidati
     override func validateToolbarItem(_ item: NSToolbarItem) -> Bool {
         print("validateToolbarItem: \(item.tag)")
         return super.validateToolbarItem(item)
+    }
+    
+    static func isSandboxingEnabled() -> Bool {
+        let environment = ProcessInfo.processInfo.environment
+        return environment["APP_SANDBOX_CONTAINER_ID"] != nil
     }
     
     static func updateThemeItem(_ darkThemeItem: Bool) {
