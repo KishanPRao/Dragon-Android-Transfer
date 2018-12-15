@@ -1,0 +1,8 @@
+<resources>
+	<string name="app_name">Dragon Android Transfer Helper</string>
+	<string name="wireless_mode">Select the wireless mode</string>
+	<string name="hotspot">Hotspot</string>
+	<string name="wifi">WiFi</string>
+	<string name="turn_on_wifi">Turn ON Wifi</string>
+	<!--<string name="wifi_localhotspot_configure_ssid_default">Tsssst</string>-->
+</resources>
