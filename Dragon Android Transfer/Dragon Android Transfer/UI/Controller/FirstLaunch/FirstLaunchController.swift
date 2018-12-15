@@ -110,8 +110,8 @@ class FirstLaunchController: NSViewController {
     
     func finish() {
         FirstLaunchController.firstLaunchFinished()
-        wc = NSViewController.loadFromStoryboard(name: "Main")
-        wc?.showWindow(self)
+//        wc = NSViewController.loadFromStoryboard(name: "Main")
+//        wc?.showWindow(self)
         self.view.window?.close()
     }
     

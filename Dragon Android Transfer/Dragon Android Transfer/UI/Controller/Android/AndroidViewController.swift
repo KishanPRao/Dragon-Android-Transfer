@@ -58,6 +58,9 @@ class AndroidViewController: NSViewController,
 	internal var helpWindow: HelpWindow? = nil
 	
 	internal var needsUpdatePopupDimens = false
+    
+    
+    @IBOutlet weak var cta: NSButton!
 	
 	//internal var mCircularProgress: IndeterminateProgressView? = nil
 //    internal var mCurrentProgress = -1.0
@@ -88,10 +91,40 @@ class AndroidViewController: NSViewController,
 	}
     
     var firstLaunchWc: NSWindowController? = nil
+    class FLWDelegate: NSObject, NSWindowDelegate {
+        var avc: AndroidViewController? = nil
+        
+        func windowWillClose(_ notification: Notification) {
+            avc?.updateDeviceStatus()
+            avc = nil
+        }
+    }
+    
+    var flwDelegate = FLWDelegate()
+    
+    @IBAction func openSetup(_ any: Any) {
+//        if (!AppDelegate.isSandboxingEnabled()) {
+//            FirstLaunchController.copyNonSandbox()
+//        }
+        
+//        if (!FirstLaunchController.isFirstLaunchFinished()) {
+            LogI("First Launch sequence")
+            firstLaunchWc = NSViewController.loadFromStoryboard(name: "FirstLaunchController")
+            firstLaunchWc?.showWindow(self)
+        flwDelegate.avc = self
+        firstLaunchWc?.window?.delegate = flwDelegate
+//            removeNotifications()
+//            self.view.window?.close()
+//            return
+//        }
+    }
     
     override func viewDidAppear() {
         super.viewDidAppear()
-        
+        if (!AppDelegate.isSandboxingEnabled()) {
+            FirstLaunchController.copyNonSandbox()
+        }
+        /*
         if (!AppDelegate.isSandboxingEnabled()) {
             FirstLaunchController.copyNonSandbox()
         }
@@ -103,7 +136,7 @@ class AndroidViewController: NSViewController,
             removeNotifications()
             self.view.window?.close()
             return
-        }
+        }*/
         
         self.view.window?.delegate = self
         
@@ -136,6 +169,13 @@ class AndroidViewController: NSViewController,
     }
 	
 	func updateDeviceStatus() {
+        if (!FirstLaunchController.isFirstLaunchFinished()) {
+            messageText.isHidden = false
+            messageText.stringValue = R.string.usbSetupMsg
+            cta.isHidden = false
+            return
+        }
+        cta.isHidden = true
 		if (!transferHandler.hasActiveDevice()) {
 			AppDelegate.reset()
 			

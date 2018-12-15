@@ -76,4 +76,6 @@ public struct StringResource {
         "The application needs a specific file to run on your system.\n" +
     "Please click on the button below and follow the steps to copy the file."
     let firstLaunchCta = "Continue"
+    let usbSetupMsg = "USB mode has not been set up yet.\nPlease click the button below."
+    let usbSetupCta = "Setup"
 }

@@ -36,6 +36,14 @@ extension AndroidViewController {
 		
 		overlayView.isHidden = true
 		overlayView.setBackground(R.color.menuBgColor)
+        
+        
+        cta.setText(text: R.string.usbSetupCta,
+                    textColor: R.color.firstLaunchCtaText,
+                    alignment: .center,
+                    bgColor: R.color.firstLaunchCtaBg,
+                    isSelected: false,
+                    rounded: true)
 		
 		/*
 		let progressSize = 120.0 as CGFloat
