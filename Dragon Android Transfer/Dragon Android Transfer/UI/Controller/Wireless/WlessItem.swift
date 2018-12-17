@@ -9,31 +9,28 @@
 import Cocoa
 
 class WlessItem: NSCollectionViewItem {
-
     override var isSelected: Bool {
         didSet {
             view.layer?.borderWidth = isSelected ? 5.0 : 0.0
         }
     }
     
-    var imageFile: ImageFile? {
+    var itemTitle = "<Unknown>"
+    var image: NSImage? {
         didSet {
             guard isViewLoaded else { return }
-            if let imageFile = imageFile {
-                imageView?.image = imageFile.thumbnail
-                textField?.stringValue = imageFile.fileName
-            } else {
-                imageView?.image = nil
-                textField?.stringValue = "EMPTY"
-            }
+            imageView?.image = image
+            textField?.stringValue = itemTitle
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.wantsLayer = true
-        view.layer?.backgroundColor = NSColor.lightGray.cgColor
-        view.layer?.borderColor = NSColor.white.cgColor
+        let bgColor = NSColor.darkGray
+        view.layer?.backgroundColor = bgColor.cgColor
+        view.layer?.borderColor = NSColor.lightGray.cgColor
+        view.layer?.cornerRadius = 5.0
         view.layer?.borderWidth = 0.0
     }
 }

@@ -11,33 +11,31 @@ import Foundation
 extension WirelessController : NSCollectionViewDataSource, NSCollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
         print("collectionView 1")
-        return 3
+        return devices.count
     }
     
-    func collectionView(_ collectionView: NSCollectionView, viewForSupplementaryElementOfKind kind: NSCollectionView.SupplementaryElementKind, at indexPath: IndexPath) -> NSView {
-        print("collectionView 2.1")
-        let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "WlessItem"), for: indexPath)
-        return item.view
-    }
+//    func collectionView(_ collectionView: NSCollectionView, viewForSupplementaryElementOfKind kind: NSCollectionView.SupplementaryElementKind, at indexPath: IndexPath) -> NSView {
+//        print("collectionView 2.1")
+//        return NSView()
+//    }
     
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         print("collectionView 2")
         let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "WlessItem"), for: indexPath)
         guard let collectionViewItem = item as? WlessItem else {return item}
         
-        // 5
-//        let imageFile = imageDirectoryLoader.imageFileForIndexPath(indexPath)
-//        collectionViewItem.imageFile = imageFile
-//        return item
+        let androidImage = NSImage(named: NSImage.Name(rawValue: R.drawable.android))
+        collectionViewItem.itemTitle = devices[indexPath.item]
+        collectionViewItem.image = androidImage
         return item
     }
     
     func numberOfSections(in collectionView: NSCollectionView) -> Int {
         print("collectionView 3")
-        return 5
+        return 1
     }
     
     func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> NSSize {
-        return NSSize(width: 1000, height: 40)
+        return NSZeroSize
     }
 }
