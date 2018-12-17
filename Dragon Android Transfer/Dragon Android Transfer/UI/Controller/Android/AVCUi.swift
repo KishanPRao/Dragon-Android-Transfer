@@ -53,7 +53,40 @@ extension AndroidViewController {
         pathSelectorRootView.setBackground(R.color.clear)
 		loadingProgress.isHidden = true
 		//        parent.center fromView:parent.superview];
+        
+        toggleControl.updateMainFont()
+        toggleControl.target = self
+        toggleControl.action = #selector(switchMode)
 	}
+    
+    @objc func switchMode(_ sender: Any) {
+        let selSeg = toggleControl.selectedSegment
+        if (selSeg == transferMode) {
+            LogW("switchMode: same")
+            return
+        }
+        transferMode = selSeg
+        if (selSeg == TransferMode.USB) {
+            LogD("switchMode: USB")
+        } else if (selSeg == TransferMode.Wireless) {
+            LogD("switchMode: Wireless")
+            let window = self.view.window!
+//            var frameSize = window.frame
+//            frameSize.size = NSSize(width: window.frame.width, height: frameSize.height - window.titlebarHeight)
+            
+            if wlessController == nil {
+                wlessController = NSViewController.loadFromStoryboard(name: "WirelessController")
+            }
+//            wlessController = NSViewController.loadFromStoryboard(name: "WirelessController")
+//            wlessController?.showWindow(self)
+            if let wlessController = wlessController {
+//                print("\(wlessWC.window)")
+//                add compl handler if needed
+                presentViewControllerAsModalWindow(wlessController)
+//                window.beginSheet(wlessController.view., completionHandler: nil)
+            }
+        }
+    }
 	
 	@objc internal func showProgress() {
         self.fileTable.enableKeys = false

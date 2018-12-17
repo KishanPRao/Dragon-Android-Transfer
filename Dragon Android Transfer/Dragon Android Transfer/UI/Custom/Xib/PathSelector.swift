@@ -70,7 +70,7 @@ class PathSelector: VerboseView {
                                                                            useUnderline: useUnderline,
                                                                            color: textColor)
         }
-        button.updateMainFont()
+        button.updateButtonMainFont()
 	}
 	
 	private func updateButton(_ button: NSButton, _ image: NSImage) {

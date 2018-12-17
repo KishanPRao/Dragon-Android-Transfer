@@ -42,7 +42,13 @@
 		5098AC6C1FFD3A9A0084449B /* NSImageView_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5098AC6B1FFD3A990084449B /* NSImageView_Extension.swift */; };
 		5098AC6E1FFD3C820084449B /* path_selector_div.png in Resources */ = {isa = PBXBuildFile; fileRef = 5098AC6D1FFD3C810084449B /* path_selector_div.png */; };
 		5098AC701FFD3CBA0084449B /* ImageResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5098AC6F1FFD3CBA0084449B /* ImageResource.swift */; };
+		50A1225921C650F5009C6DDF /* WirelessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A1225821C650F5009C6DDF /* WirelessController.swift */; };
+		50A1225B21C65125009C6DDF /* WirelessController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50A1225A21C65125009C6DDF /* WirelessController.storyboard */; };
 		50B020341FE986C500989BA4 /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B020331FE986C500989BA4 /* CollectionExtension.swift */; };
+		50C4536621C75CB8006E3D31 /* ImageFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C4536521C75CB8006E3D31 /* ImageFile.swift */; };
+		50C4536921C75D61006E3D31 /* WlessItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C4536721C75D61006E3D31 /* WlessItem.swift */; };
+		50C4536A21C75D61006E3D31 /* WlessItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50C4536821C75D61006E3D31 /* WlessItem.xib */; };
+		50C4536C21C7806F006E3D31 /* WlessControllerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C4536B21C7806F006E3D31 /* WlessControllerData.swift */; };
 		50CAAF8A1FFFBFCD00911D8E /* SingleClickButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CAAF891FFFBFCD00911D8E /* SingleClickButton.swift */; };
 		50CAAF9220000F2A00911D8E /* DarkAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CAAF9120000F2A00911D8E /* DarkAlert.swift */; };
 		50CAAF952000253100911D8E /* android.png in Resources */ = {isa = PBXBuildFile; fileRef = 50CAAF932000253000911D8E /* android.png */; };
@@ -352,7 +358,13 @@
 		5098AC6B1FFD3A990084449B /* NSImageView_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSImageView_Extension.swift; sourceTree = "<group>"; };
 		5098AC6D1FFD3C810084449B /* path_selector_div.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = path_selector_div.png; sourceTree = "<group>"; };
 		5098AC6F1FFD3CBA0084449B /* ImageResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageResource.swift; sourceTree = "<group>"; };
+		50A1225821C650F5009C6DDF /* WirelessController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WirelessController.swift; sourceTree = "<group>"; };
+		50A1225A21C65125009C6DDF /* WirelessController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WirelessController.storyboard; sourceTree = "<group>"; };
 		50B020331FE986C500989BA4 /* CollectionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
+		50C4536521C75CB8006E3D31 /* ImageFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageFile.swift; sourceTree = "<group>"; };
+		50C4536721C75D61006E3D31 /* WlessItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WlessItem.swift; sourceTree = "<group>"; };
+		50C4536821C75D61006E3D31 /* WlessItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WlessItem.xib; sourceTree = "<group>"; };
+		50C4536B21C7806F006E3D31 /* WlessControllerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WlessControllerData.swift; sourceTree = "<group>"; };
 		50CAAF891FFFBFCD00911D8E /* SingleClickButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleClickButton.swift; sourceTree = "<group>"; };
 		50CAAF9120000F2A00911D8E /* DarkAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkAlert.swift; sourceTree = "<group>"; };
 		50CAAF932000253000911D8E /* android.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = android.png; sourceTree = "<group>"; };
@@ -706,6 +718,19 @@
 			path = "Dragon Android Transfer";
 			sourceTree = "<group>";
 		};
+		50A1225721C64E99009C6DDF /* Wireless */ = {
+			isa = PBXGroup;
+			children = (
+				50A1225821C650F5009C6DDF /* WirelessController.swift */,
+				50A1225A21C65125009C6DDF /* WirelessController.storyboard */,
+				50C4536521C75CB8006E3D31 /* ImageFile.swift */,
+				50C4536721C75D61006E3D31 /* WlessItem.swift */,
+				50C4536821C75D61006E3D31 /* WlessItem.xib */,
+				50C4536B21C7806F006E3D31 /* WlessControllerData.swift */,
+			);
+			path = Wireless;
+			sourceTree = "<group>";
+		};
 		50C567201FFA934C00452792 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -806,6 +831,7 @@
 		BE3BD3BB04329C8CC1275F9F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				50A1225721C64E99009C6DDF /* Wireless */,
 				BE3BDE794C92E054421418BB /* ViewController.swift */,
 				DABE0EB22110AD4100EC546E /* FirstLaunch */,
 				BE3BD5A1FB12D32671A07E74 /* Android */,
@@ -1327,6 +1353,7 @@
 				BE3BD0680117384D1A25829B /* update_sizes.png in Resources */,
 				BE3BD17F8436D360FDCB20EC /* Credits.rtf in Resources */,
 				BE3BDA1FB1387C3949B25E52 /* index.html in Resources */,
+				50A1225B21C65125009C6DDF /* WirelessController.storyboard in Resources */,
 				DAC5916A202F7A0300534084 /* file.png in Resources */,
 				50961C0F1FF966C2001B6D3D /* menu.png in Resources */,
 				50961C0B1FF95CAE001B6D3D /* internal_storage.png in Resources */,
@@ -1335,6 +1362,7 @@
 				50F5117D200139FB00CCB22C /* FileOptions.xib in Resources */,
 				BE3BD43FFDA218F217C09DBA /* help.rtf in Resources */,
 				BE3BD0E5A9B8848A8C017AD3 /* CopyDialog.xib in Resources */,
+				50C4536A21C75D61006E3D31 /* WlessItem.xib in Resources */,
 				DAAF120420DCC23300E075B8 /* Ubuntu-Bold.ttf in Resources */,
 				BE3BD3CA5BE659E67FC602F6 /* HelpWindow.xib in Resources */,
 				BE3BDBB3DBEEB39658AC9DDD /* AndroidViewController.storyboard in Resources */,
@@ -1628,6 +1656,7 @@
 				50293DF81FEFBF2A00B06B14 /* BaseFileType.swift in Sources */,
 				50961C011FF94A09001B6D3D /* NibLoader.m in Sources */,
 				50FE44B21FF6C51B0099A029 /* PushAnimatorTrial.swift in Sources */,
+				50C4536621C75CB8006E3D31 /* ImageFile.swift in Sources */,
 				BE3BD8168BA539FF4397E553 /* DarkWindow.swift in Sources */,
 				50F193481FFD5D4A001B6984 /* BlurOverlayView.swift in Sources */,
 				BE3BD32896E1B80E34684643 /* ColoredButton.swift in Sources */,
@@ -1636,6 +1665,7 @@
 				BE3BD7F160769EC8049FA1AC /* ClipboardDelegate.swift in Sources */,
 				50D7D9B61FFE97AC00E85E70 /* SelectionTableRowView.swift in Sources */,
 				BE3BD64DA0CEAFD027656D0A /* ColoredPopUpButton.swift in Sources */,
+				50A1225921C650F5009C6DDF /* WirelessController.swift in Sources */,
 				50961BFA1FF916A6001B6D3D /* StorageItem.swift in Sources */,
 				50293DF41FEFB8DB00B06B14 /* DeviceTableDelegate.swift in Sources */,
 				BE3BD7A0031EADC65E19DA1D /* CrossfadeSegue.swift in Sources */,
@@ -1643,6 +1673,7 @@
 				BE3BD5D597FE4AA22E298EFB /* CustomSwiftAnimator.swift in Sources */,
 				BE3BD284856999A467420E8C /* DisabledTextField.swift in Sources */,
 				DA463DCE20F49D1200EBF189 /* AuthCheckCommand.cpp in Sources */,
+				50C4536C21C7806F006E3D31 /* WlessControllerData.swift in Sources */,
 				5098AC701FFD3CBA0084449B /* ImageResource.swift in Sources */,
 				BE3BDFCBE0994AEA0312BA2D /* DragNotificationDelegate.swift in Sources */,
 				BE3BD1B87F638080742BF2CD /* DragUiDelegate.swift in Sources */,
@@ -1732,6 +1763,7 @@
 				BE3BD392818B15BDF9FEEAFA /* MVCTable.swift in Sources */,
 				506D098A1FFBECE200FEA857 /* NSRect_Extension.swift in Sources */,
 				DA41CE4220DE4CB7006E0A4C /* AnimationUtils.swift in Sources */,
+				50C4536921C75D61006E3D31 /* WlessItem.swift in Sources */,
 				BE3BDD0F6C64C70A7CDDE47F /* MenuViewController.swift in Sources */,
 				BE3BDEABF4423BB229370157 /* MVCTransfer.swift in Sources */,
 				BE3BD9725949A8036826EB22 /* NumberResource.swift in Sources */,

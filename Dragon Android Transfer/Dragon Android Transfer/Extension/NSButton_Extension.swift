@@ -101,7 +101,7 @@ extension NSButton {
         //        self.attributedStringValue = TextUtils.attributedBoldString(from: text, color: R.color.white, nonBoldRange: nil, fontSize: 15.0, .center)
     }
     
-    func updateMainFont(_ fontSize: CGFloat = 40.0) {
+    func updateButtonMainFont(_ fontSize: CGFloat = 40.0) {
         //        let fontSize = self.font?.pointSize ?? 10.0
         //        let mainFont = NSFont(name: R.font.mainFont, size: fontSize)
         let mainFont = NSFont(name: R.font.mainFont, size: fontSize)

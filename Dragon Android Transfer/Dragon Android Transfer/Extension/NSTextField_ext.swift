@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension NSTextField {
+extension NSControl {
     
     func updateMainFont(_ inFontSize: CGFloat? = nil) {
         let fontSize = inFontSize ?? (self.font?.pointSize ?? 10.0)
@@ -18,6 +18,14 @@ extension NSTextField {
     
     func updateMainFontInIncrement(_ incrementAmount: CGFloat? = nil) {
         let fontSize = (self.font?.pointSize ?? 10.0) + (incrementAmount ?? 0.0)
+        let mainFont = NSFont(name: R.font.mainFont, size: fontSize)
+        self.font = mainFont
+    }
+}
+
+extension NSText {
+    func updateMainFont(_ inFontSize: CGFloat? = nil) {
+        let fontSize = inFontSize ?? (self.font?.pointSize ?? 10.0)
         let mainFont = NSFont(name: R.font.mainFont, size: fontSize)
         self.font = mainFont
     }

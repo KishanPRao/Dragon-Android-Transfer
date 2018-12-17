@@ -12,6 +12,10 @@ public enum TransferType {
     static let AndroidToMac = 0
     static let MacToAndroid = 1
 }
+public enum TransferMode {
+    static let USB = 0
+    static let Wireless = 1
+}
 
 public enum StatusTypeNotification {
 	static let COPY_FROM_ANDROID = "COPY_FROM_ANDROID"

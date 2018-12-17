@@ -28,6 +28,8 @@ class AndroidViewController: NSViewController,
     var disposeBag = DisposeBag()
 	internal let bgScheduler = ConcurrentDispatchQueueScheduler(qos: .background)
     
+    internal var transferMode = TransferMode.USB
+    
 //    internal let tableDelegate = DeviceTableDelegate()
 	internal var androidDirectoryItems: Array<BaseFile> = [] /*{
         didSet {
@@ -49,6 +51,7 @@ class AndroidViewController: NSViewController,
 	@IBOutlet weak var pathSelector: PathSelector!
 	@IBOutlet weak var pathSelectorRootView: NSView!
     
+    @IBOutlet weak var toggleControl: NSSegmentedControl!
     
     @IBOutlet weak var snackbar: Snackbar!
     
@@ -58,6 +61,8 @@ class AndroidViewController: NSViewController,
 	internal var helpWindow: HelpWindow? = nil
 	
 	internal var needsUpdatePopupDimens = false
+    
+    internal var wlessController: WirelessController? = nil
 	
 	//internal var mCircularProgress: IndeterminateProgressView? = nil
 //    internal var mCurrentProgress = -1.0

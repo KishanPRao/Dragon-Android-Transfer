@@ -17,7 +17,7 @@ struct PrintUtils {
         } else {
             if (DebugMode) {
 //                Swift.print(item, terminator: terminator)
-                print(item, terminator: terminator)
+                print(item, separator:" ", terminator: terminator)
             }
         }
     }
@@ -25,7 +25,7 @@ struct PrintUtils {
 	static public func Print(_ TAG: String, _ itemsAny: Any) {
         if (DebugMode) {
 //            Swift.print("[" + TAG + "]:", terminator: " ")
-            print("[" + TAG + "]:", terminator: " ")
+            print("<" + TAG + ">:", separator:" ", terminator: " ")
             PrintItem(TAG, itemsAny, terminator: "\n")
         }
 	}

@@ -8,8 +8,8 @@ import Foundation
 //TODO: What happens if 32 bit architecture?
 typealias Number = UInt64
 
-//let DEBUG = true
-let DEBUG = false
+let DEBUG = true
+//let DEBUG = false
 let FILE_WRITE = false
 
 extension Double {
@@ -46,9 +46,9 @@ extension Data {
 func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
     if (DEBUG) {
         
-//        for item in items {
-            Swift.print(items)
-//        }
+        for item in items {
+            Swift.print(item, separator: separator, terminator: terminator)
+        }
         if (FILE_WRITE) {
         let path = "/Users/Kishan/dump.txt"
             for item in items {

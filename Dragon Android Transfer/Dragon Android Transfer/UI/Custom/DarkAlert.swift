@@ -23,7 +23,7 @@ class DarkAlert: NSAlert {
                            isSelected: buttonProperty.isSelected,
                            rounded: true)
             button.imageScaling = .scaleNone
-            button.updateMainFont(buttonProperty.textSize)
+            button.updateButtonMainFont(buttonProperty.textSize)
         }
         if property.fullScreen {
 			alert.window.styleMask = NSWindow.StyleMask.fullSizeContentView
@@ -60,7 +60,7 @@ class DarkAlert: NSAlert {
 					alignment: .center, bgColor: R.color.white,
 					rounded: true)
 			button.imageScaling = .scaleNone
-            button.updateMainFont(13.0)
+            button.updateButtonMainFont(13.0)
             button
 		}*/
 	}
