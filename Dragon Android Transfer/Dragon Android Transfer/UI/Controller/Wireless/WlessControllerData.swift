@@ -38,4 +38,26 @@ extension WirelessController : NSCollectionViewDataSource, NSCollectionViewDeleg
     func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> NSSize {
         return NSZeroSize
     }
+    
+    func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
+        guard let indexPath = indexPaths.first else {
+            return
+        }
+        // 3
+        guard let item = collectionView.item(at: indexPath) else {
+            return
+        }
+//        (item as! CollectionViewItem).setHighlight(true)
+        connectBtn.isEnabled = true
+    }
+    
+    func collectionView(_ collectionView: NSCollectionView, didDeselectItemsAt indexPaths: Set<IndexPath>) {
+        guard let indexPath = indexPaths.first else {
+            return
+        }
+        guard let item = collectionView.item(at: indexPath) else {
+            return
+        }
+        connectBtn.isEnabled = false
+    }
 }

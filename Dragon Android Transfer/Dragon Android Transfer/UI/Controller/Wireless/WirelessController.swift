@@ -12,6 +12,7 @@ class WirelessController: NSViewController {
     @IBOutlet weak var messageText: NSTextView!
     @IBOutlet weak var itemsView: NSCollectionView!
     @IBOutlet weak var progressView: NSProgressIndicator!
+    @IBOutlet weak var connectBtn: NSButton!
     var devices: [String] = []
     
     override func viewDidAppear() {
@@ -32,11 +33,21 @@ class WirelessController: NSViewController {
 //        itemsView.enclosingScrollView?.hasVerticalScroller = true
 //        view.wantsLayer = true
 //        itemsView.layer?.backgroundColor = NSColor.black.cgColor
+        updateCollViewRect()
+    }
+    
+    private func updateCollViewRect() {
+        //        Ref: https://stackoverflow.com/questions/46433652/nscollectionview-does-not-scroll-items-past-initial-visible-rect
         if #available(OSX 10.13, *) {
             if let contentSize = self.itemsView.collectionViewLayout?.collectionViewContentSize {
                 self.itemsView.setFrameSize(contentSize)
             }
         }
+    }
+    
+    func addItem(_ name: String) {
+        devices.append(name)
+        itemsView.reloadData()
     }
     
     internal func initUi() {
@@ -53,9 +64,20 @@ class WirelessController: NSViewController {
         progressView.startAnimation(nil)
         configureCollectionView()
         
-        devices.append("Moto G5 Plus")
-        devices.append("Samsung S7")
-        devices.append("One Plus 6T")
-        itemsView.reloadData()
+        devices.removeAll()
+        addItem("One Plus 6T")
+        addItem("Moto G5 Plus")
+        addItem("Samsung S7")
+    }
+    
+    @IBAction func connect(_ sender: Any) {
+        guard let indexPath = itemsView.selectionIndexes.first else {
+            return
+        }
+        guard let item = itemsView.item(at: indexPath) else {
+            return
+        }
+        let wItem = (item as! WlessItem)
+        LogI("Connect to  \(wItem)")
     }
 }

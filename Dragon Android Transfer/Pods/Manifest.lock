@@ -7,6 +7,7 @@ PODS:
   - RxSwift (4.1.2)
   - RxTest (4.1.2):
     - RxSwift (~> 4.0)
+  - SwiftyJSON (4.2.0)
 
 DEPENDENCIES:
   - MASShortcut
@@ -14,6 +15,16 @@ DEPENDENCIES:
   - RxCocoa (~> 4.1.2)
   - RxSwift (~> 4.1.2)
   - RxTest (~> 4.1.2)
+  - SwiftyJSON (~> 4.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - MASShortcut
+    - RxBlocking
+    - RxCocoa
+    - RxSwift
+    - RxTest
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
   MASShortcut: 9c215e8a8a78f3d01ce56da48e2730ab66b538fa
@@ -21,7 +32,8 @@ SPEC CHECKSUMS:
   RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   RxTest: e634f15fd2c2cd0e0120132ef7a4f7be69ad0393
+  SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 3e06224dbf696b493d646b2acadf2b35d36f1f03
+PODFILE CHECKSUM: 1632f94b95d4c06a2190d0d9d1ac2eeb1f5a25bd
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3

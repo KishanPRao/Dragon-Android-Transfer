@@ -23,11 +23,44 @@
 		503B88541F928944004E6417 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503B88531F928944004E6417 /* StringExtension.swift */; };
 		503C5A2F1E0FB9300090EB68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 503C5A2E1E0FB9300090EB68 /* Assets.xcassets */; };
 		503C5A321E0FB9300090EB68 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 503C5A301E0FB9300090EB68 /* Main.storyboard */; };
+		503D543E21CE2B9300A6624D /* Disconnected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D541921CE2B9300A6624D /* Disconnected.swift */; };
+		503D543F21CE2B9300A6624D /* AbstractConnectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D541A21CE2B9300A6624D /* AbstractConnectionState.swift */; };
+		503D544021CE2B9300A6624D /* ConnectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D541B21CE2B9300A6624D /* ConnectionState.swift */; };
+		503D544121CE2B9300A6624D /* Connected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D541C21CE2B9300A6624D /* Connected.swift */; };
+		503D544221CE2B9300A6624D /* ConnectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D541D21CE2B9300A6624D /* ConnectionData.swift */; };
+		503D544321CE2B9300A6624D /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D541E21CE2B9300A6624D /* Action.swift */; };
+		503D544421CE2B9300A6624D /* Failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D541F21CE2B9300A6624D /* Failed.swift */; };
+		503D544521CE2B9300A6624D /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D542021CE2B9300A6624D /* Operation.swift */; };
+		503D544621CE2B9300A6624D /* WlessConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D542221CE2B9300A6624D /* WlessConstants.swift */; };
+		503D544721CE2B9300A6624D /* Concurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D542321CE2B9300A6624D /* Concurrency.swift */; };
+		503D544821CE2B9300A6624D /* AtomicReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D542421CE2B9300A6624D /* AtomicReference.swift */; };
+		503D544921CE2B9300A6624D /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D542521CE2B9300A6624D /* Queue.swift */; };
+		503D544A21CE2B9300A6624D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D542621CE2B9300A6624D /* Utils.swift */; };
+		503D544B21CE2B9300A6624D /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D542721CE2B9300A6624D /* LinkedList.swift */; };
+		503D544C21CE2B9300A6624D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D542921CE2B9300A6624D /* Session.swift */; };
+		503D544D21CE2B9300A6624D /* SessionHeartbeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D542A21CE2B9300A6624D /* SessionHeartbeat.swift */; };
+		503D544E21CE2B9300A6624D /* AbstractThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D542B21CE2B9300A6624D /* AbstractThread.swift */; };
+		503D544F21CE2B9300A6624D /* SessionPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D542C21CE2B9300A6624D /* SessionPacket.swift */; };
+		503D545021CE2B9300A6624D /* SessionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D542D21CE2B9300A6624D /* SessionHandler.swift */; };
+		503D545121CE2B9300A6624D /* SessionTransceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D542E21CE2B9300A6624D /* SessionTransceiver.swift */; };
+		503D545221CE2B9300A6624D /* SessionReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D542F21CE2B9300A6624D /* SessionReceiver.swift */; };
+		503D545321CE2B9300A6624D /* SessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D543021CE2B9300A6624D /* SessionProtocol.swift */; };
+		503D545421CE2B9300A6624D /* UiCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D543121CE2B9300A6624D /* UiCallback.swift */; };
+		503D545521CE2B9300A6624D /* SessionResponseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D543221CE2B9300A6624D /* SessionResponseProtocol.swift */; };
+		503D545621CE2B9300A6624D /* SessionDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D543321CE2B9300A6624D /* SessionDiscovery.swift */; };
+		503D545721CE2B9300A6624D /* SessionSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D543421CE2B9300A6624D /* SessionSender.swift */; };
+		503D545F21CE496B00A6624D /* CommCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D545E21CE496B00A6624D /* CommCommand.swift */; };
 		503D93161FF8EAA0009E7E39 /* menu_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 503D93151FF8EAA0009E7E39 /* menu_back.png */; };
 		503D93181FF8ED1B009E7E39 /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D93171FF8ED1B009E7E39 /* ImageButton.swift */; };
 		503D931A1FF8F0A8009E7E39 /* NSView_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503D93191FF8F0A8009E7E39 /* NSView_Extension.swift */; };
 		506D09881FFBE6E900FEA857 /* IndeterminateProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D09871FFBE6E900FEA857 /* IndeterminateProgress.swift */; };
 		506D098A1FFBECE200FEA857 /* NSRect_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D09891FFBECE200FEA857 /* NSRect_Extension.swift */; };
+		508580CD21D632AA00E1DB90 /* yudpsocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 508580C621D632AA00E1DB90 /* yudpsocket.cpp */; };
+		508580CE21D632AA00E1DB90 /* TCPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508580C721D632AA00E1DB90 /* TCPClient.swift */; };
+		508580CF21D632AA00E1DB90 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508580C821D632AA00E1DB90 /* Result.swift */; };
+		508580D021D632AA00E1DB90 /* UDPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508580CA21D632AA00E1DB90 /* UDPClient.swift */; };
+		508580D121D632AA00E1DB90 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508580CB21D632AA00E1DB90 /* Socket.swift */; };
+		508580D221D632AA00E1DB90 /* ytcpsocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 508580CC21D632AA00E1DB90 /* ytcpsocket.cpp */; };
 		50961BFA1FF916A6001B6D3D /* StorageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50961BF91FF916A6001B6D3D /* StorageItem.swift */; };
 		50961BFE1FF92DCF001B6D3D /* NSButton_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50961BFD1FF92DCF001B6D3D /* NSButton_Extension.swift */; };
 		50961C011FF94A09001B6D3D /* NibLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 50961C001FF94A09001B6D3D /* NibLoader.m */; };
@@ -337,12 +370,46 @@
 		503C5A2E1E0FB9300090EB68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		503C5A311E0FB9300090EB68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		503C5A331E0FB9300090EB68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		503D541921CE2B9300A6624D /* Disconnected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Disconnected.swift; sourceTree = "<group>"; };
+		503D541A21CE2B9300A6624D /* AbstractConnectionState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractConnectionState.swift; sourceTree = "<group>"; };
+		503D541B21CE2B9300A6624D /* ConnectionState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionState.swift; sourceTree = "<group>"; };
+		503D541C21CE2B9300A6624D /* Connected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connected.swift; sourceTree = "<group>"; };
+		503D541D21CE2B9300A6624D /* ConnectionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionData.swift; sourceTree = "<group>"; };
+		503D541E21CE2B9300A6624D /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		503D541F21CE2B9300A6624D /* Failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Failed.swift; sourceTree = "<group>"; };
+		503D542021CE2B9300A6624D /* Operation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
+		503D542221CE2B9300A6624D /* WlessConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WlessConstants.swift; sourceTree = "<group>"; };
+		503D542321CE2B9300A6624D /* Concurrency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Concurrency.swift; sourceTree = "<group>"; };
+		503D542421CE2B9300A6624D /* AtomicReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicReference.swift; sourceTree = "<group>"; };
+		503D542521CE2B9300A6624D /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		503D542621CE2B9300A6624D /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		503D542721CE2B9300A6624D /* LinkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
+		503D542921CE2B9300A6624D /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		503D542A21CE2B9300A6624D /* SessionHeartbeat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionHeartbeat.swift; sourceTree = "<group>"; };
+		503D542B21CE2B9300A6624D /* AbstractThread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractThread.swift; sourceTree = "<group>"; };
+		503D542C21CE2B9300A6624D /* SessionPacket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionPacket.swift; sourceTree = "<group>"; };
+		503D542D21CE2B9300A6624D /* SessionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionHandler.swift; sourceTree = "<group>"; };
+		503D542E21CE2B9300A6624D /* SessionTransceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTransceiver.swift; sourceTree = "<group>"; };
+		503D542F21CE2B9300A6624D /* SessionReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionReceiver.swift; sourceTree = "<group>"; };
+		503D543021CE2B9300A6624D /* SessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionProtocol.swift; sourceTree = "<group>"; };
+		503D543121CE2B9300A6624D /* UiCallback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UiCallback.swift; sourceTree = "<group>"; };
+		503D543221CE2B9300A6624D /* SessionResponseProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionResponseProtocol.swift; sourceTree = "<group>"; };
+		503D543321CE2B9300A6624D /* SessionDiscovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDiscovery.swift; sourceTree = "<group>"; };
+		503D543421CE2B9300A6624D /* SessionSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionSender.swift; sourceTree = "<group>"; };
+		503D545E21CE496B00A6624D /* CommCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommCommand.swift; sourceTree = "<group>"; };
 		503D93151FF8EAA0009E7E39 /* menu_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_back.png; sourceTree = "<group>"; };
 		503D93171FF8ED1B009E7E39 /* ImageButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
 		503D93191FF8F0A8009E7E39 /* NSView_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSView_Extension.swift; sourceTree = "<group>"; };
 		506D09871FFBE6E900FEA857 /* IndeterminateProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndeterminateProgress.swift; sourceTree = "<group>"; };
 		506D09891FFBECE200FEA857 /* NSRect_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSRect_Extension.swift; sourceTree = "<group>"; };
 		507AB7F71E2A374C00C749D1 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		508580C621D632AA00E1DB90 /* yudpsocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = yudpsocket.cpp; sourceTree = "<group>"; };
+		508580C721D632AA00E1DB90 /* TCPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCPClient.swift; sourceTree = "<group>"; };
+		508580C821D632AA00E1DB90 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		508580C921D632AA00E1DB90 /* SwiftSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftSocket.h; sourceTree = "<group>"; };
+		508580CA21D632AA00E1DB90 /* UDPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDPClient.swift; sourceTree = "<group>"; };
+		508580CB21D632AA00E1DB90 /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
+		508580CC21D632AA00E1DB90 /* ytcpsocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ytcpsocket.cpp; sourceTree = "<group>"; };
 		50961BF91FF916A6001B6D3D /* StorageItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageItem.swift; sourceTree = "<group>"; };
 		50961BFD1FF92DCF001B6D3D /* NSButton_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSButton_Extension.swift; sourceTree = "<group>"; };
 		50961BFF1FF94A09001B6D3D /* NibLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NibLoader.h; path = "Dragon Android Transfer/Data/NibLoader.h"; sourceTree = SOURCE_ROOT; };
@@ -718,6 +785,79 @@
 			path = "Dragon Android Transfer";
 			sourceTree = "<group>";
 		};
+		503D541721CE2B9300A6624D /* Wireless */ = {
+			isa = PBXGroup;
+			children = (
+				508580C521D632AA00E1DB90 /* SwiftSocket */,
+				503D541821CE2B9300A6624D /* StateMachine */,
+				503D542121CE2B9300A6624D /* Common */,
+				503D542821CE2B9300A6624D /* Main */,
+			);
+			path = Wireless;
+			sourceTree = "<group>";
+		};
+		503D541821CE2B9300A6624D /* StateMachine */ = {
+			isa = PBXGroup;
+			children = (
+				503D541921CE2B9300A6624D /* Disconnected.swift */,
+				503D541A21CE2B9300A6624D /* AbstractConnectionState.swift */,
+				503D541B21CE2B9300A6624D /* ConnectionState.swift */,
+				503D541C21CE2B9300A6624D /* Connected.swift */,
+				503D541D21CE2B9300A6624D /* ConnectionData.swift */,
+				503D541E21CE2B9300A6624D /* Action.swift */,
+				503D541F21CE2B9300A6624D /* Failed.swift */,
+				503D542021CE2B9300A6624D /* Operation.swift */,
+			);
+			path = StateMachine;
+			sourceTree = "<group>";
+		};
+		503D542121CE2B9300A6624D /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				503D545E21CE496B00A6624D /* CommCommand.swift */,
+				503D542221CE2B9300A6624D /* WlessConstants.swift */,
+				503D542321CE2B9300A6624D /* Concurrency.swift */,
+				503D542421CE2B9300A6624D /* AtomicReference.swift */,
+				503D542521CE2B9300A6624D /* Queue.swift */,
+				503D542621CE2B9300A6624D /* Utils.swift */,
+				503D542721CE2B9300A6624D /* LinkedList.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		503D542821CE2B9300A6624D /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				503D542921CE2B9300A6624D /* Session.swift */,
+				503D542A21CE2B9300A6624D /* SessionHeartbeat.swift */,
+				503D542B21CE2B9300A6624D /* AbstractThread.swift */,
+				503D542C21CE2B9300A6624D /* SessionPacket.swift */,
+				503D542D21CE2B9300A6624D /* SessionHandler.swift */,
+				503D542E21CE2B9300A6624D /* SessionTransceiver.swift */,
+				503D542F21CE2B9300A6624D /* SessionReceiver.swift */,
+				503D543021CE2B9300A6624D /* SessionProtocol.swift */,
+				503D543121CE2B9300A6624D /* UiCallback.swift */,
+				503D543221CE2B9300A6624D /* SessionResponseProtocol.swift */,
+				503D543321CE2B9300A6624D /* SessionDiscovery.swift */,
+				503D543421CE2B9300A6624D /* SessionSender.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		508580C521D632AA00E1DB90 /* SwiftSocket */ = {
+			isa = PBXGroup;
+			children = (
+				508580C621D632AA00E1DB90 /* yudpsocket.cpp */,
+				508580C721D632AA00E1DB90 /* TCPClient.swift */,
+				508580C821D632AA00E1DB90 /* Result.swift */,
+				508580C921D632AA00E1DB90 /* SwiftSocket.h */,
+				508580CA21D632AA00E1DB90 /* UDPClient.swift */,
+				508580CB21D632AA00E1DB90 /* Socket.swift */,
+				508580CC21D632AA00E1DB90 /* ytcpsocket.cpp */,
+			);
+			path = SwiftSocket;
+			sourceTree = "<group>";
+		};
 		50A1225721C64E99009C6DDF /* Wireless */ = {
 			isa = PBXGroup;
 			children = (
@@ -809,6 +949,7 @@
 		BE3BD224063D4EC147025AC2 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				503D541721CE2B9300A6624D /* Wireless */,
 				BE3BD6DE89D3E96E50158629 /* Command */,
 				BE3BD4F649D659BA9D6C40EC /* Helpers */,
 				BE3BDEC1388F225A7058EDD3 /* Executors */,
@@ -1190,7 +1331,6 @@
 				500381411F8D44A0000728E9 /* Frameworks */,
 				500381421F8D44A0000728E9 /* Resources */,
 				79A342B057A4B792F0CBE49A /* [CP] Embed Pods Frameworks */,
-				E618945E911D4D1EF8153E06 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1210,8 +1350,6 @@
 				500381501F8D4510000728E9 /* Sources */,
 				500381511F8D4510000728E9 /* Frameworks */,
 				500381521F8D4510000728E9 /* Resources */,
-				87F57096DADFCA5ADED677D3 /* [CP] Embed Pods Frameworks */,
-				8027E3E00FB8A17D2481F007 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1232,7 +1370,6 @@
 				503C5A241E0FB92F0090EB68 /* Frameworks */,
 				503C5A251E0FB92F0090EB68 /* Resources */,
 				DD9F2B5D3F847726169FCAA9 /* [CP] Embed Pods Frameworks */,
-				E179AFA7709D746F0FD14A81 /* [CP] Copy Pods Resources */,
 				50C567231FFA935F00452792 /* CopyFiles */,
 			);
 			buildRules = (
@@ -1447,36 +1584,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dragon Android TransferTests/Pods-Dragon Android TransferTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8027E3E00FB8A17D2481F007 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dragon Android TransferUITests/Pods-Dragon Android TransferUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		87F57096DADFCA5ADED677D3 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dragon Android TransferUITests/Pods-Dragon Android TransferUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		B518355D0E54215792A6E568 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1505,46 +1612,18 @@
 				"${BUILT_PRODUCTS_DIR}/MASShortcut/MASShortcut.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MASShortcut.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dragon Android Transfer/Pods-Dragon Android Transfer-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E179AFA7709D746F0FD14A81 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dragon Android Transfer/Pods-Dragon Android Transfer-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E618945E911D4D1EF8153E06 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dragon Android TransferTests/Pods-Dragon Android TransferTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1636,6 +1715,7 @@
 				BE3BDE084524366D5F702AFC /* AndroidDeviceMac.swift in Sources */,
 				BE3BDC57F874BAFD8C7076B1 /* AppDelegate.swift in Sources */,
 				503D931A1FF8F0A8009E7E39 /* NSView_Extension.swift in Sources */,
+				503D545321CE2B9300A6624D /* SessionProtocol.swift in Sources */,
 				BE3BD7DAF4A0DEDEBB668109 /* DimenUtils.swift in Sources */,
 				50B020341FE986C500989BA4 /* CollectionExtension.swift in Sources */,
 				BE3BD3CF4A98FDDACABFF93A /* ColorUtils.swift in Sources */,
@@ -1644,7 +1724,10 @@
 				BE3BD37C280AAD9C969F3243 /* TimeUtils.swift in Sources */,
 				50293DF61FEFBF0B00B06B14 /* BaseFile.swift in Sources */,
 				BE3BD9C6949E9F5050D4D401 /* ThreadUtils.swift in Sources */,
+				503D544721CE2B9300A6624D /* Concurrency.swift in Sources */,
 				50F314E01FAE1C45006BF985 /* ExtensionBaseFile.swift in Sources */,
+				503D544E21CE2B9300A6624D /* AbstractThread.swift in Sources */,
+				503D545F21CE496B00A6624D /* CommCommand.swift in Sources */,
 				BE3BD4859D0A4C8B57D3336A /* StyleUtils.swift in Sources */,
 				BE3BDCC039E34A76B2BA261E /* DragUtils.swift in Sources */,
 				BE3BD247789B6C3497AF10EA /* ClickableView.swift in Sources */,
@@ -1652,21 +1735,28 @@
 				50DD59091FFD2C020089D742 /* NSImage_Extension.swift in Sources */,
 				50CAAF9820003A0E00911D8E /* String_Extension.swift in Sources */,
 				50F51187200151CB00CCB22C /* PasteboardWatcher.swift in Sources */,
+				503D544921CE2B9300A6624D /* Queue.swift in Sources */,
 				BE3BDA30B26F35C7C23F9B56 /* IndeterminateProgressView.swift in Sources */,
+				508580CD21D632AA00E1DB90 /* yudpsocket.cpp in Sources */,
 				50293DF81FEFBF2A00B06B14 /* BaseFileType.swift in Sources */,
 				50961C011FF94A09001B6D3D /* NibLoader.m in Sources */,
 				50FE44B21FF6C51B0099A029 /* PushAnimatorTrial.swift in Sources */,
+				503D544121CE2B9300A6624D /* Connected.swift in Sources */,
 				50C4536621C75CB8006E3D31 /* ImageFile.swift in Sources */,
+				503D544A21CE2B9300A6624D /* Utils.swift in Sources */,
+				503D545221CE2B9300A6624D /* SessionReceiver.swift in Sources */,
 				BE3BD8168BA539FF4397E553 /* DarkWindow.swift in Sources */,
 				50F193481FFD5D4A001B6984 /* BlurOverlayView.swift in Sources */,
 				BE3BD32896E1B80E34684643 /* ColoredButton.swift in Sources */,
 				BE3BDC41D77A6265E5E8283C /* ClipboardViewController.swift in Sources */,
 				BE3BD20E4CB561A51395CF39 /* ClipboardTableCellView.swift in Sources */,
+				503D545421CE2B9300A6624D /* UiCallback.swift in Sources */,
 				BE3BD7F160769EC8049FA1AC /* ClipboardDelegate.swift in Sources */,
 				50D7D9B61FFE97AC00E85E70 /* SelectionTableRowView.swift in Sources */,
 				BE3BD64DA0CEAFD027656D0A /* ColoredPopUpButton.swift in Sources */,
 				50A1225921C650F5009C6DDF /* WirelessController.swift in Sources */,
 				50961BFA1FF916A6001B6D3D /* StorageItem.swift in Sources */,
+				503D544621CE2B9300A6624D /* WlessConstants.swift in Sources */,
 				50293DF41FEFB8DB00B06B14 /* DeviceTableDelegate.swift in Sources */,
 				BE3BD7A0031EADC65E19DA1D /* CrossfadeSegue.swift in Sources */,
 				5098AC6C1FFD3A9A0084449B /* NSImageView_Extension.swift in Sources */,
@@ -1675,9 +1765,12 @@
 				DA463DCE20F49D1200EBF189 /* AuthCheckCommand.cpp in Sources */,
 				50C4536C21C7806F006E3D31 /* WlessControllerData.swift in Sources */,
 				5098AC701FFD3CBA0084449B /* ImageResource.swift in Sources */,
+				503D543E21CE2B9300A6624D /* Disconnected.swift in Sources */,
 				BE3BDFCBE0994AEA0312BA2D /* DragNotificationDelegate.swift in Sources */,
 				BE3BD1B87F638080742BF2CD /* DragUiDelegate.swift in Sources */,
+				508580CF21D632AA00E1DB90 /* Result.swift in Sources */,
 				BE3BD1160DCBB842CAF018B2 /* DraggableTableView.swift in Sources */,
+				503D543F21CE2B9300A6624D /* AbstractConnectionState.swift in Sources */,
 				BE3BDA1B26C25B694341E27B /* DraggableItem.swift in Sources */,
 				50F91FC920024A3B00C58955 /* MenuStatusView.swift in Sources */,
 				BE3BD756779B9E066ABD34FA /* SegueFromLeftOld.swift in Sources */,
@@ -1687,10 +1780,14 @@
 				BE3BDC4D92033DA885AE5581 /* FileCellView.swift in Sources */,
 				BE3BDC9870F08BB0B77454E1 /* AbstractHandler.swift in Sources */,
 				BE3BDAE8242721166CAFDEC9 /* AndroidHandler.swift in Sources */,
+				503D544221CE2B9300A6624D /* ConnectionData.swift in Sources */,
 				BE3BD3FACF4DE64BB04FAEE6 /* MacHandler.swift in Sources */,
 				BE3BDEEB194C92E6EEB01070 /* TransferHandler.swift in Sources */,
 				50DFEDBB2002A377004BAE01 /* AdWindowController.swift in Sources */,
+				503D544321CE2B9300A6624D /* Action.swift in Sources */,
+				503D544B21CE2B9300A6624D /* LinkedList.swift in Sources */,
 				50961BFE1FF92DCF001B6D3D /* NSButton_Extension.swift in Sources */,
+				503D545121CE2B9300A6624D /* SessionTransceiver.swift in Sources */,
 				BE3BDCBA1F920EFDA3ADCCF7 /* PrintUtils.swift in Sources */,
 				DA48DA5A20DFA99800171295 /* AbstractProgressView.swift in Sources */,
 				BE3BDA06EB0630E43703247B /* DeviceNotificationDelegate.swift in Sources */,
@@ -1698,6 +1795,8 @@
 				BE3BDFCE24CB423E5C753535 /* BaseExtension.swift in Sources */,
 				BE3BD4784A27F72D2B9CC3F1 /* BaseObject.swift in Sources */,
 				BE3BD4B7CC752F2DB32B185C /* Constants.swift in Sources */,
+				503D544421CE2B9300A6624D /* Failed.swift in Sources */,
+				503D544F21CE2B9300A6624D /* SessionPacket.swift in Sources */,
 				BE3BD43E1D6C3ADCE968188D /* HelpWindow.swift in Sources */,
 				BE3BD06FDDB930947C1B074A /* CopyDialog.swift in Sources */,
 				50D7D9BC1FFEA37A00E85E70 /* ScrollessScrollView.m in Sources */,
@@ -1715,16 +1814,21 @@
 				BE3BDF0DB532B65C04E311BD /* SimpleAdbCommand.cpp in Sources */,
 				50F91FCF200251B300C58955 /* Path.swift in Sources */,
 				BE3BD05D840B7FC4EC6F0DC2 /* FileExistsCommand.cpp in Sources */,
+				503D544821CE2B9300A6624D /* AtomicReference.swift in Sources */,
 				DAAF120720DCE77100E075B8 /* NonDeselectTableView.swift in Sources */,
+				508580D121D632AA00E1DB90 /* Socket.swift in Sources */,
 				BE3BD32DC2C2B35B0E63F253 /* NewFolderCommand.cpp in Sources */,
 				50CAAF8A1FFFBFCD00911D8E /* SingleClickButton.swift in Sources */,
 				BE3BD997583170883563D454 /* DeleteCommand.cpp in Sources */,
+				508580CE21D632AA00E1DB90 /* TCPClient.swift in Sources */,
 				BE3BDB43AA8BAD090A486622 /* TotalSpaceCommand.cpp in Sources */,
 				BE3BD29F2F154A0AECFAD74B /* AvailableSpaceCommand.cpp in Sources */,
 				DAAF120F20DD573600E075B8 /* UnitBezier.cpp in Sources */,
 				BE3BD10A17A4F6FC76A3D731 /* FileSizeCommand.cpp in Sources */,
 				BE3BDDD656E09806D5694906 /* PullCommand.cpp in Sources */,
 				50FE44A91FF6B84D0099A029 /* SegueFromLeftNew.swift in Sources */,
+				503D545521CE2B9300A6624D /* SessionResponseProtocol.swift in Sources */,
+				503D545621CE2B9300A6624D /* SessionDiscovery.swift in Sources */,
 				DA4B897E20F501C4001E93A1 /* App_Extension.swift in Sources */,
 				BE3BD192CE9F4157090C7FF1 /* logger.cpp in Sources */,
 				503D93181FF8ED1B009E7E39 /* ImageButton.swift in Sources */,
@@ -1734,9 +1838,12 @@
 				BE3BDB8502B96665F2BD39A9 /* MacHelper.mm in Sources */,
 				BE3BD10A9B765DCC5FF46FB7 /* CommandFactory.cpp in Sources */,
 				BE3BD0F4C5A7EF122AD8ADE6 /* AdbExecutorMac.mm in Sources */,
+				503D544021CE2B9300A6624D /* ConnectionState.swift in Sources */,
 				BE3BD18B21658A76373A84E1 /* ShellResolver.cpp in Sources */,
 				BE3BDC7A6DF3C18127CFFF78 /* ShellParser.swift in Sources */,
 				BE3BD0BD51163ECA8A5D5591 /* AlertUtils.m in Sources */,
+				503D545021CE2B9300A6624D /* SessionHandler.swift in Sources */,
+				503D545721CE2B9300A6624D /* SessionSender.swift in Sources */,
 				DAE8B56520D01A3500520FB3 /* VerboseObject.swift in Sources */,
 				DA48DA5C20DFAB2000171295 /* CircularProgressView.swift in Sources */,
 				BE3BDE555397795773311960 /* BridgingUtils.m in Sources */,
@@ -1749,14 +1856,19 @@
 				BE3BDDAC202EC594F7145B67 /* AVCWindow.swift in Sources */,
 				5096950D1FF765D8005BC423 /* LightTheme.swift in Sources */,
 				BE3BD8EDE4315A9DDE83BC28 /* AVCActions.swift in Sources */,
+				503D544521CE2B9300A6624D /* Operation.swift in Sources */,
 				BE3BDF9E75310567DF68036E /* AVCDrag.swift in Sources */,
 				BE3BD42A08E8DFFB9237CD83 /* AndroidViewController.swift in Sources */,
+				503D544D21CE2B9300A6624D /* SessionHeartbeat.swift in Sources */,
 				DAE8B56A20D01D6C00520FB3 /* VerboseView.swift in Sources */,
+				508580D021D632AA00E1DB90 /* UDPClient.swift in Sources */,
 				BE3BD98A9BBF4B8A5D355489 /* AVCUi.swift in Sources */,
 				50F5117B200139EE00CCB22C /* FileOptions.swift in Sources */,
+				508580D221D632AA00E1DB90 /* ytcpsocket.cpp in Sources */,
 				50D7D9B41FFE948D00E85E70 /* TextUtils.swift in Sources */,
 				50D37A9C20091366007A1374 /* NSTextField_ext.swift in Sources */,
 				DA06CB7120D9707400448053 /* DarkAlertUtils.swift in Sources */,
+				503D544C21CE2B9300A6624D /* Session.swift in Sources */,
 				DABE0EC02110D3A300EC546E /* FirstLaunchController.swift in Sources */,
 				BE3BDE36A34F20C0862470AC /* R.swift in Sources */,
 				BE3BDD0E064CA86D1F6A123C /* NSWindow_Extension.swift in Sources */,
@@ -2020,6 +2132,8 @@
 					"$(PROJECT_DIR)/build/Debug/MASShortcut",
 					"$(PROJECT_DIR)/build/Debug/RxSwift",
 				);
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				INFOPLIST_FILE = "Dragon Android Transfer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kishanprao.dragon-android-transfer";
@@ -2052,6 +2166,8 @@
 					"$(PROJECT_DIR)/build/Debug/MASShortcut",
 					"$(PROJECT_DIR)/build/Debug/RxSwift",
 				);
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				INFOPLIST_FILE = "Dragon Android Transfer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kishanprao.dragon-android-transfer";

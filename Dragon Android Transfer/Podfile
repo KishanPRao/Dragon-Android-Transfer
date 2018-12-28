@@ -14,6 +14,7 @@ target 'Dragon Android Transfer' do
 #    pod 'PLCrashReporter', '~> 1.2'
 	pod 'RxSwift', $rxVersion
 	pod 'RxCocoa', $rxVersion
+	pod 'SwiftyJSON', '~> 4.0'
 	
 	# Pods for Dragon Android Transfer
 	
