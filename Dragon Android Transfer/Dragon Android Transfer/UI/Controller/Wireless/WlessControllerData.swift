@@ -25,7 +25,8 @@ extension WirelessController : NSCollectionViewDataSource, NSCollectionViewDeleg
         guard let collectionViewItem = item as? WlessItem else {return item}
         
         let androidImage = NSImage(named: NSImage.Name(rawValue: R.drawable.android))
-        collectionViewItem.itemTitle = devices[indexPath.item]
+        let device = devices[indexPath.item]
+        collectionViewItem.itemTitle = device.name
         collectionViewItem.image = androidImage
         return item
     }

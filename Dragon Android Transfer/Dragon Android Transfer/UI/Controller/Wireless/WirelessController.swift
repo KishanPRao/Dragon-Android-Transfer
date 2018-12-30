@@ -7,13 +7,16 @@
 //
 
 import Foundation
+import RxSwift
 
 class WirelessController: NSViewController {
     @IBOutlet weak var messageText: NSTextView!
     @IBOutlet weak var itemsView: NSCollectionView!
     @IBOutlet weak var progressView: NSProgressIndicator!
     @IBOutlet weak var connectBtn: NSButton!
-    var devices: [String] = []
+    var devices: [AndroidDeviceMac] = []
+    let session = Session.shared
+    var disposeBag = DisposeBag()
     
     override func viewDidAppear() {
         super.viewDidAppear()
@@ -45,10 +48,10 @@ class WirelessController: NSViewController {
         }
     }
     
-    func addItem(_ name: String) {
-        devices.append(name)
-        itemsView.reloadData()
-    }
+//    func addItem(_ name: String) {
+//        devices.append(name)
+//        itemsView.reloadData()
+//    }
     
     internal func initUi() {
         if let window = self.view.window {
@@ -64,10 +67,24 @@ class WirelessController: NSViewController {
         progressView.startAnimation(nil)
         configureCollectionView()
         
+        session.begin()
         devices.removeAll()
-        addItem("One Plus 6T")
-        addItem("Moto G5 Plus")
-        addItem("Samsung S7")
+        
+        session.discovery.observeAndroidDevices()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: {
+                devices in
+                self.updateDevices(devices)
+            }).disposed(by: disposeBag)
+//        addItem("One Plus 6T")
+//        addItem("Moto G5 Plus")
+//        addItem("Samsung S7")
+    }
+    
+    func updateDevices(_ devices: [AndroidDeviceMac]) {
+//        self.devices.removeAll()
+        self.devices = devices
+        itemsView.reloadData()
     }
     
     @IBAction func connect(_ sender: Any) {

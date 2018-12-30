@@ -13,11 +13,13 @@ import Cocoa
 	var id : String = ""
 	var name : String = ""
 	var storages = [StorageItem]()
+    var ipAddr: String = ""     //Wireless specific
 	
-	init(id: String, name: String, storages: [StorageItem] = []) {
+    init(id: String, name: String, storages: [StorageItem] = [], ipAddr: String = "") {
 		self.id = id
 		self.name = name
 		self.storages = storages
+        self.ipAddr = ipAddr
 	}
 	
     override public var description: String { return "AndroidDeviceMac" + ": \(id, name)" }

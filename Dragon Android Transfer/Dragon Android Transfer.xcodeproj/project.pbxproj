@@ -394,7 +394,7 @@
 		503D543021CE2B9300A6624D /* SessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionProtocol.swift; sourceTree = "<group>"; };
 		503D543121CE2B9300A6624D /* UiCallback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UiCallback.swift; sourceTree = "<group>"; };
 		503D543221CE2B9300A6624D /* SessionResponseProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionResponseProtocol.swift; sourceTree = "<group>"; };
-		503D543321CE2B9300A6624D /* SessionDiscovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDiscovery.swift; sourceTree = "<group>"; };
+		503D543321CE2B9300A6624D /* SessionDiscovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionDiscovery.swift; sourceTree = "<group>"; usesTabs = 0; };
 		503D543421CE2B9300A6624D /* SessionSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionSender.swift; sourceTree = "<group>"; };
 		503D545E21CE496B00A6624D /* CommCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommCommand.swift; sourceTree = "<group>"; };
 		503D93151FF8EAA0009E7E39 /* menu_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_back.png; sourceTree = "<group>"; };

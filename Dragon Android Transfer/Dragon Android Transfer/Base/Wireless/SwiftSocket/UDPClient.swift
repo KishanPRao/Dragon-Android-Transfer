@@ -157,7 +157,9 @@ open class UDPServer: Socket {
             var buff: [Byte] = [Byte](repeating: 0x0,count: expectlen)
             var remoteipbuff: [Int8] = [Int8](repeating: 0x0,count: 16)
             var remoteport: Int32 = 0
+//            print("recv start")
             let readLen: Int32 = c_yudpsocket_recive(fd, buff: buff, len: Int32(expectlen), ip: &remoteipbuff, port: &remoteport)
+//            print("recv done")
             let port: Int = Int(remoteport)
             var address = ""
             if let ip = String(cString: remoteipbuff, encoding: String.Encoding.utf8) {

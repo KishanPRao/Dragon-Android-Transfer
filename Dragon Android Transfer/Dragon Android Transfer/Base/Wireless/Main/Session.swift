@@ -9,7 +9,7 @@
 import Foundation
 
 class Session: SessionProtocol {
-    static let sharedInstance = Session()
+    static let shared = Session()
     func connectionEstablishing() {
         DispatchQueue.main.async {
             self.callback?.onConnecting()
@@ -181,7 +181,9 @@ class Session: SessionProtocol {
     }
     
     func begin() {
-        discovery.start()
+        if !discovery.hasStarted {
+            discovery.start()
+        }
     }
     
     func performAction(_ action: Action) {

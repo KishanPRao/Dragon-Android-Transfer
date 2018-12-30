@@ -82,7 +82,7 @@ extension AndroidViewController {
             if let wlessController = wlessController {
 //                print("\(wlessWC.window)")
 //                add compl handler if needed
-                presentViewControllerAsModalWindow(wlessController)
+                presentViewControllerAsModalWindow(wlessController) //proper so far
 //                window.beginSheet(wlessController.view., completionHandler: nil)
             }
         }
