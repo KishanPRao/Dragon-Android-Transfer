@@ -11,3 +11,4 @@ build
 xcuserdata/
 *.out
 *.o
+_tests_/
